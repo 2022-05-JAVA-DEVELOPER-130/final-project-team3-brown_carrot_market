@@ -1,3 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.itwill.brown_carrot_market.mapper.NoticeMapper"></mapper>
+<mapper namespace="com.itwill.brown_carrot_market.mapper.NoticeMapper">
+	<select id = "selectAll" resultType = "com.itwill.brown_carrot_market.dto.Notice">
+		select * from notice order by notice_fix desc, notice_no desc
+	</select>
+	<select id = "selectByNo" parameterType="java.lang.Integer" resultType="com.itwill.brown_carrot_market.dto.Notice">
+		select * from notice where notice_no=#{notice_no}
+	</select>
+	<insert id="insertNotice" parameterType="com.itwill.brown_carrot_market.dto.Notice">
+		<selectKey resultType="java.lang.Integer"
+				keyProperty="notice_no" order="BEFORE">
+				SELECT notice_notice_no_seq.nextval FROM DUAL
+		</selectKey>
+		insert into notice values(#{notice_no}, #{notice_title}, #{notice_content}, 
+									#{notice_date},#{notice_count},#{notice_fix})
+	</insert>
+	<delete id="deleteNotice" parameterType="java.lang.Integer">
+		delete notice where notice_no=#{notice_no}
+	</delete>
+	<update id="updateNotice" parameterType="com.itwill.brown_carrot_market.dto.Notice">
+		update notice set notice_title=#{notice_title}, notice_content=#{notice_content} 
+		where notice_no=#{notice_no}
+	</update>
+	<update id="updateNoticeCount">
+		update notice set notice_count = notice_count+1 where notice_no = #{notice_no};
+	</update>
+	
+</mapper>
