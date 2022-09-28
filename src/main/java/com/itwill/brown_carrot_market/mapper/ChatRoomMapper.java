@@ -1,5 +1,5 @@
 package com.itwill.brown_carrot_market.mapper;
 
-public class ChatRoomMapper {
+public interface ChatRoomMapper {
 
 }
