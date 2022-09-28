@@ -1,5 +1,5 @@
 package com.itwill.brown_carrot_market.service;
 
-public class AddressService {
+public interface AddressService {
 
 }
