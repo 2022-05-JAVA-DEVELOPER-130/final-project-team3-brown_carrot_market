@@ -25,7 +25,8 @@ public interface ProductMapper {
 	public int updateProductCount(int p_no);
 
 	public int updateProduct(Product product);
-
+	
+	public int updateProductWishCount(int p_no); 
 	
 /***********************	
 	//관심수 수정
