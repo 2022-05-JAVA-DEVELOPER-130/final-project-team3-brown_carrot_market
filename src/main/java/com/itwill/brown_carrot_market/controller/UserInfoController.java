@@ -57,7 +57,7 @@ public class UserInfoController {
 	@RequestMapping("/user_login_form")
 	public String user_login_form() {
 		//return "user_login_form";
-		return "login";
+		return "user_login";
 	}
 
 	@RequestMapping(value = "/user_login_action", method = RequestMethod.POST)
@@ -78,12 +78,12 @@ public class UserInfoController {
 				request.setAttribute("msg1",
 						user.getUser_id() + " 는 존재하지않는 아이디 입니다.");
 				//forwardPath = "user_login_form";
-				forwardPath = "login";
+				forwardPath = "user_login";
 				break;
 			case 1 :
 				request.setAttribute("msg2", "패쓰워드가 일치하지 않습니다.");
 				//forwardPath = "user_login_form";
-				forwardPath = "login";
+				forwardPath = "user_login";
 				break;
 			case 2 :
 				request.getSession().setAttribute("sUserId", user.getUser_id());
@@ -101,7 +101,7 @@ public class UserInfoController {
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
 		UserInfo loginUser=userService.findUser(sUserId);
 		request.setAttribute("loginUser", loginUser);
-		return "my-account";
+		return "user_my-account";
 	}
 
 	@LoginCheck
