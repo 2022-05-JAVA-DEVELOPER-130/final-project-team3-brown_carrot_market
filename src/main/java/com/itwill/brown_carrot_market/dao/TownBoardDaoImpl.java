@@ -17,14 +17,29 @@ public class TownBoardDaoImpl implements TownBoardDao{
 	public TownBoardDaoImpl() {
 		System.out.println(">>> TownBoardDaoImpl 호출");
 	}
+	
 	public TownBoardMapper getTownBoardMapper() {
 		return townBoardMapper;
 	}
+	public void setTownBoardMapper(TownBoardMapper townBoardMapper) {
+		System.out.println(">>> townBoardDaoImpl() : setTownBoardMapper() 호출");
+		this.townBoardMapper = townBoardMapper;
+	}
+	
+	/*
 	@Override
 	public int insertTownBoard(TownBoard townBoard) {
 		
 		return townBoardMapper.insertTownBoard(townBoard);
 	}
+	*/
+
+	@Override
+	public int deleteTownBoardOne(int t_no) {
+		System.out.println(">>> townBoardDaoImpl : delete()호출");
+		return townBoardMapper.deleteTownBoardOne(t_no);
+	}
+	
 
 	
 	
