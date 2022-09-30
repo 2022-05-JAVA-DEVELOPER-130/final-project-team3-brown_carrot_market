@@ -1,12 +1,17 @@
 package com.itwill.brown_carrot_market.dao;
 
-/*import java.util.List;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.itwill.brown_carrot_market.dto.TownBoard;
 import com.itwill.brown_carrot_market.mapper.TownBoardMapper;
 
+@Repository(value = "townBoardDaoImpl")
 public class TownBoardDaoImpl implements TownBoardDao{
 	
+	@Autowired(required = true)
 	private TownBoardMapper townBoardMapper;
 	
 	public TownBoardDaoImpl() {
@@ -20,11 +25,7 @@ public class TownBoardDaoImpl implements TownBoardDao{
 		
 		return townBoardMapper.insertTownBoard(townBoard);
 	}
-	@Override
-	public int deleteTownBoardOne(int t_no) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 	
 	
 	
@@ -35,4 +36,3 @@ public class TownBoardDaoImpl implements TownBoardDao{
 	
 	
 }
-*/
