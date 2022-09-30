@@ -9,11 +9,11 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.itwill.brown_carrot_market.dto.Invitation;
-import com.itwill.brown_carrot_market.dto.User;
+import com.itwill.brown_carrot_market.dto.UserInfo;
 
 
 @Mapper
-public interface UserMapper {
+public interface UserInfoMapper {
 	/*
 	 * <insert id="createUser" parameterType="com.itwill.user.User"> INSERT INTO
 	 * userinfo VALUES (#{user_id}, #{user_pw}, #{user_name}, #{user_email},
@@ -24,7 +24,7 @@ public interface UserMapper {
 	 * @Insert("INSERT INTO userinfo VALUES (#{user_id}, #{user_pw}, #{user_name}, #{user_email}, #{user_phone},"
 	 * + "#{user_freshness}, #{user_point}, #{user_profile})")
 	 */
-	public int createUser(User user);
+	public int createUser(UserInfo user);
 
 	/*
 	 * <insert id="createAddress" parameterType="com.itwill.user.Address">
@@ -37,7 +37,7 @@ public interface UserMapper {
 	 * @Insert("insert into address values(address_address_no_seq.nextval, #{address_name}, #{address_lat}, #{address_lng},"
 	 * + " #{address_range},#{user_id})")
 	 */
-	public int createAddress(User user);
+	public int createAddress(UserInfo user);
 
 	/*
 	 * <insert id="createInvitation" parameterType="com.itwill.user.Invitation">
@@ -51,16 +51,16 @@ public interface UserMapper {
 	
 	
 	//@Update("update  userinfo set password=#{password},name=#{name},email=#{email} where user_id=#{user_id}")
-	public int updateUser(User user);
+	public int updateUser(UserInfo user);
 
 	//@Delete("delete userinfo where user_id=#{user_id}")
 	public int removeUser(String user_id);
 
 	//@Select("select user_id,password,name,email from userinfo where user_id=#{user_id}")
-	public User findUser(String user_id);
+	public UserInfo findUser(String user_id);
 
 	//@Select("select user_id,password,name,email from userinfo")
-	public List<User> findUserList();
+	public List<UserInfo> findUserList();
 
 	//@Select("select count(*) cnt from userinfo where user_id=#{user_id}")
 	public int existedUser(String user_id);

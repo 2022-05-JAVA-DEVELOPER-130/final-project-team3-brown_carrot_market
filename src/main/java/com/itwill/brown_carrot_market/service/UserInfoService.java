@@ -3,15 +3,15 @@ package com.itwill.brown_carrot_market.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.itwill.brown_carrot_market.dto.User;
+import com.itwill.brown_carrot_market.dto.UserInfo;
 
-public interface UserService {
+public interface UserInfoService {
 
 	/*
 	 * 회원가입
 	 */
 	/**************1.반환값사용***********************/
-	int create(User user) throws Exception;
+	int create(UserInfo user) throws Exception;
 
 	/*********************************************/
 
@@ -30,12 +30,12 @@ public interface UserService {
 	/*
 	 * 회원상세보기
 	 */
-	User findUser(String userId) throws Exception;
+	UserInfo findUser(String userId) throws Exception;
 
 	/*
 	 * 회원수정
 	 */
-	int update(User user) throws Exception;
+	int update(UserInfo user) throws Exception;
 
 	/*
 	 * 회원탈퇴
@@ -45,7 +45,7 @@ public interface UserService {
 	/*
 	 * 전체회원리스트
 	 */
-	List<User> findUserList() throws Exception;
+	List<UserInfo> findUserList() throws Exception;
 
 	/*
 	 * 아이디중복체크

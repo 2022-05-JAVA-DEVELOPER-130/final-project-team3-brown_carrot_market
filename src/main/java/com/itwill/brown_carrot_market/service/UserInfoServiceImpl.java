@@ -7,8 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.itwill.brown_carrot_market.dao.UserDao;
-import com.itwill.brown_carrot_market.dto.User;
+import com.itwill.brown_carrot_market.dto.UserInfo;
 
 /*
  * - 회원관리 업무(비즈니스로직,예외처리,트랜젝션,보안,로깅)을 수행하는 클래스
@@ -16,12 +15,12 @@ import com.itwill.brown_carrot_market.dto.User;
  * - Dao를 이용해서 데이타베이스를 조작작업(CRUD)하는 클래스
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserInfoServiceImpl implements UserInfoService {
 	@Autowired
 	@Qualifier("userDaoImpl")
-	private UserDao userDao;
+	private UserInfoDao userDao;
 
-	public UserServiceImpl() throws Exception {
+	public UserInfoServiceImpl() throws Exception {
 		System.out.println("#### UserServiceImpl() : 디폴트생성자 호출  ");
 	}
 
@@ -30,7 +29,7 @@ public class UserServiceImpl implements UserService {
 	 */
 	/************** 1.반환값사용 ***********************/
 	@Override
-	public int create(User user) throws Exception {
+	public int create(UserInfo user) throws Exception {
 		/*
 		 * -1:아이디중복 1:회원가입성공
 		 */
@@ -58,7 +57,7 @@ public class UserServiceImpl implements UserService {
 	public int login(String user_id, String password) throws Exception {
 		int result = -1;
 		// 1.아이디 존재여부
-		User user = userDao.findUser(user_id);
+		UserInfo user = userDao.findUser(user_id);
 		if (user == null) {
 			// 아이디존재안함
 			result = 0;
@@ -83,7 +82,7 @@ public class UserServiceImpl implements UserService {
 	 * 회원상세보기
 	 */
 	@Override
-	public User findUser(String user_id) throws Exception {
+	public UserInfo findUser(String user_id) throws Exception {
 		return userDao.findUser(user_id);
 	}
 
@@ -91,7 +90,7 @@ public class UserServiceImpl implements UserService {
 	 * 회원수정
 	 */
 	@Override
-	public int update(User user) throws Exception {
+	public int update(UserInfo user) throws Exception {
 		return userDao.updateUser(user);
 	}
 
@@ -107,7 +106,7 @@ public class UserServiceImpl implements UserService {
 	 * 전체회원리스트
 	 */
 	@Override
-	public List<User> findUserList() throws Exception {
+	public List<UserInfo> findUserList() throws Exception {
 		return userDao.findUserList();
 	}
 
