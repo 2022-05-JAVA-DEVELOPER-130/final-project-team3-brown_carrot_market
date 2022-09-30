@@ -29,8 +29,6 @@ public interface ProductMapper {
 	public int updateProductWishCount(int p_no); 
 	
 /***********************	
-	//관심수 수정
-	public int ();
 	
 	//insert
 	
