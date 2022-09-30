@@ -1,7 +1,15 @@
 package com.itwill.brown_carrot_market.test;
 
-public class ProductDaoSpringBootTestApplication {
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
+@SpringBootApplication
+@ComponentScan(basePackages = {"com.itwill.brown_carrot_market.dao.Product"})
+public class ProductDaoSpringBootTestApplication {
+	public static void main(String[] args) throws Exception{
+		
+		
+	}
 /*
  
 import org.springframework.boot.SpringApplication;
