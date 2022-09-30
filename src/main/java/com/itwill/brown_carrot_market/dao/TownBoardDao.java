@@ -14,8 +14,14 @@ public interface TownBoardDao {
 	//동네 게시판 글 하나 삭제
 	int deleteTownBoardOne(int t_no) throws Exception;
 	
-	//동네
-	//List<TownBoard> selectNonMemberTownBoardList();
+	//동네 게시판 비회원이 전체조회
+	List<TownBoard> selectNonMemberTownBoardList();
+	
+	//동네 게시판 비회원이 카테고리 조건으로 전체조회
+	List<TownBoard> selectNonMemberCtgrTownBoardList(int t_ctgr_no);
+	
+	//동네 게시판 회원이 좌표값 조건으로 전체조회
+	//List<TownBoard> selectTownBoardListCoordinate();
 	
 	
 	

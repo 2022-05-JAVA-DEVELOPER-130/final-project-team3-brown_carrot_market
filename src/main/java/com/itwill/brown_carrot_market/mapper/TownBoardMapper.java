@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 public List<TownBoard> selectNonMemberTownBoardList();
 
-public List<TownBoard> selectNonMemberCtgrTownBoardList();
+public List<TownBoard> selectNonMemberCtgrTownBoardList(int t_ctgr_no);
 
 public List<TownBoard> selectTownBoardListCoordinate();
 

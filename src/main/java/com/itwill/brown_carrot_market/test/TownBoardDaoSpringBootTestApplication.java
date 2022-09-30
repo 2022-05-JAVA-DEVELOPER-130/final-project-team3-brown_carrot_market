@@ -34,7 +34,10 @@ public class TownBoardDaoSpringBootTestApplication {
 		TownBoardDao townBoardDao=(TownBoardDao)context.getBean(TownBoardDao.class);
 		//System.out.println(townBoardDao.insertTownBoard(new TownBoard(0, "제목", "내용", null, 0, 1, "역삼동", 0, 0, "carrot1")));
 		//System.out.println(townBoardDao.deleteTownBoardOne(9));
-		//System.out.println(townBoardDao.);
+		//System.out.println(townBoardDao.selectNonMemberTownBoardList());
+		//System.out.println(townBoardDao.selectNonMemberCtgrTownBoardList(1));
+		//System.out.println(townBoardDao.selectTownBoardListCoordinate());
+		
 
 	}
 }

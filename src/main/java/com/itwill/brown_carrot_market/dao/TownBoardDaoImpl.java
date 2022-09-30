@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.TownBoard;
 import com.itwill.brown_carrot_market.mapper.TownBoardMapper;
 
@@ -39,7 +40,25 @@ public class TownBoardDaoImpl implements TownBoardDao{
 		System.out.println(">>> townBoardDaoImpl : delete()호출");
 		return townBoardMapper.deleteTownBoardOne(t_no);
 	}
-	
+
+	@Override
+	public List<TownBoard> selectNonMemberTownBoardList() {
+		
+		return townBoardMapper.selectNonMemberTownBoardList();
+	}
+
+	@Override
+	public List<TownBoard> selectNonMemberCtgrTownBoardList(int t_ctgr_no) {
+		
+		return townBoardMapper.selectNonMemberCtgrTownBoardList(t_ctgr_no);
+	}
+/*
+	@Override
+	public List<TownBoard> selectTownBoardListCoordinate(Address address) {
+		
+		return townBoardMapper.selectTownBoardListCoordinate(address);
+	}
+*/	
 	
 
 	
