@@ -25,9 +25,9 @@
 			<result column="USER_PROFILE" property="user_profile"/>
 		</association>
 		<collection property="productImagesList" javaType="com.itwill.brown_carrot_market.dto.ProductImage">
-			<result column="" property=""/>
-			<result column="" property=""/>
-			<result column="" property=""/>
+			<result column="PI_NO " property="pi_no"/>
+			<result column="PI_NAME " property="pi_name"/>
+			<result column="P_NO " property="p_no"/>
 		
 		</collection>
 	</resultMap> 
@@ -73,4 +73,19 @@
              order by pp.p_date desc;  
 	
 	</select>
+	
+	<!-- 선택한 상품 하나 보여주기 -->
+	<select id="selectByOne" parameterType="int" resultMap="productResultMap">
+		select * from product p left outer join product_img pi on p.p_no=pi.p_no
+                        join p_category pc on p.p_ctgr_no=pc.p_ctgr_no 
+                        where p.p_no=#{p_no};
+	</select>
+	
+	<!-- 특정 유저의 상품리스트 불러오기 -->
+	<select id="selectByUserId" parameterType="java.lang.String" resultMap="productResultMap">
+	select * from product p  
+                    left outer join product_img pi on p.p_no=pi.p_no
+                    join p_category pc on p.p_ctgr_no=pc.p_ctgr_no
+                    where p.user_id=#{user_id};
+    </select>
 </mapper>
