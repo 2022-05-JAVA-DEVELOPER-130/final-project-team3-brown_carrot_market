@@ -141,9 +141,9 @@
 				$("#login_user_pw").focus();
 				return;
 			}
-	
 			   $('#msg1').html("");
 			   $('#msg2').html("");
+			   console.log($('#user_login_form').serialize());
 				$.ajax({
 					url:'user_login_action_json',
 					method:'POST',

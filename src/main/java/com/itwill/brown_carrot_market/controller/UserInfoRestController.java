@@ -194,9 +194,12 @@ public class UserInfoRestController {
 		String msg="";
 		Map resultMap=new HashMap();
 		List<UserInfo> resultList=new ArrayList<UserInfo>();
+		System.out.println("파라메타로 받은 >>>>>>>"+user);
 		
 		int result=
 				userService.login(user.getUser_id(), user.getUser_pw());
+		System.out.println("result >>>>>>>"+result);
+		
 		/*
 		 * 회원로그인
 		 * 0:아이디존재안함
@@ -217,7 +220,9 @@ public class UserInfoRestController {
 		case 2:
 			request.getSession().setAttribute("sUserId", user.getUser_id());
 			//우선은 첫번째 주소만 넣었습니다.
-			request.getSession().setAttribute("sAddressNo", user.getAddressList().get(0).getAddress_no());
+			if(user.getAddressList()!=null) {
+				request.getSession().setAttribute("sAddressNo", user.getAddressList().get(0).getAddress_no());
+			}
 			UserInfo sUser=userService.findUser(user.getUser_id());
 			
 			code=2;

@@ -65,7 +65,6 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	@Override
 	public UserInfo findUser(String user_id) throws Exception {
 		System.out.println("#### UserDaoImpl : findUser() 호출  ");
-
 		return userMapper.findUser(user_id);
 	}
 
