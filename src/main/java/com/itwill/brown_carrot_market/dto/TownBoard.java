@@ -1,5 +1,7 @@
 package com.itwill.brown_carrot_market.dto;
 
+import java.util.List;
+
 public class TownBoard {
 	/*
 T_NO	NUMBER(10,0)
@@ -23,6 +25,9 @@ USER_ID	VARCHAR2(30 BYTE)
 	public int t_address_lat;
 	public int t_address_lng;
 	public UserInfo userInfo;
+	
+	public List<TownImage> townImageList;
+	
 	
 	public TownBoard() {
 		// TODO Auto-generated constructor stub

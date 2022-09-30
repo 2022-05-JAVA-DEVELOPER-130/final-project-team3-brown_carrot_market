@@ -1,3 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.itwill.brown_carrot_market.mapper.TownReactionMapper"></mapper>
+<mapper namespace="com.itwill.brown_carrot_market.mapper.TownReactionMapper">
+	
+	<!-- 공감하기 등록 -->
+	<select id="insertTownBoardReac" parameterType="com.itwill.brown_carrot_market.dto.TownReaction">
+		insert into town_reaction(t_reac_no,t_reac_type,t_no,user_id) 
+		values(TOWN_REACTION_T_REAC_NO_SEQ.nextval,#{t_reac_type},#{t_no},#{user_id})
+	</select>
+	
+	<!-- 공감하기 한개 삭제 -->
+	<delete id="deleteTownBoardReac" parameterType="int">
+		delete town_reaction where t_reac_no=#{t_reac_no}
+	</delete>
+	
+	
+
+</mapper>

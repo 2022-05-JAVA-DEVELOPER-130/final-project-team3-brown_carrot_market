@@ -14,7 +14,6 @@
 			<result column="T_CTGR_NO" property="t_ctgr_no"/>
 			<result column="T_CTGR_NAME" property="t_ctgr_name"/>
 		</association>
-		<!-- 
 		<association property="userInfo" javaType="com.itwill.brown_carrot_market.dto.UserInfo">
 			<result column="USER_ID" property="user_id"/>
 			<result column="USER_PW" property="user_pw"/>
@@ -25,12 +24,38 @@
 			<result column="USER_POINT" property="user_point"/>
 			<result column="USER_PROFILE" property="user_profile"/>
 		</association>
-		 -->
+		<collection property="townImageList" javaType="java.util.List" ofType="com.itwill.brown_carrot_market.dto.TownImage" >
+			<result column="T_IMG_NO" property="t_img_no"/>
+			<result column="T_IMG_NAME" property="t_img_name"/>
+			<result column="T_NO" property="t_no"/>
+			
+		</collection>
+		
 	</resultMap>
 	
+	<!-- 비회원이 동네게시판 글 전체 조회.. -->
+	<select id="selectNonMemberTownBoardList" resultMap="townBoradResultMap">
+		select * from town_board tb 
+		join town_img ti 
+		on tb.t_no = ti.t_no
+		join town_category tc
+		on tc.t_ctgr_no = tb.t_ctgr_no
+		order by tb.t_date desc
+	</select>
+	
+	<!-- 비회원이 카테고리로 조건 검색(동네게시판 글 전체 조회) -->
+	<select id="selectNonMemberCtgrTownBoardList" resultMap="townBoradResultMap">
+	select * from town_board tb 
+	join town_img ti 
+	on tb.t_no = ti.t_no
+	join town_category tc
+	on tc.t_ctgr_no = tb.t_ctgr_no
+	where tc.t_ctgr_no=#{t_ctgr_no}
+	order by tb.t_date desc
+	</select>
 	
 	<!-- 동네 게시판 글 전체 조회 (좌표 값에 따라 검색하기) -->
-	<select id="selectTownBoardListCoordinate" parameterType="map" resultMap="townBoradResultMap">
+	<select id="selectTownBoardListCoordinate" parameterType="map" resultMap="townBoradResultMap" >
 		select * from (select * from town_board tb 
 join town_img ti 
 on tb.t_no = ti.t_no
@@ -47,7 +72,7 @@ where tb.t_address_lat
 	
 	
 	<!-- 동네 게시판 글 전체 조회(좌표값에 따라 검색 + 카테고리로 검색) -->
-	<select id="selectTownBoardCtgrListCoordinate" parameterType="map" resultMap="townBoradResultMap">
+	<select id="selectTownBoardCtgrListCoordinate" parameterType="map" resultMap="townBoradResultMap" >
 		select * from (select * from(select * from town_board tb left outer join town_img ti on tb.t_no = ti.t_no
                             join town_category tc on tc.t_ctgr_no = tb.t_ctgr_no where tc.t_ctgr_no=#{t_ctgr_no}) aa
 where aa.t_address_lat 
@@ -74,19 +99,6 @@ where aa.t_address_lat
 		update town_board set t_title=#{t_title},t_content=#{t_content}, t_ctgr_no=#{t_ctgr_no} where t_no=#{t_no}
 	</update>
 	
-	<!-- 해당 게시물의 사진 전체 삭제 -->
-	<delete id="deleteTownBoardImgAll" parameterType="java.lang.Integer">
-		delete town_img where t_no=#{t_no}
-	</delete>
-	<!-- 해당 게시물의 사진 한개 삭제 -->
-	<delete id="deleteTownBoardImgOne" parameterType="java.lang.Integer">
-		delete town_img where t_img_no=#{t_img_no}
-	</delete>
-	<!-- 해당 게시물 사진 수정할때 사진 삽입 -->
-	<insert id="" parameterType="com.itwill.brown_carrot_market.dto.TownImage">
-		insert into town_img(t_img_no, t_img_name, t_no) values(TOWN_IMG_T_IMG_NO_SEQ.nextval,#{t_img_name},#{t_no})
-	</insert>
-	
 	<!-- 게시물 조회수 증가 -->
 	<update id="updateTownBoardCount" parameterType="int">
 		update town_board set t_count=t_count+1 where t_no=#{t_no}
@@ -101,44 +113,5 @@ where aa.t_address_lat
 		select count(*) from town_reaction where t_no=#{t_no} and t_reac_type=#{t_reac_type}
 	</select>
 	
-	<!-- 댓글 등록 -->
-	<insert id="insertTownBoardReply" parameterType="com.itwill.brown_carrot_market.dto.TownReply">
-		insert into town_reply(T_REPLY_NO, T_REPLY_TITLE, T_REPLY_CONTENT,T_REPLY_DATE ,GROUPNO,STEP,DEPTH,user_id, t_no)
-		values(TOWN_REPLY_T_REPLY_NO_SEQ.nextval,#{t_reply_title},#{t_reply_content},sysdate,#{groupno},#{step},#{depth},#{user_id},#{t_no});
-	</insert>
-	<!-- 댓글 삭제 -->
-	<delete id="deleteTownBoardReply" parameterType="int">
-		delete town_reply where t_reply_no = #{t_reply_no}
-	</delete>
-	
-	<!-- 관심목록 총 갯수 -->
-	<select id="selectTownWishListCount" resultType="int">
-		select count(*) from town_wishlist
-	</select>
-	<!-- 관심 목록 글 전체 조회 -->
-	<select id="selectTownWishListAll" parameterType="java.lang.String" resultMap="townBoradResultMap">
-		select * from town_wishlist tw
-		join town_board tb
-		on tw.t_no = tb.t_no
-		left outer join town_img ti
-		on tb.t_no= ti.t_no
-		where tw.user_id=#{user_id}
-	</select>
-	<!-- 관심목록 리스트에서 글 한개 조회 -->
-	<select id="selectTownWishListOne" parameterType="int" resultMap="townBoradResultMap">
-		select * from town_wishlist wl 
-		join town_board tb
-		on wl.t_no = tb.t_no
-		where wl.t_wl_no=#{t_wl_no}
-	</select>
-	<!-- 관심목록 등록 -->
-	<insert id="insertTownWishList" parameterType="com.itwill.brown_carrot_market.dto.TownWishList">
-		insert into town_wishlist(t_wl_no,user_id,t_no) 
-		values(TOWN_WISHLIST_T_WL_NO_SEQ.nextval,#{user_id},TOWN_BOARD_T_NO_SEQ.currval);
-	</insert>
-	<!-- 관심목록 글 한개 삭제 -->
-	<delete id="deleteTownWishList" parameterType="int">
-		delete town_wishlist where t_wl_no=#{t_wl_no}
-	</delete>
 	
 </mapper>
