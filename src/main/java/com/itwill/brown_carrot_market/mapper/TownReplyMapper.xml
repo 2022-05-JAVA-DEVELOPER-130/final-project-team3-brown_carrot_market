@@ -1,3 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.itwill.brown_carrot_market.mapper.TownReplyMapper"></mapper>
+<mapper namespace="com.itwill.brown_carrot_market.mapper.TownReplyMapper">
+
+	<!-- 댓글 등록 -->
+	<insert id="insertTownBoardReply" parameterType="com.itwill.brown_carrot_market.dto.TownReply">
+		insert into town_reply(T_REPLY_NO, T_REPLY_TITLE, T_REPLY_CONTENT,T_REPLY_DATE ,GROUPNO,STEP,DEPTH,user_id, t_no)
+		values(TOWN_REPLY_T_REPLY_NO_SEQ.nextval,#{t_reply_title},#{t_reply_content},sysdate,#{groupno},#{step},#{depth},#{user_id},#{t_no});
+	</insert>
+	<!-- 댓글 삭제 -->
+	<delete id="deleteTownBoardReply" parameterType="int">
+		delete town_reply where t_reply_no = #{t_reply_no}
+	</delete>
+
+</mapper>

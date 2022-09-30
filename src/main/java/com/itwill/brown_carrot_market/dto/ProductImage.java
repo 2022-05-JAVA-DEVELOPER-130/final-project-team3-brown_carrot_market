@@ -11,16 +11,16 @@ P_NO             NUMBER(20)
 public class ProductImage {
 	public int pi_no;
 	public String pi_name;
-	public Product product;
+	public int p_no;
 	
 	public ProductImage() {		
 	}
 
-	public ProductImage(int pi_no, String pi_name, Product product) {
+	public ProductImage(int pi_no, String pi_name, int p_no) {
 		super();
 		this.pi_no = pi_no;
 		this.pi_name = pi_name;
-		this.product = product;
+		this.p_no = p_no;
 	}
 
 	public int getPi_no() {
@@ -39,17 +39,17 @@ public class ProductImage {
 		this.pi_name = pi_name;
 	}
 
-	public Product getProduct() {
-		return product;
+	public int getP_no() {
+		return p_no;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setP_no(int p_no) {
+		this.p_no = p_no;
 	}
 
 	@Override
 	public String toString() {
-		return "ProductImage [pi_no=" + pi_no + ", pi_name=" + pi_name + ", product=" + product + "]";
+		return "ProductImage [pi_no=" + pi_no + ", pi_name=" + pi_name + ", p_no=" + p_no + "]";
 	}
 	
 	
