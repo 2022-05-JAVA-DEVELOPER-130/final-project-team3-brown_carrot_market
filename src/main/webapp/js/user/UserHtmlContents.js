@@ -162,4 +162,45 @@ UserHtmlContents.user_view_addresses=function(addressList){
                             </div>
                         </div>`;
 }
-	
+UserHtmlContents.user_view_addresses_one=function(addressList){
+	return `<p>The following addresses will be used on the productList page by default.</p>
+
+                        <div class="row">
+                            <div class="col-12 col-lg-6 mb-5 mb-lg-0">
+                                <h6 class="mb-3">Address (1)</h6>
+                                <address>
+                                    ${addressList[0].address_name} <br>
+                                <input type="text" name="address_name" disabled value="${addressList[0].address_name}"><br>
+                                </address>
+                                <a href="#" id="btn_address_first" class="btn btn-primary btn-sm">주소 수정</a>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <h6 class="mb-3">Address (2)</h6>
+                                <address>
+                                     <br>
+                                <input type="text" name="address_name" value=""><br>
+                                </address>
+                                <a href="#" id="btn_address_new1" class="btn btn-primary btn-sm">주소 입력</a>
+                            </div>
+                        </div>`;
+}
+UserHtmlContents.user_view_addresses_zero=function(addressList){
+	return `<p>The following addresses will be used on the productList page by default.</p>
+
+                        <div class="row">
+                            <div class="col-12 col-lg-6 mb-5 mb-lg-0">
+                                <h6 class="mb-3">Address (1)</h6>
+                                <address>
+                                <input type="text" name="address_name" value=""><br>
+                                </address>
+                                <a href="#" id="btn_address_new1" class="btn btn-primary btn-sm">주소 입력</a>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <h6 class="mb-3">Address (2)</h6>
+                                <address>
+                                <input type="text" name="address_name" value=""><br>
+                                </address>
+                                <a href="#" id="btn_address_new2" class="btn btn-primary btn-sm">주소 입력</a>
+                            </div>
+                        </div>`;
+}	
