@@ -34,7 +34,7 @@
 	</resultMap>
 	
 	<!-- 동네게시판 글 등록 -->
-	
+	 
 	
 	<!-- 비회원이 동네게시판 글 전체 조회.. -->
 	<select id="selectNonMemberTownBoardList" resultMap="townBoradResultMap">
