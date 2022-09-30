@@ -24,13 +24,13 @@
 			<result column="USER_POINT" property="user_point"/>
 			<result column="USER_PROFILE" property="user_profile"/>
 		</association>
-		<collection property="productImagesList" javaType="com.itwill.brown_carrot_market.dto.ProductImage">
+		<collection property="productImagesList" javaType="java.util.List" ofType="com.itwill.brown_carrot_market.dto.ProductImage">
 			<result column="PI_NO " property="pi_no"/>
 			<result column="PI_NAME " property="pi_name"/>
 			<result column="P_NO " property="p_no"/>
-		
 		</collection>
 	</resultMap> 
+	
 	
 	<!-- 비회원 상품 전체리스트 불러오기 -->
 	<select id="selectProductAll" resultMap="productResultMap">
@@ -88,4 +88,30 @@
                     join p_category pc on p.p_ctgr_no=pc.p_ctgr_no
                     where p.user_id=#{user_id};
     </select>
+    
+    <!-- 상품삭제 -->
+    <delete id="deleteByPNo" parameterType="int">
+    	delete from product p where p.p_no=#{p_no};
+    </delete>
+    
+    <!-- 조회수 수정 -->
+    <update id="updateProductCount" parameterType="int">
+    	update product p set p.p_count=p.p_count+1 where p.p_no=#{p_no};
+    </update>
+    
+    <!-- 게시글 수정 -->
+    <update id="updateProduct" parameterType="com.itwill.brown_carrot_market.dto.Product">
+    	update product p set p.p_title=#{p_title},
+                     p.p_desc=#{p_desc},
+                     p.p_price=#{p_price},
+                     p.p_sell=#{p_sell},
+                     p.p_ctgr_no=#{p_ctgr_no}
+                 where p.p_no=#{p_no}; 
+    </update>
+    
+    <!-- 관심수 수정 -->
+    <!-- update product p set p.p_wish=(select count(*) from wishlist where p_no=13) where p.p_no=13; -->
+    
+    
+    <!-- 상품 작성 -->
 </mapper>
