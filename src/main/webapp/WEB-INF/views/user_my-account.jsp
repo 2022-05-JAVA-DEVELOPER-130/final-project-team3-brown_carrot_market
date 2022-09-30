@@ -74,8 +74,18 @@
 					method : 'POST',
 					dataType : 'json',
 					success : function(jsonResult) {
-							$('#my-account-content').html(UserHtmlContents.user_view_addresses(jsonResult.data[0].addressList));
-						    console.log(jsonResult);
+							//주소의 갯수를 확인해보자
+						    console.log(jsonResult.data[0].addressList.length);
+						
+							var addressCount=jsonResult.data[0].addressList.length;
+							
+							if(addressCount==0){
+								$('#my-account-content').html(UserHtmlContents.user_view_addresses_zero(jsonResult.data[0].addressList));
+							}else if (addressCount==1) {
+								$('#my-account-content').html(UserHtmlContents.user_view_addresses_one(jsonResult.data[0].addressList));
+							}else if (addressCount==2) {
+								$('#my-account-content').html(UserHtmlContents.user_view_addresses(jsonResult.data[0].addressList));
+							}
 					    }
 				});
 				
