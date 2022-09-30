@@ -94,6 +94,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public UserInfo findUser(String user_id) throws Exception {
 		return userDao.findUser(user_id);
 	}
+	
 
 	/*
 	 * 회원수정
@@ -101,6 +102,11 @@ public class UserInfoServiceImpl implements UserInfoService {
 	@Override
 	public int update(UserInfo user) throws Exception {
 		return userDao.updateUser(user);
+	}
+	
+	@Override
+	public int updateAddress(Address address) throws Exception {
+		return userDao.updateAddress(address);
 	}
 
 	/*
@@ -131,5 +137,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 			return false;
 		}
 	}
+
+
+
 
 }

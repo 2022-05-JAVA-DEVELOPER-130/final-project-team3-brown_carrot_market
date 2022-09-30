@@ -140,27 +140,25 @@ UserHtmlContents.user_view_content=function(loginUser) {
                         </form>`;
 }
 
-UserHtmlContents.user_view_addresses=function(){
-	return `<p>The following addresses will be used on the checkout page by default.</p>
+UserHtmlContents.user_view_addresses=function(addressList){
+	return `<p>The following addresses will be used on the productList page by default.</p>
 
                         <div class="row">
                             <div class="col-12 col-lg-6 mb-5 mb-lg-0">
-                                <h6 class="mb-3">Billing Address</h6>
+                                <h6 class="mb-3">Address (1)</h6>
                                 <address>
-                                    MD NAZRUL ISLAM <br>
-                                    Madhabdi, Narsingdi <br>
-                                    Madhabdi <br>
-                                    Narsingdi <br>
-                                    1600
+                                    ${addressList[0].address_name} <br>
+                                <input type="text" name="address_name" disabled value="${addressList[0].address_name}"><br>
                                 </address>
-                                <a href="#" class="btn btn-primary btn-sm">Edit Address</a>
+                                <a href="#" id="btn_address_first" class="btn btn-primary btn-sm">주소 수정</a>
                             </div>
                             <div class="col-12 col-lg-6">
-                                <h6 class="mb-3">Shipping Address</h6>
+                                <h6 class="mb-3">Address (2)</h6>
                                 <address>
-                                    You have not set up this type of address yet.
+                                    ${addressList[1].address_name} <br>
+                                <input type="text" name="address_name" disabled value="${addressList[1].address_name}"><br>
                                 </address>
-                                <a href="#" class="btn btn-primary btn-sm">Edit Address</a>
+                                <a href="#" id="btn_address_second" class="btn btn-primary btn-sm">주소 수정</a>
                             </div>
                         </div>`;
 }

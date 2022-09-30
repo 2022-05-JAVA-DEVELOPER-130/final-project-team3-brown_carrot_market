@@ -63,7 +63,6 @@
 				    	// 주소-좌표 변환 객체를 생성합니다
 				    	var geocoder = new kakao.maps.services.Geocoder();
 				
-				
 				// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
 				if (navigator.geolocation) {
 				    

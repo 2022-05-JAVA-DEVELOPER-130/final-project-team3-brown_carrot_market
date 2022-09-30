@@ -68,10 +68,45 @@
 			$(document).on('click',	'#user_view_addresses',function(e) {
 				console.log("click!! >> #user_view_addresses");
 				
-				$('#my-account-content').html(UserHtmlContents.user_view_addresses());
+			    $.ajax({
+					url : 'user_view_json',
+					method : 'POST',
+					dataType : 'json',
+					success : function(jsonResult) {
+							$('#my-account-content').html(UserHtmlContents.user_view_addresses(jsonResult.data[0].addressList));
+						    console.log(jsonResult);
+					    }
+				});
 				
 				e.preventDefault();
 			});
+			/****************user_update_addresses******************/
+			//(Step_1)
+			$(document).on('click',	'#btn_address_first,#btn_address_second',function(e) {
+				console.log("click!! >> #btn_address...");
+				
+			    $.ajax({
+					url : 'user_update_adresse_json',
+					method : 'POST',
+					dataType : 'json',
+					success : function(jsonResult) {
+							$("input[name=address_name]").attr("disabled",false);
+						    console.log(jsonResult);
+						    //
+						    e.target.id+="_selected";
+						    console.log(e.target.id);
+						    console.log($(e.target).id);
+					    }
+				});
+				
+				e.preventDefault();
+			});
+			
+			//(Step_2)
+			$(document).on('click',	'#btn_address_first_selected,#btn_address_second_selected',function(e) {
+				console.log("click!! >> #btn_address..._selected");
+			
+			
 			
 		});//END
 	</script>
@@ -405,11 +440,12 @@
 				<div class="col-12 col-lg-3">
 					<div class="my-account-navigation mb-50">
 						<ul>
+							<!-- (수정필요)활성화에 따라서, active를 넣는 작업 해야함! -->
 							<li class="active"><a href="user_my_account">Dashboard</a></li>
 							<li><a href="order-list.html">Orders</a></li>
 							<li><a href="downloads.html">Downloads</a></li>
 							<li><a href="" id="user_view_addresses">Addresses</a></li>
-							<li class="active"><a href="account-details.html" id="user_account_details">Account Details</a></li>
+							<li class="active"><a href="#" id="user_account_details">Account Details</a></li>
 							<li><a href="user_logout_action">Logout</a></li>
 						</ul>
 					</div>

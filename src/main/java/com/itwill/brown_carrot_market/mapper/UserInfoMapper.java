@@ -54,6 +54,11 @@ public interface UserInfoMapper {
 	//@Update("update  userinfo set password=#{password},name=#{name},email=#{email} where user_id=#{user_id}")
 	public int updateUser(UserInfo user);
 
+	//@Update("")
+	public int updateAddress(Address address);
+	
+	
+	
 	//@Delete("delete userinfo where user_id=#{user_id}")
 	public int removeUser(String user_id);
 
@@ -63,6 +68,7 @@ public interface UserInfoMapper {
 	//@Select("select user_id,password,name,email from userinfo")
 	public List<UserInfo> findUserList();
 
+	
 	//@Select("select count(*) cnt from userinfo where user_id=#{user_id}")
 	public int existedUser(String user_id);
 
