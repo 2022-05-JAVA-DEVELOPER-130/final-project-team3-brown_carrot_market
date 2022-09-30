@@ -29,8 +29,7 @@
 <script type="text/javascript">
 		$(function() {
 			/****************user_view******************/
-			$(document).on('click', '#user_account_details,#a_account_details',function(e){
-					console.log("click!! >> #user_account_details");
+			$(document).on('click', '#user_account_details, #a_account_details',function(e){
 					
 				    $.ajax({
 						url:'user_view_json',
@@ -55,7 +54,7 @@
 					data : param,
 					success : function(jsonResult) {
 					    if (jsonResult.code == 1) {
-						 	$('#content').html(UserHtmlContents.user_view_content(jsonResult.data[0]));
+						 	$('#my-account-content').html(UserHtmlContents.user_view_content(jsonResult.data[0]));
 					    } else if (jsonResult.code == 2) {
 							
 					    }
@@ -65,12 +64,16 @@
 				//}
 				e.preventDefault();
 			});
+			/****************user_view_addresses******************/
+			$(document).on('click',	'#user_view_addresses',function(e) {
+				console.log("click!! >> #user_view_addresses");
+				
+				$('#my-account-content').html(UserHtmlContents.user_view_addresses());
+				
+				e.preventDefault();
+			});
 			
-			
-			
-			
-			
-		});
+		});//END
 	</script>
 
 </head>
@@ -405,7 +408,7 @@
 							<li class="active"><a href="user_my_account">Dashboard</a></li>
 							<li><a href="order-list.html">Orders</a></li>
 							<li><a href="downloads.html">Downloads</a></li>
-							<li><a href="addresses.html">Addresses</a></li>
+							<li><a href="" id="user_view_addresses">Addresses</a></li>
 							<li class="active"><a href="account-details.html" id="user_account_details">Account Details</a></li>
 							<li><a href="user_logout_action">Logout</a></li>
 						</ul>
@@ -413,7 +416,7 @@
 				</div>
 				<div class="col-12 col-lg-9">
 					<div id="my-account-content" class="my-account-content mb-50">
-						<!-- START!! ************************************************ -->
+					<!-- START!! ************************************************ -->
 						<p>
 							Hello <strong>${loginUser.user_id}</strong> (not <strong>${loginUser.user_id}</strong>?
 							<a href="user_logout_action">Log out</a>)
@@ -423,7 +426,7 @@
 							manage your shipping and billing addresses, and <a href="account-details.html" id="a_account_details">edit your password and account
 								details</a>.
 						</p>
-						<!-- END!! ************************************************** -->
+					<!-- END!! ************************************************** -->
 					</div>
 				</div>
 			</div>
