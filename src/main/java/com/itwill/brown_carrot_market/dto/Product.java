@@ -36,13 +36,17 @@ public class Product {
 	public UserInfo userInfo;
 	
 	public List<ProductImage> productImagesList;
+	public List<Address> addressList;
 	
 	public Product() {
 	}
 
+	
+
+
 	public Product(int p_no, String p_title, String p_desc, int p_price, String p_date, int p_sell, int p_count,
 			int p_wish, String p_address_name, int p_address_lat, int p_address_lng, ProductCategory productCategory,
-			UserInfo userInfo,List<ProductImage> productImagesList) {
+			UserInfo userInfo, List<ProductImage> productImagesList, List<Address> addressList) {
 		super();
 		this.p_no = p_no;
 		this.p_title = p_title;
@@ -58,7 +62,10 @@ public class Product {
 		this.productCategory = productCategory;
 		this.userInfo = userInfo;
 		this.productImagesList = productImagesList;
+		this.addressList = addressList;
 	}
+
+
 
 
 	public int getP_no() {
@@ -172,6 +179,22 @@ public class Product {
 	public void setProductImagesList(List<ProductImage> productImagesList) {
 		this.productImagesList = productImagesList;
 	}
+	
+	
+
+	public List<Address> getAddressList() {
+		return addressList;
+	}
+
+
+
+
+	public void setAddressList(List<Address> addressList) {
+		this.addressList = addressList;
+	}
+
+
+
 
 	@Override
 	public String toString() {
@@ -179,8 +202,13 @@ public class Product {
 				+ ", p_date=" + p_date + ", p_sell=" + p_sell + ", p_count=" + p_count + ", p_wish=" + p_wish
 				+ ", p_address_name=" + p_address_name + ", p_address_lat=" + p_address_lat + ", p_address_lng="
 				+ p_address_lng + ", productCategory=" + productCategory + ", userInfo=" + userInfo
-				+ ", productImagesList=" + productImagesList + "]";
+				+ ", productImagesList=" + productImagesList + ", addressList=" + addressList + "]";
 	}
+
+
+
+
+	
 	
 	
 }

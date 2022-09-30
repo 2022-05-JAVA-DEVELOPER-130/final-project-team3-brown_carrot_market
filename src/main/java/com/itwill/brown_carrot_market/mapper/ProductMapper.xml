@@ -29,6 +29,9 @@
 			<result column="PI_NAME " property="pi_name"/>
 			<result column="P_NO " property="p_no"/>
 		</collection>
+		<collection property="addressList" javaType="java.util.List" ofType="com.itwill.brown_carrot_market.dto.Address">
+			
+		</collection>
 	</resultMap> 
 	
 	
