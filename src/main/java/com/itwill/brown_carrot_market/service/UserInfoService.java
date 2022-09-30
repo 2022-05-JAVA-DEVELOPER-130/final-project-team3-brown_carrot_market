@@ -3,6 +3,7 @@ package com.itwill.brown_carrot_market.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 
 public interface UserInfoService {
@@ -11,7 +12,7 @@ public interface UserInfoService {
 	 * 회원가입
 	 */
 	/**************1.반환값사용***********************/
-	int create(UserInfo user) throws Exception;
+	int create(UserInfo user,Address address) throws Exception;
 
 	/*********************************************/
 

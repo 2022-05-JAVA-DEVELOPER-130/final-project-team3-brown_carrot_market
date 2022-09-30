@@ -18,17 +18,21 @@ public class Address {
 	private double address_lng;
 	private int address_range;
 	
+	private String user_id;
+	
 	public Address() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Address(int address_no, String address_name, double address_lat, double address_lng, int address_range) {
+	public Address(int address_no, String address_name, double address_lat,
+			double address_lng, int address_range, String user_id) {
 		super();
 		this.address_no = address_no;
 		this.address_name = address_name;
 		this.address_lat = address_lat;
 		this.address_lng = address_lng;
 		this.address_range = address_range;
+		this.user_id = user_id;
 	}
 
 	public int getAddress_no() {
@@ -71,11 +75,20 @@ public class Address {
 		this.address_range = address_range;
 	}
 
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+
 	@Override
 	public String toString() {
-		return "Address [address_no=" + address_no + ", address_name=" + address_name + ", address_lat=" + address_lat
-				+ ", address_lng=" + address_lng + ", address_range=" + address_range + "]";
+		return "Address [address_no=" + address_no + ", address_name="
+				+ address_name + ", address_lat=" + address_lat
+				+ ", address_lng=" + address_lng + ", address_range="
+				+ address_range + ", user_id=" + user_id + "]";
 	}
-	
 	
 }

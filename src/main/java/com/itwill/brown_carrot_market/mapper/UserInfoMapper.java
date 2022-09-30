@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Invitation;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 
@@ -37,7 +38,7 @@ public interface UserInfoMapper {
 	 * @Insert("insert into address values(address_address_no_seq.nextval, #{address_name}, #{address_lat}, #{address_lng},"
 	 * + " #{address_range},#{user_id})")
 	 */
-	public int createAddress(UserInfo user);
+	public int createAddress(Address address);
 
 	/*
 	 * <insert id="createInvitation" parameterType="com.itwill.user.Invitation">

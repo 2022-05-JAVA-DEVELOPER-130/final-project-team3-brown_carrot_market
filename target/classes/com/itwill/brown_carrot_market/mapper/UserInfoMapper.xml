@@ -39,6 +39,11 @@
 		resultType="com.itwill.brown_carrot_market.dto.UserInfo">
 		select * from userinfo where user_id= #{user_id}
 	</select>
+
+	<select id="findAdressList" parameterType="com.itwill.brown_carrot_market.dto.Address"
+		resultType="com.itwill.brown_carrot_market.dto.Address">
+		select * from userinfo where user_id= #{user_id}
+	</select>
 	
 	<select id="findInviation" parameterType="String" resultType="com.itwill.brown_carrot_market.dto.Invitation">
 		select * from invitation where user_id=#{user_id}

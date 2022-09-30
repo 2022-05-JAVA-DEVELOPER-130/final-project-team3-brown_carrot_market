@@ -140,75 +140,28 @@ UserHtmlContents.user_view_content=function(loginUser) {
                         </form>`;
 }
 
-UserHtmlContents.user_write_form_content=function(){
-	return `<table width="0" border="0" cellpadding="0" cellspacing="0">
-				<tbody>
-					<tr>
-						<td>
-							<!--contents--> <br>
-							<table style="padding-left: 10px" border="0" cellpadding="0"
-								cellspacing="0">
-								<tbody>
-									<tr>
-										<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>사용자 관리 -
-												회원 가입</b></td>
-									</tr>
-								</tbody>
-							</table> <!-- write Form  -->
-							<form id="user_write_form" name="f" method="post">
-								<table border="0" cellpadding="0" cellspacing="1" width="590"
-									bgcolor="BBBBBB">
-									<tbody>
-										<tr>
-											<td width="100" align="center" bgcolor="E6ECDE" height="22">사용자
-												아이디</td>
-											<td width="490" bgcolor="ffffff" style="padding-left: 10px"
-												align="left"><input type="text" style="width: 150px"
-												name="userId"  value="">&nbsp;&nbsp;<font color="red" id="msg1"></font>
-											</td>
-										</tr>
-										<tr>
-											<td width="100" align="center" bgcolor="E6ECDE" height="22">비밀번호</td>
-											<td width="490" bgcolor="ffffff" style="padding-left: 10px"
-												align="left"><input type="password" style="width: 150px"
-												name="password" id="password" value=""></td>
-										</tr>
-										<tr>
-											<td width="100" align="center" bgcolor="E6ECDE" height="22">비밀번호
-												확인</td>
-											<td width="490" bgcolor="ffffff" style="padding-left: 10px"
-												align="left"><input type="password" style="width: 150px"
-												name="password2" value=""></td>
-										</tr>
-										<tr>
-											<td width="100" align="center" bgcolor="E6ECDE" height="22">이름</td>
-											<td width="490" bgcolor="ffffff" style="padding-left: 10px"
-												align="left"><input type="text" style="width: 150px"
-												name="name" value=""></td>
-										</tr>
-										<tr>
-											<td width="100" align="center" bgcolor="E6ECDE" height="22">이메일
-												주소</td>
-											<td width="490" bgcolor="ffffff" style="padding-left: 10px"
-												align="left"><input type="text" style="width: 150px"
-												name="email" value=""></td>
-										</tr>
-									</tbody>
-								</table>
-							</form> <br>
-			
-							<table border="0" cellpadding="0" cellspacing="1">
-								<tbody>
-									<tr>
-										<td align="center"><input type="button" value="회원 가입"
-											id="btn_user_write_action"> &nbsp;</td>
-									</tr>
-								</tbody>
-							</table>
-			
-						</td>
-					</tr>
-				</tbody>
-			</table>`;
+UserHtmlContents.user_view_addresses=function(){
+	return `<p>The following addresses will be used on the checkout page by default.</p>
+
+                        <div class="row">
+                            <div class="col-12 col-lg-6 mb-5 mb-lg-0">
+                                <h6 class="mb-3">Billing Address</h6>
+                                <address>
+                                    MD NAZRUL ISLAM <br>
+                                    Madhabdi, Narsingdi <br>
+                                    Madhabdi <br>
+                                    Narsingdi <br>
+                                    1600
+                                </address>
+                                <a href="#" class="btn btn-primary btn-sm">Edit Address</a>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <h6 class="mb-3">Shipping Address</h6>
+                                <address>
+                                    You have not set up this type of address yet.
+                                </address>
+                                <a href="#" class="btn btn-primary btn-sm">Edit Address</a>
+                            </div>
+                        </div>`;
 }
 	

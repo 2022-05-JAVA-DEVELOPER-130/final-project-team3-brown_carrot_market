@@ -25,6 +25,7 @@
 	src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7c7231db91ae56cfc5e3c6ea06f73c6&libraries=services"></script>
 <script type="text/javascript">
 	$(function() {
 		
@@ -55,9 +56,82 @@
 				  	}
 				}
 		 }); */
+		 
+		 $(document).on("click", "#address_name",function(e){
+				/**********************************************************/
+			console.log('click!! - #address_name');
+				    	// 주소-좌표 변환 객체를 생성합니다
+				    	var geocoder = new kakao.maps.services.Geocoder();
+				
+				
+				// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+				if (navigator.geolocation) {
+				    
+				    // ***GeoLocation을 이용해서 접속 위치를 얻어옵니다
+				    navigator.geolocation.getCurrentPosition(function(position) {
+				    	
+				        
+				        var lat = position.coords.latitude, // 위도
+				            lon = position.coords.longitude; // 경도
+				        
+				        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+				            message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
+				        
+				        // 마커와 인포윈도우를 표시합니다
+				        //displayMarker(locPosition, message);
+				            console.log("locPosition: "+locPosition.getLat(),locPosition.getLng());
+				            console.log(message);
+							$("#address_lat").val(lat);
+							$("#address_lng").val(lon);
+							
+							/*좌표->주소 변환*********************************************************/
+							 searchDetailAddrFromCoords(locPosition, function(result, status) {
+							 if (status === kakao.maps.services.Status.OK) {
+							    	//console.log('도로명주소 : ' + result[0].road_address.address_name);
+							    	//console.log('지번 주소 : ' + result[0].address.address_name);
+							            var detailAddr = !!result[0].road_address ? result[0].road_address.address_name  : '';
+							           		 detailAddr += result[0].address.address_name;
+							            
+							           		//주소를 동까지만 자릅니다.
+							           		subStr = detailAddr.lastIndexOf(" ");
+							           		detailAddr=detailAddr.substring(0,subStr);
+							           		 
+							            var content = '<div class="bAddr">' +
+							                            '<span class="title">법정동 주소정보</span>' + 
+							                            detailAddr + 
+							                        '</div>';
+							
+										$("#address_name").val(detailAddr);
+							        }
+							 });
+							/**********************************************************/
+				            
+				      });
+				    
+				} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+				    
+				    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
+				        message = 'geolocation을 사용할수 없어요..'
+						$("#address_name").val(message);
+				}
+				
+				/*좌표->주소 변환*********************************************************/
+				function searchAddrFromCoords(coords, callback) {
+				    // 좌표로 행정동 주소 정보를 요청합니다
+				    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+				}
+				function searchDetailAddrFromCoords(coords, callback) {
+				    // 좌표로 법정동 상세 주소 정보를 요청합니다
+				    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+				}
+				/**********************************************************/
+			 
+		 });
+		 
+		 
+		 
 		/* user_login_action ************************************/
 		$(document).on("click", "#btn_user_login_action",function(e){
-			console.log('click!! - #btn_user_login_action');
 			if ($("#login_user_id").val() == "") {
 				alert("사용자 아이디를 입력하십시요.");
 				$("#login_user_id").focus();
@@ -84,10 +158,7 @@
 							console.log(jsonResult);
 							$('#msg2').html(jsonResult.msg);
 					    }else if (jsonResult.code == 2) {
-					    	/* 
-							$('#navigation').html(UserHtmlContents.user_left_menu_login_content(jsonResult.data[0]));
-							$('#content').html(UserHtmlContents.user_main_content());
-							 */
+					    	
 					    	location.href = "user_my_account";	//(수정필요)main으로 보내야 할듯
 					    }
 					}
@@ -553,6 +624,18 @@
 							<div class="form-group">
 								<input type="text" class="form-control phone_number" id="user_phone"
 									name="user_phone" value="${fuser.user_phone}" placeholder="Phone ( - 제외 입력해주세요) ">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" id="address_name"
+									name="address_name" value="" placeholder="위치접근을 '허용'해주세요. 나중에 입력가능">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" id="address_lat"
+									name="address_lat" value="0.0" placeholder="위도">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control phone_number" id="address_lng"
+									name="address_lng" value="0.0" placeholder="경도">
 							</div>
 							<input type="button" id="btn_user_write_action"
 								class="btn btn-primary btn-sm" value="회원가입">
