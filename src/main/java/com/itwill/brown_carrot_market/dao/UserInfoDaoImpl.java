@@ -48,6 +48,12 @@ public class UserInfoDaoImpl implements UserInfoDao {
 
 		return userMapper.updateUser(user);
 	}
+	
+	@Override
+	public int updateAddress(Address address) throws Exception {
+		System.out.println("#### UserDaoImpl : updateAddress() 호출  ");
+		return userMapper.updateAddress(address);
+	}
 
 	@Override
 	public int removeUser(String user_id) throws Exception {
@@ -63,13 +69,14 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		return userMapper.findUser(user_id);
 	}
 
+
 	@Override
 	public List<UserInfo> findUserList() throws Exception {
 		System.out.println("#### UserDaoImpl : findUserList 호출  ");
 
 		return userMapper.findUserList();
 	}
-
+	
 	@Override
 	public boolean existedUser(String user_id) throws Exception {
 
@@ -83,6 +90,8 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		}
 
 	}
+
+
 
 
 

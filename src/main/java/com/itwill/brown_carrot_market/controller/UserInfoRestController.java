@@ -72,8 +72,8 @@ public class UserInfoRestController {
 	}
 	
 	@LoginCheck
-	@PostMapping("/user_view_adresses_json")
-	public Map user_view_adresses_json(HttpServletRequest request) throws Exception{
+	@PostMapping("/user_update_adresse_json")
+	public Map user_update_adresse_json(HttpServletRequest request, @ModelAttribute Address address) throws Exception{
 		Map resultMap=new HashMap();
 		int code=1;
 		String url="user_main";
@@ -81,6 +81,13 @@ public class UserInfoRestController {
 		List<UserInfo> resultList=new ArrayList<UserInfo>();
 		
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
+		System.out.println("sUserId >>>>>>>>>"+sUserId);
+
+		/***********수정 필요***********/
+		address = new Address(userService.findUser(sUserId).getAddressList().get(0).getAddress_no(), "test 주소", 37.49, 127.04, 1, sUserId);
+		userService.updateAddress(address);
+		/******************************/
+		
 		UserInfo loginUser=userService.findUser(sUserId);
 		resultList.add(loginUser);
 		
@@ -209,6 +216,8 @@ public class UserInfoRestController {
 			break;
 		case 2:
 			request.getSession().setAttribute("sUserId", user.getUser_id());
+			//우선은 첫번째 주소만 넣었습니다.
+			request.getSession().setAttribute("sAddressNo", user.getAddressList().get(0).getAddress_no());
 			UserInfo sUser=userService.findUser(user.getUser_id());
 			
 			code=2;

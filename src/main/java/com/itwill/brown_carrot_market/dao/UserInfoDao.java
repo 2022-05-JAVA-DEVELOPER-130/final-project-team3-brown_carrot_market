@@ -21,6 +21,8 @@ public interface UserInfoDao {
 	 */
 	int updateUser(UserInfo user) throws Exception;
 
+	int updateAddress(Address address) throws Exception;
+	
 	/*
 	 * 사용자아이디에해당하는 사용자를 삭제
 	 */
@@ -40,5 +42,7 @@ public interface UserInfoDao {
 	 * 인자로 전달되는 아이디를 가지는 사용자가 존재하는지의 여부를판별
 	 */
 	boolean existedUser(String userId) throws Exception;
+	
+	
 
 }
