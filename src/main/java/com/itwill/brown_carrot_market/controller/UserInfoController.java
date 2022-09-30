@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.UserInfoService;
 
@@ -32,17 +33,15 @@ public class UserInfoController {
 				.println("user_write_form 컨트롤러 호출-userService: " + userService);
 		return "user_write_form";
 	}
-
+/*
 	@RequestMapping(value = "/user_write_action", method = RequestMethod.POST)
-	public String user_write_action_post(@ModelAttribute(value = "fuser") UserInfo user, Model model)
+	public String user_write_action_post(@ModelAttribute(value = "fuser") UserInfo user, @ModelAttribute(value = "address") Address address, Model model)
 			throws Exception {
 		System.out.println("parameter로 전달받은"+user);
 
 		String forward_path = "";
-		/*
-		 * -1:아이디중복 1:회원가입성공
-		 */
-		int result = userService.create(user);
+		 // -1:아이디중복 1:회원가입성공
+		int result = userService.create(user,address);
 		if (result == -1) {
 			model.addAttribute("msg",
 					user.getUser_id() + " 는 이미 존재하는 아이디 입니다.");
@@ -53,7 +52,7 @@ public class UserInfoController {
 		}
 		return forward_path;
 	}
-
+*/
 	@RequestMapping("/user_login_form")
 	public String user_login_form() {
 		//return "user_login_form";
@@ -87,7 +86,7 @@ public class UserInfoController {
 				break;
 			case 2 :
 				request.getSession().setAttribute("sUserId", user.getUser_id());
-				forwardPath = "redirect:user_main";
+				forwardPath = "redirect:user_my-account";
 				break;
 		}
 		return forwardPath;

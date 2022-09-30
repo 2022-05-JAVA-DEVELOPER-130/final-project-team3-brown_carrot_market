@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.itwill.brown_carrot_market.dao.UserInfoDao;
+import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 
 /*
@@ -30,7 +31,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	 */
 	/************** 1.반환값사용 ***********************/
 	@Override
-	public int create(UserInfo user) throws Exception {
+	public int create(UserInfo user,Address address) throws Exception {
 		/*
 		 * -1:아이디중복 1:회원가입성공
 		 */
@@ -43,6 +44,13 @@ public class UserInfoServiceImpl implements UserInfoService {
 			// 아이디안중복
 			// 2.회원가입
 			int insertRowCount = userDao.createUser(user);
+			
+			if(address.getAddress_lat()!=0.0) {
+				address.setUser_id(user.getUser_id());
+				int insertAddress =userDao.createAddress(address);
+				System.out.println(insertAddress);
+			}
+			
 			return insertRowCount;
 		}
 	}
