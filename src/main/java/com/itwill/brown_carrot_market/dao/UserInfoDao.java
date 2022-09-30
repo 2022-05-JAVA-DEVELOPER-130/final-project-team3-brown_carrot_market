@@ -2,6 +2,7 @@ package com.itwill.brown_carrot_market.dao;
 
 import java.util.List;
 
+import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 
 public interface UserInfoDao {
@@ -10,6 +11,10 @@ public interface UserInfoDao {
 	 * 사용자관리테이블에 새로운사용자생성
 	 */
 	int createUser(UserInfo user) throws Exception;
+	/*
+	 * 사용자관리테이블에 새로운사용자의 주소생성
+	 */
+	int createAddress(Address address) throws Exception;
 
 	/*
 	 * 기존의 사용자정보를 수정
