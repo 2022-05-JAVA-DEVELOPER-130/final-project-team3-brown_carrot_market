@@ -32,12 +32,14 @@ public interface UserInfoService {
 	 * 회원상세보기
 	 */
 	UserInfo findUser(String userId) throws Exception;
-
 	/*
 	 * 회원수정
 	 */
 	int update(UserInfo user) throws Exception;
 
+	int updateAddress(Address addressS) throws Exception;
+	
+	
 	/*
 	 * 회원탈퇴
 	 */
