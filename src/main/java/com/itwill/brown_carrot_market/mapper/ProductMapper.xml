@@ -36,7 +36,7 @@
 	<select id="selectProductAll" resultMap="productResultMap">
 		select * from product p left outer join product_img pi on p.p_no=pi.p_no
                         join p_category pc on p.p_ctgr_no=pc.p_ctgr_no
-                        order by p.p_date desc;
+                        order by p.p_date desc
 	
 	</select> 
 	<!-- 비회원 카테고리별 상품리스트 불러오기 -->
@@ -44,7 +44,7 @@
 		select * from product p left outer join product_img pi on p.p_no=pi.p_no
                         join p_category pc on p.p_ctgr_no=pc.p_ctgr_no
                         where p.p_ctgr_no=#{p_ctgr_no}
-                        order by p.p_date desc;
+                        order by p.p_date desc
 	</select>
 	
 	<!-- 로그인한 회원 범위안 상품 리스트 불러오기-->
@@ -57,7 +57,7 @@
         where pp.p_address_lng
         between (select a.address_lng from address a where a.user_id=#{user_id} and a.address_no=#{address_no})-0.056344377*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
             AND (select a.address_lng from address a where a.user_id=#{user_id} and a.address_no=#{address_no})+0.056344377*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
-            order by pp.p_date desc;           
+            order by pp.p_date desc           
 	</select>
 	
 	<!-- 로그인한 회원 범위+카테고리오 상품 리스트 불러오기 -->
@@ -70,7 +70,7 @@
         where pp.p_address_lng
         between (select a.address_lng from address a where a.user_id=#{user_id} and a.address_no=#{address_no})-0.056344377*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
             AND (select a.address_lng from address a where a.user_id=#{user_id} and a.address_no=#{address_no})+0.056344377*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
-             order by pp.p_date desc;  
+             order by pp.p_date desc
 	
 	</select>
 	
@@ -78,7 +78,7 @@
 	<select id="selectByOne" parameterType="int" resultMap="productResultMap">
 		select * from product p left outer join product_img pi on p.p_no=pi.p_no
                         join p_category pc on p.p_ctgr_no=pc.p_ctgr_no 
-                        where p.p_no=#{p_no};
+                        where p.p_no=#{p_no}
 	</select>
 	
 	<!-- 특정 유저의 상품리스트 불러오기 -->
@@ -86,17 +86,17 @@
 	select * from product p  
                     left outer join product_img pi on p.p_no=pi.p_no
                     join p_category pc on p.p_ctgr_no=pc.p_ctgr_no
-                    where p.user_id=#{user_id};
+                    where p.user_id=#{user_id}
     </select>
     
     <!-- 상품삭제 -->
     <delete id="deleteByPNo" parameterType="int">
-    	delete from product p where p.p_no=#{p_no};
+    	delete from product p where p.p_no=#{p_no}
     </delete>
-    
+     
     <!-- 조회수 수정 -->
     <update id="updateProductCount" parameterType="int">
-    	update product p set p.p_count=p.p_count+1 where p.p_no=#{p_no};
+    	update product p set p.p_count=p.p_count+1 where p.p_no=#{p_no}
     </update>
     
     <!-- 게시글 수정 -->
@@ -106,7 +106,7 @@
                      p.p_price=#{p_price},
                      p.p_sell=#{p_sell},
                      p.p_ctgr_no=#{p_ctgr_no}
-                 where p.p_no=#{p_no}; 
+                 where p.p_no=#{p_no} 
     </update>
     
     <!-- 관심수 수정 -->

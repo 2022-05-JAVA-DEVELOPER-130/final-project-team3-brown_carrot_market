@@ -12,4 +12,27 @@ public interface ProductMapper {
 	
 	public List<Product> selectAllByCtgr();
 	
+	public List<Product> selectListByRange();
+	
+	public List<Product> selectListByRangeCtgr();
+	
+	public List<Product> selectByUserId();
+	
+	public Product selectByOne();
+	
+	public int deleteByPNo(int p_no);
+	
+	public int updateProductCount(int p_no);
+
+	public int updateProduct(Product product);
+
+	
+/***********************	
+	//관심수 수정
+	public int ();
+	
+	//insert
+	
+*************************/	
+	
 }
