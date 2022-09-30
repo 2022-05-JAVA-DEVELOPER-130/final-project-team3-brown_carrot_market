@@ -55,5 +55,7 @@
 	<delete id="deleteTownWishList" parameterType="int">
 		delete town_wishlist where t_wl_no=#{t_wl_no}
 	</delete>
+	
+	
 
 </mapper>

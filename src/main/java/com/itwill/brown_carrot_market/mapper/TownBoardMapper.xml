@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!-- <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.itwill.brown_carrot_market.mapper.TownBoardMapper">
+<mapper namespace="com.itwill.brown_carrot_market.mapper.TownBoardMapper"> 
 	<resultMap id="townBoradResultMap" type="com.itwill.brown_carrot_market.dto.TownBoard" >
 		<result column="T_NO" property="t_no"/>
 		<result column="T_TITLE" property="t_title"/>
@@ -27,16 +27,11 @@
 		<collection property="townImageList" javaType="java.util.List" ofType="com.itwill.brown_carrot_market.dto.TownImage" >
 			<result column="T_IMG_NO" property="t_img_no"/>
 			<result column="T_IMG_NAME" property="t_img_name"/>
-			<result column="T_NO" property="t_no"/>
-			
 		</collection>
 		
 	</resultMap>
-	 
-	<!-- 동네게시판 글 등록 -->
-	   
 	
-	<!-- 비회원이 동네게시판 글 전체 조회.. -->
+	비회원이 동네게시판 글 전체 조회..
 	<select id="selectNonMemberTownBoardList" resultMap="townBoradResultMap">
 		select * from town_board tb 
 		join town_img ti 
@@ -46,7 +41,7 @@
 		order by tb.t_date desc
 	</select>
 	
-	<!-- 비회원이 카테고리로 조건 검색(동네게시판 글 전체 조회) -->
+	비회원이 카테고리로 조건 검색(동네게시판 글 전체 조회)
 	<select id="selectNonMemberCtgrTownBoardList" resultMap="townBoradResultMap">
 	select * from town_board tb 
 	join town_img ti 
@@ -57,7 +52,7 @@
 	order by tb.t_date desc
 	</select>
 	
-	<!-- 동네 게시판 글 전체 조회 (좌표 값에 따라 검색하기) -->
+	동네 게시판 글 전체 조회 (좌표 값에 따라 검색하기)
 	<select id="selectTownBoardListCoordinate" parameterType="map" resultMap="townBoradResultMap" >
 		select * from (select * from town_board tb 
 join town_img ti 
@@ -74,7 +69,7 @@ where tb.t_address_lat
 	</select>
 	
 	
-	<!-- 동네 게시판 글 전체 조회(좌표값에 따라 검색 + 카테고리로 검색) -->
+	동네 게시판 글 전체 조회(좌표값에 따라 검색 + 카테고리로 검색)
 	<select id="selectTownBoardCtgrListCoordinate" parameterType="map" resultMap="townBoradResultMap" >
 		select * from (select * from(select * from town_board tb left outer join town_img ti on tb.t_no = ti.t_no
                             join town_category tc on tc.t_ctgr_no = tb.t_ctgr_no where tc.t_ctgr_no=#{t_ctgr_no}) aa
@@ -87,34 +82,34 @@ where aa.t_address_lat
 		
 	</select>
 	
-	<!-- 게시글 한개 찾기(글 번호로) -->
+	게시글 한개 찾기(글 번호로)
 	<select id="selectTownBoardOne" parameterType="java.lang.Integer">
 		select * from town_board where t_no=#{t_no}
 	</select>
 	
-	<!-- 게시글 한개 삭제 -->
+	게시글 한개 삭제
 	<delete id="deleteTownBoardOne" parameterType="java.lang.Integer">
 		delete town_board where t_no=#{t_no}
 	</delete>
 	
-	<!-- 게시글 한개 수정 -->
+	게시글 한개 수정
 	<update id="updateTownBoardOne" parameterType="com.itwill.brown_carrot_market.dto.TownBoard">
 		update town_board set t_title=#{t_title},t_content=#{t_content}, t_ctgr_no=#{t_ctgr_no} where t_no=#{t_no}
 	</update>
 	
-	<!-- 게시물 조회수 증가 -->
+	게시물 조회수 증가
 	<update id="updateTownBoardCount" parameterType="int">
 		update town_board set t_count=t_count+1 where t_no=#{t_no}
 	</update>
 	
-	<!-- 게시물의 공감수 구하기 -->
+	게시물의 공감수 구하기
 	<select id="selectTownBoardReacCount" >
 		select count(*) from town_reaction where t_no=#{t_no}
 	</select>
-	<!-- 게시물의 공감 타입별 공감수 구하기 -->
+	게시물의 공감 타입별 공감수 구하기
 	<select id="selectTownBoardReacTypeCount">
 		select count(*) from town_reaction where t_no=#{t_no} and t_reac_type=#{t_reac_type}
 	</select>
 	
 	
-</mapper>
+</mapper> -->
