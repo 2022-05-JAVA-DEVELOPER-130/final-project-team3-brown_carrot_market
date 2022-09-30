@@ -8,49 +8,56 @@ T_NO	NUMBER(10,0)
 	 */
 	public int t_img_no;
 	public String t_img_name;
-	public TownBoard townBoard;
+	public int t_no;
+	
 	
 	public TownImage() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public TownImage(int t_img_no, String t_img_name, TownBoard townBoard) {
+
+	public TownImage(int t_img_no, String t_img_name, int t_no) {
 		super();
 		this.t_img_no = t_img_no;
 		this.t_img_name = t_img_name;
-		this.townBoard = townBoard;
+		this.t_no = t_no;
 	}
+
 
 	public int getT_img_no() {
 		return t_img_no;
 	}
 
+
 	public void setT_img_no(int t_img_no) {
 		this.t_img_no = t_img_no;
 	}
+
 
 	public String getT_img_name() {
 		return t_img_name;
 	}
 
+
 	public void setT_img_name(String t_img_name) {
 		this.t_img_name = t_img_name;
 	}
 
-	public TownBoard getTownBoard() {
-		return townBoard;
+
+	public int getT_no() {
+		return t_no;
 	}
 
-	public void setTownBoard(TownBoard townBoard) {
-		this.townBoard = townBoard;
+
+	public void setT_no(int t_no) {
+		this.t_no = t_no;
 	}
+
 
 	@Override
 	public String toString() {
-		return "TownImage [t_img_no=" + t_img_no + ", t_img_name=" + t_img_name + ", townBoard=" + townBoard + "]";
+		return "TownImage [t_img_no=" + t_img_no + ", t_img_name=" + t_img_name + ", t_no=" + t_no + "]";
 	}
-	
-	
 	
 	
 }
