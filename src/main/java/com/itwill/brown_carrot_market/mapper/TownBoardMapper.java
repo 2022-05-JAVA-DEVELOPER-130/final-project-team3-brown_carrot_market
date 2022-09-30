@@ -25,6 +25,9 @@ public interface TownBoardMapper {
 	
 	public int updateTownBoardCount(int t_no);
 	
+	public int insertTownBoard(TownBoard townBoard);
+	
+	
 	
 	
 	
