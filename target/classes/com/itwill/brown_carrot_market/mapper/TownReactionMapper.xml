@@ -13,6 +13,14 @@
 		delete town_reaction where t_reac_no=#{t_reac_no}
 	</delete>
 	
+	<!-- 게시물의 공감수 구하기 -->
+	<select id="selectTownBoardReacCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		select count(*) from town_reaction where t_no=#{t_no}
+	</select>
+	<!-- 게시물의 공감 타입별 공감수 구하기 -->
+	<select id="selectTownBoardReacTypeCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		select count(*) from town_reaction where t_no=#{t_no} and t_reac_type=#{t_reac_type}
+	</select>
 	
 
 </mapper>

@@ -11,6 +11,9 @@ public interface TownReactionMapper {
 	
 	public int deleteTownBoardReac(int t_reac_no);
 	
+	public int selectTownBoardReacCount(int t_no);
+	
+	public int selectTownBoardReacTypeCount(int t_no, int t_reac_type);
 	
 	
 }
