@@ -28,6 +28,22 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7c7231db91ae56cfc5e3c6ea06f73c6&libraries=services"></script>
 <script type="text/javascript">
 	$(function() {
+		/* login_check ***********************/
+		$.ajax({
+			url:'user_session_check_json',
+			method:'POST',
+			dataType:'json',
+			success:function(jsonResult){
+			    if(jsonResult.code==1){
+			    	$(".account-area").html(UserHtmlContents.user_thumbnail());
+			    }else if (jsonResult.code==2) {
+			    	$(".account-area").html(UserHtmlContents.user_thumbnail_login(jsonResult.data[0]));
+				}
+			}
+		});
+		/*************************************/
+		
+		
 		
 	    /* validator객체변수선언 */
 		var validator = null;
@@ -58,17 +74,16 @@
 		 }); */
 		 
 		 $(document).on("click", "#address_name",function(e){
-				/**********************************************************/
+		/**********************************************************/
 			console.log('click!! - #address_name');
-				    	// 주소-좌표 변환 객체를 생성합니다
-				    	var geocoder = new kakao.maps.services.Geocoder();
+		    	// 주소-좌표 변환 객체를 생성합니다
+		    	var geocoder = new kakao.maps.services.Geocoder();
 				
 				// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
 				if (navigator.geolocation) {
 				    
 				    // ***GeoLocation을 이용해서 접속 위치를 얻어옵니다
 				    navigator.geolocation.getCurrentPosition(function(position) {
-				    	
 				        
 				        var lat = position.coords.latitude, // 위도
 				            lon = position.coords.longitude; // 경도
@@ -76,8 +91,6 @@
 				        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
 				            message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
 				        
-				        // 마커와 인포윈도우를 표시합니다
-				        //displayMarker(locPosition, message);
 				            console.log("locPosition: "+locPosition.getLat(),locPosition.getLng());
 				            console.log(message);
 							$("#address_lat").val(lat);
@@ -94,12 +107,6 @@
 							           		//주소를 동까지만 자릅니다.
 							           		subStr = detailAddr.lastIndexOf(" ");
 							           		detailAddr=detailAddr.substring(0,subStr);
-							           		 
-							            var content = '<div class="bAddr">' +
-							                            '<span class="title">법정동 주소정보</span>' + 
-							                            detailAddr + 
-							                        '</div>';
-							
 										$("#address_name").val(detailAddr);
 							        }
 							 });
@@ -123,7 +130,7 @@
 				    // 좌표로 법정동 상세 주소 정보를 요청합니다
 				    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
 				}
-				/**********************************************************/
+		/**********************************************************/
 			 
 		 });
 		 

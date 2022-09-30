@@ -238,17 +238,24 @@ public class UserInfoRestController {
 		resultMap.put("data",resultList);
 		return resultMap;
 	}
+	
 	@LoginCheck
 	@PostMapping(value = "/user_session_check_json")
 	public Map user_session_check_json(HttpSession session) throws Exception{
 		Map resultMap=new HashMap();
 		int code=1;
-		String url="user_main";
-		String msg="세션존재함";
+		String url="index";
+		String msg="세션존재 안함XX";
 		List<UserInfo> resultList=new ArrayList<UserInfo>();
 		String sUserId=(String)session.getAttribute("sUserId");
-		UserInfo sUser=userService.findUser(sUserId);
-		resultList.add(sUser);
+		System.out.println("user_session_check_json : sUserId >>> "+sUserId);
+		if(sUserId!=null) {
+			UserInfo sUser=userService.findUser(sUserId);
+			code=2;
+			url="index";
+			msg="세션존재";
+			resultList.add(sUser);
+		}
 		
 		resultMap.put("code", code);
 		resultMap.put("url", url);
