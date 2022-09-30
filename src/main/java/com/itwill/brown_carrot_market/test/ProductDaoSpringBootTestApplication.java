@@ -1,7 +1,26 @@
 package com.itwill.brown_carrot_market.test;
 
-public class ProductDaoSpringBootTestApplication {
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
+import com.itwill.brown_carrot_market.dao.ProductDao;
+
+@SpringBootApplication
+@ComponentScan(basePackages = {"com.itwill.brown_carrot_market"})
+public class ProductDaoSpringBootTestApplication {
+	public static void main(String[] args) throws Exception{
+		SpringApplication application = 
+				new SpringApplication(ProductDaoSpringBootTestApplication.class);
+		application.setWebApplicationType(WebApplicationType.NONE);
+		ConfigurableApplicationContext context=application.run(args);
+		ProductDao productDao=(ProductDao)context.getBean(ProductDao.class);
+		System.out.println(productDao.selectProductAll());
+		//System.out.println(guestDao.selectByNo(881));
+		
+	}
 /*
  
 import org.springframework.boot.SpringApplication;
