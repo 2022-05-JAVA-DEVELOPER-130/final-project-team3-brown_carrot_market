@@ -40,7 +40,7 @@
 		select * from userinfo where user_id= #{user_id}
 	</select>
 	
-	<select id="findInviation" parameterType="String" resultType="com.itwill.user.Invitation">
+	<select id="findInviation" parameterType="String" resultType="com.itwill.brown_carrot_market.dto.Invitation">
 		select * from invitation where user_id=#{user_id}
 	</select>
 	

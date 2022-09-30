@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.itwill.user.mapper.UserInfoMapper;
+import com.itwill.brown_carrot_market.dto.UserInfo;
+import com.itwill.brown_carrot_market.mapper.UserInfoMapper;
+
 
 @Repository(value = "userDaoImpl")
 public class UserInfoDaoImpl implements UserInfoDao {
