@@ -1,6 +1,6 @@
 package com.itwill.brown_carrot_market.dao;
 
-import java.util.List;
+/*import java.util.List;
 
 import com.itwill.brown_carrot_market.dto.TownBoard;
 import com.itwill.brown_carrot_market.mapper.TownBoardMapper;
@@ -35,3 +35,4 @@ public class TownBoardDaoImpl implements TownBoardDao{
 	
 	
 }
+*/

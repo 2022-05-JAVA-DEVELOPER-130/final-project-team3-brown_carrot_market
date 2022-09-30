@@ -14,7 +14,7 @@
 		<result column="P_ADDRESS_NAME" property="p_address_name"/>
 		<result column="P_ADDRESS_LAT"  property="p_address_lat"/>
 		<result column="P_ADDRESS_LNG  " property="p_address_lng"/>
-		<association property="productCategory" javaType="com.itwill.brown_carrot_market.dto.UserInfo">
+		<association property="userInfo" javaType="com.itwill.brown_carrot_market.dto.UserInfo">
 			<result column="USER_ID" property="user_id"/>
 			<result column="USER_PW" property="user_pw"/>
 			<result column="USER_NAME" property="user_name"/>
@@ -111,7 +111,12 @@
     
     <!-- 관심수 수정 -->
     <!-- update product p set p.p_wish=(select count(*) from wishlist where p_no=13) where p.p_no=13; -->
-    
-    
+    <update id="updateProductWishCount" parameterType="int">
+    	<selectKey keyProperty="p_wish" resultType="int" order="BEFORE">
+    		select count(*) from wishlist where p_no=#{p_no}
+    	</selectKey> 
+    	update product p set p.p_wish=#{p_wish} where p.p_no=#{p_no}
+    </update> 
+     
     <!-- 상품 작성 -->
 </mapper>
