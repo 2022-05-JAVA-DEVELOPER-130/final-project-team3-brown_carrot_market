@@ -1,6 +1,6 @@
 <!-- <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.itwill.brown_carrot_market.mapper.TownBoardMapper">
+<mapper namespace="com.itwill.brown_carrot_market.mapper.TownBoardMapper"> 
 	<resultMap id="townBoradResultMap" type="com.itwill.brown_carrot_market.dto.TownBoard" >
 		<result column="T_NO" property="t_no"/>
 		<result column="T_TITLE" property="t_title"/>
