@@ -40,6 +40,7 @@ public class TownBoardDaoImpl implements TownBoardDao{
 		return townBoardMapper.deleteTownBoardOne(t_no);
 	}
 	
+	
 
 	
 	

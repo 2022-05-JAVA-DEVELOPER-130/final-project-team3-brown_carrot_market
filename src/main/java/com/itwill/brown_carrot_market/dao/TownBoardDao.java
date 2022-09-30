@@ -14,7 +14,8 @@ public interface TownBoardDao {
 	//동네 게시판 글 하나 삭제
 	int deleteTownBoardOne(int t_no) throws Exception;
 	
-	
+	//동네
+	//List<TownBoard> selectNonMemberTownBoardList();
 	
 	
 	
