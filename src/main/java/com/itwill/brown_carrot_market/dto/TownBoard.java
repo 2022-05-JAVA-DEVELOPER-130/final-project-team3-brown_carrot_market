@@ -29,6 +29,7 @@ USER_ID	VARCHAR2(30 BYTE)
 	public List<TownImage> townImageList;
 	
 	
+	
 	public TownBoard() {
 		// TODO Auto-generated constructor stub
 	}
