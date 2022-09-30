@@ -30,7 +30,7 @@
 		$(function() {
 			/****************user_view******************/
 			$(document).on('click', '#user_account_details, #a_account_details',function(e){
-					
+				console.log("click!! >> "+e.target);
 				    $.ajax({
 						url:'user_view_json',
 						method:'POST',
@@ -44,6 +44,7 @@
 			
 			/****************user_modify_action******************/
 			$(document).on('click',	'#btn_user_modify_action',function(e) {
+				console.log("click!! >> "+e.target);
 				//if(validator.form()){
 			    var param = $('#user_modify_form').serialize();
 			    console.log(param);
@@ -105,11 +106,11 @@
 			//(Step_2)
 			$(document).on('click',	'#btn_address_first_selected,#btn_address_second_selected',function(e) {
 				console.log("click!! >> #btn_address..._selected");
-			
+			});
 			
 			
 		});//END
-	</script>
+</script>
 
 </head>
 
