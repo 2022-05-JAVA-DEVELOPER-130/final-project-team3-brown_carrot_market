@@ -37,8 +37,8 @@
 		select * from product p left outer join product_img pi on p.p_no=pi.p_no
                         join p_category pc on p.p_ctgr_no=pc.p_ctgr_no
                         order by p.p_date desc
-	
 	</select> 
+
 	<!-- 비회원 카테고리별 상품리스트 불러오기 -->
 	<select id="selectAllByCtgr" parameterType="int" resultMap="productResultMap"> 
 		select * from product p left outer join product_img pi on p.p_no=pi.p_no
@@ -120,5 +120,5 @@
      
     <!-- 상품 작성 -->
     
-    
+	
 </mapper>
