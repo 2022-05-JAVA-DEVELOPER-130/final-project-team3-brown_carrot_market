@@ -6,7 +6,7 @@ UserHtmlContents.user_left_menu_logout_content=function(){
 			</p>
 			<ul>
 				<li><a href="user_main" id="a_user_main">회원홈</a></li>
-				<li><a href="user_login_form" id="a_user_login_form">로그인</a></li>
+				<li><a href="user_login" id="a_user_login">로그인</a></li>
 				<li><a href="user_write_form" id="a_user_write_form">회원가입</a></li>
 			</ul>`;
 }			
@@ -211,8 +211,8 @@ UserHtmlContents.user_thumbnail=function(){
                             </div>
                             <ul class="user-meta-dropdown">
                                 <!-- <li class="user-title"><span>Hello,</span> Lim Sarah</li>-->
-                                <li><a href="user_login_form">회원가입</a></li>
-                                <li><a href="user_login_form"><i class="icofont-login"></i> 로그인</a></li>
+                                <li><a href="user_login">회원가입</a></li>
+                                <li><a href="user_login"><i class="icofont-login"></i> 로그인</a></li>
                             </ul>`;
 }	
 UserHtmlContents.user_thumbnail_login=function(loginUser){
