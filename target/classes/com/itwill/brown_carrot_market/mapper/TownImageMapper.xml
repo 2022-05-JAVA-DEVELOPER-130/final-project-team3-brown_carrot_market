@@ -1,3 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.itwill.brown_carrot_market.mapper.TownImageMapper"></mapper>
+<mapper namespace="com.itwill.brown_carrot_market.mapper.TownImageMapper">
+
+	<!-- 해당 게시물의 사진 전체 삭제 -->
+	<delete id="deleteTownBoardImgAll" parameterType="java.lang.Integer">
+		delete town_img where t_no=#{t_no}
+	</delete>
+	<!-- 해당 게시물의 사진 한개 삭제 -->
+	<delete id="deleteTownBoardImgOne" parameterType="java.lang.Integer">
+		delete town_img where t_img_no=#{t_img_no}
+	</delete>
+	<!-- 해당 게시물 사진 수정할때 사진 삽입 -->
+	<insert id="insertTownBoardImg" parameterType="com.itwill.brown_carrot_market.dto.TownImage">
+		insert into town_img(t_img_no, t_img_name, t_no) values(TOWN_IMG_T_IMG_NO_SEQ.nextval,#{t_img_name},#{t_no})
+	</insert>
+
+</mapper>

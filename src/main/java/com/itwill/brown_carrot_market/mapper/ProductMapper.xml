@@ -1,3 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.itwill.brown_carrot_market.mapper.ProductMapper"></mapper>
+<mapper namespace="com.itwill.brown_carrot_market.mapper.ProductMapper">
+	 
+	<resultMap id="productResultMap" type="com.itwill.brown_carrot_market.dto.Product" >
+		<result column="P_NO" property="p_no"/>
+		<result column="P_TITLE" property="p_title"/>
+		<result column="P_DESC" property="p_desc"/>
+		<result column="P_PRICE" property="p_price"/>
+		<result column="P_DATE" property="p_date"/>
+		<result column="P_SELL" property="p_sell"/>
+		<result column="P_COUNT" property="p_count"/>
+		<result column="P_WISH" property="p_wish"/>
+		<result column="P_ADDRESS_NAME" property="p_address_name"/>
+		<result column="P_ADDRESS_LAT"  property="p_address_lat"/>
+		<result column="P_ADDRESS_LNG  " property="p_address_lng"/>
+		<association property="userInfo" javaType="com.itwill.brown_carrot_market.dto.UserInfo">
+			<result column="USER_ID" property="user_id"/>
+			<result column="USER_PW" property="user_pw"/>
+			<result column="USER_NAME" property="user_name"/>
+			<result column="USER_EMAIL" property="user_email"/>
+			<result column="USER_PHONE" property="user_phone"/>
+			<result column="USER_FRESHNESS" property="user_freshness"/>
+			<result column="USER_POINT" property="user_point"/>
+			<result column="USER_PROFILE" property="user_profile"/>
+		</association>
+		<collection property="productImagesList" javaType="java.util.List" ofType="com.itwill.brown_carrot_market.dto.ProductImage">
+			<result column="PI_NO " property="pi_no"/>
+			<result column="PI_NAME " property="pi_name"/>
+			<result column="P_NO " property="p_no"/>
+		</collection>
+		<collection property="addressList" javaType="java.util.List" ofType="com.itwill.brown_carrot_market.dto.Address">
+			
+		</collection>
+	</resultMap> 
+	
+	
+	<!-- 비회원 상품 전체리스트 불러오기 -->
+	<select id="selectProductAll" resultMap="productResultMap">
+		select * from product p left outer join product_img pi on p.p_no=pi.p_no
+                        join p_category pc on p.p_ctgr_no=pc.p_ctgr_no
+                        order by p.p_date desc
+	</select> 
+
+	<!-- 비회원 카테고리별 상품리스트 불러오기 -->
+	<select id="selectAllByCtgr" parameterType="int" resultMap="productResultMap"> 
+		select * from product p left outer join product_img pi on p.p_no=pi.p_no
+                        join p_category pc on p.p_ctgr_no=pc.p_ctgr_no
+                        where p.p_ctgr_no=#{p_ctgr_no}
+                        order by p.p_date desc
+	</select>
+	
+	<!-- 로그인한 회원 범위안 상품 리스트 불러오기-->
+	<select id="selectListByRange" parameterType ="com.itwill.brown_carrot_market.dto.Address" resultMap="productResultMap">
+		select * from (select * from product p left outer join product_img pi on p.p_no=pi.p_no
+                                       join p_category pc on p.p_ctgr_no=pc.p_ctgr_no
+             where p.p_address_lat 
+             between (select a.address_lat from address a where a.user_id=#{user_id} and a.address_no=#{address_no})-0.004504505*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
+                AND (select a.address_lat from address a where a.user_id=#{user_id} and a.address_no=#{address_no})+0.004504505*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no}))pp
+        where pp.p_address_lng
+        between (select a.address_lng from address a where a.user_id=#{user_id} and a.address_no=#{address_no})-0.056344377*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
+            AND (select a.address_lng from address a where a.user_id=#{user_id} and a.address_no=#{address_no})+0.056344377*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
+            order by pp.p_date desc           
+	</select>
+	
+	<!-- 로그인한 회원 범위+카테고리오 상품 리스트 불러오기 -->
+	<select id="selectListByRangeCtgr" parameterType="map" resultMap="productResultMap">
+		select * from (select * from (select * from product p left outer join product_img pi on p.p_no=pi.p_no
+                                       join p_category pc on p.p_ctgr_no=pc.p_ctgr_no where p.p_ctgr_no=#{p_ctgr_no}) pa
+             where pa.p_address_lat 
+            between (select a.address_lat from address a where a.user_id=#{user_id} and a.address_no=#{address_no})-0.004504505*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
+                AND (select a.address_lat from address a where a.user_id=#{user_id} and a.address_no=#{address_no})+0.004504505*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no}))pp
+        where pp.p_address_lng
+        between (select a.address_lng from address a where a.user_id=#{user_id} and a.address_no=#{address_no})-0.056344377*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
+            AND (select a.address_lng from address a where a.user_id=#{user_id} and a.address_no=#{address_no})+0.056344377*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
+             order by pp.p_date desc
+	
+	</select>
+	
+	<!-- 선택한 상품 하나 보여주기 -->
+	<select id="selectByOne" parameterType="int" resultMap="productResultMap">
+		select * from product p left outer join product_img pi on p.p_no=pi.p_no
+                        join p_category pc on p.p_ctgr_no=pc.p_ctgr_no 
+                        where p.p_no=#{p_no}
+	</select>
+	
+	<!-- 특정 유저의 상품리스트 불러오기 -->
+	<select id="selectByUserId" parameterType="java.lang.String" resultMap="productResultMap">
+	select * from product p  
+                    left outer join product_img pi on p.p_no=pi.p_no
+                    join p_category pc on p.p_ctgr_no=pc.p_ctgr_no
+                    where p.user_id=#{user_id}
+    </select>
+    
+    <!-- 상품삭제 -->
+    <delete id="deleteByPNo" parameterType="int">
+    	delete from product p where p.p_no=#{p_no}
+    </delete>
+     
+    <!-- 조회수 수정 -->
+    <update id="updateProductCount" parameterType="int">
+    	update product p set p.p_count=p.p_count+1 where p.p_no=#{p_no}
+    </update>
+    
+    <!-- 게시글 수정 -->
+    <update id="updateProduct" parameterType="com.itwill.brown_carrot_market.dto.Product">
+    	update product p set p.p_title=#{p_title},
+                     p.p_desc=#{p_desc},
+                     p.p_price=#{p_price},
+                     p.p_sell=#{p_sell},
+                     p.p_ctgr_no=#{p_ctgr_no}
+                 where p.p_no=#{p_no} 
+    </update>
+    
+    <!-- 관심수 수정 -->
+    <!-- update product p set p.p_wish=(select count(*) from wishlist where p_no=13) where p.p_no=13; -->
+    <update id="updateProductWishCount" parameterType="int">
+    	<selectKey keyProperty="p_wish" resultType="int" order="BEFORE">
+    		select count(*) from wishlist where p_no=#{p_no}
+    	</selectKey> 
+    	update product p set p.p_wish=#{p_wish} where p.p_no=#{p_no}
+    </update> 
+     
+    <!-- 상품 작성 -->
+    
+	
+</mapper>
