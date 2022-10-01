@@ -203,4 +203,27 @@ UserHtmlContents.user_view_addresses_zero=function(addressList){
                                 <a href="#" id="btn_address_new2" class="btn btn-primary btn-sm">주소 입력</a>
                             </div>
                         </div>`;
+}
+
+UserHtmlContents.user_thumbnail=function(){
+		return `<div class="user-thumbnail">
+			    			<i class="fa fa-user-circle"></i>
+                            </div>
+                            <ul class="user-meta-dropdown">
+                                <!-- <li class="user-title"><span>Hello,</span> Lim Sarah</li>-->
+                                <li><a href="user_login_form">회원가입</a></li>
+                                <li><a href="user_login_form"><i class="icofont-login"></i> 로그인</a></li>
+                            </ul>`;
+}	
+UserHtmlContents.user_thumbnail_login=function(loginUser){
+		return `<div class="user-thumbnail">
+                            <img src='img/user_profile/${loginUser.user_profile}' alt="">
+                            </div>
+                            <ul class="user-meta-dropdown">
+                                <li class="user-title"><span>안녕하세요,</span> ${loginUser.user_name} 님</li>
+                                <li><a href="user_my_account">My Account</a></li>
+                                <li><a href="order-list.html">Orders List</a></li>
+                                <li><a href="wishlist.html">Wishlist</a></li>
+                                <li><a href="user_logout_action"><i class="icofont-logout"></i> Logout</a></li>
+                            </ul>`;
 }	
