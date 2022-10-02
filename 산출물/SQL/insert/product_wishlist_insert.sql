@@ -28,7 +28,7 @@ insert into product_img values(PRODUCT_IMG_PI_NO_SEQ.nextval, 'keyboard1.jpg', P
 insert into product_img values(PRODUCT_IMG_PI_NO_SEQ.nextval, 'keyboard2.jpg', PRODUCT_P_NO_SEQ.currval);
 insert into wishlist(wishlist_no,p_no,user_id) values(wishlist_wishlist_no_seq.nextval,PRODUCT_P_NO_SEQ.currval,'carrot6');
 
-insert into product values(PRODUCT_P_NO_SEQ.nextval, '(미개봉)마우스', '선물받았는데 필요없어져서 팝니다. 직거래환영', 30000, sysdate-30, null,, 10, 5,'역삼동',37.4923615, 127.0292881, 1,'carrot2');
+insert into product values(PRODUCT_P_NO_SEQ.nextval, '(미개봉)마우스', '선물받았는데 필요없어져서 팝니다. 직거래환영', 30000, sysdate-30, null, 10, 5,'역삼동',37.4923615, 127.0292881, 1,'carrot2');
 insert into product_img values(PRODUCT_IMG_PI_NO_SEQ.nextval, 'mouse1.jpg', PRODUCT_P_NO_SEQ.currval);
 insert into product_img values(PRODUCT_IMG_PI_NO_SEQ.nextval, 'mouse2.jpg', PRODUCT_P_NO_SEQ.currval);
 insert into wishlist(wishlist_no,p_no,user_id) values(wishlist_wishlist_no_seq.nextval,PRODUCT_P_NO_SEQ.currval,'carrot6');
