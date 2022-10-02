@@ -1,4 +1,4 @@
-package com.itwill.brown_carrot_market.test;
+package com.itwill.brown_carrot_market.test.dao;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
