@@ -1,3 +1,4 @@
+DROP TABLE review CASCADE CONSTRAINTS;
 DROP TABLE town_reaction CASCADE CONSTRAINTS;
 DROP TABLE town_reply CASCADE CONSTRAINTS;
 DROP TABLE town_img CASCADE CONSTRAINTS;
@@ -61,6 +62,7 @@ DROP SEQUENCE product_p_no_SEQ;
 CREATE SEQUENCE product_p_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
+
 CREATE TABLE payment(
 		payment_no                    		VARCHAR2(30)		 NULL ,
 		payment_method                		VARCHAR2(30)		 NULL ,
@@ -80,6 +82,7 @@ DROP SEQUENCE orders_orders_no_SEQ;
 
 CREATE SEQUENCE orders_orders_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+
 CREATE TABLE transfer(
 		transfer_no                   		NUMBER(10)		 NULL ,
 		transfer_deposit              		NUMBER(10)		 NULL ,
@@ -92,7 +95,6 @@ CREATE TABLE transfer(
 DROP SEQUENCE transfer_transfer_no_SEQ;
 
 CREATE SEQUENCE transfer_transfer_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 
 CREATE TABLE product_img(
@@ -115,8 +117,6 @@ CREATE TABLE wishlist(
 DROP SEQUENCE wishlist_wishlist_no_SEQ;
 
 CREATE SEQUENCE wishlist_wishlist_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
-
 
 CREATE TABLE address(
 		address_no                    		NUMBER(30)		 NULL ,
@@ -142,7 +142,6 @@ CREATE TABLE invitation(
 DROP SEQUENCE invitation_invi_no_SEQ;
 
 CREATE SEQUENCE invitation_invi_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 
 CREATE TABLE notice(
@@ -172,8 +171,6 @@ DROP SEQUENCE chat_room_c_room_no_SEQ;
 CREATE SEQUENCE chat_room_c_room_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
-
-
 CREATE TABLE chat_contents(
 		c_content_no                  		NUMBER(10)		 NULL ,
 		c_content                     		VARCHAR2(100)		 NULL ,
@@ -186,7 +183,6 @@ CREATE TABLE chat_contents(
 DROP SEQUENCE chat_contents_c_content_no_SEQ;
 
 CREATE SEQUENCE chat_contents_c_content_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 
 CREATE TABLE town_category(
@@ -219,7 +215,6 @@ DROP SEQUENCE town_board_t_no_SEQ;
 CREATE SEQUENCE town_board_t_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
-
 CREATE TABLE town_wishlist(
 		t_wl_no                       		NUMBER(10)		 NULL ,
 		user_id                       		VARCHAR2(10)		 NULL ,
@@ -231,7 +226,6 @@ DROP SEQUENCE town_wishlist_t_wl_no_SEQ;
 CREATE SEQUENCE town_wishlist_t_wl_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
-
 CREATE TABLE town_img(
 		t_img_no                      		NUMBER(10)		 NULL ,
 		t_img_name                    		VARCHAR2(100)		 NULL ,
@@ -241,6 +235,7 @@ CREATE TABLE town_img(
 DROP SEQUENCE town_img_t_img_no_SEQ;
 
 CREATE SEQUENCE town_img_t_img_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+
 
 
 CREATE TABLE town_reply(
@@ -261,7 +256,6 @@ CREATE SEQUENCE town_reply_t_reply_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
 
-
 CREATE TABLE town_reaction(
 		t_reac_no                     		NUMBER(10)		 NULL ,
 		t_reac_type                   		NUMBER(10)		 NULL ,
@@ -272,6 +266,21 @@ CREATE TABLE town_reaction(
 DROP SEQUENCE town_reaction_t_reac_no_SEQ;
 
 CREATE SEQUENCE town_reaction_t_reac_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+
+
+
+CREATE TABLE review(
+		review_no                     		NUMBER(10)		 NULL ,
+		review_desc                   		VARCHAR2(100)		 NULL ,
+		review_image                  		VARCHAR2(100)		 NULL ,
+		review_point                  		NUMBER(10,1)		 NULL ,
+		orders_no                     		NUMBER(10)		 NULL ,
+		user_id                       		VARCHAR2(30)		 NULL 
+);
+
+DROP SEQUENCE review_review_no_SEQ;
+
+CREATE SEQUENCE review_review_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
 
@@ -293,7 +302,7 @@ ALTER TABLE orders ADD CONSTRAINT IDX_orders_FK1 FOREIGN KEY (user_id) REFERENCE
 
 ALTER TABLE transfer ADD CONSTRAINT IDX_transfer_PK PRIMARY KEY (transfer_no);
 ALTER TABLE transfer ADD CONSTRAINT IDX_transfer_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
-ALTER TABLE transfer ADD CONSTRAINT IDX_transfer_FK1 FOREIGN KEY (orders_no) REFERENCES orders (orders_no);
+ALTER TABLE transfer ADD CONSTRAINT IDX_transfer_FK1 FOREIGN KEY (orders_no) REFERENCES orders (orders_no) on delete cascade;
 
 ALTER TABLE product_img ADD CONSTRAINT IDX_product_img_PK PRIMARY KEY (pi_no);
 ALTER TABLE product_img ADD CONSTRAINT IDX_product_img_FK0 FOREIGN KEY (p_no) REFERENCES product (p_no);
@@ -339,4 +348,8 @@ ALTER TABLE town_reply ADD CONSTRAINT IDX_town_reply_FK1 FOREIGN KEY (t_no) REFE
 ALTER TABLE town_reaction ADD CONSTRAINT IDX_town_reaction_PK PRIMARY KEY (t_reac_no);
 ALTER TABLE town_reaction ADD CONSTRAINT IDX_town_reaction_FK0 FOREIGN KEY (t_no) REFERENCES town_board (t_no);
 ALTER TABLE town_reaction ADD CONSTRAINT IDX_town_reaction_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
+
+ALTER TABLE review ADD CONSTRAINT IDX_review_PK PRIMARY KEY (review_no);
+ALTER TABLE review ADD CONSTRAINT IDX_review_FK0 FOREIGN KEY (orders_no) REFERENCES orders (orders_no) on delete cascade;
+ALTER TABLE review ADD CONSTRAINT IDX_review_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
 

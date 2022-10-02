@@ -93,7 +93,6 @@
 					success : function(jsonResult) {
 							//주소의 갯수를 확인해보자
 						    console.log(jsonResult.data[0].addressList.length);
-						
 							var addressCount=jsonResult.data[0].addressList.length;
 							
 							if(addressCount==0){
@@ -109,76 +108,100 @@
 				e.preventDefault();
 			});
 			/****************user_update_addresses******************/
-			//(Step_1) update
-			$(document).on('click',	'#btn_address_first,#btn_address_second',function(e) {
-				console.log("click!! >> #btn_address...");
-			    $.ajax({
-					url : 'user_update_adresse_json',
-					method : 'POST',
-					dataType : 'json',
-					success : function(jsonResult) {
-							$("input[name=address_name]").attr("disabled",false);
-						    console.log(jsonResult);
-						    //
-						    e.target.id+="_selected";
-						    console.log(e.target.id);
-						    console.log($(e.target).id);
-					    }
-				});
+			//(Step_1) Getting a address
+			$(document).on('click',	'#btn_address_first,#btn_address_second,#btn_address_new1,#btn_address_new2',function(e) {
+				var selectedAddress = $(e.target).prev($("address"));
+				selectedAddress.addClass("selected_address");
+				selectedAddress.children("input[name=address_name]").attr("disabled",false);
 				
+				$(e.target).addClass("selected");
+				
+		    /**********************************************************/
+		    	// 주소-좌표 변환 객체를 생성합니다
+		    	var geocoder = new kakao.maps.services.Geocoder();
+				// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+				if (navigator.geolocation) {
+				    // ***GeoLocation을 이용해서 접속 위치를 얻어옵니다
+				    navigator.geolocation.getCurrentPosition(function(position) {
+				        var lat = position.coords.latitude, // 위도
+				            lon = position.coords.longitude; // 경도
+				        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+				            message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
+				            console.log("locPosition: "+locPosition.getLat(),locPosition.getLng());
+				            console.log(message);
+							/*좌표->주소 변환*********************************************************/
+							 searchDetailAddrFromCoords(locPosition, function(result, status) {
+							 if (status === kakao.maps.services.Status.OK) {
+							    	//console.log('도로명주소 : ' + result[0].road_address.address_name);
+							    	//console.log('지번 주소 : ' + result[0].address.address_name);
+							            //var detailAddr = !!result[0].road_address ? result[0].road_address.address_name  : '';
+							            var detailAddr = result[0].address.address_name;
+							           		//주소를 동까지만 자릅니다.
+							           		subStr = detailAddr.lastIndexOf(" ");
+							           		detailAddr=detailAddr.substring(0,subStr);
+											$(".selected_address > input[name=address_name] ").val(detailAddr);
+											$(".selected_address > input[name=address_lat] ").val(lat);
+											$(".selected_address > input[name=address_lng] ").val(lon);
+							        }
+							 });
+							/**********************************************************/
+				      });
+				} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+				    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
+				        message = 'geolocation을 사용할수 없어요..'
+			        	$("._selected").val(message);
+				}
+			/**********************************************************/
+				/*좌표->주소 변환*********************************************************/
+				function searchAddrFromCoords(coords, callback) {
+				    // 좌표로 행정동 주소 정보를 요청합니다
+				    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+				}
+				function searchDetailAddrFromCoords(coords, callback) {
+				    // 좌표로 법정동 상세 주소 정보를 요청합니다
+				    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+				}
+		/**********************************************************/
+				$(e.target).html("확인");
 				e.preventDefault();
 			});
 			
-			//(Step_2) insert
-			$(document).on('click',	'#btn_address_first_selected, #btn_address_second_selected,#btn_address_new1,#btn_address_new2',function(e) {
-				console.log("click!! >> #btn_address..._selected");
-				/**********************************************************/
-				console.log('click!! - #address_name');
-			    	// 주소-좌표 변환 객체를 생성합니다
-			    	var geocoder = new kakao.maps.services.Geocoder();
-					// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
-					if (navigator.geolocation) {
-					    // ***GeoLocation을 이용해서 접속 위치를 얻어옵니다
-					    navigator.geolocation.getCurrentPosition(function(position) {
-					        var lat = position.coords.latitude, // 위도
-					            lon = position.coords.longitude; // 경도
-					        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-					            message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
-					            console.log("locPosition: "+locPosition.getLat(),locPosition.getLng());
-					            console.log(message);
-								/*좌표->주소 변환*********************************************************/
-								 searchDetailAddrFromCoords(locPosition, function(result, status) {
-								 if (status === kakao.maps.services.Status.OK) {
-								    	//console.log('도로명주소 : ' + result[0].road_address.address_name);
-								    	//console.log('지번 주소 : ' + result[0].address.address_name);
-								            var detailAddr = !!result[0].road_address ? result[0].road_address.address_name  : '';
-								           		 detailAddr += result[0].address.address_name;
-								            
-								           		//주소를 동까지만 자릅니다.
-								           		subStr = detailAddr.lastIndexOf(" ");
-								           		detailAddr=detailAddr.substring(0,subStr);
-							           		/*(수정 필요)*****************************************/
-											$("input[name=address_name]").val(detailAddr);
-							           		/******************************************/
-								        }
-								 });
-								/**********************************************************/
-					      });
-					} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-					    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
-					        message = 'geolocation을 사용할수 없어요..'
-							$("input[name=address_name]").val(message);
-					}
-					/*좌표->주소 변환*********************************************************/
-					function searchAddrFromCoords(coords, callback) {
-					    // 좌표로 행정동 주소 정보를 요청합니다
-					    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
-					}
-					function searchDetailAddrFromCoords(coords, callback) {
-					    // 좌표로 법정동 상세 주소 정보를 요청합니다
-					    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-					}
-			/**********************************************************/
+			//(Step_2) update & insert
+			$(document).on('click',	'.selected',function(e) {
+				
+				if($(e.target).hasClass('update')){
+				    $.ajax({
+						url : 'user_update_address_json',
+						method : 'POST',
+						data: $(".selected_address > *").serialize(),
+						dataType : 'json',
+						success : function(jsonResult) {
+							    console.log(jsonResult);
+							    if(jsonResult.code==0) alert("동일한 주소는 1개만 등록가능합니다.");
+							    $( "#user_view_addresses" ).trigger( "click" );
+							    /*
+								$(".selected_address > input[name=address_name]").attr("disabled",true);
+								$(".selected_address").removeClass("selected_address");
+								$(e.target).removeClass("selected");
+								$(e.target).html("주소 수정");
+								*/
+						    }
+					});
+				}else if ($(e.target).hasClass('insert')) {
+					console.log($("._selected").find("input[name=address_name]"));
+				    $.ajax({
+						url : 'user_insert_address_json',
+						method : 'POST',
+						data: $(".selected_address > *").serialize(),
+						dataType : 'json',
+						success : function(jsonResult) {
+							    console.log(jsonResult);
+							    if(jsonResult.code==0) alert("동일한 주소는 1개만 등록가능합니다.");
+							    $( "#user_view_addresses" ).trigger( "click" );
+						    }
+					});
+					
+				}
 			});
 			
 			

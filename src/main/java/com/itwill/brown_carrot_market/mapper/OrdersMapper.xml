@@ -1,3 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.itwill.brown_carrot_market.mapper.OrdersMapper"></mapper>
+<mapper namespace="com.itwill.brown_carrot_market.mapper.OrdersMapper">
+	<resultMap id="ordersResultMap" type="com.itwill.brown_carrot_market.dto.Orders" >
+		<result column="orders_no" property="orders_no" />
+		<result column="p_no" property="product.p_no" />
+		<result column="user_id" property="user_id" />
+		<collection property="ordersList" javaType="java.util.List" ofType="com.itwill.brown_carrot_market.dto.Orders">
+			<result column="orders_no" property="orders_no" />
+			<result column="p_no" property="product.p_no" />
+			<result column="uesr_id" property="user_id" />
+		</collection>
+	</resultMap>
+	<select id = "selectAllById" resultMap = "ordersResultMap">
+		select * from orders where user_id=#{user_id}
+	</select>
+	<select id = "selectByNo" resultMap = "ordersResultMap">
+		select * from orders where orders_no=#{orders_no}
+	</select>
+	<insert id = "insertOrders" parameterType="com.itwill.brown_carrot_market.dto.Orders">
+		insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, #{product.p_no}, #{user_id})
+	</insert>
+	<delete id  = "deleteOrders" parameterType="com.itwill.brown_carrot_market.dto.Orders">
+		delete orders where orders_no = #{orders_no}
+	</delete>
+</mapper>

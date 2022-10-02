@@ -36,7 +36,7 @@
 
 	<!-- user_id를 통해, userinfo와 addressList (Select) -->
 	<select id="findUser" parameterType="String" resultMap="userInfoResultMap">
-		select * from userinfo u left join address a on u.user_id=a.user_id where u.user_id= #{user_id}
+		select * from userinfo u left join address a on u.user_id=a.user_id where u.user_id= #{user_id} order by a.address_no asc
 	</select>
 
 

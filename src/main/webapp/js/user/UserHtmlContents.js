@@ -36,55 +36,6 @@ UserHtmlContents.user_main_content=function(){
 			</object>`;
 }
 
-UserHtmlContents.user_login_form_content=function(){
-	return `<table border="0" cellpadding="0" cellspacing="0">
-				<tbody>
-					<tr>
-						<td><br>
-							<table style="padding-left: 10px" border="0" cellpadding="0"
-								cellspacing="0">
-								<tbody>
-									<tr>
-										<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>사용자 관리 -
-												로그인</b></td>
-									</tr>
-								</tbody>
-							</table> <!-- login Form  -->
-							<form name="f" method="post" id="user_login_form">
-								<table border="0" cellpadding="0" cellspacing="1" bgcolor="BBBBBB">
-									<tbody>
-										<tr>
-											<td width="100" align="center" bgcolor="E6ECDE" height="22">사용자
-												아이디</td>
-											<td width="490" align="left" bgcolor="ffffff"
-												style="padding-left: 10px"><input type="text"
-												style="width: 150" name="userId" value="">&nbsp;&nbsp;<font
-												color="red" id="msg1"></font></td>
-										</tr>
-										<tr>
-											<td width="100" align="center" bgcolor="E6ECDE" height="22">비밀번호</td>
-											<td width="490" align="left" bgcolor="ffffff"
-												style="padding-left: 10px"><input type="password"
-												style="width: 150" name="password" value="" >&nbsp;&nbsp;<font
-												color="red" id="msg2"></font></td>
-										</tr>
-									</tbody>
-								</table>
-							</form> <br>
-							<table border="0" cellpadding="0" cellspacing="1">
-								<tbody>
-									<tr>
-										<td align="center">
-										<input id="btn_user_login_action" type="button" value="로그인"> &nbsp; 
-										<input id="btn_user_write_form" type="button" value="회원가입" ></td>
-									</tr>
-								</tbody>
-							</table></td>
-					</tr>
-				</tbody>
-			</table>`;
-}
-
 UserHtmlContents.user_view_content=function(loginUser) {
 	return `<h5 class="mb-3">Account Details</h5>
 
@@ -147,18 +98,22 @@ UserHtmlContents.user_view_addresses=function(addressList){
                             <div class="col-12 col-lg-6 mb-5 mb-lg-0">
                                 <h6 class="mb-3">Address (1)</h6>
                                 <address>
-                                    ${addressList[0].address_name} <br>
+                                <input type="hidden" name="address_no" value="${addressList[0].address_no}">
+                                <input type="hidden" name="address_lat" value="${addressList[0].address_lat}">
+                                <input type="hidden" name="address_lng" value="${addressList[0].address_lng}">
                                 <input type="text" name="address_name" disabled value="${addressList[0].address_name}"><br>
                                 </address>
-                                <a href="#" id="btn_address_first" class="btn btn-primary btn-sm">주소 수정</a>
+                                <a href="#" id="btn_address_first" class="btn btn-primary btn-sm update">주소 수정</a>
                             </div>
-                            <div class="col-12 col-lg-6">
+                            <div class="col-12 col-lg-6 mb-5 mb-lg-0">
                                 <h6 class="mb-3">Address (2)</h6>
                                 <address>
-                                    ${addressList[1].address_name} <br>
+                                <input type="hidden" name="address_no" value="${addressList[1].address_no}">
+                                <input type="hidden" name="address_lat" value="${addressList[1].address_lat}">
+                                <input type="hidden" name="address_lng" value="${addressList[1].address_lng}">
                                 <input type="text" name="address_name" disabled value="${addressList[1].address_name}"><br>
                                 </address>
-                                <a href="#" id="btn_address_second" class="btn btn-primary btn-sm">주소 수정</a>
+                                <a href="#" id="btn_address_second" class="btn btn-primary btn-sm update">주소 수정</a>
                             </div>
                         </div>`;
 }
@@ -169,18 +124,21 @@ UserHtmlContents.user_view_addresses_one=function(addressList){
                             <div class="col-12 col-lg-6 mb-5 mb-lg-0">
                                 <h6 class="mb-3">Address (1)</h6>
                                 <address>
-                                    ${addressList[0].address_name} <br>
+                                <input type="hidden" name="address_no" value="${addressList[0].address_no}">
+                                <input type="hidden" name="address_lat" value="${addressList[0].address_lat}">
+                                <input type="hidden" name="address_lng" value="${addressList[0].address_lng}">
                                 <input type="text" name="address_name" disabled value="${addressList[0].address_name}"><br>
                                 </address>
-                                <a href="#" id="btn_address_first" class="btn btn-primary btn-sm">주소 수정</a>
+                                <a href="#" id="btn_address_first" class="btn btn-primary btn-sm update">주소 수정</a>
                             </div>
                             <div class="col-12 col-lg-6">
                                 <h6 class="mb-3">Address (2)</h6>
                                 <address>
-                                     <br>
-                                <input type="text" name="address_name" value=""><br>
+                                <input type="hidden" name="address_lat" value="">
+                                <input type="hidden" name="address_lng" value="">
+                                <input type="text" name="address_name" disabled value="">
                                 </address>
-                                <a href="#" id="btn_address_new1" class="btn btn-primary btn-sm">주소 입력</a>
+                                <a href="#" id="btn_address_new1" class="btn btn-primary btn-sm insert">주소 입력</a>
                             </div>
                         </div>`;
 }
@@ -191,16 +149,20 @@ UserHtmlContents.user_view_addresses_zero=function(addressList){
                             <div class="col-12 col-lg-6 mb-5 mb-lg-0">
                                 <h6 class="mb-3">Address (1)</h6>
                                 <address>
-                                <input type="text" name="address_name" value=""><br>
+                                <input type="hidden" name="address_lat" value="">
+                                <input type="hidden" name="address_lng" value="">
+                                <input type="text" name="address_name" disabled value=""><br>
                                 </address>
-                                <a href="#" id="btn_address_new1" class="btn btn-primary btn-sm">주소 입력</a>
+                                <a href="#" id="btn_address_new1" class="btn btn-primary btn-sm insert">주소 입력</a>
                             </div>
                             <div class="col-12 col-lg-6">
                                 <h6 class="mb-3">Address (2)</h6>
                                 <address>
-                                <input type="text" name="address_name" value=""><br>
+                                <input type="hidden" name="address_lat" value="">
+                                <input type="hidden" name="address_lng" value="">
+                                <input type="text" name="address_name" disabled value=""><br>
                                 </address>
-                                <a href="#" id="btn_address_new2" class="btn btn-primary btn-sm">주소 입력</a>
+                                <a href="#" id="btn_address_new2" class="btn btn-primary btn-sm insert">주소 입력</a>
                             </div>
                         </div>`;
 }
