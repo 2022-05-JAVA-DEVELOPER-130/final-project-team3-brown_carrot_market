@@ -39,6 +39,7 @@ public interface UserInfoService {
 
 	int updateAddress(Address addressS) throws Exception;
 	
+	int createAddress(Address address) throws Exception;
 	
 	/*
 	 * 회원탈퇴

@@ -72,20 +72,49 @@ public class UserInfoRestController {
 	}
 	
 	@LoginCheck
-	@PostMapping("/user_update_adresse_json")
-	public Map user_update_adresse_json(HttpServletRequest request, @ModelAttribute Address address) throws Exception{
+	@PostMapping("/user_update_address_json")
+	public Map user_update_address_json(HttpServletRequest request, @ModelAttribute Address address) throws Exception{
 		Map resultMap=new HashMap();
-		int code=1;
+		int code=0;
 		String url="user_main";
-		String msg="";
+		String msg="update_address 실패";
 		List<UserInfo> resultList=new ArrayList<UserInfo>();
 		
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
-		System.out.println("sUserId >>>>>>>>>"+sUserId);
 
+		System.out.println("RestController-user_update_address_json() 호출");
+		System.out.println("sUserId >>>>>>>>>"+sUserId);
+		address.setUser_id(sUserId);
 		/***********수정 필요***********/
-		address = new Address(userService.findUser(sUserId).getAddressList().get(0).getAddress_no(), "test 주소", 37.49, 127.04, 1, sUserId);
-		userService.updateAddress(address);
+		code = userService.updateAddress(address);
+		/******************************/
+		
+		UserInfo loginUser=userService.findUser(sUserId);
+		resultList.add(loginUser);
+		
+		resultMap.put("code", code);
+		resultMap.put("url", url);
+		resultMap.put("msg", msg);
+		resultMap.put("data",resultList);
+		return resultMap;
+	}
+	@LoginCheck
+	@PostMapping("/user_insert_address_json")
+	public Map user_insert_address_json(HttpServletRequest request, @ModelAttribute Address address) throws Exception{
+		Map resultMap=new HashMap();
+		int code=0;
+		String url="user_main";
+		String msg="insert_address 실패";
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
+		
+		String sUserId=(String)request.getSession().getAttribute("sUserId");
+		
+		System.out.println("RestController-user_insert_address_json() 호출");
+		System.out.println("sUserId >>>>>>>>>"+sUserId);
+		/***********수정 필요***********/
+		address.setUser_id(sUserId);
+		System.out.println(address);
+		code=userService.createAddress(address);
 		/******************************/
 		
 		UserInfo loginUser=userService.findUser(sUserId);

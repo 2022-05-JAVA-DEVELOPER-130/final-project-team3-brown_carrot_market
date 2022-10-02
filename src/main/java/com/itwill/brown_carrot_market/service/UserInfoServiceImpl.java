@@ -47,7 +47,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 			
 			if(address.getAddress_lat()!=0.0) {
 				address.setUser_id(user.getUser_id());
+				
 				int insertAddress =userDao.createAddress(address);
+				
 				System.out.println(insertAddress);
 			}
 			
@@ -106,7 +108,32 @@ public class UserInfoServiceImpl implements UserInfoService {
 	
 	@Override
 	public int updateAddress(Address address) throws Exception {
+		
+		//기존에 존재하는지 찾기
+		List<Address> findAddressList=
+		userDao.findUser(address.getUser_id()).getAddressList();
+		
+		for (Address findAddress : findAddressList) {
+			if(findAddress.getAddress_no()!=address.getAddress_no()&&findAddress.getAddress_name().equals(address.getAddress_name())) {
+				//동일한 주소가 존재한다면
+				return 0;
+			}
+		}
 		return userDao.updateAddress(address);
+	}
+	@Override
+	public int createAddress(Address address) throws Exception {
+		//기존에 존재하는지 찾기
+		List<Address> findAddressList=
+				userDao.findUser(address.getUser_id()).getAddressList();
+
+		for (Address findAddress : findAddressList) {
+			if(findAddress.getAddress_no()!=address.getAddress_no()&&findAddress.getAddress_name().equals(address.getAddress_name())) {
+				//동일한 주소가 존재한다면
+				return 0;
+			}
+		}
+		return userDao.createAddress(address);
 	}
 
 	/*
@@ -137,6 +164,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 			return false;
 		}
 	}
+
+
 
 
 
