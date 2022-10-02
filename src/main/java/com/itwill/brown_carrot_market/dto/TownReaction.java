@@ -7,10 +7,10 @@ T_REAC_TYPE	NUMBER(10,0)
 T_NO	NUMBER(10,0)
 USER_ID	VARCHAR2(30 BYTE) 
 	 */
-	public int t_reac_no;
-	public int t_reac_type;
-	public TownBoard townBoard;
-	public UserInfo userInfo;
+	private int t_reac_no;
+	private int t_reac_type;
+	private TownBoard townBoard;
+	private UserInfo userInfo;
 	
 	public TownReaction() {
 		// TODO Auto-generated constructor stub

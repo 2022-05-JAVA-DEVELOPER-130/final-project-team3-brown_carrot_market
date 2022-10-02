@@ -6,9 +6,9 @@ T_IMG_NO	NUMBER(10,0)
 T_IMG_NAME	VARCHAR2(100 BYTE)
 T_NO	NUMBER(10,0) 
 	 */
-	public int t_img_no;
-	public String t_img_name;
-	public int t_no;
+	private int t_img_no;
+	private String t_img_name;
+	private int t_no;
 	
 	
 	public TownImage() {
