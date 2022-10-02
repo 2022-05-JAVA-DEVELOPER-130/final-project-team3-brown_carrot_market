@@ -15,19 +15,19 @@ T_ADDRESS_LAT	NUMBER(20,10)
 T_ADDRESS_LNG	NUMBER(20,10)
 USER_ID	VARCHAR2(30 BYTE)
 	 */
-	public int t_no;
-	public String t_title;
-	public String t_content;
-	public String t_date;
-	public int t_count;
-	public TownCategory townCategory;
-	public String t_address_name;
-	public int t_address_lat;
-	public int t_address_lng;
-	public UserInfo userInfo;
+	private int t_no;
+	private String t_title;
+	private String t_content;
+	private String t_date;
+	private int t_count;
+	private TownCategory townCategory;
+	private String t_address_name;
+	private int t_address_lat;
+	private int t_address_lng;
+	private UserInfo userInfo;
 	
-	public List<TownImage> townImageList;
-	public List<Address> addressesList;
+	private List<TownImage> townImageList;
+	private List<Address> addressesList;
 	
 	
 	public TownBoard() {

@@ -8,7 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.TownBoard;
 
-@Mapper public interface TownBoardMapper {
+@Mapper 
+public interface TownBoardMapper {
 
 //동네 게시판 비회원이 전체조회
 public List<TownBoard> selectNonMemberTownBoardList();

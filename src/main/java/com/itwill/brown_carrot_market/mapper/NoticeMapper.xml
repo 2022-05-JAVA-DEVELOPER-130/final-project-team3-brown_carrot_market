@@ -13,17 +13,17 @@
 				SELECT notice_notice_no_seq.nextval FROM DUAL
 		</selectKey>
 		insert into notice values(#{notice_no}, #{notice_title}, #{notice_content}, 
-									#{notice_date},#{notice_count},#{notice_fix})
+									sysdate,#{notice_count},#{notice_fix})
 	</insert>
 	<delete id="deleteNotice" parameterType="java.lang.Integer">
 		delete notice where notice_no=#{notice_no}
 	</delete>
 	<update id="updateNotice" parameterType="com.itwill.brown_carrot_market.dto.Notice">
-		update notice set notice_title=#{notice_title}, notice_content=#{notice_content} 
+		update notice set notice_title=#{notice_title}, notice_content=#{notice_content} ,notice_fix=#{notice_fix}
 		where notice_no=#{notice_no}
 	</update>
 	<update id="updateNoticeCount">
-		update notice set notice_count = notice_count+1 where notice_no = #{notice_no};
+		update notice set notice_count = notice_count+1 where notice_no = #{notice_no}
 	</update>
 	
 </mapper>
