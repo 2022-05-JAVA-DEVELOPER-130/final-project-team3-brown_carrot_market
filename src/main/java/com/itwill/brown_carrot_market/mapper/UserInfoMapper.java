@@ -68,6 +68,8 @@ public interface UserInfoMapper {
 	//@Select("select user_id,password,name,email from userinfo")
 	public List<UserInfo> findUserList();
 
+	//@Select("")
+	public int existedInvitation(Invitation invitation);
 	
 	//@Select("select count(*) cnt from userinfo where user_id=#{user_id}")
 	public int existedUser(String user_id);

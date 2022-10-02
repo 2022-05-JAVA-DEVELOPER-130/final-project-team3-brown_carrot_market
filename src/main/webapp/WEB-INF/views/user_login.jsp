@@ -100,8 +100,8 @@ $(function() {
 						 if (status === kakao.maps.services.Status.OK) {
 						    	//console.log('도로명주소 : ' + result[0].road_address.address_name);
 						    	//console.log('지번 주소 : ' + result[0].address.address_name);
-						            var detailAddr = !!result[0].road_address ? result[0].road_address.address_name  : '';
-						           		 detailAddr += result[0].address.address_name;
+						            //var detailAddr = !!result[0].road_address ? result[0].road_address.address_name  : '';
+						           		var detailAddr = result[0].address.address_name;
 						            
 						           		//주소를 동까지만 자릅니다.
 						           		subStr = detailAddr.lastIndexOf(" ");
@@ -256,6 +256,7 @@ $(function() {
 			return false;
 		}
 	    //if(validator.form()){
+	    	console.log($('#user_write_form').serialize());
 		    $.ajax({
 				url : 'user_write_action_json',
 				method : 'POST',
@@ -689,8 +690,12 @@ $(function() {
 									name="address_lat" value="0.0" placeholder="위도">
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control phone_number" id="address_lng"
+								<input type="text" class="form-control" id="address_lng"
 									name="address_lng" value="0.0" placeholder="경도">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" id="invi_email"
+									name="invi_email" value="" placeholder="초대코드">
 							</div>
 							<input type="button" id="btn_user_write_action"
 								class="btn btn-primary btn-sm" value="회원가입">

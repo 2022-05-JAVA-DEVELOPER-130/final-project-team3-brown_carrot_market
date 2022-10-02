@@ -147,7 +147,7 @@
 							/**********************************************************/
 				      });
 				} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-				    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
+				    //var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
 				        message = 'geolocation을 사용할수 없어요..'
 			        	$("._selected").val(message);
 				}
@@ -204,6 +204,30 @@
 				}
 			});
 			
+			/* Send_Mail********************************/
+			$(document).on('click', '#btn_invi', function(e) {
+				console.log($("#invi_email").val());
+				$.ajax({
+					url : 'springMail',
+					method : 'POST',
+					data:{
+						"invi_email":$("#invi_email").val()
+					},
+					beforeSend:function(e){
+						//수정필요
+						$('.form-group').append("<div class='progress'><div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' aria-valuenow='75' aria-valuemin='0' aria-valuemax='100' style='width: 75%'></div></div>");
+					},
+					success : function(e) {
+						console.log("success");
+						$('.progress').remove();
+						alert($("#invi_email").val()+" 님에게 초대장이 전송되었습니다.");
+						$("#invi_email").val("");
+					}
+				});
+	
+				e.preventDefault();
+			});
+			/*******************************************/
 			
 		});//END
 </script>
@@ -549,10 +573,10 @@
 					</div>
 				</div>
 				<div class="col-12 col-lg-9">
-					<div id="my-account-content" class="my-account-content mb-50">
-					<!-- START!! ************************************************ -->
+		<!-- START!! ************************************************ -->
+					<div id="my-account-content" class="my-account-content mb-50" style="margin-bottom: 10px">
 						<p>
-							Hello <strong>${loginUser.user_id}</strong> (not <strong>${loginUser.user_id}</strong>?
+							<strong>${loginUser.user_id}</strong>님, 안녕하세요? (<strong>${loginUser.user_id}</strong>님이 아니신가요?
 							<a href="user_logout_action">Log out</a>)
 						</p>
 						<p>
@@ -560,8 +584,18 @@
 							manage your shipping and billing addresses, and <a href="account-details.html" id="a_account_details">edit your password and account
 								details</a>.
 						</p>
-					<!-- END!! ************************************************** -->
+                    </div>
+                    <div class="shortcodes_content mb-100">
+                        <form class="invi_form">
+                            <div class="form-group">
+                                <label for="invi_email">흙당근마켓에 친구를 초대해보세요!</label>
+                                <input type="email" class="form-control" id="invi_email" name="invi_email" aria-describedby="emailHelp" placeholder="Enter email">
+                                <small id="emailHelp" class="form-text text-muted">초대받은 친구가 회원가입시, **point를 드립니다!.</small>
+                            </div>
+                        </form>
+                        <button type="submit" class="btn btn-primary" id="btn_invi">Submit</button>
 					</div>
+		<!-- END!! ************************************************** -->
 				</div>
 			</div>
 		</div>

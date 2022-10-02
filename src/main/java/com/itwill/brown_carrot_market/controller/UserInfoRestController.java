@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.brown_carrot_market.dto.Address;
+import com.itwill.brown_carrot_market.dto.Invitation;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.UserInfoService;
 
@@ -307,8 +308,10 @@ public class UserInfoRestController {
 	}
 	
 	@PostMapping(value="/user_write_action_json")
-	public Map user_write_action_json(@ModelAttribute(value = "fuser") UserInfo user, Address address,Model model) 
+	public Map user_write_action_json(@ModelAttribute(value = "fuser") UserInfo user, Address address, Invitation invitation, Model model) 
 			throws Exception{
+		System.out.println(invitation);
+		
 		Map resultMap=new HashMap();
 		int code=1;
 		String url="user_main";
@@ -318,13 +321,14 @@ public class UserInfoRestController {
 		 *  0:아이디중복
 		 *  1:회원가입성공
 		 */
-		int result=userService.create(user,address);
+		int result=userService.create(user,address,invitation);
 		if(result==-1) {
 			code=2;
 			url="user_write_form";
 			msg= user.getUser_id()+" 는 이미 존재하는 아이디 입니다.";
 			
 		}else if(result==1) {
+			
 			code=1;
 			url="user_login_form";
 			msg= "회원가입성공";

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.itwill.brown_carrot_market.dao.UserInfoDao;
 import com.itwill.brown_carrot_market.dto.Address;
+import com.itwill.brown_carrot_market.dto.Invitation;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 
 /*
@@ -31,7 +32,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	 */
 	/************** 1.반환값사용 ***********************/
 	@Override
-	public int create(UserInfo user,Address address) throws Exception {
+	public int create(UserInfo user,Address address,Invitation invitation) throws Exception {
 		/*
 		 * -1:아이디중복 1:회원가입성공
 		 */
@@ -51,6 +52,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 				int insertAddress =userDao.createAddress(address);
 				
 				System.out.println(insertAddress);
+			}
+			if(userDao.existedInvitation(invitation)) {
+				System.out.println("초대코드로 가입한 회원-> point줘야함!");
 			}
 			
 			return insertRowCount;
@@ -135,6 +139,13 @@ public class UserInfoServiceImpl implements UserInfoService {
 		}
 		return userDao.createAddress(address);
 	}
+	
+	@Override
+	public int createInvitation(Invitation invitation) throws Exception {
+		return userDao.createInvitation(invitation);
+	}
+	
+	
 
 	/*
 	 * 회원탈퇴
@@ -164,6 +175,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 			return false;
 		}
 	}
+
+
 
 
 

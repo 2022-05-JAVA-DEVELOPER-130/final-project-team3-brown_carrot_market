@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.itwill.brown_carrot_market.dto.Address;
+import com.itwill.brown_carrot_market.dto.Invitation;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.mapper.UserInfoMapper;
 
@@ -40,6 +41,12 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	public int createAddress(Address address) throws Exception {
 		System.out.println("#### UserDaoImpl : createAddress() 호출  ");
 		return userMapper.createAddress(address);
+	}
+	
+	@Override
+	public int createInvitation(Invitation invitation) throws Exception {
+		System.out.println("#### UserDaoImpl : createInvitation() 호출  ");
+		return userMapper.createInvitation(invitation);
 	}
 
 	@Override
@@ -77,6 +84,17 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	}
 	
 	@Override
+	public boolean existedInvitation(Invitation invitation) throws Exception {
+		System.out.println("#### UserDaoImpl : existedInvitation 호출  ");
+		int count = userMapper.existedInvitation(invitation);
+		if (count == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	@Override
 	public boolean existedUser(String user_id) throws Exception {
 
 		System.out.println("#### UserDaoImpl : existedUser 호출  ");
@@ -89,6 +107,10 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		}
 
 	}
+
+
+
+
 
 
 
