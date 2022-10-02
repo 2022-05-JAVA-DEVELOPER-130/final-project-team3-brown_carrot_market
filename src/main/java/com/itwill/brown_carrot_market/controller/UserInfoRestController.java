@@ -313,17 +313,19 @@ public class UserInfoRestController {
 		System.out.println(invitation);
 		
 		Map resultMap=new HashMap();
-		int code=1;
+		int code=0;
 		String url="user_main";
 		String msg="세션존재함";
 		List<UserInfo> resultList=new ArrayList<UserInfo>();
 		/*
 		 *  0:아이디중복
 		 *  1:회원가입성공
+		 *  2:초대코드로 회원가입
+		 *  3:존재하지 않는 초대코드로 회원가입 
 		 */
 		int result=userService.create(user,address,invitation);
-		if(result==-1) {
-			code=2;
+		if(result==0) {
+			code=0;
 			url="user_write_form";
 			msg= user.getUser_id()+" 는 이미 존재하는 아이디 입니다.";
 			
@@ -332,6 +334,16 @@ public class UserInfoRestController {
 			code=1;
 			url="user_login_form";
 			msg= "회원가입성공";
+		}else if (result==2) {
+			//초대코드로 회원가입시 포인트 부여
+			//int updatePointResult= userService.updatePoint(user, invitation);
+			code=2;
+			url="user_login_form";
+			msg= "회원가입성공& point적립";
+		}else if (result==3) {
+			code=3;
+			url="user_login_form";
+			msg= "회원가입성공& 존재하지않는코드";
 		}
 		
 		resultMap.put("code", code);

@@ -38,7 +38,6 @@ UserHtmlContents.user_main_content=function(){
 
 UserHtmlContents.user_view_content=function(loginUser) {
 	return `<h5 class="mb-3">Account Details</h5>
-
                         <form action="#" method="post" id="user_modify_form">
                             <div class="row">
                                 <div class="col-12 col-lg-6">

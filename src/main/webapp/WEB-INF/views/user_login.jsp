@@ -268,11 +268,21 @@ $(function() {
 						$('#user_write_form')[0].reset();
 						$('#msg1').html("회원가입성공! 로그인해보세요!");
 						$("#login_user_id").focus();
-						
-				     console.log(">>>>>>> 성공!!:"+jsonResult.msg);
-				    } else if (jsonResult.code == 2) {
+				     //console.log(">>>>>>> 성공!!:"+jsonResult.msg);
+				    } else if (jsonResult.code == 0) {
+				     //console.log(">>>>>>> 아이디중복!!:"+jsonResult.msg);
 						$('#msg3').html(jsonResult.msg);
-				    }
+				    }else if (jsonResult.code == 2) {
+				     //console.log(">>>>>>> 포인트적립!!:"+jsonResult.msg);
+						$('#user_write_form')[0].reset();
+						$('#msg3').html(jsonResult.msg);
+						alert('500point가 적립되었습니다.');
+				    }else if (jsonResult.code == 3) {
+				     //console.log(">>>>>>> 포인트적립!!:"+jsonResult.msg);
+						$('#user_write_form')[0].reset();
+						$('#msg3').html(jsonResult.msg);
+						alert('회원가입 성공. 존재하지않는 추천코드입니다.');
+					}
 				    console.log(jsonResult);
 				}
 		    });

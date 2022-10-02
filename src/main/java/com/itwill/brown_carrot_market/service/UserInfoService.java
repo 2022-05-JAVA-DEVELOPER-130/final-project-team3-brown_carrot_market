@@ -39,6 +39,8 @@ public interface UserInfoService {
 	int update(UserInfo user) throws Exception;
 
 	int updateAddress(Address addressS) throws Exception;
+
+	int updatePoint(UserInfo user,Invitation invitation) throws Exception;
 	
 	int createAddress(Address address) throws Exception;
 	

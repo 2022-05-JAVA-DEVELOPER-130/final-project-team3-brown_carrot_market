@@ -61,6 +61,11 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		System.out.println("#### UserDaoImpl : updateAddress() 호출  ");
 		return userMapper.updateAddress(address);
 	}
+	
+	@Override
+	public int updatePoint(UserInfo userInfo) throws Exception {
+		return userMapper.updatePoint(userInfo);
+	}
 
 	@Override
 	public int removeUser(String user_id) throws Exception {
@@ -75,12 +80,16 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		return userMapper.findUser(user_id);
 	}
 
-
 	@Override
 	public List<UserInfo> findUserList() throws Exception {
 		System.out.println("#### UserDaoImpl : findUserList 호출  ");
 
 		return userMapper.findUserList();
+	}
+	
+	@Override
+	public String findInvitation(Invitation invitation) throws Exception {
+		return userMapper.findInvitation(invitation);
 	}
 	
 	@Override
@@ -107,11 +116,6 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		}
 
 	}
-
-
-
-
-
 
 
 

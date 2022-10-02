@@ -40,6 +40,9 @@
 		select * from userinfo u left join address a on u.user_id=a.user_id where u.user_id= #{user_id} order by a.address_no asc
 	</select>
 
+	<select id="findInvitation" parameterType="com.itwill.brown_carrot_market.dto.Invitation" resultType="java.lang.String">
+		select user_id from invitation where invi_email=#{invi_email}
+	</select>
 	
 	
 
