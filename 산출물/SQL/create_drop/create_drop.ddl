@@ -350,6 +350,6 @@ ALTER TABLE town_reaction ADD CONSTRAINT IDX_town_reaction_FK0 FOREIGN KEY (t_no
 ALTER TABLE town_reaction ADD CONSTRAINT IDX_town_reaction_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
 
 ALTER TABLE review ADD CONSTRAINT IDX_review_PK PRIMARY KEY (review_no);
-ALTER TABLE review ADD CONSTRAINT IDX_review_FK0 FOREIGN KEY (orders_no) REFERENCES orders (orders_no);
+ALTER TABLE review ADD CONSTRAINT IDX_review_FK0 FOREIGN KEY (orders_no) REFERENCES orders (orders_no) on delete cascade;
 ALTER TABLE review ADD CONSTRAINT IDX_review_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
 
