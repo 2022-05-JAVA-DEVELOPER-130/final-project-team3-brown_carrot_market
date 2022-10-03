@@ -200,8 +200,8 @@ public class Product {
 	public String toString() {
 		return "Product [p_no=" + p_no + ", p_title=" + p_title + ", p_desc=" + p_desc + ", p_price=" + p_price
 				+ ", p_date=" + p_date + ", p_sell=" + p_sell + ", p_count=" + p_count + ", p_wish=" + p_wish
-				+ ", p_address_name=" + p_address_name + ", p_address_lat=" + p_address_lat + ", p_address_lng="
-				+ p_address_lng + ", productCategory=" + productCategory + ", userInfo=" + userInfo
+				+ ", p_address_name=" + p_address_name + ", p_address_lat=" + p_address_lat 
+				+ ", p_address_lng="+ p_address_lng + ", productCategory=" + productCategory + ", userInfo=" + userInfo
 				+ ", productImagesList=" + productImagesList + ", addressList=" + addressList + "]";
 	}
 
