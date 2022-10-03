@@ -165,6 +165,11 @@ public class UserInfoServiceImpl implements UserInfoService {
 		}
 		return userDao.createAddress(address);
 	}
+	
+	@Override
+	public int updateAddressRange(Address addressS) throws Exception {
+		return userDao.updateAddressRange(addressS);
+	}
 
 	@Override
 	public int createInvitation(Invitation invitation) throws Exception {
@@ -199,5 +204,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 			return false;
 		}
 	}
+
+
 
 }

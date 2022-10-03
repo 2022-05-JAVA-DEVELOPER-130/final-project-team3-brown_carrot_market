@@ -28,60 +28,66 @@ public class TownBoardDaoImpl implements TownBoardDao{
 	}
 	
 	@Override
-	public List<TownBoard> selectNonMemberTownBoardList() {
+	public List<TownBoard> selectNonMemberTownBoardList() throws Exception{
 		System.out.println(">>> townBoardDaoImpl : selectNonMemberTownBoardList()호출");
 		return townBoardMapper.selectNonMemberTownBoardList();
 	}
 
 	@Override
-	public List<TownBoard> selectNonMemberCtgrTownBoardList(int t_ctgr_no) {
+	public List<TownBoard> selectNonMemberCtgrTownBoardList(int t_ctgr_no) throws Exception{
 		System.out.println(">>> townBoardDaoImpl : selectNonMemberCtgrTownBoardList()호출");
 		return townBoardMapper.selectNonMemberCtgrTownBoardList(t_ctgr_no);
 	}
 
 	
 	@Override
-	public List<TownBoard> selectTownBoardListCoordinate(Address address) {
+	public List<TownBoard> selectTownBoardListCoordinate(Address address) throws Exception{
 		System.out.println(">>> townBoardDaoImpl : selectTownBoardListCoordinate()호출");
 		return townBoardMapper.selectTownBoardListCoordinate(address);
 	}
 
 	@Override
-	public List<TownBoard> selectTownBoardCtgrListCoordinate(int t_ctgr_no, Address address) {
+	public List<TownBoard> selectTownBoardCtgrListCoordinate(int t_ctgr_no, Address address) throws Exception{
 		System.out.println(">>> townBoardDaoImpl : selectTownBoardCtgrListCoordinate()호출");
 		return townBoardMapper.selectTownBoardCtgrListCoordinate(t_ctgr_no, address);
 	}
 
 
 	@Override
-	public TownBoard selectTownBoardOne(int t_no) {
+	public TownBoard selectTownBoardOne(int t_no) throws Exception{
 		System.out.println(">>> townBoardDaoImpl : selectTownBoardOne()호출");
 		return townBoardMapper.selectTownBoardOne(t_no);
 	}
 	
 	@Override
-	public int deleteTownBoardOne(int t_no) {
+	public int deleteTownBoardOne(int t_no) throws Exception{
 		System.out.println(">>> townBoardDaoImpl : delete()호출");
 		return townBoardMapper.deleteTownBoardOne(t_no);
 	}
 
 	@Override
-	public int updateTownBoardOne(TownBoard townBoard) {
+	public int updateTownBoardOne(TownBoard townBoard) throws Exception{
 		System.out.println(">>> townBoardDaoImpl : updateTownBoardOne()호출");
 		return townBoardMapper.updateTownBoardOne(townBoard);
 	}
 
 	@Override
-	public int updateTownBoardCount(int t_no) {
+	public int updateTownBoardCount(int t_no) throws Exception{
 		System.out.println(">>> townBoardDaoImpl : updateTownBoardCount()호출");
 		return townBoardMapper.updateTownBoardCount(t_no);
 	}
 	
 	
 	@Override
-	public int insertTownBoard(TownBoard townBoard) {
+	public int insertTownBoard(TownBoard townBoard) throws Exception{
 		System.out.println(">>> townBoardDaoImpl : insertTownBoard()호출");
 		return townBoardMapper.insertTownBoard(townBoard);
+	}
+
+	@Override
+	public List<TownBoard> selectTownBoardIdList(String user_id) throws Exception{
+		System.out.println(">>> townBoardDaoImpl : selectTownBoardIdList()호출");
+		return townBoardMapper.selectTownBoardIdList(user_id);
 	}
 
 

@@ -22,17 +22,17 @@ public class TownReplyDaoImpl implements TownReplyDao{
 		this.townReplyMapper = townReplyMapper;
 	}
 	@Override
-	public int insertTownBoardReply(TownReply townReply) {
+	public int insertTownBoardReply(TownReply townReply) throws Exception{
 		System.out.println(">>> townReplyDaoImpl: insertTownBoardReply()호출");
 		return townReplyMapper.insertTownBoardReply(townReply);
 	}
 	@Override
-	public int deleteTownBoardReply(int t_reply_no) {
+	public int deleteTownBoardReply(int t_reply_no) throws Exception{
 		System.out.println(">>> townReplyDaoImpl : deleteTownBoardReply()호출");
 		return townReplyMapper.deleteTownBoardReply(t_reply_no);
 	} 
 	@Override
-	public int updateTownBoardReply(TownReply townReply) {
+	public int updateTownBoardReply(TownReply townReply) throws Exception{
 		System.out.println(">>> townReplyDaoImpl :updateTownBoardReply()호출");
 		return townReplyMapper.updateTownBoardReply(townReply);
 	}

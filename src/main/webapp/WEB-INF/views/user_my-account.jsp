@@ -107,12 +107,24 @@
 				
 				e.preventDefault();
 			});
-			/****************user_update_addresses******************/
+			
+			
+			$(document).on('change', "[type='range']",function(e) {
+				console.log($(e.target).val());
+				console.log(e.target.id);
+				console.log($('label[for='+e.target.id+']').text());
+				
+				$('label[for='+e.target.id+']').text($(e.target).val());
+				e.preventDefault();
+			
+			});
+			 /****************user_update_addresses******************/
 			//(Step_1) Getting a address
 			$(document).on('click',	'#btn_address_first,#btn_address_second,#btn_address_new1,#btn_address_new2',function(e) {
 				var selectedAddress = $(e.target).prev($("address"));
 				selectedAddress.addClass("selected_address");
 				selectedAddress.children("input[name=address_name]").attr("disabled",false);
+				selectedAddress.children("input[name=address_range]").attr("disabled",false);
 				
 				$(e.target).addClass("selected");
 				
@@ -168,6 +180,8 @@
 			
 			//(Step_2) update & insert
 			$(document).on('click',	'.selected',function(e) {
+				
+				console.log($(".selected_address > *").serialize());
 				
 				if($(e.target).hasClass('update')){
 				    $.ajax({
@@ -574,7 +588,8 @@
 				</div>
 				<div class="col-12 col-lg-9">
 		<!-- START!! ************************************************ -->
-					<div id="my-account-content" class="my-account-content mb-50" style="margin-bottom: 10px">
+					<div id="my-account-content" class="my-account-content mb-50" style="margin-bottom: 20px">
+						<div class="shortcodes_content mb-100" style="margin-bottom: 0px">
 						<p>
 							<strong>${loginUser.user_id}</strong>님, 안녕하세요? (<strong>${loginUser.user_id}</strong>님이 아니신가요?
 							<a href="user_logout_action">Log out</a>)
@@ -584,17 +599,18 @@
 							manage your shipping and billing addresses, and <a href="account-details.html" id="a_account_details">edit your password and account
 								details</a>.
 						</p>
+						</div>
+	                    <div class="shortcodes_content mb-100" style="margin-bottom: 20px">
+	                        <form class="invi_form">
+	                            <div class="form-group">
+	                                <label for="invi_email">흙당근마켓에 친구를 초대해보세요!</label>
+	                                <input type="email" class="form-control" id="invi_email" name="invi_email" aria-describedby="emailHelp" placeholder="Enter email">
+	                                <small id="emailHelp" class="form-text text-muted">초대받은 친구가 회원가입시, 500point를 드립니다!.</small>
+	                            </div>
+	                        </form>
+	                        <button type="submit" class="btn btn-primary" id="btn_invi">Submit</button>
+						</div>
                     </div>
-                    <div class="shortcodes_content mb-100">
-                        <form class="invi_form">
-                            <div class="form-group">
-                                <label for="invi_email">흙당근마켓에 친구를 초대해보세요!</label>
-                                <input type="email" class="form-control" id="invi_email" name="invi_email" aria-describedby="emailHelp" placeholder="Enter email">
-                                <small id="emailHelp" class="form-text text-muted">초대받은 친구가 회원가입시, **point를 드립니다!.</small>
-                            </div>
-                        </form>
-                        <button type="submit" class="btn btn-primary" id="btn_invi">Submit</button>
-					</div>
 		<!-- END!! ************************************************** -->
 				</div>
 			</div>

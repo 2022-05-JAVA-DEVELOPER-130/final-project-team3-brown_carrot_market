@@ -52,10 +52,10 @@
 			VALUES (#{user_id}, #{user_pw}, #{user_name}, #{user_email}, #{user_phone}, 36.5, 0, 'newCarrot.jpg')
 	</insert>
 	
-	<insert id="createAddress" parameterType="com.itwill.brown_carrot_market.dto.Address">
+	<insert id="createAddress" parameterType="com.itwill.brown_carrot_market.dto.Address"><!-- adress_range(default)=3 -->
 		<!-- insert into address(address_no, address_name, address_lat,address_lng, address_range,user_id) -->
 		insert into address
-			values(address_address_no_seq.nextval, #{address_name}, #{address_lat}, #{address_lng}, #{address_range},#{user_id})
+			values(address_address_no_seq.nextval, #{address_name}, #{address_lat}, #{address_lng}, 3 ,#{user_id})
 	</insert>
 	
 	<insert id="createInvitation" parameterType="com.itwill.brown_carrot_market.dto.Invitation">
@@ -71,7 +71,12 @@
 	</update>
 	
 	<update id="updateAddress" parameterType="com.itwill.brown_carrot_market.dto.Address">
-	 	update address set address_name=#{address_name}, address_lat=#{address_lat}, address_lng=#{address_lng}
+	 	update address set address_name=#{address_name}, address_lat=#{address_lat}, address_lng=#{address_lng}, address_range=#{address_range}
+		where address_no=#{address_no}
+	</update>
+
+	<update id="updateAddressRange" parameterType="com.itwill.brown_carrot_market.dto.Address">
+	 	update address set address_range=#{address_range}
 		where address_no=#{address_no}
 	</update>
 

@@ -39,6 +39,9 @@ public int updateTownBoardCount(int t_no);
 public int insertTownBoard(TownBoard townBoard);
 
 
+//동네게시판 글 아이디로 조회(내가 쓴 글 조회)
+public List<TownBoard> selectTownBoardIdList(String user_id);
+
 
 
 }
