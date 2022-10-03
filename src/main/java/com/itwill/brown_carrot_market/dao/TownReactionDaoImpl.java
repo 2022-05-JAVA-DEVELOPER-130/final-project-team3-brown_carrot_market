@@ -23,22 +23,22 @@ public class TownReactionDaoImpl implements TownReactionDao{
 		this.townReactionMapper = townReactionMapper;
 	}
 	@Override
-	public int insertTownBoardReac(TownReaction townReaction) {
+	public int insertTownBoardReac(TownReaction townReaction) throws Exception{
 		System.out.println(">>>  townReactionDaoImpl():insertTownBoardReac 호출");
 		return townReactionMapper.insertTownBoardReac(townReaction);
 	}
 	@Override
-	public int deleteTownBoardReac(int t_reac_no) {
+	public int deleteTownBoardReac(int t_reac_no) throws Exception{
 		System.out.println(">>>  townReactionDaoImpl():deleteTownBoardReac 호출");
 		return townReactionMapper.deleteTownBoardReac(t_reac_no);
 	}
 	@Override
-	public int selectTownBoardReacCount(int t_no) {
+	public int selectTownBoardReacCount(int t_no) throws Exception{
 		System.out.println(">>>  townReactionDaoImpl():selectTownBoardReacCount 호출");
 		return townReactionMapper.selectTownBoardReacCount(t_no);
 	}
 	@Override
-	public int selectTownBoardReacTypeCount(int t_no, int t_reac_type) {
+	public int selectTownBoardReacTypeCount(int t_no, int t_reac_type) throws Exception{
 		System.out.println(">>>  townReactionDaoImpl():selectTownBoardReacTypeCount 호출");
 		return townReactionMapper.selectTownBoardReacTypeCount(t_no, t_reac_type);
 	}

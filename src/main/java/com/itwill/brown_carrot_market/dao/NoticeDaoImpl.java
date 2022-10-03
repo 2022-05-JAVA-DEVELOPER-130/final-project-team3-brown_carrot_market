@@ -27,37 +27,37 @@ public class NoticeDaoImpl implements NoticeDao{
 	}
 
 	@Override
-	public List<Notice> selectAll() {
+	public List<Notice> selectAll() throws Exception{
 		System.out.println(">>>noticeDaoImpl : selectAll()호출");
 		return noticeMapper.selectAll();
 	}
 
 	@Override
-	public Notice selectByNo(int notice_no) {
+	public Notice selectByNo(int notice_no) throws Exception{
 		System.out.println(">>>noticeDaoImpl : selectByNo()호출");
 		return noticeMapper.selectByNo(notice_no);
 	}
 
 	@Override
-	public int insertNotice(Notice notice) {
+	public int insertNotice(Notice notice) throws Exception{
 		System.out.println(">>>noticeDaoImpl : insertNotice()호출");
 		return noticeMapper.insertNotice(notice);
 	}
 
 	@Override
-	public int deleteNotice(int notice_no) {
+	public int deleteNotice(int notice_no) throws Exception{
 		System.out.println(">>>noticeDaoImpl : deleteNotice()호출");
 		return noticeMapper.deleteNotice(notice_no);
 	}
 
 	@Override
-	public int updateNotice(Notice notice) {
+	public int updateNotice(Notice notice) throws Exception{
 		System.out.println(">>>noticeDaoImpl : updateNotice()호출");
 		return noticeMapper.updateNotice(notice);
 	}
 
 	@Override
-	public int updateNoticeCount(int notice_no) {
+	public int updateNoticeCount(int notice_no) throws Exception{
 		System.out.println(">>>noticeDaoImpl : updateNoticeCount()호출");
 		return noticeMapper.updateNoticeCount(notice_no);
 	}

@@ -22,18 +22,18 @@ public class TownImageDaoImpl implements TownImageDao{
 		this.townImageMapper = townImageMapper;
 	}
 	@Override
-	public int deleteTownBoardImgAll(int t_no) {
+	public int deleteTownBoardImgAll(int t_no) throws Exception{
 		System.out.println(">>> townImageDaoImpl:deleteTownBoardImgAll()호출");
 		return townImageMapper.deleteTownBoardImgAll(t_no);
 	}
 	@Override
-	public int deleteTownBoardImgOne(int t_img_no) {
+	public int deleteTownBoardImgOne(int t_img_no) throws Exception{
 		System.out.println(">>> townImageDaoImpl:deleteTownBoardImgOne()호출");
 		return townImageMapper.deleteTownBoardImgOne(t_img_no);
 	}
 	/*
 	@Override
-	public TownImage insertTownBoardImg(TownImage townImage) {
+	public TownImage insertTownBoardImg(TownImage townImage) throws Exception{
 		System.out.println(">>> townImageDaoImpl:insertTownBoardImg()호출");
 		return townImageMapper.insertTownBoardImg(townImage);
 	}
