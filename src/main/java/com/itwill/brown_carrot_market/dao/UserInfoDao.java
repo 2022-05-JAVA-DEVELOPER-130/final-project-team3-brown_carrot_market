@@ -3,6 +3,7 @@ package com.itwill.brown_carrot_market.dao;
 import java.util.List;
 
 import com.itwill.brown_carrot_market.dto.Address;
+import com.itwill.brown_carrot_market.dto.Invitation;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 
 public interface UserInfoDao {
@@ -10,28 +11,34 @@ public interface UserInfoDao {
 	/*
 	 * 사용자관리테이블에 새로운사용자생성
 	 */
-	int createUser(UserInfo user) throws Exception;
+	int createUser(UserInfo userInfo) throws Exception;
 	/*
 	 * 사용자관리테이블에 새로운사용자의 주소생성
 	 */
 	int createAddress(Address address) throws Exception;
 
+	int createInvitation(Invitation invitation) throws Exception;
+
 	/*
 	 * 기존의 사용자정보를 수정
 	 */
-	int updateUser(UserInfo user) throws Exception;
+	int updateUser(UserInfo userInfo) throws Exception;
 
 	int updateAddress(Address address) throws Exception;
+
+	int updatePoint(UserInfo userInfo) throws Exception;
 	
 	/*
 	 * 사용자아이디에해당하는 사용자를 삭제
 	 */
-	int removeUser(String userId) throws Exception;
+	int removeUser(String user_id) throws Exception;
 
 	/*
 	 * 사용자아이디에해당하는 정보를 데이타베이스에서 찾아서 User 도메인클래스에 저장하여 반환
 	 */
-	UserInfo findUser(String userId) throws Exception;
+	UserInfo findUser(String user_id) throws Exception;
+	
+	String findInvitation(Invitation invitation) throws Exception;
 
 	/*
 	 * 모든사용자 정보를 데이타베이스에서 찾아서 List<User> 콜렉션 에 저장하여 반환
@@ -43,6 +50,7 @@ public interface UserInfoDao {
 	 */
 	boolean existedUser(String userId) throws Exception;
 	
+	boolean existedInvitation(Invitation invitation) throws Exception;
 	
 
 }
