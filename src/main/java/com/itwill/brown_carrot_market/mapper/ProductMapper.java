@@ -15,11 +15,11 @@ public interface ProductMapper {
 	
 	public List<Product> selectListByRange(Address address);
 	
-	public List<Product> selectListByRangeCtgr();
+	public List<Product> selectListByRangeCtgr(int p_ctgr_no, Address address);
 	
-	public List<Product> selectByUserId();
+	public List<Product> selectByUserId(String user_id);
 	
-	public Product selectByOne();
+	public Product selectByOne(int p_no);
 	
 	public int deleteByPNo(int p_no);
 	

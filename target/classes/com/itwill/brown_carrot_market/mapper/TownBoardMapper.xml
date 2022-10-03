@@ -47,7 +47,7 @@
 	<!-- 비회원이 동네게시판 글 전체 조회.. -->
 	<select id="selectNonMemberTownBoardList" resultMap="townBoradResultMap">
 		select * from town_board tb 
-		join town_img ti 
+		left outer join town_img ti 
 		on tb.t_no = ti.t_no
 		join town_category tc
 		on tc.t_ctgr_no = tb.t_ctgr_no
@@ -57,7 +57,7 @@
 	<!-- 비회원이 카테고리로 조건 검색(동네게시판 글 전체 조회) -->
 	<select id="selectNonMemberCtgrTownBoardList" parameterType="int" resultMap="townBoradResultMap">
 	select * from town_board tb 
-	join town_img ti 
+	left outer join town_img ti 
 	on tb.t_no = ti.t_no
 	join town_category tc
 	on tc.t_ctgr_no = tb.t_ctgr_no
@@ -68,7 +68,7 @@
 	<!-- 동네 게시판 글 전체 조회 (좌표 값에 따라 검색하기) -->
 	<select id="selectTownBoardListCoordinate" parameterType="com.itwill.brown_carrot_market.dto.Address" resultMap="townBoradResultMap" >
 		select * from (select * from town_board tb 
-join town_img ti 
+left outer join town_img ti 
 on tb.t_no = ti.t_no
 join town_category tc
 on tc.t_ctgr_no = tb.t_ctgr_no
@@ -100,6 +100,17 @@ where aa.t_address_lat
 		select * from town_board where t_no=#{t_no}
 	</select>
 	
+	<!-- 게시글 아이디로 찾기(내가 쓴 게시물리스트 찾기) -->
+	<select id="selectTownBoardIdList" parameterType="java.lang.String" resultMap="townBoradResultMap">
+		select * from town_board tb 
+		left outer join town_img ti 
+		on tb.t_no = ti.t_no
+		join town_category tc
+		on tc.t_ctgr_no = tb.t_ctgr_no
+		where user_id=#{user_id}
+		order by tb.t_date desc
+	</select>
+	
 	<!-- 게시글 한개 삭제 -->
 	<delete id="deleteTownBoardOne" parameterType="java.lang.Integer">
 		delete town_board where t_no=#{t_no}
@@ -114,6 +125,8 @@ where aa.t_address_lat
 	<update id="updateTownBoardCount" parameterType="int">
 		update town_board set t_count=t_count+1 where t_no=#{t_no}
 	</update>
+	
+	
 	
 
 	
