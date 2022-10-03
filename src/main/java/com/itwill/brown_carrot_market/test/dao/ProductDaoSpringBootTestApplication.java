@@ -17,9 +17,9 @@ public class ProductDaoSpringBootTestApplication {
 		application.setWebApplicationType(WebApplicationType.NONE);
 		ConfigurableApplicationContext context=application.run(args);
 		ProductDao productDao=(ProductDao)context.getBean(ProductDao.class);
-		System.out.println(productDao.selectProductAll());
-		//System.out.println(guestDao.selectByNo(881));
-		
+		//System.out.println(productDao.selectProductAll());
+		//System.out.println(productDao.selectAllByCtgr(2));
+		System.out.println(productDao.selectListByRange(null));
 	}
 /*
  
