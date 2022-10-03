@@ -8,6 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 
 import com.itwill.brown_carrot_market.dao.ProductDao;
 import com.itwill.brown_carrot_market.dto.Address;
+import com.itwill.brown_carrot_market.dto.Product;
+import com.itwill.brown_carrot_market.dto.ProductCategory;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.itwill.brown_carrot_market"})
@@ -21,6 +23,14 @@ public class ProductDaoSpringBootTestApplication {
 		//System.out.println(productDao.selectProductAll());
 		//System.out.println(productDao.selectAllByCtgr(2));
 		//System.out.println(productDao.selectListByRange(new Address(1, null, 0, 0, 0, "carrot1")));
+		//System.out.println(productDao.selectListByRangeCtgr(2, new Address(1, null, 0, 0, 0, "carrot1")));
+		//System.out.println(productDao.selectByUserId("carrot1"));
+		//System.out.println(productDao.selectByOne(3));
+		//상품 삭제 이미지 on DELETE CASCADE 써줘야함
+		//https://wakestand.tistory.com/205
+		//System.out.println(productDao.deleteByPNo(11));
+		//System.out.println(productDao.updateProductCount(1));
+		//System.out.println(productDao.updateProduct(new Product(11, "한글책수정", "수정해봅니다", 10000, null, 1, 0, 0, null, 0, 0, new ProductCategory(5, null), null, null, null)));
 		
 	}
 /*
