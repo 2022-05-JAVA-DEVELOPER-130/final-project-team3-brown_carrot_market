@@ -27,8 +27,9 @@
 		select count(*) cnt from userinfo where user_id= #{user_id}
 	</select>
 	
-	<select id="existedInvitation" parameterType="com.itwill.brown_carrot_market.dto.Invitation" resultType="String"> 
-		select COUNT(*) FROM invitation where user_id=#{userId} </select>
+	<select id="existedInvitation" parameterType="com.itwill.brown_carrot_market.dto.Invitation" resultType="java.lang.Integer">
+		select count(*) cnt from invitation where invi_email=#{invi_email}
+	</select>
 	
 	<select id="findUserList" resultMap="userInfoResultMap">
 		select * from address a join userinfo u on a.user_id=u.user_id
@@ -39,13 +40,10 @@
 		select * from userinfo u left join address a on u.user_id=a.user_id where u.user_id= #{user_id} order by a.address_no asc
 	</select>
 
-
-
-
-	
-	<select id="findInviation" parameterType="String" resultType="com.itwill.brown_carrot_market.dto.Invitation">
-		select * from invitation where user_id=#{user_id}
+	<select id="findInvitation" parameterType="com.itwill.brown_carrot_market.dto.Invitation" resultType="java.lang.String">
+		select user_id from invitation where invi_email=#{invi_email}
 	</select>
+	
 	
 
 	<insert id="createUser" parameterType="com.itwill.brown_carrot_market.dto.UserInfo">

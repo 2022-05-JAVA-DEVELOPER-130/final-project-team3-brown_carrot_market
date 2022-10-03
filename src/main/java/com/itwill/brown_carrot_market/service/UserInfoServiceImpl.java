@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.itwill.brown_carrot_market.dao.UserInfoDao;
 import com.itwill.brown_carrot_market.dto.Address;
+import com.itwill.brown_carrot_market.dto.Invitation;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 
 /*
@@ -31,29 +32,45 @@ public class UserInfoServiceImpl implements UserInfoService {
 	 */
 	/************** 1.반환값사용 ***********************/
 	@Override
-	public int create(UserInfo user,Address address) throws Exception {
+	public int create(UserInfo user, Address address, Invitation invitation) throws Exception {
 		/*
-		 * -1:아이디중복 1:회원가입성공
+		 * 0:아이디중복 1:회원가입성공 2:초대코드로 회원가입
 		 */
 
 		// 1.아이디중복체크
 		if (userDao.existedUser(user.getUser_id())) {
 			// 아이디중복
-			return -1;
+			return 0;
 		} else {
 			// 아이디안중복
 			// 2.회원가입
 			int insertRowCount = userDao.createUser(user);
-			
-			if(address.getAddress_lat()!=0.0) {
+
+			if (address.getAddress_lat() != 0.0) {
 				address.setUser_id(user.getUser_id());
-				
-				int insertAddress =userDao.createAddress(address);
-				
+
+				int insertAddress = userDao.createAddress(address);
+
 				System.out.println(insertAddress);
 			}
 			
-			return insertRowCount;
+			if (userDao.existedInvitation(invitation)) {
+				System.out.println("초대한   사람: "+userDao.findInvitation(invitation));
+				System.out.println("초대받은 사람: "+invitation.getUser_id());
+				/***************transaction 설정 필요******************/
+				int invi_point = 500;	// 각각 500point 부여
+				user.setUser_point(invi_point);
+				
+				int updateNewUser = userDao.updatePoint(user);
+				int updateInviUser = userDao.updatePoint(new UserInfo(userDao.findInvitation(invitation), null, null, null, null, 0.0, invi_point, null, null));
+				/******************************************************/
+				return 2;
+			}else {
+				
+				return 3;
+			}
+
+			//return insertRowCount;
 		}
 	}
 
@@ -96,7 +113,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public UserInfo findUser(String user_id) throws Exception {
 		return userDao.findUser(user_id);
 	}
-	
 
 	/*
 	 * 회원수정
@@ -105,35 +121,54 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public int update(UserInfo user) throws Exception {
 		return userDao.updateUser(user);
 	}
-	
+
 	@Override
 	public int updateAddress(Address address) throws Exception {
-		
-		//기존에 존재하는지 찾기
-		List<Address> findAddressList=
-		userDao.findUser(address.getUser_id()).getAddressList();
-		
+
+		// 기존에 존재하는지 찾기
+		List<Address> findAddressList = userDao.findUser(address.getUser_id()).getAddressList();
+
 		for (Address findAddress : findAddressList) {
-			if(findAddress.getAddress_no()!=address.getAddress_no()&&findAddress.getAddress_name().equals(address.getAddress_name())) {
-				//동일한 주소가 존재한다면
+			if (findAddress.getAddress_no() != address.getAddress_no()
+					&& findAddress.getAddress_name().equals(address.getAddress_name())) {
+				// 동일한 주소가 존재한다면
 				return 0;
 			}
 		}
 		return userDao.updateAddress(address);
 	}
+
+	@Override
+	public int updatePoint(UserInfo userInfo, Invitation invitation) throws Exception {
+		/***************transaction 설정 필요******************/
+		int invi_point = 500;	// 각각 500point 부여
+		userInfo.setUser_point(invi_point);
+		
+		int updateNewUser = userDao.updatePoint(userInfo);
+		int updateInviUser = userDao.updatePoint(new UserInfo(invitation.getUser_id(), null, null, null, null, 0.0, invi_point, null, null));
+		/******************************************************/
+
+		return updateInviUser * updateNewUser;
+	}
+
 	@Override
 	public int createAddress(Address address) throws Exception {
-		//기존에 존재하는지 찾기
-		List<Address> findAddressList=
-				userDao.findUser(address.getUser_id()).getAddressList();
+		// 기존에 존재하는지 찾기
+		List<Address> findAddressList = userDao.findUser(address.getUser_id()).getAddressList();
 
 		for (Address findAddress : findAddressList) {
-			if(findAddress.getAddress_no()!=address.getAddress_no()&&findAddress.getAddress_name().equals(address.getAddress_name())) {
-				//동일한 주소가 존재한다면
+			if (findAddress.getAddress_no() != address.getAddress_no()
+					&& findAddress.getAddress_name().equals(address.getAddress_name())) {
+				// 동일한 주소가 존재한다면
 				return 0;
 			}
 		}
 		return userDao.createAddress(address);
+	}
+
+	@Override
+	public int createInvitation(Invitation invitation) throws Exception {
+		return userDao.createInvitation(invitation);
 	}
 
 	/*
@@ -164,10 +199,5 @@ public class UserInfoServiceImpl implements UserInfoService {
 			return false;
 		}
 	}
-
-
-
-
-
 
 }
