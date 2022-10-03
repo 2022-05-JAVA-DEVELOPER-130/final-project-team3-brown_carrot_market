@@ -44,6 +44,32 @@ public class TownBoardServiceImpl implements TownBoardService{
 	public TownBoard selectTownBoardOne(int t_no) throws Exception {
 		return townBoardDao.selectTownBoardOne(t_no);
 	}
+
+	@Override
+	public int deleteTownBoardOne(int t_no) throws Exception {
+		return townBoardDao.deleteTownBoardOne(t_no);
+	}
+
+	@Override
+	public int updateTownBoardOne(TownBoard townBoard) throws Exception {
+		
+		return townBoardDao.updateTownBoardOne(townBoard);
+	}
+
+	@Override
+	public int updateTownBoardCount(int t_no) throws Exception {
+		return townBoardDao.updateTownBoardCount(t_no);
+	}
+
+	@Override
+	public int insertTownBoard(TownBoard townBoard) throws Exception {
+		return townBoardDao.insertTownBoard(townBoard);
+	}
+
+	@Override
+	public List<TownBoard> selectTownBoardIdList(String user_id) throws Exception {
+		return townBoardDao.selectTownBoardIdList(user_id);
+	}
 	
 	
 	

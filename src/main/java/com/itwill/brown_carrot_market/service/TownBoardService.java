@@ -22,6 +22,22 @@ public interface TownBoardService {
 	//동네 게시판 게시글 한개 조회
 	TownBoard selectTownBoardOne(int t_no)throws Exception;
 	
+	//동네 게시판 글 하나 삭제
+	int deleteTownBoardOne(int t_no) throws Exception;
+	
+	//동네게시판 게시글 한개 수정
+	int updateTownBoardOne(TownBoard townBoard)throws Exception;
+	
+	//동네게시판 게시물 조회수 증가
+	int updateTownBoardCount(int t_no)throws Exception;
+	
+	//동네게시판 글 등록
+	int insertTownBoard(TownBoard townBoard)throws Exception;
+	
+	//동네게시판 글 아이디로 조회(내가 쓴 글 조회)
+	List<TownBoard> selectTownBoardIdList(String user_id)throws Exception;
+	
+	
 	
 	
 	
