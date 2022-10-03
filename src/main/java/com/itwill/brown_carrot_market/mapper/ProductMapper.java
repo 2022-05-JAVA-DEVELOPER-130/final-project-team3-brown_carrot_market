@@ -27,11 +27,11 @@ public interface ProductMapper {
 
 	public int updateProduct(Product product);
 	
-	public int updateProductWishCount(int p_no); 
+	//public int updateProductWishCount(int p_no); 
 	
 /***********************	
 	
-	//insert
+	public int insertProduct()
 	
 *************************/	
 	

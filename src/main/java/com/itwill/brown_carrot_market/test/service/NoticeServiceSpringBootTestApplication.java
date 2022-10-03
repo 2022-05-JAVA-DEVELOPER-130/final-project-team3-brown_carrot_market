@@ -42,16 +42,15 @@ public class NoticeServiceSpringBootTestApplication {
 		System.out.println("selectAll() test:"+noticeService.selectAll());
 		
 		System.out.println("selectByNo() test:"+noticeService.selectByNo(2));
-		/*	
 		
-		//System.out.println("insertNotice() test:"+noticeDao.insertNotice(new Notice(0, "추가 공지사항 제목", "추가 공지사항 내용", null, 0, 0)));
+		//System.out.println("insertNotice() test:"+noticeService.insertNotice(new Notice(0, "추가 service 공지사항 제목", "추가 service 공지사항 내용", null, 0, 0)));
 		
-		//System.out.println("deleteNotice() test:"+noticeDao.deleteNotice(9));
+		System.out.println("deleteNotice() test:"+noticeService.deleteNotice(12));
 		
-		//System.out.println("updateNotice() test:"+noticeDao.updateNotice(new Notice(10, "공지사항 제목 수정", "공지사항 내용 수정", null, 0, 1)));
+		System.out.println("updateNotice() test:"+noticeService.updateNotice(new Notice(13, "공지사항 service 제목 수정", "공지사항service 내용 수정", null, 0, 1)));
 		
-		System.out.println("updateNoticeCount() test:"+noticeDao.updateNoticeCount(1));
-		*/
+		System.out.println("updateNoticeCount() test:"+noticeService.updateNoticeCount(2));
+		
 		
 
 	}

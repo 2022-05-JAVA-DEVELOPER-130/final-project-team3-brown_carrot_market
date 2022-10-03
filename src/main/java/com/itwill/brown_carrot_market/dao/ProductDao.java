@@ -2,6 +2,7 @@ package com.itwill.brown_carrot_market.dao;
 
 import java.util.List;
 
+
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Product;
 
@@ -29,10 +30,13 @@ public interface ProductDao {
 	int  deleteByPNo(int p_no)throws Exception;
 	
 	//선택한 상품 업데이트
-	public int updateProduct(Product product);
+	int updateProduct(Product product)throws Exception;
 	
 	//상품 조회수 증가
-	public int updateProductCount(int p_no);
+	int updateProductCount(int p_no)throws Exception;
+	
+	//관심갯수 증가
+	//int updateProductWishCount(int p_no)throws Exception; 
 	
 	//상품 등록
 	

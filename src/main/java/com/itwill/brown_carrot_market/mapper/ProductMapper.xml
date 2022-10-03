@@ -13,7 +13,7 @@
 		<result column="P_WISH" property="p_wish"/>
 		<result column="P_ADDRESS_NAME" property="p_address_name"/>
 		<result column="P_ADDRESS_LAT"  property="p_address_lat"/>
-		<result column="P_ADDRESS_LNG  " property="p_address_lng"/>
+		<result column="P_ADDRESS_LNG" property="p_address_lng"/>
 		<association property="productCategory" javaType="com.itwill.brown_carrot_market.dto.ProductCategory">
 			<result column="P_CTGR_NO" property="p_ctgr_no"/>
 			<result column="P_CTGR_NAME" property="p_ctgr_name"/>
@@ -131,6 +131,31 @@
     </update> 
      
     <!-- 상품 작성 -->
-    
-	
+    <!--  
+    <insert id="insertProduct" parameterType="com.itwill.brown_carrot_market.dto.Product">
+    	<selectKey keyProperty="p_address_name" resultType="java.lang.String" order="BEFORE">
+    		select a.address_name from address a where a.user_id=#{user_id} and a.address_no=#{address.address_no}
+    	</selectKey>
+    	<selectKey keyProperty="p_address_lat" resultType="java.lang.String" order="BEFORE">
+    		select a.address_lat from address a where a.user_id=#{user_id} and a.address_no=#{address.address_no}
+    	</selectKey>
+    	<selectKey keyProperty="p_address_lng" resultType="java.lang.String" order="BEFORE">
+    		select a.address_lng from address a where a.user_id=#{user_id} and a.address_no=#{address.address_no}
+    	</selectKey>
+    	insert into product(p_no,p_title,p_desc,p_price,p_date,p_sell,p_count,p_wish,p_address_name,p_address_lat,p_address_lng,p_ctgr_no,user_id)
+        values (PRODUCT_P_NO_SEQ.nextval,
+                #{p_title},
+                #{p_desc},
+                #{p_price},
+                sysdate,
+                null,
+                0,
+                0,
+                #{p_address_name},
+                #{p_address_lat},
+                #{p_address_lng},
+                #{p_ctgr_no},
+                #{user_id})
+    </insert>
+	-->
 </mapper>
