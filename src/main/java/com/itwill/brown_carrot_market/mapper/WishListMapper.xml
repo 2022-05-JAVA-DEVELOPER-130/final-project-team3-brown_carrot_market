@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwill.brown_carrot_market.mapper.WishListMapper">
-	<resultMap id="wishListResultMap" type="com.itwill.brown_carrot_market.dto.wishList">
+	<resultMap id="wishListResultMap" type="com.itwill.brown_carrot_market.dto.WishList">
 		<result column="WISHLIST_NO" property="wishlist_no"/>
 		<association property="userInfo" javaType="com.itwill.brown_carrot_market.dto.UserInfo">
 			<result column="USER_ID" property="user_id"/>
@@ -30,31 +30,32 @@
 	
 	<!-- 유저가 관심글한 목록 전체 불러오기 -->
 	<select id="selectWishListAll" parameterType="java.lang.String" resultMap="wishListResultMap">
-	select * from wishlist w 
-			 join product p on w.p_no=p.p_no 
-			 left outer join product_img pi
-			 on p.p_no= pi.p_no
-			 where w.user_id=#{user_id};
+		select * from wishlist w 
+		join product p 
+		on w.p_no=p.p_no 
+		left outer join product_img pi
+		on p.p_no= pi.p_no
+		where w.user_id=#{user_id}
 	</select>
 	
 	<!-- 관심글 한개 불러오기 -->
 	<select id="selectWishListOne" parameterType="int" resultMap="wishListResultMap">
-		select * from wishlist w join product p on w.p_no=p.p_no where w.wishlist_no=#{wishlist_no};
+		select * from wishlist w join product p on w.p_no=p.p_no where w.wishlist_no=#{wishlist_no}
 	</select>
 	
 	<!-- 관심글 갯수 카운트 -->
 	<select id="selectWishListCount" resultType="int" parameterType="com.itwill.brown_carrot_market.dto.UserInfo">
-		select count(*) from wishlist where user_id= #{user_id};
+		select count(*) from wishlist where user_id= #{user_id}
 	</select>
 	
 	<!-- 관심글 등록 -->
 	<insert id="insertWishList" parameterType="com.itwill.brown_carrot_market.dto.WishList">
 		insert into wishlist(wishlist_no,p_no,user_id) 
-		values(wishlist_wishlist_no_seq.nextval,#{product.p_no},#{userinfo.user_id})
+		values(wishlist_wishlist_no_seq.nextval,#{product.p_no},#{userInfo.user_id})
 	</insert>
 	<!-- 관심글 삭제 -->
 	<delete id="deleteWishList" parameterType="int">
-		delete from wishlist w where w.wishlist_no=#{wishlist_no};
+		delete from wishlist w where w.wishlist_no=#{wishlist_no}
 	</delete>
 		
 </mapper>
