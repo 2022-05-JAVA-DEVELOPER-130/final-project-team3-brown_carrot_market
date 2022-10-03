@@ -30,7 +30,7 @@ public class TownReplyDaoImpl implements TownReplyDao{
 	public int deleteTownBoardReply(int t_reply_no) {
 		System.out.println(">>> townReplyDaoImpl : deleteTownBoardReply()호출");
 		return townReplyMapper.deleteTownBoardReply(t_reply_no);
-	}
+	} 
 	@Override
 	public int updateTownBoardReply(TownReply townReply) {
 		System.out.println(">>> townReplyDaoImpl :updateTownBoardReply()호출");
