@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Product;
 import com.itwill.brown_carrot_market.mapper.ProductMapper;
 
@@ -34,4 +35,20 @@ public class ProductDaoImpl implements ProductDao{
 		
 		return productMapper.selectProductAll();
 	}
+
+	@Override
+	public List<Product> selectAllByCtgr(int p_ctgr_no) throws Exception {
+		System.out.println("### ProductDaoImpl : selectAllByCtgr 호출");
+		return productMapper.selectAllByCtgr(p_ctgr_no);
+	}
+
+	@Override
+	public List<Product> selectListByRange(Address address) {
+		System.out.println("###ProductDaoImpl : selectListByRange 호출");
+		return productMapper.selectListByRange(address);
+	}
+	
+	
+	
+	
 }

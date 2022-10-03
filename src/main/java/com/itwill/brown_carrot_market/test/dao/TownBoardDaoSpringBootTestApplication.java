@@ -42,7 +42,7 @@ public class TownBoardDaoSpringBootTestApplication {
 		// 좌표값에 따라서 나와야해서 어디까지인지 다시 확인하기..일단 나오기는 하는듯
 		//System.out.println("selectTownBoardListCoordinate test"+townBoardDao.selectTownBoardListCoordinate(new Address(1, null, 0, 0, 0, "carrot1")));
 		
-		//좌표값 + 카테고리 조건으로 검색.. 실패함 다시 보기
+		//좌표값 + 카테고리 조건으로 검색.. 실패함 다시 보기.. .나오는데 좌표범위대로 나오는지는 잘 모르겠음 다시 보기..
 		//System.out.println("selectTownBoardCtgrListCoordinate test : "+ townBoardDao.selectTownBoardCtgrListCoordinate(1,new Address(1, null, 0, 0, 0, "carrot1" )));
 		
 		//System.out.println("selectTownBoardOne test :"+townBoardDao.selectTownBoardOne(1));

@@ -14,6 +14,10 @@
 		<result column="P_ADDRESS_NAME" property="p_address_name"/>
 		<result column="P_ADDRESS_LAT"  property="p_address_lat"/>
 		<result column="P_ADDRESS_LNG  " property="p_address_lng"/>
+		<association property="productCategory" javaType="com.itwill.brown_carrot_market.dto.ProductCategory">
+			<result column="P_CTGR_NO" property="p_ctgr_no"/>
+			<result column="P_CTGR_NAME" property="p_ctgr_name"/>
+		</association>
 		<association property="userInfo" javaType="com.itwill.brown_carrot_market.dto.UserInfo">
 			<result column="USER_ID" property="user_id"/>
 			<result column="USER_PW" property="user_pw"/>
@@ -30,7 +34,12 @@
 			<result column="P_NO " property="p_no"/>
 		</collection>
 		<collection property="addressList" javaType="java.util.List" ofType="com.itwill.brown_carrot_market.dto.Address">
-			
+			<result column="ADDRESS_NO" property="address_no"/>
+			<result column="ADDRESS_NAME" property="address_name"/>
+			<result column="ADDRESS_LAT" property="address_lat"/>
+			<result column="ADDRESS_LNG" property="address_lng"/>
+			<result column="ADDRESS_RANGE" property="address_range"/>
+			<result column="USER_ID" property="user_id"/>
 		</collection>
 	</resultMap> 
 	
