@@ -13,6 +13,7 @@ import com.itwill.brown_carrot_market.dto.Notice;
 import com.itwill.brown_carrot_market.dto.TownBoard;
 import com.itwill.brown_carrot_market.dto.TownCategory;
 import com.itwill.brown_carrot_market.dto.UserInfo;
+import com.itwill.brown_carrot_market.service.NoticeService;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.itwill.brown_carrot_market"})
@@ -36,11 +37,12 @@ public class NoticeServiceSpringBootTestApplication {
 				new SpringApplication(NoticeServiceSpringBootTestApplication.class);
 		application.setWebApplicationType(WebApplicationType.NONE);
 		ConfigurableApplicationContext context=application.run(args);
-		NoticeDao noticeDao=(NoticeDao)context.getBean(NoticeDao.class);
+		NoticeService noticeService=(NoticeService)context.getBean(NoticeService.class);
 		
-		System.out.println("selectAll() test:"+noticeDao.selectAll());
+		System.out.println("selectAll() test:"+noticeService.selectAll());
 		
-		System.out.println("selectByNo() test:"+noticeDao.selectByNo(2));
+		System.out.println("selectByNo() test:"+noticeService.selectByNo(2));
+		/*	
 		
 		//System.out.println("insertNotice() test:"+noticeDao.insertNotice(new Notice(0, "추가 공지사항 제목", "추가 공지사항 내용", null, 0, 0)));
 		
@@ -49,7 +51,7 @@ public class NoticeServiceSpringBootTestApplication {
 		//System.out.println("updateNotice() test:"+noticeDao.updateNotice(new Notice(10, "공지사항 제목 수정", "공지사항 내용 수정", null, 0, 1)));
 		
 		System.out.println("updateNoticeCount() test:"+noticeDao.updateNoticeCount(1));
-		
+		*/
 		
 
 	}
