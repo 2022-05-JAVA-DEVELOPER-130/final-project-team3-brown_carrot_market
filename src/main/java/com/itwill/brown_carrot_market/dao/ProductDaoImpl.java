@@ -73,13 +73,13 @@ public class ProductDaoImpl implements ProductDao{
 	}
 	
 	@Override
-	public int updateProduct(Product product) {
+	public int updateProduct(Product product)throws Exception {
 		System.out.println("###ProductDaoImpl : updateProduct 호출");
 		return productMapper.updateProduct(product);
 	}
 
 	@Override
-	public int updateProductCount(int p_no) {
+	public int updateProductCount(int p_no)throws Exception {
 		System.out.println("###ProductDaoImpl : updateProductCount 호출");
 		return productMapper.updateProductCount(p_no);
 	}
