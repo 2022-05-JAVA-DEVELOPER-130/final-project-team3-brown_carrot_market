@@ -77,11 +77,11 @@
 		select * from (select * from (select * from product p left outer join product_img pi on p.p_no=pi.p_no
                                        join p_category pc on p.p_ctgr_no=pc.p_ctgr_no where p.p_ctgr_no=#{p_ctgr_no}) pa
              where pa.p_address_lat 
-            between (select a.address_lat from address a where a.user_id=#{user_id} and a.address_no=#{address_no})-0.004504505*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
-                AND (select a.address_lat from address a where a.user_id=#{user_id} and a.address_no=#{address_no})+0.004504505*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no}))pp
+            between (select a.address_lat from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})-0.004504505*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
+                AND (select a.address_lat from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})+0.004504505*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no}))pp
         where pp.p_address_lng
-        between (select a.address_lng from address a where a.user_id=#{user_id} and a.address_no=#{address_no})-0.056344377*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
-            AND (select a.address_lng from address a where a.user_id=#{user_id} and a.address_no=#{address_no})+0.056344377*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
+        between (select a.address_lng from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})-0.056344377*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
+            AND (select a.address_lng from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})+0.056344377*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
              order by pp.p_date desc
 	
 	</select>
@@ -103,7 +103,7 @@
     
     <!-- 상품삭제 -->
     <delete id="deleteByPNo" parameterType="int">
-    	delete from product p where p.p_no=#{p_no}
+    	delete product where p_no=#{p_no}
     </delete>
      
     <!-- 조회수 수정 -->
@@ -117,7 +117,7 @@
                      p.p_desc=#{p_desc},
                      p.p_price=#{p_price},
                      p.p_sell=#{p_sell},
-                     p.p_ctgr_no=#{p_ctgr_no}
+                     p.p_ctgr_no=#{productCategory.p_ctgr_no}
                  where p.p_no=#{p_no} 
     </update>
     
