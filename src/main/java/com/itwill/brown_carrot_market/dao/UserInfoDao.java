@@ -25,6 +25,8 @@ public interface UserInfoDao {
 	int updateUser(UserInfo userInfo) throws Exception;
 
 	int updateAddress(Address address) throws Exception;
+	
+	int updateAddressRange(Address address) throws Exception;
 
 	int updatePoint(UserInfo userInfo) throws Exception;
 	

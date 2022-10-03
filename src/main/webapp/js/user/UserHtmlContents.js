@@ -92,25 +92,30 @@ UserHtmlContents.user_view_content=function(loginUser) {
 
 UserHtmlContents.user_view_addresses=function(addressList){
 	return `<p>The following addresses will be used on the productList page by default.</p>
-
                         <div class="row">
                             <div class="col-12 col-lg-6 mb-5 mb-lg-0">
-                                <h6 class="mb-3">Address (1)</h6>
+                                <input type='radio' name='rd_address_no' value="${addressList[0].address_no}" style='margin-bottom:16px' >
+                                <h6 class="mb-3" style='display:inline'>Address (1)</h6>
                                 <address>
                                 <input type="hidden" name="address_no" value="${addressList[0].address_no}">
                                 <input type="hidden" name="address_lat" value="${addressList[0].address_lat}">
                                 <input type="hidden" name="address_lng" value="${addressList[0].address_lng}">
                                 <input type="text" name="address_name" disabled value="${addressList[0].address_name}"><br>
+								<input id='range1' name="address_range" type="range" value="${addressList[0].address_range}" min="0" max="10" disabled>
+                                <label for='range1' class = "range_val bigshop-label bigshop-label-info bigshop-label-pill" value="">${addressList[0].address_range}</label><br/>
                                 </address>
                                 <a href="#" id="btn_address_first" class="btn btn-primary btn-sm update">주소 수정</a>
                             </div>
                             <div class="col-12 col-lg-6 mb-5 mb-lg-0">
-                                <h6 class="mb-3">Address (2)</h6>
+                                <input type='radio' name='rd_address_no' value="${addressList[1].address_no}" style='margin-bottom:16px' >
+                                <h6 class="mb-3" style='display:inline'>Address (2)</h6>
                                 <address>
                                 <input type="hidden" name="address_no" value="${addressList[1].address_no}">
                                 <input type="hidden" name="address_lat" value="${addressList[1].address_lat}">
                                 <input type="hidden" name="address_lng" value="${addressList[1].address_lng}">
                                 <input type="text" name="address_name" disabled value="${addressList[1].address_name}"><br>
+								<input id='range2' name="address_range" type="range" value="${addressList[1].address_range}" min="0" max="10" disabled>
+                                <label for='range2' class = "range_val bigshop-label bigshop-label-info bigshop-label-pill" value="">${addressList[1].address_range}</label><br/>
                                 </address>
                                 <a href="#" id="btn_address_second" class="btn btn-primary btn-sm update">주소 수정</a>
                             </div>
@@ -127,6 +132,8 @@ UserHtmlContents.user_view_addresses_one=function(addressList){
                                 <input type="hidden" name="address_lat" value="${addressList[0].address_lat}">
                                 <input type="hidden" name="address_lng" value="${addressList[0].address_lng}">
                                 <input type="text" name="address_name" disabled value="${addressList[0].address_name}"><br>
+								<input id='range1' name="address_range" type="range" value="${addressList[0].address_range}" min="0" max="10" disabled>
+                                <label for='range1' class = "range_val bigshop-label bigshop-label-info bigshop-label-pill" value="">${addressList[0].address_range}</label><br/>
                                 </address>
                                 <a href="#" id="btn_address_first" class="btn btn-primary btn-sm update">주소 수정</a>
                             </div>

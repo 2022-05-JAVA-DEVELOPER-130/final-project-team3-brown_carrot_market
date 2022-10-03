@@ -63,6 +63,11 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	}
 	
 	@Override
+	public int updateAddressRange(Address address) throws Exception {
+		return userMapper.updateAddressRange(address);
+	}
+	
+	@Override
 	public int updatePoint(UserInfo userInfo) throws Exception {
 		return userMapper.updatePoint(userInfo);
 	}
@@ -116,6 +121,8 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		}
 
 	}
+
+
 
 
 
