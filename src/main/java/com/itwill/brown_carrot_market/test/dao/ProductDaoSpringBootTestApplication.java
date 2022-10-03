@@ -7,6 +7,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
 import com.itwill.brown_carrot_market.dao.ProductDao;
+import com.itwill.brown_carrot_market.dto.Address;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.itwill.brown_carrot_market"})
@@ -19,7 +20,8 @@ public class ProductDaoSpringBootTestApplication {
 		ProductDao productDao=(ProductDao)context.getBean(ProductDao.class);
 		//System.out.println(productDao.selectProductAll());
 		//System.out.println(productDao.selectAllByCtgr(2));
-		System.out.println(productDao.selectListByRange(null));
+		//System.out.println(productDao.selectListByRange(new Address(1, null, 0, 0, 0, "carrot1")));
+		
 	}
 /*
  
