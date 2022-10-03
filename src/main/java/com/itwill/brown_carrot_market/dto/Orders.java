@@ -1,7 +1,13 @@
 package com.itwill.brown_carrot_market.dto;
 
 import java.util.List;
-
+/*
+이름        널?       유형           
+--------- -------- ------------ 
+ORDERS_NO NOT NULL NUMBER(10)   
+P_NO               NUMBER(20)   
+USER_ID            VARCHAR2(10) 
+ */
 public class Orders {
 	private int orders_no;
 	private Product product;
