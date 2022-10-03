@@ -15,11 +15,11 @@ public interface TownBoardDao {
 	//동네 게시판 비회원이 카테고리 조건으로 전체조회
 	List<TownBoard> selectNonMemberCtgrTownBoardList(int t_ctgr_no);
 	
-	//동네 게시판 회원이 좌표값 조건으로 전체조회
+	//동네 게시판 회원이 좌표값 조건으로 전체조회 -- 좌표 범위대로 나오는지 다시 확인하기..
 	List<TownBoard> selectTownBoardListCoordinate(Address address);
 	
-	//동네 게시판 회원이 좌표값과 카테고리 조건으로 전체조회 -- 다시 보기.. 실패했음.. ㅜ
-	//List<TownBoard> selectTownBoardCtgrListCoordinate(int t_ctgr_no ,Address address);
+	//동네 게시판 회원이 좌표값과 카테고리 조건으로 전체조회 -- 좌표 범위대로 나오는지 다시 확인하기..
+	List<TownBoard> selectTownBoardCtgrListCoordinate(int t_ctgr_no ,Address address);
 	
 	//동네 게시판 게시글 한개 조회
 	TownBoard selectTownBoardOne(int t_no);

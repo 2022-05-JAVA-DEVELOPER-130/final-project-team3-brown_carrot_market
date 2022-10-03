@@ -45,13 +45,13 @@ public class TownBoardDaoImpl implements TownBoardDao{
 		System.out.println(">>> townBoardDaoImpl : selectTownBoardListCoordinate()호출");
 		return townBoardMapper.selectTownBoardListCoordinate(address);
 	}
-/*
+
 	@Override
 	public List<TownBoard> selectTownBoardCtgrListCoordinate(int t_ctgr_no, Address address) {
 		System.out.println(">>> townBoardDaoImpl : selectTownBoardCtgrListCoordinate()호출");
 		return townBoardMapper.selectTownBoardCtgrListCoordinate(t_ctgr_no, address);
 	}
-*/
+
 
 	@Override
 	public TownBoard selectTownBoardOne(int t_no) {
