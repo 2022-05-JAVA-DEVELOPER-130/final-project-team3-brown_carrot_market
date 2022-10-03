@@ -3,11 +3,12 @@ package com.itwill.brown_carrot_market.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.itwill.brown_carrot_market.dto.ChatContents;
 import com.itwill.brown_carrot_market.mapper.ChatContentsMapper;
 
-
+@Repository
 public class ChatContentsDaoImpl implements ChatContentsDao {
 	@Autowired
 	private ChatContentsMapper chatContentsMapper;
