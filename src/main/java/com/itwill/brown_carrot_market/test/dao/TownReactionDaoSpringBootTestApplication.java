@@ -8,12 +8,14 @@ import org.springframework.context.annotation.ComponentScan;
 
 import com.itwill.brown_carrot_market.dao.NoticeDao;
 import com.itwill.brown_carrot_market.dao.TownBoardDao;
+import com.itwill.brown_carrot_market.dao.TownReactionDao;
 import com.itwill.brown_carrot_market.dao.TownReplyDao;
 import com.itwill.brown_carrot_market.dao.TownWishListDao;
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Notice;
 import com.itwill.brown_carrot_market.dto.TownBoard;
 import com.itwill.brown_carrot_market.dto.TownCategory;
+import com.itwill.brown_carrot_market.dto.TownReaction;
 import com.itwill.brown_carrot_market.dto.TownReply;
 import com.itwill.brown_carrot_market.dto.TownWishList;
 import com.itwill.brown_carrot_market.dto.UserInfo;
@@ -40,11 +42,16 @@ public class TownReactionDaoSpringBootTestApplication {
 				new SpringApplication(TownReactionDaoSpringBootTestApplication.class);
 		application.setWebApplicationType(WebApplicationType.NONE);
 		ConfigurableApplicationContext context=application.run(args);
-		TownReplyDao townReplyDao=(TownReplyDao)context.getBean(TownReplyDao.class);
+		TownReactionDao townReactionDao=(TownReactionDao)context.getBean(TownReactionDao.class);
 		
 		
-		System.out.println("updateTownBoardReply() test:"+townReplyDao.updateTownBoardReply(new TownReply(6, "댓글 제목 수정", "댓글 내용 수정", null, 0, 0, 0, null, null)));
+		//System.out.println("insertTownBoardReac() test:"+townReactionDao.insertTownBoardReac(new TownReaction(0, 3, new TownBoard(1, null, null, null, 0, null, null, 0, 0, null, null, null), new UserInfo("carrot1", null, null, null, null, 0, 0, null, null))));
 		
+		System.out.println("deleteTownBoardReac() test:"+townReactionDao.deleteTownBoardReac(42));
+		
+		System.out.println("selectTownBoardReacCount() test:"+townReactionDao.selectTownBoardReacCount(1));
+		
+		System.out.println("selectTownBoardReacTypeCount() test:"+townReactionDao.selectTownBoardReacTypeCount(1, 1));
 		
 
 	}
