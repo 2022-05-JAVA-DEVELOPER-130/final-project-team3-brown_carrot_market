@@ -100,6 +100,51 @@ public class UserInfoRestController {
 		return resultMap;
 	}
 	@LoginCheck
+	@PostMapping("/user_update_address_range_json")
+	public Map user_update_address_range_json(@ModelAttribute Address address) throws Exception{
+		System.out.println(address);
+		Map resultMap=new HashMap();
+		int code=0;
+		String url="user_main";
+		String msg="update_address 실패";
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
+
+		System.out.println("RestController-user_update_address_range_json() 호출");
+		/***********수정 필요***********/
+		code = userService.updateAddressRange(address);
+		/******************************/
+		
+		resultMap.put("code", code);
+		resultMap.put("url", url);
+		resultMap.put("msg", msg);
+		resultMap.put("data",resultList);
+		return resultMap;
+	}
+	@LoginCheck
+	@PostMapping("/user_remove_address_json")
+	public Map user_remove_address_json(@ModelAttribute Address address) throws Exception{
+		System.out.println(address);
+		Map resultMap=new HashMap();
+		int code=0;
+		String url="user_main";
+		String msg="remove_address 실패";
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
+		
+		System.out.println("RestController-user_remove_address_json() 호출");
+		/***********수정 필요***********/
+		code = userService.removeAddress(address);
+		if(code==1)
+		msg="remove_address 성공";
+		/******************************/
+		
+		resultMap.put("code", code);
+		resultMap.put("url", url);
+		resultMap.put("msg", msg);
+		resultMap.put("data",resultList);
+		return resultMap;
+	}
+	
+	@LoginCheck
 	@PostMapping("/user_insert_address_json")
 	public Map user_insert_address_json(HttpServletRequest request, @ModelAttribute Address address) throws Exception{
 		Map resultMap=new HashMap();
@@ -116,6 +161,7 @@ public class UserInfoRestController {
 		address.setUser_id(sUserId);
 		System.out.println(address);
 		code=userService.createAddress(address);
+		msg="insert_address 성공";
 		/******************************/
 		
 		UserInfo loginUser=userService.findUser(sUserId);

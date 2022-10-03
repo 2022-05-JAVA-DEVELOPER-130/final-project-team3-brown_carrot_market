@@ -97,5 +97,9 @@
 		delete userinfo where user_id=#{user_id}
 	</delete>
 
+	<delete id="removeAddress" parameterType="com.itwill.brown_carrot_market.dto.Address">
+		delete address where address_no=#{address_no}
+	</delete>
+
 
 </mapper>

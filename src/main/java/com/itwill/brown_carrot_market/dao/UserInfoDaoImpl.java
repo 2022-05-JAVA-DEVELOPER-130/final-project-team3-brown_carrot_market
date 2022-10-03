@@ -74,9 +74,14 @@ public class UserInfoDaoImpl implements UserInfoDao {
 
 	@Override
 	public int removeUser(String user_id) throws Exception {
-		System.out.println("#### UserDaoImpl : remove() 호출  ");
-
+		System.out.println("#### UserDaoImpl : removeUser() 호출  ");
 		return userMapper.removeUser(user_id);
+	}
+	
+	@Override
+	public int removeAddress(Address address) throws Exception {
+		System.out.println("#### UserDaoImpl : removeAddress() 호출  ");
+		return userMapper.removeAddress(address);
 	}
 
 	@Override
@@ -121,6 +126,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		}
 
 	}
+
 
 
 

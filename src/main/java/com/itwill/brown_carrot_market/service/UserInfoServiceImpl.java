@@ -183,6 +183,11 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public int remove(String user_id) throws Exception {
 		return userDao.removeUser(user_id);
 	}
+	
+	@Override
+	public int removeAddress(Address address) throws Exception {
+		return userDao.removeAddress(address);
+	}
 
 	/*
 	 * 전체회원리스트
@@ -204,6 +209,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 			return false;
 		}
 	}
+
+
 
 
 

@@ -42,9 +42,11 @@ public interface UserInfoMapper {
 	//@Update("")
 	public int updatePoint(UserInfo userInfo);
 	
-	
 	//@Delete("")
 	public int removeUser(String user_id);
+	
+	//@Delete("")
+	public int removeAddress(Address address);
 
 	//@Select("")
 	public UserInfo findUser(String user_id);

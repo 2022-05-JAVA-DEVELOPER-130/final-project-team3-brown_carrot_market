@@ -34,6 +34,8 @@ public interface UserInfoDao {
 	 * 사용자아이디에해당하는 사용자를 삭제
 	 */
 	int removeUser(String user_id) throws Exception;
+	
+	int removeAddress(Address address) throws Exception;
 
 	/*
 	 * 사용자아이디에해당하는 정보를 데이타베이스에서 찾아서 User 도메인클래스에 저장하여 반환
