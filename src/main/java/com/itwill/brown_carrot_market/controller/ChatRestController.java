@@ -1,5 +1,5 @@
 package com.itwill.brown_carrot_market.controller;
 
-public class ChatRoomRestController {
+public class ChatRestController {
 
 }
