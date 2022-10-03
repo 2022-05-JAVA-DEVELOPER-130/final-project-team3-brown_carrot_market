@@ -28,13 +28,32 @@ public class NoticeServiceImpl implements NoticeService{
 	public Notice selectByNo(int notice_no) throws Exception {
 		return noticeDao.selectByNo(notice_no);
 	}
-/*
+
 	@Override
 	public int insertNotice(Notice notice) throws Exception {
 		
-		return 0;
+		return noticeDao.insertNotice(notice);
 	}
-	*/
+
+	@Override
+	public int deleteNotice(int notice_no) throws Exception {
+		return noticeDao.deleteNotice(notice_no);
+	}
+
+	@Override
+	public int updateNotice(Notice notice) throws Exception {
+		return noticeDao.updateNotice(notice);
+	}
+
+	@Override
+	public int updateNoticeCount(int notice_no) throws Exception {
+		return noticeDao.updateNoticeCount(notice_no);
+	}
+	
+	
+	
+	
+	
 	
 	
 	
