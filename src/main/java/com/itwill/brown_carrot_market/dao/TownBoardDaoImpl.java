@@ -84,6 +84,12 @@ public class TownBoardDaoImpl implements TownBoardDao{
 		return townBoardMapper.insertTownBoard(townBoard);
 	}
 
+	@Override
+	public List<TownBoard> selectTownBoardIdList(String user_id) {
+		System.out.println(">>> townBoardDaoImpl : selectTownBoardIdList()호출");
+		return townBoardMapper.selectTownBoardIdList(user_id);
+	}
+
 
 	
 

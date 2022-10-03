@@ -43,7 +43,7 @@ public class TownBoardDaoSpringBootTestApplication {
 		//System.out.println("selectTownBoardListCoordinate test"+townBoardDao.selectTownBoardListCoordinate(new Address(1, null, 0, 0, 0, "carrot1")));
 		
 		//좌표값 + 카테고리 조건으로 검색.. 실패함 다시 보기.. .나오는데 좌표범위대로 나오는지는 잘 모르겠음 다시 보기..
-		System.out.println("selectTownBoardCtgrListCoordinate test : "+ townBoardDao.selectTownBoardCtgrListCoordinate(1,new Address(1, null, 0, 0, 0, "carrot1" )));
+		//System.out.println("selectTownBoardCtgrListCoordinate test : "+ townBoardDao.selectTownBoardCtgrListCoordinate(1,new Address(1, null, 0, 0, 0, "carrot1" )));
 		
 		//System.out.println("selectTownBoardOne test :"+townBoardDao.selectTownBoardOne(1));
 		
@@ -55,7 +55,7 @@ public class TownBoardDaoSpringBootTestApplication {
 		
 		//System.out.println("insert test:"+townBoardDao.insertTownBoard(new TownBoard(0, "new 제목", "new 내용", null, 0, new TownCategory(3, null), "서초동", 0, 0, new UserInfo("carrot3", null, null, null, null, 0, 0, null, null), null, null)));
 		
-		
+		//System.out.println("selectTownBoardIdList test:"+townBoardDao.selectTownBoardIdList("carrot1"));
 		
 
 	}
