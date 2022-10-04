@@ -49,11 +49,20 @@ function getContextPath(){
 //채팅 페이지 열릴 때 
 
 $(document).ready(function(){
+	
+	 
 	console.log("document ready");
 	
 	console.log("document ready end : "+loginId);
-	connectWS();
+	//connectWS();
+	
+	message_send_function();
+    
 	});
+	
+	$(window).on("load",function(){
+		connectWS();
+	})
 	
 function getLoginId(){
 		$.ajax({
@@ -76,6 +85,8 @@ function getLoginId(){
 		
 //채팅방 내용 불러오기		
 $(document).on('click','[id^=btnCall]',function(e){
+	e.preventDefault();
+	e.stopPropagation();
 		num = this.id.substr(7);
 		console.log(num);
 		c_room_no=num;
@@ -139,7 +150,7 @@ $.ajax({
 		
 	});
 	
-	message_send_function();
+	
 	});
 	
 	
@@ -194,8 +205,11 @@ function chat_head(id){
 //메세지 전송 
 
 function message_send_function(){
-	$('#btnChatSend').click(function(e){
+		$('#chat_content_msg').focus();
 		
+	$('#btnChatSend').click(function(e){
+		e.preventDefault();
+		e.stopPropagation();
 		if($('#chat_content_msg').val()==""){
 			alert('내용을 입력하세요');
 			$('#chat_content_msg').focus();
@@ -206,7 +220,6 @@ function message_send_function(){
 		
 		
 		
-		e.preventDefault();
 		//제이슨데이터 만들기 
 		// 임시 데이터 test
 		
@@ -239,10 +252,11 @@ function message_send_function(){
 			
 		message_sendDB(jsonData);
 		console.log("DB 전송")		
-		
+		return false;
 	
 	
 	});
+	return false;
 }
 
 function message_sendDB(jsonData){
@@ -267,6 +281,7 @@ function message_sendDB(jsonData){
     				
     				socket.send(JSON.stringify(jsonData));		
     					console.log("socket 전송")	;	
+    			$('#chat_content_msg').val("");
     			},
     			error:function(xhr){
 						console.log("error");
@@ -274,7 +289,6 @@ function message_sendDB(jsonData){
     			
     			});
     			
-    			$('#chat_content_msg').val("");
 			}
 
 
@@ -297,6 +311,7 @@ function connectWS(){
 	
 	ws.onmessage=function(result){
 		//var onMsg=JSON.parse(evt);
+		result.stopPropagation();
 		console.log(result.data);
 		var onMsg=JSON.parse(result.data);
 		console.log('메세지 얻기');
@@ -307,9 +322,10 @@ function connectWS(){
             $('#chat_history').append(message_other(onMsg.data[0]));
 		}else if(onMsg.data[0].user_id==loginId){
 			//내가 보낸 경우
-			console.log("내가 보낸 경우:"+loginId);
 			$('#chat_history').append(message_you(onMsg.data[0]));
 		}
+		
+		return false;
 	}
 	
 	

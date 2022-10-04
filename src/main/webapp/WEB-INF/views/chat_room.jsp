@@ -117,7 +117,7 @@
 							<div class="input-group mb-0">
 							<!-- 전송 버튼 -->
 								<div class="input-group-prepend" id="btnChatSend">
-									<span class="input-group-text"><i class="fa fa-send"></i></span>
+									<span class="input-group-text"><i class="fa fa-send" ></i></span>
 								</div>
 								<input type="text" class="form-control" id="chat_content_msg"
 									placeholder="Enter text here...">
