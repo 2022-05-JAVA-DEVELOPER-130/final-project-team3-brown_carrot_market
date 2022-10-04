@@ -59,4 +59,8 @@ public interface ChatRoomMapper {
 	@Delete("delete from chat_room where c_room_no = #{c_room_no}")
 	public int chatRoomDelete(int c_room_no);
 	
+	// 채팅방 안읽은 메시지 수
+	@Select("select count(*) from chat_contents where c_room_no=#{c_room_no} and c_read=0 and user_id!=#{user_id}")
+	public int chatNotRead(int c_room_no,String user_id);
+	
 }

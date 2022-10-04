@@ -49,6 +49,11 @@ public class ChatRoomDaoImpl implements ChatRoomDao {
 	public List<ChatRoom> chatRoomCheck(String from_id,String to_id,Integer p_no) {
 		return chatRoomMapper.chatRoomCheck(from_id, to_id, p_no);
 	}
+	
+	@Override
+	public int chatNotRead(int c_room_no,String user_id) {
+		return chatRoomMapper.chatNotRead(c_room_no, user_id);
+	}
 
 	
 }

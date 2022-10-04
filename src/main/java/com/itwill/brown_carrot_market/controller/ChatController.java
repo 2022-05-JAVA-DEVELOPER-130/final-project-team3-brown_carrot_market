@@ -1,5 +1,6 @@
 package com.itwill.brown_carrot_market.controller;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +35,9 @@ public class ChatController {
 		//@RequestMapping(value="/chat_room", method=RequestMethod.POST)
 		public String chatList(HttpSession httpSession,@RequestParam String user) {
 			List<ChatRoomListView> chatList = chatService.chatRoomSelectAll(user);
+			for (ChatRoomListView chatRoomListView : chatList) {
+				chatRoomListView.setNot_read(chatService.chatNotRead(chatRoomListView.getC_room_no(), user));
+			}
 			httpSession.setAttribute("chatList",chatList);
 			httpSession.setAttribute("loginId", user);
 			return "chat_room";

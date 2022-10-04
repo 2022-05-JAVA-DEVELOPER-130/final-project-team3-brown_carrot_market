@@ -120,6 +120,10 @@ public class ChatServiceImpl implements ChatService {
 		return chatRoomDao.chatRoomSelect(c_room_no);
 	}
 	
+	@Override
+	public int chatNotRead(int c_room_no,String user_id) {
+		return chatRoomDao.chatNotRead(c_room_no, user_id);
+	}
 	
 	
 	
