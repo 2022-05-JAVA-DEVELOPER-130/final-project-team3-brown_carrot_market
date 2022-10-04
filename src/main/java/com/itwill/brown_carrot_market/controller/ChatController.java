@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwill.brown_carrot_market.dto.ChatContents;
 import com.itwill.brown_carrot_market.dto.ChatRoomListView;
+import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.ChatService;
+import com.itwill.brown_carrot_market.service.UserInfoService;
 
 
 
@@ -29,7 +31,7 @@ import com.itwill.brown_carrot_market.service.ChatService;
 public class ChatController {
 	
 	@Autowired private ChatService chatService;
-	 
+	@Autowired private UserInfoService userInfoService;
 	
 	/**************************************************/
 		//@RequestMapping(value="/chat_room", method=RequestMethod.POST)
@@ -50,18 +52,22 @@ public class ChatController {
 		
 		/**************************************************/
 		@RequestMapping(value="/chat_room", method=RequestMethod.GET)
-		public String chatList(HttpSession httpSession) {
+		public String chatList(HttpSession httpSession) throws Exception {
+			
 			String userId=(String)httpSession.getAttribute("sUserId");
+			UserInfo userInfo=(UserInfo) httpSession.getAttribute("sUser");
 				//System.out.println("************************** 아이디 :"+userId);
 			  List<ChatRoomListView> chatList = chatService.chatRoomSelectAll(userId);
 				for (ChatRoomListView chatRoomListView : chatList) {
-					
+					UserInfo otherInfo = userInfoService.findUser(chatRoomListView.getYou_id());
+					chatRoomListView.setYou_image(otherInfo.getUser_profile());
 					chatRoomListView.setNot_read(chatService.chatNotRead(chatRoomListView.getC_room_no(), userId));
 				}
 				System.out.println(chatList);
 			  System.out.println("채팅 리스트:"+chatList);
 			  httpSession.setAttribute("chatList",chatList);
 			  httpSession.setAttribute("loginId", userId);
+			  
 			 
 			return "chat_room";
 		}	
