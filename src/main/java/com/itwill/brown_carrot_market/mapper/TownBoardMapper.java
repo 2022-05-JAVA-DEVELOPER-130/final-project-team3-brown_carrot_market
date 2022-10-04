@@ -36,7 +36,7 @@ public int updateTownBoardOne(TownBoard townBoard);
 public int updateTownBoardCount(int t_no);
 
 //동네게시판 게시물 등록
-public int insertTownBoard(TownBoard townBoard);
+//public int insertTownBoard(TownBoard townBoard);
 
 
 //동네게시판 글 아이디로 조회(내가 쓴 글 조회)

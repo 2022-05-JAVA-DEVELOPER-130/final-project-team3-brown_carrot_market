@@ -77,13 +77,13 @@ public class TownBoardDaoImpl implements TownBoardDao{
 		return townBoardMapper.updateTownBoardCount(t_no);
 	}
 	
-	
+	/*
 	@Override
 	public int insertTownBoard(TownBoard townBoard) throws Exception{
 		System.out.println(">>> townBoardDaoImpl : insertTownBoard()호출");
 		return townBoardMapper.insertTownBoard(townBoard);
 	}
-
+*/
 	@Override
 	public List<TownBoard> selectTownBoardIdList(String user_id) throws Exception{
 		System.out.println(">>> townBoardDaoImpl : selectTownBoardIdList()호출");
