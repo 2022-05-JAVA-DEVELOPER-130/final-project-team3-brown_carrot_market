@@ -32,7 +32,7 @@ public interface TownBoardService {
 	int updateTownBoardCount(int t_no)throws Exception;
 	
 	//동네게시판 글 등록
-	int insertTownBoard(TownBoard townBoard)throws Exception;
+	//int insertTownBoard(TownBoard townBoard)throws Exception;
 	
 	//동네게시판 글 아이디로 조회(내가 쓴 글 조회)
 	List<TownBoard> selectTownBoardIdList(String user_id)throws Exception;
