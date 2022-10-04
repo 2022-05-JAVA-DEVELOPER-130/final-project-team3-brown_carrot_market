@@ -35,9 +35,7 @@ public class ChatController {
 		//@RequestMapping(value="/chat_room", method=RequestMethod.POST)
 		public String chatList(HttpSession httpSession,@RequestParam String user) {
 			List<ChatRoomListView> chatList = chatService.chatRoomSelectAll(user);
-			for (ChatRoomListView chatRoomListView : chatList) {
-				chatRoomListView.setNot_read(chatService.chatNotRead(chatRoomListView.getC_room_no(), user));
-			}
+
 			httpSession.setAttribute("chatList",chatList);
 			httpSession.setAttribute("loginId", user);
 			return "chat_room";
@@ -56,6 +54,11 @@ public class ChatController {
 			String userId=(String)httpSession.getAttribute("sUserId");
 				//System.out.println("************************** 아이디 :"+userId);
 			  List<ChatRoomListView> chatList = chatService.chatRoomSelectAll(userId);
+				for (ChatRoomListView chatRoomListView : chatList) {
+					
+					chatRoomListView.setNot_read(chatService.chatNotRead(chatRoomListView.getC_room_no(), userId));
+				}
+				System.out.println(chatList);
 			  System.out.println("채팅 리스트:"+chatList);
 			  httpSession.setAttribute("chatList",chatList);
 			  httpSession.setAttribute("loginId", userId);
