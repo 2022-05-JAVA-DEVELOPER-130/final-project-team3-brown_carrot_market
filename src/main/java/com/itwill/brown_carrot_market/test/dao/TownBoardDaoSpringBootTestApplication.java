@@ -66,7 +66,7 @@ public class TownBoardDaoSpringBootTestApplication {
 		pmap.put("address", map);
 		
 		townBoardDao.insertTownBoard(pmap);
-		
+		 
 		
 		
 		
