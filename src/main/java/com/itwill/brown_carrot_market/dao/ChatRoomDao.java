@@ -24,4 +24,7 @@ public interface ChatRoomDao {
 	 // 채팅방 목록 체크
 	 public ChatRoom chatRoomSelect(Integer c_room_no);
 
+	 
+	 public int chatNotRead(int c_room_no, String user_id);
+
 }

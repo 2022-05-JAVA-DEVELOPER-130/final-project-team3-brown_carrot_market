@@ -42,11 +42,11 @@ public class TownReplyDaoSpringBootTestApplication {
 		ConfigurableApplicationContext context=application.run(args);
 		TownReplyDao townReplyDao=(TownReplyDao)context.getBean(TownReplyDao.class);
 		
-		//System.out.println("insertTownBoardReply() test:"+townReplyDao.insertTownBoardReply(new TownReply(0, "new 댓글제목", "new 댓글 내용", null, 1, 1, 1, new UserInfo("carrot1", null, null, null, null, 0, 0, null, null), new TownBoard(1, null, null, null, 0, null, null, 0, 0, null, null, null))));
+		//System.out.println("insertTownBoardReply() test:"+townReplyDao.insertTownBoardReply(new TownReply(0, "groupno 수정 new 댓글제목", "new 댓글 내용", null, 1, 1, 1, new UserInfo("carrot3", null, null, null, null, 0, 0, null, null), new TownBoard(3, null, null, null, 0, null, null, 0, 0, null, null, null))));
 		
 		//System.out.println("deleteTownBoardReply() test:"+townReplyDao.deleteTownBoardReply(5));
 		
-		System.out.println("updateTownBoardReply() test:"+townReplyDao.updateTownBoardReply(new TownReply(6, "댓글 제목 수정", "댓글 내용 수정", null, 0, 0, 0, null, null)));
+		//System.out.println("updateTownBoardReply() test:"+townReplyDao.updateTownBoardReply(new TownReply(6, "댓글 제목 수정", "댓글 내용 수정", null, 0, 0, 0, null, null)));
 		
 		
 

@@ -37,4 +37,6 @@ public interface ChatService {
 
 	// 중복체크 
 	boolean duplicateCheck(String mId, String mIdYou, Integer p_no);
+
+	public int chatNotRead(int c_room_no, String user_id);
 }
