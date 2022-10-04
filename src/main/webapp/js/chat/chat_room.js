@@ -27,6 +27,9 @@ function getContextPath(){
 //채팅 페이지 열릴 때 
 
 $(document).ready(function(){
+	/*$.ajax({
+		
+	})*/
 	});
 		
 		
@@ -50,7 +53,7 @@ $.ajax({
 			//$('#content').html('채팅 불러오기 성공');
 			$('#chat_history').html("");
 			$('#chatHead').html("");
-			var loginId=$('#loginId').val();
+			loginId=$('#loginId').val();
 			console.log(loginId);
 			for(const item of chatContentArray){
 				

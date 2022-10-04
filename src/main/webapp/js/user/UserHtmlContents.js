@@ -212,6 +212,7 @@ UserHtmlContents.user_thumbnail_login=function(loginUser){
                                 <li><a href="user_my_account">My Account</a></li>
                                 <li><a href="order-list.html">Orders List</a></li>
                                 <li><a href="wishlist.html">Wishlist</a></li>
+                                <li><a href="chat_room">Chatting</a></li>
                                 <li><a href="user_logout_action"><i class="icofont-logout"></i> Logout</a></li>
                             </ul>`;
 }	

@@ -31,7 +31,7 @@ public class ChatController {
 	 
 	
 	/**************************************************/
-		@RequestMapping(value="/chat_room", method=RequestMethod.POST)
+		//@RequestMapping(value="/chat_room", method=RequestMethod.POST)
 		public String chatList(HttpSession httpSession,@RequestParam String user) {
 			List<ChatRoomListView> chatList = chatService.chatRoomSelectAll(user);
 			httpSession.setAttribute("chatList",chatList);
@@ -39,13 +39,29 @@ public class ChatController {
 			return "chat_room";
 		}	
 		
-		@RequestMapping(value = "/login", method = { RequestMethod.GET })
+		//@RequestMapping(value = "/login", method = { RequestMethod.GET })
 		public String login(HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
 			return "login";
 		}
 		
 		
+		/**************************************************/
+		@RequestMapping(value="/chat_room", method=RequestMethod.GET)
+		public String chatList(HttpSession httpSession) {
+			String userId=(String)httpSession.getAttribute("sUserId");
+			/*
+			 * List<ChatRoomListView> chatList = chatService.chatRoomSelectAll(userId);
+			 * httpSession.setAttribute("chatList",chatList);
+			 * httpSession.setAttribute("loginId", user);
+			 */
+			return "chat_room";
+		}	
+		
+		
+		
 
+	/**************************************************/
+		
 	/**************************************************/
 	
 	@RequestMapping(value = "/chat", method = { RequestMethod.GET })
