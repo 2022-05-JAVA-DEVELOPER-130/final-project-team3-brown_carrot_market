@@ -31,7 +31,7 @@ public class TownBoardDaoSpringBootTestApplication {
 		GuestDao guestDao = (GuestDao) context.getBean(GuestDao.class);
 		System.out.println(guestDao.selectAll());
 		System.out.println(guestDao.selectByNo(881));
-		*/
+		*/ 
 		
 		SpringApplication application = 
 				new SpringApplication(TownBoardDaoSpringBootTestApplication.class);
