@@ -114,6 +114,13 @@ public class ChatServiceImpl implements ChatService {
 
 		return chatRoomListView;
 	}
+
+	@Override
+	public ChatRoom chatRoomSelect(Integer c_room_no) {
+		return chatRoomDao.chatRoomSelect(c_room_no);
+	}
+	
+	
 	
 	
 

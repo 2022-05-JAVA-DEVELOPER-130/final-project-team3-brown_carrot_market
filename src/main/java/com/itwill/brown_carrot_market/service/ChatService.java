@@ -3,6 +3,7 @@ package com.itwill.brown_carrot_market.service;
 import java.util.List;
 
 import com.itwill.brown_carrot_market.dto.ChatContents;
+import com.itwill.brown_carrot_market.dto.ChatRoom;
 import com.itwill.brown_carrot_market.dto.ChatRoomListView;
 
 
@@ -21,6 +22,9 @@ public interface ChatService {
 	public int insertChat(ChatContents chat_contents);
 	
 	public String testService();
+	
+	//채팅방 1개 조회
+	public ChatRoom chatRoomSelect(Integer c_room_no);
 	
 	// 채팅방 전체 조회
 	public List<ChatRoomListView> chatRoomSelectAll(String user_id);
