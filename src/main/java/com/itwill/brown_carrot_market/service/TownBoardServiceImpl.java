@@ -60,12 +60,12 @@ public class TownBoardServiceImpl implements TownBoardService{
 	public int updateTownBoardCount(int t_no) throws Exception {
 		return townBoardDao.updateTownBoardCount(t_no);
 	}
-
+/*
 	@Override
 	public int insertTownBoard(TownBoard townBoard) throws Exception {
 		return townBoardDao.insertTownBoard(townBoard);
 	}
-
+*/
 	@Override
 	public List<TownBoard> selectTownBoardIdList(String user_id) throws Exception {
 		return townBoardDao.selectTownBoardIdList(user_id);
