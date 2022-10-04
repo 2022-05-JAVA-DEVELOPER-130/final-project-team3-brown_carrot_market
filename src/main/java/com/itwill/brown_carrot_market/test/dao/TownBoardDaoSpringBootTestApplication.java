@@ -58,16 +58,16 @@ public class TownBoardDaoSpringBootTestApplication {
 		
 		//System.out.println("selectTownBoardIdList test:"+townBoardDao.selectTownBoardIdList("carrot1"));
 		
-		////System.out.println("insert test:"+townBoardDao.insertTownBoard(new TownBoard(0, "new 제목", "new 내용", null, 0, new TownCategory(3, null), "서초동", 0, 0, new UserInfo("carrot3", null, null, null, null, 0, 0, null, null), null, null)));
 
+		/*
 		Map map=townBoardDao.selectTownBoardAddress("carrot3", 5);
 		Map pmap=new HashMap();
-		pmap.put("townBoard", new TownBoard(0, "new 제목", "new 내용", null, 0, new TownCategory(3, null), null, 0, 0, new UserInfo("carrot3", null, null, null, null, 0, 0, null, null), null, null));
+		pmap.put("townBoard", new TownBoard(0, "new new제목", "new 내용", null, 0, new TownCategory(3, null), null, 0, 0, new UserInfo("carrot3", null, null, null, null, 0, 0, null, null), null, null));
 		pmap.put("address", map);
 		
 		townBoardDao.insertTownBoard(pmap);
 		 
-		
+		*/
 		
 		
 		
