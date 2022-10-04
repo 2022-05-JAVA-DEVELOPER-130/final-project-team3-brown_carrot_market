@@ -88,6 +88,7 @@ public class ProductDaoImpl implements ProductDao{
 	
 	@Override
 	public int insertProduct(Map map) {
+		System.out.println("###ProductDaoImpl : insertProduct 호출");
 		productMapper.insertProduct(map);
 		return 1;
 	}
