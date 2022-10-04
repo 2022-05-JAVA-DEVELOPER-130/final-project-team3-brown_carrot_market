@@ -197,7 +197,6 @@ function message_other(chat_content){
 	
 	
 
-
 	return `<li class="clearfix">
 									<div class="message-data">
 										<span class="message-data-time">${date_string(chat_content.send_time)}</span>
