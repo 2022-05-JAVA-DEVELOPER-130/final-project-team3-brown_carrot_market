@@ -76,27 +76,53 @@ public class UserInfoController {
 	@RequestMapping("/user_my_account")
 	public String user_my_account(HttpServletRequest request) throws Exception{
 		/**************login check**************/
+		System.out.println("기본Controller - user_my_account");
 		
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
-		UserInfo loginUser=userService.findUser(sUserId);
-		request.setAttribute("loginUser", loginUser);
+		UserInfo sUser=(UserInfo)request.getSession().getAttribute("sUser");
+
+		System.out.println("sUserId"+sUserId);
+		System.out.println("sUser"+sUser);
+		
+		//UserInfo sUser=userService.findUser(sUserId);
+		//request.setAttribute("sUser", sUser);
+
+		/***********수정 필요***********/
+		/*
+		if(sUser.getAddressList()!=null) {
+			for(Address address: sUser.getAddressList()) {
+				request.getSession().setAttribute("sAddress", address);
+				System.out.println("sAddress : "+address);
+			}
+		}
+		*/
+		Address sAddress=(Address)request.getSession().getAttribute("sAddress");
+		System.out.println("sAddress: "+sAddress);
+		/******************************/
 		return "user_my-account";
 	}
 
 	@LoginCheck
+	@RequestMapping(value = "/user_logout_action")
+	public String user_logout_action(HttpSession session) {
+		session.invalidate();
+		return "redirect:main";
+	}
+	
+	/*
+	@LoginCheck
 	@RequestMapping("/user_view")
 	public String user_view(HttpServletRequest request) throws Exception{
-		/**************login check**************/
 		
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
 		UserInfo loginUser=userService.findUser(sUserId);
 		request.setAttribute("loginUser", loginUser);
 		return "user_view";
 	}
+	
 	@LoginCheck
 	@RequestMapping(value = "/user_modify_form",method=RequestMethod.POST)
 	public String user_modify_form_post(HttpServletRequest request)throws Exception {
-		/**************login check**************/
 		
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
 		UserInfo loginUser=userService.findUser(sUserId);
@@ -106,46 +132,29 @@ public class UserInfoController {
 	@LoginCheck
 	@RequestMapping(value = "/user_modify_action",method = RequestMethod.POST)
 	public String user_modify_action_post(@ModelAttribute UserInfo user) throws Exception{
-		/**************login check**************/
 		int rowCount=userService.update(user);
 		return "redirect:user_view";
 	}
 	@LoginCheck
 	@RequestMapping(value = "/user_remove_action",method = RequestMethod.POST)
 	public String user_remove_action_post(HttpSession session) throws Exception{
-		/**************login check**************/
 		String sUserId=(String)session.getAttribute("sUserId");
 		int rowCount=userService.remove(sUserId);
 		session.invalidate();
 		return "redirect:user_main";
 	}
-	@LoginCheck
-	@RequestMapping(value = "/user_logout_action")
-	public String user_logout_action(HttpSession session) {
-		session.invalidate();
-		return "redirect:index.jsp";
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	 */
+
 	
 	
 	@RequestMapping(value = {"/user_modify_form",
-							 "/user_login_action",
+							 /*"/user_login_action",*/
 							 "/user_write_action",
 							 "/user_modify_action",
 							 "/user_remove_action"},
 					method = RequestMethod.GET)
 	public String user_action_get() {
-	return "redirect:user_main";
+	return "redirect:main";
 	}
 
 	@ExceptionHandler(Exception.class)

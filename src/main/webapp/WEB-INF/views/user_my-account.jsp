@@ -19,6 +19,7 @@
 
 <!-- Style CSS -->
 <link rel="stylesheet" href="style.css">
+<!-- <link rel="stylesheet" href="css/user_btn.css"> -->
 
 <!-- javaScript -->
 <script type="text/javascript"
@@ -43,7 +44,6 @@
 				}
 			});
 			/*************************************/
-			
 			
 			/****************user_view******************/
 			$(document).on('click', '#user_account_details, #a_account_details',function(e){
@@ -92,7 +92,6 @@
 					dataType : 'json',
 					success : function(jsonResult) {
 							//주소의 갯수를 확인해보자
-						    console.log(jsonResult.data[0].addressList.length);
 							var addressCount=jsonResult.data[0].addressList.length;
 							
 							if(addressCount==0){
@@ -101,33 +100,109 @@
 								$('#my-account-content').html(UserHtmlContents.user_view_addresses_one(jsonResult.data[0].addressList));
 							}else if (addressCount==2) {
 								$('#my-account-content').html(UserHtmlContents.user_view_addresses(jsonResult.data[0].addressList));
+								if(jsonResult.data[0].addressList[0].address_range > 0){
+									$('.rd_adress1').prop('checked',true);
+									$('.rd_adress1').nextUntil($("input[name=address_range]")).children("input[name=address_range]").attr("disabled",false);
+								}else{
+									$('.rd_adress2').prop('checked',true);
+									$('.rd_adress2').nextUntil($("input[name=address_range]")).children("input[name=address_range]").attr("disabled",false);
+								}
 							}
 					    }
 				});
-				
 				e.preventDefault();
 			});
 			
+		 /****************(수정필요)remove_address******************/
+			//$(document).on('click',	'#btn_remove_first,#btn_remove_second',function(e) {
+			$(document).on('click',	'.remove',function(e) {
+				console.log('click!!'+$(e.target).parent($("address")).children("input[name=address_name]").val());
+				$.ajax({
+					url : 'user_remove_address_json',
+					method : 'POST',
+					data: $(e.target).parent($("address")).children().serialize(),
+					dataType : 'json',
+					success : function(jsonResult) {
+						    console.log(jsonResult);
+						    $( "#user_view_addresses" ).trigger( "click" );
+					    }
+				});
+				e.preventDefault();
+			});
 			
+		 /****************change_selected_address[radio_btn]******************/
+			$(document).on('click', "#btn_address_first,#btn_address_second",function(e) {
+				console.log('click!!'+e.target.id);
+				//$(e.target).css("background","#0f99f3");
+				//$(e.target).css("color","#fff");
+				
+				//선택 해제
+				$(".selected_sAddressNo").css("background","");
+				$(".selected_sAddressNo").css("color","");
+				$(".selected_sAddressNo").parent($("address")).children("input[name=address_range]").attr("disabled",true);
+				$(".selected_sAddressNo").parent($("address")).children("input[name=address_range]").val(0);
+				$(".selected_sAddressNo").parent($("address")).children("input[name=address_range]").trigger( "change" );
+				//$(".selected_sAddressNo").parent($("address")).children(".range_val").text(0);
+				$(".selected_sAddressNo").removeClass("selected_sAddressNo");
+				
+				//선택
+				$(e.target).addClass("selected_sAddressNo");
+				$(".selected_sAddressNo").css("background","#0f99f3");
+				$(".selected_sAddressNo").css("color","#fff");
+				$(e.target).parent($("address")).children("input[name=address_range]").attr("disabled",false);
+				
+				if(e.target.id=="btn_address_first"){
+					$( ".rd_adress1" ).trigger( "change" );
+				}else {
+					$( ".rd_adress2" ).trigger( "change" );
+				}
+				
+				e.preventDefault();
+			});
+		 /*
+			$(document).on('change', "[type='radio']",function(e) {
+				//var selectedAddress = $(e.target).nextUntil($("input[name=address_range]"));
+				
+				$("[type='radio']").each(function(){
+					var value=$(this).val();
+					var checked=$(this).prop('checked');
+				var selectedAddress = $(this).nextUntil($("input[name=address_range]"));
+					
+					if(checked){
+						selectedAddress.children("input[name=address_range]").attr("disabled",false);
+					}else{
+						selectedAddress.children("input[name=address_range]").attr("disabled",true);
+						selectedAddress.children("input[name=address_range]").val(0);
+						selectedAddress.children(".range_val").text(0);
+					}
+				});
+			 
+			});
+			*/ 
+			 /****************update_address_range******************/
 			$(document).on('change', "[type='range']",function(e) {
-				console.log($(e.target).val());
-				console.log(e.target.id);
-				console.log($('label[for='+e.target.id+']').text());
 				
-				$('label[for='+e.target.id+']').text($(e.target).val());
-				e.preventDefault();
-			
-			});
-			 /****************user_update_addresses******************/
-			//(Step_1) Getting a address
-			$(document).on('click',	'#btn_address_first,#btn_address_second,#btn_address_new1,#btn_address_new2',function(e) {
-				var selectedAddress = $(e.target).prev($("address"));
+				var selectedAddress = $(e.target).parent($("address"));
 				selectedAddress.addClass("selected_address");
-				selectedAddress.children("input[name=address_name]").attr("disabled",false);
-				selectedAddress.children("input[name=address_range]").attr("disabled",false);
 				
+				$.ajax({
+					url : 'user_update_address_range_json',
+					method : 'POST',
+					data: $(".selected_address > *").serialize(),
+					dataType : 'json',
+					success : function(jsonResult) {
+						    console.log(jsonResult);
+						    $( "#user_view_addresses" ).trigger( "click" );
+					    }
+				});
+				e.preventDefault();
+			});
+			 /****************user_insert_addresses******************/
+			//(Step_1) Getting a address
+			$(document).on('click',	'#btn_address_new1,#btn_address_new2',function(e) {
+				var selectedAddress = $(e.target).parent($("address"));
+				selectedAddress.addClass("selected_address");
 				$(e.target).addClass("selected");
-				
 		    /**********************************************************/
 		    	// 주소-좌표 변환 객체를 생성합니다
 		    	var geocoder = new kakao.maps.services.Geocoder();
@@ -138,7 +213,7 @@
 				        var lat = position.coords.latitude, // 위도
 				            lon = position.coords.longitude; // 경도
 				        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-				            message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
+				            message = '여기에 계신가요?!'; // 인포윈도우에 표시될 내용입니다
 				            console.log("locPosition: "+locPosition.getLat(),locPosition.getLng());
 				            console.log(message);
 							/*좌표->주소 변환*********************************************************/
@@ -154,6 +229,18 @@
 											$(".selected_address > input[name=address_name] ").val(detailAddr);
 											$(".selected_address > input[name=address_lat] ").val(lat);
 											$(".selected_address > input[name=address_lng] ").val(lon);
+											confirm(detailAddr+message);
+											$.ajax({
+												url : 'user_insert_address_json',
+												method : 'POST',
+												data: $(".selected_address > *").serialize(),
+												dataType : 'json',
+												success : function(jsonResult) {
+													    console.log(jsonResult);
+													    if(jsonResult.code==0) alert("동일한 주소는 1개만 등록가능합니다.");
+													    $( "#user_view_addresses" ).trigger( "click" );
+												    }
+											});
 							        }
 							 });
 							/**********************************************************/
@@ -174,11 +261,11 @@
 				    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
 				}
 		/**********************************************************/
-				$(e.target).html("확인");
 				e.preventDefault();
 			});
 			
 			//(Step_2) update & insert
+			/*
 			$(document).on('click',	'.selected',function(e) {
 				
 				console.log($(".selected_address > *").serialize());
@@ -198,7 +285,6 @@
 								$(".selected_address").removeClass("selected_address");
 								$(e.target).removeClass("selected");
 								$(e.target).html("주소 수정");
-								*/
 						    }
 					});
 				}else if ($(e.target).hasClass('insert')) {
@@ -214,10 +300,9 @@
 							    $( "#user_view_addresses" ).trigger( "click" );
 						    }
 					});
-					
 				}
 			});
-			
+		*/
 			/* Send_Mail********************************/
 			$(document).on('click', '#btn_invi', function(e) {
 				console.log($("#invi_email").val());
@@ -591,7 +676,7 @@
 					<div id="my-account-content" class="my-account-content mb-50" style="margin-bottom: 20px">
 						<div class="shortcodes_content mb-100" style="margin-bottom: 0px">
 						<p>
-							<strong>${loginUser.user_id}</strong>님, 안녕하세요? (<strong>${loginUser.user_id}</strong>님이 아니신가요?
+							<strong>${sUser.user_id}</strong>님, 안녕하세요? (<strong>${sUser.user_id}</strong>님이 아니신가요?
 							<a href="user_logout_action">Log out</a>)
 						</p>
 						<p>

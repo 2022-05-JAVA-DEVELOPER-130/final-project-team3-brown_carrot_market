@@ -53,6 +53,8 @@ public interface UserInfoService {
 	 * 회원탈퇴
 	 */
 	int remove(String userId) throws Exception;
+	
+	int removeAddress(Address address) throws Exception;
 
 	/*
 	 * 전체회원리스트
