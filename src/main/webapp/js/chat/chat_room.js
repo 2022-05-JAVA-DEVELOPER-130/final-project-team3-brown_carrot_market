@@ -16,6 +16,28 @@ var jsonData={
 	
 };
 
+/* validator객체변수선언 */
+	/*var validator=null;
+    $.validator.setDefaults({
+			rules:{
+				chat_content_msg:{
+					required:true
+					
+				}
+			
+				
+			},
+			messages:{
+				chat_content_msg:{
+					required: "내용을 입력하세요"
+					
+				}
+				
+			},
+			errorClass:'error',
+			validClass:'valid'
+    });*/
+
 
 //경로 얻기 
 function getContextPath(){
@@ -27,11 +49,20 @@ function getContextPath(){
 //채팅 페이지 열릴 때 
 
 $(document).ready(function(){
+	
+	 
 	console.log("document ready");
 	
 	console.log("document ready end : "+loginId);
-	connectWS();
+	//connectWS();
+	
+	message_send_function();
+    
 	});
+	
+	$(window).on("load",function(){
+		connectWS();
+	})
 	
 function getLoginId(){
 		$.ajax({
@@ -54,6 +85,8 @@ function getLoginId(){
 		
 //채팅방 내용 불러오기		
 $(document).on('click','[id^=btnCall]',function(e){
+	e.preventDefault();
+	e.stopPropagation();
 		num = this.id.substr(7);
 		console.log(num);
 		c_room_no=num;
@@ -117,7 +150,7 @@ $.ajax({
 		
 	});
 	
-	message_send_function();
+	
 	});
 	
 	
@@ -172,10 +205,21 @@ function chat_head(id){
 //메세지 전송 
 
 function message_send_function(){
+		$('#chat_content_msg').focus();
+		
 	$('#btnChatSend').click(function(e){
+		e.preventDefault();
+		e.stopPropagation();
+		if($('#chat_content_msg').val()==""){
+			alert('내용을 입력하세요');
+			$('#chat_content_msg').focus();
+			return false;
+		}
 		console.log("send 버튼 클릭");
 		timestamp = new Date().getTime();
-		e.preventDefault();
+		
+		
+		
 		//제이슨데이터 만들기 
 		// 임시 데이터 test
 		
@@ -202,16 +246,17 @@ function message_send_function(){
 		
 		
 		
-		$('#chat_content_msg').val("");
+		
 	
 		
 			
 		message_sendDB(jsonData);
 		console.log("DB 전송")		
-		
+		return false;
 	
 	
 	});
+	return false;
 }
 
 function message_sendDB(jsonData){
@@ -236,12 +281,14 @@ function message_sendDB(jsonData){
     				
     				socket.send(JSON.stringify(jsonData));		
     					console.log("socket 전송")	;	
+    			$('#chat_content_msg').val("");
     			},
     			error:function(xhr){
 						console.log("error");
 				}
     			
     			});
+    			
 			}
 
 
@@ -264,6 +311,7 @@ function connectWS(){
 	
 	ws.onmessage=function(result){
 		//var onMsg=JSON.parse(evt);
+		result.stopPropagation();
 		console.log(result.data);
 		var onMsg=JSON.parse(result.data);
 		console.log('메세지 얻기');
@@ -274,9 +322,10 @@ function connectWS(){
             $('#chat_history').append(message_other(onMsg.data[0]));
 		}else if(onMsg.data[0].user_id==loginId){
 			//내가 보낸 경우
-			console.log("내가 보낸 경우:"+loginId);
 			$('#chat_history').append(message_you(onMsg.data[0]));
 		}
+		
+		return false;
 	}
 	
 	

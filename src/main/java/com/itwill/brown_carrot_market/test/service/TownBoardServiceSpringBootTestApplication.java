@@ -1,5 +1,8 @@
 package com.itwill.brown_carrot_market.test.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -55,11 +58,18 @@ public class TownBoardServiceSpringBootTestApplication {
 		
 		System.out.println("updateTownBoardCount test:"+townBoardService.updateTownBoardCount(1));
 		
-		//System.out.println("insert test:"+townBoardService.insertTownBoard(new TownBoard(0, "new 제목", "new 내용", null, 0, new TownCategory(3, null), "서초동", 0, 0, new UserInfo("carrot3", null, null, null, null, 0, 0, null, null), null, null)));
-		
 		System.out.println("selectTownBoardIdList test:"+townBoardService.selectTownBoardIdList("carrot1"));
 		
-
+		//System.out.println("insert test:"+townBoardService.insertTownBoard(new TownBoard(0, "new 제목", "new 내용", null, 0, new TownCategory(3, null), "서초동", 0, 0, new UserInfo("carrot3", null, null, null, null, 0, 0, null, null), null, null)));
+		
+		Map map=townBoardService.selectTownBoardAddress("carrot3", 5);
+		Map pmap=new HashMap();
+		pmap.put("townBoard", new TownBoard(0, "new new2제목", "new 내용", null, 0, new TownCategory(3, null), null, 0, 0, new UserInfo("carrot3", null, null, null, null, 0, 0, null, null), null, null));
+		pmap.put("address", map);
+		
+		townBoardService.insertTownBoard(pmap);
+		
+		
 	}
 }
 
