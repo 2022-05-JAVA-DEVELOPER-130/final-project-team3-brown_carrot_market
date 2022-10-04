@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.itwill.brown_carrot_market.dto.Address;
+import com.itwill.brown_carrot_market.dto.Invitation;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 
 public interface UserInfoService {
@@ -12,7 +13,7 @@ public interface UserInfoService {
 	 * 회원가입
 	 */
 	/**************1.반환값사용***********************/
-	int create(UserInfo user,Address address) throws Exception;
+	int create(UserInfo user,Address address,Invitation invitation) throws Exception;
 
 	/*********************************************/
 
@@ -39,11 +40,21 @@ public interface UserInfoService {
 
 	int updateAddress(Address addressS) throws Exception;
 	
+	int updateAddressRange(Address addressS) throws Exception;
 	
+
+	int updatePoint(UserInfo user,Invitation invitation) throws Exception;
+	
+	int createAddress(Address address) throws Exception;
+	
+	int createInvitation(Invitation invitation) throws Exception;
+
 	/*
 	 * 회원탈퇴
 	 */
 	int remove(String userId) throws Exception;
+	
+	int removeAddress(Address address) throws Exception;
 
 	/*
 	 * 전체회원리스트

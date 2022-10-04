@@ -16,60 +16,50 @@ import com.itwill.brown_carrot_market.dto.UserInfo;
 @Mapper
 public interface UserInfoMapper {
 	/*
-	 * <insert id="createUser" parameterType="com.itwill.user.User"> INSERT INTO
-	 * userinfo VALUES (#{user_id}, #{user_pw}, #{user_name}, #{user_email},
-	 * #{user_phone}, #{user_freshness}, #{user_point}, #{user_profile})
-	 * </insert>
-	 */
-	/*
-	 * @Insert("INSERT INTO userinfo VALUES (#{user_id}, #{user_pw}, #{user_name}, #{user_email}, #{user_phone},"
-	 * + "#{user_freshness}, #{user_point}, #{user_profile})")
+	 * @Insert("")
 	 */
 	public int createUser(UserInfo user);
 
 	/*
-	 * <insert id="createAddress" parameterType="com.itwill.user.Address">
-	 * insert into address(address_no, address_name, address_lat,address_lng,
-	 * address_range,user_id) values(address_address_no_seq.nextval,
-	 * #{address_name}, #{address_lat}, #{address_lng},
-	 * #{address_range},#{user_id}) </insert>
-	 */
-	/*
-	 * @Insert("insert into address values(address_address_no_seq.nextval, #{address_name}, #{address_lat}, #{address_lng},"
-	 * + " #{address_range},#{user_id})")
+	 * @Insert("")
 	 */
 	public int createAddress(Address address);
 
-	/*
-	 * <insert id="createInvitation" parameterType="com.itwill.user.Invitation">
-	 * insert into invitation(invi_no,invi_email,user_id)
-	 * values(INVITATION_INVI_NO_SEQ.nextval,#{invi_email},#{user_id}) </insert>
-	 */
-	//@Insert("insert into invitation values(INVITATION_INVI_NO_SEQ.nextval,#{invi_email},#{user_id})")
+	//@Insert("")
 	public int createInvitation(Invitation invitation);
 
 	
 	
 	
-	//@Update("update  userinfo set password=#{password},name=#{name},email=#{email} where user_id=#{user_id}")
+	//@Update("")
 	public int updateUser(UserInfo user);
 
 	//@Update("")
 	public int updateAddress(Address address);
+	//@Update("")
+	public int updateAddressRange(Address address);
 	
+	//@Update("")
+	public int updatePoint(UserInfo userInfo);
 	
-	
-	//@Delete("delete userinfo where user_id=#{user_id}")
+	//@Delete("")
 	public int removeUser(String user_id);
+	
+	//@Delete("")
+	public int removeAddress(Address address);
 
-	//@Select("select user_id,password,name,email from userinfo where user_id=#{user_id}")
+	//@Select("")
 	public UserInfo findUser(String user_id);
 
-	//@Select("select user_id,password,name,email from userinfo")
+	//@Select("")
 	public List<UserInfo> findUserList();
 
+	public String findInvitation(Invitation invitation);
+
+	//@Select("")
+	public int existedInvitation(Invitation invitation);
 	
-	//@Select("select count(*) cnt from userinfo where user_id=#{user_id}")
+	//@Select("")
 	public int existedUser(String user_id);
 
 }
