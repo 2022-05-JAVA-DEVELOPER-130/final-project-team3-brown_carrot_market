@@ -279,6 +279,7 @@ function connectWS(){
 		}
 	}
 	
+	
 	ws.onclose=function(evt){
 		console.log('소켓 닫기');
 	}
