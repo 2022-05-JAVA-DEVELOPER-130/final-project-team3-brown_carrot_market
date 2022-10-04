@@ -106,7 +106,7 @@ UserHtmlContents.user_view_addresses=function(addressList){
                                 <input type="button" id="btn_address_first" class="btn btn-outline-primary mb-1" name="address_name" value="${addressList[0].address_name}" >
                                 <a href="#" id="btn_remove_first" class="btn btn-secondary mb-1 remove"><i class="icofont-ui-delete"></i></a><br/>
 								
-								<input type="range" id='range1' name="address_range" class='mb-1' value="${addressList[0].address_range}" min="0" max="10" disabled>
+								<input id='range1' name="address_range" type="range" value="${addressList[0].address_range}" min="0" max="10" disabled>
                                 <label for='range1' class = "range_val bigshop-label bigshop-label-info bigshop-label-pill" value="">${addressList[0].address_range}</label><br/>
                                 </address>
                                 

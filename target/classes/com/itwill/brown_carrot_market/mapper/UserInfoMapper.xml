@@ -55,7 +55,7 @@
 	<insert id="createAddress" parameterType="com.itwill.brown_carrot_market.dto.Address"><!-- adress_range(default)=3 -->
 		<!-- insert into address(address_no, address_name, address_lat,address_lng, address_range,user_id) -->
 		insert into address
-			values(address_address_no_seq.nextval, #{address_name}, #{address_lat}, #{address_lng}, 3 ,#{user_id})
+			values(address_address_no_seq.nextval, #{address_name}, #{address_lat}, #{address_lng}, #{address_range} ,#{user_id})
 	</insert>
 	
 	<insert id="createInvitation" parameterType="com.itwill.brown_carrot_market.dto.Invitation">

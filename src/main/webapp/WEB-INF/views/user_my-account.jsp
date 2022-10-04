@@ -101,11 +101,24 @@
 							}else if (addressCount==2) {
 								$('#my-account-content').html(UserHtmlContents.user_view_addresses(jsonResult.data[0].addressList));
 								if(jsonResult.data[0].addressList[0].address_range > 0){
-									$('.rd_adress1').prop('checked',true);
-									$('.rd_adress1').nextUntil($("input[name=address_range]")).children("input[name=address_range]").attr("disabled",false);
+									$('#btn_address_first').parent($("address")).addClass("selected_Address");
+									$('#btn_address_first').css("background","#0f99f3");
+									$('#btn_address_first').css("color","#fff");
+									$(".selected_Address > input[name=address_range]").attr("disabled",false);
+									
 								}else{
-									$('.rd_adress2').prop('checked',true);
-									$('.rd_adress2').nextUntil($("input[name=address_range]")).children("input[name=address_range]").attr("disabled",false);
+									$('#btn_address_second').parent($("address")).addClass("selected_Address");
+									$('#btn_address_second').css("background","#0f99f3");
+									$('#btn_address_second').css("color","#fff");
+									$(".selected_Address > input[name=address_range]").attr("disabled",false);
+									
+									/*
+									$('#btn_address_second').addClass("selected_sAddress");
+									$(e.target).addClass("selected_sAddress");
+									$(".selected_sAddress").css("background","#0f99f3");
+									$(".selected_sAddress").css("color","#fff");
+									$(".selected_sAddress").parent($("address")).children("input[name=address_range]").attr("disabled",false);
+									*/
 								}
 							}
 					    }
@@ -113,9 +126,9 @@
 				e.preventDefault();
 			});
 			
-		 /****************(수정필요)remove_address******************/
-			//$(document).on('click',	'#btn_remove_first,#btn_remove_second',function(e) {
-			$(document).on('click',	'.remove',function(e) {
+		 /****************remove_address******************/
+			$(document).on('click',	'#btn_remove_first,#btn_remove_second',function(e) {
+			//$(document).on('click',	'.remove',function(e) {
 				console.log('click!!'+$(e.target).parent($("address")).children("input[name=address_name]").val());
 				$.ajax({
 					url : 'user_remove_address_json',
@@ -130,68 +143,59 @@
 				e.preventDefault();
 			});
 			
-		 /****************change_selected_address[radio_btn]******************/
+		 /****************change_selected_address[type='radio']******************/
 			$(document).on('click', "#btn_address_first,#btn_address_second",function(e) {
 				console.log('click!!'+e.target.id);
-				//$(e.target).css("background","#0f99f3");
-				//$(e.target).css("color","#fff");
+				console.log($(e.target).parent($("address")).hasClass('selected_Address'));
 				
-				//선택 해제
-				$(".selected_sAddressNo").css("background","");
-				$(".selected_sAddressNo").css("color","");
-				$(".selected_sAddressNo").parent($("address")).children("input[name=address_range]").attr("disabled",true);
-				$(".selected_sAddressNo").parent($("address")).children("input[name=address_range]").val(0);
-				$(".selected_sAddressNo").parent($("address")).children("input[name=address_range]").trigger( "change" );
-				//$(".selected_sAddressNo").parent($("address")).children(".range_val").text(0);
-				$(".selected_sAddressNo").removeClass("selected_sAddressNo");
-				
-				//선택
-				$(e.target).addClass("selected_sAddressNo");
-				$(".selected_sAddressNo").css("background","#0f99f3");
-				$(".selected_sAddressNo").css("color","#fff");
-				$(e.target).parent($("address")).children("input[name=address_range]").attr("disabled",false);
-				
-				if(e.target.id=="btn_address_first"){
-					$( ".rd_adress1" ).trigger( "change" );
-				}else {
-					$( ".rd_adress2" ).trigger( "change" );
-				}
-				
+				//if(!$(e.target).parent($("address")).hasClass('selected_Address')){
+					//선택 해제
+					$(".selected_Address>input[name=address_name]").css("background","");
+					$(".selected_Address>input[name=address_name]").css("color","");
+					$(".selected_Address>input[name=address_range]").attr("disabled",true);
+					$(".selected_Address>input[name=address_range]").val(0);
+					$(".selected_Address>.range_val").text(0);
+					//$(".selected_Address>input[name=address_range]").trigger( "change" );
+					//$(".selected_sAddress").parent($("address")).children("input[name=address_range]").trigger( "change" );
+					
+					$.ajax({
+						url : 'user_update_address_range_json',
+						method : 'POST',
+						data: $(".change_Address > *").serialize(),
+						dataType : 'json',
+						success : function(jsonResult) {
+							    console.log(jsonResult);
+							    //$('.change_Address').removeClass("change_Address");
+							    //$( "#user_view_addresses" ).trigger( "click" );
+								$(".selected_Address").removeClass("selected_Address");
+								
+								//선택
+								$(e.target).parent($("address")).addClass("selected_Address");
+								$(".selected_Address>input[name=address_name]").css("background","#0f99f3");
+								$(".selected_Address>input[name=address_name]").css("color","#fff");
+								$(".selected_Address>input[name=address_range]").attr("disabled",false);
+								//$(".selected_Address>input[name=address_range]").val(3);
+								//$(".selected_Address>.range_val").text(3);
+						    }
+					});
+				//}
 				e.preventDefault();
 			});
-		 /*
-			$(document).on('change', "[type='radio']",function(e) {
-				//var selectedAddress = $(e.target).nextUntil($("input[name=address_range]"));
-				
-				$("[type='radio']").each(function(){
-					var value=$(this).val();
-					var checked=$(this).prop('checked');
-				var selectedAddress = $(this).nextUntil($("input[name=address_range]"));
-					
-					if(checked){
-						selectedAddress.children("input[name=address_range]").attr("disabled",false);
-					}else{
-						selectedAddress.children("input[name=address_range]").attr("disabled",true);
-						selectedAddress.children("input[name=address_range]").val(0);
-						selectedAddress.children(".range_val").text(0);
-					}
-				});
-			 
-			});
-			*/ 
+		 
 			 /****************update_address_range******************/
 			$(document).on('change', "[type='range']",function(e) {
 				
 				var selectedAddress = $(e.target).parent($("address"));
-				selectedAddress.addClass("selected_address");
+				selectedAddress.addClass("change_Address");
 				
 				$.ajax({
 					url : 'user_update_address_range_json',
 					method : 'POST',
-					data: $(".selected_address > *").serialize(),
+					data: $(".change_Address > *").serialize(),
 					dataType : 'json',
 					success : function(jsonResult) {
 						    console.log(jsonResult);
+						    $('.change_Address').removeClass("change_Address");
 						    $( "#user_view_addresses" ).trigger( "click" );
 					    }
 				});
@@ -229,7 +233,7 @@
 											$(".selected_address > input[name=address_name] ").val(detailAddr);
 											$(".selected_address > input[name=address_lat] ").val(lat);
 											$(".selected_address > input[name=address_lng] ").val(lon);
-											confirm(detailAddr+message);
+											confirm("[ "+detailAddr+"] "+message);
 											$.ajax({
 												url : 'user_insert_address_json',
 												method : 'POST',
