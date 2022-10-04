@@ -1,7 +1,7 @@
 package com.itwill.brown_carrot_market.dao;
 
 import java.util.List;
-
+import java.util.Map;
 
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Product;
@@ -36,8 +36,10 @@ public interface ProductDao {
 	int updateProductCount(int p_no)throws Exception;
 	
 	//관심갯수 증가
-	//int updateProductWishCount(int p_no)throws Exception; 
+	int updateProductWishCount(int p_no)throws Exception; 
+	
+	Map selectProductAddress(String user_id,int address_no);
 	
 	//상품 등록
-	
+	public int insertProduct(Map map);
 }

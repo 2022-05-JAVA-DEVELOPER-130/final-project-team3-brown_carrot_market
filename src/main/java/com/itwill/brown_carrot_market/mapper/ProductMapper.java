@@ -1,6 +1,7 @@
 package com.itwill.brown_carrot_market.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -27,12 +28,13 @@ public interface ProductMapper {
 
 	public int updateProduct(Product product);
 	
-	//public int updateProductWishCount(int p_no); 
+	public int updateProductWishCount(int p_no); 
 	
-/***********************	
+/***********************/
+	public Map selectProductAddress(Map map);
 	
-	public int insertProduct()
+	public int insertProduct(Map map);
 	
-*************************/	
+/*************************/	
 	
 }

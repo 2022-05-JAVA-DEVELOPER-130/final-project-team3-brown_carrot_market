@@ -1,6 +1,8 @@
 package com.itwill.brown_carrot_market.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -84,13 +86,30 @@ public class ProductDaoImpl implements ProductDao{
 		return productMapper.updateProductCount(p_no);
 	}
 	
-	/*
+	@Override
+	public int insertProduct(Map map) {
+		productMapper.insertProduct(map);
+		return 1;
+	}
+	
+	
 	@Override
 	public int updateProductWishCount(int p_no) throws Exception {
 		System.out.println("###ProductDaoImpl : updateProductWishCount 호출");
 		return productMapper.updateProductWishCount(p_no);
 	}
-	*/
+
+	@Override
+	public Map selectProductAddress(String user_id, int address_no) {
+		Map paramMap=new HashMap();
+		paramMap.put("user_id", user_id);
+		paramMap.put("address_no", address_no);
+		
+		Map aa=productMapper.selectProductAddress(paramMap);
+		System.out.println(aa);
+		return aa;
+	}
+	
 	
 	
 	
