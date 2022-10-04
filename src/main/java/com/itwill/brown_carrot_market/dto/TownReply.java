@@ -12,15 +12,15 @@ DEPTH	NUMBER(10,0)
 USER_ID	VARCHAR2(30 BYTE)
 T_NO	NUMBER(10,0)
 	 */
-	public int t_reply_no;
-	public String t_reply_title;
-	public String t_reply_content;
-	public String t_reply_date;
-	public int groupno;
-	public int step;
-	public int depth;
-	public UserInfo userInfo;
-	public TownBoard townBoard;
+	private int t_reply_no;
+	private String t_reply_title;
+	private String t_reply_content;
+	private String t_reply_date;
+	private int groupno;
+	private int step;
+	private int depth;
+	private UserInfo userInfo;
+	private TownBoard townBoard;
 	
 	public TownReply() {
 		// TODO Auto-generated constructor stub

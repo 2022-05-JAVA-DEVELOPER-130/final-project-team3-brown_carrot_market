@@ -19,6 +19,7 @@
 
 <!-- Style CSS -->
 <link rel="stylesheet" href="style.css">
+<!-- <link rel="stylesheet" href="css/user_btn.css"> -->
 
 <!-- javaScript -->
 <script type="text/javascript"
@@ -26,8 +27,25 @@
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
 <script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7c7231db91ae56cfc5e3c6ea06f73c6&libraries=services"></script>
 <script type="text/javascript">
 		$(function() {
+			/* login_check ***********************/
+			$.ajax({
+				url:'user_session_check_json',
+				method:'POST',
+				dataType:'json',
+				success:function(jsonResult){
+				    if(jsonResult.code==1){
+				    	$(".account-area").html(UserHtmlContents.user_thumbnail());
+				    }else if (jsonResult.code==2) {
+				    	$(".account-area").html(UserHtmlContents.user_thumbnail_login(jsonResult.data[0]));
+					}
+				}
+			});
+			/*************************************/
+			
+			
 			/****************user_view******************/
 			$(document).on('click', '#user_account_details, #a_account_details',function(e){
 				console.log("click!! >> "+e.target);
@@ -75,8 +93,6 @@
 					dataType : 'json',
 					success : function(jsonResult) {
 							//주소의 갯수를 확인해보자
-						    console.log(jsonResult.data[0].addressList.length);
-						
 							var addressCount=jsonResult.data[0].addressList.length;
 							
 							if(addressCount==0){
@@ -85,39 +101,233 @@
 								$('#my-account-content').html(UserHtmlContents.user_view_addresses_one(jsonResult.data[0].addressList));
 							}else if (addressCount==2) {
 								$('#my-account-content').html(UserHtmlContents.user_view_addresses(jsonResult.data[0].addressList));
+								if(jsonResult.data[0].addressList[0].address_range > 0){
+									$('.rd_adress1').prop('checked',true);
+									$('.rd_adress1').nextUntil($("input[name=address_range]")).children("input[name=address_range]").attr("disabled",false);
+								}else{
+									$('.rd_adress2').prop('checked',true);
+									$('.rd_adress2').nextUntil($("input[name=address_range]")).children("input[name=address_range]").attr("disabled",false);
+								}
 							}
 					    }
 				});
-				
 				e.preventDefault();
 			});
-			/****************user_update_addresses******************/
-			//(Step_1)
-			$(document).on('click',	'#btn_address_first,#btn_address_second',function(e) {
-				console.log("click!! >> #btn_address...");
-				
-			    $.ajax({
-					url : 'user_update_adresse_json',
+			
+		 /****************(수정필요)remove_address******************/
+			//$(document).on('click',	'#btn_remove_first,#btn_remove_second',function(e) {
+			$(document).on('click',	'.remove',function(e) {
+				console.log('click!!'+$(e.target).parent($("address")).children("input[name=address_name]").val());
+				$.ajax({
+					url : 'user_remove_address_json',
 					method : 'POST',
+					data: $(e.target).parent($("address")).children().serialize(),
 					dataType : 'json',
 					success : function(jsonResult) {
-							$("input[name=address_name]").attr("disabled",false);
 						    console.log(jsonResult);
-						    //
-						    e.target.id+="_selected";
-						    console.log(e.target.id);
-						    console.log($(e.target).id);
+						    $( "#user_view_addresses" ).trigger( "click" );
 					    }
 				});
-				
 				e.preventDefault();
 			});
 			
-			//(Step_2)
-			$(document).on('click',	'#btn_address_first_selected,#btn_address_second_selected',function(e) {
-				console.log("click!! >> #btn_address..._selected");
+		 /****************change_selected_address[radio_btn]******************/
+			$(document).on('click', "#btn_address_first,#btn_address_second",function(e) {
+				console.log('click!!'+e.target.id);
+				//$(e.target).css("background","#0f99f3");
+				//$(e.target).css("color","#fff");
+				
+				//선택 해제
+				$(".selected_sAddressNo").css("background","");
+				$(".selected_sAddressNo").css("color","");
+				$(".selected_sAddressNo").parent($("address")).children("input[name=address_range]").attr("disabled",true);
+				$(".selected_sAddressNo").parent($("address")).children("input[name=address_range]").val(0);
+				$(".selected_sAddressNo").parent($("address")).children("input[name=address_range]").trigger( "change" );
+				//$(".selected_sAddressNo").parent($("address")).children(".range_val").text(0);
+				$(".selected_sAddressNo").removeClass("selected_sAddressNo");
+				
+				//선택
+				$(e.target).addClass("selected_sAddressNo");
+				$(".selected_sAddressNo").css("background","#0f99f3");
+				$(".selected_sAddressNo").css("color","#fff");
+				$(e.target).parent($("address")).children("input[name=address_range]").attr("disabled",false);
+				
+				if(e.target.id=="btn_address_first"){
+					$( ".rd_adress1" ).trigger( "change" );
+				}else {
+					$( ".rd_adress2" ).trigger( "change" );
+				}
+				
+				e.preventDefault();
+			});
+		 /*
+			$(document).on('change', "[type='radio']",function(e) {
+				//var selectedAddress = $(e.target).nextUntil($("input[name=address_range]"));
+				
+				$("[type='radio']").each(function(){
+					var value=$(this).val();
+					var checked=$(this).prop('checked');
+				var selectedAddress = $(this).nextUntil($("input[name=address_range]"));
+					
+					if(checked){
+						selectedAddress.children("input[name=address_range]").attr("disabled",false);
+					}else{
+						selectedAddress.children("input[name=address_range]").attr("disabled",true);
+						selectedAddress.children("input[name=address_range]").val(0);
+						selectedAddress.children(".range_val").text(0);
+					}
+				});
+			 
+			});
+			*/ 
+			 /****************update_address_range******************/
+			$(document).on('change', "[type='range']",function(e) {
+				
+				var selectedAddress = $(e.target).parent($("address"));
+				selectedAddress.addClass("selected_address");
+				
+				$.ajax({
+					url : 'user_update_address_range_json',
+					method : 'POST',
+					data: $(".selected_address > *").serialize(),
+					dataType : 'json',
+					success : function(jsonResult) {
+						    console.log(jsonResult);
+						    $( "#user_view_addresses" ).trigger( "click" );
+					    }
+				});
+				e.preventDefault();
+			});
+			 /****************user_insert_addresses******************/
+			//(Step_1) Getting a address
+			$(document).on('click',	'#btn_address_new1,#btn_address_new2',function(e) {
+				var selectedAddress = $(e.target).parent($("address"));
+				selectedAddress.addClass("selected_address");
+				$(e.target).addClass("selected");
+		    /**********************************************************/
+		    	// 주소-좌표 변환 객체를 생성합니다
+		    	var geocoder = new kakao.maps.services.Geocoder();
+				// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+				if (navigator.geolocation) {
+				    // ***GeoLocation을 이용해서 접속 위치를 얻어옵니다
+				    navigator.geolocation.getCurrentPosition(function(position) {
+				        var lat = position.coords.latitude, // 위도
+				            lon = position.coords.longitude; // 경도
+				        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+				            message = '여기에 계신가요?!'; // 인포윈도우에 표시될 내용입니다
+				            console.log("locPosition: "+locPosition.getLat(),locPosition.getLng());
+				            console.log(message);
+							/*좌표->주소 변환*********************************************************/
+							 searchDetailAddrFromCoords(locPosition, function(result, status) {
+							 if (status === kakao.maps.services.Status.OK) {
+							    	//console.log('도로명주소 : ' + result[0].road_address.address_name);
+							    	//console.log('지번 주소 : ' + result[0].address.address_name);
+							            //var detailAddr = !!result[0].road_address ? result[0].road_address.address_name  : '';
+							            var detailAddr = result[0].address.address_name;
+							           		//주소를 동까지만 자릅니다.
+							           		subStr = detailAddr.lastIndexOf(" ");
+							           		detailAddr=detailAddr.substring(0,subStr);
+											$(".selected_address > input[name=address_name] ").val(detailAddr);
+											$(".selected_address > input[name=address_lat] ").val(lat);
+											$(".selected_address > input[name=address_lng] ").val(lon);
+											confirm(detailAddr+message);
+											$.ajax({
+												url : 'user_insert_address_json',
+												method : 'POST',
+												data: $(".selected_address > *").serialize(),
+												dataType : 'json',
+												success : function(jsonResult) {
+													    console.log(jsonResult);
+													    if(jsonResult.code==0) alert("동일한 주소는 1개만 등록가능합니다.");
+													    $( "#user_view_addresses" ).trigger( "click" );
+												    }
+											});
+							        }
+							 });
+							/**********************************************************/
+				      });
+				} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+				    //var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
+				        message = 'geolocation을 사용할수 없어요..'
+			        	$("._selected").val(message);
+				}
+			/**********************************************************/
+				/*좌표->주소 변환*********************************************************/
+				function searchAddrFromCoords(coords, callback) {
+				    // 좌표로 행정동 주소 정보를 요청합니다
+				    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+				}
+				function searchDetailAddrFromCoords(coords, callback) {
+				    // 좌표로 법정동 상세 주소 정보를 요청합니다
+				    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+				}
+		/**********************************************************/
+				e.preventDefault();
 			});
 			
+			//(Step_2) update & insert
+			/*
+			$(document).on('click',	'.selected',function(e) {
+				
+				console.log($(".selected_address > *").serialize());
+				
+				if($(e.target).hasClass('update')){
+				    $.ajax({
+						url : 'user_update_address_json',
+						method : 'POST',
+						data: $(".selected_address > *").serialize(),
+						dataType : 'json',
+						success : function(jsonResult) {
+							    console.log(jsonResult);
+							    if(jsonResult.code==0) alert("동일한 주소는 1개만 등록가능합니다.");
+							    $( "#user_view_addresses" ).trigger( "click" );
+							    /*
+								$(".selected_address > input[name=address_name]").attr("disabled",true);
+								$(".selected_address").removeClass("selected_address");
+								$(e.target).removeClass("selected");
+								$(e.target).html("주소 수정");
+						    }
+					});
+				}else if ($(e.target).hasClass('insert')) {
+					console.log($("._selected").find("input[name=address_name]"));
+				    $.ajax({
+						url : 'user_insert_address_json',
+						method : 'POST',
+						data: $(".selected_address > *").serialize(),
+						dataType : 'json',
+						success : function(jsonResult) {
+							    console.log(jsonResult);
+							    if(jsonResult.code==0) alert("동일한 주소는 1개만 등록가능합니다.");
+							    $( "#user_view_addresses" ).trigger( "click" );
+						    }
+					});
+				}
+			});
+		*/
+			/* Send_Mail********************************/
+			$(document).on('click', '#btn_invi', function(e) {
+				console.log($("#invi_email").val());
+				$.ajax({
+					url : 'springMail',
+					method : 'POST',
+					data:{
+						"invi_email":$("#invi_email").val()
+					},
+					beforeSend:function(e){
+						//수정필요
+						$('.form-group').append("<div class='progress'><div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' aria-valuenow='75' aria-valuemin='0' aria-valuemax='100' style='width: 75%'></div></div>");
+					},
+					success : function(e) {
+						console.log("success");
+						$('.progress').remove();
+						alert($("#invi_email").val()+" 님에게 초대장이 전송되었습니다.");
+						$("#invi_email").val("");
+					}
+				});
+	
+				e.preventDefault();
+			});
+			/*******************************************/
 			
 		});//END
 </script>
@@ -405,7 +615,7 @@
 									</div>
 								</div>
 							</div>
-
+<!-- START!! **************************************************************** -->
 							<!-- Account -->
 							<div class="account-area">
 								<div class="user-thumbnail">
@@ -421,6 +631,7 @@
 								</ul>
 							</div>
 						</div>
+<!-- END!! **************************************************************** -->
 					</nav>
 				</div>
 			</div>
@@ -462,10 +673,11 @@
 					</div>
 				</div>
 				<div class="col-12 col-lg-9">
-					<div id="my-account-content" class="my-account-content mb-50">
-					<!-- START!! ************************************************ -->
+		<!-- START!! ************************************************ -->
+					<div id="my-account-content" class="my-account-content mb-50" style="margin-bottom: 20px">
+						<div class="shortcodes_content mb-100" style="margin-bottom: 0px">
 						<p>
-							Hello <strong>${loginUser.user_id}</strong> (not <strong>${loginUser.user_id}</strong>?
+							<strong>${loginUser.user_id}</strong>님, 안녕하세요? (<strong>${loginUser.user_id}</strong>님이 아니신가요?
 							<a href="user_logout_action">Log out</a>)
 						</p>
 						<p>
@@ -473,8 +685,19 @@
 							manage your shipping and billing addresses, and <a href="account-details.html" id="a_account_details">edit your password and account
 								details</a>.
 						</p>
-					<!-- END!! ************************************************** -->
-					</div>
+						</div>
+	                    <div class="shortcodes_content mb-100" style="margin-bottom: 20px">
+	                        <form class="invi_form">
+	                            <div class="form-group">
+	                                <label for="invi_email">흙당근마켓에 친구를 초대해보세요!</label>
+	                                <input type="email" class="form-control" id="invi_email" name="invi_email" aria-describedby="emailHelp" placeholder="Enter email">
+	                                <small id="emailHelp" class="form-text text-muted">초대받은 친구가 회원가입시, 500point를 드립니다!.</small>
+	                            </div>
+	                        </form>
+	                        <button type="submit" class="btn btn-primary" id="btn_invi">Submit</button>
+						</div>
+                    </div>
+		<!-- END!! ************************************************** -->
 				</div>
 			</div>
 		</div>

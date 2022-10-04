@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Product;
 import com.itwill.brown_carrot_market.mapper.ProductMapper;
 
@@ -34,4 +35,65 @@ public class ProductDaoImpl implements ProductDao{
 		
 		return productMapper.selectProductAll();
 	}
+
+	@Override
+	public List<Product> selectAllByCtgr(int p_ctgr_no) throws Exception {
+		System.out.println("### ProductDaoImpl : selectAllByCtgr 호출");
+		return productMapper.selectAllByCtgr(p_ctgr_no);
+	}
+
+	@Override
+	public List<Product> selectListByRange(Address address) throws Exception {
+		System.out.println("###ProductDaoImpl : selectListByRange 호출");
+		return productMapper.selectListByRange(address);
+	}
+
+	@Override
+	public List<Product> selectListByRangeCtgr(int p_ctgr_no, Address address) throws Exception {
+		System.out.println("###ProductDaoImpl : selectListByRangeCtgr 호출");
+		return productMapper.selectListByRangeCtgr(p_ctgr_no, address);
+	}
+
+	@Override
+	public List<Product> selectByUserId(String user_id) throws Exception {
+		System.out.println("###ProductDaoImpl : selectByUserId 호출");
+		return productMapper.selectByUserId(user_id);
+	}
+
+	@Override
+	public Product selectByOne(int p_no) throws Exception {
+		System.out.println("###ProductDaoImpl : selectByOne 호출");
+		return productMapper.selectByOne(p_no);
+	}
+
+	@Override
+	public int deleteByPNo(int p_no) throws Exception {
+		System.out.println("###ProductDaoImpl : deleteByPNo 호출");
+		return productMapper.deleteByPNo(p_no);
+	}
+	
+	@Override
+	public int updateProduct(Product product)throws Exception {
+		System.out.println("###ProductDaoImpl : updateProduct 호출");
+		return productMapper.updateProduct(product);
+	}
+
+	@Override
+	public int updateProductCount(int p_no)throws Exception {
+		System.out.println("###ProductDaoImpl : updateProductCount 호출");
+		return productMapper.updateProductCount(p_no);
+	}
+	
+	/*
+	@Override
+	public int updateProductWishCount(int p_no) throws Exception {
+		System.out.println("###ProductDaoImpl : updateProductWishCount 호출");
+		return productMapper.updateProductWishCount(p_no);
+	}
+	*/
+	
+	
+	
+	
+	
 }

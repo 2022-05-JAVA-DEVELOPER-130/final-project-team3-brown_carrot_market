@@ -10,12 +10,12 @@ NOTICE_DATE	DATE
 NOTICE_COUNT	NUMBER(10,0)
 NOTICE_FIX	NUMBER(10,0)
 	 */
-	public int notice_no;
-	public String notice_title;
-	public String notice_content;
-	public String notice_date;
-	public int notice_count;
-	public int notice_fix;
+	private int notice_no;
+	private String notice_title;
+	private String notice_content;
+	private String notice_date;
+	private int notice_count;
+	private int notice_fix;
 	
 	public Notice() {
 		// TODO Auto-generated constructor stub

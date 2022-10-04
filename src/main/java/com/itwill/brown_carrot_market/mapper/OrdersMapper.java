@@ -1,5 +1,19 @@
 package com.itwill.brown_carrot_market.mapper;
 
-public interface OrdersMapper {
+import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
+import com.itwill.brown_carrot_market.dto.Orders;
+
+@Mapper
+public interface OrdersMapper {
+	
+	int insertOrders(Orders orders);
+	
+	List<Orders> selectAllById(String user_id); 
+	
+	Orders selectByNo(int orders_no);
+	
+	int deleteOrders(int orders_no);
 }

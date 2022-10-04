@@ -5,8 +5,8 @@ public class TownCategory {
 T_CTGR_NO	NUMBER(10,0)
 T_CTGR_NAME	VARCHAR2(100 BYTE)
 	 */
-	public int t_ctgr_no;
-	public String t_ctgr_name;
+	private int t_ctgr_no;
+	private String t_ctgr_name;
 	
 	public TownCategory() {
 		// TODO Auto-generated constructor stub

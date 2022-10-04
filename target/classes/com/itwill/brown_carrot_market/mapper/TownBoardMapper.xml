@@ -28,13 +28,26 @@
 			<result column="T_IMG_NO" property="t_img_no"/>
 			<result column="T_IMG_NAME" property="t_img_name"/>
 		</collection>
+		<collection property="addressesList" javaType="java.util.List" ofType="com.itwill.brown_carrot_market.dto.Address">
+			<result column="address_no" property="address_no" />
+			<result column="address_name" property="address_name" />
+			<result column="address_lat" property="address_lat" />
+			<result column="address_lng" property="address_lng" />
+			<result column="address_range" property="address_range" />
+		</collection>
 		
 	</resultMap>
+	
+	<!-- 동네게시판 글 등록 -->
+	<insert id="insertTownBoard" parameterType="com.itwill.brown_carrot_market.dto.TownBoard">
+		insert into town_board(t_no, t_title, t_content, t_date, t_count, t_ctgr_no,t_address_name, t_address_lat,t_address_lng,user_id)
+		values(TOWN_BOARD_T_NO_SEQ.nextval, #{t_title},#{t_content},sysdate,#{t_count},#{townCategory.t_ctgr_no},#{t_address_name},#{t_address_lat}, #{t_address_lng},#{userInfo.user_id})
+	</insert>
 	
 	<!-- 비회원이 동네게시판 글 전체 조회.. -->
 	<select id="selectNonMemberTownBoardList" resultMap="townBoradResultMap">
 		select * from town_board tb 
-		join town_img ti 
+		left outer join town_img ti 
 		on tb.t_no = ti.t_no
 		join town_category tc
 		on tc.t_ctgr_no = tb.t_ctgr_no
@@ -44,7 +57,7 @@
 	<!-- 비회원이 카테고리로 조건 검색(동네게시판 글 전체 조회) -->
 	<select id="selectNonMemberCtgrTownBoardList" parameterType="int" resultMap="townBoradResultMap">
 	select * from town_board tb 
-	join town_img ti 
+	left outer join town_img ti 
 	on tb.t_no = ti.t_no
 	join town_category tc
 	on tc.t_ctgr_no = tb.t_ctgr_no
@@ -55,7 +68,7 @@
 	<!-- 동네 게시판 글 전체 조회 (좌표 값에 따라 검색하기) -->
 	<select id="selectTownBoardListCoordinate" parameterType="com.itwill.brown_carrot_market.dto.Address" resultMap="townBoradResultMap" >
 		select * from (select * from town_board tb 
-join town_img ti 
+left outer join town_img ti 
 on tb.t_no = ti.t_no
 join town_category tc
 on tc.t_ctgr_no = tb.t_ctgr_no
@@ -74,17 +87,28 @@ where tb.t_address_lat
 		select * from (select * from(select * from town_board tb left outer join town_img ti on tb.t_no = ti.t_no
                             join town_category tc on tc.t_ctgr_no = tb.t_ctgr_no where tc.t_ctgr_no=#{t_ctgr_no}) aa
 where aa.t_address_lat 
-             between (select a.address_lat from address a where a.user_id=#{user_id} and a.address_no=#{address_no})-0.004504505*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
-                AND (select a.address_lat from address a where a.user_id=#{user_id} and a.address_no=#{address_no})+0.004504505*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})) tblist
+             between (select a.address_lat from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})-0.004504505*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
+                AND (select a.address_lat from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})+0.004504505*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})) tblist
         where tblist.t_address_lng
-        between (select a.address_lng from address a where a.user_id=#{user_id} and a.address_no=#{address_no})-0.056344377*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
-            AND (select a.address_lng from address a where a.user_id=#{user_id} and a.address_no=#{address_no})+0.056344377*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
+        between (select a.address_lng from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})-0.056344377*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
+            AND (select a.address_lng from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})+0.056344377*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
 		
 	</select>
 	
 	<!-- 게시글 한개 찾기(글 번호로) -->
-	<select id="selectTownBoardOne" parameterType="java.lang.Integer">
+	<select id="selectTownBoardOne" parameterType="java.lang.Integer" resultMap="townBoradResultMap">
 		select * from town_board where t_no=#{t_no}
+	</select>
+	
+	<!-- 게시글 아이디로 찾기(내가 쓴 게시물리스트 찾기) -->
+	<select id="selectTownBoardIdList" parameterType="java.lang.String" resultMap="townBoradResultMap">
+		select * from town_board tb 
+		left outer join town_img ti 
+		on tb.t_no = ti.t_no
+		join town_category tc
+		on tc.t_ctgr_no = tb.t_ctgr_no
+		where user_id=#{user_id}
+		order by tb.t_date desc
 	</select>
 	
 	<!-- 게시글 한개 삭제 -->
@@ -94,7 +118,7 @@ where aa.t_address_lat
 	
 	<!-- 게시글 한개 수정 -->
 	<update id="updateTownBoardOne" parameterType="com.itwill.brown_carrot_market.dto.TownBoard">
-		update town_board set t_title=#{t_title},t_content=#{t_content}, t_ctgr_no=#{t_ctgr_no} where t_no=#{t_no}
+		update town_board set t_title=#{t_title},t_content=#{t_content}, t_ctgr_no=#{townCategory.t_ctgr_no} where t_no=#{t_no}
 	</update>
 	
 	<!-- 게시물 조회수 증가 -->
@@ -102,14 +126,9 @@ where aa.t_address_lat
 		update town_board set t_count=t_count+1 where t_no=#{t_no}
 	</update>
 	
-	<!-- 게시물의 공감수 구하기 -->
-	<select id="selectTownBoardReacCount" >
-		select count(*) from town_reaction where t_no=#{t_no}
-	</select>
-	<!-- 게시물의 공감 타입별 공감수 구하기 -->
-	<select id="selectTownBoardReacTypeCount">
-		select count(*) from town_reaction where t_no=#{t_no} and t_reac_type=#{t_reac_type}
-	</select>
+	
+	
+
 	
 	
 </mapper>

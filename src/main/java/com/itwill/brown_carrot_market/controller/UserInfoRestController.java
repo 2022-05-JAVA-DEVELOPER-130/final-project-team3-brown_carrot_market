@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.brown_carrot_market.dto.Address;
+import com.itwill.brown_carrot_market.dto.Invitation;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.UserInfoService;
 
@@ -72,20 +73,95 @@ public class UserInfoRestController {
 	}
 	
 	@LoginCheck
-	@PostMapping("/user_update_adresse_json")
-	public Map user_update_adresse_json(HttpServletRequest request, @ModelAttribute Address address) throws Exception{
+	@PostMapping("/user_update_address_json")
+	public Map user_update_address_json(HttpServletRequest request, @ModelAttribute Address address) throws Exception{
 		Map resultMap=new HashMap();
-		int code=1;
+		int code=0;
 		String url="user_main";
-		String msg="";
+		String msg="update_address 실패";
 		List<UserInfo> resultList=new ArrayList<UserInfo>();
 		
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
-		System.out.println("sUserId >>>>>>>>>"+sUserId);
 
+		System.out.println("RestController-user_update_address_json() 호출");
+		System.out.println("sUserId >>>>>>>>>"+sUserId);
+		address.setUser_id(sUserId);
 		/***********수정 필요***********/
-		address = new Address(userService.findUser(sUserId).getAddressList().get(0).getAddress_no(), "test 주소", 37.49, 127.04, 1, sUserId);
-		userService.updateAddress(address);
+		code = userService.updateAddress(address);
+		/******************************/
+		
+		UserInfo loginUser=userService.findUser(sUserId);
+		resultList.add(loginUser);
+		
+		resultMap.put("code", code);
+		resultMap.put("url", url);
+		resultMap.put("msg", msg);
+		resultMap.put("data",resultList);
+		return resultMap;
+	}
+	@LoginCheck
+	@PostMapping("/user_update_address_range_json")
+	public Map user_update_address_range_json(@ModelAttribute Address address) throws Exception{
+		System.out.println(address);
+		Map resultMap=new HashMap();
+		int code=0;
+		String url="user_main";
+		String msg="update_address 실패";
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
+
+		System.out.println("RestController-user_update_address_range_json() 호출");
+		/***********수정 필요***********/
+		code = userService.updateAddressRange(address);
+		/******************************/
+		
+		resultMap.put("code", code);
+		resultMap.put("url", url);
+		resultMap.put("msg", msg);
+		resultMap.put("data",resultList);
+		return resultMap;
+	}
+	@LoginCheck
+	@PostMapping("/user_remove_address_json")
+	public Map user_remove_address_json(@ModelAttribute Address address) throws Exception{
+		System.out.println(address);
+		Map resultMap=new HashMap();
+		int code=0;
+		String url="user_main";
+		String msg="remove_address 실패";
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
+		
+		System.out.println("RestController-user_remove_address_json() 호출");
+		/***********수정 필요***********/
+		code = userService.removeAddress(address);
+		if(code==1)
+		msg="remove_address 성공";
+		/******************************/
+		
+		resultMap.put("code", code);
+		resultMap.put("url", url);
+		resultMap.put("msg", msg);
+		resultMap.put("data",resultList);
+		return resultMap;
+	}
+	
+	@LoginCheck
+	@PostMapping("/user_insert_address_json")
+	public Map user_insert_address_json(HttpServletRequest request, @ModelAttribute Address address) throws Exception{
+		Map resultMap=new HashMap();
+		int code=0;
+		String url="user_main";
+		String msg="insert_address 실패";
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
+		
+		String sUserId=(String)request.getSession().getAttribute("sUserId");
+		
+		System.out.println("RestController-user_insert_address_json() 호출");
+		System.out.println("sUserId >>>>>>>>>"+sUserId);
+		/***********수정 필요***********/
+		address.setUser_id(sUserId);
+		System.out.println(address);
+		code=userService.createAddress(address);
+		msg="insert_address 성공";
 		/******************************/
 		
 		UserInfo loginUser=userService.findUser(sUserId);
@@ -238,17 +314,24 @@ public class UserInfoRestController {
 		resultMap.put("data",resultList);
 		return resultMap;
 	}
+	
 	@LoginCheck
 	@PostMapping(value = "/user_session_check_json")
 	public Map user_session_check_json(HttpSession session) throws Exception{
 		Map resultMap=new HashMap();
 		int code=1;
-		String url="user_main";
-		String msg="세션존재함";
+		String url="index";
+		String msg="세션존재 안함XX";
 		List<UserInfo> resultList=new ArrayList<UserInfo>();
 		String sUserId=(String)session.getAttribute("sUserId");
-		UserInfo sUser=userService.findUser(sUserId);
-		resultList.add(sUser);
+		System.out.println("user_session_check_json : sUserId >>> "+sUserId);
+		if(sUserId!=null) {
+			UserInfo sUser=userService.findUser(sUserId);
+			code=2;
+			url="index";
+			msg="세션존재";
+			resultList.add(sUser);
+		}
 		
 		resultMap.put("code", code);
 		resultMap.put("url", url);
@@ -271,27 +354,42 @@ public class UserInfoRestController {
 	}
 	
 	@PostMapping(value="/user_write_action_json")
-	public Map user_write_action_json(@ModelAttribute(value = "fuser") UserInfo user, Address address,Model model) 
+	public Map user_write_action_json(@ModelAttribute(value = "fuser") UserInfo user, Address address, Invitation invitation, Model model) 
 			throws Exception{
+		System.out.println(invitation);
+		
 		Map resultMap=new HashMap();
-		int code=1;
+		int code=0;
 		String url="user_main";
 		String msg="세션존재함";
 		List<UserInfo> resultList=new ArrayList<UserInfo>();
 		/*
 		 *  0:아이디중복
 		 *  1:회원가입성공
+		 *  2:초대코드로 회원가입
+		 *  3:존재하지 않는 초대코드로 회원가입 
 		 */
-		int result=userService.create(user,address);
-		if(result==-1) {
-			code=2;
+		int result=userService.create(user,address,invitation);
+		if(result==0) {
+			code=0;
 			url="user_write_form";
 			msg= user.getUser_id()+" 는 이미 존재하는 아이디 입니다.";
 			
 		}else if(result==1) {
+			
 			code=1;
 			url="user_login_form";
 			msg= "회원가입성공";
+		}else if (result==2) {
+			//초대코드로 회원가입시 포인트 부여
+			//int updatePointResult= userService.updatePoint(user, invitation);
+			code=2;
+			url="user_login_form";
+			msg= "회원가입성공& point적립";
+		}else if (result==3) {
+			code=3;
+			url="user_login_form";
+			msg= "회원가입성공& 존재하지않는코드";
 		}
 		
 		resultMap.put("code", code);
