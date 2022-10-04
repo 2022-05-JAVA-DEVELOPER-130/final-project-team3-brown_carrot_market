@@ -1,6 +1,7 @@
 package com.itwill.brown_carrot_market.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -60,18 +61,28 @@ public class TownBoardServiceImpl implements TownBoardService{
 	public int updateTownBoardCount(int t_no) throws Exception {
 		return townBoardDao.updateTownBoardCount(t_no);
 	}
-/*
-	@Override
-	public int insertTownBoard(TownBoard townBoard) throws Exception {
-		return townBoardDao.insertTownBoard(townBoard);
-	}
-*/
 	@Override
 	public List<TownBoard> selectTownBoardIdList(String user_id) throws Exception {
 		return townBoardDao.selectTownBoardIdList(user_id);
 	}
+
 	
+	/*
+	@Override
+	public int insertTownBoard(TownBoard townBoard) throws Exception {
+		return townBoardDao.insertTownBoard(townBoard);
+	}
+	 */
 	
+	@Override
+	public Map selectTownBoardAddress(String user_id, int address_no) {
+		return townBoardDao.selectTownBoardAddress(user_id, address_no);
+	}
+
+	@Override
+	public int insertTownBoard(Map map) {
+		return townBoardDao.insertTownBoard(map);
+	}
 	
 	
 	
