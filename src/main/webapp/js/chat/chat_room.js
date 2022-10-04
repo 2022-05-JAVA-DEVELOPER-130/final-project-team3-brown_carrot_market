@@ -153,12 +153,54 @@ $.ajax({
 	
 	});
 	
+	//날짜 변환 
+	function date_string(dateString){
+		var dateConv = Date.parse(dateString);
+	 var date = dayjs(Number(dateConv));
+	  var nowDate1 = date.format("YYYY-MM-DD HH:mm:ss");
+	  const nowDate=new Date(nowDate1);
+	  
+	  var year=nowDate.getFullYear();
+	  var month=nowDate.getMonth();
+	  var day=nowDate.getDate();
+	  var hour=nowDate.getHours();
+	  
+	  var ampm="AM";
+	  
+	  if(hour>12){
+		hour-=12;
+		ampm="PM";
+	}
+	  var mm=nowDate.getMinutes();
+	  var dayformat = "";
+	  var dayString="";
+	var today=new Date();
 	
+	if(year==today.getFullYear() && month==today.getMonth() && day==today.getDate()){
+		dayString="오늘";
+	}else if(year==today.getFullYear()){
+		dayString=month+"월"+day+"일";
+		
+	}else{
+		dayString=year+"년"+month+"월"+day+"일";
+	}
+	
+	//$('#chat_history').append(`<h3>${dayString}</h3><br>`);
+	
+dayformat=hour+":"+mm+" "+ampm+","+" "+dayString;
+	
+	return dayformat;
+		
+	}
 
 function message_other(chat_content){
+	
+	
+
+
 	return `<li class="clearfix">
 									<div class="message-data">
-										<span class="message-data-time">${chat_content.send_time}</span>
+										<span class="message-data-time">${date_string(chat_content.send_time)}</span>
 									</div>
 									<div class="message my-message">${chat_content.c_content}</div>
 								</li>`
@@ -167,7 +209,7 @@ function message_other(chat_content){
 function message_you(chat_content){
 	return `<li class="clearfix">
 									<div class="message-data text-right">
-										<span class="message-data-time">${chat_content.send_time}</span> <img
+										<span class="message-data-time">${date_string(chat_content.send_time)}</span> <img
 											src="https://bootdey.com/img/Content/avatar/avatar7.png"
 											alt="avatar">
 									</div>
