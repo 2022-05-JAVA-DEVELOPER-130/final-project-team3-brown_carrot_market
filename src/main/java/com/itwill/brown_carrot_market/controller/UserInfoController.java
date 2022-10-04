@@ -81,23 +81,23 @@ public class UserInfoController {
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
 		UserInfo sUser=(UserInfo)request.getSession().getAttribute("sUser");
 
-		System.out.println("sUserId"+sUserId);
-		System.out.println("sUser"+sUser);
+		System.out.println("sUserId: "+sUserId);
+		System.out.println("sUser: "+sUser);
 		
 		//UserInfo sUser=userService.findUser(sUserId);
 		//request.setAttribute("sUser", sUser);
 
 		/***********수정 필요***********/
-		/*
 		if(sUser.getAddressList()!=null) {
 			for(Address address: sUser.getAddressList()) {
+				if(address.getAddress_range()>0) {
 				request.getSession().setAttribute("sAddress", address);
-				System.out.println("sAddress : "+address);
+				//System.out.println("sAddress : "+address);
+				}
 			}
 		}
-		*/
-		Address sAddress=(Address)request.getSession().getAttribute("sAddress");
-		System.out.println("sAddress: "+sAddress);
+		//Address sAddress=(Address)request.getSession().getAttribute("sAddress");
+		//System.out.println("sAddress: "+sAddress);
 		/******************************/
 		return "user_my-account";
 	}
@@ -149,6 +149,7 @@ public class UserInfoController {
 	
 	@RequestMapping(value = {"/user_modify_form",
 							 /*"/user_login_action",*/
+							/*"/user_my_account",*/
 							 "/user_write_action",
 							 "/user_modify_action",
 							 "/user_remove_action"},
