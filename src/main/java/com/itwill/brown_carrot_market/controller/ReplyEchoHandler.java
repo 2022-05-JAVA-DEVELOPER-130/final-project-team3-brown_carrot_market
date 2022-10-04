@@ -131,11 +131,11 @@ public class ReplyEchoHandler {
 		System.out.println("메세지(JSONObject) 보내는 내 아이디(key):" + myId);
 		System.out.println("메세지(JSONObject) 받는 상대 아이디(key):" + yourId);
 
-		Session yourSession = userSessions.get(yourId);
+		//Session yourSession = userSessions.get(yourId);
 		
 		Session mySession=userSessions.get(myId);
 		System.out.println("메세지 보내는 세션:" + mySession);
-		System.out.println("메세지 받는 세션:" + yourSession);
+		//System.out.println("메세지 받는 세션:" + yourSession);
 
 		JSONArray jsonArr = (JSONArray) jsonObj.get("data");
 		JSONObject jsonChat = (JSONObject) jsonArr.get(0);
@@ -147,8 +147,9 @@ public class ReplyEchoHandler {
 		System.out.println("채팅 DB 넣을 때 객체:" + newChat);
 
 		try {
+			Session yourSession = userSessions.get(yourId);
+			System.out.println("메세지 받는 세션:" + yourSession);
 
-			// System.out.println("채팅 DB insert 성공!");
 
 			System.out.println("채팅 상대방 소켓에 전송 시도");
 			if (yourSession != null) {

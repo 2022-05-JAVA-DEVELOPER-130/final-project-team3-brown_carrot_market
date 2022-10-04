@@ -16,6 +16,28 @@ var jsonData={
 	
 };
 
+/* validator객체변수선언 */
+	/*var validator=null;
+    $.validator.setDefaults({
+			rules:{
+				chat_content_msg:{
+					required:true
+					
+				}
+			
+				
+			},
+			messages:{
+				chat_content_msg:{
+					required: "내용을 입력하세요"
+					
+				}
+				
+			},
+			errorClass:'error',
+			validClass:'valid'
+    });*/
+
 
 //경로 얻기 
 function getContextPath(){
@@ -173,8 +195,17 @@ function chat_head(id){
 
 function message_send_function(){
 	$('#btnChatSend').click(function(e){
+		
+		if($('#chat_content_msg').val()==""){
+			alert('내용을 입력하세요');
+			$('#chat_content_msg').focus();
+			return false;
+		}
 		console.log("send 버튼 클릭");
 		timestamp = new Date().getTime();
+		
+		
+		
 		e.preventDefault();
 		//제이슨데이터 만들기 
 		// 임시 데이터 test
@@ -202,7 +233,7 @@ function message_send_function(){
 		
 		
 		
-		$('#chat_content_msg').val("");
+		
 	
 		
 			
@@ -242,6 +273,8 @@ function message_sendDB(jsonData){
 				}
     			
     			});
+    			
+    			$('#chat_content_msg').val("");
 			}
 
 

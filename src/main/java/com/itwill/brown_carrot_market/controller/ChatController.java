@@ -50,8 +50,9 @@ public class ChatController {
 		@RequestMapping(value="/chat_room", method=RequestMethod.GET)
 		public String chatList(HttpSession httpSession) {
 			String userId=(String)httpSession.getAttribute("sUserId");
-			
+				//System.out.println("************************** 아이디 :"+userId);
 			  List<ChatRoomListView> chatList = chatService.chatRoomSelectAll(userId);
+			  System.out.println("채팅 리스트:"+chatList);
 			  httpSession.setAttribute("chatList",chatList);
 			  httpSession.setAttribute("loginId", userId);
 			 
