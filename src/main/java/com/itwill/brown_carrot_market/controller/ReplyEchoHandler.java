@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.brown_carrot_market.dto.ChatContents;
@@ -37,7 +38,14 @@ public class ReplyEchoHandler {
 
 	private static Map<String, Session> userSessions = new HashMap();
 
-	
+	   @RequestMapping(value = "/get_id", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	   public String returnSessionCheck(HttpSession httpSession) {
+	      String mId = (String)httpSession.getAttribute("sUserId");
+	      //Map<String, Member> memberInfo = dmService.getMemberInfo(mId);       
+	      System.out.println("get_id 호출:"+mId);
+	      return mId;
+	   }
+	   
 	
 	@PostMapping(value = "/chat_detail_rest", produces = "application/json;charset=UTF-8")
 	public Map chatDetail_rest(@RequestParam("c_room_no") String c_room_no) {

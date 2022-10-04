@@ -1,5 +1,5 @@
 var num = null;
-var loginId=null;
+var loginId=getLoginId();
 var loginName=null;
 var yourId=null;
 var mImage=null;
@@ -27,10 +27,30 @@ function getContextPath(){
 //채팅 페이지 열릴 때 
 
 $(document).ready(function(){
-	/*$.ajax({
-		
-	})*/
+	console.log("document ready");
+	
+	console.log("document ready end : "+loginId);
+	connectWS();
 	});
+	
+function getLoginId(){
+		$.ajax({
+		url:"get_id",
+		method:"POST",
+		
+		dataType:'text',
+		success:function(mId){
+			loginId=mId
+			console.log("로그인 아이디 얻기:"+loginId);
+		},
+		error:function(xhr){
+			console.log("error");
+		}
+		
+	});
+	return loginId;
+}
+	
 		
 		
 $(document).on('click','[id^=btnCall]',function(e){
@@ -88,6 +108,8 @@ $.ajax({
 		
 	});
 	});
+	
+	
 
 function message_other(chat_content){
 	return `<li class="clearfix">
@@ -217,12 +239,12 @@ function message_sendDB(jsonData){
 
 
 function connectWS(){
-	
-	var url="ws://localhost:80/spring_web_application_boot_template/replyEcho?"+loginId;
+	console.log("connectWS 실행 : "+loginId)
+	var url="ws://localhost:80/brown_carrot_market/replyEcho?"+loginId;
 	var ws=new WebSocket(url);
 	socket=ws;
 	
-	ws.onopen = function(evt) {
+	ws.onopen = function() {
 			console.log(loginId+'서버 연결 성공');
 		
 	    };
