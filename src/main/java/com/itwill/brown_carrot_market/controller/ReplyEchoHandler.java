@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
@@ -16,10 +19,13 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.brown_carrot_market.dto.ChatContents;
+import com.itwill.brown_carrot_market.dto.ChatRoomListView;
 import com.itwill.brown_carrot_market.service.ChatService;
 
 
@@ -31,6 +37,8 @@ public class ReplyEchoHandler {
 
 	private static Map<String, Session> userSessions = new HashMap();
 
+	
+	
 	@PostMapping(value = "/chat_detail_rest", produces = "application/json;charset=UTF-8")
 	public Map chatDetail_rest(@RequestParam("c_room_no") String c_room_no) {
 		Map resultMap = new HashMap();
@@ -60,8 +68,15 @@ public class ReplyEchoHandler {
 
 		return resultMap;
 	}
+	
+	//채팅방 상대 아이디 가져오기 
+	/*
+	 * @PostMapping(value="/chat_your_id",produces =
+	 * "application/json;charset=UTF-8") public Map chat_your_id() {
+	 * 
+	 * }
+	 */
 
-//@PathParam("mId") String mId
 	@OnOpen
 	public void handleOpen(Session session) {
 		String mId = session.getQueryString();
