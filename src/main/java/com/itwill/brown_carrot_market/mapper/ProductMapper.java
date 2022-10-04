@@ -30,11 +30,9 @@ public interface ProductMapper {
 	
 	public int updateProductWishCount(int p_no); 
 	
-/***********************/
 	public Map selectProductAddress(Map map);
 	
 	public int insertProduct(Map map);
 	
-/*************************/	
 	
 }

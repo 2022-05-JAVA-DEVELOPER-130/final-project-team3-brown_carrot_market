@@ -1,5 +1,8 @@
 package com.itwill.brown_carrot_market.test.dao;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,7 +31,7 @@ public class TownBoardDaoSpringBootTestApplication {
 		GuestDao guestDao = (GuestDao) context.getBean(GuestDao.class);
 		System.out.println(guestDao.selectAll());
 		System.out.println(guestDao.selectByNo(881));
-		*/
+		*/ 
 		
 		SpringApplication application = 
 				new SpringApplication(TownBoardDaoSpringBootTestApplication.class);
@@ -53,11 +56,21 @@ public class TownBoardDaoSpringBootTestApplication {
 		
 		//System.out.println("updateTownBoardCount test:"+townBoardDao.updateTownBoardCount(1));
 		
-		////System.out.println("insert test:"+townBoardDao.insertTownBoard(new TownBoard(0, "new 제목", "new 내용", null, 0, new TownCategory(3, null), "서초동", 0, 0, new UserInfo("carrot3", null, null, null, null, 0, 0, null, null), null, null)));
-		
 		//System.out.println("selectTownBoardIdList test:"+townBoardDao.selectTownBoardIdList("carrot1"));
 		
 
+		/*
+		Map map=townBoardDao.selectTownBoardAddress("carrot3", 5);
+		Map pmap=new HashMap();
+		pmap.put("townBoard", new TownBoard(0, "new new제목", "new 내용", null, 0, new TownCategory(3, null), null, 0, 0, new UserInfo("carrot3", null, null, null, null, 0, 0, null, null), null, null));
+		pmap.put("address", map);
+		
+		townBoardDao.insertTownBoard(pmap);
+		 
+		*/
+		
+		
+		
 	}
 }
 
