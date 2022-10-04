@@ -38,6 +38,7 @@ public class ChatController {
 			httpSession.setAttribute("loginId", user);
 			return "chat_room";
 		}	
+		 
 		
 		//@RequestMapping(value = "/login", method = { RequestMethod.GET })
 		public String login(HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
