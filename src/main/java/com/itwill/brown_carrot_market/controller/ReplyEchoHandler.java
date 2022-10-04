@@ -38,10 +38,12 @@ public class ReplyEchoHandler {
 	private ChatService chatService;
 
 	private static Map<String, Session> userSessions = new HashMap();
+	String userId="";
 
 	   @RequestMapping(value = "/get_id", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	   public String returnSessionCheck(HttpSession httpSession) {
 	      String mId = (String)httpSession.getAttribute("sUserId");
+	      this.userId=mId;
 	      //Map<String, Member> memberInfo = dmService.getMemberInfo(mId);       
 	      System.out.println("get_id 호출:"+mId);
 	      return mId;
@@ -103,11 +105,12 @@ public class ReplyEchoHandler {
 
 	@OnOpen
 	public void handleOpen(Session session) {
-		String mId = session.getQueryString();
+		String mId = (String)session.getQueryString();
 		System.out.println("연결 세션:" + session);
 		System.out.println("아이디:" + mId);
 		userSessions.put(mId, session);
 		// System.out.println(userSessions.keySet());
+		System.out.println(userSessions);
 	}
 
 	/*
@@ -192,7 +195,9 @@ public class ReplyEchoHandler {
 
 	@OnClose
 	public void handleClose(Session session) {
-		System.out.println("socket 닫기:" + session);
+		System.out.println("socket 닫기:" + userId);
+		userSessions.remove(userId);
+		System.out.println(userSessions);
 	}
 
 	/*

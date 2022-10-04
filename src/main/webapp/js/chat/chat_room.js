@@ -49,11 +49,20 @@ function getContextPath(){
 //채팅 페이지 열릴 때 
 
 $(document).ready(function(){
+	
+	 
 	console.log("document ready");
 	
 	console.log("document ready end : "+loginId);
-	connectWS();
+	//connectWS();
+	
+	message_send_function();
+    
 	});
+	
+	$(window).on("load",function(){
+		connectWS();
+	})
 	
 function getLoginId(){
 		$.ajax({
@@ -76,6 +85,8 @@ function getLoginId(){
 		
 //채팅방 내용 불러오기		
 $(document).on('click','[id^=btnCall]',function(e){
+	e.preventDefault();
+	e.stopPropagation();
 		num = this.id.substr(7);
 		console.log(num);
 		c_room_no=num;
@@ -140,15 +151,56 @@ $.ajax({
 		
 	});
 	
-	message_send_function();
+	
 	});
+	
+	//날짜 변환 
+	function date_string(dateString){
+		var dateConv = Date.parse(dateString);
+	 var date = dayjs(Number(dateConv));
+	  var nowDate1 = date.format("YYYY-MM-DD HH:mm:ss");
+	  const nowDate=new Date(nowDate1);
+	  
+	  var year=nowDate.getFullYear();
+	  var month=nowDate.getMonth();
+	  var day=nowDate.getDate();
+	  var hour=nowDate.getHours();
+	  
+	  var ampm="AM";
+	  
+	  if(hour>12){
+		hour-=12;
+		ampm="PM";
+	}
+	  var mm=nowDate.getMinutes();
+	  var dayformat = "";
+	  var dayString="";
+	var today=new Date();
+	
+	if(year==today.getFullYear() && month==today.getMonth() && day==today.getDate()){
+		dayString="오늘";
+	}else if(year==today.getFullYear()){
+		dayString=month+"월"+day+"일";
+		
+	}else{
+		dayString=year+"년"+month+"월"+day+"일";
+	}
+	
+	//$('#chat_history').append(`<h3>${dayString}</h3><br>`);
+	
+dayformat=hour+":"+mm+" "+ampm+","+" "+dayString;
+	
+	return dayformat;
+		
+	}
+
+function message_other(chat_content){
 	
 	
 
-function message_other(chat_content){
 	return `<li class="clearfix">
 									<div class="message-data">
-										<span class="message-data-time">${chat_content.send_time}</span>
+										<span class="message-data-time">${date_string(chat_content.send_time)}</span>
 									</div>
 									<div class="message my-message">${chat_content.c_content}</div>
 								</li>`
@@ -157,7 +209,7 @@ function message_other(chat_content){
 function message_you(chat_content){
 	return `<li class="clearfix">
 									<div class="message-data text-right">
-										<span class="message-data-time">${chat_content.send_time}</span> <img
+										<span class="message-data-time">${date_string(chat_content.send_time)}</span> <img
 											src="https://bootdey.com/img/Content/avatar/avatar7.png"
 											alt="avatar">
 									</div>
@@ -195,8 +247,11 @@ function chat_head(id){
 //메세지 전송 
 
 function message_send_function(){
-	$('#btnChatSend').click(function(e){
+		$('#chat_content_msg').focus();
 		
+	$('#btnChatSend').click(function(e){
+		e.preventDefault();
+		e.stopPropagation();
 		if($('#chat_content_msg').val()==""){
 			alert('내용을 입력하세요');
 			$('#chat_content_msg').focus();
@@ -207,7 +262,6 @@ function message_send_function(){
 		
 		
 		
-		e.preventDefault();
 		//제이슨데이터 만들기 
 		// 임시 데이터 test
 		
@@ -240,10 +294,11 @@ function message_send_function(){
 			
 		message_sendDB(jsonData);
 		console.log("DB 전송")		
-		
+		return false;
 	
 	
 	});
+	return false;
 }
 
 function message_sendDB(jsonData){
@@ -268,6 +323,7 @@ function message_sendDB(jsonData){
     				
     				socket.send(JSON.stringify(jsonData));		
     					console.log("socket 전송")	;	
+    			$('#chat_content_msg').val("");
     			},
     			error:function(xhr){
 						console.log("error");
@@ -275,7 +331,6 @@ function message_sendDB(jsonData){
     			
     			});
     			
-    			$('#chat_content_msg').val("");
 			}
 
 
@@ -298,6 +353,7 @@ function connectWS(){
 	
 	ws.onmessage=function(result){
 		//var onMsg=JSON.parse(evt);
+		result.stopPropagation();
 		console.log(result.data);
 		var onMsg=JSON.parse(result.data);
 		console.log('메세지 얻기');
@@ -308,9 +364,10 @@ function connectWS(){
             $('#chat_history').append(message_other(onMsg.data[0]));
 		}else if(onMsg.data[0].user_id==loginId){
 			//내가 보낸 경우
-			console.log("내가 보낸 경우:"+loginId);
 			$('#chat_history').append(message_you(onMsg.data[0]));
 		}
+		
+		return false;
 	}
 	
 	

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,6 +16,9 @@
 	
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.js"></script>
+
+	
 	<script src="js/chat/chat_room.js"></script>
 </head>
 <body>
@@ -117,7 +121,7 @@
 							<div class="input-group mb-0">
 							<!-- 전송 버튼 -->
 								<div class="input-group-prepend" id="btnChatSend">
-									<span class="input-group-text"><i class="fa fa-send"></i></span>
+									<span class="input-group-text"><i class="fa fa-send" ></i></span>
 								</div>
 								<input type="text" class="form-control" id="chat_content_msg"
 									placeholder="Enter text here...">
