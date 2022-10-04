@@ -76,16 +76,29 @@ public class UserInfoController {
 	@RequestMapping("/user_my_account")
 	public String user_my_account(HttpServletRequest request) throws Exception{
 		/**************login check**************/
+		System.out.println("기본Controller - user_my_account");
 		
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
+		UserInfo sUser=(UserInfo)request.getSession().getAttribute("sUser");
+
+		System.out.println("sUserId"+sUserId);
+		System.out.println("sUser"+sUser);
 		
+		//UserInfo sUser=userService.findUser(sUserId);
+		//request.setAttribute("sUser", sUser);
+
 		/***********수정 필요***********/
+		/*
+		if(sUser.getAddressList()!=null) {
+			for(Address address: sUser.getAddressList()) {
+				request.getSession().setAttribute("sAddress", address);
+				System.out.println("sAddress : "+address);
+			}
+		}
+		*/
 		Address sAddress=(Address)request.getSession().getAttribute("sAddress");
 		System.out.println("sAddress: "+sAddress);
 		/******************************/
-		
-		UserInfo loginUser=userService.findUser(sUserId);
-		request.setAttribute("loginUser", loginUser);
 		return "user_my-account";
 	}
 

@@ -45,7 +45,6 @@
 			});
 			/*************************************/
 			
-			
 			/****************user_view******************/
 			$(document).on('click', '#user_account_details, #a_account_details',function(e){
 				console.log("click!! >> "+e.target);
@@ -677,7 +676,7 @@
 					<div id="my-account-content" class="my-account-content mb-50" style="margin-bottom: 20px">
 						<div class="shortcodes_content mb-100" style="margin-bottom: 0px">
 						<p>
-							<strong>${loginUser.user_id}</strong>님, 안녕하세요? (<strong>${loginUser.user_id}</strong>님이 아니신가요?
+							<strong>${sUser.user_id}</strong>님, 안녕하세요? (<strong>${sUser.user_id}</strong>님이 아니신가요?
 							<a href="user_logout_action">Log out</a>)
 						</p>
 						<p>

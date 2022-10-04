@@ -36,20 +36,20 @@ UserHtmlContents.user_main_content=function(){
 			</object>`;
 }
 
-UserHtmlContents.user_view_content=function(loginUser) {
+UserHtmlContents.user_view_content=function(sUser) {
 	return `<h5 class="mb-3">Account Details</h5>
                         <form action="#" method="post" id="user_modify_form">
                             <div class="row">
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group">
                                         <label for="user_id">ID *</label>
-                                        <input type="text" class="form-control" name="user_id" value="${loginUser.user_id}">
+                                        <input type="text" class="form-control" name="user_id" value="${sUser.user_id}">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="currentPass">Current Password (Leave blank to leave unchanged)</label>
-                                        <input type="password" class="form-control" name="currentPass" value="${loginUser.user_pw}">
+                                        <input type="password" class="form-control" name="currentPass" value="${sUser.user_pw}">
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -67,19 +67,19 @@ UserHtmlContents.user_view_content=function(loginUser) {
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="user_name">Name *</label>
-                                        <input type="text" class="form-control" name="user_name" value="${loginUser.user_name}">
+                                        <input type="text" class="form-control" name="user_name" value="${sUser.user_name}">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="user_email">Email *</label>
-                                        <input type="email" class="form-control" name="user_email" value='${loginUser.user_email}'>
+                                        <input type="email" class="form-control" name="user_email" value='${sUser.user_email}'>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="user_phone">Phone *</label>
-                                        <input type="text" class="form-control" name="user_phone" value="${loginUser.user_phone}">
+                                        <input type="text" class="form-control" name="user_phone" value="${sUser.user_phone}">
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -203,12 +203,12 @@ UserHtmlContents.user_thumbnail=function(){
                                 <li><a href="user_login"><i class="icofont-login"></i> 로그인</a></li>
                             </ul>`;
 }	
-UserHtmlContents.user_thumbnail_login=function(loginUser){
+UserHtmlContents.user_thumbnail_login=function(sUser){
 		return `<div class="user-thumbnail">
-                            <img src='img/user_profile/${loginUser.user_profile}' alt="">
+                            <img src='img/user_profile/${sUser.user_profile}' alt="">
                             </div>
                             <ul class="user-meta-dropdown">
-                                <li class="user-title"><span>안녕하세요,</span> ${loginUser.user_name} 님</li>
+                                <li class="user-title"><span>안녕하세요,</span> ${sUser.user_name} 님</li>
                                 <li><a href="user_my_account">My Account</a></li>
                                 <li><a href="order-list.html">Orders List</a></li>
                                 <li><a href="wishlist.html">Wishlist</a></li>
