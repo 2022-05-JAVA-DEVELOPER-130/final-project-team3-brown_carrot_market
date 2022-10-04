@@ -22,9 +22,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.brown_carrot_market.dto.ChatContents;
+import com.itwill.brown_carrot_market.dto.ChatRoom;
 import com.itwill.brown_carrot_market.dto.ChatRoomListView;
 import com.itwill.brown_carrot_market.service.ChatService;
 
@@ -37,18 +39,35 @@ public class ReplyEchoHandler {
 
 	private static Map<String, Session> userSessions = new HashMap();
 
+	   @RequestMapping(value = "/get_id", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	   public String returnSessionCheck(HttpSession httpSession) {
+	      String mId = (String)httpSession.getAttribute("sUserId");
+	      //Map<String, Member> memberInfo = dmService.getMemberInfo(mId);       
+	      System.out.println("get_id 호출:"+mId);
+	      return mId;
+	   }
+	   
 	
-	
-	@PostMapping(value = "/chat_detail_rest", produces = "application/json;charset=UTF-8")
-	public Map chatDetail_rest(@RequestParam("c_room_no") String c_room_no) {
+	@PostMapping(value = "/chat_detail_rest")
+	public Map chatDetail_rest(@RequestBody Map<String, String> chatList) {
 		Map resultMap = new HashMap();
 		int code = 1;
 		String url = "";
 		String msg = "";
 		String yourId = "";
 		//int room_no = Integer.parseInt(c_room_no);
-		String room_no = c_room_no.substring(7);
-		System.out.println(c_room_no);
+//		String room_no = c_room_no.substring(7);
+		String room_no = chatList.get("c_room_no");
+		String mId=chatList.get("loginId");
+		
+		ChatRoom chatRoom=chatService.chatRoomSelect(Integer.parseInt(room_no));
+		
+		if(chatRoom.getFrom_id().equals(mId)) {
+			yourId=chatRoom.getTo_id();
+		}else {
+			yourId=chatRoom.getFrom_id();
+		}
+		
 		List<ChatContents> resultList = new ArrayList<ChatContents>();
 		try {
 			List<ChatContents> chatDetailList = chatService.chatSellectByRoom(Integer.parseInt(room_no));
@@ -64,6 +83,7 @@ public class ReplyEchoHandler {
 
 		resultMap.put("code", code);
 		resultMap.put("msg", msg);
+		resultMap.put("yourId", yourId);
 		resultMap.put("data", resultList);
 
 		return resultMap;
@@ -76,6 +96,10 @@ public class ReplyEchoHandler {
 	 * 
 	 * }
 	 */
+	
+
+	
+	/***********************************************************************/
 
 	@OnOpen
 	public void handleOpen(Session session) {
@@ -128,9 +152,9 @@ public class ReplyEchoHandler {
 
 			System.out.println("채팅 상대방 소켓에 전송 시도");
 			if (yourSession != null) {
-				mySession.getBasicRemote().sendText(jsonObj.toString());
 				yourSession.getBasicRemote().sendText(jsonObj.toString());
 			}
+			mySession.getBasicRemote().sendText(jsonObj.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

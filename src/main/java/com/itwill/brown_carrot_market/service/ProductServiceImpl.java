@@ -29,49 +29,49 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public List<Product> selectAllByCtgr(int p_ctgr_no) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return productDao.selectAllByCtgr(p_ctgr_no);
 	}
 
 	@Override
 	public List<Product> selectListByRange(Address address) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return productDao.selectListByRange(address);
 	}
 
 	@Override
 	public List<Product> selectListByRangeCtgr(int p_ctgr_no, Address address) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return productDao.selectListByRangeCtgr(p_ctgr_no, address);
 	}
 
 	@Override
 	public List<Product> selectByUserId(String user_id) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return productDao.selectByUserId(user_id);
 	}
 
 	@Override
 	public Product selectByOne(int p_no) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return productDao.selectByOne(p_no);
 	}
 
 	@Override
 	public int deleteByPNo(int p_no) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return productDao.deleteByPNo(p_no);
 	}
 
 	@Override
 	public int updateProduct(Product product) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return productDao.updateProduct(product);
 	}
 
 	@Override
 	public int updateProductCount(int p_no) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return productDao.updateProductCount(p_no);
 	}
 	
 }

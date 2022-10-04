@@ -53,7 +53,7 @@ public class TownBoardDaoSpringBootTestApplication {
 		
 		//System.out.println("updateTownBoardCount test:"+townBoardDao.updateTownBoardCount(1));
 		
-		//System.out.println("insert test:"+townBoardDao.insertTownBoard(new TownBoard(0, "new 제목", "new 내용", null, 0, new TownCategory(3, null), "서초동", 0, 0, new UserInfo("carrot3", null, null, null, null, 0, 0, null, null), null, null)));
+		////System.out.println("insert test:"+townBoardDao.insertTownBoard(new TownBoard(0, "new 제목", "new 내용", null, 0, new TownCategory(3, null), "서초동", 0, 0, new UserInfo("carrot3", null, null, null, null, 0, 0, null, null), null, null)));
 		
 		//System.out.println("selectTownBoardIdList test:"+townBoardDao.selectTownBoardIdList("carrot1"));
 		

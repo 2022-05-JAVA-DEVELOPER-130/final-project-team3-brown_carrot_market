@@ -50,11 +50,11 @@ public class ChatController {
 		@RequestMapping(value="/chat_room", method=RequestMethod.GET)
 		public String chatList(HttpSession httpSession) {
 			String userId=(String)httpSession.getAttribute("sUserId");
-			/*
-			 * List<ChatRoomListView> chatList = chatService.chatRoomSelectAll(userId);
-			 * httpSession.setAttribute("chatList",chatList);
-			 * httpSession.setAttribute("loginId", user);
-			 */
+			
+			  List<ChatRoomListView> chatList = chatService.chatRoomSelectAll(userId);
+			  httpSession.setAttribute("chatList",chatList);
+			  httpSession.setAttribute("loginId", userId);
+			 
 			return "chat_room";
 		}	
 		

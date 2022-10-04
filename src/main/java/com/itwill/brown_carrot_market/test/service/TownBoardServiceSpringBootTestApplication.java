@@ -55,7 +55,7 @@ public class TownBoardServiceSpringBootTestApplication {
 		
 		System.out.println("updateTownBoardCount test:"+townBoardService.updateTownBoardCount(1));
 		
-		System.out.println("insert test:"+townBoardService.insertTownBoard(new TownBoard(0, "new 제목", "new 내용", null, 0, new TownCategory(3, null), "서초동", 0, 0, new UserInfo("carrot3", null, null, null, null, 0, 0, null, null), null, null)));
+		//System.out.println("insert test:"+townBoardService.insertTownBoard(new TownBoard(0, "new 제목", "new 내용", null, 0, new TownCategory(3, null), "서초동", 0, 0, new UserInfo("carrot3", null, null, null, null, 0, 0, null, null), null, null)));
 		
 		System.out.println("selectTownBoardIdList test:"+townBoardService.selectTownBoardIdList("carrot1"));
 		
