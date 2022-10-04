@@ -52,28 +52,37 @@ function getLoginId(){
 }
 	
 		
-		
+//채팅방 내용 불러오기		
 $(document).on('click','[id^=btnCall]',function(e){
-		num = this.id;
+		num = this.id.substr(7);
 		console.log(num);
+		c_room_no=num;
+		var chat_detail={
+			"c_room_no":num,
+			"loginId":loginId
+		}
 $.ajax({
-		
 		
 		
 		url:"chat_detail_rest",
 		method:"POST",
-		data:{"c_room_no":num},
-//		data:{"c_room_no":num},
-//		data:{c_room_no:$("#btnCall").val()},
+		//data:{"c_room_no":num},
+		data: JSON.stringify(chat_detail),
+		async: true,
+        contentType: "application/json; charset=utf-8", //헤더의 Content-Type을 설정
+        dataType: "JSON", //응답받을 데이터 타입 (XML,JSON,TEXT,HTML,JSONP)    			
+    			    			
 	
 		
 		success:function(jsonResult){
 			var chatContentArray=jsonResult.data;
+			yourId=jsonResult.yourId;
+			console.log("채팅방의 상대방 ID:"+yourId);
 			console.log(chatContentArray[0]);
 			//$('#content').html('채팅 불러오기 성공');
 			$('#chat_history').html("");
 			$('#chatHead').html("");
-			loginId=$('#loginId').val();
+			//loginId=$('#loginId').val();
 			console.log(loginId);
 			for(const item of chatContentArray){
 				
@@ -107,6 +116,8 @@ $.ajax({
 		}
 		
 	});
+	
+	message_send_function();
 	});
 	
 	
@@ -170,8 +181,7 @@ function message_send_function(){
 		
 		jsonData.mId=loginId;
 		
-		yourId="carrot3";
-		c_room_no="3";
+		
 		/*****상대방 아이디 / 채팅방 데이터 받아와야 함  */
 		jsonData.your_id=yourId;
 		jsonData.msg="메세지 전송(socket.send)";
@@ -264,7 +274,7 @@ function connectWS(){
             $('#chat_history').append(message_other(onMsg.data[0]));
 		}else if(onMsg.data[0].user_id==loginId){
 			//내가 보낸 경우
-			console.log(loginId);
+			console.log("내가 보낸 경우:"+loginId);
 			$('#chat_history').append(message_you(onMsg.data[0]));
 		}
 	}
