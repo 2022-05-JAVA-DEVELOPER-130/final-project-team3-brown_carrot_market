@@ -109,16 +109,16 @@ $.ajax({
 			for(const item of chatContentArray){
 				
 				if(item.user_id!=loginId){
-					var siva = item.user_id;
+					var youId = item.user_id;
 					break;
 			
 				}else{
 				
-					var siva = "CCAARROOTT1";
+					var youId = "error";
 			
 				}
 			};
-			$('#chatHead').append(chat_head(siva));
+			$('#chatHead').append(chat_head(youId));
 			
 			
 			

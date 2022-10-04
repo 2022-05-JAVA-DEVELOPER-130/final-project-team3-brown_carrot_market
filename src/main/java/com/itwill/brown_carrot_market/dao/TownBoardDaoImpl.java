@@ -1,6 +1,8 @@
 package com.itwill.brown_carrot_market.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -77,13 +79,6 @@ public class TownBoardDaoImpl implements TownBoardDao{
 		return townBoardMapper.updateTownBoardCount(t_no);
 	}
 	
-	
-	@Override
-	public int insertTownBoard(TownBoard townBoard) throws Exception{
-		System.out.println(">>> townBoardDaoImpl : insertTownBoard()호출");
-		return townBoardMapper.insertTownBoard(townBoard);
-	}
-
 	@Override
 	public List<TownBoard> selectTownBoardIdList(String user_id) throws Exception{
 		System.out.println(">>> townBoardDaoImpl : selectTownBoardIdList()호출");
@@ -91,6 +86,30 @@ public class TownBoardDaoImpl implements TownBoardDao{
 	}
 
 
+	/*
+	@Override
+	public int insertTownBoard(TownBoard townBoard) throws Exception{
+		System.out.println(">>> townBoardDaoImpl : insertTownBoard()호출");
+		return townBoardMapper.insertTownBoard(townBoard);
+	}
+	 */
+	@Override
+	public int insertTownBoard(Map map) {
+		townBoardMapper.insertTownBoard(map);
+		return 1;
+	}
+
+	@Override
+	public Map selectTownBoardAddress(String user_id, int address_no) {
+		Map paramMap = new HashMap();
+		paramMap.put("user_id", user_id);
+		paramMap.put("address_no", address_no);
+		
+		Map aa = townBoardMapper.selectTownBoardAddress(paramMap);
+		System.out.println(aa);
+		return aa;
+	}
+	
 	
 
 	
