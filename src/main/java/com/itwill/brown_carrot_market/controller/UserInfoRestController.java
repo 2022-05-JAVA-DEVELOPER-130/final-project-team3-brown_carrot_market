@@ -339,6 +339,7 @@ public class UserInfoRestController {
 		resultMap.put("url", url);
 		resultMap.put("msg", msg);
 		resultMap.put("data",resultList);
+		resultMap.put("sUserId",sUserId);
 		return resultMap;
 		
 	}
