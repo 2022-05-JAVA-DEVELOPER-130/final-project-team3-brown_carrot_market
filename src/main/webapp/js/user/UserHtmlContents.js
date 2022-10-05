@@ -1,40 +1,5 @@
 function UserHtmlContents(){
 }
-UserHtmlContents.user_left_menu_logout_content=function(){
-	return  `<p>
-				<strong>메뉴</strong>
-			</p>
-			<ul>
-				<li><a href="user_main" id="a_user_main">회원홈</a></li>
-				<li><a href="user_login" id="a_user_login">로그인</a></li>
-				<li><a href="user_write_form" id="a_user_write_form">회원가입</a></li>
-			</ul>`;
-}			
-UserHtmlContents.user_left_menu_login_content=function(user){
-	return  `<p>
-				<strong>메뉴</strong>
-			</p>
-			<ul>
-				<li><a href=''>${user.name}</a></li>
-				<li><a href='user_view' id="a_user_view">내정보</a></li>
-				<li><a href="user_logout_action" id="a_user_logout_action">로그아웃</a></li>
-			</ul>`;
-}			
-	
-UserHtmlContents.user_main_content=function(){
-	return `<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-				codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0"
-				width="540px" height="350px">
-				<param name="movie" value="image/FI_main.swf">
-				<param name="play" value="true">
-				<param name="loop" value="true">
-				<param name="quality" value="high">
-				<embed src="image/enter.png" scale="exactfit" play="true" loop="true"
-					quality="high" style="margin: 10px;"
-					pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
-					width="540px" height="350px"></embed>
-			</object>`;
-}
 
 UserHtmlContents.user_view_content=function(sUser) {
 	return `<h5 class="mb-3">Account Details</h5>
@@ -192,7 +157,7 @@ UserHtmlContents.user_view_addresses_zero=function(addressList){
                             -->
                         </div>`;
 }
-
+/*
 UserHtmlContents.user_thumbnail=function(){
 		return `<div class="user-thumbnail">
 			    			<i class="fa fa-user-circle"></i>
@@ -209,10 +174,8 @@ UserHtmlContents.user_thumbnail_login=function(sUser){
                             </div>
                             <ul class="user-meta-dropdown">
                                 <li class="user-title"><span>안녕하세요,</span> ${sUser.user_name} 님</li>
-                                <li><a href="user_my_account">My Account</a></li>
-                                <li><a href="order-list.html">Orders List</a></li>
-                                <li><a href="wishlist.html">Wishlist</a></li>
+                                <li><a href="user_my_account">마이페이지</a></li>
                                 <li><a href="chat_room">Chatting</a></li>
-                                <li><a href="user_logout_action"><i class="icofont-logout"></i> Logout</a></li>
+                                <li><a href="user_logout_action"><i class="icofont-logout"></i> 로그아웃</a></li>
                             </ul>`;
-}	
+}	*/
