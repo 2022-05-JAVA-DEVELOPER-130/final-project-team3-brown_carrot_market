@@ -7,6 +7,8 @@ var mImage=null;
 var c_room_no=null;
 var contextPath=getContextPath();
 
+var last_seen_time=null;
+
 var jsonData={
 	code:null,
 	url:null,
@@ -69,10 +71,12 @@ function getLoginId(){
 		url:"get_id",
 		method:"POST",
 		
-		dataType:'text',
-		success:function(mId){
-			loginId=mId
+		dataType:'JSON',
+		success:function(jsonResult){
+			loginId=jsonResult.mId
+			mImage=jsonResult.userImg;
 			console.log("로그인 아이디 얻기:"+loginId);
+			console.log("프로필 이미지 얻기:"+mImage);
 		},
 		error:function(xhr){
 			console.log("error");
@@ -110,6 +114,7 @@ $.ajax({
 		success:function(jsonResult){
 			var chatContentArray=jsonResult.data;
 			yourId=jsonResult.yourId;
+			yourImg = jsonResult.yourImg;
 			console.log("채팅방의 상대방 ID:"+yourId);
 			console.log(chatContentArray[0]);
 			//$('#content').html('채팅 불러오기 성공');
@@ -130,7 +135,7 @@ $.ajax({
 			
 				}
 			};*/
-			$('#chatHead').append(chat_head(yourId));
+			$('#chatHead').append(chat_head(yourId,yourImg));
 			
 			
 			
@@ -195,7 +200,12 @@ dayformat=hour+":"+mm+" "+ampm+","+" "+dayString;
 	}
 
 function message_other(chat_content){
-	
+	var chat_read="";
+	if(chat_content.c_read==0){
+		chat_read="전송됨";
+	}else if(chat_content.c_read==1){
+		chat_read="읽음";
+	}
 	
 
 	return `<li class="clearfix">
@@ -203,25 +213,32 @@ function message_other(chat_content){
 										<span class="message-data-time">${date_string(chat_content.send_time)}</span>
 									</div>
 									<div class="message my-message">${chat_content.c_content}</div>
+									<div class="chat_read_check">${chat_read}</div>
 								</li>`
 }
 
 function message_you(chat_content){
+	var chat_read="";
+	if(chat_content.c_read==0){
+		chat_read="전송됨";
+	}else if(chat_content.c_read==1){
+		chat_read="읽음";
+	}
 	return `<li class="clearfix">
 									<div class="message-data text-right">
-										<span class="message-data-time">${date_string(chat_content.send_time)}</span> <img
-											src="https://bootdey.com/img/Content/avatar/avatar7.png"
-											alt="avatar">
+										<span class="message-data-time">${date_string(chat_content.send_time)}</span>  <img src='img/user_profile/${mImage}'
+											alt="">
 									</div>
 									<div class="message other-message float-right">${chat_content.c_content}</div>
+									<div class="chat_read_check">${chat_read}</div>
 								</li>`
 }
-function chat_head(id){
+function chat_head(id,img){
 	return 	`<div class="row">
 								<div class="col-lg-6">
 									<a href="javascript:void(0);" data-toggle="modal"
 										data-target="#view_info"> <img
-										src="https://bootdey.com/img/Content/avatar/avatar2.png"
+										src="img/user_profile/${img}"
 										alt="avatar">
 									</a>
 									<div class="chat-about">
@@ -354,11 +371,14 @@ function connectWS(){
 	ws.onmessage=function(result){
 		//var onMsg=JSON.parse(evt);
 		result.stopPropagation();
-		console.log(result.data);
-		var onMsg=JSON.parse(result.data);
+		//console.log(result.data);
+		//var onMsg=JSON.parse(result.data);
 		console.log('메세지 얻기');
-		console.log(onMsg.data[0]);
+		//console.log(onMsg.data[0]);
+		var onmsg=JSON.parse(result.data);
+		console.log(onmsg);
 		
+		/*
 		if(onMsg.data[0].user_id!=loginId){
 			//상대가 메세지 보낸 경우
             $('#chat_history').append(message_other(onMsg.data[0]));
@@ -366,7 +386,17 @@ function connectWS(){
 			//내가 보낸 경우
 			$('#chat_history').append(message_you(onMsg.data[0]));
 		}
+		*/
 		
+		if(onmsg.user_id!=loginId){
+			//상대가 메세지 보낸 경우
+			console.log("상대가 보낸 경우"+onmsg.user_id)
+            $('#chat_history').append(message_other(onmsg));
+		}else if(onmsg.user_id==loginId){
+			console.log("내가 보낸 경우"+onmsg.user_id)
+			//내가 보낸 경우
+			$('#chat_history').append(message_you(onmsg));
+		}
 		return false;
 	}
 	
@@ -374,6 +404,7 @@ function connectWS(){
 	
 	ws.onclose=function(evt){
 		console.log('소켓 닫기');
+		
 	}
 }
 		
