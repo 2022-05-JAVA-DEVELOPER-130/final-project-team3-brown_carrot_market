@@ -333,13 +333,15 @@ public class UserInfoRestController {
 			url="index";
 			msg="세션존재";
 			resultList.add(sUser);
+			resultMap.put("sUserId",sUserId);
+			resultMap.put("sUser",sUser);
+			resultMap.put("sAddress",sAddress);
 		}
 		
 		resultMap.put("code", code);
 		resultMap.put("url", url);
 		resultMap.put("msg", msg);
 		resultMap.put("data",resultList);
-		resultMap.put("sUserId",sUserId);
 		return resultMap;
 		
 	}

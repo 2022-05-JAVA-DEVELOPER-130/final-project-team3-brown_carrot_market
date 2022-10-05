@@ -22,6 +22,7 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="style.css">
 
+	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 </head>
 
 <body>
