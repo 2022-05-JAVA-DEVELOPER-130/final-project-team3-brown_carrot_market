@@ -76,6 +76,7 @@ function getLoginId(){
 			loginId=jsonResult.mId
 			mImage=jsonResult.userImg;
 			console.log("로그인 아이디 얻기:"+loginId);
+			console.log("프로필 이미지 얻기:"+mImage);
 		},
 		error:function(xhr){
 			console.log("error");
@@ -212,7 +213,7 @@ function message_other(chat_content){
 function message_you(chat_content){
 	return `<li class="clearfix">
 									<div class="message-data text-right">
-										<span class="message-data-time">${date_string(chat_content.send_time)}</span>  <img src='img/user_profile/${mImage}.png'
+										<span class="message-data-time">${date_string(chat_content.send_time)}</span>  <img src='img/user_profile/${mImage}'
 											alt="">
 									</div>
 									<div class="message other-message float-right">${chat_content.c_content}</div>

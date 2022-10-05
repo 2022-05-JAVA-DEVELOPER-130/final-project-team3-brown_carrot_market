@@ -47,16 +47,17 @@ public class ReplyEchoHandler {
 	   @PostMapping(value = "/get_id")
 	   public Map returnSessionCheck(HttpSession httpSession) {
 		   Map resultMap=new HashMap();
+		   String userImg=null;
 	      String mId = (String)httpSession.getAttribute("sUserId");
 	      this.userId=mId;
 	      System.out.println("get_id 호출:"+mId);
 	      try {
-	    	  String userImg=userService.findUser(mId).getUser_profile();
+	    	  userImg=userService.findUser(mId).getUser_profile();
 	      }catch (Exception e) {
 	    	  e.printStackTrace();
 	      }
 	      resultMap.put("mId", mId);
-	      resultMap.put("userImg", mId);
+	      resultMap.put("userImg", userImg);
 	      return resultMap;
 	   }
 	   
