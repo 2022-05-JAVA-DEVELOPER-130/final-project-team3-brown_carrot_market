@@ -99,12 +99,12 @@ public class ChatServiceImpl implements ChatService {
 	@Override
 	public List<ChatRoomListView> chatRoomSelectAll(String user_id) {
 		List<ChatRoomListView> chatRoomListView = chatRoomDao.chatRoomSelectAll(user_id);
+		/*위에가 문제*/
 			System.out.println("service단");
 
 
 		for (ChatRoomListView a : chatRoomListView) {
 			ChatRoom chatRoom = chatRoomDao.chatRoomSelect(a.getC_room_no()); 
-			System.out.println("--------------");
 			if(chatRoom.getTo_id().equals(user_id)) {
 				a.setYou_id(chatRoom.getFrom_id());
 
@@ -114,7 +114,7 @@ public class ChatServiceImpl implements ChatService {
 			}
 			
 		}
-		System.out.println(chatRoomListView);
+	
 		return chatRoomListView;
 	}
 
