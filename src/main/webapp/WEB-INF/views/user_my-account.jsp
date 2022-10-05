@@ -26,24 +26,11 @@
 	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
-<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7c7231db91ae56cfc5e3c6ea06f73c6&libraries=services"></script>
+<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
+<script type="text/javascript" src="js/common/user_session_check.js"></script>
 <script type="text/javascript">
 		$(function() {
-			/* login_check ***********************/
-			$.ajax({
-				url:'user_session_check_json',
-				method:'POST',
-				dataType:'json',
-				success:function(jsonResult){
-				    if(jsonResult.code==1){
-				    	$(".account-area").html(UserHtmlContents.user_thumbnail());
-				    }else if (jsonResult.code==2) {
-				    	$(".account-area").html(UserHtmlContents.user_thumbnail_login(jsonResult.data[0]));
-					}
-				}
-			});
-			/*************************************/
 			
 			/****************user_view******************/
 			$(document).on('click', '#user_account_details, #a_account_details',function(e){

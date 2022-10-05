@@ -35,18 +35,21 @@ public class OrdersDaoImpl implements OrdersDao{
 	@Override
 	public int deleteOrders(int orders_no) throws Exception {
 		System.out.println("#### OrdersDaoImplMyBatisMapperInterface : deleteOrders(int orders_no) 호출  ");
+		System.out.println("deleteOrders(int orders_no) 메소드 : " + ordersMapper);
 		return ordersMapper.deleteOrders(orders_no);
 	}
 
 	@Override
 	public Orders selectByNo(int orders_no) throws Exception {
 		System.out.println("#### OrdersDaoImplMyBatisMapperInterface : selectByNo(int orders_no) 호출  ");
+		System.out.println("selectByNo(int orders_no) 메소드 : " + ordersMapper);
 		return ordersMapper.selectByNo(orders_no);
 	}
 
 	@Override
 	public List<Orders> selectAllById(String user_id) throws Exception {
 		System.out.println("#### OrdersDaoImplMyBatisMapperInterface : selectAllById(String user_id) 호출  ");
+		System.out.println("selectAllById(String user_id) 메소드 : " + ordersMapper);
 		return ordersMapper.selectAllById(user_id);
 	}
 

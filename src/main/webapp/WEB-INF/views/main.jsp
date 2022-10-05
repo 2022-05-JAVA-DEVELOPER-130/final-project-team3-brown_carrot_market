@@ -22,26 +22,7 @@
 	<!-- javaScript -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
-	<script type="text/javascript">
-	$(function() {
-		/* login_check ***********************/
-		$.ajax({
-			url:'user_session_check_json',
-			method:'POST',
-			dataType:'json',
-			success:function(jsonResult){
-			    if(jsonResult.code==1){
-			    	$(".account-area").html(UserHtmlContents.user_thumbnail());
-			    }else if (jsonResult.code==2) {
-			    	$(".account-area").html(UserHtmlContents.user_thumbnail_login(jsonResult.data[0]));
-				}
-			}
-		});
-		/*************************************/
-		
-		//e.preventDefault();
-	});//END
-	</script>
+	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 </head>
 
 <body>

@@ -1,6 +1,7 @@
 package com.itwill.brown_carrot_market.dto;
 
 import java.sql.Date;
+import java.util.List;
 /*
 이름                널?       유형           
 ----------------- -------- ------------ 
@@ -17,21 +18,23 @@ public class Transfer {
 	private int transfer_withdraw;
 	private Date transfer_date;
 	private String user_id;
-	private int orders_no;
+	private Orders orders;
+	private Product product;
 	
 	public Transfer() {
 	
 	}
 
 	public Transfer(int transfer_no, int transfer_deposit, int transfer_withdraw, Date transfer_date, String user_id,
-			int orders_no) {
+			Orders orders, Product product) {
 		super();
 		this.transfer_no = transfer_no;
 		this.transfer_deposit = transfer_deposit;
 		this.transfer_withdraw = transfer_withdraw;
 		this.transfer_date = transfer_date;
 		this.user_id = user_id;
-		this.orders_no = orders_no;
+		this.orders = orders;
+		this.product = product;
 	}
 
 	public int getTransfer_no() {
@@ -74,19 +77,29 @@ public class Transfer {
 		this.user_id = user_id;
 	}
 
-	public int getOrders_no() {
-		return orders_no;
+	public Orders getOrders() {
+		return orders;
 	}
 
-	public void setOrders_no(int orders_no) {
-		this.orders_no = orders_no;
+	public void setOrders(Orders orders) {
+		this.orders = orders;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	@Override
 	public String toString() {
-		return "Transfer [transfer_no=" + transfer_no + ", transfer_deposit=" + transfer_deposit
-				+ ", transfer_withdraw=" + transfer_withdraw + ", transfer_date=" + transfer_date + ", user_id="
-				+ user_id + ", orders_no=" + orders_no + "]";
+		return "\nTransfer [transfer_deposit=" + transfer_deposit + ", transfer_withdraw=" + transfer_withdraw
+				+ ", transfer_date=" + transfer_date + ", user_id=" + user_id + ", product.p_title=" + product.p_title + "]";
 	}
+
+	
+
 	
 }
