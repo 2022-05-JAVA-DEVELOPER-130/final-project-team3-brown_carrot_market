@@ -114,6 +114,7 @@ $.ajax({
 		success:function(jsonResult){
 			var chatContentArray=jsonResult.data;
 			yourId=jsonResult.yourId;
+			yourImg = jsonResult.yourImg;
 			console.log("채팅방의 상대방 ID:"+yourId);
 			console.log(chatContentArray[0]);
 			//$('#content').html('채팅 불러오기 성공');
@@ -134,7 +135,7 @@ $.ajax({
 			
 				}
 			};*/
-			$('#chatHead').append(chat_head(yourId));
+			$('#chatHead').append(chat_head(yourId,yourImg));
 			
 			
 			
@@ -219,12 +220,12 @@ function message_you(chat_content){
 									<div class="message other-message float-right">${chat_content.c_content}</div>
 								</li>`
 }
-function chat_head(id){
+function chat_head(id,img){
 	return 	`<div class="row">
 								<div class="col-lg-6">
 									<a href="javascript:void(0);" data-toggle="modal"
 										data-target="#view_info"> <img
-										src="https://bootdey.com/img/Content/avatar/avatar2.png"
+										src="img/user_profile/${img}"
 										alt="avatar">
 									</a>
 									<div class="chat-about">

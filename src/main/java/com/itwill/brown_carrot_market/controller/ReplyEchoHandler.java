@@ -63,12 +63,13 @@ public class ReplyEchoHandler {
 	   
 	
 	@PostMapping(value = "/chat_detail_rest")
-	public Map chatDetail_rest(@RequestBody Map<String, String> chatList) {
+	public Map chatDetail_rest(@RequestBody Map<String, String> chatList) throws Exception  {
 		Map resultMap = new HashMap();
 		int code = 1;
 		String url = "";
 		String msg = "";
 		String yourId = "";
+		String yourImg="";
 		//int room_no = Integer.parseInt(c_room_no);
 //		String room_no = c_room_no.substring(7);
 		String room_no = chatList.get("c_room_no");
@@ -78,8 +79,10 @@ public class ReplyEchoHandler {
 		
 		if(chatRoom.getFrom_id().equals(mId)) {
 			yourId=chatRoom.getTo_id();
+			yourImg = userService.findUser(yourId).getUser_profile();
 		}else {
 			yourId=chatRoom.getFrom_id();
+			yourImg = userService.findUser(yourId).getUser_profile();
 		}
 		
 		List<ChatContents> resultList = new ArrayList<ChatContents>();
@@ -98,6 +101,7 @@ public class ReplyEchoHandler {
 		resultMap.put("code", code);
 		resultMap.put("msg", msg);
 		resultMap.put("yourId", yourId);
+		resultMap.put("yourImg", yourImg);
 		resultMap.put("data", resultList);
 
 		return resultMap;
