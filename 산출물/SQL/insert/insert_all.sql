@@ -475,20 +475,20 @@ PAYMENT_DATE            DATE
 USER_ID                 VARCHAR2(30)
 */
 insert into payment values('payment439085dsfr46546ue', 'kakaopay', '10000', sysdate-10, 'carrot1');
-insert into payment values('payment439085dsfr46557sd', 'naverpay', '3000', sysdate-10, 'carrot1');
-insert into payment values('payment852185dsfr46557sd', 'tosspay', '44000', sysdate-9, 'carrot1');
-insert into payment values('payment753185dsfr46557sd', 'tosspay', '20000', sysdate-8, 'carrot1');
-insert into payment values('payment598185dsfr46557sd', 'kakaopay', '56000', sysdate-7, 'carrot1');
+insert into payment values('payment439085dsfr46sfewf', 'naverpay', '3000', sysdate-10, 'carrot1');
+insert into payment values('payment852185dsfr465213d', 'tosspay', '44000', sysdate-9, 'carrot1');
+insert into payment values('payment753185dsfr4653453', 'tosspay', '20000', sysdate-8, 'carrot1');
+insert into payment values('payment598185dsfr465534d', 'kakaopay', '56000', sysdate-7, 'carrot1');
 
 insert into payment values('payment439roew3343223456', 'card', '20000', sysdate-8, 'carrot2');
-insert into payment values('payment124roew3343223456', 'naverpay', '30000', sysdate-7, 'carrot2');
-insert into payment values('payment986roew3343223456', 'tosspay', '5000', sysdate-5, 'carrot2');
-insert into payment values('payment421roew3343223456', 'card', '5000', sysdate-3, 'carrot2');
-insert into payment values('payment689roew3343223456', 'kakaopay', '10000', sysdate-1, 'carrot2');
+insert into payment values('payment124roew3343226755', 'naverpay', '30000', sysdate-7, 'carrot2');
+insert into payment values('payment986roew3343222312', 'tosspay', '5000', sysdate-5, 'carrot2');
+insert into payment values('payment421roew3343225467', 'card', '5000', sysdate-3, 'carrot2');
+insert into payment values('payment689roew3343226576', 'kakaopay', '10000', sysdate-1, 'carrot2');
 
-insert into payment values('payment3958rkjgfdfekwf45', 'tosspay', '3000', sysdate-7, 'carrot3');
-insert into payment values('payment3457rkjgfdfekwf45', 'kakaopay', '25000', sysdate-6, 'carrot3');
-insert into payment values('payment4578rkjgfdfekwf45', 'kakaopay', '25000', sysdate-5, 'carrot3');
+insert into payment values('payment3958rkjgfdferfvs5', 'tosspay', '3000', sysdate-7, 'carrot3');
+insert into payment values('payment3457rkergdfekwf45', 'kakaopay', '25000', sysdate-6, 'carrot3');
+insert into payment values('payment4578rkjgdfvskwf45', 'kakaopay', '25000', sysdate-5, 'carrot3');
 
 insert into payment values('payment20394ertiujwkdsfg', 'naverpay', '394580', sysdate-8, 'carrot4');
 
@@ -512,26 +512,26 @@ select p_no, p_title, p_date, user_id, p_price from product;
 */
 
 
---[orders] p_no=9, 판매자 carrot6
-insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, 9,'carrot5');
+--[orders] p_no=1, 판매자 carrot1
+insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, 1,'carrot5');
 --[transfer] 구매자 carrot5
-insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,10000, 0, sysdate-10, 'carrot6',ORDERS_ORDERS_NO_SEQ.currval);
+insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,10000, 0, sysdate-10, 'carrot5',ORDERS_ORDERS_NO_SEQ.currval);
+--[transfer] 판매자 carrot1
+insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,0, 10000, sysdate-10, 'carrot1',ORDERS_ORDERS_NO_SEQ.currval);
+
+--[orders] p_no=10, 판매자 carrot6
+insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, 10,'carrot3');
+--[transfer] 구매자 carrot3
+insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,10000, 0, sysdate-8, 'carrot3',ORDERS_ORDERS_NO_SEQ.currval);
 --[transfer] 판매자 carrot6
-insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,0, 10000, sysdate-10, 'carrot5',ORDERS_ORDERS_NO_SEQ.currval);
+insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,0, 10000, sysdate-8, 'carrot6',ORDERS_ORDERS_NO_SEQ.currval);
 
---[orders] p_no=10, 판매자 carrot7
-insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, 10,'carrot5');
---[transfer] 구매자 carrot5
-insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,10000, 0, sysdate-8, 'carrot5',ORDERS_ORDERS_NO_SEQ.currval);
---[transfer] 판매자 carrot7
-insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,0, 10000, sysdate-8, 'carrot7',ORDERS_ORDERS_NO_SEQ.currval);
-
---[orders] p_no=11, 판매자 carrot8
-insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, 10,'carrot5');
---[transfer] 구매자 carrot4
-insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,5000, 0, sysdate-9, 'carrot4',ORDERS_ORDERS_NO_SEQ.currval);
---[transfer] 판매자 carrot8
-insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,0, 5000, sysdate-9, 'carrot8',ORDERS_ORDERS_NO_SEQ.currval);
+--[orders] p_no=2, 판매자 carrot2
+insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, 2,'carrot8');
+--[transfer] 구매자 carrot8
+insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,5000, 0, sysdate-9, 'carrot8',ORDERS_ORDERS_NO_SEQ.currval);
+--[transfer] 판매자 carrot2
+insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,0, 5000, sysdate-9, 'carrot2',ORDERS_ORDERS_NO_SEQ.currval);
 
 
 --***************join [orders + transfer]
