@@ -21,12 +21,15 @@ public class ServerSocketHandler {
 	@Autowired
 	private ChatService chatService;
 	
+	private String id=null;
+	
 	private static Map<String,Session> serverClientSession=new HashMap<String,Session>();
 	
 	
 	@OnOpen
 	public void serverSocketOpen(Session session) {
 		String mId = (String)session.getQueryString();
+		this.id=mId;
 		serverClientSession.put(mId, session);
 		System.out.println(mId+"의 server_client socket 생성:"+session);
 	}
@@ -39,6 +42,7 @@ public class ServerSocketHandler {
 	@OnClose
 	public void serverSocketClose(Session session) {
 		System.out.println("server_client socket 닫기");
+		serverClientSession.remove(id);
 
 	}
 	
