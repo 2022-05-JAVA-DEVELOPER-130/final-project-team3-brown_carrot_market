@@ -29,6 +29,7 @@ import com.itwill.brown_carrot_market.dto.ChatContents;
 import com.itwill.brown_carrot_market.dto.ChatRoom;
 import com.itwill.brown_carrot_market.dto.ChatRoomListView;
 import com.itwill.brown_carrot_market.service.ChatService;
+import com.itwill.brown_carrot_market.service.UserInfoService;
 
 
 @RestController
@@ -36,17 +37,27 @@ import com.itwill.brown_carrot_market.service.ChatService;
 public class ReplyEchoHandler {
 	@Autowired
 	private ChatService chatService;
+	
+	@Autowired
+	private UserInfoService userService;
 
 	private static Map<String, Session> userSessions = new HashMap();
 	String userId="";
 
-	   @RequestMapping(value = "/get_id", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
-	   public String returnSessionCheck(HttpSession httpSession) {
+	   @PostMapping(value = "/get_id")
+	   public Map returnSessionCheck(HttpSession httpSession) {
+		   Map resultMap=new HashMap();
 	      String mId = (String)httpSession.getAttribute("sUserId");
 	      this.userId=mId;
-	      //Map<String, Member> memberInfo = dmService.getMemberInfo(mId);       
 	      System.out.println("get_id 호출:"+mId);
-	      return mId;
+	      try {
+	    	  String userImg=userService.findUser(mId).getUser_profile();
+	      }catch (Exception e) {
+	    	  e.printStackTrace();
+	      }
+	      resultMap.put("mId", mId);
+	      resultMap.put("userImg", mId);
+	      return resultMap;
 	   }
 	   
 	
@@ -134,11 +145,9 @@ public class ReplyEchoHandler {
 		System.out.println("메세지(JSONObject) 보내는 내 아이디(key):" + myId);
 		System.out.println("메세지(JSONObject) 받는 상대 아이디(key):" + yourId);
 
-		//Session yourSession = userSessions.get(yourId);
 		
 		Session mySession=userSessions.get(myId);
 		System.out.println("메세지 보내는 세션:" + mySession);
-		//System.out.println("메세지 받는 세션:" + yourSession);
 
 		JSONArray jsonArr = (JSONArray) jsonObj.get("data");
 		JSONObject jsonChat = (JSONObject) jsonArr.get(0);
@@ -198,6 +207,7 @@ public class ReplyEchoHandler {
 		System.out.println("socket 닫기:" + userId);
 		userSessions.remove(userId);
 		System.out.println(userSessions);
+		
 	}
 
 	/*
