@@ -38,9 +38,9 @@ public class ChatServiceImpl implements ChatService {
 	}
 
 	@Override
-	public int chatReadUpdate(int c_room_no) {
+	public int chatReadUpdate(int c_room_no,String user_id) {
 		// TODO Auto-generated method stub
-		return chat_contentsDao.chatReadUpdate(c_room_no);
+		return chat_contentsDao.chatReadUpdate(c_room_no,user_id);
 	}
 
 	@Override

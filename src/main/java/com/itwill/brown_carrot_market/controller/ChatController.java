@@ -115,11 +115,13 @@ public class ChatController {
 	
 	
 	//읽음(1)으로 변경
-	@ResponseBody
-	@GetMapping(value="/chat_readUpdate")
-	public int chatReadUpdate(@RequestParam("c_room_no") int c_room_no) {
-		return chatService.chatReadUpdate(c_room_no);
-	}
+	/*
+	 * @ResponseBody
+	 * 
+	 * @GetMapping(value="/chat_readUpdate") public int
+	 * chatReadUpdate(@RequestParam("c_room_no") int c_room_no) { return
+	 * chatService.chatReadUpdate(c_room_no); }
+	 */
 	
 	//메세지 삭제
 	@ResponseBody

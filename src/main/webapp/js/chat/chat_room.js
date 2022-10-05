@@ -200,7 +200,12 @@ dayformat=hour+":"+mm+" "+ampm+","+" "+dayString;
 	}
 
 function message_other(chat_content){
-	
+	var chat_read="";
+	if(chat_content.c_read==0){
+		chat_read="전송됨";
+	}else if(chat_content.c_read==1){
+		chat_read="읽음";
+	}
 	
 
 	return `<li class="clearfix">
@@ -208,16 +213,24 @@ function message_other(chat_content){
 										<span class="message-data-time">${date_string(chat_content.send_time)}</span>
 									</div>
 									<div class="message my-message">${chat_content.c_content}</div>
+									<div class="chat_read_check">${chat_read}</div>
 								</li>`
 }
 
 function message_you(chat_content){
+	var chat_read="";
+	if(chat_content.c_read==0){
+		chat_read="전송됨";
+	}else if(chat_content.c_read==1){
+		chat_read="읽음";
+	}
 	return `<li class="clearfix">
 									<div class="message-data text-right">
 										<span class="message-data-time">${date_string(chat_content.send_time)}</span>  <img src='img/user_profile/${mImage}'
 											alt="">
 									</div>
 									<div class="message other-message float-right">${chat_content.c_content}</div>
+									<div class="chat_read_check">${chat_read}</div>
 								</li>`
 }
 function chat_head(id,img){
@@ -358,11 +371,14 @@ function connectWS(){
 	ws.onmessage=function(result){
 		//var onMsg=JSON.parse(evt);
 		result.stopPropagation();
-		console.log(result.data);
-		var onMsg=JSON.parse(result.data);
+		//console.log(result.data);
+		//var onMsg=JSON.parse(result.data);
 		console.log('메세지 얻기');
-		console.log(onMsg.data[0]);
+		//console.log(onMsg.data[0]);
+		var onmsg=JSON.parse(result.data);
+		console.log(onmsg);
 		
+		/*
 		if(onMsg.data[0].user_id!=loginId){
 			//상대가 메세지 보낸 경우
             $('#chat_history').append(message_other(onMsg.data[0]));
@@ -370,7 +386,17 @@ function connectWS(){
 			//내가 보낸 경우
 			$('#chat_history').append(message_you(onMsg.data[0]));
 		}
+		*/
 		
+		if(onmsg.user_id!=loginId){
+			//상대가 메세지 보낸 경우
+			console.log("상대가 보낸 경우"+onmsg.user_id)
+            $('#chat_history').append(message_other(onmsg));
+		}else if(onmsg.user_id==loginId){
+			console.log("내가 보낸 경우"+onmsg.user_id)
+			//내가 보낸 경우
+			$('#chat_history').append(message_you(onmsg));
+		}
 		return false;
 	}
 	
