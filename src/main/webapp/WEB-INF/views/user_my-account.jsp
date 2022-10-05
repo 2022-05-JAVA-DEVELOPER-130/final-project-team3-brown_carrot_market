@@ -323,7 +323,25 @@
 			/* Edit_user_profile********************************/
 			$(document).on('click', '.img-circle', function(e) {
 				console.log("수정해보자!");
-				
+				/* 
+				$.ajax({
+					url : 'upload',
+					method : 'POST',
+					data:{
+						"invi_email":$("#invi_email").val()
+					},
+					beforeSend:function(e){
+						//수정필요
+						$('.form-group').append("<div class='progress'><div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' aria-valuenow='75' aria-valuemin='0' aria-valuemax='100' style='width: 75%'></div></div>");
+					},
+					success : function(e) {
+						console.log("success");
+						$('.progress').remove();
+						alert($("#invi_email").val()+" 님에게 초대장이 전송되었습니다.");
+						$("#invi_email").val("");
+					}
+				});
+				 */
 				e.preventDefault();
 			});
 			/*******************************************/
@@ -385,7 +403,7 @@
 					<div id="my-account-content" class="my-account-content mb-50" style="margin-bottom: 20px">
 						<div class="shortcodes_content mb-100" style="margin-bottom: 0px">
 	                        <div class="col-12 col-lg-9">
-	                            <img class="img-circle" src="img/user_profile/${sUser.user_profile}" alt="img/user_profile/newCarrot.jpg">
+	                            <img class="img-circle" src="img/user_profile/${sUser.user_profile}" onerror="this.src='img/user_profile/newCarrot.jpg'">
 							<p>
 								<strong>${sUser.user_id}</strong>님, 안녕하세요? 
 							</p>
