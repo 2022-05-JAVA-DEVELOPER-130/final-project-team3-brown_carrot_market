@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+.img-circle {
+    border-radius: 50%;
+    background-color: #fff;
+    width: 100px;
+    height: 100px;
+    max-width: none;
+}

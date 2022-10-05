@@ -20,8 +20,7 @@
 <!-- Style CSS -->
 <link rel="stylesheet" href="style.css">
 
-
-<!-- <link rel="stylesheet" href="css/user_btn.css"> -->
+<link rel="stylesheet" href="css/user.css">
 
 <!-- javaScript -->
 <script type="text/javascript"
@@ -321,6 +320,13 @@
 				e.preventDefault();
 			});
 			/*******************************************/
+			/* Edit_user_profile********************************/
+			$(document).on('click', '.img-circle', function(e) {
+				console.log("수정해보자!");
+				
+				e.preventDefault();
+			});
+			/*******************************************/
 			
 		});//END
 </script>
@@ -366,10 +372,11 @@
 						<ul>
 							<!-- (수정필요)활성화에 따라서, active를 넣는 작업 해야함! -->
 							<li class="active"><a href="user_my_account">마이페이지</a></li>
-							<li><a href="order-list.html">Orders</a></li>
-							<li><a href="" id="user_view_addresses">내 동네설정</a></li>
-							<li class="active"><a href="#" id="user_account_details">Account Details</a></li>
-							<li><a href="user_logout_action">Logout</a></li>
+							<li class=""><a href="#" id="user_account_details">회원정보수정</a></li>
+							<li class="active"><a href="" id="user_view_addresses">내 동네설정</a></li>
+							<li class=""><a href="#" id="user_account_details">흙당근 포인트</a></li>
+							<li class=""><a href="#" id="user_account_details">흙당근 매너온도</a></li>
+							<li><a href="user_logout_action">로그아웃</a></li>
 						</ul>
 					</div>
 				</div>
@@ -377,15 +384,12 @@
 		<!-- START!! ************************************************ -->
 					<div id="my-account-content" class="my-account-content mb-50" style="margin-bottom: 20px">
 						<div class="shortcodes_content mb-100" style="margin-bottom: 0px">
-						<p>
-							<strong>${sUser.user_id}</strong>님, 안녕하세요? (<strong>${sUser.user_id}</strong>님이 아니신가요?
-							<a href="user_logout_action">Log out</a>)
-						</p>
-						<p>
-							From your account dashboard you can view your recent orders,
-							manage your shipping and billing addresses, and <a href="account-details.html" id="a_account_details">edit your password and account
-								details</a>.
-						</p>
+	                        <div class="col-12 col-lg-9">
+	                            <img class="img-circle" src="img/user_profile/${sUser.user_profile}" alt="img/user_profile/newCarrot.jpg">
+							<p>
+								<strong>${sUser.user_id}</strong>님, 안녕하세요? 
+							</p>
+	                        </div>
 						</div>
 	                    <div class="shortcodes_content mb-100" style="margin-bottom: 20px">
 	                        <form class="invi_form">
