@@ -470,6 +470,7 @@
                 <div class="col-12 col-lg-6">
                     <div class="single_product_desc">
                         <h4 class="title mb-2">${product.p_title}</h4>
+                        <!--  
                         <div class="single_product_ratings mb-2">
                             <i class="fa fa-star" aria-hidden="true"></i>
                             <i class="fa fa-star" aria-hidden="true"></i>
@@ -478,7 +479,8 @@
                             <i class="fa fa-star" aria-hidden="true"></i>
                             <span class="text-muted">(8 Reviews)</span>
                         </div>
-                        <h4 class="price mb-4">${product.p_price} </h4>
+                        -->
+                        <h4 class="price mb-4">가격 : ${product.p_price} </h4>
 
                         <!-- Overview -->
                         <div class="short_overview mb-4">
@@ -487,31 +489,7 @@
                         </div>
 
                         <!-- Color Option -->
-                        <div class="widget p-0 color mb-3">
-                            <h6 class="widget-title">Color</h6>
-                            <div class="widget-desc d-flex">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                                    <label class="custom-control-label black" for="customRadio1"></label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-                                    <label class="custom-control-label pink" for="customRadio2"></label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-                                    <label class="custom-control-label red" for="customRadio3"></label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
-                                    <label class="custom-control-label purple" for="customRadio4"></label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
-                                    <label class="custom-control-label white" for="customRadio5"></label>
-                                </div>
-                            </div>
-                        </div>
+                       
 
                         <!-- Size Option -->
                        
