@@ -42,7 +42,7 @@
                 <c:forEach var="list" items="${chatList}">
                
                 <li class="clearfix">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar">
+                        <img src="img/user_profile/${list.you_image}" alt="avatar">
                         <div class="about">
 							<input name="chatRoomNo" type="hidden" value=${list.c_room_no}/>
 					<!--	<button type="button" class="btn btn-default" id="btnCall${list.c_room_no}" value=${list.c_room_no}>${list.c_room_no}</button>-->

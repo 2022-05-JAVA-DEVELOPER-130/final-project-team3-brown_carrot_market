@@ -120,6 +120,7 @@ $.ajax({
 			$('#chatHead').html("");
 			//loginId=$('#loginId').val();
 			console.log(loginId);
+			/*
 			for(const item of chatContentArray){
 				
 				if(item.user_id!=loginId){
@@ -131,8 +132,8 @@ $.ajax({
 					var youId = "error";
 			
 				}
-			};
-			$('#chatHead').append(chat_head(youId));
+			};*/
+			$('#chatHead').append(chat_head(yourId));
 			
 			
 			
