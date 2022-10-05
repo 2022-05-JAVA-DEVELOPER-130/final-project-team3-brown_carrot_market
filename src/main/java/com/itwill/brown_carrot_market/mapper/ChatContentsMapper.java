@@ -31,8 +31,8 @@ public interface ChatContentsMapper {
 	 */
 	
 	//읽음 확인 변경 
-	@Update("update chat_contents set c_read=1 where c_room_no=#{c_room_no} and send_time<sysdate")
-	public int chatReadUpdate(@Param("c_room_no") int c_room_no);
+	@Update("update chat_contents set c_read=1 where c_room_no=#{c_room_no} and user_id=#{user_id}")
+	public int chatReadUpdate(@Param("c_room_no") int c_room_no, @Param("user_id") String user_id);
 	
 	//채팅 한 개 삭제
 	@Delete("delete chat_contents where c_content_no=#{c_content_no}")

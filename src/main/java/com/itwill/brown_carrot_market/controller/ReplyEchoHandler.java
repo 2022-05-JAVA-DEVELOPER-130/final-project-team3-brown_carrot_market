@@ -60,7 +60,8 @@ public class ReplyEchoHandler {
 	      resultMap.put("userImg", userImg);
 	      return resultMap;
 	   }
-	   
+	 
+	
 	
 	@PostMapping(value = "/chat_detail_rest")
 	public Map chatDetail_rest(@RequestBody Map<String, String> chatList) throws Exception  {
@@ -85,8 +86,10 @@ public class ReplyEchoHandler {
 			yourImg = userService.findUser(yourId).getUser_profile();
 		}
 		
+		
 		List<ChatContents> resultList = new ArrayList<ChatContents>();
 		try {
+			chatService.chatReadUpdate(Integer.parseInt(room_no),yourId); //상대의 기존 채팅 모두 읽음 처리
 			List<ChatContents> chatDetailList = chatService.chatSellectByRoom(Integer.parseInt(room_no));
 			code = 1;
 			msg = "성공";
@@ -107,13 +110,7 @@ public class ReplyEchoHandler {
 		return resultMap;
 	}
 	
-	//채팅방 상대 아이디 가져오기 
-	/*
-	 * @PostMapping(value="/chat_your_id",produces =
-	 * "application/json;charset=UTF-8") public Map chat_your_id() {
-	 * 
-	 * }
-	 */
+	
 	
 
 	
@@ -162,6 +159,7 @@ public class ReplyEchoHandler {
 		ChatContents newChat = new ChatContents(0, jsonChat.getString("c_content"), "time", 0,
 				jsonChat.getString("user_id"), Integer.parseInt(jsonChat.getString("c_room_no")));
 		System.out.println("채팅 DB 넣을 때 객체:" + newChat);
+		
 
 		try {
 			Session yourSession = userSessions.get(yourId);
@@ -170,9 +168,10 @@ public class ReplyEchoHandler {
 
 			System.out.println("채팅 상대방 소켓에 전송 시도");
 			if (yourSession != null) {
-				yourSession.getBasicRemote().sendText(jsonObj.toString());
+				jsonChat.put("c_read", 1);
+				yourSession.getBasicRemote().sendText(jsonChat.toString());
 			}
-			mySession.getBasicRemote().sendText(jsonObj.toString());
+			mySession.getBasicRemote().sendText(jsonChat.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -215,11 +214,6 @@ public class ReplyEchoHandler {
 		
 	}
 
-	/*
-	 * public void afterConnectionClosed(WebSocketSession session, CloseStatus
-	 * status) throws Exception { // TODO Auto-generated method stub String
-	 * mId=(String)session.getAttributes().get("user_id");
-	 * System.out.println("커넥션 끝:"+mId); }
-	 */
+	
 
 }
