@@ -213,6 +213,7 @@ $(function() {
 						$('#msg2').html(jsonResult.msg);
 				    }else if (jsonResult.code == 2) {
 				    	
+				    	
 				    	location.href = "user_my_account";	//(수정필요)main으로 보내야 할듯
 				    }
 				}

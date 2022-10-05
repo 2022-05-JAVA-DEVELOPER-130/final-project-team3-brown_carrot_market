@@ -13,7 +13,7 @@ public interface ChatService {
 	
 	public ChatContents chatSellectOne(int c_content_no);
 	
-	public int chatReadUpdate(int c_room_no);
+	public int chatReadUpdate(int c_room_no,String user_id);
 	
 	public int chatDelete(int c_content_no);
 

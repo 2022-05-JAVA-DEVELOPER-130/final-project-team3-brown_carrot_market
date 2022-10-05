@@ -5,14 +5,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
-import com.itwill.brown_carrot_market.dao.OrdersDao;
+import com.itwill.brown_carrot_market.dao.TransferDao;
 import com.itwill.brown_carrot_market.dto.Orders;
 import com.itwill.brown_carrot_market.dto.Product;
-import com.itwill.brown_carrot_market.dto.UserInfo;
+import com.itwill.brown_carrot_market.dto.Transfer;
+
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.itwill"})
-public class OrdersDaoSpringBootTestApplication {
+public class TransferDaoSpringBootTestApplication {
 	public static void main(String[] args) throws Exception {
 		/****************case1********************/
 		/*
@@ -28,14 +29,16 @@ public class OrdersDaoSpringBootTestApplication {
 		*/
 		
 		SpringApplication application = 
-				new SpringApplication(OrdersDaoSpringBootTestApplication.class);
+				new SpringApplication(TransferDaoSpringBootTestApplication.class);
 		application.setWebApplicationType(WebApplicationType.NONE);
 		ConfigurableApplicationContext context=application.run(args);
-		OrdersDao ordersDao=(OrdersDao)context.getBean(OrdersDao.class);
-		//System.out.println(ordersDao.deleteOrders(1));
-		System.out.println(ordersDao.selectByNo(2));
-		//System.out.println(ordersDao.selectAllById("carrot8"));
-		System.out.println(ordersDao.insertOrders(new Orders(0,new Product(7,null,null,0,null,0,0,0,null,0,0,null,null,null,null),"carrot2",null)));
+		TransferDao transferDao=(TransferDao)context.getBean(TransferDao.class);
+		System.out.println(transferDao.insertTransfer_Deposit(7));
+		System.out.println(transferDao.insertTransfer_Withdraw(7));
+		System.out.println(transferDao.insertTransfer_Withdraw_Cancle(7));
+		System.out.println(transferDao.insertTransfer_Deposit_Cancle(7));
+		System.out.println(transferDao.selectById("carrot1"));
 
 	}
+
 }

@@ -59,9 +59,8 @@ public class ChatController {
 				//System.out.println("************************** 아이디 :"+userId);
 			  List<ChatRoomListView> chatList = chatService.chatRoomSelectAll(userId);
 				for (ChatRoomListView chatRoomListView : chatList) {
-					//임시.. SQL User랑 합쳐서 이미지 가져오기 만들어야함.
-					UserInfo otherInfo = userInfoService.findUser(chatRoomListView.getYou_id());
-					chatRoomListView.setYou_image(otherInfo.getUser_profile());
+					String img = userInfoService.findUser(chatRoomListView.getYou_id()).getUser_profile();
+					chatRoomListView.setYou_image(img);
 					chatRoomListView.setNot_read(chatService.chatNotRead(chatRoomListView.getC_room_no(), userId));
 				}
 				System.out.println(chatList);
@@ -116,11 +115,13 @@ public class ChatController {
 	
 	
 	//읽음(1)으로 변경
-	@ResponseBody
-	@GetMapping(value="/chat_readUpdate")
-	public int chatReadUpdate(@RequestParam("c_room_no") int c_room_no) {
-		return chatService.chatReadUpdate(c_room_no);
-	}
+	/*
+	 * @ResponseBody
+	 * 
+	 * @GetMapping(value="/chat_readUpdate") public int
+	 * chatReadUpdate(@RequestParam("c_room_no") int c_room_no) { return
+	 * chatService.chatReadUpdate(c_room_no); }
+	 */
 	
 	//메세지 삭제
 	@ResponseBody
