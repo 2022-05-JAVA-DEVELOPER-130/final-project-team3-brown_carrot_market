@@ -3,6 +3,7 @@ var loginId=getLoginId();
 var loginName=null;
 var yourId=null;
 var mImage=null;
+var socket=null;
 
 var c_room_no=null;
 var contextPath=getContextPath();
@@ -63,7 +64,7 @@ $(document).ready(function(){
 	});
 	
 	$(window).on("load",function(){
-		connectWS();
+		//connectWS();
 	})
 	
 function getLoginId(){
@@ -89,8 +90,12 @@ function getLoginId(){
 		
 //채팅방 내용 불러오기		
 $(document).on('click','[id^=btnCall]',function(e){
-	e.preventDefault();
+	if(socket!=null){
+	socket.close();
+	}
+		
 	e.stopPropagation();
+	e.preventDefault();
 		num = this.id.substr(7);
 		console.log(num);
 		c_room_no=num;
@@ -112,6 +117,7 @@ $.ajax({
 	
 		
 		success:function(jsonResult){
+			connectWS();
 			var chatContentArray=jsonResult.data;
 			yourId=jsonResult.yourId;
 			yourImg = jsonResult.yourImg;
@@ -151,7 +157,7 @@ $.ajax({
 				}
 			};
 			
-			$('.chat-history').scrollTop($('.chat-history').prop('scrollHeight'));
+			//$('.chat-history').scrollTop($('.chat-history').prop('scrollHeight'));
 		}
 		
 	});
@@ -340,6 +346,7 @@ function message_sendDB(jsonData){
     				
     				socket.send(JSON.stringify(jsonData));		
     					console.log("socket 전송")	;	
+    					//console.log("성공적인 socket 전송 여부: "+sendResult);
     			$('#chat_content_msg').val("");
     			},
     			error:function(xhr){
@@ -356,12 +363,29 @@ function message_sendDB(jsonData){
 
 function connectWS(){
 	console.log("connectWS 실행 : "+loginId)
-	var url="ws://localhost:80/brown_carrot_market/replyEcho?"+loginId;
+	var url="ws://localhost:80/brown_carrot_market/replyEcho?"+loginId+"&"+c_room_no;
 	var ws=new WebSocket(url);
 	socket=ws;
 	
 	ws.onopen = function() {
 			console.log(loginId+'서버 연결 성공');
+			jsonData.mId=loginId;
+		
+		
+		/*****상대방 아이디 / 채팅방 데이터 받아와야 함  */
+		jsonData.your_id=yourId;
+		jsonData.msg="채팅방 입장(socket.send)";
+		jsonData.code="2";
+		jsonData.data=[{
+			c_content_no:"",
+			c_content:"",
+			send_time:"",
+			c_read:"0",
+			user_id:loginId,
+			c_room_no:c_room_no
+		}]
+			socket.send(JSON.stringify(jsonData));
+			console.log()
 		
 	    };
 	ws.onerror=function(evt){
@@ -376,7 +400,7 @@ function connectWS(){
 		console.log('메세지 얻기');
 		//console.log(onMsg.data[0]);
 		var onmsg=JSON.parse(result.data);
-		console.log(onmsg);
+		console.log(onmsg.code);
 		
 		/*
 		if(onMsg.data[0].user_id!=loginId){
@@ -387,7 +411,8 @@ function connectWS(){
 			$('#chat_history').append(message_you(onMsg.data[0]));
 		}
 		*/
-		
+		//메세지 전송한 경우
+		if(onmsg.code=="1"){
 		if(onmsg.user_id!=loginId){
 			//상대가 메세지 보낸 경우
 			console.log("상대가 보낸 경우"+onmsg.user_id)
@@ -397,7 +422,68 @@ function connectWS(){
 			//내가 보낸 경우
 			$('#chat_history').append(message_you(onmsg));
 		}
+		} //입장한 경우
+		else if(onmsg.code=="2"){
+			console.log("입장한 경우");
+			var chat_detail={
+			"c_room_no":c_room_no,
+			"loginId":loginId
+		}
+			$.ajax({
+		
+		
+		url:"chat_detail_rest",
+		method:"POST",
+		data: JSON.stringify(chat_detail),
+		async: true,
+        contentType: "application/json; charset=utf-8", //헤더의 Content-Type을 설정
+        dataType: "JSON", //응답받을 데이터 타입 (XML,JSON,TEXT,HTML,JSONP)    			
+    			    			
+	
+		
+		success:function(jsonResult){
+			var chatContentArray=jsonResult.data;
+			yourId=jsonResult.yourId;
+			yourImg = jsonResult.yourImg;
+			console.log("채팅방의 상대방 ID:"+yourId);
+			console.log(chatContentArray[0]);
+			//$('#content').html('채팅 불러오기 성공');
+			$('#chat_history').html("");
+			$('#chatHead').html("");
+			//loginId=$('#loginId').val();
+			console.log(loginId);
+			/*
+			for(const item of chatContentArray){
+				
+				if(item.user_id!=loginId){
+					var youId = item.user_id;
+					break;
+			
+				}else{
+				
+					var youId = "error";
+			
+				}
+			};*/
+			$('#chatHead').append(chat_head(yourId,yourImg));
+			
+			
+			
+			
+			for(const item of chatContentArray){
+				
+				if(item.user_id!=loginId){
+					console.log("내가 보낸 메세지");
+			$('#chat_history').append(message_other(item));
+				}else{
+					console.log("상대가 보낸 메세지");
+			$('#chat_history').append(message_you(item));
+				}
+			};
+		}
+		});
 		return false;
+	}
 	}
 	
 	
