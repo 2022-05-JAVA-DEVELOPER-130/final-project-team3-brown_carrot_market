@@ -1,5 +1,7 @@
 package com.itwill.brown_carrot_market.service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,21 +99,22 @@ public class ChatServiceImpl implements ChatService {
 	@Override
 	public List<ChatRoomListView> chatRoomSelectAll(String user_id) {
 		List<ChatRoomListView> chatRoomListView = chatRoomDao.chatRoomSelectAll(user_id);
-		
-		
+			System.out.println("service단");
+
+
 		for (ChatRoomListView a : chatRoomListView) {
 			ChatRoom chatRoom = chatRoomDao.chatRoomSelect(a.getC_room_no()); 
+			System.out.println("--------------");
+			if(chatRoom.getTo_id().equals(user_id)) {
+				a.setYou_id(chatRoom.getFrom_id());
 
-			if(chatRoom.getFrom_id().equals(user_id)) {
+			}else if(chatRoom.getFrom_id().equals(user_id)) {
 				a.setYou_id(chatRoom.getTo_id());
 	
 			}
-			else if(chatRoom.getTo_id().equals(user_id)) {
-				a.setYou_id(chatRoom.getFrom_id());
-
-			}
+			
 		}
-
+		System.out.println(chatRoomListView);
 		return chatRoomListView;
 	}
 

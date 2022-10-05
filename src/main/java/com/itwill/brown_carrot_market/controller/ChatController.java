@@ -58,12 +58,18 @@ public class ChatController {
 			UserInfo userInfo=(UserInfo) httpSession.getAttribute("sUser");
 				//System.out.println("************************** 아이디 :"+userId);
 			  List<ChatRoomListView> chatList = chatService.chatRoomSelectAll(userId);
+			  System.out.println(chatList);
 				for (ChatRoomListView chatRoomListView : chatList) {
-					String img = userInfoService.findUser(chatRoomListView.getYou_id()).getUser_profile();
-					chatRoomListView.setYou_image(img);
+					if(chatRoomListView.getYou_id()==null) {
+						
+					}else {
+						String img = userInfoService.findUser(chatRoomListView.getYou_id()).getUser_profile();
+						chatRoomListView.setYou_image(img);
+						
+					}
+					
 					chatRoomListView.setNot_read(chatService.chatNotRead(chatRoomListView.getC_room_no(), userId));
 				}
-				System.out.println(chatList);
 			  System.out.println("채팅 리스트:"+chatList);
 			  httpSession.setAttribute("chatList",chatList);
 			  httpSession.setAttribute("loginId", userId);

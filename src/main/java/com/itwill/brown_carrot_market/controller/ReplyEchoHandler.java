@@ -43,6 +43,9 @@ public class ReplyEchoHandler {
 
 	private static Map<String, Session> userSessions = new HashMap();
 	String userId="";
+	String userKey="";
+	
+	private int item=0;
 
 	   @PostMapping(value = "/get_id")
 	   public Map returnSessionCheck(HttpSession httpSession) {
@@ -119,11 +122,24 @@ public class ReplyEchoHandler {
 
 	@OnOpen
 	public void handleOpen(Session session) {
-		String mId = (String)session.getQueryString();
+		String mId="";
+		String c_room_no="";
+		String qStr=(String)session.getQueryString();
+		String key="";
+		if(qStr.contains("&")) {
+			String[] qStrArray=qStr.split("&");
+			mId=qStrArray[0].trim();
+			c_room_no=qStrArray[1].trim();
+			key=mId+"&"+c_room_no;
+		}else {
+			mId=(String)session.getQueryString();
+			key=mId;
+		}
+		this.userKey=key;
+		//String mId = (String)session.getQueryString();
 		System.out.println("연결 세션:" + session);
 		System.out.println("아이디:" + mId);
-		userSessions.put(mId, session);
-		// System.out.println(userSessions.keySet());
+		userSessions.put(key, session);
 		System.out.println(userSessions);
 	}
 
@@ -136,24 +152,28 @@ public class ReplyEchoHandler {
 
 	@OnMessage
 	public void handleMessage(String message, Session session) {
-
 		System.out.println("---------ON MESSAGE--------");
 		System.out.println(message);
 
 		System.out.println("메세지 전송한 세션:" + session);
-
+		
 		JSONObject jsonObj = new JSONObject(message);
+		String code=jsonObj.getString("code");
+		/**********code 판별*********/
 		String yourId = jsonObj.getString("your_id");
 		String myId=jsonObj.getString("mId");
 		System.out.println("메세지(JSONObject) 보내는 내 아이디(key):" + myId);
 		System.out.println("메세지(JSONObject) 받는 상대 아이디(key):" + yourId);
 
 		
-		Session mySession=userSessions.get(myId);
-		System.out.println("메세지 보내는 세션:" + mySession);
 
 		JSONArray jsonArr = (JSONArray) jsonObj.get("data");
 		JSONObject jsonChat = (JSONObject) jsonArr.get(0);
+		Session myChatSession=userSessions.get(myId+"&"+jsonChat.getString("c_room_no"));
+		
+		
+		
+		System.out.println("메세지 보내는 세션:" + myChatSession);
 
 		System.out.println("jsonData.data 채팅 내용:" + jsonChat.getString("c_content"));
 
@@ -161,22 +181,63 @@ public class ReplyEchoHandler {
 				jsonChat.getString("user_id"), Integer.parseInt(jsonChat.getString("c_room_no")));
 		System.out.println("채팅 DB 넣을 때 객체:" + newChat);
 		
+		
+		
+		if(code.equals("1")) {
+			jsonChat.put("code", 1);
 
 		try {
-			Session yourSession = userSessions.get(yourId);
+			Session yourSession = userSessions.get(yourId+"&"+jsonChat.getString("c_room_no"));
 			System.out.println("메세지 받는 세션:" + yourSession);
 
-
-			System.out.println("채팅 상대방 소켓에 전송 시도");
-			if (yourSession != null) {
+			System.out.println("채팅 상대방 소켓에 메세지 전송 시도");
+			if (yourSession != null&&myChatSession!=null) {
 				jsonChat.put("c_read", 1);
 				yourSession.getBasicRemote().sendText(jsonChat.toString());
+				myChatSession.getBasicRemote().sendText(jsonChat.toString());
+			}else if(yourSession!=null) {
+				myChatSession.getBasicRemote().sendText(jsonChat.toString());
+			}else {
+				for(String key : userSessions.keySet()) {
+					jsonChat.put("toastId", yourId);
+					Session s=userSessions.get(key);
+					
+					System.out.println("일반 알람 전송 시도 :"+s);
+					s.getBasicRemote().sendText(jsonChat.toString());
+				}
 			}
-			mySession.getBasicRemote().sendText(jsonChat.toString());
+			/*
+			else {
+				for(String key : userSessions.keySet()) {
+					Session s=userSessions.get(key);
+					s.getBasicRemote().sendText(jsonChat.toString());
+				}
+			}
+			*/
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		}
+		else if(code.equals("2")) {
+			jsonChat.put("code", 2);
+			try {
+			Session yourSession = userSessions.get(yourId+"&"+jsonChat.getString("c_room_no"));
+			System.out.println("메세지 받는 세션:" + yourSession);
 
+			System.out.println(">>>채팅 상대방 소켓에 입장 시도");
+			if (yourSession != null&&myChatSession!=null) {
+				System.out.println(">>>한명 접속한 상태에서 새로운 접속 시도");
+				jsonChat.put("c_read", 1);
+				yourSession.getBasicRemote().sendText(jsonChat.toString());
+				myChatSession.getBasicRemote().sendText(jsonChat.toString());
+			}
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
 	}
 
 	@PostMapping(value = "/chat_message_rest")
@@ -209,8 +270,8 @@ public class ReplyEchoHandler {
 
 	@OnClose
 	public void handleClose(Session session) {
-		System.out.println("socket 닫기:" + userId);
-		userSessions.remove(userId);
+		System.out.println("socket 닫기:" + userKey);
+		userSessions.remove(userKey);
 		System.out.println(userSessions);
 		
 	}

@@ -16,6 +16,7 @@ function connectServer(loginId){
 	}
 	
 	ws.onmessage=function(result){
+		alert("메세지 전송:"+result);
 		console.log('메세지 전송');
 	}
 	
