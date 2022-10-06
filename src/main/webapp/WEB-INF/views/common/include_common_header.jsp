@@ -108,7 +108,7 @@
                                         <ul class="dropdown">
                                             <li><a href="checkout-4.html">충전하기</a></li>
                                             <li><a href="#">송금하기</a></li>
-                                            <li><a href="product-details.html">거래내역</a></li>
+                                            <li><a href="product-details.html">페이내역</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="#">자주하는질문</a></li>
@@ -132,6 +132,11 @@
                             <!-- Wishlist -->
                             <div class="wishlist-area">
                                 <a href="wishlist.html" class="wishlist-btn"><i class="icofont-heart"></i></a>
+                            </div>
+                            
+                            <!-- transaction list -->
+                            <div class="transaction-list wishlist-area">
+                                <a href="wishlist.html" class="wishlist-btn"><i class="icofont-bag"></i></a>
                             </div>
 
                             <!-- Cart -->

@@ -1,6 +1,5 @@
 package com.itwill.brown_carrot_market.dto;
 
-import java.util.List;
 /*
 이름        널?       유형           
 --------- -------- ------------ 
@@ -13,18 +12,15 @@ public class Orders {
 	private Product product;
 	private String user_id;
 	
-	private List<Orders> ordersList;
-	
 	public Orders() {
 
 	}
 
-	public Orders(int orders_no, Product product, String user_id, List<Orders> ordersList) {
+	public Orders(int orders_no, Product product, String user_id) {
 		super();
 		this.orders_no = orders_no;
 		this.product = product;
 		this.user_id = user_id;
-		this.ordersList = ordersList;
 	}
 
 	public int getOrders_no() {
@@ -51,17 +47,9 @@ public class Orders {
 		this.user_id = user_id;
 	}
 
-	public List<Orders> getOrdersList() {
-		return ordersList;
-	}
-
-	public void setOrdersList(List<Orders> ordersList) {
-		this.ordersList = ordersList;
-	}
-
 	@Override
 	public String toString() {
-		return "\nOrders [orders_no=" + orders_no + ", product.p_no=" + product.p_no + ", user_id=" + user_id + "]";
+		return "\nOrders [orders_no=" + orders_no + ", product.p_title=" + product.p_title + ", user_id=" + user_id + "]";
 	}
 
 	

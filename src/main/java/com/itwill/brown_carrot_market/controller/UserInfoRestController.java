@@ -80,6 +80,7 @@ public class UserInfoRestController {
 		resultMap.put("data",resultList);
 		return resultMap;
 	}
+	
 	@LoginCheck
 	@PostMapping("/user_update_address_range_json")
 	public Map user_update_address_range_json(HttpServletRequest request, @ModelAttribute Address address) throws Exception{
@@ -103,6 +104,31 @@ public class UserInfoRestController {
 		resultMap.put("data",resultList);
 		return resultMap;
 	}
+	
+	
+	@LoginCheck
+	@PostMapping("/user_update_profile_json")
+	public Map user_update_profile_json(@ModelAttribute UserInfo userInfo) throws Exception{
+		Map resultMap=new HashMap();
+		int code=0;
+		String url="user_update_profile";
+		String msg="update_profile 실패";
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
+
+		System.out.println("RestController-user_update_profile_json() 호출");
+		/***********수정 필요***********/
+		code = userService.updateProfile(userInfo);
+		if(code==1) msg="update_profile 성공";
+
+		/******************************/
+		
+		resultMap.put("code", code);
+		resultMap.put("url", url);
+		resultMap.put("msg", msg);
+		resultMap.put("data",resultList);
+		return resultMap;
+	}
+	
 	@LoginCheck
 	@PostMapping("/user_remove_address_json")
 	public Map user_remove_address_json(HttpServletRequest request, @ModelAttribute Address address) throws Exception{

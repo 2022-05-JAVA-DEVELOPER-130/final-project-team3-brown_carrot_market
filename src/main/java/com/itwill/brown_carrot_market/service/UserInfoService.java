@@ -16,6 +16,9 @@ public interface UserInfoService {
 	int create(UserInfo user,Address address,Invitation invitation) throws Exception;
 
 	/*********************************************/
+	int createAddress(Address address) throws Exception;
+	
+	int createInvitation(Invitation invitation) throws Exception;
 
 	/*
 	 * 회원로그인
@@ -42,12 +45,10 @@ public interface UserInfoService {
 	
 	int updateAddressRange(Address addressS) throws Exception;
 	
-
 	int updatePoint(UserInfo user,Invitation invitation) throws Exception;
+
+	int updateProfile(UserInfo userInfo) throws Exception;
 	
-	int createAddress(Address address) throws Exception;
-	
-	int createInvitation(Invitation invitation) throws Exception;
 
 	/*
 	 * 회원탈퇴
@@ -65,5 +66,6 @@ public interface UserInfoService {
 	 * 아이디중복체크
 	 */
 	boolean isDuplicateId(String userId) throws Exception;
+
 
 }

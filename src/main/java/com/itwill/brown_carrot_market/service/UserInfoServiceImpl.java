@@ -150,7 +150,13 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 		return updateInviUser * updateNewUser;
 	}
-
+	@Override
+	public int updateProfile(UserInfo userInfo) throws Exception {
+		return userDao.updateProfile(userInfo);
+	}
+	
+	
+	
 	@Override
 	public int createAddress(Address address) throws Exception {
 		// 기존에 존재하는지 찾기

@@ -256,46 +256,7 @@
 		/**********************************************************/
 				e.preventDefault();
 			});
-			
-			//(Step_2) update & insert
-			/*
-			$(document).on('click',	'.selected',function(e) {
-				
-				console.log($(".selected_address > *").serialize());
-				
-				if($(e.target).hasClass('update')){
-				    $.ajax({
-						url : 'user_update_address_json',
-						method : 'POST',
-						data: $(".selected_address > *").serialize(),
-						dataType : 'json',
-						success : function(jsonResult) {
-							    console.log(jsonResult);
-							    if(jsonResult.code==0) alert("동일한 주소는 1개만 등록가능합니다.");
-							    $( "#user_view_addresses" ).trigger( "click" );
-							    /*
-								$(".selected_address > input[name=address_name]").attr("disabled",true);
-								$(".selected_address").removeClass("selected_address");
-								$(e.target).removeClass("selected");
-								$(e.target).html("주소 수정");
-						    }
-					});
-				}else if ($(e.target).hasClass('insert')) {
-					console.log($("._selected").find("input[name=address_name]"));
-				    $.ajax({
-						url : 'user_insert_address_json',
-						method : 'POST',
-						data: $(".selected_address > *").serialize(),
-						dataType : 'json',
-						success : function(jsonResult) {
-							    console.log(jsonResult);
-							    if(jsonResult.code==0) alert("동일한 주소는 1개만 등록가능합니다.");
-							    $( "#user_view_addresses" ).trigger( "click" );
-						    }
-					});
-				}
-			});
-		*/
+
 			/* Send_Mail********************************/
 			$(document).on('click', '#btn_invi', function(e) {
 				console.log($("#invi_email").val());
@@ -320,31 +281,99 @@
 				e.preventDefault();
 			});
 			/*******************************************/
-			/* Edit_user_profile********************************/
+			
+			/* View_user_profile********************************/
 			$(document).on('click', '.img-circle', function(e) {
 				console.log("수정해보자!");
-				/* 
-				$.ajax({
-					url : 'upload',
-					method : 'POST',
-					data:{
-						"invi_email":$("#invi_email").val()
-					},
-					beforeSend:function(e){
-						//수정필요
-						$('.form-group').append("<div class='progress'><div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' aria-valuenow='75' aria-valuemin='0' aria-valuemax='100' style='width: 75%'></div></div>");
-					},
-					success : function(e) {
-						console.log("success");
-						$('.progress').remove();
-						alert($("#invi_email").val()+" 님에게 초대장이 전송되었습니다.");
-						$("#invi_email").val("");
-					}
-				});
-				 */
+				
+				 $.ajax({
+						url:'user_view_json',
+						method:'POST',
+						dataType:'json',
+						success:function(jsonResult){
+							$('#my-account-content').html(UserHtmlContents.user_profile_edit(jsonResult.data[0]));
+						}
+					});
+		
 				e.preventDefault();
 			});
 			/*******************************************/
+			
+			/* Edit_user_profile********************************/
+			$(document).on('click', '.edit_profile', function(e) {
+				console.log("수정해보자!");
+				
+				$("#chooseF").trigger('click');
+				
+				 $(e.target).addClass("save_profile");
+				 $(e.target).removeClass("edit_profile");
+				 $(e.target).val("저장");
+				e.preventDefault();
+			});
+			/*******************************************/
+			
+			/* Save_user_profile********************************/
+			$(document).on('click', '.save_profile', function(e) {
+				console.log("저장해보자!");
+				
+				const formData = new FormData($('#image_form')[0]);
+				 $.ajax({
+						url:'user/upload',
+						type:'POST',
+						processData:false,	//파일전송시 반드시 false
+						contentType:false,
+						data:formData,
+						success:function(jsonResult){
+							 console.log(jsonResult);
+							 
+							 $.ajax({
+									url : 'user_update_profile_json',
+									method : 'POST',
+									data: {
+										"user_id":$("input[name='user_id']").val(),
+										"user_profile": jsonResult.newFileName 
+									},
+									dataType : 'json',
+									success : function(jsonResult) {
+										 console.log(jsonResult.msg);
+										 console.log('성공!!');
+								    }
+								});
+						}
+					 });  
+					e.preventDefault();
+			
+			});
+			/*******************************************/
+			
+			/* Remove_user_profile********************************/
+			$(document).on('click', '.remove_profile', function(e) {
+				console.log("삭제해보자!");
+			
+				e.preventDefault();
+			});
+			/*******************************************/
+			/* 
+				 function showImage() { 
+					$('#image-show:last-child').css("visibility","visible");
+					$('#image-upload').css("visibility","hidden");
+					$('#fileName').text("");
+					console.log('showImage() function 실행!!');
+				}
+				 */
+				//이미지가 업로드 되면
+				$(document).on('change','#chooseF',function(e){
+					//console.log($('input[type=file]')[0].files[0]);	//파일정보
+					loadFile($('input[type=file]')[0]);	//첫번째 파일 로드
+					
+					e.preventDefault();
+				});
+				
+				//화면에 load하기 위해 blbo 만들어서 삽입
+				function loadFile(input) {
+					var file = input.files[0];
+				    document.getElementById('user_profile').src=URL.createObjectURL(file);
+				}
 			
 		});//END
 </script>
@@ -392,8 +421,8 @@
 							<li class="active"><a href="user_my_account">마이페이지</a></li>
 							<li class=""><a href="#" id="user_account_details">회원정보수정</a></li>
 							<li class="active"><a href="" id="user_view_addresses">내 동네설정</a></li>
-							<li class=""><a href="#" id="user_account_details">흙당근 포인트</a></li>
-							<li class=""><a href="#" id="user_account_details">흙당근 매너온도</a></li>
+							<li class=""><a href="#" id="">흙당근 포인트</a></li>
+							<li class=""><a href="#" id="">흙당근 매너온도</a></li>
 							<li><a href="user_logout_action">로그아웃</a></li>
 						</ul>
 					</div>
