@@ -49,7 +49,7 @@ public class Orders {
 
 	@Override
 	public String toString() {
-		return "\nOrders [orders_no=" + orders_no + ", product=" + product + ", user_id=" + user_id + "]";
+		return "\nOrders [orders_no=" + orders_no + ", product.p_title=" + product.p_title + ", user_id=" + user_id + "]";
 	}
 
 	

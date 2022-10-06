@@ -21,7 +21,7 @@ public class OrdersRestController {
 	private OrdersService ordersService;
 	
 	@GetMapping("/orders_view_json")
-	public Map orders_view_json(@ModelAttribute(value="sUser") Orders orders, String user_id, HttpServletRequest request) throws Exception{
+	public Map orders_view_json(Orders orders) throws Exception{
 		Map resultMap = new HashMap();
 		int code=1;
 		String url = "main";

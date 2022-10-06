@@ -21,7 +21,7 @@ public class TransferController {
 	public String transfer_list(Model model /*HttpServletRequest request*/) throws Exception{
 		String forwardPath="";
 		
-		List<Transfer> transferList = transferService.selectById("carrot1");
+		List<Transfer> transferList = transferService.selectById("carrot2");
 		model.addAttribute("transferList", transferList);
 		forwardPath="/transfer_list";
 		
