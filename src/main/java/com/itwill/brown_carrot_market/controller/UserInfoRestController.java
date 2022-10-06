@@ -349,6 +349,7 @@ public class UserInfoRestController {
 		System.out.println("user_session_check_json : sUserId >>> "+sUserId);
 		if(sUserId!=null) {
 			UserInfo sUser=userService.findUser(sUserId);
+			System.out.println("sUser: "+sUser);
 			
 			/***********수정 필요***********/
 			Address sAddress=(Address)session.getAttribute("sAddress");

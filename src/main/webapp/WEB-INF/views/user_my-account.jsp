@@ -348,32 +348,39 @@
 			
 			/* Remove_user_profile********************************/
 			$(document).on('click', '.remove_profile', function(e) {
-				console.log("삭제해보자!");
+				//console.log("삭제해보자!");
 			
+				console.log($("#user_profile").attr('user_profile'));
+				 $.ajax({
+						url : 'user/delete',
+						method : 'POST',
+						data: {
+							"user_profile":$("#user_profile").attr('user_profile')
+						},
+						dataType : 'json',
+						success : function(jsonResult) {
+							 console.log(jsonResult.result);
+							 console.log('성공!!');
+					    }
+					});
+				
 				e.preventDefault();
 			});
 			/*******************************************/
-			/* 
-				 function showImage() { 
-					$('#image-show:last-child').css("visibility","visible");
-					$('#image-upload').css("visibility","hidden");
-					$('#fileName').text("");
-					console.log('showImage() function 실행!!');
-				}
-				 */
-				//이미지가 업로드 되면
-				$(document).on('change','#chooseF',function(e){
-					//console.log($('input[type=file]')[0].files[0]);	//파일정보
-					loadFile($('input[type=file]')[0]);	//첫번째 파일 로드
-					
-					e.preventDefault();
-				});
+			
+			//이미지가 업로드 되면
+			$(document).on('change','#chooseF',function(e){
+				//console.log($('input[type=file]')[0].files[0]);	//파일정보
+				loadFile($('input[type=file]')[0]);	//첫번째 파일 로드
 				
-				//화면에 load하기 위해 blbo 만들어서 삽입
-				function loadFile(input) {
-					var file = input.files[0];
-				    document.getElementById('user_profile').src=URL.createObjectURL(file);
-				}
+				e.preventDefault();
+			});
+			
+			//화면에 load하기 위해 blbo 만들어서 삽입
+			function loadFile(input) {
+				var file = input.files[0];
+			    document.getElementById('user_profile').src=URL.createObjectURL(file);
+			}
 			
 		});//END
 </script>

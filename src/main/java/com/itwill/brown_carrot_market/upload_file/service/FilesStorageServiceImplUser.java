@@ -1,5 +1,6 @@
 package com.itwill.brown_carrot_market.upload_file.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -30,7 +31,6 @@ public class FilesStorageServiceImplUser implements FilesStorageServiceUser {
 	@Override
 	public void init() {
 		try {
-
 			Files.createDirectory(root);
 		} catch (IOException e) {
 			throw new RuntimeException(
@@ -83,6 +83,20 @@ public class FilesStorageServiceImplUser implements FilesStorageServiceUser {
 					.map((path) -> this.root.relativize(path));
 		} catch (IOException e) {
 			throw new RuntimeException("Could not load the files!");
+		}
+	}
+
+	@Override
+	public boolean delete(String filename) {
+		
+		File deleteFile = new File(root+"/"+filename);
+		
+		if(deleteFile.exists()) {
+			System.out.println("삭제성공 : "+filename);
+			return deleteFile.delete();
+		}else {
+			System.out.println("삭제실패 : "+filename);
+			return false;
 		}
 	}
 

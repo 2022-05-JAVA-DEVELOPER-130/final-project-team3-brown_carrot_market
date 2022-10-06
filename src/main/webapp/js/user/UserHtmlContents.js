@@ -163,16 +163,16 @@ UserHtmlContents.user_profile_edit=function(sUser){
                     	<profile>
       	               <div class="mb-100" style="margin-bottom: 0px">
 	                        <div class="col-xl-3">
-	                            <img id="user_profile" class="img-circle" src='img/user_profile/${sUser.user_profile}' alt="" style="width:200px; height:200px; margin:0 auto 0 auto 200px">
+	                            <img id="user_profile" class="img-circle" src='img/user_profile/${sUser.user_profile}' alt="" user_profile='${sUser.user_profile}' style="width:200px; height:200px; margin:0 auto 0 200px" onerror="this.src='img/user_profile/newCarrot.jpg'">
 	                        </div>
-                        	<form id="image_form"  name="image_form" enctype="multipart/form-data">
+                        	<form id="image_form"  name="image_form" enctype="multipart/form-data" style="margin:0 auto 0 200px">
 	                        	<input type="hidden" name="user_id" id="user_id" value="${sUser.user_id}"><br>
 	                        	<input type="file" name="files" id="chooseF" hidden><br>
 		                        <input type="submit" id="btn_submit" class="btn btn-outline-primary mb-1 edit_profile" value="사진 선택">
+		                        <button type="button" class="btn btn-outline-primary mb-1 remove_profile">사진 삭제</button>
 							</form> 
                         </div>
 						<div class="shortcodes_content mb-100" style="margin-bottom: 0px">
-	                        <button type="button" class="btn btn-outline-primary mb-1 remove_profile">사진 삭제</button>
 						</div>
 						</profile>`;
 }
