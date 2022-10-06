@@ -33,12 +33,13 @@ public class TransferDaoSpringBootTestApplication {
 		application.setWebApplicationType(WebApplicationType.NONE);
 		ConfigurableApplicationContext context=application.run(args);
 		TransferDao transferDao=(TransferDao)context.getBean(TransferDao.class);
-		System.out.println(transferDao.insertTransfer_Deposit(7));
-		System.out.println(transferDao.insertTransfer_Withdraw(7));
-		System.out.println(transferDao.insertTransfer_Withdraw_Cancle(7));
-		System.out.println(transferDao.insertTransfer_Deposit_Cancle(7));
-		System.out.println(transferDao.selectById("carrot1"));
-
+		/*
+		 * System.out.println(transferDao.insertTransfer_Deposit(7));
+		 * System.out.println(transferDao.insertTransfer_Withdraw(7));
+		 * System.out.println(transferDao.insertTransfer_Withdraw_Cancle(7));
+		 * System.out.println(transferDao.insertTransfer_Deposit_Cancle(7));
+		 * System.out.println(transferDao.selectById("carrot1"));
+		 */
 	}
 
 }

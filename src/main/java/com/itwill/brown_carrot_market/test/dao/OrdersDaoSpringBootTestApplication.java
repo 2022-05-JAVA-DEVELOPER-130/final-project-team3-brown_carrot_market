@@ -35,7 +35,7 @@ public class OrdersDaoSpringBootTestApplication {
 		//System.out.println(ordersDao.deleteOrders(1));
 		System.out.println(ordersDao.selectByNo(2));
 		//System.out.println(ordersDao.selectAllById("carrot8"));
-		System.out.println(ordersDao.insertOrders(new Orders(0,new Product(7,null,null,0,null,0,0,0,null,0,0,null,null,null,null),"carrot2",null)));
+		System.out.println(ordersDao.insertOrders(new Orders(0,new Product(7,null,null,0,null,0,0,0,null,0,0,null,null,null,null),"carrot2")));
 
 	}
 }
