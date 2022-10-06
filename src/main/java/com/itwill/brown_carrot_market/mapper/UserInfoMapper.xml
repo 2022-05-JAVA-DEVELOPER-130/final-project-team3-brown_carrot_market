@@ -91,6 +91,12 @@
 	 	update userinfo set user_point=user_point+#{user_point}
 		where user_id=#{user_id}
 	</update>
+
+	<!-- 프로필이미지 -->
+	<update id="updateProfile" parameterType="com.itwill.brown_carrot_market.dto.UserInfo">
+	 	update userinfo set user_profile=#{user_profile}
+		where user_id=#{user_id}
+	</update>
 	
 	<!-- <delete id="remove" parameterType="String"> -->
 	<delete id="removeUser" parameterType="com.itwill.brown_carrot_market.dto.UserInfo">

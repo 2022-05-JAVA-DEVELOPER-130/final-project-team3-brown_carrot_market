@@ -29,74 +29,71 @@ import com.itwill.brown_carrot_market.upload_file.service.FilesStorageService;
 @Controller
 public class FilesControllerUser {
 
-  @Autowired
-  @Qualifier(value = "FilesStorageServiceImplUser")
-  FilesStorageService storageService;
-  
-  @GetMapping("/test/multipart_form")
-  public String mutipart_form() {
-	  
+	@Autowired
+	@Qualifier(value = "FilesStorageServiceImplUser")
+	FilesStorageService storageService;
 
-		  
-	  return "multipart_form";
-  }
-  
-  @PostMapping("/user/upload")
-  public ResponseEntity<ResponseMessage> uploadFiles(@RequestParam("files") MultipartFile[] files) {
-     System.out.println(files.length);
-     //storageService.deleteAll();
-     //storageService.init();
-	 String message = "";
-	 
-	//storageService.root=Paths.get("c:\\upload/test/controller");
-	 
+	@GetMapping("/test/multipart_form")
+	public String mutipart_form() {
+		return "multipart_form";
+	}
 
-	 
-	 
-    try {
-      List<String> fileNames = new ArrayList<>();
-     
-      for (MultipartFile file : files) {
-    	  System.out.println(file.isEmpty());
-    	  if(!file.isEmpty()) {
-    		  storageService.save(file);
-    		  fileNames.add(file.getOriginalFilename());
-    	  }
-	  }
-      message = "Uploaded the files successfully: " + fileNames;
-      return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
-    } catch (Exception e) {
-    	e.printStackTrace();
-      message = "Fail to upload files!";
-      return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
-    }
-  }
+	@PostMapping("/user/upload")
+	public ResponseEntity<ResponseMessage> uploadFiles(
+			@RequestParam("files") MultipartFile[] files) {
+		System.out.println(files.length);
+		// storageService.deleteAll();
+		// storageService.init();
+		String message = "";
 
-  @GetMapping("/user/files")
-  public ResponseEntity<List<FileInfo>> getListFiles() {
-    List<FileInfo> fileInfos = storageService.loadAll().map(path -> {
-      String filename = path.getFileName().toString();
-      String url = MvcUriComponentsBuilder
-          .fromMethodName(FilesControllerUser.class, "getFile", path.getFileName().toString()).build().toString();
+		try {
+			List<String> fileNames = new ArrayList<>();
 
-      return new FileInfo(filename, url);
-    }).collect(Collectors.toList());
+			for (MultipartFile file : files) {
+				System.out.println(file.isEmpty());
+				if (!file.isEmpty()) {
+					storageService.save(file);
+					fileNames.add(file.getOriginalFilename());
+				}
+			}
+			message = "Uploaded the files successfully: " + fileNames;
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(new ResponseMessage(message));
+		} catch (Exception e) {
+			e.printStackTrace();
+			message = "Fail to upload files!";
+			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
+					.body(new ResponseMessage(message));
+		}
+	}
 
-    return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
-  }
-	/*@GetMapping("/view")
-	public String view(Model model) {
-	
-	  List<FileEntity> files = fileRepository.findAll();
-	  model.addAttribute("all",files);
-	  return "view";
-	}*/
-  
+	@GetMapping("/user/files")
+	public ResponseEntity<List<FileInfo>> getListFiles() {
+		List<FileInfo> fileInfos = storageService.loadAll().map(path -> {
+			String filename = path.getFileName().toString();
+			String url = MvcUriComponentsBuilder
+					.fromMethodName(FilesControllerUser.class, "getFile",
+							path.getFileName().toString())
+					.build().toString();
 
-  @GetMapping("/user/files/{filename:.+}")
-  public ResponseEntity<Resource> getFile(@PathVariable String filename) {
-    Resource file = storageService.load(filename);
-    return ResponseEntity.ok()
-        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
-  }
+			return new FileInfo(filename, url);
+		}).collect(Collectors.toList());
+
+		return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
+	}
+	/*
+	 * @GetMapping("/view") public String view(Model model) {
+	 * 
+	 * List<FileEntity> files = fileRepository.findAll();
+	 * model.addAttribute("all",files); return "view"; }
+	 */
+
+	@GetMapping("/user/files/{filename:.+}")
+	public ResponseEntity<Resource> getFile(@PathVariable String filename) {
+		Resource file = storageService.load(filename);
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION,
+						"attachment; filename=\"" + file.getFilename() + "\"")
+				.body(file);
+	}
 }

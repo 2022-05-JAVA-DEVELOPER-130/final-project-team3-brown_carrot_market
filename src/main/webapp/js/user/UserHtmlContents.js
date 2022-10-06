@@ -158,12 +158,12 @@ UserHtmlContents.user_view_addresses_zero=function(addressList){
                         </div>`;
 }
 
-UserHtmlContents.user_profile_edit=function(){
+UserHtmlContents.user_profile_edit=function(sUser){
 	return `<h5 class="mb-3">프로필 수정</h5>
                     	<profile>
       	               <div class="mb-100" style="margin-bottom: 0px">
 	                        <div class="col-xl-3">
-	                            <img id="user_profile" class="img-circle" src='img/user_profile/newCarrot.jpg' alt="" style="width:200px; height:200px; margin:0 auto 0 auto 200px">
+	                            <img id="user_profile" class="img-circle" src='img/user_profile/${sUser.user_profile}' alt="" style="width:200px; height:200px; margin:0 auto 0 auto 200px">
 	                        </div>
                         	<form id="image_form"  name="image_form" enctype="multipart/form-data">
 	                        	<input type="file" name="files" id="chooseF" hidden><br>

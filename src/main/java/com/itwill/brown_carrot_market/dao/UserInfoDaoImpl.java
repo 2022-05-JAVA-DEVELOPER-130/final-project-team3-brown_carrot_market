@@ -71,6 +71,10 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	public int updatePoint(UserInfo userInfo) throws Exception {
 		return userMapper.updatePoint(userInfo);
 	}
+	@Override
+	public int updateProfile(UserInfo userInfo) throws Exception {
+		return userMapper.updateProfile(userInfo);
+	}
 
 	@Override
 	public int removeUser(String user_id) throws Exception {

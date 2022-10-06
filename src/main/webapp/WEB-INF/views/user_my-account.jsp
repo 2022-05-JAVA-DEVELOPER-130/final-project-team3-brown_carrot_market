@@ -286,7 +286,14 @@
 			$(document).on('click', '.img-circle', function(e) {
 				console.log("수정해보자!");
 				
-				$('#my-account-content').html(UserHtmlContents.user_profile_edit());
+				 $.ajax({
+						url:'user_view_json',
+						method:'POST',
+						dataType:'json',
+						success:function(jsonResult){
+							$('#my-account-content').html(UserHtmlContents.user_profile_edit(jsonResult.data[0]));
+						}
+					});
 		
 				e.preventDefault();
 			});
@@ -298,21 +305,6 @@
 				
 				$("#chooseF").trigger('click');
 				
-				
-				/*
-				$.ajax({
-					url : 'upload',
-					method : 'POST',
-					data:{
-						"invi_email":$("#invi_email").val()
-					},
-					beforeSend:function(e){
-						$('.form-group').append("<div class='progress'><div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' aria-valuenow='75' aria-valuemin='0' aria-valuemax='100' style='width: 75%'></div></div>");
-					},
-					success : function(e) {
-					}
-				});
-				*/
 				 $(e.target).addClass("save_profile");
 				 $(e.target).removeClass("edit_profile");
 				 $(e.target).val("저장");
@@ -323,8 +315,20 @@
 			/* Save_user_profile********************************/
 			$(document).on('click', '.save_profile', function(e) {
 				console.log("저장해보자!");
+				
+				const formData = new FormData($('#image_form')[0]);
+				 $.ajax({
+						url:'user/upload',
+						type:'POST',
+						processData:false,	//파일전송시 반드시 false
+						contentType:false,
+						data:formData,
+						success:function(jsonResult){
+							 console.log('성공!!');
+						}
+					 });  
+					e.preventDefault();
 			
-				e.preventDefault();
 			});
 			/*******************************************/
 			
@@ -335,48 +339,27 @@
 				e.preventDefault();
 			});
 			/*******************************************/
-			
+			/* 
 				 function showImage() { 
 					$('#image-show:last-child').css("visibility","visible");
 					$('#image-upload').css("visibility","hidden");
 					$('#fileName').text("");
 					console.log('showImage() function 실행!!');
 				}
-				
+				 */
 				//이미지가 업로드 되면
 				$(document).on('change','#chooseF',function(e){
-			
-					console.log($('input[type=file]')[0].files[0]);	//파일정보
-					console.log($('input[type=file]')[0].files[0].name);	//파일이름
-			
+					//console.log($('input[type=file]')[0].files[0]);	//파일정보
 					loadFile($('input[type=file]')[0]);	//첫번째 파일 로드
 					
 					e.preventDefault();
 				});
 				
-				//화면에 load하기 위해 img태그 만들어서 삽입
+				//화면에 load하기 위해 blbo 만들어서 삽입
 				function loadFile(input) {
 					var file = input.files[0];
-					
-				  /*   var name = input.files[0].name;
-			
-				    var newImage = document.createElement("img");
-				    newImage.setAttribute("class", 'img-circle');
-			
-				    newImage.src = URL.createObjectURL(file);   
-			
-				    newImage.style.width = "200px";
-				    newImage.style.height = "200px";
-				    newImage.style.visibility = "hidden";   //버튼을 누르기 전까지는 이미지 숨기기
-				    newImage.style.objectFit = "contain";
-			
-				    var container = document.getElementById('user_profile');
-				    container.append(newImage);
-				     */
 				    document.getElementById('user_profile').src=URL.createObjectURL(file);
 				}
-			
-			
 			
 		});//END
 </script>

@@ -2,7 +2,7 @@ function CommonHtmlContents(){
 }
 
 CommonHtmlContents.user_thumbnail=function(){
-		return `<div class="user-thumbnail">
+		return `<div class="user_account user-thumbnail">
 			    			<i class="fa fa-user-circle"></i>
                             </div>
                             <ul class="user-meta-dropdown">
@@ -12,7 +12,7 @@ CommonHtmlContents.user_thumbnail=function(){
                             </ul>`;
 }	
 CommonHtmlContents.user_thumbnail_login=function(sUser){
-		return `<div class="user-thumbnail">
+		return `<div class="user_account user-thumbnail">
                             <img src='img/user_profile/${sUser.user_profile}' alt="">
                             </div>
                             <ul class="user-meta-dropdown">

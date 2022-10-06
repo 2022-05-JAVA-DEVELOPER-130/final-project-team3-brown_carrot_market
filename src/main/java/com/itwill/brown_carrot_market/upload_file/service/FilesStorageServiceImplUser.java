@@ -41,8 +41,7 @@ public class FilesStorageServiceImplUser implements FilesStorageService {
 	@Override
 	public void save(MultipartFile file) {
 		try {
-			Files.copy(file.getInputStream(),
-					this.root.resolve(file.getOriginalFilename()),
+			Files.copy(file.getInputStream(), this.root.resolve(System.currentTimeMillis()+file.getOriginalFilename()),
 					StandardCopyOption.REPLACE_EXISTING);
 		} catch (Exception e) {
 			e.printStackTrace();
