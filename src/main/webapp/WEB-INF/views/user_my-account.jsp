@@ -284,7 +284,6 @@
 			
 			/* View_user_profile********************************/
 			$(document).on('click', '.img-circle', function(e) {
-				console.log("수정해보자!");
 				
 				 $.ajax({
 						url:'user_view_json',
@@ -294,20 +293,24 @@
 							$('#my-account-content').html(UserHtmlContents.user_profile_edit(jsonResult.data[0]));
 						}
 					});
-		
+				/*  console.log($('.img-circle').src());
+				 if($('.img-circle').src=='img/user_profile/newCarrot.jpg'){
+					 $('.remove_profile').attr('type','hidden');
+				 } */
 				e.preventDefault();
 			});
 			/*******************************************/
 			
 			/* Edit_user_profile********************************/
 			$(document).on('click', '.edit_profile', function(e) {
-				console.log("수정해보자!");
 				
 				$("#chooseF").trigger('click');
 				
 				 $(e.target).addClass("save_profile");
 				 $(e.target).removeClass("edit_profile");
-				 $(e.target).val("저장");
+				 
+				 $(e.target).val("사진 저장");
+				
 				e.preventDefault();
 			});
 			/*******************************************/
@@ -359,8 +362,20 @@
 						},
 						dataType : 'json',
 						success : function(jsonResult) {
-							 console.log(jsonResult.result);
-							 console.log('성공!!');
+							 console.log('파일 delete 성공!!');
+							 $.ajax({
+									url : 'user_update_profile_json',
+									method : 'POST',
+									data: {
+										"user_id":$("input[name='user_id']").val(),
+										"user_profile": "newCarrot.jpg"
+									},
+									dataType : 'json',
+									success : function(jsonResult) {
+										 console.log(jsonResult.msg);
+										 console.log('성공!!');
+								    }
+								});
 					    }
 					});
 				
@@ -372,7 +387,7 @@
 			$(document).on('change','#chooseF',function(e){
 				//console.log($('input[type=file]')[0].files[0]);	//파일정보
 				loadFile($('input[type=file]')[0]);	//첫번째 파일 로드
-				
+				 $('.remove_profile').attr('type','hidden');
 				e.preventDefault();
 			});
 			
