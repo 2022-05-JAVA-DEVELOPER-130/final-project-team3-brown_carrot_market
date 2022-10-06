@@ -284,7 +284,7 @@ function message_send_function(){
 		console.log("send 버튼 클릭");
 		timestamp = new Date().getTime();
 		
-		
+	
 		
 		//제이슨데이터 만들기 
 		// 임시 데이터 test
