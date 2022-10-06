@@ -254,8 +254,8 @@ function chat_head(id,img){
 									</div>
 								</div>
 								<div class="col-lg-6 hidden-sm text-right">
-									<a href="javascript:void(0);" class="btn btn-outline-secondary"><i
-										class="fa fa-camera"></i></a> <a href="javascript:void(0);"
+									<a  class="btn btn-outline-secondary"><i
+										class="fa fa-camera" id="btnChatAppointment"></i></a> <a href="javascript:void(0);"
 										class="btn btn-outline-primary"><i class="fa fa-image"></i></a>
 									<a href="javascript:void(0);" class="btn btn-outline-info"><i
 										class="fa fa-cogs"></i></a> <a href="javascript:void(0);"
@@ -271,6 +271,7 @@ function chat_head(id,img){
 
 function message_send_function(){
 		$('#chat_content_msg').focus();
+		
 		
 	$('#btnChatSend').click(function(e){
 		e.preventDefault();
@@ -493,5 +494,29 @@ function connectWS(){
 		
 	}
 }
+
+
+
+
+/****************약속 잡기************************/
+
+ $(document).on('click','#btnChatAppointment',function(e){
+	
+	popup();
+	
+	
+})
+	
+	
+	
+
+  
+  function popup(){
+            var url = "chat_appointment";
+            var name = "약속 잡기";
+            var option = "width = 500, height = 500, top = 100, left = 200, location = no,  resizable=no"
+            window.open(url, name, option);
+        }
+       
 		
 

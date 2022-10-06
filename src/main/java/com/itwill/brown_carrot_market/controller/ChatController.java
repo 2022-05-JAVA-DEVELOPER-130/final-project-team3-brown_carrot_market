@@ -49,6 +49,17 @@ public class ChatController {
 			return "login";
 		}
 		
+		/************약속잡기*************/
+		@RequestMapping(value="/chat_appointment",method=RequestMethod.GET)
+		public String chatAppointment(HttpServletRequest req, HttpServletResponse resp, HttpSession session){
+		return "chat_appointment";	
+		}
+		
+		@RequestMapping(value="/chat_appointment_map",method=RequestMethod.GET)
+		public String chatAppointmentMap(HttpServletRequest req, HttpServletResponse resp, HttpSession session){
+		return "chat_appointment_map";	
+		}
+		
 		
 		/**************************************************/
 		@RequestMapping(value="/chat_room", method=RequestMethod.GET)
