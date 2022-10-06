@@ -11,9 +11,10 @@ public interface OrdersMapper {
 	
 	int insertOrders(Orders orders);
 	
-	List<Orders> selectAllById(String user_id); 
-	
 	Orders selectByNo(int orders_no);
 	
 	int deleteOrders(int orders_no);
+
+	List<Orders> selectAllById(String user_id); 
+
 }

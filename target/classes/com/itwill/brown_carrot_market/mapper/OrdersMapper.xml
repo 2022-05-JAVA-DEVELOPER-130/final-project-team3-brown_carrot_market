@@ -1,26 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.itwill.brown_carrot_market.mapper.OrdersMapper">
-	<resultMap id="ordersResultMap" type="com.itwill.brown_carrot_market.dto.Orders" >
+<mapper
+	namespace="com.itwill.brown_carrot_market.mapper.OrdersMapper">
+	<resultMap id="ordersResultMap"
+		type="com.itwill.brown_carrot_market.dto.Orders">
 		<result column="orders_no" property="orders_no" />
-		<result column="p_no" property="product.p_no" />
 		<result column="user_id" property="user_id" />
-		<collection property="ordersList" javaType="java.util.List" ofType="com.itwill.brown_carrot_market.dto.Orders">
-			<result column="orders_no" property="orders_no" />
-			<result column="p_no" property="product.p_no" />
-			<result column="uesr_id" property="user_id" />
-		</collection>
+		<association property="product"
+			javaType="com.itwill.brown_carrot_market.dto.Product">
+			<result column="P_NO" property="p_no" />
+			<result column="P_TITLE" property="p_title" />
+			<result column="P_DESC" property="p_desc" />
+			<result column="P_PRICE" property="p_price" />
+			<result column="P_DATE" property="p_date" />
+		</association>
 	</resultMap>
-	<select id = "selectAllById" resultMap = "ordersResultMap">
-		select * from orders where user_id=#{user_id}
+	<select id="selectAllById" resultMap="ordersResultMap">
+		select * from orders o join product p on o.p_no = p.p_no where o.user_id=#{user_id}
 	</select>
-	<select id = "selectByNo" resultMap = "ordersResultMap">
-		select * from orders where orders_no=#{orders_no}
+	<select id="selectByNo" resultMap="ordersResultMap">
+		select * from orders where
+		orders_no=#{orders_no}
 	</select>
-	<insert id = "insertOrders" parameterType="com.itwill.brown_carrot_market.dto.Orders">
-		insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, #{product.p_no}, #{user_id})
+	<insert id="insertOrders"
+		parameterType="com.itwill.brown_carrot_market.dto.Orders">
+		insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval,
+		#{product.p_no}, #{user_id})
 	</insert>
-	<delete id  = "deleteOrders" parameterType="com.itwill.brown_carrot_market.dto.Orders">
+	<delete id="deleteOrders"
+		parameterType="com.itwill.brown_carrot_market.dto.Orders">
 		delete orders where orders_no = #{orders_no}
 	</delete>
 </mapper>
