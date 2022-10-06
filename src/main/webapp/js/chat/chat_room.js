@@ -244,6 +244,7 @@ function message_you(chat_content){
 }
 
 
+//약속 잡기 html
 
 function message_app(chat_content){
 	var chat_read="";
