@@ -24,8 +24,10 @@ public class ProductController {
 		System.out.println("### ProductController() 기본생성자");
 	}
 	
-	@RequestMapping("/product_list")
+	@RequestMapping(value={"/product_list",
+							"/product_login_list"})
 	public String product_list(Model model, HttpSession session) throws Exception {
+		/*
 		String sUserId = (String)session.getAttribute("sUserId");
 		Address sAddress = (Address)session.getAttribute("sAddress");
 		if(sUserId != null) {
@@ -34,6 +36,7 @@ public class ProductController {
 			model.addAttribute("productLoginList",productLoginList);
 			return "product_login_list";
 		}
+		*/
 		//비회원 상품리스트
 		List<Product> productList = productService.selectProductAll();
 		model.addAttribute("productList", productList);	
