@@ -60,15 +60,12 @@ public class ChatController {
 			  List<ChatRoomListView> chatList = chatService.chatRoomSelectAll(userId);
 			  System.out.println(chatList);
 				for (ChatRoomListView chatRoomListView : chatList) {
-					if(chatRoomListView.getYou_id()==null) {
 						
-					}else {
+						System.out.println(chatRoomListView.getYou_id());
+					
 						String img = userInfoService.findUser(chatRoomListView.getYou_id()).getUser_profile();
 						chatRoomListView.setYou_image(img);
-						
-					}
-					
-					chatRoomListView.setNot_read(chatService.chatNotRead(chatRoomListView.getC_room_no(), userId));
+						chatRoomListView.setNot_read(chatService.chatNotRead(chatRoomListView.getC_room_no(), userId));
 				}
 			  System.out.println("채팅 리스트:"+chatList);
 			  httpSession.setAttribute("chatList",chatList);

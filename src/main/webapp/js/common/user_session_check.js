@@ -28,9 +28,9 @@ function session_check(){
 		dataType:'json',
 		success:function(jsonResult){
 		    if(jsonResult.code==1){ //세션에 로그인 유저 존재XX
-		    	$(".account-area").html(UserHtmlContents.user_thumbnail());
+		    	$(".account-area").html(CommonHtmlContents.user_thumbnail());
 		    }else if (jsonResult.code==2) {//세션에 로그인 유저 존재
-		    	$(".account-area").html(UserHtmlContents.user_thumbnail_login(jsonResult.data[0]));
+		    	$(".account-area").html(CommonHtmlContents.user_thumbnail_login(jsonResult.data[0]));
 				connectServer(jsonResult.data[0].user_id);
 			}
 		}
