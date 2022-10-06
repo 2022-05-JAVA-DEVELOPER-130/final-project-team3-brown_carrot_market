@@ -287,12 +287,20 @@ function chat_head(id,img){
 									</div>
 								</div>
 								<div class="col-lg-6 hidden-sm text-right">
-									<a  class="btn btn-outline-secondary"><i
-										class="fa fa-camera" id="btnChatAppointment"></i></a> <a href="javascript:void(0);"
-										class="btn btn-outline-primary"><i class="fa fa-image"></i></a>
-									<a href="javascript:void(0);" class="btn btn-outline-info"><i
-										class="fa fa-cogs"></i></a> <a href="javascript:void(0);"
-										class="btn btn-outline-warning"><i class="fa fa-question"></i></a>
+									
+									<a  href="javascript:void(0);" class="btn btn-outline-info" ><i
+										class="fa fa-handshake-o" id="btnChatAppointment"></i></a> 
+										
+										
+									<a href="javascript:void(0);" class="btn btn-outline-primary">
+									<i class="fa fa-image"></i></a>
+									
+									<a href="javascript:void(0);" class="btn btn-outline-dark">
+									<i class="fa fa-sign-out"></i></a> 
+								
+									<a href="javascript:void(0);" class="btn btn-outline-danger">
+									<i class="fa fa-close" ></i></a>
+								
 								</div>
 							</div>`
 	
