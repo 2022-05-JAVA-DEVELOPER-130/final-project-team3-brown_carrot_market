@@ -324,7 +324,21 @@
 						contentType:false,
 						data:formData,
 						success:function(jsonResult){
-							 console.log('성공!!');
+							 console.log(jsonResult);
+							 
+							 $.ajax({
+									url : 'user_update_profile_json',
+									method : 'POST',
+									data: {
+										"user_id":$("input[name='user_id']").val(),
+										"user_profile": jsonResult.newFileName 
+									},
+									dataType : 'json',
+									success : function(jsonResult) {
+										 console.log(jsonResult.msg);
+										 console.log('성공!!');
+								    }
+								});
 						}
 					 });  
 					e.preventDefault();

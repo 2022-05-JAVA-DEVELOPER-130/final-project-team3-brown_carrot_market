@@ -4,7 +4,9 @@ import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +24,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
+import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.upload_file.message.ResponseMessage;
 import com.itwill.brown_carrot_market.upload_file.model.FileInfo;
 import com.itwill.brown_carrot_market.upload_file.service.FilesStorageService;
+import com.itwill.brown_carrot_market.upload_file.service.FilesStorageServiceUser;
 
 @Controller
 public class FilesControllerUser {
 
 	@Autowired
 	@Qualifier(value = "FilesStorageServiceImplUser")
-	FilesStorageService storageService;
+	FilesStorageServiceUser storageService;
 
 	@GetMapping("/test/multipart_form")
 	public String mutipart_form() {
@@ -39,31 +43,41 @@ public class FilesControllerUser {
 	}
 
 	@PostMapping("/user/upload")
-	public ResponseEntity<ResponseMessage> uploadFiles(
+	public ResponseEntity<Map<String,Object>> uploadFiles(
 			@RequestParam("files") MultipartFile[] files) {
+		
+		Map<String,Object> result = new HashMap();
+		
 		System.out.println(files.length);
 		// storageService.deleteAll();
 		// storageService.init();
 		String message = "";
-
+		String newFileName= "";
 		try {
 			List<String> fileNames = new ArrayList<>();
 
 			for (MultipartFile file : files) {
 				System.out.println(file.isEmpty());
 				if (!file.isEmpty()) {
-					storageService.save(file);
+					newFileName= storageService.save(file);
 					fileNames.add(file.getOriginalFilename());
 				}
 			}
-			message = "Uploaded the files successfully: " + fileNames;
-			return ResponseEntity.status(HttpStatus.OK)
-					.body(new ResponseMessage(message));
+			message = "Uploaded the files successfully: " + fileNames+" newFileName"+newFileName;
+			
+			result.put("message", message);
+			result.put("newFileName", newFileName);
+			
+			//return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+			return ResponseEntity.status(HttpStatus.OK).body(result);
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 			message = "Fail to upload files!";
-			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
-					.body(new ResponseMessage(message));
+			result.put("message", message);
+			
+			//return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+			return ResponseEntity.status(HttpStatus.OK).body(result);
 		}
 	}
 

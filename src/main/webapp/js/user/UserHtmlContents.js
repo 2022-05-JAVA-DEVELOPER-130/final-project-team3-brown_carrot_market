@@ -166,6 +166,7 @@ UserHtmlContents.user_profile_edit=function(sUser){
 	                            <img id="user_profile" class="img-circle" src='img/user_profile/${sUser.user_profile}' alt="" style="width:200px; height:200px; margin:0 auto 0 auto 200px">
 	                        </div>
                         	<form id="image_form"  name="image_form" enctype="multipart/form-data">
+	                        	<input type="hidden" name="user_id" id="user_id" value="${sUser.user_id}"><br>
 	                        	<input type="file" name="files" id="chooseF" hidden><br>
 		                        <input type="submit" id="btn_submit" class="btn btn-outline-primary mb-1 edit_profile" value="사진 선택">
 							</form> 

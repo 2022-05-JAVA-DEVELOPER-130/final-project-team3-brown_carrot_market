@@ -17,7 +17,7 @@ import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service(value = "FilesStorageServiceImplUser")
-public class FilesStorageServiceImplUser implements FilesStorageService {
+public class FilesStorageServiceImplUser implements FilesStorageServiceUser {
 
 	// private Path root = Paths.get("c:\\upload/test");
 	@Value("${user_profile.dir}")
@@ -39,10 +39,14 @@ public class FilesStorageServiceImplUser implements FilesStorageService {
 	}
 
 	@Override
-	public void save(MultipartFile file) {
+	public String save(MultipartFile file) {
 		try {
-			Files.copy(file.getInputStream(), this.root.resolve(System.currentTimeMillis()+file.getOriginalFilename()),
+			
+			String newFileName=System.currentTimeMillis()+file.getOriginalFilename();
+			
+			Files.copy(file.getInputStream(), this.root.resolve(newFileName),
 					StandardCopyOption.REPLACE_EXISTING);
+			return newFileName;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(
