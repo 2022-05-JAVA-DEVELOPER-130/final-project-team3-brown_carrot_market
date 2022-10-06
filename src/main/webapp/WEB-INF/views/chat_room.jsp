@@ -91,7 +91,7 @@
 
    
 
-     
+     </div>
 							</div>
 						</div>
 						<div class="chat-history">
