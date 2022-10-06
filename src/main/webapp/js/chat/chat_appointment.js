@@ -104,7 +104,11 @@ function displayMarker(place) {
     });*/
 }
 
+
+/*************************지도 클릭 이벤트 처리******************************/
+
 var geocoder = new kakao.maps.services.Geocoder();
+
 
 // 마커 이미지의 주소
 		var markerImageUrl = "img/chat-img/logo_carrot.png",
