@@ -3,6 +3,7 @@
  var chatAppLat=null; 
  var chatAppLng=null; 
   var detailAddr=null;
+  var chatAppspot=null;
   
   $(document).ready(function(){
 	
@@ -110,6 +111,8 @@ var geocoder = new kakao.maps.services.Geocoder();
 	    
 	     searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
         if (status === kakao.maps.services.Status.OK) {
+			chatAppspot=!!result[0].road_address ?result[0].road_address.address_name:result[0].address.address_name;
+
             detailAddr = !!result[0].road_address ? '<div style="color:green; font-size:7pt; font-weight:bold;">' + result[0].road_address.address_name + '</div>' : '';
             detailAddr += '<div style="color:orange; font-size:5pt; ">' + result[0].address.address_name + '</div>';
             
@@ -174,10 +177,13 @@ var jsonData={
 jsonData.mId=window.opener.loginId;
 jsonData.your_id=window.opener.yourId;
 jsonData.msg="약속 전송";
-jsonData.code="1";
+jsonData.code="3";
 jsonData.data=[{
 			c_content_no:"",
-			c_content:"!!!약속이 잡혔어요~!!!"+"날짜"+chatAppdate+"시간:"+chatApptime+":"+detailAddr,
+			c_content:window.opener.loginId+" 님이 약속을 잡았어요!",
+			c_appdate:chatAppdate,
+			c_apptime:chatApptime,
+			c_appspot:chatAppspot,
 			send_time:"",
 			c_read:"0",
 			user_id:window.opener.loginId,

@@ -223,6 +223,9 @@ function message_other(chat_content){
 								</li>`
 }
 
+
+
+
 function message_you(chat_content){
 	var chat_read="";
 	if(chat_content.c_read==0){
@@ -239,6 +242,35 @@ function message_you(chat_content){
 									<div class="chat_read_check">${chat_read}</div>
 								</li>`
 }
+
+
+
+function message_app(chat_content){
+	var chat_read="";
+	if(chat_content.c_read==0){
+		chat_read="전송됨";
+	}else if(chat_content.c_read==1){
+		chat_read="읽음";
+	}
+	 return `<li class="clearfix">
+									<div class="message-data text-right">
+										<span class="message-data-time"></span>
+										 <img src='img/user_profile/${mImage}'
+											alt="">
+									</div>
+									<div class="message other-message float-right">
+									<p style="color:orange; font-weight:bold;">${chat_content.c_content}</p>
+									<p>일시 : ${chat_content.c_appdate} ${chat_content.c_apptime} </p>
+									<p>장소 : ${chat_content.c_appspot}</p>
+									</div>
+									<div class="chat_read_check">${chat_read}</div>
+								</li>`
+								
+								
+								
+	
+}
+
 function chat_head(id,img){
 	return 	`<div class="row">
 								<div class="col-lg-6">
@@ -484,6 +516,9 @@ function connectWS(){
 		}
 		});
 		return false;
+	}else if(onmsg.code=="3"){
+		console.log("약속 잡기");
+		$('#chat_history').append(message_app(onmsg));
 	}
 	}
 	

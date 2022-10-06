@@ -206,14 +206,7 @@ public class ReplyEchoHandler {
 					s.getBasicRemote().sendText(jsonChat.toString());
 				}
 			}
-			/*
-			else {
-				for(String key : userSessions.keySet()) {
-					Session s=userSessions.get(key);
-					s.getBasicRemote().sendText(jsonChat.toString());
-				}
-			}
-			*/
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -235,6 +228,32 @@ public class ReplyEchoHandler {
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(code.equals("3")) {
+			jsonChat.put("code", 3);
+			
+			try {
+				Session yourSession = userSessions.get(yourId+"&"+jsonChat.getString("c_room_no"));
+
+				System.out.println("약속 전송");
+				if (yourSession != null&&myChatSession!=null) {
+					jsonChat.put("c_read", 1);
+					yourSession.getBasicRemote().sendText(jsonChat.toString());
+					myChatSession.getBasicRemote().sendText(jsonChat.toString());
+				}else if(yourSession!=null) {
+					myChatSession.getBasicRemote().sendText(jsonChat.toString());
+				}else {
+					for(String key : userSessions.keySet()) {
+						jsonChat.put("toastId", yourId);
+						Session s=userSessions.get(key);
+						
+						System.out.println("일반 알람 전송 시도 :"+s);
+						s.getBasicRemote().sendText(jsonChat.toString());
+					}
+				}
+				
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
 		}
 		
 		
