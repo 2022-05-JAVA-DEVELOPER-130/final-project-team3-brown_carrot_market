@@ -284,7 +284,6 @@
 			
 			/* View_user_profile********************************/
 			$(document).on('click', '.img-circle', function(e) {
-				console.log("수정해보자!");
 				
 				 $.ajax({
 						url:'user_view_json',
@@ -294,20 +293,24 @@
 							$('#my-account-content').html(UserHtmlContents.user_profile_edit(jsonResult.data[0]));
 						}
 					});
-		
+				/*  console.log($('.img-circle').src());
+				 if($('.img-circle').src=='img/user_profile/newCarrot.jpg'){
+					 $('.remove_profile').attr('type','hidden');
+				 } */
 				e.preventDefault();
 			});
 			/*******************************************/
 			
 			/* Edit_user_profile********************************/
 			$(document).on('click', '.edit_profile', function(e) {
-				console.log("수정해보자!");
 				
 				$("#chooseF").trigger('click');
 				
 				 $(e.target).addClass("save_profile");
 				 $(e.target).removeClass("edit_profile");
-				 $(e.target).val("저장");
+				 
+				 $(e.target).val("사진 저장");
+				
 				e.preventDefault();
 			});
 			/*******************************************/
@@ -348,32 +351,51 @@
 			
 			/* Remove_user_profile********************************/
 			$(document).on('click', '.remove_profile', function(e) {
-				console.log("삭제해보자!");
+				//console.log("삭제해보자!");
 			
+				console.log($("#user_profile").attr('user_profile'));
+				 $.ajax({
+						url : 'user/delete',
+						method : 'POST',
+						data: {
+							"user_profile":$("#user_profile").attr('user_profile')
+						},
+						dataType : 'json',
+						success : function(jsonResult) {
+							 console.log('파일 delete 성공!!');
+							 $.ajax({
+									url : 'user_update_profile_json',
+									method : 'POST',
+									data: {
+										"user_id":$("input[name='user_id']").val(),
+										"user_profile": "newCarrot.jpg"
+									},
+									dataType : 'json',
+									success : function(jsonResult) {
+										 console.log(jsonResult.msg);
+										 console.log('성공!!');
+								    }
+								});
+					    }
+					});
+				
 				e.preventDefault();
 			});
 			/*******************************************/
-			/* 
-				 function showImage() { 
-					$('#image-show:last-child').css("visibility","visible");
-					$('#image-upload').css("visibility","hidden");
-					$('#fileName').text("");
-					console.log('showImage() function 실행!!');
-				}
-				 */
-				//이미지가 업로드 되면
-				$(document).on('change','#chooseF',function(e){
-					//console.log($('input[type=file]')[0].files[0]);	//파일정보
-					loadFile($('input[type=file]')[0]);	//첫번째 파일 로드
-					
-					e.preventDefault();
-				});
-				
-				//화면에 load하기 위해 blbo 만들어서 삽입
-				function loadFile(input) {
-					var file = input.files[0];
-				    document.getElementById('user_profile').src=URL.createObjectURL(file);
-				}
+			
+			//이미지가 업로드 되면
+			$(document).on('change','#chooseF',function(e){
+				//console.log($('input[type=file]')[0].files[0]);	//파일정보
+				loadFile($('input[type=file]')[0]);	//첫번째 파일 로드
+				 $('.remove_profile').attr('type','hidden');
+				e.preventDefault();
+			});
+			
+			//화면에 load하기 위해 blbo 만들어서 삽입
+			function loadFile(input) {
+				var file = input.files[0];
+			    document.getElementById('user_profile').src=URL.createObjectURL(file);
+			}
 			
 		});//END
 </script>
