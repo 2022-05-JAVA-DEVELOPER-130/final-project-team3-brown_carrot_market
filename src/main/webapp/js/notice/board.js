@@ -13,7 +13,7 @@ function changeQnaList(pageno){
 				let data = resultObj.data;
 				let htmlBuffer = ``;
 				data.itemList.forEach(function(notice, i){
-					let fDate = formatDate(qna.q_date);
+					let fDate = formatDate(notice.notice_date);
 					let toDate = formatDate(new Date());
 					htmlBuffer += `<tr>
 	                                <th scope="row">${notice.notice_no}</th>

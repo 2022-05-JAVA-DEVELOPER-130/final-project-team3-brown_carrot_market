@@ -1,6 +1,8 @@
 package com.itwill.brown_carrot_market.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -26,12 +28,33 @@ public class NoticeDaoImpl implements NoticeDao{
 		this.noticeMapper = noticeMapper;
 	}
 
+/*
 	@Override
 	public List<Notice> selectAll() throws Exception{
 		System.out.println(">>>noticeDaoImpl : selectAll()호출");
 		return noticeMapper.selectAll();
 	}
+*/
+	//페이징 처리 공지사항 전체조회
+	@Override
+	public List<Notice> selectAll(int pageStart, int pageEnd) throws Exception{
+		System.out.println(">>>noticeDaoImpl : selectAll()호출");
+		
+		//
+		Map<String, Integer>map = new HashMap<>();
+		map.put("pgaeStart", pageStart);
+		map.put("pageEnd", pageEnd);
+		
+		return noticeMapper.selectAll(pageStart, pageEnd);
+	}
+	
+	//전체 게시물 수 계산
+	@Override
+	public int selectCountNotice() throws Exception{
+		return noticeMapper.selectCountNotice();
+	}
 
+	
 	@Override
 	public Notice selectByNo(int notice_no) throws Exception{
 		System.out.println(">>>noticeDaoImpl : selectByNo()호출");
@@ -61,6 +84,8 @@ public class NoticeDaoImpl implements NoticeDao{
 		System.out.println(">>>noticeDaoImpl : updateNoticeCount()호출");
 		return noticeMapper.updateNoticeCount(notice_no);
 	}
+
+
 	
 	
 	
