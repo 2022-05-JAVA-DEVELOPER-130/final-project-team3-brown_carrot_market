@@ -33,8 +33,7 @@ public interface ChatService {
 	// 채팅방 생성
 	public int chatRoomCreate(String from_id,String to_id,Integer p_no);
 		
-	// 채팅방 삭제
-	public int chatRoomDelete(int c_room_no);
+
 
 	// 중복체크 
 	boolean duplicateCheck(String mId, String mIdYou, Integer p_no);
@@ -52,4 +51,6 @@ public interface ChatService {
 	public int promiseUpdate(Promise promise);
 	
 	public int promiseExist(int c_room_no);
+
+	public int chatRoomDelete(String user_id, int c_room_no);
 }

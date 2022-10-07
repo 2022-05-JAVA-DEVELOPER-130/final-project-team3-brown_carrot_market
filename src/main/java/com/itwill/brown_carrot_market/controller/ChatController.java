@@ -60,6 +60,11 @@ public class ChatController {
 		return "chat_appointment_change";	
 		}
 		
+		@RequestMapping(value="/chat_appointment_map",method=RequestMethod.GET)
+		public String chatAppointmentMap(HttpServletRequest req, HttpServletResponse resp, HttpSession session){
+		return "chat_appointment_map";	
+		}
+		
 	
 		
 		
