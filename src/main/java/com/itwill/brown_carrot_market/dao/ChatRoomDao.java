@@ -27,4 +27,10 @@ public interface ChatRoomDao {
 	 
 	 public int chatNotRead(int c_room_no, String user_id);
 
+	 public int chatRoomDelteTo(String user_id, int c_room_no);
+
+	 public int chatRoomDelteFrom(String user_id, int c_room_no);
+
+	 public int chatRoomDeleteCheck(int c_room_no);
+
 }
