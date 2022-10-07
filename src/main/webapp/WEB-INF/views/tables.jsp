@@ -90,9 +90,11 @@
 	                                       
 	                                        	<a href="notice_view?notice_no=${notice.notice_no}&pageno=${noticeList.pageMaker.curPage}">
 	                                        		${notice.notice_title}
+	                                        		<!--
 	                                        		<c:if test="${to_date eq notice.notice_date}">
 	                                        			&nbsp;&nbsp;<span class="badge badge-danger">new</span>
 	                                        		</c:if>
+	                                        		  -->
 	                                        	</a>
 	                                        	
 	                                        
