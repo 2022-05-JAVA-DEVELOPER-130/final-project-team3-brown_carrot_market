@@ -24,8 +24,8 @@ public class NoticeRestController {
 	/*
 	 * 게시글 리스트 반환 (REST)
 	 */
-	@RequestMapping("/notice_list_rest")
-	public  Map<String, Object> notice_list_rest(@RequestParam(required = false, defaultValue = "1") Integer pageno) {
+	@RequestMapping("/tables_rest")
+	public  Map<String, Object> tables_rest(@RequestParam(required = false, defaultValue = "1") Integer pageno) {
 		Map<String, Object> resultMap = new HashMap<>();	
 		PageMakerDto<Notice> noticeList = null;
 		try {

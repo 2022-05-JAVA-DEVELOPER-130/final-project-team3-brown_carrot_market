@@ -133,7 +133,7 @@
                                 </c:forEach>
                                 <c:if test="${noticeList.pageMaker.curPage < noticeList.pageMaker.totPage}">  
 	                                <li class="page-item">
-				                        <button class="page-link" onclick="changeQnaList(${noticeList.pageMaker.nextPage});"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+				                        <button class="page-link" onclick="changeQnaList(${noticeList.pageMaker.nextPage})"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
 			                    	 </li>
                                 </c:if>
 

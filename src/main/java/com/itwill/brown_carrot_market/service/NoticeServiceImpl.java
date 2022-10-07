@@ -56,7 +56,7 @@ public class NoticeServiceImpl implements NoticeService{
 		
 
 		title.append(t.replace(" ", "&nbsp;"));
-		notice.setNotice_title(t);
+		notice.setNotice_title(title.toString());
 		
 		return notice;
 	}
