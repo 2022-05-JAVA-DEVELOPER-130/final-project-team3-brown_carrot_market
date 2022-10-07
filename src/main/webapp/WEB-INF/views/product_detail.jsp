@@ -21,8 +21,10 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="style.css">
-
+	<!-- javaScript -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 </head>
 
 <body>
@@ -138,6 +140,7 @@
                         </div>
                         -->
                         <h4 class="price mb-4">가격 : ${product.p_price} </h4>
+                        <h4 class="price mb-4">이미지 : ${product.productImagesList} </h4>
 
                         <!-- Overview -->
                         <div class="short_overview mb-4">
