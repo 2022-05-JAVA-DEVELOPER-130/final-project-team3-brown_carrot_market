@@ -3,7 +3,7 @@
 */
 function changeQnaList(pageno){
 	$.ajax({
-		url: "notice_list_rest",
+		url: "tables_rest",
 		method: "post",
 		data: {"pageno" :pageno},
 		dataType: "json",
@@ -60,7 +60,7 @@ function changeQnaList(pageno){
 */
 $(".qna_btn.list").on("click", function(){
 	let pageno = $(this).attr("pageno");
-	location.href = `qna_list?pageno=${pageno}`;
+	location.href = `notice_list?pageno=${pageno}`;
 });
 
 /*
