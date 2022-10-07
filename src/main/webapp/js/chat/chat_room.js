@@ -295,12 +295,13 @@ function chat_head(id,img,room_no){
 									<a href="javascript:void(0);" class="btn btn-outline-primary">
 									<i class="fa fa-image"></i></a>
 									
-									<a href="javascript:void(0);" class="btn btn-outline-dark">
+									<a href="javascript:void(0);" class="btn btn-outline-dark"
+									id="deleteRoom">
 									<i class="fa fa-sign-out"></i></a> 
 								
 									<a href="javascript:void(0);" class="btn btn-outline-danger">
 									<i class="fa fa-close" ></i></a>
-									<li>${room_no}</li>
+									
 								</div>
 							</div>`
 	
@@ -531,6 +532,103 @@ function connectWS(){
 	}
 }
 
+/*****************삭제....*************** */
+
+$(document).on('click','#deleteRoom',function(e){
+	console.log(c_room_no);
+
+	var chat_room={
+		"c_room_no":c_room_no,
+		"loginId":loginId
+	}
+$.ajax({
+		
+		
+		url:"chat_delete_rest",
+		method:"POST",
+		data: JSON.stringify(chat_room),
+		async: true,
+        contentType: "application/json; charset=utf-8", //헤더의 Content-Type을 설정
+        dataType: "JSON", //응답받을 데이터 타입 (XML,JSON,TEXT,HTML,JSONP)  
+				
+    			    			
+	
+		
+		success:function(jsonResult){
+			var chatList=jsonResult.data;
+		//	var chatContentArray=jsonResult.data;
+		//	yourId=jsonResult.yourId;
+		//	yourImg = jsonResult.yourImg;
+		//	c_room_no=jsonResult.c_room_no;
+		//	console.log("채팅방의 상대방 ID:"+yourId);
+		//	console.log(chatContentArray[0]);
+		//	//$('#content').html('채팅 불러오기 성공');
+		//	$('#chat_history').html("");
+		//	$('#chatHead').html("");
+			//loginId=$('#loginId').val();
+			console.log("불러오기");
+			console.log(chatList);
+			$('#chatRoomList').html("");
+			$('#chat_history').html("");
+			$('#chat_history').append(chatRoomOut());
+			
+			for(const item of chatList){
+				
+			$('#chatRoomList').append(chatRoomListNew(item));
+				
+				
+			}
+
+		}
+		
+	});
+	
+	});
+function chatRoomOut(){
+	return `<li class="clearfix">
+									<div class="message-data text-right">
+										<span class="message-data-time">10:10 AM, Today</span> <img
+											src="https://bootdey.com/img/Content/avatar/avatar7.png"
+											alt="avatar">
+									</div>
+									<div class="message other-message float-right" >Hi Aiden,
+										how are you? How is the project coming along?</div>
+								</li>
+								<li class="clearfix">
+									<div class="message-data">
+										<span class="message-data-time">10:12 AM, Today</span>
+									</div>
+									<div class="message my-message">Are we meeting today?</div>
+								</li>
+								<li class="clearfix">
+									<div class="message-data">
+										<span class="message-data-time">10:15 AM, Today</span>
+									</div>
+									<div class="message my-message">Project has been already
+										finished and I have results to show you.</div>
+								</li>
+								<li class="clearfix">
+									<div class="message-data text-right">
+										<span class="message-data-time">10:10 AM, Today</span> <img
+											src="https://bootdey.com/img/Content/avatar/avatar7.png"
+											alt="avatar">
+									</div>
+									<div class="message other-message float-right">Hi Aiden,
+										how are you? How is the project coming along?</div>
+								</li>`
+}
+function chatRoomListNew(list){
+	return `        <li class="clearfix">
+                        <img src='img/user_profile/${list.you_image}' alt="avatar">
+                       
+                        <div class="about">
+							<input name="chatRoomNo" type="hidden" value=${list.c_room_no}/>
+					<!--	<button type="button" class="btn btn-default" id="btnCall${list.c_room_no}" value=${list.c_room_no}>${list.c_room_no}</button>-->
+                            <div class="name" id="btnCall${list.c_room_no}" value=${list.c_room_no}>${list.you_id}</div> 
+                            <div class="content"> <i class="fa fa-circle offline"></i>${list.c_content}</div>                                            
+                        </div>
+                 </li>`
+}
 
 
 

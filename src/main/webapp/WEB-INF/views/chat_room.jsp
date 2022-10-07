@@ -38,7 +38,7 @@
                 </div>
 
 				<input name="loginId" id="loginId" type="hidden" value=${loginId}>
-                <ul class="list-unstyled chat-list mt-2 mb-0">
+                <ul class="list-unstyled chat-list mt-2 mb-0" id="chatRoomList">
                 <c:forEach var="list" items="${chatList}">
                
                 <li class="clearfix">
