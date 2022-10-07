@@ -10,9 +10,13 @@
 			javaType="com.itwill.brown_carrot_market.dto.Product">
 			<result column="P_NO" property="p_no" />
 			<result column="P_TITLE" property="p_title" />
-			<result column="P_DESC" property="p_desc" />
 			<result column="P_PRICE" property="p_price" />
 			<result column="P_DATE" property="p_date" />
+			<collection property="productImagesList" javaType="java.util.List" ofType="com.itwill.brown_carrot_market.dto.ProductImage">
+				<result column="PI_NO " property="pi_no"/>
+				<result column="PI_NAME " property="pi_name"/>
+				<result column="P_NO " property="p_no"/>
+			</collection>
 		</association>
 	</resultMap>
 	<select id="selectAllById" resultMap="ordersResultMap">
