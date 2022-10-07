@@ -187,4 +187,6 @@
                            #{product.userInfo.user_id})
 	</insert>
 	
+	<!-- 사진 -->
+	
 </mapper>

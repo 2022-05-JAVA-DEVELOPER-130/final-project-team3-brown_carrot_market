@@ -9,12 +9,51 @@
 	private Orders orders;
 	private UserInfo userInfo;
  -->
+ 	<resultMap id="reviewResultMap" type="com.itwill.brown_carrot_market.dto.Review">
+ 		<result column="review_no" property="review_no"/>
+ 		<result column="review_desc" property="review_desc"/>
+ 		<result column="review_image" property="review_image"/>
+ 		<result column="review_point" property="review_point"/>
+ 		<result column="user_id" property="userInfo.user_id" />
+ 		<association property="orders" javaType="com.itwill.brown_carrot_market.dto.Orders">
+	 		<result column="orders_no" property="orders_no" />
+	 		<result column="p_no" property="product.p_no" />
+			<result column="user_id" property="user_id" />
+ 		</association>
+ 	</resultMap>
  
-	<select id="createReview" parameterType="com.itwill.brown_carrot_market.dto.Review" resultType="int">
+ 
+	<insert id="createReview" parameterType="com.itwill.brown_carrot_market.dto.Review">
 		insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
-    		values(REVIEW_REVIEW_NO_SEQ.nextval,#{review_desc},#{review_image},#{review_point}, #{orders.orders_no},#{userinfo.user_id})
-	</select>	
-
-
+    		values(REVIEW_REVIEW_NO_SEQ.nextval,#{review_desc},#{review_image},#{review_point}, #{orders.orders_no},#{userInfo.user_id})
+	</insert>
+	
+	<!-- 전체후기 : 판매자 or 구매자가 나에게 남긴 후기 -->
+	<select id="findReceivedReview" parameterType="String" resultMap="reviewResultMap">
+		select * from review r
+		join orders oo
+		on r.orders_no=oo.orders_no
+			where r.user_id in
+				(select o.user_id buyer from product p
+					join orders o
+					on p.p_no=o.p_no
+					where p.user_id = #{user_id})
+			or r.user_id in
+				(select p.user_id seller from product p
+					join orders o
+					on p.p_no=o.p_no
+					where o.user_id = #{user_id})
+	</select>
+	
+	<!-- '판매자(carrot3)'인 경우 : 구매자가 남긴 후기  -->
+	<select id="findReceivedReviewByBuyer" parameterType="String" resultMap="reviewResultMap">
+		select * from review r
+			where r.user_id in
+				(select o.user_id buyer from product p
+					join orders o
+					on p.p_no=o.p_no
+					where p.user_id =#{user_id})
+	</select>
+	
 
 </mapper>

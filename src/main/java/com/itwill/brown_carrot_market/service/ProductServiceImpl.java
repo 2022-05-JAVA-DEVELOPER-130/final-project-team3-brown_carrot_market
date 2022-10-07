@@ -1,6 +1,7 @@
 package com.itwill.brown_carrot_market.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -72,6 +73,12 @@ public class ProductServiceImpl implements ProductService{
 	public int updateProductCount(int p_no) throws Exception {
 		// TODO Auto-generated method stub
 		return productDao.updateProductCount(p_no);
+	}
+
+	@Override
+	public int insertProduct(Map map) throws Exception {
+		// TODO Auto-generated method stub
+		return productDao.insertProduct(map);
 	}
 	
 }
