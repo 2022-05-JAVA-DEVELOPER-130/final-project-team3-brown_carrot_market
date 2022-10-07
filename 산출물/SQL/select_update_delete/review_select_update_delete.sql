@@ -55,7 +55,14 @@ where o.user_id=r.user_id;
 --********[거래후기상세]페이지
 
 -- 전체후기 : 판매자 or 구매자가 나에게 남긴 후기
-select * from review r
+select *
+from review r
+join orders oo
+on r.orders_no=oo.orders_no
+join product pp
+on oo.p_no=pp.p_no
+join userinfo u
+on pp.user_id=u.user_id
 where r.user_id in
 (select o.user_id buyer from product p
 join orders o
