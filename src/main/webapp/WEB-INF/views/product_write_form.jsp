@@ -81,7 +81,7 @@
                                     
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="" id="email" placeholder="가격" required>
+                                            <input type="text" class="form-control" name="p_price" id="p_price" placeholder="가격" required>
                                         </div>
                                     </div>
                                     
@@ -100,7 +100,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea name="message" class="form-control" id="message" cols="30" rows="10" placeholder="물건 설명" required></textarea>
+                                            <textarea name="p_desc" class="form-control" id="p_desc" cols="30" rows="10" placeholder="물건 설명" required></textarea>
                                         	</div>
                                         </div>
                                     </div>
