@@ -8,6 +8,13 @@
   
   $(document).ready(function(){
 	
+	$(window).on("load",function(){
+		$.ajax({
+			url:"s"
+		
+	});
+	});
+	
 	
 	$('#datePicker').datepicker({
 	format:"yyyy-mm-dd",
