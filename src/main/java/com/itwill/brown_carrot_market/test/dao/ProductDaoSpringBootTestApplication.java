@@ -46,12 +46,14 @@ public class ProductDaoSpringBootTestApplication {
 		*/
 		
 		//address를 뽑아옴
+		/*
 		Map map=productDao.selectProductAddress("carrot3", 5);
 		
 		Map pmap=new HashMap();
 		pmap.put("product",new Product(0, "제발요", "되게해주세요", 1000, null, 0, 0, 0, null, 0, 0, new ProductCategory(1, ""), new UserInfo("carrot3", null, null, null, null, 0, 0, null, null), null, null));
 		pmap.put("address", map);
 		productDao.insertProduct(pmap);
+		*/
 	}
 	
 /*
