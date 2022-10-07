@@ -19,6 +19,7 @@
 			<result column="address_lat" property="address_lat" />
 			<result column="address_lng" property="address_lng" />
 			<result column="address_range" property="address_range" />
+			<result column="user_id" property="user_id" />
 		</collection>
 	</resultMap>
 
