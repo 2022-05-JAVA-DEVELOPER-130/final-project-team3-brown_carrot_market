@@ -28,9 +28,9 @@
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7c7231db91ae56cfc5e3c6ea06f73c6&libraries=services"></script>
-<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
-<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 <script type="text/javascript" src="js/common/user_session_check.js"></script>
+<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
+<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
 <script type="text/javascript">
 		$(function() {
 			
@@ -339,7 +339,8 @@
 									dataType : 'json',
 									success : function(jsonResult) {
 										 console.log(jsonResult.msg);
-										 console.log('성공!!');
+										 //수정필요
+										 $("#user_my_account").get(0).click();
 								    }
 								});
 						}
@@ -372,8 +373,9 @@
 									},
 									dataType : 'json',
 									success : function(jsonResult) {
-										 console.log(jsonResult.msg);
 										 console.log('성공!!');
+										//수정필요
+										 $("#user_my_account").get(0).click();
 								    }
 								});
 					    }
@@ -391,7 +393,7 @@
 				e.preventDefault();
 			});
 			
-			//화면에 load하기 위해 blbo 만들어서 삽입
+			//화면에 load하기 위해 blob 만들어서 삽입
 			function loadFile(input) {
 				var file = input.files[0];
 			    document.getElementById('user_profile').src=URL.createObjectURL(file);
@@ -440,7 +442,7 @@
 					<div class="my-account-navigation mb-50">
 						<ul>
 							<!-- (수정필요)활성화에 따라서, active를 넣는 작업 해야함! -->
-							<li class="active"><a href="user_my_account">마이페이지</a></li>
+							<li class="active"><a href="user_my_account" id="user_my_account">마이페이지</a></li>
 							<li class=""><a href="#" id="user_account_details">회원정보수정</a></li>
 							<li class="active"><a href="" id="user_view_addresses">내 동네설정</a></li>
 							<li class=""><a href="#" id="">흙당근 포인트</a></li>

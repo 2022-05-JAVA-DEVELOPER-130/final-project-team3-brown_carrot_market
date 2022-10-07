@@ -21,7 +21,7 @@ public class OrdersController {
 	
 	
 	@RequestMapping(value = "/orders_list")
-	public String orders_list(Model model) throws Exception{
+	public String orders_list(Model model/*, HttpServletRequest request*/) throws Exception{
 		String forwardPath="";
 		
 		//String sUserId=(String)request.getSession().getAttribute("carrot1");

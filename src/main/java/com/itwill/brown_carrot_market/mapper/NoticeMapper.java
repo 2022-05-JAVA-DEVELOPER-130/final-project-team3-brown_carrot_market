@@ -8,9 +8,19 @@ import com.itwill.brown_carrot_market.dto.Notice;
 
 @Mapper
 public interface NoticeMapper {
-	
+
+/*
 	//공지사항 전체조회
 	public List<Notice> selectAll();
+*/	
+	
+	//공지사항 전체조회--페이징 처리
+	public List<Notice> selectAll(int pageStart, int pageEnd);
+	
+	
+	//공지사항 전게 게시글 수 계산
+	public int selectCountNotice();
+	
 	
 	//공지사항 글 한개 찾기
 	public Notice selectByNo(int notice_no);

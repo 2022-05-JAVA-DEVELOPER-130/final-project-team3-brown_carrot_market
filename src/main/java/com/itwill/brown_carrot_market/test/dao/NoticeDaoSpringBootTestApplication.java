@@ -38,7 +38,7 @@ public class NoticeDaoSpringBootTestApplication {
 		ConfigurableApplicationContext context=application.run(args);
 		NoticeDao noticeDao=(NoticeDao)context.getBean(NoticeDao.class);
 		
-		System.out.println("selectAll() test:"+noticeDao.selectAll());
+		//System.out.println("selectAll() test:"+noticeDao.selectAll());
 		
 		System.out.println("selectByNo() test:"+noticeDao.selectByNo(2));
 		
