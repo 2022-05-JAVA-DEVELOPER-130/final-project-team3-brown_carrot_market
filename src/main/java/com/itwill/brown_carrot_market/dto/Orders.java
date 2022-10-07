@@ -61,8 +61,16 @@ public class Orders {
 
 	@Override
 	public String toString() {
-		return "\nOrders [orders_no=" + orders_no + ", product.p_title=" + product.p_title + ", user_id=" + user_id + ", transfer.transfer_date" + transfer.getTransfer_date()+ "]";
+		return "Orders [orders_no=" + orders_no + ", product=" + product
+				+ ", user_id=" + user_id + ", transfer=" + transfer + "]";
 	}
+
+	/*
+	 * @Override public String toString() { return "\nOrders [orders_no=" +
+	 * orders_no + ", product.p_title=" + product.p_title + ", user_id=" +
+	 * user_id + ", transfer.transfer_date" + transfer.getTransfer_date()+ "]";
+	 * }
+	 */
 
 	
 }

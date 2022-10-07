@@ -81,11 +81,30 @@ public class ChatServiceImpl implements ChatService {
 		return chatRoomDao.chatRoomCreate(from_id, to_id, p_no);
 	}
 
-	// 채팅방 삭제
-	@Override
-	public int chatRoomDelete(int c_room_no) {
-		return chatRoomDao.chatRoomDelete(c_room_no);
-	}
+	//채팅방 삭제 
+		@Override
+		public int chatRoomDelete(String user_id,int c_room_no) {
+			int result = 0;
+			if(chatRoomDao.chatRoomDeleteCheck(c_room_no)==2) {
+				ChatRoom chatRoom = chatRoomDao.chatRoomSelect(c_room_no);
+				if(chatRoom.getTo_id().equals(user_id)) {
+					result = chatRoomDao.chatRoomDelteTo(user_id, c_room_no);
+				}else if(chatRoom.getFrom_id().equals(user_id)) {
+					result = chatRoomDao.chatRoomDelteFrom(user_id, c_room_no);
+				}
+			
+				
+			}
+			else if(chatRoomDao.chatRoomDeleteCheck(c_room_no)==1) {
+				result = chatRoomDao.chatRoomDelete(c_room_no);
+				
+			}
+			
+
+
+		
+			return result;
+		}
 	
 	// 채팅방 중복 체크 
 	@Override

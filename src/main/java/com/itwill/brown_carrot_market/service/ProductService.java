@@ -1,6 +1,7 @@
 package com.itwill.brown_carrot_market.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Product;
@@ -33,6 +34,8 @@ public interface ProductService {
 		
 		//상품 조회수 증가
 		int updateProductCount(int p_no)throws Exception;
+		
+		int insertProduct(Map map)throws Exception;
 		
 		/*
 		 * insert랑 updateWishCount 추가하기

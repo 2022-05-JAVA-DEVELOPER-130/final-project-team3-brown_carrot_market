@@ -1,7 +1,8 @@
 package com.itwill.brown_carrot_market.controller;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,7 +10,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.brown_carrot_market.dto.Address;
@@ -52,4 +55,39 @@ public class ProductController {
 		
 		return "product_detail";
 	}
+	
+	@RequestMapping("/product_write_form")
+	public String product_write_form()throws Exception {
+			System.out.println("product_write_form 컨트롤러 호출-productService: " + productService);
+		return "product_write_form";
+	}
+	
+	@RequestMapping(value = "/product_write_action", method = RequestMethod.GET)
+	public String product_write_action_get() {
+		return "redirect : product_list";
+	}
+	
+
+	@RequestMapping(value = "/product_write_action", method = RequestMethod.POST)
+	public String product_write_action(@ModelAttribute Map<String, Object> map, Model model, HttpSession session) {
+		String forwardPath = "";
+		String sUserId = (String)session.getAttribute("sUserId");
+		Address sAddress = (Address)session.getAttribute("sAddress");
+		try {
+			map.put("user_id", sUserId);
+			map.put("address_no", sAddress.getAddress_no());
+			
+			int insertRowCount = productService.insertProduct(map);
+			
+			forwardPath = "redirect:guest_list";
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("MSG", "잘모르는실패!!!");
+			forwardPath = "redirect:main";
+		}
+		return forwardPath;
+	}
+	
+	
+	
 }

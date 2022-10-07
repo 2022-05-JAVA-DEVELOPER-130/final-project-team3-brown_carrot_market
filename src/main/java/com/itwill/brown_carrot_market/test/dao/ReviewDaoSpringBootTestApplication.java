@@ -40,26 +40,17 @@ public class ReviewDaoSpringBootTestApplication {
 		  application.setWebApplicationType(WebApplicationType.NONE);
 		  ConfigurableApplicationContext context=application.run(args);
 		 
-		//NoticeDao noticeDao=(NoticeDao)context.getBean(NoticeDao.class);
 		ReviewDao reviewDao = (ReviewDao)context.getBean(ReviewDao.class);
-		
-		//System.out.println("selectAll() test:"+noticeDao.selectAll());
-		
-		//System.out.println("selectByNo() test:"+reviewDao.selectByNo(2));
-		
-		//System.out.println("insertNotice() test:"+noticeDao.insertNotice(new Notice(0, "추가 공지사항 제목", "추가 공지사항 내용", null, 0, 0)));
-		
-		//System.out.println("deleteNotice() test:"+noticeDao.deleteNotice(9));
-		
-		//System.out.println("updateNotice() test:"+noticeDao.updateNotice(new Notice(10, "공지사항 제목 수정", "공지사항 내용 수정", null, 0, 1)));
-		
-		//System.out.println("updateNoticeCount() test:"+reviewDao.updateNoticeCount(1));
 		
 		//values(REVIEW_REVIEW_NO_SEQ.nextval,'친절하고 약속시간을 잘지켜요','',0.1, 1,'carrot5');
 		
-		Review review = new Review(0, "Dao Test", null, 0.1, new Orders(66, null, null, null), new UserInfo("carrot1", null, null, null, null, 0, 0, null, null));
-		System.out.println("createReview() test: "+reviewDao.createReview(review));
+		Review review = new Review(0, "Dao Test", "", 0.1, new Orders(66, null, null, null), new UserInfo("carrot1", null, null, null, null, 0, 0, null, null));
+		//System.out.println("createReview() test: "+reviewDao.createReview(review));
 
+		System.out.println("findReceivedReview() test: "+reviewDao.findReceivedReview("carrot1"));
+		
+		System.out.println("findReceivedReviewByBuyer() test: "+reviewDao.findReceivedReviewByBuyer("carrot3"));
+		
 	}
 }
 
