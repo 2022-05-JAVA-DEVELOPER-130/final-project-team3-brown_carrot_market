@@ -33,7 +33,6 @@
 <script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
 <script type="text/javascript">
 		$(function() {
-			
 			/****************user_view******************/
 			$(document).on('click', '#user_account_details, #a_account_details',function(e){
 				console.log("click!! >> "+e.target);
