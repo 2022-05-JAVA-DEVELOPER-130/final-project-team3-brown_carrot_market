@@ -46,13 +46,13 @@
 	<button type="button" id="btnChatAppSpot">장소 찾기</button>
 	</div>
 	<div id="map" style="width:300px;height:300px;"></div>
-	<div id="org_map" style="width:300px;height:300px;"></div>
 	
 	
-	<input type="hidden" id="chatApp_lat" value=""/>
-	<input type="hidden" id="chatApp_lng" value=""/>
+	<input type="hidden" id="chatApp_lat" value="">
+	<input type="hidden" id="chatApp_lng" value="">
 	</form>
 	<button type="button" id="chatAppUpdateSubmit">약속 수정하기</button>
+	<button type="button" id="chatAppDeleteSubmit">약속 삭제하기</button>
 
 </body>
 </html>
