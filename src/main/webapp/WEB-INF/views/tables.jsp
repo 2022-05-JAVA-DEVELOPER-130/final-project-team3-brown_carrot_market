@@ -7,6 +7,7 @@
 <fmt:formatDate var="to_date" value='${toDay}' pattern='yyyy-MM-dd' />
 <fmt:formatDate var="q_date" value='${qna.q_date}' pattern='yyyy-MM-dd' />
  -->
+
 <!doctype html>
 <html lang="en">
 
@@ -39,9 +40,9 @@
 	 -->
 	 
     <!-- Header Area -->
-    <!-- 
+    
   	<jsp:include page="common/include_common_header.jsp"/>
-  	 -->
+  	
     <!-- Header Area End -->
     
     <!-- Breadcumb Area -->
@@ -157,7 +158,9 @@
 	<!--
 	
 	  -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="js/notice/board.js" defer></script>
+	
 
 </body>
 
