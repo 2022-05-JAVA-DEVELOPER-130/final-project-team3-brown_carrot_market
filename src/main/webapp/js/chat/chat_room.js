@@ -5,6 +5,7 @@ var yourId=null;
 var mImage=null;
 var socket=null;
 
+
 var c_room_no=null;
 var contextPath=getContextPath();
 
@@ -149,10 +150,13 @@ $.ajax({
 			
 			for(const item of chatContentArray){
 				
-				if(item.user_id!=loginId){
+				if(item.user_id=="admin"){
+					$('#chat_history').append(message_admin(item));
+				}
+				else if(item.user_id!=loginId){
 					console.log("내가 보낸 메세지");
 			$('#chat_history').append(message_other(item));
-				}else{
+				}else if(item.user_id==loginId){
 					console.log("상대가 보낸 메세지");
 			$('#chat_history').append(message_you(item));
 				}
@@ -241,6 +245,13 @@ function message_you(chat_content){
 									</div>
 									<div class="message other-message float-right">${chat_content.c_content}</div>
 									<div class="chat_read_check">${chat_read}</div>
+								</li>`
+}
+/***************** 공지 *************** */
+function message_admin(chat_content){
+	return `<li class="clearfix">
+
+									<div class="message admin-message" margin:auto>${chat_content.c_content}</div>
 								</li>`
 }
 
@@ -515,10 +526,13 @@ function connectWS(){
 			
 			for(const item of chatContentArray){
 				
-				if(item.user_id!=loginId){
+				if(item.user_id=="admin"){
+					$('#chat_history').append(message_admin(item));
+				}
+				else if(item.user_id!=loginId){
 					console.log("내가 보낸 메세지");
 			$('#chat_history').append(message_other(item));
-				}else{
+				}else if(item.user_id==loginId){
 					console.log("상대가 보낸 메세지");
 			$('#chat_history').append(message_you(item));
 				}
