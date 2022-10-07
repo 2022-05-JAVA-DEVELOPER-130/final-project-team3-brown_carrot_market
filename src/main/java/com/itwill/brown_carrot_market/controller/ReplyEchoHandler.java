@@ -317,7 +317,7 @@ public class ReplyEchoHandler {
 		ChatContents newChat = new ChatContents(0, String.valueOf(message.get("c_content")), null, null,
 				String.valueOf(message.get("user_id")), Integer.valueOf(message.get("c_room_no")));
 
-		
+	
 		try {
 		System.out.println("약속 채팅Contents 넣기:"+newChat);
 		chatService.promiseInsert(newPromise);
