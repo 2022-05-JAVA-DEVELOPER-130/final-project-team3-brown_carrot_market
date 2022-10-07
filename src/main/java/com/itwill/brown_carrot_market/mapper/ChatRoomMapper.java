@@ -62,13 +62,17 @@ public interface ChatRoomMapper {
 	public int chatRoomDelete(int c_room_no);
 	
 	// 첫 채팅방 삭제..? --> From 
-	@Update ("update chat_room set from_id_in=1 where from_id=#{user_id} and c_room_no=#{c_room_no}")
+	@Update ("update chat_room set from_id_in=0 where from_id=#{user_id} and c_room_no=#{c_room_no}")
 	public int chatRoomDeleteFrom(String user_id, int c_room_no);
 
 	// 첫 채팅방 삭제 --> To
 	@Update ("update chat_room "
-			+ "set to_id_in=1 where to_id=#{user_id} and c_room_no=#{c_room_no}")
+			+ "set to_id_in=0 where to_id=#{user_id} and c_room_no=#{c_room_no}")
 	public int chatRoomDeleteTo(String user_id, int c_room_no);
+	
+	// 채팅방 첫삭제 여부
+	@Select("select from_id_in+to_id_in sum from chat_room where c_room_no=#{c_room_no}")
+	public int chatRoomDeleteCheck(int c_room_no);
 	
 	// 채팅방 안읽은 메시지 수
 	@Select("select count(*) from chat_contents where c_room_no=#{c_room_no} and c_read=0 and user_id!=#{user_id}")

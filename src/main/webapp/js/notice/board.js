@@ -13,16 +13,19 @@ function changeQnaList(pageno){
 				let data = resultObj.data;
 				let htmlBuffer = ``;
 				data.itemList.forEach(function(notice, i){
+					/*
 					let fDate = formatDate(notice.notice_date);
 					let toDate = formatDate(new Date());
+					*/
 					htmlBuffer += `<tr>
 	                                <th scope="row">${notice.notice_no}</th>
 	                                <td><a href="notice_view?notice_no=${notice.notice_no}&pageno=${data.pageMaker.curPage}">${notice.notice_title}</a>`;
+	                /*
 	                if(fDate == toDate){
 						htmlBuffer += `&nbsp;&nbsp;<span class="badge badge-danger">new</span>`;
 					}
+					*/
                     htmlBuffer += `</td>
-	                                    <td>d</td>
 	                                    <td>${notice.notice_date}</td>
 	                                    <td>${notice.notice_count}</td>
 	                                </tr>`;
@@ -58,6 +61,7 @@ function changeQnaList(pageno){
 /*
 게시글 목록 이동
 */
+
 $(".qna_btn.list").on("click", function(){
 	let pageno = $(this).attr("pageno");
 	location.href = `notice_list?pageno=${pageno}`;
@@ -123,7 +127,7 @@ $(".qna_btn.update").on("click", function(){
 */
 $(".qna_btn.write_form, .qna_btn.reply").on("click", function(){
 	let pageno = $(this).attr("pageno");
-	location.href = "qna_write_form?pageno=" + pageno;
+	location.href = "notice_write_form?pageno=" + pageno;
 });
 
 /*

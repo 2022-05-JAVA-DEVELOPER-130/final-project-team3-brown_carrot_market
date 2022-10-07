@@ -11,6 +11,11 @@ var contextPath=getContextPath();
 
 var last_seen_time=null;
 
+var c_app_lat=null;
+var c_app_lng=null;
+
+var promiseData=null;
+
 var jsonData={
 	code:null,
 	url:null,
@@ -73,12 +78,29 @@ $(document).on('click','[id^=btnCall]',function(e){
 	if(socket!=null){
 	socket.close();
 	}
+	num = this.id.substr(7);
+		c_room_no=num;
+	
+			$.ajax({
+		url:'promise_check',
+		method:"POST",
+		data:'c_room_no='+c_room_no,
+		dataType:'JSON',
+		success:function(jsonResult){
+			//console.log("약속장소:"+spot)
+			promiseData= jsonResult.data;
+			c_app_lat=promiseData.c_app_lat;
+			c_app_lng=promiseData.c_app_lng;
+			
+			
+			
+		}
+	});
+	
 		
 	e.stopPropagation();
 	e.preventDefault();
-		num = this.id.substr(7);
-		console.log(num);
-		c_room_no=num;
+		
 		var chat_detail={
 			"c_room_no":num,
 			"loginId":loginId
@@ -103,7 +125,7 @@ $.ajax({
 			yourImg = jsonResult.yourImg;
 			c_room_no=jsonResult.c_room_no;
 			console.log("채팅방의 상대방 ID:"+yourId);
-			console.log(chatContentArray[0]);
+			console.log(chatContentArray);
 			//$('#content').html('채팅 불러오기 성공');
 			$('#chat_history').html("");
 			$('#chatHead').html("");
@@ -128,18 +150,30 @@ $.ajax({
 			
 			
 			for(const item of chatContentArray){
+		
 				
-				if(item.user_id=="admin"){
+			/*if(item.user_id=="admin"){
 					$('#chat_history').append(message_admin(item));
 				}
-				else if(item.user_id!=loginId){
-					console.log("내가 보낸 메세지");
-			$('#chat_history').append(message_other(item));
-				}else if(item.user_id==loginId){
+				*/
+				if(item.user_id!=loginId){
+					if(item.user_id=="admin"){
+					$('#chat_history').append(message_admin(item));
+				}
+					else if(item.user_id=="adminP"){
+						$('#chat_history').append( `<li class="clearfix">
+
+                           <div class="message admin-message" margin:auto>${item.c_content}
+                           <br>약속 장소 : <a href="javascript:void(popupMap(${promiseData.c_app_lat},${promiseData.c_app_lng}))" style="font-size:6px;",id="chat_spot_map">${promiseData.c_app_spot}</a></div>
+                        </li>`);
+						
+					}else{
 					console.log("상대가 보낸 메세지");
+			$('#chat_history').append(message_other(item));
+			}
+				}else if(item.user_id==loginId){
+					console.log("내가 보낸 메세지");
 			$('#chat_history').append(message_you(item));
-				}else if(item.user_id=="adminP"){
-					$('#chat_history').append(message_admin_promise_history(item));
 				}
 			};
 			
@@ -240,22 +274,23 @@ function message_admin(chat_content){
 //약속 잡기 html
 
 function message_admin_promise_history(chat_content){
-	var c_app_spot="";
 	$.ajax({
 		url:'promise_check',
 		method:"POST",
 		data:'c_room_no='+c_room_no,
-		dataType:'json',
+		dataType:'JSON',
 		success:function(jsonResult){
-			c_app_spot=jsonResult.data[0].c_app_spot;
+			//console.log("약속장소:"+spot)
+			$('#chat_history').append( `<li class="clearfix">
+
+									<div class="message admin-message" margin:auto>${chat_content.c_content}
+									<br>약속 장소 : <a href="javascript:void(popupMap(${jsonResult.data.c_app_lat},${jsonResult.data.c_app_lng}))" style="font-size:6px;",id="chat_spot_map",c_app_lat="${jsonResult.data.c_app_lat}",c_app_lng="${jsonResult.data.c_app_lng}">${jsonResult.data.c_app_spot}</a></div>
+								</li>`);
+			
 			
 		}
 	});
-	return `<li class="clearfix">
-
-									<div class="message admin-message" margin:auto>${chat_content.c_content}<br>약속 장소 :
-									<a href="" style="font-size:6px;">${c_app_spot}</a></div>
-								</li>`
+	
 }
 
 function message_admin_promise(chat_content){
@@ -263,7 +298,7 @@ function message_admin_promise(chat_content){
 	return `<li class="clearfix">
 
 									<div class="message admin-message" margin:auto>${chat_content.c_content}<br>약속 장소 :
-									<a href="" style="font-size:6px;">${chat_content.c_appspot}</a></div>
+									<a href="javascript:void(popupMap(${chat_content.c_app_lat},${chat_content.c_app_lng}))" style="font-size:6px;" class="chat_spot_map" >${chat_content.c_appspot}</a></div>
 								</li>`
 }
 
@@ -291,12 +326,13 @@ function chat_head(id,img,room_no){
 									<a href="javascript:void(0);" class="btn btn-outline-primary">
 									<i class="fa fa-image"></i></a>
 									
-									<a href="javascript:void(0);" class="btn btn-outline-dark">
+									<a href="javascript:void(0);" class="btn btn-outline-dark"
+									id="deleteRoom">
 									<i class="fa fa-sign-out"></i></a> 
 								
 									<a href="javascript:void(0);" class="btn btn-outline-danger">
 									<i class="fa fa-close" ></i></a>
-									<li>${room_no}</li>
+									
 								</div>
 							</div>`
 	
@@ -342,6 +378,7 @@ function message_send_function(){
 			c_room_no:c_room_no
 		}]
 		
+		
 
 			
 		
@@ -350,7 +387,6 @@ function message_send_function(){
 		
 		
 		
-	
 		
 			
 		message_sendDB(jsonData);
@@ -527,6 +563,103 @@ function connectWS(){
 	}
 }
 
+/*****************삭제....*************** */
+
+$(document).on('click','#deleteRoom',function(e){
+	console.log(c_room_no);
+
+	var chat_room={
+		"c_room_no":c_room_no,
+		"loginId":loginId
+	}
+$.ajax({
+		
+		
+		url:"chat_delete_rest",
+		method:"POST",
+		data: JSON.stringify(chat_room),
+		async: true,
+        contentType: "application/json; charset=utf-8", //헤더의 Content-Type을 설정
+        dataType: "JSON", //응답받을 데이터 타입 (XML,JSON,TEXT,HTML,JSONP)  
+				
+    			    			
+	
+		
+		success:function(jsonResult){
+			var chatList=jsonResult.data;
+		//	var chatContentArray=jsonResult.data;
+		//	yourId=jsonResult.yourId;
+		//	yourImg = jsonResult.yourImg;
+		//	c_room_no=jsonResult.c_room_no;
+		//	console.log("채팅방의 상대방 ID:"+yourId);
+		//	console.log(chatContentArray[0]);
+		//	//$('#content').html('채팅 불러오기 성공');
+		//	$('#chat_history').html("");
+		//	$('#chatHead').html("");
+			//loginId=$('#loginId').val();
+			console.log("불러오기");
+			console.log(chatList);
+			$('#chatRoomList').html("");
+			$('#chat_history').html("");
+			$('#chat_history').append(chatRoomOut());
+			
+			for(const item of chatList){
+				
+			$('#chatRoomList').append(chatRoomListNew(item));
+				
+				
+			}
+
+		}
+		
+	});
+	
+	});
+function chatRoomOut(){
+	return `<li class="clearfix">
+									<div class="message-data text-right">
+										<span class="message-data-time">10:10 AM, Today</span> <img
+											src="https://bootdey.com/img/Content/avatar/avatar7.png"
+											alt="avatar">
+									</div>
+									<div class="message other-message float-right" >Hi Aiden,
+										how are you? How is the project coming along?</div>
+								</li>
+								<li class="clearfix">
+									<div class="message-data">
+										<span class="message-data-time">10:12 AM, Today</span>
+									</div>
+									<div class="message my-message">Are we meeting today?</div>
+								</li>
+								<li class="clearfix">
+									<div class="message-data">
+										<span class="message-data-time">10:15 AM, Today</span>
+									</div>
+									<div class="message my-message">Project has been already
+										finished and I have results to show you.</div>
+								</li>
+								<li class="clearfix">
+									<div class="message-data text-right">
+										<span class="message-data-time">10:10 AM, Today</span> <img
+											src="https://bootdey.com/img/Content/avatar/avatar7.png"
+											alt="avatar">
+									</div>
+									<div class="message other-message float-right">Hi Aiden,
+										how are you? How is the project coming along?</div>
+								</li>`
+}
+function chatRoomListNew(list){
+	return `        <li class="clearfix">
+                        <img src='img/user_profile/${list.you_image}' alt="avatar">
+                       
+                        <div class="about">
+							<input name="chatRoomNo" type="hidden" value=${list.c_room_no}/>
+					<!--	<button type="button" class="btn btn-default" id="btnCall${list.c_room_no}" value=${list.c_room_no}>${list.c_room_no}</button>-->
+                            <div class="name" id="btnCall${list.c_room_no}" value=${list.c_room_no}>${list.you_id}</div> 
+                            <div class="content"> <i class="fa fa-circle offline"></i>${list.c_content}</div>                                            
+                        </div>
+                 </li>`
+}
 
 
 
@@ -553,10 +686,10 @@ function connectWS(){
 	
 	
 	
-})
-	
-	
-	
+}) //약속잡기 버튼 클릭 
+
+
+
 
   
   function popupNew(){
@@ -569,6 +702,13 @@ function connectWS(){
   function popupChange(){
             var url = "chat_appointment_change";
             var name = "약속 수정";
+            var option = "width = 500, height = 500, top = 100, left = 200, location = no,  resizable=no"
+            window.open(url, name, option);
+        }
+        
+   function popupMap(c_app_lat,c_app_lng){
+            var url = "chat_appointment_map?c_app_lat="+c_app_lat+"&c_app_lng="+c_app_lng;
+            var name = "약속 장소 지도로 보기";
             var option = "width = 500, height = 500, top = 100, left = 200, location = no,  resizable=no"
             window.open(url, name, option);
         }

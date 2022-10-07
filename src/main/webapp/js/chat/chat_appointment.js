@@ -6,8 +6,37 @@
   var chatAppspot=null;
   var marker_org=null;
   
-  $(document).ready(function(){
+  var jsonData={
+	code:null,
+	url:null,
+	msg:null,
+	your_id:null, // 상대 아이디 
+	data:null //chat_contents 
 	
+};
+  
+  $(document).ready(function(){
+	var lastIndexCount=location.href.lastIndexOf('/');
+	var changeUrl=location.href.substr(lastIndexCount+1);
+	if(changeUrl=="chat_appointment_change"){
+		$(window).on("load",function(){
+			$.ajax({
+				url:'promise_check',
+				method:"POST",
+				data:'c_room_no='+window.opener.c_room_no,
+				dataType:'JSON',
+				success:function(jsonResult){
+					var dateidx=jsonResult.data.c_app_date
+					$('#datePicker').val(dateidx.substr(0,10));
+					$('#datePicker').trigger('change');
+					$('#chatAppTime').val(dateidx.substr(11));
+					$('#chatAppTime').trigger('change');
+					$('#searchChatAppSpot').val(jsonResult.data.c_app_spot);
+					$('#btnChatAppSpot').trigger('click');
+				}
+			});
+		});
+	}
 	
 	$('#datePicker').datepicker({
 	format:"yyyy-mm-dd",
@@ -44,7 +73,7 @@ $('#btnChatAppSpot').click(function(e){
 		
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
-        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(window.opener.c_app_lat, window.opener.c_app_lng), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };  
 
@@ -190,35 +219,12 @@ $('#chatAppFinalSubmit').click(function(e){
 	e.preventDefault();
 	e.stopPropagation();
 	
-if($('#datePicker').val()==""){
-			alert('날짜를 입력하세요');
-			$('#datePicker').focus();
-			return false;
-		}   
-		
-if($('#chatAppTime').val()==""){
-			alert('시간을 입력하세요');
-			$('#chatAppTime').focus();
-			return false;
-		}   
-if(chatAppspot==null){
-	alert('약속 장소를 지정하세요');
-	$('#searchChatAppSpot').focus();
-	return false;
-}
+
+
+	validate();
 
 
 
-
-
-var jsonData={
-	code:null,
-	url:null,
-	msg:null,
-	your_id:null, // 상대 아이디 
-	data:null //chat_contents 
-	
-};
 
 jsonData.mId=window.opener.loginId;
 jsonData.your_id=window.opener.yourId;
@@ -271,12 +277,84 @@ jsonData.data=[{
 	//디비 전송 - 성공시 함수실행...? 
 })
 
+//약속 수정 
+$('#chatAppUpdateSubmit').click(function(e){
+	//console.log((chatAppdate+" "+chatApptime).substr(0,16));
+	e.preventDefault();
+	e.stopPropagation();
+	validate();
+	
+	var dateStr=(chatAppdate+" "+chatApptime).substr(0,16);
+	
+	jsonData.mId=window.opener.loginId;
+jsonData.your_id=window.opener.yourId;
+jsonData.msg="약속 업데이트";
+jsonData.code="3";
+jsonData.data=[{
+			c_content_no:"",
+			c_content:`${window.opener.loginId} 님이 ${dateStr}으로 약속을 변경했어요!`,
+			c_appdate:chatAppdate,
+			c_apptime:chatApptime,
+			c_appspot:chatAppspot,
+			c_app_lat:chatAppLat,
+			c_app_lng:chatAppLng,
+			c_app_date:(chatAppdate+" "+chatApptime).substr(0,16),
+			send_time:"",
+			c_read:"0",
+			user_id:"adminP", //보내는 아이디 admin_promise 변경 
+			c_room_no:window.opener.c_room_no
+		}]
+		console.log(jsonData);
+		
+		
+		$.ajax({
+			url:'promise_update',
+			data:JSON.stringify(jsonData.data[0]),
+			type:"POST",
+			async:true,
+			contentType: "application/json; charset=utf-8", //헤더의 Content-Type을 설정
+    		dataType: "JSON", //응답받을 데이터 타입 (XML,JSON,TEXT,HTML,JSONP)   
+    		
+    		
+    		success:function(result){
+				
+			console.log("promise update SUCCESS!")
+			window.opener.socket.send(JSON.stringify(jsonData));
+  		    self.close();
+			},
+			
+			
+			error:function(xhr){
+				console.log("promise update error");
+			}
+			
+		});
 })
+
+}) // document.ready 끝 
 
  
  /**********지도 script**************/
  
- 
+ function validate(){
+	if($('#datePicker').val()==""){
+			alert('날짜를 입력하세요');
+			$('#datePicker').focus();
+			return false;
+		}   
+		
+if($('#chatAppTime').val()==""){
+			alert('시간을 입력하세요');
+			$('#chatAppTime').focus();
+			return false;
+		}   
+if(chatAppspot==null){
+	alert('약속 장소를 지정하세요');
+	$('#searchChatAppSpot').focus();
+	return false;
+}
+
+}
 
 
 

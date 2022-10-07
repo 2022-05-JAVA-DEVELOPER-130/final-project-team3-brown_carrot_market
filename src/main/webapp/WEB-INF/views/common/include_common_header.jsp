@@ -117,7 +117,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="#">자주하는질문</a></li>
-                                    <li><a href="contact.html">공지사항</a></li>
+                                    <li><a href="notice_list">공지사항</a></li>
                                 </ul>
                             </div>
                         </div>

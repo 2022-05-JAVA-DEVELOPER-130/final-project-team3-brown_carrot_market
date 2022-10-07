@@ -119,6 +119,53 @@ public class ReplyEchoHandler {
 		return resultMap;
 	}
 	
+	// 삭제-----------------------------------------------
+		@PostMapping(value = "/chat_delete_rest", produces = "application/json;charset=UTF-8")
+		public Map chatDelete_rest(@RequestBody Map<String, String> chatRoom) {
+			Map resultMap = new HashMap();
+			int code = 1;
+			String url = "";
+			String msg = "";
+			String yourId = "";
+			//int room_no = Integer.parseInt(c_room_no);
+			String room_no = chatRoom.get("c_room_no");
+			String loginId = chatRoom.get("loginId");
+
+			List<ChatRoomListView> resultList = new ArrayList<ChatRoomListView>();
+			chatService.chatRoomDelete(loginId,Integer.parseInt(room_no));
+			
+			
+			try {
+				List<ChatRoomListView> chatList = chatService.chatRoomSelectAll(loginId);
+			
+					for (ChatRoomListView chatRoomListView : chatList) {
+							
+							System.out.println(chatRoomListView.getYou_id());
+						
+							String img = userService.findUser(chatRoomListView.getYou_id()).getUser_profile();
+							System.out.println("이미지.."+img);
+							chatRoomListView.setYou_image(img);
+							chatRoomListView.setNot_read(chatService.chatNotRead(chatRoomListView.getC_room_no(),loginId));
+					}
+				code = 1;
+				msg = "성공";
+				resultList = chatList;
+			} catch (Exception e) {
+				code = 2;
+				msg = "성공";
+				e.printStackTrace();
+
+			}
+		
+
+			resultMap.put("code", code);
+			resultMap.put("msg", msg);
+			resultMap.put("data", resultList);
+			resultMap.put("c_room_no", room_no);
+
+			return resultMap;
+		}
+	
 	
 	
 
@@ -331,7 +378,7 @@ public class ReplyEchoHandler {
 	}
 	
 	//약속 존재하는지 판단 
-	@PostMapping(value="/promise_check")
+	@PostMapping(value="/promise_check",produces = "application/json;charset=UTF-8")
 	public Map promiseExist(@RequestParam int c_room_no) {
 		Map resultMap = new HashMap();
 		String code="";
@@ -349,6 +396,30 @@ public class ReplyEchoHandler {
 		resultMap.put("data",promise);
 		resultMap.put("code", code);
 		return resultMap;
+	}
+	
+	@PostMapping(value="/promise_update")
+	public Map updatePromise(@RequestBody Map<String,String> message){
+		Map resultMap = new HashMap();
+		String msg="";
+		
+		Promise updatePromise=new Promise(Integer.valueOf(message.get("c_room_no")), Double.valueOf(message.get("c_app_lat")), Double.valueOf(message.get("c_app_lng")), String.valueOf(message.get("c_app_date")),
+				String.valueOf(message.get("c_appspot")));
+		
+		ChatContents newChat = new ChatContents(0, String.valueOf(message.get("c_content")), null, null,
+				String.valueOf(message.get("user_id")), Integer.valueOf(message.get("c_room_no")));
+		
+		try {
+			chatService.promiseUpdate(updatePromise);
+			chatService.insertChat(newChat);
+			msg="업데이트 성공";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		resultMap.put("msg", msg);
+		return resultMap;
+		
 	}
 
 	

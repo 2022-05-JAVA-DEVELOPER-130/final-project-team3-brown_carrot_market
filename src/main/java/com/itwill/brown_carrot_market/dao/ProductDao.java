@@ -41,5 +41,5 @@ public interface ProductDao {
 	Map selectProductAddress(String user_id,int address_no);
 	
 	//상품 등록
-	public int insertProduct(Map map);
+	int insertProduct(Map map)throws Exception;
 }

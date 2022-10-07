@@ -38,7 +38,7 @@ public class TransferDaoSpringBootTestApplication {
 		 * System.out.println(transferDao.insertTransfer_Withdraw(9));
 		 * System.out.println(transferDao.insertTransfer_Withdraw_Cancle(7));
 		 * System.out.println(transferDao.insertTransfer_Deposit_Cancle(7));
-		 * System.out.println(transferDao.selectById("carrot1"));
+		 System.out.println(transferDao.selectById("carrot1"));
 		 */
 	}
 
