@@ -40,7 +40,6 @@
 	<div>
 		<label>약속 날짜</label> <input type="text" id="datePicker">
 	</div>
-	<button type="button" id="btnChatAppDate">날짜 확인</button>
 	
 	<br>
 	
@@ -49,7 +48,6 @@
 	<form>
   <p><input type="time" id="chatAppTime"></p>
 </form>
-  <button type="button" id="btnChatAppTime">입력</button>
 	</div>
 	
 	<br>

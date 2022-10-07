@@ -27,36 +27,31 @@ public class TransferDaoImpl implements TransferDao{
 
 	@Override
 	public int insertTransfer_Deposit(int p_no) throws Exception {
-		System.out.println("#### TransferDaoImplMyBatisMapperInterface : insertTransfer_Deposit(Transfer transfer) 호출  ");
-		System.out.println("insertTransfer_Deposit() 메소드 : " + transferMapper);
+		System.out.println("#### TransferDaoImpl : insertTransfer_Deposit(Transfer transfer) 호출  ");
 		return transferMapper.insertTransfer_Deposit(p_no);
 	}
 
 	@Override
 	public int insertTransfer_Withdraw(int p_no) throws Exception {
-		System.out.println("#### TransferDaoImplMyBatisMapperInterface : insertTransfer_Withdraw(Transfer transfer) 호출  ");
-		System.out.println("insertTransfer_Withdraw(Transfer transfer) 메소드 : " + transferMapper);
+		System.out.println("#### TransferDaoImpl : insertTransfer_Withdraw(Transfer transfer) 호출  ");
 		return transferMapper.insertTransfer_Withdraw(p_no);
 	}
 
 	@Override
 	public int insertTransfer_Deposit_Cancle(int p_no) throws Exception {
-		System.out.println("#### TransferDaoImplMyBatisMapperInterface : insertTransfer_Deposit_Cancle(Transfer transfer) 호출  ");
-		System.out.println("insertTransfer_Deposit_Cancle(Transfer transfer) 메소드 : " + transferMapper);
+		System.out.println("#### TransferDaoImpl : insertTransfer_Deposit_Cancle(Transfer transfer) 호출  ");
 		return transferMapper.insertTransfer_Deposit_Cancle(p_no);
 	}
 
 	@Override
 	public int insertTransfer_Withdraw_Cancle(int p_no) throws Exception {
-		System.out.println("#### TransferDaoImplMyBatisMapperInterface : insertTransfer_Withdraw_Cancle(Transfer transfer) 호출  ");
-		System.out.println("insertTransfer_Withdraw_Cancle(Transfer transfer) 메소드 : " + transferMapper);
+		System.out.println("#### TransferDaoImpl : insertTransfer_Withdraw_Cancle(Transfer transfer) 호출  ");
 		return transferMapper.insertTransfer_Withdraw_Cancle(p_no);
 	}
 
 	@Override
 	public List<Transfer> selectById(String user_id) throws Exception {
-		System.out.println("#### TransferDaoImplMyBatisMapperInterface : selectById(String user_id) 호출  ");
-		System.out.println("selectById(String user_id) 메소드 : " + transferMapper);
+		System.out.println("#### TransferDaoImpl : selectById(String user_id) 호출  ");
 		return transferMapper.selectById(user_id);
 	}
 	

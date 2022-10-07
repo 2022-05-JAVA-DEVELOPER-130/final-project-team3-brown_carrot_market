@@ -108,6 +108,7 @@ public class ReplyEchoHandler {
 		resultMap.put("code", code);
 		resultMap.put("msg", msg);
 		resultMap.put("yourId", yourId);
+		resultMap.put("c_room_no", room_no);
 		resultMap.put("yourImg", yourImg);
 		resultMap.put("data", resultList);
 

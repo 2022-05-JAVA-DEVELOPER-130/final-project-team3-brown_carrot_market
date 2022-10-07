@@ -16,19 +16,18 @@
 	
 });
 
-$('#btnChatAppDate').on('click',function(){
-	var date=$('#datePicker').val();
-	console.log("날짜:"+date);
-	
-	chatAppdate=date;
-});
+$('#datePicker').on('change',function(){
+	chatAppdate=$('#datePicker').val();
+})
 
-$('#btnChatAppTime').on('click',function(){
-	var time=$(chatAppTime).val();
-	console.log("시간:"+time);
-	chatApptime=time;
-	
-});
+
+
+$('#chatAppTime').on('change',function(){
+	chatApptime=$('#chatAppTime').val();
+})
+
+
+/***약속 장소 ******/
 
 $('#btnChatAppSpot').click(function(e){
 	    if($('#searchChatAppSpot').val()==""){
@@ -93,15 +92,16 @@ function displayMarker(place) {
         image:markerImage
     }),infowindow = new kakao.maps.InfoWindow({zindex:1});
     
+    chatAppLng=place.x;
+    chatAppLat=place.y;
+    
+    
      infowindow.setContent('<div style="padding:5px;font-size:6px;color:orange;font-weight:bold;">' + place.place_name + '<br> ('+place.road_address_name+')</div>');
         infowindow.open(map, marker_org);
+        
+      chatAppspot=place.place_name+"("+place.road_address_name+")";
 
-    /*// 마커에 클릭이벤트를 등록합니다
-    kakao.maps.event.addListener(marker_org, 'click', function() {
-        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-        infowindow.setContent('<div style="padding:5px;font-size:6px;color:orange; font-weight:bold;">' + place.place_name + '<br> ('+place.road_address_name+')</div>');
-        infowindow.open(map, marker_org);
-    });*/
+   
 }
 
 
@@ -229,7 +229,7 @@ jsonData.data=[{
   
 
 //  f.submit();
-    //self.close();
+    self.close();
 
 	//디비 전송 - 성공시 함수실행...? 
 })

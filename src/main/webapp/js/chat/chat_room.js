@@ -121,6 +121,7 @@ $.ajax({
 			var chatContentArray=jsonResult.data;
 			yourId=jsonResult.yourId;
 			yourImg = jsonResult.yourImg;
+			c_room_no=jsonResult.c_room_no;
 			console.log("채팅방의 상대방 ID:"+yourId);
 			console.log(chatContentArray[0]);
 			//$('#content').html('채팅 불러오기 성공');
@@ -141,7 +142,7 @@ $.ajax({
 			
 				}
 			};*/
-			$('#chatHead').append(chat_head(yourId,yourImg));
+			$('#chatHead').append(chat_head(yourId,yourImg,c_room_no));
 			
 			
 			
@@ -272,7 +273,7 @@ function message_app(chat_content){
 	
 }
 
-function chat_head(id,img){
+function chat_head(id,img,room_no){
 	return 	`<div class="row">
 								<div class="col-lg-6">
 									<a href="javascript:void(0);" data-toggle="modal"
@@ -287,12 +288,20 @@ function chat_head(id,img){
 									</div>
 								</div>
 								<div class="col-lg-6 hidden-sm text-right">
-									<a  class="btn btn-outline-secondary"><i
-										class="fa fa-camera" id="btnChatAppointment"></i></a> <a href="javascript:void(0);"
-										class="btn btn-outline-primary"><i class="fa fa-image"></i></a>
-									<a href="javascript:void(0);" class="btn btn-outline-info"><i
-										class="fa fa-cogs"></i></a> <a href="javascript:void(0);"
-										class="btn btn-outline-warning"><i class="fa fa-question"></i></a>
+									
+									<a  href="javascript:void(0);" class="btn btn-outline-info" ><i
+										class="fa fa-handshake-o" id="btnChatAppointment"></i></a> 
+										
+										
+									<a href="javascript:void(0);" class="btn btn-outline-primary">
+									<i class="fa fa-image"></i></a>
+									
+									<a href="javascript:void(0);" class="btn btn-outline-dark">
+									<i class="fa fa-sign-out"></i></a> 
+								
+									<a href="javascript:void(0);" class="btn btn-outline-danger">
+									<i class="fa fa-close" ></i></a>
+									<li>${room_no}</li>
 								</div>
 							</div>`
 	
