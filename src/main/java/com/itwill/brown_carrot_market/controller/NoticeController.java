@@ -19,10 +19,16 @@ public class NoticeController {
 	
 	@RequestMapping("/tables")
 	public String notice_list(@RequestParam(required = false, defaultValue = "1") Integer pageno,Model model)throws Exception{
+		
+		try {
 		PageMakerDto<Notice> noticeList = noticeService.selectAll(pageno);
 		//List<Notice> noticeList = noticeService.selectAll();
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("pageno", pageno);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
 		
 		return "tables";
 	}
