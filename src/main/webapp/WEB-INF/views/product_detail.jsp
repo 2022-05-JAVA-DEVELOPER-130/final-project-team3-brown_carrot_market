@@ -140,7 +140,7 @@
                         </div>
                         -->
                         <h4 class="price mb-4">가격 : ${product.p_price} </h4>
-                        <h4 class="price mb-4">이미지 : ${product.productImagesList} </h4>
+                        <h4 class="price mb-4">이미지 : <img class="normal_img" src="img/product_img/${product.productImagesList[0].pi_name}" alt=""></h4>
 
                         <!-- Overview -->
                         <div class="short_overview mb-4">
