@@ -3,10 +3,20 @@ package com.itwill.brown_carrot_market.service;
 import java.util.List;
 
 import com.itwill.brown_carrot_market.dto.Notice;
+import com.itwill.brown_carrot_market.util.PageMakerDto;
+
 
 public interface NoticeService {
 	//공지사항 전체조회
-	List<Notice> selectAll() throws Exception;
+	//List<Notice> selectAll() throws Exception;
+	
+	PageMakerDto<Notice> selectAll(int currentPage) throws Exception;
+	
+	
+	//전체 게시물 수 계산
+	int selectCountNotice() throws Exception;
+	
+	
 	
 	//공지사항 글 한개 찾기
 	Notice selectByNo(int notice_no) throws Exception;

@@ -1,5 +1,6 @@
 package com.itwill.brown_carrot_market.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itwill.brown_carrot_market.dto.ChatContents;
 import com.itwill.brown_carrot_market.dto.ChatRoom;
 import com.itwill.brown_carrot_market.dto.ChatRoomListView;
+import com.itwill.brown_carrot_market.dto.Promise;
 import com.itwill.brown_carrot_market.service.ChatService;
 import com.itwill.brown_carrot_market.service.UserInfoService;
 
@@ -47,6 +49,7 @@ public class ReplyEchoHandler {
 	
 	private int item=0;
 
+	//아이디 반환
 	   @PostMapping(value = "/get_id")
 	   public Map returnSessionCheck(HttpSession httpSession) {
 		   Map resultMap=new HashMap();
@@ -66,6 +69,7 @@ public class ReplyEchoHandler {
 	   }
 	 
 	
+	 //채팅 내용 불러오기
 	
 	@PostMapping(value = "/chat_detail_rest")
 	public Map chatDetail_rest(@RequestBody Map<String, String> chatList) throws Exception  {
@@ -115,11 +119,58 @@ public class ReplyEchoHandler {
 		return resultMap;
 	}
 	
+	// 삭제-----------------------------------------------
+		@PostMapping(value = "/chat_delete_rest", produces = "application/json;charset=UTF-8")
+		public Map chatDelete_rest(@RequestBody Map<String, String> chatRoom) {
+			Map resultMap = new HashMap();
+			int code = 1;
+			String url = "";
+			String msg = "";
+			String yourId = "";
+			//int room_no = Integer.parseInt(c_room_no);
+			String room_no = chatRoom.get("c_room_no");
+			String loginId = chatRoom.get("loginId");
+
+			List<ChatRoomListView> resultList = new ArrayList<ChatRoomListView>();
+			chatService.chatRoomDelete(loginId,Integer.parseInt(room_no));
+			
+			
+			try {
+				List<ChatRoomListView> chatList = chatService.chatRoomSelectAll(loginId);
+			
+					for (ChatRoomListView chatRoomListView : chatList) {
+							
+							System.out.println(chatRoomListView.getYou_id());
+						
+							String img = userService.findUser(chatRoomListView.getYou_id()).getUser_profile();
+							System.out.println("이미지.."+img);
+							chatRoomListView.setYou_image(img);
+							chatRoomListView.setNot_read(chatService.chatNotRead(chatRoomListView.getC_room_no(),loginId));
+					}
+				code = 1;
+				msg = "성공";
+				resultList = chatList;
+			} catch (Exception e) {
+				code = 2;
+				msg = "성공";
+				e.printStackTrace();
+
+			}
+		
+
+			resultMap.put("code", code);
+			resultMap.put("msg", msg);
+			resultMap.put("data", resultList);
+			resultMap.put("c_room_no", room_no);
+
+			return resultMap;
+		}
+	
 	
 	
 
 	
-	/***********************************************************************/
+	/******************* 소켓 관련****************************************************/
 
 	@OnOpen
 	public void handleOpen(Session session) {
@@ -260,6 +311,9 @@ public class ReplyEchoHandler {
 		
 	}
 
+	
+	//*********************메세지 DB 저장 
+	
 	@PostMapping(value = "/chat_message_rest")
 	public String insertChat(@RequestBody Map<String, String> messages) {
 	
@@ -294,6 +348,54 @@ public class ReplyEchoHandler {
 		userSessions.remove(userKey);
 		System.out.println(userSessions);
 		
+	}
+	
+	
+	
+	/***** 채팅 약속 ***/
+	@PostMapping(value="/promise_insert_rest")
+	public Map insertPromise(@RequestBody Map<String,String> message) {
+		Map resultMap = new HashMap();
+		String msg="";
+		Promise newPromise=new Promise(Integer.valueOf(message.get("c_room_no")), Double.valueOf(message.get("c_app_lat")), Double.valueOf(message.get("c_app_lng")), String.valueOf(message.get("c_app_date")),
+				String.valueOf(message.get("c_appspot")));
+		System.out.println("새로운 약속:"+newPromise);
+		
+		ChatContents newChat = new ChatContents(0, String.valueOf(message.get("c_content")), null, null,
+				String.valueOf(message.get("user_id")), Integer.valueOf(message.get("c_room_no")));
+
+	
+		try {
+		System.out.println("약속 채팅Contents 넣기:"+newChat);
+		chatService.promiseInsert(newPromise);
+		chatService.insertChat(newChat);
+		msg="약속 잡기 성공";
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		resultMap.put("msg", msg);
+		return resultMap;
+	}
+	
+	//약속 존재하는지 판단 
+	@PostMapping(value="/promise_check",produces = "application/json;charset=UTF-8")
+	public Map promiseExist(@RequestParam int c_room_no) {
+		Map resultMap = new HashMap();
+		String code="";
+		Promise promise=null;
+		try {
+			promise=chatService.promiseSelect(c_room_no);
+			if(promise!=null) {
+				code="1"; //기존 약속 존재
+			}else {
+				code="2"; //존재하지않음 
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		resultMap.put("data",promise);
+		resultMap.put("code", code);
+		return resultMap;
 	}
 
 	

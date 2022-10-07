@@ -11,17 +11,21 @@ public class Orders {
 	private int orders_no;
 	private Product product;
 	private String user_id;
+	private Transfer transfer;
 	
 	public Orders() {
 
 	}
 
-	public Orders(int orders_no, Product product, String user_id) {
+	public Orders(int orders_no, Product product, String user_id, Transfer transfer) {
 		super();
 		this.orders_no = orders_no;
 		this.product = product;
 		this.user_id = user_id;
+		this.transfer = transfer;
 	}
+
+	
 
 	public int getOrders_no() {
 		return orders_no;
@@ -47,10 +51,26 @@ public class Orders {
 		this.user_id = user_id;
 	}
 
+	public Transfer getTransfer() {
+		return transfer;
+	}
+
+	public void setTransfer(Transfer transfer) {
+		this.transfer = transfer;
+	}
+
 	@Override
 	public String toString() {
-		return "\nOrders [orders_no=" + orders_no + ", product.p_title=" + product.p_title + ", user_id=" + user_id + "]";
+		return "Orders [orders_no=" + orders_no + ", product=" + product
+				+ ", user_id=" + user_id + ", transfer=" + transfer + "]";
 	}
+
+	/*
+	 * @Override public String toString() { return "\nOrders [orders_no=" +
+	 * orders_no + ", product.p_title=" + product.p_title + ", user_id=" +
+	 * user_id + ", transfer.transfer_date" + transfer.getTransfer_date()+ "]";
+	 * }
+	 */
 
 	
 }

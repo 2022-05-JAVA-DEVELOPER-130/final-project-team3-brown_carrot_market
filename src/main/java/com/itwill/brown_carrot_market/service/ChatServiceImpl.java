@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.itwill.brown_carrot_market.dao.ChatContentsDao;
 import com.itwill.brown_carrot_market.dao.ChatRoomDao;
+import com.itwill.brown_carrot_market.dao.PromiseDao;
 import com.itwill.brown_carrot_market.dto.ChatContents;
 import com.itwill.brown_carrot_market.dto.ChatRoom;
 import com.itwill.brown_carrot_market.dto.ChatRoomListView;
+import com.itwill.brown_carrot_market.dto.Promise;
 
 
 
@@ -22,6 +24,9 @@ public class ChatServiceImpl implements ChatService {
 	
 	@Autowired
 	ChatRoomDao chatRoomDao;
+	
+	@Autowired
+	PromiseDao promiseDao;
 	
 	public ChatServiceImpl() {
 		System.out.println(">>>>> 채팅 service 생성");
@@ -76,11 +81,30 @@ public class ChatServiceImpl implements ChatService {
 		return chatRoomDao.chatRoomCreate(from_id, to_id, p_no);
 	}
 
-	// 채팅방 삭제
-	@Override
-	public int chatRoomDelete(int c_room_no) {
-		return chatRoomDao.chatRoomDelete(c_room_no);
-	}
+	//채팅방 삭제 
+		@Override
+		public int chatRoomDelete(String user_id,int c_room_no) {
+			int result = 0;
+			if(chatRoomDao.chatRoomDeleteCheck(c_room_no)==2) {
+				ChatRoom chatRoom = chatRoomDao.chatRoomSelect(c_room_no);
+				if(chatRoom.getTo_id().equals(user_id)) {
+					result = chatRoomDao.chatRoomDelteTo(user_id, c_room_no);
+				}else if(chatRoom.getFrom_id().equals(user_id)) {
+					result = chatRoomDao.chatRoomDelteFrom(user_id, c_room_no);
+				}
+			
+				
+			}
+			else if(chatRoomDao.chatRoomDeleteCheck(c_room_no)==1) {
+				result = chatRoomDao.chatRoomDelete(c_room_no);
+				
+			}
+			
+
+
+		
+			return result;
+		}
 	
 	// 채팅방 중복 체크 
 	@Override
@@ -126,6 +150,36 @@ public class ChatServiceImpl implements ChatService {
 	@Override
 	public int chatNotRead(int c_room_no,String user_id) {
 		return chatRoomDao.chatNotRead(c_room_no, user_id);
+	}
+
+	@Override
+	public Promise promiseSelect(int c_room_no) {
+		// TODO Auto-generated method stub
+		return promiseDao.promiseSelect(c_room_no);
+	}
+
+	@Override
+	public int promiseInsert(Promise promise) {
+		// TODO Auto-generated method stub
+		return promiseDao.promiseInsert(promise);
+	}
+
+	@Override
+	public int promiseDelete(int c_room_no) {
+		// TODO Auto-generated method stub
+		return promiseDao.promiseDelete(c_room_no);
+	}
+
+	@Override
+	public int promiseUpdate(Promise promise) {
+		// TODO Auto-generated method stub
+		return promiseDao.promiseUpdate(promise);
+	}
+
+	@Override
+	public int promiseExist(int c_room_no) {
+		// TODO Auto-generated method stub
+		return promiseDao.promiseExist(c_room_no);
 	}
 	
 	
