@@ -397,6 +397,30 @@ public class ReplyEchoHandler {
 		resultMap.put("code", code);
 		return resultMap;
 	}
+	
+	@PostMapping(value="/promise_update")
+	public Map updatePromise(@RequestBody Map<String,String> message){
+		Map resultMap = new HashMap();
+		String msg="";
+		
+		Promise updatePromise=new Promise(Integer.valueOf(message.get("c_room_no")), Double.valueOf(message.get("c_app_lat")), Double.valueOf(message.get("c_app_lng")), String.valueOf(message.get("c_app_date")),
+				String.valueOf(message.get("c_appspot")));
+		
+		ChatContents newChat = new ChatContents(0, String.valueOf(message.get("c_content")), null, null,
+				String.valueOf(message.get("user_id")), Integer.valueOf(message.get("c_room_no")));
+		
+		try {
+			chatService.promiseUpdate(updatePromise);
+			chatService.insertChat(newChat);
+			msg="업데이트 성공";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		resultMap.put("msg", msg);
+		return resultMap;
+		
+	}
 
 	
 
