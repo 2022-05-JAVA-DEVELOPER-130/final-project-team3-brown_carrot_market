@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 import com.itwill.brown_carrot_market.dto.Orders;
 import com.itwill.brown_carrot_market.dto.Product;
+import com.itwill.brown_carrot_market.dto.Transfer;
 import com.itwill.brown_carrot_market.service.OrdersService;
 
 
@@ -35,7 +36,7 @@ public class OrdersServiceSpringBootTestApplication {
 		System.out.println(ordersService.deleteOrders(21));
 		System.out.println(ordersService.selectByNo(16));
 		System.out.println(ordersService.selectAllById("carrot1"));
-		System.out.println(ordersService.insertOrders(new Orders(0,new Product(7,null,null,0,null,0,0,0,null,0,0,null,null,null,null),"carrot7")));
+		System.out.println(ordersService.insertOrders(new Orders(0,new Product(7,null,null,0,null,0,0,0,null,0,0,null,null,null,null),"carrot7", new Transfer())));
 
 	}
 }

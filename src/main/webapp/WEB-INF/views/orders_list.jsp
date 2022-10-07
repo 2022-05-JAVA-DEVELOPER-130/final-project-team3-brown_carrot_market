@@ -15,7 +15,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Bigshop | Responsive E-commerce Template</title>
+    <title>Brown Carrot Market</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -322,10 +322,10 @@
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
-                    <h5>Cart</h5>
+                    <h5>구매내역</h5>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active">Cart</li>
+                        <li class="breadcrumb-item active">구매내역</li>
                     </ol>
                 </div>
             </div>
@@ -342,21 +342,20 @@
 	                            <table class="table table-bordered mb-30">
 	                                <thead>
 	                                    <tr>
-	                                        <th scope="col"><i class="icofont-ui-delete"></i></th>
+	                                        <!--<th scope="col"><i class="icofont-ui-delete"></i></th>-->
 	                                        <th scope="col">구매일자</th>
-	                                        <th scope="col">사진</th>
-	                                        <th scope="col">이름</th>
-	                                        <th scope="col">상품 가격</th>
-	                                        <!-- <th scope="col"></th>
-	                                        <th scope="col"></th> -->
+	                                        <th scope="col">사   진</th>
+	                                        <th scope="col">이   름</th>
+	                                        <th scope="col">상품가격</th>
+	                                        <th scope="col">비   고</th>
 	                                    </tr>
 	                                </thead>
 	                                <tbody>
 									    <c:forEach items="${ordersList}" var="Orders">
 		                                    <tr>
-		                                        <th scope="row">
+		                                        <!--<th scope="row">
 		                                            <i class="icofont-close"></i>
-		                                        </th>
+		                                        </th>-->
 		                                        <td>
 		                                        	<c:set var="product_date" value="${Orders.product.p_date}"/>
 		                                        	${fn:substring(product_date,0,10)}
@@ -365,7 +364,7 @@
 		                                            <img src="" alt="Product">
 		                                        </td>
 		                                        <td>
-		                                            <a href="#">${Orders.product.p_title}</a>
+		                                            <a href="/brown_carrot_market/product_detail?p_no=${Orders.product.p_no}">${Orders.product.p_title}</a>
 		                                        </td>
 		                                        <td>
 		                                        	${Orders.product.p_price}
@@ -374,8 +373,8 @@
 		                                            <div class="quantity">
 		                                                <input type="number" class="qty-text" id="qty3" step="1" min="1" max="99" name="quantity" value="1">
 		                                            </div>
-		                                        </td>
-		                                        <td>$11</td> -->
+		                                        </td> -->
+		                                        <td></td>
 		                                    </tr>
 										</c:forEach>    
 	                                </tbody>
