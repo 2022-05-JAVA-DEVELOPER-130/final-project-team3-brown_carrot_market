@@ -33,7 +33,6 @@
 <script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
 <script type="text/javascript">
 		$(function() {
-			
 			/****************user_view******************/
 			$(document).on('click', '#user_account_details, #a_account_details',function(e){
 				console.log("click!! >> "+e.target);
@@ -291,6 +290,10 @@
 						dataType:'json',
 						success:function(jsonResult){
 							$('#my-account-content').html(UserHtmlContents.user_profile_edit(jsonResult.data[0]));
+							if(jsonResult.data[0].user_profile=='newCarrot.jpg'){
+								$('.remove_profile').attr('type','hidden');
+								$('.edit_profile').val('사진 추가');
+							}
 						}
 					});
 				/*  console.log($('.img-circle').src());

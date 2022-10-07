@@ -16,19 +16,18 @@
 	
 });
 
-$('#btnChatAppDate').on('click',function(){
-	var date=$('#datePicker').val();
-	console.log("날짜:"+date);
-	
-	chatAppdate=date;
-});
+$('#datePicker').on('change',function(){
+	chatAppdate=$('#datePicker').val();
+})
 
-$('#btnChatAppTime').on('click',function(){
-	var time=$(chatAppTime).val();
-	console.log("시간:"+time);
-	chatApptime=time;
-	
-});
+
+
+$('#chatAppTime').on('change',function(){
+	chatApptime=$('#chatAppTime').val();
+})
+
+
+/***약속 장소 ******/
 
 $('#btnChatAppSpot').click(function(e){
 	    if($('#searchChatAppSpot').val()==""){
@@ -93,15 +92,16 @@ function displayMarker(place) {
         image:markerImage
     }),infowindow = new kakao.maps.InfoWindow({zindex:1});
     
+    chatAppLng=place.x;
+    chatAppLat=place.y;
+    
+    
      infowindow.setContent('<div style="padding:5px;font-size:6px;color:orange;font-weight:bold;">' + place.place_name + '<br> ('+place.road_address_name+')</div>');
         infowindow.open(map, marker_org);
+        
+      chatAppspot=place.place_name+"("+place.road_address_name+")";
 
-    /*// 마커에 클릭이벤트를 등록합니다
-    kakao.maps.event.addListener(marker_org, 'click', function() {
-        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-        infowindow.setContent('<div style="padding:5px;font-size:6px;color:orange; font-weight:bold;">' + place.place_name + '<br> ('+place.road_address_name+')</div>');
-        infowindow.open(map, marker_org);
-    });*/
+   
 }
 
 
@@ -190,11 +190,24 @@ $('#chatAppFinalSubmit').click(function(e){
 	e.preventDefault();
 	e.stopPropagation();
 	
-	  var f= $('#chatAppDateTimeSpot');
-    //document.domain = "127.0.0.1"; //document.domain 값이 팝업과 부모창 동일해야 합니다.
-  /*  opener.name = "parentPage"; //유니크한 이름이어야 합니다.
-    f.target = opener.name;*/
-//window.opener.document.getElementById("chat_content_msg").value="약속이 잡혔어요!";
+if($('#datePicker').val()==""){
+			alert('날짜를 입력하세요');
+			$('#datePicker').focus();
+			return false;
+		}   
+		
+if($('#chatAppTime').val()==""){
+			alert('시간을 입력하세요');
+			$('#chatAppTime').focus();
+			return false;
+		}   
+if(chatAppspot==null){
+	alert('약속 장소를 지정하세요');
+	$('#searchChatAppSpot').focus();
+	return false;
+}
+
+
 
 
 
@@ -213,23 +226,47 @@ jsonData.msg="약속 전송";
 jsonData.code="3";
 jsonData.data=[{
 			c_content_no:"",
-			c_content:window.opener.loginId+" 님이 약속을 잡았어요!",
+			c_content:`${window.opener.loginId} 님이 ${chatAppdate} ${chatApptime}에 약속을 잡았어요!`,
 			c_appdate:chatAppdate,
 			c_apptime:chatApptime,
 			c_appspot:chatAppspot,
+			c_app_lat:chatAppLat,
+			c_app_lng:chatAppLng,
+			c_app_date:chatAppdate+" "+chatApptime,
 			send_time:"",
 			c_read:"0",
-			user_id:window.opener.loginId,
+			user_id:"adminP", //보내는 아이디 admin_promise 변경 
 			c_room_no:window.opener.c_room_no
 		}]
 		console.log(jsonData);
 		
-		window.opener.socket.send(JSON.stringify(jsonData));
+		$.ajax({
+			url:'promise_insert_rest',
+			data:JSON.stringify(jsonData.data[0]),
+			type:"POST",
+			async:true,
+			contentType: "application/json; charset=utf-8", //헤더의 Content-Type을 설정
+    		dataType: "JSON", //응답받을 데이터 타입 (XML,JSON,TEXT,HTML,JSONP)   
+    		
+    		
+    		success:function(result){
+				
+			console.log("promise insert SUCCESS!")
+			window.opener.socket.send(JSON.stringify(jsonData));
+  		    self.close();
+			},
+			
+			
+			error:function(xhr){
+				console.log("promise insert error");
+			}
+			
+		});
+
 
   
 
 //  f.submit();
-    //self.close();
 
 	//디비 전송 - 성공시 함수실행...? 
 })

@@ -5,6 +5,7 @@ import java.util.List;
 import com.itwill.brown_carrot_market.dto.ChatContents;
 import com.itwill.brown_carrot_market.dto.ChatRoom;
 import com.itwill.brown_carrot_market.dto.ChatRoomListView;
+import com.itwill.brown_carrot_market.dto.Promise;
 
 
 public interface ChatService {
@@ -39,4 +40,16 @@ public interface ChatService {
 	boolean duplicateCheck(String mId, String mIdYou, Integer p_no);
 
 	public int chatNotRead(int c_room_no, String user_id);
+	
+	
+	/***약속잡기***/
+	public Promise promiseSelect(int c_room_no);
+	
+	public int promiseInsert(Promise promise);
+	
+	public int promiseDelete(int c_room_no);
+	
+	public int promiseUpdate(Promise promise);
+	
+	public int promiseExist(int c_room_no);
 }
