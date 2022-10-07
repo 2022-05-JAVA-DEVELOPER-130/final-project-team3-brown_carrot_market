@@ -82,7 +82,7 @@ public class ProductController {
 			
 			int insertRowCount = productService.insertProduct(map);
 			
-			forwardPath = "redirect:guest_list";
+			forwardPath = "redirect:product_list";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("MSG", "잘모르는실패!!!");
