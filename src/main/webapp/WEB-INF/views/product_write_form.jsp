@@ -24,6 +24,7 @@
 	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+	<script type="text/javascript" src="js/product/product.js"></script>
 	
 	
 </head>
@@ -62,13 +63,13 @@
     <!-- Message Now Area -->
                 <div class="col-12">
                     <div class="contact_from mb-50">
-                        <form action="mail.php" method="post" id="main_contact_form">
+                        <form name="product_write_form" action="product_write_action" method="post" id="main_contact_form">
                             <div class="contact_input_area">
                                 <div id="success_fail_info"></div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="p_title" id="p_title" placeholder= 제목 required>
+                                            <input type="text" class="form-control" name="product.p_title" id="p_title" placeholder= 제목 required>
                                         </div>
                                     </div>
                                     <!--  
@@ -81,14 +82,14 @@
                                     
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="p_price" id="p_price" placeholder="가격" required>
+                                            <input type="text" class="form-control" name="product.p_price" id="p_price" placeholder="가격" required>
                                         </div>
                                     </div>
                                     
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <select class="custom-select form-control w-100">
-                                                <option selected>카테고리</option>
+                                            <select id="p_ctgr_no" name="product.productCategory.p_ctgr_no" class="custom-select form-control w-100">
+                                                <option selected disabled="disabled">카테고리</option>
                                                 <option value="1">-가전제품</option>
                                                 <option value="2">-가구</option>
                                                 <option value="3">-의류</option>
@@ -100,13 +101,13 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea name="p_desc" class="form-control" id="p_desc" cols="30" rows="10" placeholder="물건 설명" required></textarea>
+                                            <textarea name="product.p_desc" class="form-control" id="p_desc" cols="30" rows="10" placeholder="물건 설명" required></textarea>
                                         	</div>
                                         </div>
                                     </div>
                                     <div class="col-12 text-center">
-                                        <input type="button" class="btn btn-primary w-40" value="물건 올리기">&nbsp; 
-                                        <input type="button" class="btn btn-primary w-40" value="동네물건목록">
+                                        <input type="button" id="btn_product_write_action" class="btn btn-primary w-40" value="물건 올리기" onclick="productCreate()">&nbsp; 
+                                        <input type="button" class="btn btn-primary w-40" value="동네물건목록" onclick="productList()">
                                 </div>
                             </div>
                         </form>

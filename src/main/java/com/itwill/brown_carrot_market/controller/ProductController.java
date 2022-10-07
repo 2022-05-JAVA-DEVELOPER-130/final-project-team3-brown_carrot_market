@@ -69,13 +69,16 @@ public class ProductController {
 	
 
 	@RequestMapping(value = "/product_write_action", method = RequestMethod.POST)
-	public String product_write_action(@ModelAttribute Map<String, Object> map, Model model, HttpSession session) {
+	public String product_write_action(@RequestParam Map<String, Object> map, Model model, HttpSession session) {
 		String forwardPath = "";
 		String sUserId = (String)session.getAttribute("sUserId");
 		Address sAddress = (Address)session.getAttribute("sAddress");
 		try {
+			map.put("product.userInfo.user_id", sUserId);
 			map.put("user_id", sUserId);
 			map.put("address_no", sAddress.getAddress_no());
+			System.out.println(map);
+			//model.addAttribute("product", map);
 			
 			int insertRowCount = productService.insertProduct(map);
 			
