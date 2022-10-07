@@ -53,6 +53,7 @@ public class ProductController {
 	public String guest_view(@RequestParam int p_no, Model model) throws Exception {
 		
 		Product product = productService.selectByOne(p_no);
+		System.out.println(product);
 		model.addAttribute("product", product);
 		
 		return "product_detail";
