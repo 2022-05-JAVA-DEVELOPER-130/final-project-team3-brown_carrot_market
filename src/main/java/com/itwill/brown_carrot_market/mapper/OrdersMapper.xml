@@ -58,13 +58,11 @@
 		select * from orders o join product p on o.p_no = p.p_no where o.user_id=#{user_id}
 	</select>
 	<select id="selectByNo" resultMap="ordersResultMap">
-		select * from orders where
-		orders_no=#{orders_no}
+		select * from orders where orders_no=#{orders_no}
 	</select>
 	<insert id="insertOrders"
 		parameterType="com.itwill.brown_carrot_market.dto.Orders">
-		insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval,
-		#{product.p_no}, #{user_id})
+		insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, #{product.p_no}, #{user_id})
 	</insert>
 	<delete id="deleteOrders"
 		parameterType="com.itwill.brown_carrot_market.dto.Orders">
