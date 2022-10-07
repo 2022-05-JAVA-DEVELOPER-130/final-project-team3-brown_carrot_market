@@ -331,7 +331,7 @@ public class ReplyEchoHandler {
 	}
 	
 	//약속 존재하는지 판단 
-	@PostMapping(value="/promise_check")
+	@PostMapping(value="/promise_check",produces = "application/json;charset=UTF-8")
 	public Map promiseExist(@RequestParam int c_room_no) {
 		Map resultMap = new HashMap();
 		String code="";
