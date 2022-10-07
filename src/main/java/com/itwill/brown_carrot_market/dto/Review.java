@@ -2,4 +2,94 @@ package com.itwill.brown_carrot_market.dto;
 
 public class Review {
 
+	/*
+	 이름           널?       유형            
+	------------ -------- ------------- 
+	review_no    NOT NULL NUMBER(10)    
+	review_desc           VARCHAR2(100) 
+	review_image          VARCHAR2(100) 
+	review_point          NUMBER(10,1)  
+	orders_no             NUMBER(10)    
+	user_id               VARCHAR2(30)  
+	 */
+	
+	private int review_no;
+	private String review_desc;
+	private String review_image;
+	private double review_point;
+	private Orders orders;
+	private UserInfo userInfo;
+	
+	public Review() {
+	}
+
+	public Review(int review_no, String review_desc, String review_image,
+			double review_point, Orders orders, UserInfo userInfo) {
+		super();
+		this.review_no = review_no;
+		this.review_desc = review_desc;
+		this.review_image = review_image;
+		this.review_point = review_point;
+		this.orders = orders;
+		this.userInfo = userInfo;
+	}
+
+	public int getReview_no() {
+		return review_no;
+	}
+
+	public void setReview_no(int review_no) {
+		this.review_no = review_no;
+	}
+
+	public String getReview_desc() {
+		return review_desc;
+	}
+
+	public void setReview_desc(String review_desc) {
+		this.review_desc = review_desc;
+	}
+
+	public String getReview_image() {
+		return review_image;
+	}
+
+	public void setReview_image(String review_image) {
+		this.review_image = review_image;
+	}
+
+	public double getReview_point() {
+		return review_point;
+	}
+
+	public void setReview_point(double review_point) {
+		this.review_point = review_point;
+	}
+
+	public Orders getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Orders orders) {
+		this.orders = orders;
+	}
+
+	public UserInfo getUserInfo() {
+		return userInfo;
+	}
+
+	public void setUserInfo(UserInfo userInfo) {
+		this.userInfo = userInfo;
+	}
+
+	@Override
+	public String toString() {
+		return "Review [review_no=" + review_no + ", review_desc=" + review_desc
+				+ ", review_image=" + review_image + ", review_point="
+				+ review_point + ", orders=" + orders + ", userInfo=" + userInfo
+				+ "]";
+	}
+
+	
+	
 }
