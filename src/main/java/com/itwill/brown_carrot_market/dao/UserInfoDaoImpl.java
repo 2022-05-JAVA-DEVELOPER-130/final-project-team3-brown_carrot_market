@@ -77,6 +77,11 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	}
 
 	@Override
+	public int updateFreshness(UserInfo userInfo) throws Exception {
+		return userMapper.updateFreshness(userInfo);
+	}
+	
+	@Override
 	public int removeUser(String user_id) throws Exception {
 		System.out.println("#### UserDaoImpl : removeUser() 호출  ");
 		return userMapper.removeUser(user_id);
@@ -130,6 +135,8 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		}
 
 	}
+
+
 
 
 

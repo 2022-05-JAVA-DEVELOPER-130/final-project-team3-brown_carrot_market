@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Product;
+import com.itwill.brown_carrot_market.dto.ProductCategory;
+import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.ProductService;
 
 @Controller
@@ -51,6 +53,7 @@ public class ProductController {
 	public String guest_view(@RequestParam int p_no, Model model) throws Exception {
 		
 		Product product = productService.selectByOne(p_no);
+		System.out.println(product);
 		model.addAttribute("product", product);
 		
 		return "product_detail";
@@ -69,17 +72,28 @@ public class ProductController {
 	
 
 	@RequestMapping(value = "/product_write_action", method = RequestMethod.POST)
-	public String product_write_action(@ModelAttribute Map<String, Object> map, Model model, HttpSession session) {
+	public String product_write_action(@RequestParam Map<String, Object> map, Model model, HttpSession session) {
 		String forwardPath = "";
 		String sUserId = (String)session.getAttribute("sUserId");
+		map.put("user_id", sUserId);
+
 		Address sAddress = (Address)session.getAttribute("sAddress");
+		map.put("address", sAddress);
+		
 		try {
-			map.put("user_id", sUserId);
-			map.put("address_no", sAddress.getAddress_no());
+
+			UserInfo userInfo = new UserInfo(sUserId, sUserId, sUserId, sUserId, forwardPath, 0, 0, sUserId, null);
+			map.put("userInfo", userInfo);
+			
+			ProductCategory productCategory = new ProductCategory(Integer.parseInt(map.get("p_ctgr_no").toString()), "");
+			map.put("productCategory", productCategory);
+			
+			map.put("product", map);
+			System.out.println(map);
 			
 			int insertRowCount = productService.insertProduct(map);
 			
-			forwardPath = "redirect:guest_list";
+			forwardPath = "redirect:product_list";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("MSG", "잘모르는실패!!!");

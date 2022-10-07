@@ -89,6 +89,8 @@ $(document).on('click','[id^=btnCall]',function(e){
 		success:function(jsonResult){
 			//console.log("약속장소:"+spot)
 			promiseData= jsonResult.data;
+			c_app_lat=promiseData.c_app_lat;
+			c_app_lng=promiseData.c_app_lng;
 			
 			
 			

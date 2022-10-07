@@ -25,8 +25,6 @@ import com.itwill.brown_carrot_market.dto.Invitation;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.UserInfoService;
 
-
-
 @RestController
 public class UserInfoRestController {
 	@Autowired

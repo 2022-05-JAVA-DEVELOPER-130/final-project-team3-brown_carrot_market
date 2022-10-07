@@ -1,4 +1,4 @@
-package com.itwill.brown_carrot_market.test.dao;
+package com.itwill.brown_carrot_market.test.service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
@@ -7,19 +7,18 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
 import com.itwill.brown_carrot_market.dao.NoticeDao;
-import com.itwill.brown_carrot_market.dao.ReviewDao;
 import com.itwill.brown_carrot_market.dao.TownBoardDao;
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Notice;
-import com.itwill.brown_carrot_market.dto.Orders;
-import com.itwill.brown_carrot_market.dto.Review;
 import com.itwill.brown_carrot_market.dto.TownBoard;
 import com.itwill.brown_carrot_market.dto.TownCategory;
 import com.itwill.brown_carrot_market.dto.UserInfo;
+import com.itwill.brown_carrot_market.service.NoticeService;
+import com.itwill.brown_carrot_market.service.ReviewService;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.itwill.brown_carrot_market"})
-public class ReviewDaoSpringBootTestApplication {
+public class ReviewServiceSpringBootTestApplication {
 
 	public static void main(String[] args) throws Exception {
 		/****************case1********************/
@@ -35,22 +34,18 @@ public class ReviewDaoSpringBootTestApplication {
 		System.out.println(guestDao.selectByNo(881));
 		*/
 		
-		  SpringApplication application = new
-		  SpringApplication(ReviewDaoSpringBootTestApplication.class);
-		  application.setWebApplicationType(WebApplicationType.NONE);
-		  ConfigurableApplicationContext context=application.run(args);
-		 
-		ReviewDao reviewDao = (ReviewDao)context.getBean(ReviewDao.class);
+		SpringApplication application = 
+				new SpringApplication(ReviewServiceSpringBootTestApplication.class);
+		application.setWebApplicationType(WebApplicationType.NONE);
+		ConfigurableApplicationContext context=application.run(args);
+		ReviewService reviewService=(ReviewService)context.getBean(ReviewService.class);
 		
-		//values(REVIEW_REVIEW_NO_SEQ.nextval,'친절하고 약속시간을 잘지켜요','',0.1, 1,'carrot5');
-		Review review = new Review(0, "Dao Test", "", 0.1, new Orders(66, null, null, null), new UserInfo("carrot1", null, null, null, null, 0, 0, null, null));
-		System.out.println("createReview() test: "+reviewDao.createReview(review));
+		System.out.println("findReceivedReview() test: "+reviewService.findReceivedReview("carrot1"));
+		
+		System.out.println("findReceivedReviewByBuyer() test: "+reviewService.findReceivedReviewByBuyer("carrot3"));
+		
+		System.out.println("findReceivedReviewBySeller() test: "+reviewService.findReceivedReviewBySeller("carrot1"));	
 
-		System.out.println("findReceivedReview() test: "+reviewDao.findReceivedReview("carrot1"));
-		
-		System.out.println("findReceivedReviewByBuyer() test: "+reviewDao.findReceivedReviewByBuyer("carrot3"));
-		
-		System.out.println("findReceivedReviewBySeller() test: "+reviewDao.findReceivedReviewBySeller("carrot1"));
 	}
 }
 

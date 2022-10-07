@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="">
@@ -199,9 +198,14 @@ $(function() {
 						console.log(jsonResult);
 						$('#msg2').html(jsonResult.msg);
 				    }else if (jsonResult.code == 2) {
+				    	var referrer = document.referrer;
 				    	
-				    	
-				    	location.href = "user_my_account";	//(수정필요)main으로 보내야 할듯
+				    	if(referrer.indexOf("user_login") != -1){
+				    		window.location.href="main";
+				    	}else {
+				    		window.location.href = referrer;
+				    	}
+				    	//location.href = "user_my_account";	//(수정필요)main으로 보내야 할듯
 				    }
 				}
 			});

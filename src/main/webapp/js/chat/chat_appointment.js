@@ -28,9 +28,9 @@
 				success:function(jsonResult){
 					var dateidx=jsonResult.data.c_app_date
 					$('#datePicker').val(dateidx.substr(0,10));
-					chatAppdate=$('#datePicker').val();
+					$('#datePicker').trigger('change');
 					$('#chatAppTime').val(dateidx.substr(11));
-					chatApptime=$('#chatAppTime').val();
+					$('#chatAppTime').trigger('change');
 					$('#searchChatAppSpot').val(jsonResult.data.c_app_spot);
 					$('#btnChatAppSpot').trigger('click');
 				}
@@ -73,7 +73,7 @@ $('#btnChatAppSpot').click(function(e){
 		
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
-        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(window.opener.c_app_lat, window.opener.c_app_lng), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };  
 
@@ -279,9 +279,12 @@ jsonData.data=[{
 
 //약속 수정 
 $('#chatAppUpdateSubmit').click(function(e){
+	//console.log((chatAppdate+" "+chatApptime).substr(0,16));
 	e.preventDefault();
 	e.stopPropagation();
 	validate();
+	
+	var dateStr=(chatAppdate+" "+chatApptime).substr(0,16);
 	
 	jsonData.mId=window.opener.loginId;
 jsonData.your_id=window.opener.yourId;
@@ -289,13 +292,13 @@ jsonData.msg="약속 업데이트";
 jsonData.code="3";
 jsonData.data=[{
 			c_content_no:"",
-			c_content:`${window.opener.loginId} 님이 ${chatAppdate} ${chatApptime}으로 약속을 변경했어요!`,
+			c_content:`${window.opener.loginId} 님이 ${dateStr}으로 약속을 변경했어요!`,
 			c_appdate:chatAppdate,
 			c_apptime:chatApptime,
 			c_appspot:chatAppspot,
 			c_app_lat:chatAppLat,
 			c_app_lng:chatAppLng,
-			c_app_date:chatAppdate+" "+chatApptime,
+			c_app_date:(chatAppdate+" "+chatApptime).substr(0,16),
 			send_time:"",
 			c_read:"0",
 			user_id:"adminP", //보내는 아이디 admin_promise 변경 

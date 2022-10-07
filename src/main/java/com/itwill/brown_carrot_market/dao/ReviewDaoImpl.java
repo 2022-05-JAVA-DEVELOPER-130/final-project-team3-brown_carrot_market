@@ -33,4 +33,10 @@ public class ReviewDaoImpl implements ReviewDao {
 			throws Exception {
 		return reviewMapper.findReceivedReviewByBuyer(user_id);
 	}
+
+	@Override
+	public List<Review> findReceivedReviewBySeller(String user_id)
+			throws Exception {
+		return reviewMapper.findReceivedReviewBySeller(user_id);
+	}
 }

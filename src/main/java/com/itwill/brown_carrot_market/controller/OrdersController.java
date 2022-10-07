@@ -10,9 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.brown_carrot_market.dto.Orders;
-import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.OrdersService;
-import com.itwill.brown_carrot_market.service.UserInfoService;
+
 
 @Controller
 public class OrdersController {
