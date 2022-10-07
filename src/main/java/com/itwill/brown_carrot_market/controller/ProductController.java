@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Product;
+import com.itwill.brown_carrot_market.dto.ProductCategory;
+import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.ProductService;
 
 @Controller
@@ -72,13 +74,21 @@ public class ProductController {
 	public String product_write_action(@RequestParam Map<String, Object> map, Model model, HttpSession session) {
 		String forwardPath = "";
 		String sUserId = (String)session.getAttribute("sUserId");
+		map.put("user_id", sUserId);
+
 		Address sAddress = (Address)session.getAttribute("sAddress");
+		map.put("address", sAddress);
+		
 		try {
-			map.put("product.userInfo.user_id", sUserId);
-			map.put("user_id", sUserId);
-			map.put("address_no", sAddress.getAddress_no());
+
+			UserInfo userInfo = new UserInfo(sUserId, sUserId, sUserId, sUserId, forwardPath, 0, 0, sUserId, null);
+			map.put("userInfo", userInfo);
+			
+			ProductCategory productCategory = new ProductCategory(Integer.parseInt(map.get("p_ctgr_no").toString()), "");
+			map.put("productCategory", productCategory);
+			
+			map.put("product", map);
 			System.out.println(map);
-			//model.addAttribute("product", map);
 			
 			int insertRowCount = productService.insertProduct(map);
 			

@@ -69,7 +69,7 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="product.p_title" id="p_title" placeholder= 제목 required>
+                                            <input type="text" class="form-control" name="p_title" id="p_title" placeholder= 제목 required>
                                         </div>
                                     </div>
                                     <!--  
@@ -82,13 +82,13 @@
                                     
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="product.p_price" id="p_price" placeholder="가격" required>
+                                            <input type="text" class="form-control" name="p_price" id="p_price" placeholder="가격" required>
                                         </div>
                                     </div>
                                     
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <select id="p_ctgr_no" name="product.productCategory.p_ctgr_no" class="custom-select form-control w-100">
+                                            <select id="p_ctgr_no" name="p_ctgr_no" class="custom-select form-control w-100">
                                                 <option selected disabled="disabled">카테고리</option>
                                                 <option value="1">-가전제품</option>
                                                 <option value="2">-가구</option>
@@ -101,7 +101,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea name="product.p_desc" class="form-control" id="p_desc" cols="30" rows="10" placeholder="물건 설명" required></textarea>
+                                            <textarea name="p_desc" class="form-control" id="p_desc" cols="30" rows="10" placeholder="물건 설명" required></textarea>
                                         	</div>
                                         </div>
                                     </div>

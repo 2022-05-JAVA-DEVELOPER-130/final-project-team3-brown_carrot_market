@@ -168,7 +168,7 @@
     </insert>
 	-->
    <select id="selectProductAddress" parameterType="map" resultType="map">
-   		select a.ADDRESS_NAME,a.ADDRESS_LAT,a.ADDRESS_LNG from ADDRESS a where a.user_id=#{user_id} and a.address_no=#{address_no}
+   		select a.ADDRESS_NAME,a.ADDRESS_LAT,a.ADDRESS_LNG from ADDRESS a where a.user_id=#{user_id} and a.address_no=#{address.address_no}
    </select>	  
 	  
 	<insert id="insertProduct" parameterType="map">
@@ -180,9 +180,9 @@
                			   0,
                			   0,
                			   0,				
-                           #{address.ADDRESS_NAME},
-                           #{address.ADDRESS_LAT},
-                           #{address.ADDRESS_LNG},
+                           #{address.address_name},
+                           #{address.address_lat},
+                           #{address.address_lng},
                            #{product.productCategory.p_ctgr_no},
                            #{product.userInfo.user_id})
 	</insert>
