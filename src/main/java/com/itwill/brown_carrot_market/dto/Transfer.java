@@ -20,13 +20,14 @@ public class Transfer {
 	private String user_id;
 	private Orders orders;
 	private Product product;
+	private UserInfo userinfo;
 	
 	public Transfer() {
 	
 	}
 
 	public Transfer(int transfer_no, int transfer_deposit, int transfer_withdraw, Date transfer_date, String user_id,
-			Orders orders, Product product) {
+			Orders orders, Product product, UserInfo userinfo) {
 		super();
 		this.transfer_no = transfer_no;
 		this.transfer_deposit = transfer_deposit;
@@ -35,6 +36,7 @@ public class Transfer {
 		this.user_id = user_id;
 		this.orders = orders;
 		this.product = product;
+		this.userinfo = userinfo;
 	}
 
 	public int getTransfer_no() {
@@ -93,13 +95,18 @@ public class Transfer {
 		this.product = product;
 	}
 
-	@Override
-	public String toString() {
-		return "\nTransfer [transfer_deposit=" + transfer_deposit + ", transfer_withdraw=" + transfer_withdraw
-				+ ", transfer_date=" + transfer_date + ", user_id=" + user_id + ", product.p_title=" + product.p_title + "]";
+	public UserInfo getUserinfo() {
+		return userinfo;
 	}
 
-	
+	public void setUserinfo(UserInfo userinfo) {
+		this.userinfo = userinfo;
+	}
 
-	
+	@Override
+	public String toString() {
+		return "Transfer [transfer_no=" + transfer_no + ", transfer_deposit=" + transfer_deposit
+				+ ", transfer_withdraw=" + transfer_withdraw + ", transfer_date=" + transfer_date + ", user_id="
+				+ user_id + ", orders=" + orders + ", product=" + product + ", userinfo=" + userinfo + "]";
+	}
 }

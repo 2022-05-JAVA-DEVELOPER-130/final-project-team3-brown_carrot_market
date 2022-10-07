@@ -16,16 +16,20 @@ import com.itwill.brown_carrot_market.service.TransferService;
 public class TransferController {
 	@Autowired
 	private TransferService transferService;
-	
-	@RequestMapping(value = "/transfer_list")
-	public String transfer_list(Model model /*HttpServletRequest request*/) throws Exception{
+	@LoginCheck
+	@RequestMapping(value = "/point_list")
+	public String transfer_list(Model model, HttpServletRequest request) throws Exception{
 		String forwardPath="";
-		
-		List<Transfer> transferList = transferService.selectById("carrot2");
+		String sUserId=(String)request.getSession().getAttribute("sUserId");
+		request.getSession().setAttribute("sUserId", sUserId);
+		if(sUserId==null || sUserId.equals("")) {
+			return "user_login";
+		}else {
+		List<Transfer> transferList = transferService.selectById(sUserId);
 		model.addAttribute("transferList", transferList);
-		forwardPath="/transfer_list";
-		
+		forwardPath="/point_list";
 		return forwardPath;
+		}
 	}
 	
 }

@@ -54,6 +54,6 @@
 	</insert>
 
 	<select id = "selectById" resultMap="transferResultMap">
-		select * from transfer t cross join (select * from product p join orders o on p.p_no = o.p_no)s where t.user_id=#{user_id}
+		select * from transfer t cross join (select * from product p join orders o on p.p_no = o.p_no)s where t.user_id=#{user_id} order by t.transfer_date desc
 	</select>
 </mapper>
