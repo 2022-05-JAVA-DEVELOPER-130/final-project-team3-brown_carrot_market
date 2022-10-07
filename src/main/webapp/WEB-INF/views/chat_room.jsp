@@ -282,6 +282,22 @@ body{
     display: inline-block;
     position: relative
 }
+/******* 가운데 정렬 *******/
+.chat .chat-history .admin-message {
+    color: gray;
+    padding: 18px 20px;
+    line-height: 26px;
+    font-size: 13px;
+    border-radius: 7px;
+    display: inline-block;
+    position: relative;
+	left:50%;
+	transform:translateX(-50%);
+    
+    
+    
+}
+/*************/
 
 .chat .chat-history .message:after {
     bottom: 100%;
