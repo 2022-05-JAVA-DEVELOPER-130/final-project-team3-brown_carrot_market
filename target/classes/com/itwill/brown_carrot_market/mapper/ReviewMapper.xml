@@ -14,11 +14,18 @@
  		<result column="review_desc" property="review_desc"/>
  		<result column="review_image" property="review_image"/>
  		<result column="review_point" property="review_point"/>
- 		<result column="user_id" property="userInfo.user_id" />
+ 		<association property="userInfo" javaType="com.itwill.brown_carrot_market.dto.UserInfo">
+			<result column="user_id" property="user_id" />
+			<result column="user_name" property="user_name" />
+			<result column="user_profile" property="user_profile" />
+ 		</association>
  		<association property="orders" javaType="com.itwill.brown_carrot_market.dto.Orders">
 	 		<result column="orders_no" property="orders_no" />
-	 		<result column="p_no" property="product.p_no" />
 			<result column="user_id" property="user_id" />
+	 		<association property="product" javaType="com.itwill.brown_carrot_market.dto.Product">
+	 		<result column="p_no" property="p_no" />
+	 		<result column="p_address_name" property="p_address_name" />
+	 		</association>
  		</association>
  	</resultMap>
  
@@ -33,6 +40,7 @@
 	
 	<!-- 전체후기 : 판매자 or 구매자가 나에게 남긴 후기 -->
 	<select id="findReceivedReview" parameterType="String" resultMap="reviewResultMap">
+<!-- 
 		select * from review r
 		join orders oo
 		on r.orders_no=oo.orders_no
@@ -46,6 +54,24 @@
 					join orders o
 					on p.p_no=o.p_no
 					where o.user_id = #{user_id})
+ -->
+ 		select * from review r
+			join orders oo
+			on r.orders_no=oo.orders_no
+			join product pp
+			on oo.p_no=pp.p_no
+			join userinfo u
+			on pp.user_id=u.user_id
+			where r.user_id in
+				(select o.user_id buyer from product p
+				join orders o
+				on p.p_no=o.p_no
+				where p.user_id = #{user_id})
+			or r.user_id in
+				(select p.user_id seller from product p
+				join orders o
+				on p.p_no=o.p_no
+				where o.user_id = #{user_id})
 	</select>
 	
 	<!-- 구매자가 남긴 후기: '판매자(carrot3)'인 경우 -->
