@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.itwill.brown_carrot_market.dao.ChatContentsDao;
 import com.itwill.brown_carrot_market.dao.ChatRoomDao;
+import com.itwill.brown_carrot_market.dao.PromiseDao;
 import com.itwill.brown_carrot_market.dto.ChatContents;
 import com.itwill.brown_carrot_market.dto.ChatRoom;
 import com.itwill.brown_carrot_market.dto.ChatRoomListView;
+import com.itwill.brown_carrot_market.dto.Promise;
 
 
 
@@ -22,6 +24,9 @@ public class ChatServiceImpl implements ChatService {
 	
 	@Autowired
 	ChatRoomDao chatRoomDao;
+	
+	@Autowired
+	PromiseDao promiseDao;
 	
 	public ChatServiceImpl() {
 		System.out.println(">>>>> 채팅 service 생성");
@@ -126,6 +131,36 @@ public class ChatServiceImpl implements ChatService {
 	@Override
 	public int chatNotRead(int c_room_no,String user_id) {
 		return chatRoomDao.chatNotRead(c_room_no, user_id);
+	}
+
+	@Override
+	public Promise promiseSelect(int c_room_no) {
+		// TODO Auto-generated method stub
+		return promiseDao.promiseSelect(c_room_no);
+	}
+
+	@Override
+	public int promiseInsert(Promise promise) {
+		// TODO Auto-generated method stub
+		return promiseDao.promiseInsert(promise);
+	}
+
+	@Override
+	public int promiseDelete(int c_room_no) {
+		// TODO Auto-generated method stub
+		return promiseDao.promiseDelete(c_room_no);
+	}
+
+	@Override
+	public int promiseUpdate(Promise promise) {
+		// TODO Auto-generated method stub
+		return promiseDao.promiseUpdate(promise);
+	}
+
+	@Override
+	public int promiseExist(int c_room_no) {
+		// TODO Auto-generated method stub
+		return promiseDao.promiseExist(c_room_no);
 	}
 	
 	

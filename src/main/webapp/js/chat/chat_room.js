@@ -20,27 +20,6 @@ var jsonData={
 	
 };
 
-/* validator객체변수선언 */
-	/*var validator=null;
-    $.validator.setDefaults({
-			rules:{
-				chat_content_msg:{
-					required:true
-					
-				}
-			
-				
-			},
-			messages:{
-				chat_content_msg:{
-					required: "내용을 입력하세요"
-					
-				}
-				
-			},
-			errorClass:'error',
-			validClass:'valid'
-    });*/
 
 
 //경로 얻기 
@@ -159,6 +138,8 @@ $.ajax({
 				}else if(item.user_id==loginId){
 					console.log("상대가 보낸 메세지");
 			$('#chat_history').append(message_you(item));
+				}else if(item.user_id=="adminP"){
+					$('#chat_history').append(message_admin_promise_history(item));
 				}
 			};
 			
@@ -258,31 +239,34 @@ function message_admin(chat_content){
 
 //약속 잡기 html
 
-function message_app(chat_content){
-	var chat_read="";
-	if(chat_content.c_read==0){
-		chat_read="전송됨";
-	}else if(chat_content.c_read==1){
-		chat_read="읽음";
-	}
-	 return `<li class="clearfix">
-									<div class="message-data text-right">
-										<span class="message-data-time"></span>
-										 <img src='img/user_profile/${mImage}'
-											alt="">
-									</div>
-									<div class="message other-message float-right">
-									<p style="color:orange; font-weight:bold;">${chat_content.c_content}</p>
-									<p>일시 : ${chat_content.c_appdate} ${chat_content.c_apptime} </p>
-									<p>장소 : ${chat_content.c_appspot}</p>
-									</div>
-									<div class="chat_read_check">${chat_read}</div>
+function message_admin_promise_history(chat_content){
+	var c_app_spot="";
+	$.ajax({
+		url:'promise_check',
+		method:"POST",
+		data:'c_room_no='+c_room_no,
+		dataType:'json',
+		success:function(jsonResult){
+			c_app_spot=jsonResult.data[0].c_app_spot;
+			
+		}
+	});
+	return `<li class="clearfix">
+
+									<div class="message admin-message" margin:auto>${chat_content.c_content}<br>약속 장소 :
+									<a href="" style="font-size:6px;">${c_app_spot}</a></div>
 								</li>`
-								
-								
-								
-	
 }
+
+function message_admin_promise(chat_content){
+	
+	return `<li class="clearfix">
+
+									<div class="message admin-message" margin:auto>${chat_content.c_content}<br>약속 장소 :
+									<a href="" style="font-size:6px;">${chat_content.c_appspot}</a></div>
+								</li>`
+}
+
 
 function chat_head(id,img,room_no){
 	return 	`<div class="row">
@@ -447,7 +431,6 @@ function connectWS(){
 	}
 	
 	ws.onmessage=function(result){
-		//var onMsg=JSON.parse(evt);
 		result.stopPropagation();
 		//console.log(result.data);
 		//var onMsg=JSON.parse(result.data);
@@ -456,15 +439,7 @@ function connectWS(){
 		var onmsg=JSON.parse(result.data);
 		console.log(onmsg.code);
 		
-		/*
-		if(onMsg.data[0].user_id!=loginId){
-			//상대가 메세지 보낸 경우
-            $('#chat_history').append(message_other(onMsg.data[0]));
-		}else if(onMsg.data[0].user_id==loginId){
-			//내가 보낸 경우
-			$('#chat_history').append(message_you(onMsg.data[0]));
-		}
-		*/
+	
 		//메세지 전송한 경우
 		if(onmsg.code=="1"){
 		if(onmsg.user_id!=loginId){
@@ -501,10 +476,8 @@ function connectWS(){
 			yourImg = jsonResult.yourImg;
 			console.log("채팅방의 상대방 ID:"+yourId);
 			console.log(chatContentArray[0]);
-			//$('#content').html('채팅 불러오기 성공');
 			$('#chat_history').html("");
 			$('#chatHead').html("");
-			//loginId=$('#loginId').val();
 			console.log(loginId);
 			/*
 			for(const item of chatContentArray){
@@ -542,7 +515,7 @@ function connectWS(){
 		return false;
 	}else if(onmsg.code=="3"){
 		console.log("약속 잡기");
-		$('#chat_history').append(message_app(onmsg));
+		$('#chat_history').append(message_admin_promise(onmsg));
 	}
 	}
 	
@@ -560,8 +533,24 @@ function connectWS(){
 /****************약속 잡기************************/
 
  $(document).on('click','#btnChatAppointment',function(e){
+	$.ajax({
+		url:'promise_check',
+		method:"POST",
+		data:'c_room_no='+c_room_no,
+		dataType:'json',
+		success:function(jsonResult){
+			if(jsonResult.code=="2"){
+				alert("약속을 잡으시겠습니까?");
+				popupNew();
+				
+			}else if(jsonResult.code=="1"){
+				alert("기존 약속이 있습니다. 수정하시겠습니까?");
+				popupChange();
+			}
+			
+		}
+	})
 	
-	popup();
 	
 	
 })
@@ -570,9 +559,16 @@ function connectWS(){
 	
 
   
-  function popup(){
+  function popupNew(){
             var url = "chat_appointment";
             var name = "약속 잡기";
+            var option = "width = 500, height = 500, top = 100, left = 200, location = no,  resizable=no"
+            window.open(url, name, option);
+        }
+        
+  function popupChange(){
+            var url = "chat_appointment_change";
+            var name = "약속 수정";
             var option = "width = 500, height = 500, top = 100, left = 200, location = no,  resizable=no"
             window.open(url, name, option);
         }

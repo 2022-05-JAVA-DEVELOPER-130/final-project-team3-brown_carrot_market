@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>약속 잡기</title>
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
@@ -40,7 +40,6 @@
 	<div>
 		<label>약속 날짜</label> <input type="text" id="datePicker">
 	</div>
-	<button type="button" id="btnChatAppDate">날짜 확인</button>
 	
 	<br>
 	
@@ -49,7 +48,6 @@
 	<form>
   <p><input type="time" id="chatAppTime"></p>
 </form>
-  <button type="button" id="btnChatAppTime">입력</button>
 	</div>
 	
 	<br>

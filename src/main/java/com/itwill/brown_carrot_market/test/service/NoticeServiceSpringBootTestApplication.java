@@ -39,7 +39,7 @@ public class NoticeServiceSpringBootTestApplication {
 		ConfigurableApplicationContext context=application.run(args);
 		NoticeService noticeService=(NoticeService)context.getBean(NoticeService.class);
 		
-		System.out.println("selectAll() test:"+noticeService.selectAll());
+		//System.out.println("selectAll() test:"+noticeService.selectAll());
 		
 		System.out.println("selectByNo() test:"+noticeService.selectByNo(2));
 		

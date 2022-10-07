@@ -68,10 +68,15 @@
                             <div class="classynav">
                                 <ul>
                                     <!-- <li><a href="#">Home</a></li> -->
-                                    <li><a href="shop-list-left-sidebar.html">중고거래</a>
+                                    <li><a href="product_list">동네상품</a>
                                         <ul class="dropdown">
-                                            <li><a href="shop-list-left-sidebar.html">product_list</a></li>
-                                            <li><a href="product-details.html"></a>product-details</li>
+                                            <li><a href="product_list">- 전체보기</a></li>
+                                            <li><a href="product-details.html">- 가전제품</a></li>
+                                            <li><a href="product-details.html">- 가구</a></li>
+                                            <li><a href="product-details.html">- 의류</a></li>
+                                            <li><a href="product-details.html">- 생활용품</a></li>
+                                            <li><a href="product-details.html">- 취미/게임/음반/도서</a></li>
+                                            <li><a href="product-details.html">- 기타</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="#">동네생활</a>

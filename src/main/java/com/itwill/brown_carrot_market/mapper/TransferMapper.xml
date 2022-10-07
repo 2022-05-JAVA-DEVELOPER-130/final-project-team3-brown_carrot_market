@@ -16,25 +16,10 @@
 					    <result property="p_desc" column="p_desc" />
 					    <result property="p_price" column="p_price" />
 					    <result property="p_date" column="p_date" />
-					    <result property="p_sell" column="p_sell"/>
-					    <result property="p_count" column="p_count"/>
-					    <result property="p_wish" column="p_wish"/>
-					    <result property="p_address_name" column="p_address_name"/>
-					    <result property="p_address_lat" column="p_address_lat"/>
-					    <result property="p_address_lng" column="p_address_lng"/>
-					         	<association property="productCategory" javaType="com.itwill.brown_carrot_market.dto.ProductCategory">
-									<result column="P_CTGR_NO" property="p_ctgr_no"/>
-									<result column="P_CTGR_NAME" property="p_ctgr_name"/>
-								</association>
 					<association property="userInfo" javaType="com.itwill.brown_carrot_market.dto.UserInfo">
 							<result column="USER_ID" property="user_id"/>
-							<result column="USER_PW" property="user_pw"/>
 							<result column="USER_NAME" property="user_name"/>
-							<result column="USER_EMAIL" property="user_email"/>
-							<result column="USER_PHONE" property="user_phone"/>
-							<result column="USER_FRESHNESS" property="user_freshness"/>
 							<result column="USER_POINT" property="user_point"/>
-							<result column="USER_PROFILE" property="user_profile"/>
 						</association>
 					</association>
 			</association>
@@ -44,25 +29,10 @@
 			    <result property="p_desc" column="p_desc" />
 			    <result property="p_price" column="p_price" />
 			    <result property="p_date" column="p_date" />
-			    <result property="p_sell" column="p_sell"/>
-			    <result property="p_count" column="p_count"/>
-			    <result property="p_wish" column="p_wish"/>
-			    <result property="p_address_name" column="p_address_name"/>
-			    <result property="p_address_lat" column="p_address_lat"/>
-			    <result property="p_address_lng" column="p_address_lng"/>
-				<association property="productCategory" javaType="com.itwill.brown_carrot_market.dto.ProductCategory">
-					<result column="P_CTGR_NO" property="p_ctgr_no"/>
-					<result column="P_CTGR_NAME" property="p_ctgr_name"/>
-				</association>
 				<association property="userInfo" javaType="com.itwill.brown_carrot_market.dto.UserInfo">
 					<result column="USER_ID" property="user_id"/>
-					<result column="USER_PW" property="user_pw"/>
 					<result column="USER_NAME" property="user_name"/>
-					<result column="USER_EMAIL" property="user_email"/>
-					<result column="USER_PHONE" property="user_phone"/>
-					<result column="USER_FRESHNESS" property="user_freshness"/>
 					<result column="USER_POINT" property="user_point"/>
-					<result column="USER_PROFILE" property="user_profile"/>
 				</association>
 			</association>
 		</resultMap>
