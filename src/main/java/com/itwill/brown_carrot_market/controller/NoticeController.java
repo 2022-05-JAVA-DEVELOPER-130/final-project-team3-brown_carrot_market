@@ -17,7 +17,7 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
 	
-	@RequestMapping("/tables")
+	@RequestMapping("/notice_list")
 	public String notice_list(@RequestParam(required = false, defaultValue = "1") Integer pageno,Model model)throws Exception{
 		
 		try {
@@ -31,6 +31,23 @@ public class NoticeController {
 		}
 		
 		return "tables";
+	}
+	
+	@RequestMapping("/notice_view")
+	public String notice_view(@RequestParam Integer pageno, Integer notice_no, Model model) throws Exception{
+		if(pageno==null || notice_no==null) {
+			return "tables";
+		}
+		try {
+		Notice notice = noticeService.selectByNo(notice_no);
+		noticeService.updateNoticeCount(notice_no);
+		model.addAttribute("notice", notice);
+		model.addAttribute("pageno", pageno);
+		}catch (Exception e){
+			e.printStackTrace();
+			return "error";
+		}
+		return "tables-detail";
 	}
 	
 	

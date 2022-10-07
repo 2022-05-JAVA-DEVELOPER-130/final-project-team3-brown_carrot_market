@@ -61,12 +61,12 @@ function changeQnaList(pageno){
 /*
 게시글 목록 이동
 */
-/*
+
 $(".qna_btn.list").on("click", function(){
 	let pageno = $(this).attr("pageno");
 	location.href = `notice_list?pageno=${pageno}`;
 });
-*/
+
 /*
 게시글 삭제 
 */
