@@ -153,9 +153,16 @@
 
                         <!-- Add to Cart Form -->
                         <form class="cart clearfix my-5 d-flex flex-wrap align-items-center" method="post">
+                            <!--  
                             <div class="quantity">
                                 <input type="number" class="qty-text form-control" id="qty2" step="1" min="1" max="12" name="quantity" value="1">
                             </div>
+                            -->
+                            <input type="hidden" name="p_no" value="${product.p_no}" />
+                            <input type="hidden" name="p_title" value="${product.p_title}" />
+                            <input type="hidden" name="p_desc" value="${product.p_desc}" />
+                            <input type="hidden" name="p_price" value="${product.p_price}" />
+                            <input type="hidden" name="p_ctgr_no" value="${product.productCategory.p_ctgr_no}" />
                             <button type="submit" name="addtocart" value="5" class="btn btn-primary mt-1 mt-md-0 ml-1 ml-md-3">Add to cart</button>
                         </form>
 
