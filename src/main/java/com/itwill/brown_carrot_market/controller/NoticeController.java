@@ -23,7 +23,7 @@ public class NoticeController {
 	
 	//공지사항 전체조회
 	@RequestMapping("/notice_list")
-	public String notice_list(@RequestParam(required = false, defaultValue = "1") Integer pageno,Model model)throws Exception{
+	public String notice_list(@RequestParam(required = false, defaultValue = "1") Integer pageno,Model model) throws Exception{
 		
 		try {
 		PageMakerDto<Notice> noticeList = noticeService.selectAll(pageno);
@@ -59,7 +59,7 @@ public class NoticeController {
 	/*
 	 * 새글 등록
 	 */
-	
+	/*
 	@LoginCheck
 	@RequestMapping("/notice_new_write")
 	public String notice_new_write(@ModelAttribute Notice notice, @RequestParam Integer pageno, HttpSession session) {
@@ -78,11 +78,12 @@ public class NoticeController {
 		}
 		return "redirect:notice_list?pageno=" + pageno;
 	}
-	
+	*/
 	
 	/*
 	 * 게시글 입력폼
 	 */
+	/*
 	@LoginCheck
 	@RequestMapping("/notice_write_form")
 	public String qna_write_form(Integer pageno, Model model, HttpSession session) {
@@ -103,7 +104,7 @@ public class NoticeController {
 		}
 		return "tables-write";
 	}
-	
+	*/
 	
 	
 	

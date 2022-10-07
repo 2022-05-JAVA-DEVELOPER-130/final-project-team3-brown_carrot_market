@@ -65,14 +65,14 @@
 	                                        <th scope="col" class="board_title">
 	                                        	<input type="text" name="notice_title" id="q_title_txt" placeholder=" title" />
 	                                        </th>
-	                                        <th scope="col" class="board_writer">${sM_id}</th>
+	                                        <th scope="col" class="board_writer"></th>
 	                                        <th scope="col" class="board_date"><fmt:formatDate value='${toDay}' pattern='yyyy-MM-dd' /></th>
 	                                    </tr>
 	                                </thead>
 	                                <tbody>
 	                                    <tr>
 	                                        <td id="qna_content_td" colspan="3">
-	                                        	<textarea name="q_content" id="q_content_area" placeholder=" content"></textarea>
+	                                        	<textarea name="notice_content" id="q_content_area" placeholder=" content"></textarea>
 	                                        </td>
 	                                    </tr>
 	                                </tbody>

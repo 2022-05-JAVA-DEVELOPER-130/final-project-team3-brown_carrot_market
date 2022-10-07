@@ -130,6 +130,8 @@ $(".qna_btn.write_form, .qna_btn.reply").on("click", function(){
 	location.href = "notice_write_form?pageno=" + pageno;
 });
 
+
+
 /*
 답글 등록 폼 
 */
