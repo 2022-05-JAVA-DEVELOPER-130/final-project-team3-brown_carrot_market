@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>	
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="toDay" class="java.util.Date" />
 <!doctype html>
 <html lang="en">
 
@@ -12,7 +14,6 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- include_common_top -->
-    
     <!-- include_common_top -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="forEunbi/common/board.css">
@@ -53,33 +54,36 @@
             <div class="row">
                 <div class="col-12">
                     <div class="shortcodes_title mb-30">
-                        <h4>공지사항 상세보기</h4>
+                        <h4>공지사항 등록</h4>
                     </div>
                     <div class="shortcodes_content">
                         <div class="table-responsive">
-                            <table class="table mb-0 table-bordered">
-                                <thead>
-                                    
-                                    <tr>
-                                        <th scope="col" class="board_title">${notice.notice_title}</th>
-                                        <th scope="col" class="board_date">${notice.notice_date}</th>
-                                        <th scope="col" class="board_writer">조회수 : ${notice.notice_count}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td id="qna_content_td" colspan="3">${notice.notice_content}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        	<form id="qna_write_form" method="post">
+	                            <table class="table mb-0 table-bordered">
+	                                <thead>
+	                                    <tr>
+	                                        <th scope="col" class="board_title">
+	                                        	<input type="text" name="notice_title" id="q_title_txt" placeholder=" title" />
+	                                        </th>
+	                                        <th scope="col" class="board_writer">${sM_id}</th>
+	                                        <th scope="col" class="board_date"><fmt:formatDate value='${toDay}' pattern='yyyy-MM-dd' /></th>
+	                                    </tr>
+	                                </thead>
+	                                <tbody>
+	                                    <tr>
+	                                        <td id="qna_content_td" colspan="3">
+	                                        	<textarea name="q_content" id="q_content_area" placeholder=" content"></textarea>
+	                                        </td>
+	                                    </tr>
+	                                </tbody>
+	                            </table>
+                      				<input type="hidden" name="pageno" value="${pageno}" />
+                      				<input type="hidden" name="m_id" value="${sM_id}" />
+                			</form>
                         </div>
                     </div>
                     	<div id="qna_btn_container">
-                    	<c:if test="${qna.m_id eq sM_id}">
-							<input class="qna_btn update_form" type="button" pageno="${pageno}" q_no="${qna.q_no}" value="수정" />
-							<input class="qna_btn delete" type="button" pageno="${pageno}" q_no="${qna.q_no}" value="삭제" />
-                    	</c:if>
-							<input class="qna_btn reply" type="button" pageno="${pageno}" q_no="${qna.q_no}" value="답글" />
+							<input class="qna_btn new_write" type="button" value="등록" />
 							<input class="qna_btn list" type="button" pageno="${pageno}" value="목록" />
                     	</div>
                 </div>
@@ -87,18 +91,14 @@
             
          </div>
     </div>     
-                      
+            
     <!-- Footer Area -->
-    
     <!-- Footer Area -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
     
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script src="js/notice/board.js"></script>
-	<script type="text/javascript">
-		
-	</script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="js/notice/board.js" defer></script>
 
 </body>
 
