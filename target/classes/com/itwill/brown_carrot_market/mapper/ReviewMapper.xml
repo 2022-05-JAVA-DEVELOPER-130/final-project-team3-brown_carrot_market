@@ -23,9 +23,12 @@
  	</resultMap>
  
  
-	<insert id="createReview" parameterType="com.itwill.brown_carrot_market.dto.Review">
+	<insert id="createReview" parameterType="com.itwill.brown_carrot_market.dto.Review" useGeneratedKeys="false">
 		insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
-    		values(REVIEW_REVIEW_NO_SEQ.nextval,#{review_desc},#{review_image},#{review_point}, #{orders.orders_no},#{userInfo.user_id})
+    		values(review_review_no_seq.nextval,#{review_desc},#{review_image},#{review_point}, #{orders.orders_no},#{userInfo.user_id})
+		<selectKey keyProperty="orders_no" order="AFTER" resultType="int">
+			select orders_no from dual
+		</selectKey>
 	</insert>
 	
 	<!-- 전체후기 : 판매자 or 구매자가 나에게 남긴 후기 -->
@@ -45,14 +48,28 @@
 					where o.user_id = #{user_id})
 	</select>
 	
-	<!-- '판매자(carrot3)'인 경우 : 구매자가 남긴 후기  -->
+	<!-- 구매자가 남긴 후기: '판매자(carrot3)'인 경우 -->
 	<select id="findReceivedReviewByBuyer" parameterType="String" resultMap="reviewResultMap">
 		select * from review r
+		join orders oo
+		on r.orders_no=oo.orders_no
 			where r.user_id in
 				(select o.user_id buyer from product p
 					join orders o
 					on p.p_no=o.p_no
 					where p.user_id =#{user_id})
+	</select>
+	
+	<!-- 판매자가 남긴 후기: '구매자(carrot1)'인 경우  -->
+	<select id="findReceivedReviewBySeller" parameterType="String" resultMap="reviewResultMap">
+		select * from review r
+		join orders oo
+		on r.orders_no=oo.orders_no
+			where r.user_id in
+				(select p.user_id seller from product p
+					join orders o
+					on p.p_no=o.p_no
+					where o.user_id = #{user_id})
 	</select>
 	
 
