@@ -20,19 +20,19 @@ public class OrdersRestController {
 	@Autowired
 	private OrdersService ordersService;
 	
-	@GetMapping("/orders_view_json")
-	public Map orders_view_json(Orders orders) throws Exception{
+	@GetMapping("/orders_list_json")
+	public Map orders_list_json(Orders orders) throws Exception{
 		Map resultMap = new HashMap();
 		int code=1;
 		String url = "main";
 		String msg = "";
 		
-		List<Orders> resultsList = (ArrayList<Orders>) ordersService.selectAllById("carrot5");
+		List<Orders> ordersList = ordersService.selectAllById("carrot8");
 		
 		resultMap.put("code", code);
 		resultMap.put("url", url);
 		resultMap.put("msg",msg);
-		resultMap.put("data", resultsList);
+		resultMap.put("data", ordersList);
 		return resultMap;
 	}
 	

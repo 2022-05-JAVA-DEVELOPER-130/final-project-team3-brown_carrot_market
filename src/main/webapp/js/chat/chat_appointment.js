@@ -4,6 +4,7 @@
  var chatAppLng=null; 
   var detailAddr=null;
   var chatAppspot=null;
+  var marker_org=null;
   
   $(document).ready(function(){
 	
@@ -63,17 +64,51 @@ function placesSearchCB (data, status, pagination) {
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가합니다
         var bounds = new kakao.maps.LatLngBounds();
-
-        for (var i=0; i<data.length; i++) {
+        for (var i=0; i<1; i++) {
                         bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
         }       
 
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
         map.setBounds(bounds);
+		displayMarker(data[0]);
     } 
 }
 
+// 지도에 마커를 표시하는 함수입니다
+function displayMarker(place) {
+    
+    // 마커를 생성하고 지도에 표시합니다
+    	var markerImageUrl = "img/chat-img/logo_carrot.png",
+		    markerImageSize = new kakao.maps.Size(40, 42), // 마커 이미지의 크기
+		    markerImageOptions = { 
+		        offset : new kakao.maps.Point(20, 42)// 마커 좌표에 일치시킬 이미지 안의 좌표
+		    };
+
+		// 마커 이미지를 생성한다
+		markerImage = new kakao.maps.MarkerImage(markerImageUrl, markerImageSize, markerImageOptions);
+		
+    marker_org = new kakao.maps.Marker({
+        map: map,
+        position: new kakao.maps.LatLng(place.y, place.x),
+        image:markerImage
+    }),infowindow = new kakao.maps.InfoWindow({zindex:1});
+    
+     infowindow.setContent('<div style="padding:5px;font-size:6px;color:orange;font-weight:bold;">' + place.place_name + '<br> ('+place.road_address_name+')</div>');
+        infowindow.open(map, marker_org);
+
+    /*// 마커에 클릭이벤트를 등록합니다
+    kakao.maps.event.addListener(marker_org, 'click', function() {
+        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+        infowindow.setContent('<div style="padding:5px;font-size:6px;color:orange; font-weight:bold;">' + place.place_name + '<br> ('+place.road_address_name+')</div>');
+        infowindow.open(map, marker_org);
+    });*/
+}
+
+
+/*************************지도 클릭 이벤트 처리******************************/
+
 var geocoder = new kakao.maps.services.Geocoder();
+
 
 // 마커 이미지의 주소
 		var markerImageUrl = "img/chat-img/logo_carrot.png",
@@ -90,32 +125,30 @@ var geocoder = new kakao.maps.services.Geocoder();
 		    image : markerImage, // 마커의 이미지
 		    map: map // 마커를 표시할 지도 객체
 		}), // 클릭한 위치를 표시할 마커입니다
-    infowindow = new kakao.maps.InfoWindow({zindex:1});
+    infowindow = new kakao.maps.InfoWindow({zindex:2});
 
 		marker.setMap(map);
 		
 			// 지도에 클릭 이벤트를 등록합니다
 	// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
 	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
-	    
-	   /* // 클릭한 위도, 경도 정보를 가져옵니다 
-	    var latlng = mouseEvent.latLng; 
-	    
-	    // 마커 위치를 클릭한 위치로 옮깁니다
-	    marker.setPosition(latlng);
-	    
-	    var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
-	    message += '경도는 ' + latlng.getLng() + ' 입니다';
-	    
-	    console.log(message);*/
+	     marker_org.setVisible(false);
+	
 	    
 	     searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
         if (status === kakao.maps.services.Status.OK) {
-			chatAppspot=!!result[0].road_address ?result[0].road_address.address_name:result[0].address.address_name;
-
-            detailAddr = !!result[0].road_address ? '<div style="color:green; font-size:7pt; font-weight:bold;">' + result[0].road_address.address_name + '</div>' : '';
-            detailAddr += '<div style="color:orange; font-size:5pt; ">' + result[0].address.address_name + '</div>';
-            
+			
+			
+			if(!!result[0].road_address){
+			var buildingName=!!result[0].road_address.building_name?"("+result[0].road_address.building_name+")":"";
+			
+            detailAddr = !!result[0].road_address ? '<div style="padding:5px;color:orange; font-size:6pt; font-weight:bold;">' + result[0].road_address.address_name+" "+buildingName +'</div>' : '';
+           	chatAppspot=result[0].road_address.address_name+" "+buildingName;
+            }else{
+				detailAddr = '<div style="padding:5px;color:orange; font-size:6pt; font-weight:bold; ">' + result[0].address.address_name + '</div>';
+				chatAppspot=result[0].address.address_name;
+			}
+	
             var content = '<div class="bAddr">' +
                             
                             detailAddr + 
