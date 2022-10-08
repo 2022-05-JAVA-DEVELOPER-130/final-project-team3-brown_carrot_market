@@ -1,6 +1,5 @@
 package com.itwill.brown_carrot_market.dto;
 
-import java.util.List;
 /*
 이름        널?       유형           
 --------- -------- ------------ 
@@ -12,20 +11,21 @@ public class Orders {
 	private int orders_no;
 	private Product product;
 	private String user_id;
-	
-	private List<Orders> ordersList;
+	private Transfer transfer;
 	
 	public Orders() {
 
 	}
 
-	public Orders(int orders_no, Product product, String user_id, List<Orders> ordersList) {
+	public Orders(int orders_no, Product product, String user_id, Transfer transfer) {
 		super();
 		this.orders_no = orders_no;
 		this.product = product;
 		this.user_id = user_id;
-		this.ordersList = ordersList;
+		this.transfer = transfer;
 	}
+
+	
 
 	public int getOrders_no() {
 		return orders_no;
@@ -51,18 +51,26 @@ public class Orders {
 		this.user_id = user_id;
 	}
 
-	public List<Orders> getOrdersList() {
-		return ordersList;
+	public Transfer getTransfer() {
+		return transfer;
 	}
 
-	public void setOrdersList(List<Orders> ordersList) {
-		this.ordersList = ordersList;
+	public void setTransfer(Transfer transfer) {
+		this.transfer = transfer;
 	}
 
 	@Override
 	public String toString() {
-		return "Orders [orders_no=" + orders_no + ", product.p_no=" + product.p_no + ", user_id=" + user_id + "]";
+		return "Orders [orders_no=" + orders_no + ", product=" + product
+				+ ", user_id=" + user_id + ", transfer=" + transfer + "]";
 	}
+
+	/*
+	 * @Override public String toString() { return "\nOrders [orders_no=" +
+	 * orders_no + ", product.p_title=" + product.p_title + ", user_id=" +
+	 * user_id + ", transfer.transfer_date" + transfer.getTransfer_date()+ "]";
+	 * }
+	 */
 
 	
 }

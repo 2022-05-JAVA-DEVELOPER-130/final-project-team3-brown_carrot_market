@@ -1,55 +1,20 @@
 function UserHtmlContents(){
 }
-UserHtmlContents.user_left_menu_logout_content=function(){
-	return  `<p>
-				<strong>메뉴</strong>
-			</p>
-			<ul>
-				<li><a href="user_main" id="a_user_main">회원홈</a></li>
-				<li><a href="user_login" id="a_user_login">로그인</a></li>
-				<li><a href="user_write_form" id="a_user_write_form">회원가입</a></li>
-			</ul>`;
-}			
-UserHtmlContents.user_left_menu_login_content=function(user){
-	return  `<p>
-				<strong>메뉴</strong>
-			</p>
-			<ul>
-				<li><a href=''>${user.name}</a></li>
-				<li><a href='user_view' id="a_user_view">내정보</a></li>
-				<li><a href="user_logout_action" id="a_user_logout_action">로그아웃</a></li>
-			</ul>`;
-}			
-	
-UserHtmlContents.user_main_content=function(){
-	return `<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-				codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0"
-				width="540px" height="350px">
-				<param name="movie" value="image/FI_main.swf">
-				<param name="play" value="true">
-				<param name="loop" value="true">
-				<param name="quality" value="high">
-				<embed src="image/enter.png" scale="exactfit" play="true" loop="true"
-					quality="high" style="margin: 10px;"
-					pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
-					width="540px" height="350px"></embed>
-			</object>`;
-}
 
-UserHtmlContents.user_view_content=function(loginUser) {
+UserHtmlContents.user_view_content=function(sUser) {
 	return `<h5 class="mb-3">Account Details</h5>
                         <form action="#" method="post" id="user_modify_form">
                             <div class="row">
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group">
                                         <label for="user_id">ID *</label>
-                                        <input type="text" class="form-control" name="user_id" value="${loginUser.user_id}">
+                                        <input type="text" class="form-control" name="user_id" value="${sUser.user_id}">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="currentPass">Current Password (Leave blank to leave unchanged)</label>
-                                        <input type="password" class="form-control" name="currentPass" value="${loginUser.user_pw}">
+                                        <input type="password" class="form-control" name="currentPass" value="${sUser.user_pw}">
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -67,19 +32,19 @@ UserHtmlContents.user_view_content=function(loginUser) {
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="user_name">Name *</label>
-                                        <input type="text" class="form-control" name="user_name" value="${loginUser.user_name}">
+                                        <input type="text" class="form-control" name="user_name" value="${sUser.user_name}">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="user_email">Email *</label>
-                                        <input type="email" class="form-control" name="user_email" value='${loginUser.user_email}'>
+                                        <input type="email" class="form-control" name="user_email" value='${sUser.user_email}'>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="user_phone">Phone *</label>
-                                        <input type="text" class="form-control" name="user_phone" value="${loginUser.user_phone}">
+                                        <input type="text" class="form-control" name="user_phone" value="${sUser.user_phone}">
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -106,7 +71,7 @@ UserHtmlContents.user_view_addresses=function(addressList){
                                 <input type="button" id="btn_address_first" class="btn btn-outline-primary mb-1" name="address_name" value="${addressList[0].address_name}" >
                                 <a href="#" id="btn_remove_first" class="btn btn-secondary mb-1 remove"><i class="icofont-ui-delete"></i></a><br/>
 								
-								<input type="range" id='range1' name="address_range" class='mb-1' value="${addressList[0].address_range}" min="0" max="10" disabled>
+								<input id='range1' name="address_range" type="range" value="${addressList[0].address_range}" min="0" max="10" disabled>
                                 <label for='range1' class = "range_val bigshop-label bigshop-label-info bigshop-label-pill" value="">${addressList[0].address_range}</label><br/>
                                 </address>
                                 
@@ -193,6 +158,27 @@ UserHtmlContents.user_view_addresses_zero=function(addressList){
                         </div>`;
 }
 
+UserHtmlContents.user_profile_edit=function(sUser){
+	return `<h5 class="mb-3">프로필 수정</h5>
+                    	<profile>
+      	               <div class="mb-100" style="margin-bottom: 0px">
+	                        <div class="col-xl-3">
+	                            <img id="user_profile" class="img-circle" src='img/user_profile/${sUser.user_profile}' alt="" user_profile='${sUser.user_profile}' style="width:200px; height:200px; margin:0 auto 0 200px" >
+	                        </div>
+                        	<form id="image_form"  name="image_form" enctype="multipart/form-data" style="margin:0 auto 0 200px">
+	                        	<input type="hidden" name="user_id" id="user_id" value="${sUser.user_id}"><br>
+	                        	<input type="file" name="files" id="chooseF" hidden><br>
+		                        <input type="submit" id="btn_submit" class="btn btn-outline-primary mb-1 edit_profile" value="사진 선택">
+		                        <input type="button" class="btn btn-outline-primary mb-1 remove_profile" value="사진 삭제">
+							</form> 
+                        </div>
+						<div class="shortcodes_content mb-100" style="margin-bottom: 0px">
+						</div>
+						</profile>`;
+}
+
+
+/*
 UserHtmlContents.user_thumbnail=function(){
 		return `<div class="user-thumbnail">
 			    			<i class="fa fa-user-circle"></i>
@@ -203,15 +189,14 @@ UserHtmlContents.user_thumbnail=function(){
                                 <li><a href="user_login"><i class="icofont-login"></i> 로그인</a></li>
                             </ul>`;
 }	
-UserHtmlContents.user_thumbnail_login=function(loginUser){
+UserHtmlContents.user_thumbnail_login=function(sUser){
 		return `<div class="user-thumbnail">
-                            <img src='img/user_profile/${loginUser.user_profile}' alt="">
+                            <img src='img/user_profile/${sUser.user_profile}' alt="">
                             </div>
                             <ul class="user-meta-dropdown">
-                                <li class="user-title"><span>안녕하세요,</span> ${loginUser.user_name} 님</li>
-                                <li><a href="user_my_account">My Account</a></li>
-                                <li><a href="order-list.html">Orders List</a></li>
-                                <li><a href="wishlist.html">Wishlist</a></li>
-                                <li><a href="user_logout_action"><i class="icofont-logout"></i> Logout</a></li>
+                                <li class="user-title"><span>안녕하세요,</span> ${sUser.user_name} 님</li>
+                                <li><a href="user_my_account">마이페이지</a></li>
+                                <li><a href="chat_room">Chatting</a></li>
+                                <li><a href="user_logout_action"><i class="icofont-logout"></i> 로그아웃</a></li>
                             </ul>`;
-}	
+}	*/

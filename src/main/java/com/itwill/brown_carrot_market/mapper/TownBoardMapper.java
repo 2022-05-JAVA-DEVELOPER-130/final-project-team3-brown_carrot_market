@@ -2,6 +2,7 @@
 package com.itwill.brown_carrot_market.mapper;
  
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -35,13 +36,20 @@ public int updateTownBoardOne(TownBoard townBoard);
 //동네게시판 게시물 조회수 증가
 public int updateTownBoardCount(int t_no);
 
-//동네게시판 게시물 등록
-public int insertTownBoard(TownBoard townBoard);
 
 
 //동네게시판 글 아이디로 조회(내가 쓴 글 조회)
 public List<TownBoard> selectTownBoardIdList(String user_id);
 
+/**********************************************/
+//동네게시판 게시물 등록
+//public int insertTownBoard(TownBoard townBoard);
+
+public Map selectTownBoardAddress(Map map);
+
+public int insertTownBoard(Map map);
+
+/**********************************************/
 
 
 }

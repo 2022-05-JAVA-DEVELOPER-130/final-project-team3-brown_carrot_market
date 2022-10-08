@@ -25,32 +25,10 @@ import com.itwill.brown_carrot_market.dto.Invitation;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.UserInfoService;
 
-
-
 @RestController
 public class UserInfoRestController {
 	@Autowired
 	private UserInfoService userService;
-	
-	@LoginCheck
-	@PostMapping("/user_account_details")
-	public Map user_account_details_json(HttpServletRequest request) throws Exception{
-		Map resultMap=new HashMap();
-		int code=1;
-		String url="user_main";
-		String msg="";
-		List<UserInfo> resultList=new ArrayList<UserInfo>();
-		
-		String sUserId=(String)request.getSession().getAttribute("sUserId");
-		UserInfo loginUser=userService.findUser(sUserId);
-		resultList.add(loginUser);
-		
-		resultMap.put("code", code);
-		resultMap.put("url", url);
-		resultMap.put("msg", msg);
-		resultMap.put("data",resultList);
-		return resultMap;
-	}
 	
 	@LoginCheck
 	@PostMapping("/user_view_json")
@@ -62,8 +40,9 @@ public class UserInfoRestController {
 		List<UserInfo> resultList=new ArrayList<UserInfo>();
 		
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
-		UserInfo loginUser=userService.findUser(sUserId);
-		resultList.add(loginUser);
+		UserInfo sUser=userService.findUser(sUserId);
+		
+		resultList.add(sUser);
 		
 		resultMap.put("code", code);
 		resultMap.put("url", url);
@@ -90,8 +69,8 @@ public class UserInfoRestController {
 		code = userService.updateAddress(address);
 		/******************************/
 		
-		UserInfo loginUser=userService.findUser(sUserId);
-		resultList.add(loginUser);
+		UserInfo sUser=userService.findUser(sUserId);
+		resultList.add(sUser);
 		
 		resultMap.put("code", code);
 		resultMap.put("url", url);
@@ -99,9 +78,10 @@ public class UserInfoRestController {
 		resultMap.put("data",resultList);
 		return resultMap;
 	}
+	
 	@LoginCheck
 	@PostMapping("/user_update_address_range_json")
-	public Map user_update_address_range_json(@ModelAttribute Address address) throws Exception{
+	public Map user_update_address_range_json(HttpServletRequest request, @ModelAttribute Address address) throws Exception{
 		System.out.println(address);
 		Map resultMap=new HashMap();
 		int code=0;
@@ -112,6 +92,8 @@ public class UserInfoRestController {
 		System.out.println("RestController-user_update_address_range_json() 호출");
 		/***********수정 필요***********/
 		code = userService.updateAddressRange(address);
+		if(code==1) msg="update_address 성공"; //request.getSession().setAttribute("sAddress", address);
+		//System.out.println("sAddress :"+address);
 		/******************************/
 		
 		resultMap.put("code", code);
@@ -120,9 +102,34 @@ public class UserInfoRestController {
 		resultMap.put("data",resultList);
 		return resultMap;
 	}
+	
+	
+	@LoginCheck
+	@PostMapping("/user_update_profile_json")
+	public Map user_update_profile_json(@ModelAttribute UserInfo userInfo) throws Exception{
+		Map resultMap=new HashMap();
+		int code=0;
+		String url="user_update_profile";
+		String msg="update_profile 실패";
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
+
+		System.out.println("RestController-user_update_profile_json() 호출");
+		/***********수정 필요***********/
+		code = userService.updateProfile(userInfo);
+		if(code==1) msg="update_profile 성공";
+
+		/******************************/
+		
+		resultMap.put("code", code);
+		resultMap.put("url", url);
+		resultMap.put("msg", msg);
+		resultMap.put("data",resultList);
+		return resultMap;
+	}
+	
 	@LoginCheck
 	@PostMapping("/user_remove_address_json")
-	public Map user_remove_address_json(@ModelAttribute Address address) throws Exception{
+	public Map user_remove_address_json(HttpServletRequest request, @ModelAttribute Address address) throws Exception{
 		System.out.println(address);
 		Map resultMap=new HashMap();
 		int code=0;
@@ -136,6 +143,11 @@ public class UserInfoRestController {
 		if(code==1)
 		msg="remove_address 성공";
 		/******************************/
+		//sAddress와 일치하는 address를 삭제했다면,
+		Address sAddress= (Address)request.getSession().getAttribute("sAddress");
+		System.out.println("before : "+sAddress);
+		if(sAddress.getAddress_no()==address.getAddress_no()) request.getSession().setAttribute("sAddress", null);
+		System.out.println("after : "+sAddress);
 		
 		resultMap.put("code", code);
 		resultMap.put("url", url);
@@ -154,18 +166,37 @@ public class UserInfoRestController {
 		List<UserInfo> resultList=new ArrayList<UserInfo>();
 		
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
+		UserInfo sUser=(UserInfo)request.getSession().getAttribute("sUser");
 		
 		System.out.println("RestController-user_insert_address_json() 호출");
 		System.out.println("sUserId >>>>>>>>>"+sUserId);
 		/***********수정 필요***********/
 		address.setUser_id(sUserId);
-		System.out.println(address);
-		code=userService.createAddress(address);
-		msg="insert_address 성공";
-		/******************************/
+		//최초 입력시에만 address_range=3
+		if(sUser.getAddressList().size()!=0) {
+			address.setAddress_range(0);
+		}else {
+			address.setAddress_range(3);
+		}
 		
-		UserInfo loginUser=userService.findUser(sUserId);
-		resultList.add(loginUser);
+		System.out.println("insert_addrss: "+address);
+		//System.out.println(address);
+		code=userService.createAddress(address);
+		if(code==1) {
+			msg="insert_address 성공";
+			if(sUser.getAddressList()!=null) {
+				for(Address address2: sUser.getAddressList()) {
+					if(address2.getAddress_range()>0) {
+					request.getSession().setAttribute("sAddress", address);
+					}
+				}
+			}
+		
+		}
+		/******************************/
+		//변경사항 저장
+		sUser=userService.findUser(sUserId);
+		resultList.add(sUser);
 		
 		resultMap.put("code", code);
 		resultMap.put("url", url);
@@ -193,6 +224,7 @@ public class UserInfoRestController {
 		resultMap.put("data",resultList);
 		return resultMap;
 	}
+	
 	@LoginCheck
 	@PostMapping("/user_modify_form_json")
 	public Map user_modify_form_json(HttpServletRequest request) throws Exception{
@@ -203,8 +235,8 @@ public class UserInfoRestController {
 		List<UserInfo> resultList=new ArrayList<UserInfo>();
 		
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
-		UserInfo loginUser=userService.findUser(sUserId);
-		resultList.add(loginUser);
+		UserInfo sUser=userService.findUser(sUserId);
+		resultList.add(sUser);
 		
 		resultMap.put("code", code);
 		resultMap.put("url", url);
@@ -225,8 +257,8 @@ public class UserInfoRestController {
 		try {
 			int row_count=userService.update(user);
 			String sUserId=(String)request.getSession().getAttribute("sUserId");
-			UserInfo loginUser=userService.findUser(sUserId);
-			resultList.add(loginUser);
+			UserInfo sUser=userService.findUser(sUserId);
+			resultList.add(sUser);
 			code=1;
 			url="user_main";
 			msg= "회원수정성공";
@@ -242,39 +274,19 @@ public class UserInfoRestController {
 		resultMap.put("data",resultList);
 		return resultMap;
 	}
-	
-	@LoginCheck
-	@PostMapping(value = "/user_logout_action_json")
-	public Map user_logout_action_json(HttpServletRequest request) {
-		
-		Map resultMap=new HashMap();
-		int code=1;
-		String url="user_main";
-		String msg="";
-		List<UserInfo> resultList=new ArrayList<UserInfo>();
-		
-		request.getSession().invalidate();
-		
-		resultMap.put("code", code);
-		resultMap.put("url", url);
-		resultMap.put("msg", msg);
-		resultMap.put("data",resultList);
-		return resultMap;
-	}
 
 	@PostMapping(value = "/user_login_action_json")
-	public Map user_login_action_json(@ModelAttribute(value = "loginUser") UserInfo user,HttpServletRequest request) throws Exception{
+	public Map user_login_action_json(@ModelAttribute(value = "sUser") UserInfo user,HttpServletRequest request) throws Exception{
 		
 		int code=0;
 		String url="";
 		String msg="";
 		Map resultMap=new HashMap();
 		List<UserInfo> resultList=new ArrayList<UserInfo>();
-		System.out.println("파라메타로 받은 >>>>>>>"+user);
+		System.out.println("user_login_action_json - user: "+user);
 		
 		int result=
 				userService.login(user.getUser_id(), user.getUser_pw());
-		System.out.println("result >>>>>>>"+result);
 		
 		/*
 		 * 회원로그인
@@ -295,11 +307,19 @@ public class UserInfoRestController {
 			break;
 		case 2:
 			request.getSession().setAttribute("sUserId", user.getUser_id());
-			//우선은 첫번째 주소만 넣었습니다.
-			if(user.getAddressList()!=null) {
-				request.getSession().setAttribute("sAddressNo", user.getAddressList().get(0).getAddress_no());
-			}
 			UserInfo sUser=userService.findUser(user.getUser_id());
+			request.getSession().setAttribute("sUser", sUser);
+			
+			System.out.println("sUser"+sUser);
+			
+			//우선은 address_range()>0 인 주소만 넣었습니다.
+			if(sUser.getAddressList()!=null) {
+				for(Address address: sUser.getAddressList()) {
+					if(address.getAddress_range()>0) {
+						request.getSession().setAttribute("sAddress", address);
+					}
+				}
+			}
 			
 			code=2;
 			url="user_main";
@@ -327,10 +347,20 @@ public class UserInfoRestController {
 		System.out.println("user_session_check_json : sUserId >>> "+sUserId);
 		if(sUserId!=null) {
 			UserInfo sUser=userService.findUser(sUserId);
+			System.out.println("sUser: "+sUser);
+			
+			/***********수정 필요***********/
+			Address sAddress=(Address)session.getAttribute("sAddress");
+			System.out.println("sAddress: "+sAddress);
+			/******************************/
+			
 			code=2;
 			url="index";
 			msg="세션존재";
 			resultList.add(sUser);
+			resultMap.put("sUserId",sUserId);
+			resultMap.put("sUser",sUser);
+			resultMap.put("sAddress",sAddress);
 		}
 		
 		resultMap.put("code", code);
@@ -369,6 +399,7 @@ public class UserInfoRestController {
 		 *  2:초대코드로 회원가입
 		 *  3:존재하지 않는 초대코드로 회원가입 
 		 */
+		if(address!=null) address.setAddress_range(3);
 		int result=userService.create(user,address,invitation);
 		if(result==0) {
 			code=0;
@@ -398,4 +429,48 @@ public class UserInfoRestController {
 		resultMap.put("data",resultList);
 		return resultMap;
 	}
+	
+	/*
+	@LoginCheck
+	@PostMapping("/user_account_details")
+	public Map user_account_details_json(HttpServletRequest request) throws Exception{
+		Map resultMap=new HashMap();
+		int code=1;
+		String url="user_main";
+		String msg="";
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
+		
+		String sUserId=(String)request.getSession().getAttribute("sUserId");
+		UserInfo loginUser=userService.findUser(sUserId);
+		
+		resultList.add(loginUser);
+		
+		resultMap.put("code", code);
+		resultMap.put("url", url);
+		resultMap.put("msg", msg);
+		resultMap.put("data",resultList);
+		return resultMap;
+	}
+	*/
+	
+	/*
+	@LoginCheck
+	@PostMapping(value = "/user_logout_action_json")
+	public Map user_logout_action_json(HttpServletRequest request) {
+		
+		Map resultMap=new HashMap();
+		int code=1;
+		String url="user_main";
+		String msg="";
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
+		
+		request.getSession().invalidate();
+		
+		resultMap.put("code", code);
+		resultMap.put("url", url);
+		resultMap.put("msg", msg);
+		resultMap.put("data",resultList);
+		return resultMap;
+	}
+	*/
 }

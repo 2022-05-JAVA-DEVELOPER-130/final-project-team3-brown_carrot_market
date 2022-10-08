@@ -41,6 +41,10 @@ public interface UserInfoMapper {
 	
 	//@Update("")
 	public int updatePoint(UserInfo userInfo);
+	//@Update("")
+	public int updateProfile(UserInfo userInfo);
+	//@Update("")
+	public int updateFreshness(UserInfo userInfo);
 	
 	//@Delete("")
 	public int removeUser(String user_id);

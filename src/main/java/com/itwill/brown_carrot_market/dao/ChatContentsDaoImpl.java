@@ -29,9 +29,9 @@ public class ChatContentsDaoImpl implements ChatContentsDao {
 	}
 
 	@Override
-	public int chatReadUpdate(int c_room_no) {
+	public int chatReadUpdate(int c_room_no,String user_id) {
 		// TODO Auto-generated method stub
-		return chatContentsMapper.chatReadUpdate(c_room_no);
+		return chatContentsMapper.chatReadUpdate(c_room_no,user_id);
 	}
 
 	@Override

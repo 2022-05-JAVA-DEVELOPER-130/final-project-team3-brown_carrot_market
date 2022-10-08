@@ -19,6 +19,7 @@
 			<result column="address_lat" property="address_lat" />
 			<result column="address_lng" property="address_lng" />
 			<result column="address_range" property="address_range" />
+			<result column="user_id" property="user_id" />
 		</collection>
 	</resultMap>
 
@@ -55,7 +56,7 @@
 	<insert id="createAddress" parameterType="com.itwill.brown_carrot_market.dto.Address"><!-- adress_range(default)=3 -->
 		<!-- insert into address(address_no, address_name, address_lat,address_lng, address_range,user_id) -->
 		insert into address
-			values(address_address_no_seq.nextval, #{address_name}, #{address_lat}, #{address_lng}, 3 ,#{user_id})
+			values(address_address_no_seq.nextval, #{address_name}, #{address_lat}, #{address_lng}, #{address_range} ,#{user_id})
 	</insert>
 	
 	<insert id="createInvitation" parameterType="com.itwill.brown_carrot_market.dto.Invitation">
@@ -89,6 +90,12 @@
 	<!-- 포인트 -->
 	<update id="updatePoint" parameterType="com.itwill.brown_carrot_market.dto.UserInfo">
 	 	update userinfo set user_point=user_point+#{user_point}
+		where user_id=#{user_id}
+	</update>
+
+	<!-- 프로필이미지 -->
+	<update id="updateProfile" parameterType="com.itwill.brown_carrot_market.dto.UserInfo">
+	 	update userinfo set user_profile=#{user_profile}
 		where user_id=#{user_id}
 	</update>
 	

@@ -30,6 +30,10 @@ public interface UserInfoDao {
 
 	int updatePoint(UserInfo userInfo) throws Exception;
 	
+	int updateProfile(UserInfo userInfo) throws Exception;
+
+	int updateFreshness(UserInfo userInfo) throws Exception;
+	
 	/*
 	 * 사용자아이디에해당하는 사용자를 삭제
 	 */

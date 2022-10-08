@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,8 +12,13 @@
     <title>chat</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+	
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.js"></script>
+
+	
 	<script src="js/chat/chat_room.js"></script>
 </head>
 <body>
@@ -32,11 +38,11 @@
                 </div>
 
 				<input name="loginId" id="loginId" type="hidden" value=${loginId}>
-                <ul class="list-unstyled chat-list mt-2 mb-0">
+                <ul class="list-unstyled chat-list mt-2 mb-0" id="chatRoomList">
                 <c:forEach var="list" items="${chatList}">
                
                 <li class="clearfix">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar">
+                        <img src="img/user_profile/${list.you_image}" alt="avatar">
                         <div class="about">
 							<input name="chatRoomNo" type="hidden" value=${list.c_room_no}/>
 					<!--	<button type="button" class="btn btn-default" id="btnCall${list.c_room_no}" value=${list.c_room_no}>${list.c_room_no}</button>-->
@@ -67,13 +73,25 @@
 									</div>
 								</div>
 								<div class="col-lg-6 hidden-sm text-right">
-									<a href="javascript:void(0);" class="btn btn-outline-secondary"><i
-										class="fa fa-camera"></i></a> <a href="javascript:void(0);"
-										class="btn btn-outline-primary"><i class="fa fa-image"></i></a>
-									<a href="javascript:void(0);" class="btn btn-outline-info"><i
-										class="fa fa-cogs"></i></a> <a href="javascript:void(0);"
-										class="btn btn-outline-warning"><i class="fa fa-question"></i></a>
-								</div>
+								
+									<a href="javascript:void(0);" class="btn btn-outline-info">
+									<i class="fa fa-handshake-o" id="btnChatAppointment"></i></a> 
+										
+									<a href="javascript:void(0);" class="btn btn-outline-primary">
+									<i class="fa fa-image"></i></a>
+									
+									<a href="javascript:void(0);" class="btn btn-outline-dark">
+									<i class="fa fa-sign-out"></i></a> 
+								
+									<a href="javascript:void(0);" class="btn btn-outline-danger">
+									<i class="fa fa-close" ></i></a>
+
+									
+								
+
+   
+
+     </div>
 							</div>
 						</div>
 						<div class="chat-history">
@@ -115,7 +133,7 @@
 							<div class="input-group mb-0">
 							<!-- 전송 버튼 -->
 								<div class="input-group-prepend" id="btnChatSend">
-									<span class="input-group-text"><i class="fa fa-send"></i></span>
+									<span class="input-group-text"><i class="fa fa-send" ></i></span>
 								</div>
 								<input type="text" class="form-control" id="chat_content_msg"
 									placeholder="Enter text here...">
@@ -135,6 +153,8 @@ body{
     background-color: #f4f7f6;
     margin-top:20px;
 }
+/*     삭제하기.... */
+
 .card {
     background: #fff;
     transition: .5s;
@@ -262,6 +282,22 @@ body{
     display: inline-block;
     position: relative
 }
+/******* 가운데 정렬 *******/
+.chat .chat-history .admin-message {
+    color: gray;
+    padding: 18px 20px;
+    line-height: 26px;
+    font-size: 13px;
+    border-radius: 7px;
+    display: inline-block;
+    position: relative;
+	left:50%;
+	transform:translateX(-50%);
+    
+    
+    
+}
+/*************/
 
 .chat .chat-history .message:after {
     bottom: 100%;
@@ -387,6 +423,7 @@ body{
         overflow-x: auto
     }
 }
+
 </style>
 
 <script type="text/javascript">

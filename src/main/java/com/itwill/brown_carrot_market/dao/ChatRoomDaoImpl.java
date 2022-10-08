@@ -44,10 +44,31 @@ public class ChatRoomDaoImpl implements ChatRoomDao {
 	public int chatRoomDelete(int c_room_no) {
 		return chatRoomMapper.chatRoomDelete(c_room_no);
 	}
+	// 첫 채팅방 삭제 --> To
+		@Override
+		public int chatRoomDelteTo(String user_id,int c_room_no) {
+			return chatRoomMapper.chatRoomDeleteTo(user_id, c_room_no);
+		}
+		// 첫 채팅방 삭제 --> From
+			@Override
+			public int chatRoomDelteFrom(String user_id,int c_room_no) {
+				return chatRoomMapper.chatRoomDeleteFrom(user_id, c_room_no);
+			}
+			
+		// 첫채팅방 삭제 체크
+			@Override
+			public int chatRoomDeleteCheck(int c_room_no) {
+				return chatRoomMapper.chatRoomDeleteCheck(c_room_no);
+			}
 	
 	@Override
 	public List<ChatRoom> chatRoomCheck(String from_id,String to_id,Integer p_no) {
 		return chatRoomMapper.chatRoomCheck(from_id, to_id, p_no);
+	}
+	
+	@Override
+	public int chatNotRead(int c_room_no,String user_id) {
+		return chatRoomMapper.chatNotRead(c_room_no, user_id);
 	}
 
 	

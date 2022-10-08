@@ -14,7 +14,7 @@ public class MainController {
 		System.out.println(">> MainController생성");
 	}
 
-	@RequestMapping(value = "main")
+	@RequestMapping(value = {"main","/"})
 	public String main() {
 		return "main";
 	}

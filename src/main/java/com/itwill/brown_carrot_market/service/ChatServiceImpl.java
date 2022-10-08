@@ -1,5 +1,7 @@
 package com.itwill.brown_carrot_market.service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.itwill.brown_carrot_market.dao.ChatContentsDao;
 import com.itwill.brown_carrot_market.dao.ChatRoomDao;
+import com.itwill.brown_carrot_market.dao.PromiseDao;
 import com.itwill.brown_carrot_market.dto.ChatContents;
 import com.itwill.brown_carrot_market.dto.ChatRoom;
 import com.itwill.brown_carrot_market.dto.ChatRoomListView;
+import com.itwill.brown_carrot_market.dto.Promise;
 
 
 
@@ -20,6 +24,9 @@ public class ChatServiceImpl implements ChatService {
 	
 	@Autowired
 	ChatRoomDao chatRoomDao;
+	
+	@Autowired
+	PromiseDao promiseDao;
 	
 	public ChatServiceImpl() {
 		System.out.println(">>>>> 채팅 service 생성");
@@ -38,9 +45,9 @@ public class ChatServiceImpl implements ChatService {
 	}
 
 	@Override
-	public int chatReadUpdate(int c_room_no) {
+	public int chatReadUpdate(int c_room_no,String user_id) {
 		// TODO Auto-generated method stub
-		return chat_contentsDao.chatReadUpdate(c_room_no);
+		return chat_contentsDao.chatReadUpdate(c_room_no,user_id);
 	}
 
 	@Override
@@ -74,11 +81,30 @@ public class ChatServiceImpl implements ChatService {
 		return chatRoomDao.chatRoomCreate(from_id, to_id, p_no);
 	}
 
-	// 채팅방 삭제
-	@Override
-	public int chatRoomDelete(int c_room_no) {
-		return chatRoomDao.chatRoomDelete(c_room_no);
-	}
+	//채팅방 삭제 
+		@Override
+		public int chatRoomDelete(String user_id,int c_room_no) {
+			int result = 0;
+			if(chatRoomDao.chatRoomDeleteCheck(c_room_no)==2) {
+				ChatRoom chatRoom = chatRoomDao.chatRoomSelect(c_room_no);
+				if(chatRoom.getTo_id().equals(user_id)) {
+					result = chatRoomDao.chatRoomDelteTo(user_id, c_room_no);
+				}else if(chatRoom.getFrom_id().equals(user_id)) {
+					result = chatRoomDao.chatRoomDelteFrom(user_id, c_room_no);
+				}
+			
+				
+			}
+			else if(chatRoomDao.chatRoomDeleteCheck(c_room_no)==1) {
+				result = chatRoomDao.chatRoomDelete(c_room_no);
+				
+			}
+			
+
+
+		
+			return result;
+		}
 	
 	// 채팅방 중복 체크 
 	@Override
@@ -97,23 +123,65 @@ public class ChatServiceImpl implements ChatService {
 	@Override
 	public List<ChatRoomListView> chatRoomSelectAll(String user_id) {
 		List<ChatRoomListView> chatRoomListView = chatRoomDao.chatRoomSelectAll(user_id);
-		
-		
+		/*위에가 문제*/
+			System.out.println("service단");
+
+
 		for (ChatRoomListView a : chatRoomListView) {
 			ChatRoom chatRoom = chatRoomDao.chatRoomSelect(a.getC_room_no()); 
+			if(chatRoom.getTo_id().equals(user_id)) {
+				a.setYou_id(chatRoom.getFrom_id());
 
-			if(chatRoom.getFrom_id().equals(user_id)) {
+			}else if(chatRoom.getFrom_id().equals(user_id)) {
 				a.setYou_id(chatRoom.getTo_id());
 	
 			}
-			else if(chatRoom.getTo_id().equals(user_id)) {
-				a.setYou_id(chatRoom.getFrom_id());
-
-			}
+			
 		}
-
+	
 		return chatRoomListView;
 	}
+
+	@Override
+	public ChatRoom chatRoomSelect(Integer c_room_no) {
+		return chatRoomDao.chatRoomSelect(c_room_no);
+	}
+	
+	@Override
+	public int chatNotRead(int c_room_no,String user_id) {
+		return chatRoomDao.chatNotRead(c_room_no, user_id);
+	}
+
+	@Override
+	public Promise promiseSelect(int c_room_no) {
+		// TODO Auto-generated method stub
+		return promiseDao.promiseSelect(c_room_no);
+	}
+
+	@Override
+	public int promiseInsert(Promise promise) {
+		// TODO Auto-generated method stub
+		return promiseDao.promiseInsert(promise);
+	}
+
+	@Override
+	public int promiseDelete(int c_room_no) {
+		// TODO Auto-generated method stub
+		return promiseDao.promiseDelete(c_room_no);
+	}
+
+	@Override
+	public int promiseUpdate(Promise promise) {
+		// TODO Auto-generated method stub
+		return promiseDao.promiseUpdate(promise);
+	}
+
+	@Override
+	public int promiseExist(int c_room_no) {
+		// TODO Auto-generated method stub
+		return promiseDao.promiseExist(c_room_no);
+	}
+	
 	
 	
 

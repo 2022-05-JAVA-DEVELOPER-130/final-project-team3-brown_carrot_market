@@ -1,5 +1,6 @@
 package com.itwill.brown_carrot_market.controller;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +21,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwill.brown_carrot_market.dto.ChatContents;
 import com.itwill.brown_carrot_market.dto.ChatRoomListView;
+import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.ChatService;
+import com.itwill.brown_carrot_market.service.UserInfoService;
 
 
 
@@ -28,24 +31,73 @@ import com.itwill.brown_carrot_market.service.ChatService;
 public class ChatController {
 	
 	@Autowired private ChatService chatService;
-	 
+	@Autowired private UserInfoService userInfoService;
 	
 	/**************************************************/
-		@RequestMapping(value="/chat_room", method=RequestMethod.POST)
+		//@RequestMapping(value="/chat_room", method=RequestMethod.POST)
 		public String chatList(HttpSession httpSession,@RequestParam String user) {
 			List<ChatRoomListView> chatList = chatService.chatRoomSelectAll(user);
+
 			httpSession.setAttribute("chatList",chatList);
 			httpSession.setAttribute("loginId", user);
 			return "chat_room";
 		}	
+		 
 		
-		@RequestMapping(value = "/login", method = { RequestMethod.GET })
+		//@RequestMapping(value = "/login", method = { RequestMethod.GET })
 		public String login(HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
 			return "login";
 		}
 		
+		/************약속잡기*************/
+		@RequestMapping(value="/chat_appointment",method=RequestMethod.GET)
+		public String chatAppointment(HttpServletRequest req, HttpServletResponse resp, HttpSession session){
+		return "chat_appointment";	
+		}
+		
+		@RequestMapping(value="/chat_appointment_change",method=RequestMethod.GET)
+		public String chatAppointmentChange(HttpServletRequest req, HttpServletResponse resp, HttpSession session){
+		return "chat_appointment_change";	
+		}
+		
+		@RequestMapping(value="/chat_appointment_map",method=RequestMethod.GET)
+		public String chatAppointmentMap(HttpServletRequest req, HttpServletResponse resp, HttpSession session){
+		return "chat_appointment_map";	
+		}
+		
+	
+		
+		
+		/**************************************************/
+		@RequestMapping(value="/chat_room", method=RequestMethod.GET)
+		public String chatList(HttpSession httpSession) throws Exception {
+			
+			String userId=(String)httpSession.getAttribute("sUserId");
+			UserInfo userInfo=(UserInfo) httpSession.getAttribute("sUser");
+				//System.out.println("************************** 아이디 :"+userId);
+			  List<ChatRoomListView> chatList = chatService.chatRoomSelectAll(userId);
+			  System.out.println(chatList);
+				for (ChatRoomListView chatRoomListView : chatList) {
+						
+						System.out.println(chatRoomListView.getYou_id());
+					
+						String img = userInfoService.findUser(chatRoomListView.getYou_id()).getUser_profile();
+						chatRoomListView.setYou_image(img);
+						chatRoomListView.setNot_read(chatService.chatNotRead(chatRoomListView.getC_room_no(), userId));
+				}
+			  System.out.println("채팅 리스트:"+chatList);
+			  httpSession.setAttribute("chatList",chatList);
+			  httpSession.setAttribute("loginId", userId);
+			  
+			 
+			return "chat_room";
+		}	
+		
+		
 		
 
+	/**************************************************/
+		
 	/**************************************************/
 	
 	@RequestMapping(value = "/chat", method = { RequestMethod.GET })
@@ -84,11 +136,13 @@ public class ChatController {
 	
 	
 	//읽음(1)으로 변경
-	@ResponseBody
-	@GetMapping(value="/chat_readUpdate")
-	public int chatReadUpdate(@RequestParam("c_room_no") int c_room_no) {
-		return chatService.chatReadUpdate(c_room_no);
-	}
+	/*
+	 * @ResponseBody
+	 * 
+	 * @GetMapping(value="/chat_readUpdate") public int
+	 * chatReadUpdate(@RequestParam("c_room_no") int c_room_no) { return
+	 * chatService.chatReadUpdate(c_room_no); }
+	 */
 	
 	//메세지 삭제
 	@ResponseBody
