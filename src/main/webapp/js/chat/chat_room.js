@@ -129,6 +129,9 @@ $.ajax({
 			//$('#content').html('채팅 불러오기 성공');
 			$('#chat_history').html("");
 			$('#chatHead').html("");
+			/***********숨기기**********/
+			console.log("숨기기");
+			$('#plist').hide();
 			//loginId=$('#loginId').val();
 			console.log(loginId);
 			/*
@@ -665,11 +668,11 @@ $.ajax({
 	});
 	
 	});
-	/************************************ 채팅방 X ******************************/
+	/************************************ 채팅방 닫기 ******************************/
 $(document).on('click','#outRoom',function(e){
 			$('#chat_history').html("");
 			$('#chat_history').append(chatRoomOut());
-			
+			$('#plist').show();
 			
 
 	
