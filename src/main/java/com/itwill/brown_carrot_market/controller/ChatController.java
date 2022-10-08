@@ -24,7 +24,9 @@ import com.itwill.brown_carrot_market.dto.ChatContents;
 import com.itwill.brown_carrot_market.dto.ChatRoomListView;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.ChatService;
+import com.itwill.brown_carrot_market.service.ProductService;
 import com.itwill.brown_carrot_market.service.UserInfoService;
+
 
 
 
@@ -33,6 +35,7 @@ public class ChatController {
 	
 	@Autowired private ChatService chatService;
 	@Autowired private UserInfoService userInfoService;
+	@Autowired private ProductService productService;
 	
 	/**************************************************/
 		//@RequestMapping(value="/chat_room", method=RequestMethod.POST)
@@ -91,6 +94,35 @@ public class ChatController {
 			  httpSession.setAttribute("loginId", userId);
 			  
 			 
+			return "chat_room";
+		}	
+		/************************************채팅방 생성*************************************/
+		@RequestMapping(value="/create_room", method=RequestMethod.POST)
+		public String chatCreate(HttpSession httpSession,@RequestParam("p_no") int p_no,Model model) throws Exception{
+			String from_id = (String)httpSession.getAttribute("sUserId");
+			String to_id = productService.selectByOne(p_no).getUserInfo().getUser_id();
+			boolean check = chatService.duplicateCheck(from_id, to_id, p_no);
+			if(check) {
+				System.out.println("채팅방이 이미 존재합니다");
+			}else {
+				chatService.chatRoomCreate(from_id, to_id, p_no);
+				
+				int chat_room_no = chatService.chatRoomSearch(from_id, to_id,p_no);
+				String admin = "admin";
+				ChatContents newChat=new ChatContents(0, "사기, 불법거래에 주의하세요.",
+						null, null, admin, chat_room_no);
+				chatService.insertChat(newChat);
+			}
+			List<ChatRoomListView> chatList = chatService.chatRoomSelectAll(from_id);
+			for (ChatRoomListView chatRoomListView : chatList) {
+				
+				System.out.println(chatRoomListView.getYou_id());
+			
+				String img = userInfoService.findUser(chatRoomListView.getYou_id()).getUser_profile();
+				chatRoomListView.setYou_image(img);
+				chatRoomListView.setNot_read(chatService.chatNotRead(chatRoomListView.getC_room_no(), from_id));
+		}
+			model.addAttribute("chatList",chatList);
 			return "chat_room";
 		}	
 		
