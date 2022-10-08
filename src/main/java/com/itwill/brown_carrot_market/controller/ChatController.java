@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -70,7 +71,7 @@ public class ChatController {
 		
 		/**************************************************/
 		@RequestMapping(value="/chat_room", method=RequestMethod.GET)
-		public String chatList(HttpSession httpSession) throws Exception {
+		public String chatList(HttpSession httpSession,Model model) throws Exception {
 			
 			String userId=(String)httpSession.getAttribute("sUserId");
 			UserInfo userInfo=(UserInfo) httpSession.getAttribute("sUser");
@@ -86,7 +87,7 @@ public class ChatController {
 						chatRoomListView.setNot_read(chatService.chatNotRead(chatRoomListView.getC_room_no(), userId));
 				}
 			  System.out.println("채팅 리스트:"+chatList);
-			  httpSession.setAttribute("chatList",chatList);
+			  model.addAttribute("chatList",chatList);
 			  httpSession.setAttribute("loginId", userId);
 			  
 			 
