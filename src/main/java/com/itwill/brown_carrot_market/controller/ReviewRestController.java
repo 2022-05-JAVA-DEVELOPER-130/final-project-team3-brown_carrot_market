@@ -31,7 +31,9 @@ public class ReviewRestController {
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
 		List<Review> reviewList=
 		reviewService.findReceivedReview(sUserId);
-		
+		code=2;
+		msg="review_view_json 성공";
+
 		resultMap.put("code", code);
 		resultMap.put("url", url);
 		resultMap.put("msg", msg);

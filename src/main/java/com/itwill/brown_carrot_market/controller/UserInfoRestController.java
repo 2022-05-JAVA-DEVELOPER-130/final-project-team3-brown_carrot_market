@@ -31,6 +31,95 @@ public class UserInfoRestController {
 	private UserInfoService userService;
 	
 	@LoginCheck
+	@PostMapping(value = "/user_session_check_json")
+	public Map user_session_check_json(HttpSession session) throws Exception{
+		Map resultMap=new HashMap();
+		int code=1;
+		String url="index";
+		String msg="세션존재 안함XX";
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
+		String sUserId=(String)session.getAttribute("sUserId");
+		System.out.println("user_session_check_json : sUserId >>> "+sUserId);
+		if(sUserId!=null) {
+			UserInfo sUser=userService.findUser(sUserId);
+			System.out.println("sUser: "+sUser);
+			
+			/***********수정 필요***********/
+			Address sAddress=(Address)session.getAttribute("sAddress");
+			System.out.println("sAddress: "+sAddress);
+			/******************************/
+			
+			code=2;
+			url="index";
+			msg="세션존재";
+			resultList.add(sUser);
+			resultMap.put("sUserId",sUserId);
+			resultMap.put("sUser",sUser);
+			resultMap.put("sAddress",sAddress);
+		}
+		
+		resultMap.put("code", code);
+		resultMap.put("url", url);
+		resultMap.put("msg", msg);
+		resultMap.put("data",resultList);
+		return resultMap;
+		
+	}
+	
+	@PostMapping(value = "/user_login_action_json")
+	public Map user_login_action_json(@ModelAttribute(value = "sUser") UserInfo user,HttpServletRequest request) throws Exception{
+		int code=0;
+		String url="";
+		String msg="";
+		Map resultMap=new HashMap();
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
+		System.out.println("user_login_action_json - user: "+user);
+		
+		int result= userService.login(user.getUser_id(), user.getUser_pw());
+		/*
+		 * 회원로그인
+		 * 0:아이디존재안함
+		 * 1:패쓰워드 불일치
+		 * 2:로그인성공(세션)
+		 */
+		switch (result) {
+		case 0:
+			code=0;
+			url="user_login_form";
+			msg="아이디존재안함";
+			break;
+		case 1:
+			code=1;
+			url="user_login_form";
+			msg="패쓰워드 불일치";
+			break;
+		case 2:
+			request.getSession().setAttribute("sUserId", user.getUser_id());
+			UserInfo sUser=userService.findUser(user.getUser_id());
+			request.getSession().setAttribute("sUser", sUser);
+			System.out.println("sUser"+sUser);
+			//우선은 address_range()>0 인 주소만 넣었습니다.
+			if(sUser.getAddressList()!=null) {
+				for(Address address: sUser.getAddressList()) {
+					if(address.getAddress_range()>0) {
+						request.getSession().setAttribute("sAddress", address);
+					}
+				}
+			}
+			code=2;
+			url="user_main";
+			msg="로그인 성공";
+			resultList.add(sUser);
+			break;
+		}
+		resultMap.put("code", code);
+		resultMap.put("url", url);
+		resultMap.put("msg", msg);
+		resultMap.put("data",resultList);
+		return resultMap;
+	}
+	
+	@LoginCheck
 	@PostMapping("/user_view_json")
 	public Map user_view_json(HttpServletRequest request) throws Exception{
 		Map resultMap=new HashMap();
@@ -275,101 +364,6 @@ public class UserInfoRestController {
 		return resultMap;
 	}
 
-	@PostMapping(value = "/user_login_action_json")
-	public Map user_login_action_json(@ModelAttribute(value = "sUser") UserInfo user,HttpServletRequest request) throws Exception{
-		
-		int code=0;
-		String url="";
-		String msg="";
-		Map resultMap=new HashMap();
-		List<UserInfo> resultList=new ArrayList<UserInfo>();
-		System.out.println("user_login_action_json - user: "+user);
-		
-		int result=
-				userService.login(user.getUser_id(), user.getUser_pw());
-		
-		/*
-		 * 회원로그인
-		 * 0:아이디존재안함
-		 * 1:패쓰워드 불일치
-		 * 2:로그인성공(세션)
-		 */
-		switch (result) {
-		case 0:
-			code=0;
-			url="user_login_form";
-			msg="아이디존재안함";
-			break;
-		case 1:
-			code=1;
-			url="user_login_form";
-			msg="패쓰워드 불일치";
-			break;
-		case 2:
-			request.getSession().setAttribute("sUserId", user.getUser_id());
-			UserInfo sUser=userService.findUser(user.getUser_id());
-			request.getSession().setAttribute("sUser", sUser);
-			
-			System.out.println("sUser"+sUser);
-			
-			//우선은 address_range()>0 인 주소만 넣었습니다.
-			if(sUser.getAddressList()!=null) {
-				for(Address address: sUser.getAddressList()) {
-					if(address.getAddress_range()>0) {
-						request.getSession().setAttribute("sAddress", address);
-					}
-				}
-			}
-			
-			code=2;
-			url="user_main";
-			msg="로그인 성공";
-			resultList.add(sUser);
-			break;
-
-		}
-		resultMap.put("code", code);
-		resultMap.put("url", url);
-		resultMap.put("msg", msg);
-		resultMap.put("data",resultList);
-		return resultMap;
-	}
-	
-	@LoginCheck
-	@PostMapping(value = "/user_session_check_json")
-	public Map user_session_check_json(HttpSession session) throws Exception{
-		Map resultMap=new HashMap();
-		int code=1;
-		String url="index";
-		String msg="세션존재 안함XX";
-		List<UserInfo> resultList=new ArrayList<UserInfo>();
-		String sUserId=(String)session.getAttribute("sUserId");
-		System.out.println("user_session_check_json : sUserId >>> "+sUserId);
-		if(sUserId!=null) {
-			UserInfo sUser=userService.findUser(sUserId);
-			System.out.println("sUser: "+sUser);
-			
-			/***********수정 필요***********/
-			Address sAddress=(Address)session.getAttribute("sAddress");
-			System.out.println("sAddress: "+sAddress);
-			/******************************/
-			
-			code=2;
-			url="index";
-			msg="세션존재";
-			resultList.add(sUser);
-			resultMap.put("sUserId",sUserId);
-			resultMap.put("sUser",sUser);
-			resultMap.put("sAddress",sAddress);
-		}
-		
-		resultMap.put("code", code);
-		resultMap.put("url", url);
-		resultMap.put("msg", msg);
-		resultMap.put("data",resultList);
-		return resultMap;
-		
-	}
 	@PostMapping(value = "/user_id_check_json")
 	public boolean user_id_check_json(@RequestParam String userId) throws Exception{
 		System.out.println(userId);

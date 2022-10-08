@@ -20,7 +20,8 @@ public class ReviewDaoImpl implements ReviewDao {
 	
 	@Override
 	public int createReview(Review review) {
-		return reviewMapper.createReview(review);
+		reviewMapper.createReview(review);
+		return review.getReview_no();	//insert된 review_no Return	
 	}
 
 	@Override

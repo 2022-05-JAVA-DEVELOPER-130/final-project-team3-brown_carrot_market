@@ -30,12 +30,12 @@
  	</resultMap>
  
  
-	<insert id="createReview" parameterType="com.itwill.brown_carrot_market.dto.Review" useGeneratedKeys="false">
-		insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
-    		values(review_review_no_seq.nextval,#{review_desc},#{review_image},#{review_point}, #{orders.orders_no},#{userInfo.user_id})
-		<selectKey keyProperty="orders_no" order="AFTER" resultType="int">
-			select orders_no from dual
+	<insert id="createReview" parameterType="com.itwill.brown_carrot_market.dto.Review" useGeneratedKeys="true">
+		<selectKey keyProperty="review_no" order="BEFORE" resultType="int">
+			select review_review_no_seq.nextval from dual
 		</selectKey>
+		insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
+    		values(#{review_no},#{review_desc},#{review_image},#{review_point}, #{orders.orders_no},#{userInfo.user_id})
 	</insert>
 	
 	<!-- 전체후기 : 판매자 or 구매자가 나에게 남긴 후기 -->
