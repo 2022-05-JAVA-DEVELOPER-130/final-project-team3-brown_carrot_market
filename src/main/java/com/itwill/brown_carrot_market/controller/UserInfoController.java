@@ -22,6 +22,11 @@ public class UserInfoController {
 	@Autowired
 	private UserInfoService userService;
 
+	@RequestMapping("/user_login")
+	public String user_login_form() {
+		return "user_login";
+	}
+	
 	@RequestMapping("/user_write_form")
 	public String user_write_form() {
 		System.out.println("user_write_form 컨트롤러 호출-userService: " + userService);
@@ -61,7 +66,6 @@ public class UserInfoController {
 		return "user_my-account";
 	}
 
-/*
 	@RequestMapping(value = "/user_login_action", method = RequestMethod.POST)
 	public String user_login_action_post(@ModelAttribute(value = "fuser") UserInfo user, HttpServletRequest request)
 			throws Exception {
@@ -87,7 +91,6 @@ public class UserInfoController {
 		}
 		return forwardPath;
 	}
-*/
 	/*
 	 * @LoginCheck
 	 * 
