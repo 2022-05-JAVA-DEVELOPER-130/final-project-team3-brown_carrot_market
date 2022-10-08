@@ -57,8 +57,14 @@
             </div>
         </div>
     </div>
+    <!-- Checkout Steps Area -->
+    <div class="checkout_steps_area">
+        <a href=""><i class="icofont-check-circled"></i> Login</a>
+        <a href=""><i class="icofont-check-circled"></i> Billing</a>
+        <a class="active" href="/brown_carrot_market/point_list"><i class="icofont-check-circled"></i> 페이내역</a>
+    </div>
+    <!-- Checkout Area End -->
     <!-- Breadcumb Area -->
-
     <div class="shortcodes_area section_padding_100">
         <div class="container">
             <div class="row">
@@ -97,6 +103,7 @@
             </div>
         </div>
     </div>
+	
 
     <!-- Footer Area -->
 	<jsp:include page="common/include_common_footer.jsp"/>

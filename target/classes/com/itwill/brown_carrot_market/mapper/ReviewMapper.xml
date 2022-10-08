@@ -21,7 +21,9 @@
  		</association>
  		<association property="orders" javaType="com.itwill.brown_carrot_market.dto.Orders">
 	 		<result column="orders_no" property="orders_no" />
+	 		<association property="userinfo" javaType="com.itwill.brown_carrot_market.dto.UserInfo">
 			<result column="user_id" property="user_id" />
+	 		</association>
 	 		<association property="product" javaType="com.itwill.brown_carrot_market.dto.Product">
 	 		<result column="p_no" property="p_no" />
 	 		<result column="p_address_name" property="p_address_name" />
