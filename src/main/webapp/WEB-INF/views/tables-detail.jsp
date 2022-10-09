@@ -60,7 +60,11 @@
                         <div class="table-responsive">
                             <table class="table mb-0 table-bordered">
                                 <thead>
-                                    
+                                    <tr>
+	                                	<th>제목</th>
+	                                	<th>날짜</th>
+	                                	<th>조회수</th>
+	                                </tr>
                                     <tr>
                                         <th scope="col" class="board_title">${notice.notice_title}</th>
                                         <th scope="col" class="board_date">${notice.notice_date}</th>

@@ -26,8 +26,8 @@ public class NoticeController {
 	
 	//공지사항 전체조회
 	@RequestMapping("/notice_list")
-	public String notice_list(@RequestParam(required = false, defaultValue = "1") Integer pageno,Model model) throws Exception{
-		
+	public String notice_list(@RequestParam(required = false, defaultValue = "1") Integer pageno,Model model, HttpSession session) throws Exception{
+		String sUserId=(String)session.getAttribute("sUserId");
 		try {
 		PageMakerDto<Notice> noticeList = noticeService.selectAll(pageno);
 		//List<Notice> noticeList = noticeService.selectAll();
@@ -72,7 +72,7 @@ public class NoticeController {
 		}
 		/*
 		if(sUserId != "admin") {
-			return "tables";
+			return "notice_list";
 		}
 		*/
 		try {
@@ -118,7 +118,8 @@ public class NoticeController {
 	 */
 	@LoginCheck
 	@RequestMapping("/notice_update")
-	public String notice_update(@RequestParam Map<String, String> params) {
+	public String notice_update(@RequestParam Map<String, String> params, HttpSession session) {
+		String sUserId = (String)session.getAttribute("sUserId");
 		String pageno = params.get("pageno");
 		String notice_no = params.get("notice_no");
 		if (pageno == null || notice_no == null) {
@@ -146,9 +147,15 @@ public class NoticeController {
 	@LoginCheck
 	@RequestMapping("/notice_update_form")
 	public String notice_update_form(@RequestParam Integer pageno, Integer notice_no, Model model, HttpSession session) {
+		String sUserId = (String)session.getAttribute("sUserId");
 		if (pageno == null || notice_no == null) {
 			return "notice_list";
 		}
+		/*
+		if(sUserId != "admin") {
+			return "redirect:notice_list";
+		}
+		*/
 		try {
 			
 			Notice notice = noticeService.selectByNo(notice_no);

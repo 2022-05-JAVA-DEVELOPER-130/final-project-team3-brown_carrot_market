@@ -152,7 +152,10 @@ if(document.getElementById("notice_fix").checked) {
 }
 */
 
-
+/*
+일반 회원일때 등록, 수정, 삭제 버튼 숨기기
+*/
+$()
 
 /*
 ckeditor

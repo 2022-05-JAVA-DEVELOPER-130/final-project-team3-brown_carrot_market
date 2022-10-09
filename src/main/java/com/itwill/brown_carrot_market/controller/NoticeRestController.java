@@ -3,6 +3,8 @@ package com.itwill.brown_carrot_market.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,12 +47,18 @@ public class NoticeRestController {
 	 * 게시글 삭제
 	 */
 	@RequestMapping("/notice_delete_rest")
-	public Map<String, Object> notice_delete_rest(Integer pageno, Integer notice_no){
+	public Map<String, Object> notice_delete_rest(Integer pageno, Integer notice_no, HttpSession session){
 		Map<String, Object> resultMap = new HashMap<>();
 		if (pageno == null || notice_no == null) {
 			resultMap.put("errorCode", -1);
 			resultMap.put("errorMsg", "잘못된 접근입니다");
 		}
+		/*
+		 * String sUserId = (String)session.getAttribute("sUserId");
+		if(sUserId != "admin") {
+			return "redirect:notice_list";
+		}
+		*/
 		try {
 			int result = noticeService.deleteNotice(notice_no);
 			if (result == 1) {
