@@ -75,7 +75,8 @@ CREATE TABLE payment(
 CREATE TABLE orders(
 		orders_no                     		NUMBER(10)		 NULL ,
 		p_no                          		NUMBER(20)		 NULL ,
-		user_id                       		VARCHAR2(10)		 NULL 
+		user_id                       		VARCHAR2(10)		 NULL, 
+		orders_date                   		DATE		 NULL 
 );
 
 DROP SEQUENCE orders_orders_no_SEQ;

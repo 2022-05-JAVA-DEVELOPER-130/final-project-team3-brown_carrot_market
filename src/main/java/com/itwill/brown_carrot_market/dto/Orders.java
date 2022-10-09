@@ -1,5 +1,7 @@
 package com.itwill.brown_carrot_market.dto;
 
+import java.sql.Date;
+
 /*
 이름        널?       유형           
 --------- -------- ------------ 
@@ -12,17 +14,19 @@ public class Orders {
 	private Product product;
 	private UserInfo userinfo;
 	private Transfer transfer;
+	private Date orders_date;
 	
 	public Orders() {
 
 	}
 
-	public Orders(int orders_no, Product product, UserInfo userinfo, Transfer transfer) {
+	public Orders(int orders_no, Product product, UserInfo userinfo, Transfer transfer, Date orders_date) {
 		super();
 		this.orders_no = orders_no;
 		this.product = product;
 		this.userinfo = userinfo;
 		this.transfer = transfer;
+		this.orders_date = orders_date;
 	}
 
 	public int getOrders_no() {
@@ -57,10 +61,18 @@ public class Orders {
 		this.transfer = transfer;
 	}
 
+	public Date getOrders_date() {
+		return orders_date;
+	}
+
+	public void setOrders_date(Date orders_date) {
+		this.orders_date = orders_date;
+	}
+
 	@Override
 	public String toString() {
 		return "Orders [orders_no=" + orders_no + ", product=" + product + ", userinfo=" + userinfo + ", transfer="
-				+ transfer + "]";
+				+ transfer + ", orders_date=" + orders_date + "]";
 	}
 
 }

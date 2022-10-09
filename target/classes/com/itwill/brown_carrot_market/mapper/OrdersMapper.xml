@@ -3,6 +3,7 @@
 <mapper namespace="com.itwill.brown_carrot_market.mapper.OrdersMapper">
 	<resultMap id="ordersResultMap" type="com.itwill.brown_carrot_market.dto.Orders">
 		<result column="orders_no" property="orders_no" />
+		<result column="orders_date" property="orders_date" />
 			<association property="userinfo" javaType="com.itwill.brown_carrot_market.dto.UserInfo">
 				<result column="USER_ID" property="user_id"/>
 				<result column="USER_PW" property="user_pw"/>
@@ -80,7 +81,7 @@
 	</select>
 	<insert id="insertOrders"
 		parameterType="com.itwill.brown_carrot_market.dto.Orders">
-		insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, #{product.p_no}, #{userinfo.user_id})
+		insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, #{product.p_no}, #{userinfo.user_id}, sysdate)
 	</insert>
 	<delete id="deleteOrders"
 		parameterType="com.itwill.brown_carrot_market.dto.Orders">
