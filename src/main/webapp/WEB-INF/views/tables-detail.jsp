@@ -16,7 +16,8 @@
     <!-- include_common_top -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="forEunbi/common/board.css">
-
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
 </head>
 
 <body>
@@ -75,11 +76,8 @@
                         </div>
                     </div>
                     	<div id="qna_btn_container">
-                    	<c:if test="${qna.m_id eq sM_id}">
-							<input class="qna_btn update_form" type="button" pageno="${pageno}" q_no="${qna.q_no}" value="수정" />
-							<input class="qna_btn delete" type="button" pageno="${pageno}" q_no="${qna.q_no}" value="삭제" />
-                    	</c:if>
-							<input class="qna_btn reply" type="button" pageno="${pageno}" q_no="${qna.q_no}" value="답글" />
+							<input class="qna_btn update_form" type="button" pageno="${pageno}" notice_no="${notice.notice_no}" value="수정" />
+							<input class="qna_btn delete" type="button" pageno="${pageno}" notice_no="${notice.notice_no}" value="삭제" />
 							<input class="qna_btn list" type="button" pageno="${pageno}" value="목록" />
                     	</div>
                 </div>
@@ -94,11 +92,10 @@
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
     
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script src="js/notice/board.js"></script>
-	<script type="text/javascript">
-		
-	</script>
+    <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="js/notice/board.js" defer></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 </body>
 

@@ -26,6 +26,8 @@
      -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="forEunbi/common/board.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
 
 </head>
 
@@ -90,11 +92,11 @@
 	                                       
 	                                        	<a href="notice_view?notice_no=${notice.notice_no}&pageno=${noticeList.pageMaker.curPage}">
 	                                        		${notice.notice_title}
-	                                        		<!--
-	                                        		<c:if test="${to_date eq notice.notice_date}">
-	                                        			&nbsp;&nbsp;<span class="badge badge-danger">new</span>
+	                                        		
+	                                        		<c:if test="${notice.notice_fix eq '1'}">
+	                                        			&nbsp;&nbsp;<span class="badge badge-danger">중요</span>
 	                                        		</c:if>
-	                                        		  -->
+	                                        		 
 	                                        	</a>
 	                                        	
 	                                        
@@ -160,8 +162,10 @@
 	<!--
 	
 	  -->
+	<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="js/notice/board.js" defer></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	
 
 </body>
