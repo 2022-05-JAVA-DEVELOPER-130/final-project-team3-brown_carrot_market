@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="css/shop/board.css">
      -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="forEunbi/common/board.css">
+    <link rel="stylesheet" href="css/board.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
 
@@ -81,7 +81,7 @@
                                         <th scope="col" class="board_count">조회수</th>
                                     </tr>
                                 </thead>
-                                <tbody id="qna_list_tbody">
+                                <tbody id="notice_list_tbody">
                                 
                                 	<!-- board start -->
                                 	<c:forEach var="notice" items="${noticeList.itemList}">
@@ -112,7 +112,7 @@
 						
                         </div>
                     </div>
-					<input type="button" class="qna_btn write_form" pageno="${pageno}" value="게시글작성" />
+					<input type="button" class="notice_btn write_form" pageno="${pageno}" value="게시글작성" />
                 </div>
             </div>
             

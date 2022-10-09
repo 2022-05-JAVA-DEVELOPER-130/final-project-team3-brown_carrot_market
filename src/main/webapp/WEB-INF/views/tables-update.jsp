@@ -14,7 +14,7 @@
     <!-- include_common_top -->
     <!-- include_common_top -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="forEunbi/common/board.css">
+    <link rel="stylesheet" href="css/board.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
 
@@ -70,9 +70,9 @@
 	                                </tr>
 	                                    <tr>
 	                                        <th scope="col" class="board_title">
-	                                        	<input type="text" name="notice_title" id="q_title_txt" placeholder=" title" value="${notice.notice_title}" />
+	                                        	<input type="text" name="notice_title" id="notice_title_txt" placeholder=" title" value="${notice.notice_title}" />
 	                                        </th>
-	                                        <th scope="col" class="board_writer">
+	                                        <th scope="col" class="board_fix">
 	                                        	<input type="checkbox" name = "notice_fix" value="1" id="notice_fix" >
 	                                        	<input type="hidden" name = "notice_fix" value="0" id="notice_fix_hidden" >
 	                                        </th>
@@ -81,8 +81,8 @@
 	                                </thead>
 	                                <tbody>
 	                                    <tr>
-	                                        <td id="qna_content_td" colspan="3">
-	                                        	<textarea name="notice_content" id="q_content_area" >${notice.notice_content}</textarea>
+	                                        <td id="notice_content_td" colspan="3">
+	                                        	<textarea name="notice_content" id="notice_content_area" >${notice.notice_content}</textarea>
 	                                        </td>
 	                                    </tr>
 	                                </tbody>
@@ -92,9 +92,9 @@
                 			</form>
                         </div>
                     </div>
-                    	<div id="qna_btn_container">
-							<input class="qna_btn update" type="button" value="수정" />
-							<input class="qna_btn list" type="button" pageno="${pageno}" value="목록" />
+                    	<div id="notice_btn_container">
+							<input class="notice_btn update" type="button" value="수정" />
+							<input class="notice_btn list" type="button" pageno="${pageno}" value="목록" />
                     	</div>
                 </div>
             </div>

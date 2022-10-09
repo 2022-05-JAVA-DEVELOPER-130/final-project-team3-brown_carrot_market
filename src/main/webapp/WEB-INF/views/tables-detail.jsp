@@ -15,7 +15,7 @@
     
     <!-- include_common_top -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="forEunbi/common/board.css">
+    <link rel="stylesheet" href="css/board.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
 </head>
@@ -64,21 +64,21 @@
                                     <tr>
                                         <th scope="col" class="board_title">${notice.notice_title}</th>
                                         <th scope="col" class="board_date">${notice.notice_date}</th>
-                                        <th scope="col" class="board_writer">조회수 : ${notice.notice_count}</th>
+                                        <th scope="col" class="board_count">조회수 : ${notice.notice_count}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td id="qna_content_td" colspan="3">${notice.notice_content}</td>
+                                        <td id="notice_content_td" colspan="3">${notice.notice_content}</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    	<div id="qna_btn_container">
-							<input class="qna_btn update_form" type="button" pageno="${pageno}" notice_no="${notice.notice_no}" value="수정" />
-							<input class="qna_btn delete" type="button" pageno="${pageno}" notice_no="${notice.notice_no}" value="삭제" />
-							<input class="qna_btn list" type="button" pageno="${pageno}" value="목록" />
+                    	<div id="notice_btn_container">
+							<input class="notice_btn update_form" type="button" pageno="${pageno}" notice_no="${notice.notice_no}" value="수정" />
+							<input class="notice_btn delete" type="button" pageno="${pageno}" notice_no="${notice.notice_no}" value="삭제" />
+							<input class="notice_btn list" type="button" pageno="${pageno}" value="목록" />
                     	</div>
                 </div>
             </div>
