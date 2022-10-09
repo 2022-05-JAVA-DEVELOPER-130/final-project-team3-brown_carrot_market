@@ -165,13 +165,13 @@ CREATE TABLE chat_room(
 		c_room_no                     		NUMBER(10)		 NULL ,
 		from_id                       		VARCHAR2(10)		 NULL ,
 		to_id                         		VARCHAR2(20)		 NULL ,
+        from_id_in                     		NUMBER(10)		 NULL ,
+		to_id_in                            NUMBER(20)		 NULL ,
 		p_no                          		NUMBER(20)		 NULL 
 );
 
 DROP SEQUENCE chat_room_c_room_no_SEQ;
-
 CREATE SEQUENCE chat_room_c_room_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 CREATE TABLE chat_contents(
 		c_content_no                  		NUMBER(10)		 NULL ,
