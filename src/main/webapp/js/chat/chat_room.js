@@ -659,7 +659,7 @@ $.ajax({
 			for(const item of chatList){
 				
 			$('#chatRoomList').append(chatRoomListNew(item));
-				
+			$('#plist').show();	
 				
 			}
 
