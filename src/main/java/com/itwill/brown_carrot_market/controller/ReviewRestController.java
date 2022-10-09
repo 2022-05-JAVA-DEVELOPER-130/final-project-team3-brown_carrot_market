@@ -20,9 +20,10 @@ public class ReviewRestController {
 	@Autowired
 	private ReviewService reviewService;
 	
-	//@PostMapping
-	@RequestMapping("review_view_json")
+	//@PostMapping("user_received_reviewList_json")
+	@RequestMapping("user_received_reviewList_json")
 	public Map review_view_json(HttpServletRequest request) throws Exception{
+		System.out.println("user_received_reviewList_json");
 		Map resultMap=new HashMap();
 		int code=1;
 		String url="review_view_json";

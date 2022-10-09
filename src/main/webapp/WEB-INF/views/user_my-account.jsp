@@ -402,6 +402,21 @@
 			    document.getElementById('user_profile').src=URL.createObjectURL(file);
 			}
 			
+			//user_received_reviewList
+			$(document).on('click', '#user_received_reviewList', function(e) {
+				console.log('click!!');
+				 $.ajax({
+						url:'user_received_reviewList_json',
+						method:'POST',
+						/*dataType:'json',*/
+						success:function(jsonResult){
+							//console.log(jsonResult);
+							$('#my-account-content').html(UserHtmlContents.user_received_reviewList2(jsonResult.data));
+						}
+					});
+				e.preventDefault();
+			});
+			
 		});//END
 </script>
 
@@ -449,7 +464,7 @@
 							<li class=""><a href="#" id="user_account_details">회원정보수정</a></li>
 							<li class="active"><a href="" id="user_view_addresses">내 동네설정</a></li>
 							<li class=""><a href="#" id="">흙당근 포인트 내역</a></li>
-							<li class=""><a href="review_view_json" id="">받은 거래 후기</a></li>
+							<li class=""><a href="#" id="user_received_reviewList">받은 거래 후기</a></li>
 							<li><a href="user_logout_action">로그아웃</a></li>
 						</ul>
 					</div>

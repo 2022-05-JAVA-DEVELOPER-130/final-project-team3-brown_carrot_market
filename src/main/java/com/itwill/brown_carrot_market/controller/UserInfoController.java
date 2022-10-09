@@ -27,12 +27,6 @@ public class UserInfoController {
 		return "user_login";
 	}
 	
-	@RequestMapping("/user_write_form")
-	public String user_write_form() {
-		System.out.println("user_write_form 컨트롤러 호출-userService: " + userService);
-		return "user_write_form";
-	}
-	
 	@LoginCheck
 	@RequestMapping(value = "/user_logout_action")
 	public String user_logout_action(HttpSession session) {
@@ -91,6 +85,15 @@ public class UserInfoController {
 		}
 		return forwardPath;
 	}
+	
+/*
+	@RequestMapping("/user_write_form")
+	public String user_write_form() {
+		System.out.println("user_write_form 컨트롤러 호출-userService: " + userService);
+		return "user_write_form";
+	}
+	*/
+	
 	/*
 	 * @LoginCheck
 	 * 
