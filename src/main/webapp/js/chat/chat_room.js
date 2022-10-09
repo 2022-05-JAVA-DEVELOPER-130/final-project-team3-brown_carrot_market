@@ -129,6 +129,9 @@ $.ajax({
 			//$('#content').html('채팅 불러오기 성공');
 			$('#chat_history').html("");
 			$('#chatHead').html("");
+			/***********숨기기**********/
+			console.log("숨기기");
+			$('#plist').hide();
 			//loginId=$('#loginId').val();
 			console.log(loginId);
 			/*
@@ -330,7 +333,8 @@ function chat_head(id,img,room_no){
 									id="deleteRoom">
 									<i class="fa fa-sign-out"></i></a> 
 								
-									<a href="javascript:void(0);" class="btn btn-outline-danger">
+									<a href="javascript:void(0);" class="btn btn-outline-danger"
+									id="outRoom">
 									<i class="fa fa-close" ></i></a>
 									
 								</div>
@@ -487,6 +491,52 @@ function connectWS(){
 			//내가 보낸 경우
 			$('#chat_history').append(message_you(onmsg));
 		}
+		/*****************메시지 보내는 순간 리스트 새로고침***********************/
+			
+			console.log("채팅방 새로고침");
+			$('#chatRoomList').html("");
+			var reload_id={
+		
+		"loginId":loginId
+	}
+			$.ajax({
+		
+		
+		url:"chat_room_reload_rest",
+		method:"POST",
+		data: JSON.stringify(reload_id),
+		async: true,
+        contentType: "application/json; charset=utf-8", //헤더의 Content-Type을 설정
+        dataType: "JSON", //응답받을 데이터 타입 (XML,JSON,TEXT,HTML,JSONP)  
+				
+    			    			
+	
+		
+		success:function(jsonResult){
+			var chatList=jsonResult.data;
+		
+			console.log("불러오기");
+			console.log(chatList);
+			$('#chatRoomList').html("");
+			for(const item of chatList){
+				
+			$('#chatRoomList').append(chatRoomListNew(item));
+				
+				
+			}
+
+		}
+		
+	});
+	/****************************************************************************/
+		
+		
+		
+		
+		
+		
+		
+		
 		} //입장한 경우
 		else if(onmsg.code=="2"){
 			console.log("입장한 경우");
@@ -494,6 +544,7 @@ function connectWS(){
 			"c_room_no":c_room_no,
 			"loginId":loginId
 		}
+		
 			$.ajax({
 		
 		
@@ -563,6 +614,8 @@ function connectWS(){
 	}
 }
 
+
+
 /*****************삭제....*************** */
 
 $(document).on('click','#deleteRoom',function(e){
@@ -615,37 +668,24 @@ $.ajax({
 	});
 	
 	});
+	/************************************ 채팅방 닫기 ******************************/
+$(document).on('click','#outRoom',function(e){
+			$('#chat_history').html("");
+			$('#chat_history').append(chatRoomOut());
+			$('#plist').show();
+			
+
+	
+	});
+	/********************************************************************** */
 function chatRoomOut(){
 	return `<li class="clearfix">
-									<div class="message-data text-right">
-										<span class="message-data-time">10:10 AM, Today</span> <img
-											src="https://bootdey.com/img/Content/avatar/avatar7.png"
-											alt="avatar">
+									<div class="message-data"><img
+											src="img/chat-img/logo_carrot.png"
+											alt>
+										<span class="message-data-adminGongji">당근 좋아하는 토끼</span>
 									</div>
-									<div class="message other-message float-right" >Hi Aiden,
-										how are you? How is the project coming along?</div>
-								</li>
-								<li class="clearfix">
-									<div class="message-data">
-										<span class="message-data-time">10:12 AM, Today</span>
-									</div>
-									<div class="message my-message">Are we meeting today?</div>
-								</li>
-								<li class="clearfix">
-									<div class="message-data">
-										<span class="message-data-time">10:15 AM, Today</span>
-									</div>
-									<div class="message my-message">Project has been already
-										finished and I have results to show you.</div>
-								</li>
-								<li class="clearfix">
-									<div class="message-data text-right">
-										<span class="message-data-time">10:10 AM, Today</span> <img
-											src="https://bootdey.com/img/Content/avatar/avatar7.png"
-											alt="avatar">
-									</div>
-									<div class="message other-message float-right">Hi Aiden,
-										how are you? How is the project coming along?</div>
+									<div class="message my-message">채팅방을 클릭해주세요</div>
 								</li>`
 }
 function chatRoomListNew(list){
@@ -660,6 +700,7 @@ function chatRoomListNew(list){
                         </div>
                  </li>`
 }
+
 
 
 
