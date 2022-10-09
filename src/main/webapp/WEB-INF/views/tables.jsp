@@ -75,7 +75,7 @@
                             <table class="table mb-0 table-bordered">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="board_no">번호</th>
+                                        <th scope="col" class="board_no">분류</th>
                                         <th scope="col" class="board_title">제목</th>
                                         <th scope="col" class="board_date">날짜</th>
                                         <th scope="col" class="board_count">조회수</th>
@@ -86,16 +86,24 @@
                                 	<!-- board start -->
                                 	<c:forEach var="notice" items="${noticeList.itemList}">
 	                                    <tr>
+	                                    <!-- 
 	                                        <th scope="row">${notice.notice_no}</th>
+	                                         -->
+	                                         <th>
+	                                         	<c:if test="${notice.notice_fix eq '1'}">
+	                                        			&nbsp;&nbsp;<span class="badge badge-danger">중요</span>
+	                                        		</c:if>
+	                                        		<c:if test="${notice.notice_fix eq '0'}">
+	                                        			&nbsp;&nbsp;<span class="badge badge-normal">일반</span>
+	                                        		</c:if>
+	                                         </th>
 	                                        <td>
 	                                       
 	                                       
 	                                        	<a href="notice_view?notice_no=${notice.notice_no}&pageno=${noticeList.pageMaker.curPage}">
 	                                        		${notice.notice_title}
 	                                        		
-	                                        		<c:if test="${notice.notice_fix eq '1'}">
-	                                        			&nbsp;&nbsp;<span class="badge badge-danger">중요</span>
-	                                        		</c:if>
+	                                        		
 	                                        		 
 	                                        	</a>
 	                                        	

@@ -14,14 +14,17 @@ function changeQnaList(pageno){
 				let htmlBuffer = ``;
 				data.itemList.forEach(function(notice, i){
 					
-					htmlBuffer += `<tr>
-	                                <th scope="row">${notice.notice_no}</th>
-	                                <td><a href="notice_view?notice_no=${notice.notice_no}&pageno=${data.pageMaker.curPage}">${notice.notice_title}</a>`;
-	                /*
-	                if(fDate == toDate){
-						htmlBuffer += `&nbsp;&nbsp;<span class="badge badge-danger">new</span>`;
+	                if(notice.notice_fix == 1){
+						htmlBuffer += `<tr><td>&nbsp;&nbsp;<span class="badge badge-danger">중요</span></td>`
 					}
-					*/
+	                if(notice.notice_fix == 0){
+						htmlBuffer += `<tr><td>&nbsp;&nbsp;<span class="badge badge-normal">일반</span></td>`
+					}
+	                               
+					htmlBuffer += `
+	                               
+	                                <td><a href="notice_view?notice_no=${notice.notice_no}&pageno=${data.pageMaker.curPage}">${notice.notice_title}</a>`;
+	                
                     htmlBuffer += `</td>
 	                                    <td>${notice.notice_date}</td>
 	                                    <td>${notice.notice_count}</td>
