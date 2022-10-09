@@ -91,6 +91,8 @@ public class ChatController {
 				}
 			  System.out.println("채팅 리스트:"+chatList);
 			  model.addAttribute("chatList",chatList);
+			  //드롭다운 채팅 클릭으로 채팅사이트 이동 
+			  model.addAttribute("path",1);
 			  httpSession.setAttribute("loginId", userId);
 			  
 			 
@@ -101,13 +103,15 @@ public class ChatController {
 		public String chatCreate(HttpSession httpSession,@RequestParam("p_no") int p_no,Model model) throws Exception{
 			String from_id = (String)httpSession.getAttribute("sUserId");
 			String to_id = productService.selectByOne(p_no).getUserInfo().getUser_id();
+			int chat_room_no;
 			boolean check = chatService.duplicateCheck(from_id, to_id, p_no);
 			if(check) {
 				System.out.println("채팅방이 이미 존재합니다");
+				chat_room_no = chatService.chatRoomSearch(from_id, to_id,p_no);
 			}else {
 				chatService.chatRoomCreate(from_id, to_id, p_no);
 				
-				int chat_room_no = chatService.chatRoomSearch(from_id, to_id,p_no);
+				chat_room_no = chatService.chatRoomSearch(from_id, to_id,p_no);
 				String admin = "admin";
 				ChatContents newChat=new ChatContents(0, "사기, 불법거래에 주의하세요.",
 						null, null, admin, chat_room_no);
@@ -123,6 +127,9 @@ public class ChatController {
 				chatRoomListView.setNot_read(chatService.chatNotRead(chatRoomListView.getC_room_no(), from_id));
 		}
 			model.addAttribute("chatList",chatList);
+			//채팅방 생성으로 채팅사이트 이동 
+			model.addAttribute("path",2);
+			model.addAttribute("chat_room_no",chat_room_no);
 			return "chat_room";
 		}	
 		

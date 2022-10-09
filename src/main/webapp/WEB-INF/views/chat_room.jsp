@@ -67,6 +67,9 @@
 										alt="avatar">
 									</a>
 									<div class="chat-about">
+										<input name="myId" id="myId" type="hidden" value=${loginId}>
+										<input name="path" id="path" type="hidden" value=${path}>
+										<input name="newChatRoomNo" id="newChatRoomNo" type="hidden" value=${chat_room_no}>
 										<h6 class="m-b-0">${loginId}</h6>
 										
 										<small>Last seen: 2 hours ago</small>
@@ -96,7 +99,7 @@
 						</div>
 						<div class="chat-history">
 							<ul class="m-b-0" id="chat_history">
-
+<!--  
 								<li class="clearfix">
 									<div class="message-data"><img
 											src="img/chat-img/logo_carrot.png"
@@ -105,7 +108,7 @@
 									</div>
 									<div class="message my-message">채팅방을 클릭해주세요</div>
 								</li>
-								
+-->	
 							</ul>
 						</div>
 						<div class="chat-message clearfix">

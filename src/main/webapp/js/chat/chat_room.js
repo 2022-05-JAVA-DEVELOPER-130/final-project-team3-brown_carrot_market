@@ -1,9 +1,10 @@
 var num = null;
-var loginId=getLoginId();
 var loginName=null;
+var loginId=getLoginId();
 var yourId=null;
 var mImage=null;
 var socket=null;
+
 
 
 var c_room_no=null;
@@ -33,25 +34,6 @@ function getContextPath(){
    var ctx = location.href.substr(0,lastIndexCount).replace('http', 'ws');
    return ctx;
 }
-
-//채팅 페이지 열릴 때 
-
-$(document).ready(function(){
-	
-	 
-	console.log("document ready");
-	
-	console.log("document ready end : "+loginId);
-	//connectWS();
-	
-	message_send_function();
-    
-	});
-	
-	$(window).on("load",function(){
-		//connectWS();
-	})
-	
 function getLoginId(){
 		$.ajax({
 		url:"get_id",
@@ -71,6 +53,142 @@ function getLoginId(){
 	});
 	return loginId;
 }
+
+//채팅 페이지 열릴 때 
+
+$(document).ready(function(){
+		
+		
+		
+		// 채팅방 접근 방식 확인
+	 var  path=document.getElementById("path").value;
+	 var newChatRoomNo=document.getElementById("newChatRoomNo").value;
+	 var myId=document.getElementById("loginId").value;
+	 console.log(newChatRoomNo)
+	 console.log(path);
+	 console.log(myId);
+	
+
+	
+	 
+
+
+	 
+	console.log("document ready");
+	
+	console.log("document ready end : "+loginId);
+	//connectWS();
+	
+	message_send_function();
+	
+	
+	 // 채팅방 접근 방식 확인 -- 너무 야매....
+	 var  path=document.getElementById("path").value;
+	 var newChatRoomNo=document.getElementById("newChatRoomNo").value;
+	 var myId=document.getElementById("loginId").value;
+	 console.log(newChatRoomNo)
+	 console.log(path);
+	 console.log(myId);
+	 if(path==2){
+			$('#chatHead').hide();
+			$('#plist').hide();
+			$('#chat_history').hide();			
+	 if(socket!=null){
+	socket.close();
+	}
+
+	
+
+		
+
+		
+		var chat_detail={
+			"c_room_no":newChatRoomNo,
+			"loginId":myId
+		}
+$.ajax({
+		
+		
+		url:"chat_detail_rest",
+		method:"POST",
+		//data:{"c_room_no":num},
+		data: JSON.stringify(chat_detail),
+		async: true,
+        contentType: "application/json; charset=utf-8", //헤더의 Content-Type을 설정
+        dataType: "JSON", //응답받을 데이터 타입 (XML,JSON,TEXT,HTML,JSONP)    			
+    			    			
+	
+		
+		success:function(jsonResult){
+			connectWS();
+			var chatContentArray=jsonResult.data;
+			yourId=jsonResult.yourId;
+			yourImg = jsonResult.yourImg;
+			c_room_no=jsonResult.c_room_no;
+			console.log("채팅방의 상대방 ID:"+yourId);
+			console.log(chatContentArray);
+
+			$('#chat_history').html("");
+			$('#chatHead').html("");
+			/***********숨기기**********/
+			console.log("숨기기");
+
+			console.log(loginId);
+
+			$('#chatHead').append(chat_head(yourId,yourImg,c_room_no));
+			
+			
+			
+			
+			for(const item of chatContentArray){
+		
+				
+
+				if(item.user_id!=loginId){
+					if(item.user_id=="admin"){
+						
+					$('#chat_history').append(message_admin(item));
+				}
+					else if(item.user_id=="adminP"){
+						$('#chat_history').append( `<li class="clearfix">
+
+                           <div class="message admin-message" margin:auto>${item.c_content}
+                           <br>약속 장소 : <a href="javascript:void(popupMap(${promiseData.c_app_lat},${promiseData.c_app_lng}))" style="font-size:6px;",id="chat_spot_map">${promiseData.c_app_spot}</a></div>
+                        </li>`);
+						
+					}else{
+					console.log("상대가 보낸 메세지");
+			$('#chat_history').append(message_other(item));
+			}
+				}else if(item.user_id==loginId){
+					console.log("내가 보낸 메세지");
+			$('#chat_history').append(message_you(item));
+				}
+			};
+			$('#chat_history').show();
+			$('#chatHead').show();
+			
+		}
+		
+	});
+	
+	}
+	
+//-------------------------------------------------------------------------------------------------------------------------------------------------	
+	
+	
+    
+	});
+	
+	
+	
+	$(window).on("load",function(){
+		//connectWS();
+	})
+	
+
+
+	
 	
 		
 //채팅방 내용 불러오기		
@@ -187,6 +305,7 @@ $.ajax({
 	
 	
 	});
+	
 	
 	//날짜 변환 
 	function date_string(dateString){
@@ -588,6 +707,7 @@ function connectWS(){
 				
 				if(item.user_id=="admin"){
 					$('#chat_history').append(message_admin(item));
+					
 				}
 				else if(item.user_id!=loginId){
 					console.log("내가 보낸 메세지");

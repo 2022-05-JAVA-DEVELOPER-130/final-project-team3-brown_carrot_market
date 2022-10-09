@@ -108,7 +108,8 @@ public class ReplyEchoHandler {
 			e.printStackTrace();
 
 		}
-
+		System.out.println("여기 확인"+mId);
+		System.out.println("여기 확인"+yourId);
 		resultMap.put("code", code);
 		resultMap.put("msg", msg);
 		resultMap.put("yourId", yourId);
