@@ -3,7 +3,7 @@
 <%@taglib prefix="s"  uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -29,6 +29,10 @@
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
+	<!-- jQuery --> 
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+	<!-- iamport.payment.js --> 
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 </head>
 
 <body>
@@ -42,7 +46,7 @@
     <!-- Header Area -->
     <jsp:include page="common/include_common_header.jsp"/>
     <!-- Header Area End -->
-    
+
     <!-- Breadcumb Area -->
     <div class="breadcumb_area">
         <div class="container h-100">
@@ -51,61 +55,63 @@
                     <h5>흙당근페이</h5>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active">페이내역</li>
+                        <li class="breadcrumb-item active">충전하기</li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
-    
-    <!-- Checkout Steps Area -->
-    <div class="checkout_steps_area">
-        <a href="/brown_carrot_market/payment"><i class="icofont-check-circled"></i> 충전하기</a>
-        <a href=""><i class="icofont-check-circled"></i> 송금하기</a>
-        <a class="active" href="/brown_carrot_market/point_list"><i class="icofont-check-circled"></i> 페이내역</a>
-    </div>
-    <!-- Checkout Area End -->
-    
     <!-- Breadcumb Area -->
-    <div class="shortcodes_area section_padding_100">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="shortcodes_title mb-30">
-                    </div>
-                    <div class="shortcodes_content">
-                        <div class="table-responsive">
-                            <table class="table mb-0 table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">날짜</th>
-                                        <th scope="col">입금</th>
-                                        <th scope="col">출금</th>
-                                        <th scope="col">id</th>
-                                        <th scope="col">잔액</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                	<c:forEach items="${transferList}" var="transfer">
-	                                    <tr>
-	                                        <th scope="row">${transfer.transfer_no}</th>
-	                                        <td>${transfer.transfer_date}</td>
-	                                        <td>${transfer.transfer_deposit}</td>
-	                                        <td>${-transfer.transfer_withdraw}</td>
-	                                        <td>${transfer.product.userInfo.user_id}</td>
-	                                        <td>${transfer.transfer_deposit+-transfer.transfer_withdraw}</td>
-	                                    </tr>
-                                   </c:forEach> 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+    <div class="checkout_steps_area">
+        <a class="active" href="/brown_carrot_market/payment"><i class="icofont-check-circled"></i> 충전하기</a>
+        <a href=""><i class="icofont-check-circled"></i> 송금하기</a>
+        <a href="/brown_carrot_market/point_list"><i class="icofont-check-circled"></i> 페이내역</a>
+    </div>
+
+    <div class="col-12">
+    	<div class="checkout_pagination mt-50">
+            <button class="btn btn-primary" onclick="requestPay()">충전하기</button>
         </div>
     </div>
-	
+	<script>
+	  	var IMP = window.IMP; // 생략 가능
+	    IMP.init("imp41236885"); // 예: imp00000000
+	    function requestPay() {
+	      // IMP.request_pay(param, callback) 결제창 호출
+	      IMP.request_pay({ // param
+	          pg: "kakaopay",
+	          pay_method: "card",
+	          merchant_uid: "djkndsfdsfuuvy",
+	          name: "노르웨이 회전 의자",
+	          amount: 100,
+	          buyer_email: "gildong@gmail.com",
+	          buyer_name: "홍길동",
+	          buyer_tel: "010-4242-4242",
+	          buyer_addr: "서울특별시 강남구 신사동",
+	          buyer_postcode: "01181"
+	      }, function (rsp) { // callback
+	          if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+	              alert("결제 성공!");
+	            // jQuery로 HTTP 요청
+	            jQuery.ajax({
+	                url: "{서버의 결제 정보를 받는 endpoint}", // 예: https://www.myservice.com/payments/complete
+	                method: "POST",
+	                headers: { "Content-Type": "application/json" },
+	                data: {
+	                    imp_uid: rsp.imp_uid,
+	                    merchant_uid: rsp.merchant_uid
+	                }
+	            }).done(function (data) {
+	              // 가맹점 서버 결제 API 성공시 로직
+	            })
+	          } else {
+	            alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+	          }
+	        });
+	      };
+	  </script>
+    <!-- Checkout Area End -->
 
     <!-- Footer Area -->
 	<jsp:include page="common/include_common_footer.jsp"/>

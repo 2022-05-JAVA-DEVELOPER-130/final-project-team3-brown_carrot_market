@@ -111,7 +111,7 @@
                                     </li>
                                     <li><a href="#">흙당근페이</a>
                                         <ul class="dropdown">
-                                            <li><a href="checkout-4.html">충전하기</a></li>
+                                            <li><a href="payment">충전하기</a></li>
                                             <li><a href="#">송금하기</a></li>
                                             <li><a href="point_list">페이내역</a></li>
                                         </ul>

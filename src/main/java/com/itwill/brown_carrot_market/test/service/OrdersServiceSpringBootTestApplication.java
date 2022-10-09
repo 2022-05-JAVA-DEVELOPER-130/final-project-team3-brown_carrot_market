@@ -36,8 +36,8 @@ public class OrdersServiceSpringBootTestApplication {
 		OrdersService ordersService = (OrdersService)context.getBean(OrdersService.class);
 		//System.out.println(ordersService.deleteOrders(21));
 		System.out.println(ordersService.selectByNo(1));
-		System.out.println(ordersService.selectAllById("carrot1"));
-		System.out.println(ordersService.insertOrders(new Orders(0,new Product(7,null,null,0,null,0,0,0,null,0,0,null,null,null,null),new UserInfo("carrot1", null, null, null, null, 0, 0, null, null), new Transfer())));
+		System.out.println(ordersService.selectAllById("carrot8"));
+		System.out.println(ordersService.insertOrders(new Orders(0,new Product(9,null,null,0,null,0,0,0,null,0,0,null,null,null,null),new UserInfo("carrot1", null, null, null, null, 0, 0, null, null), new Transfer(),null)));
 
 	}
 }
