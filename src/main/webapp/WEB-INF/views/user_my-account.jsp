@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!doctype html>
 <html lang="en">
 
@@ -474,7 +476,17 @@
 					<div id="my-account-content" class="my-account-content mb-50" style="margin-bottom: 20px">
 						<div class="shortcodes_content mb-100" style="margin-bottom: 0px">
 	                        <div class="col-12 col-lg-9">
-	                            <img class="img-circle" src="img/user_profile/${sUser.user_profile}" onerror="this.src='img/user_profile/newCarrot.jpg'">
+	                        <!-- 더나은 방법을 찾고싶다! -->
+	                        <c:set var="string" value="${sUser.user_profile}"/>
+							<c:choose>
+								<c:when test="${fn:startsWith(string,'http://')}">
+		                            <img class="img-circle" src="${sUser.user_profile}" onerror="this.src='img/user_profile/newCarrot.jpg'">
+								</c:when>
+								<c:otherwise>
+		                            <img class="img-circle" src="img/user_profile/${sUser.user_profile}" onerror="this.src='img/user_profile/newCarrot.jpg'">
+								</c:otherwise>
+							</c:choose>
+							<!-- 프로필 이미지 -->
 							<p>
 								<strong>${sUser.user_id}</strong>님, 안녕하세요? 
 							</p>

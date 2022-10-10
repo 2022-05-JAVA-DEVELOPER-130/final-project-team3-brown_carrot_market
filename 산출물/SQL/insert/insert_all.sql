@@ -115,7 +115,7 @@ INSERT INTO userinfo (
     '010-5555-5555',
     36.5,
     0,
-    'broccoli.png'
+    'carrot5.jpg'
 );
 
 INSERT INTO userinfo (
@@ -176,6 +176,44 @@ INSERT INTO userinfo (
     36.5,
     0,
     'potato.png'
+);
+INSERT INTO userinfo (
+    user_id,
+    user_pw,
+    user_name,
+    user_email,
+    user_phone,
+    user_freshness,
+    user_point,
+    user_profile
+) VALUES (
+    'K2478707404',
+    'kakaotest1',
+    'kakao1',
+    'tjdudg@naver.com',
+    '010-1234-5678',
+    36.5,
+    0,
+    'newCarrot.jpg'
+);
+INSERT INTO userinfo (
+    user_id,
+    user_pw,
+    user_name,
+    user_email,
+    user_phone,
+    user_freshness,
+    user_point,
+    user_profile
+) VALUES (
+    'K2479051437',
+    'kakaotest2',
+    'kakao2',
+    'brv19@hanmail.net',
+    '010-1234-5678',
+    36.5,
+    0,
+    'newCarrot.jpg'
 );
 
 INSERT INTO userinfo (

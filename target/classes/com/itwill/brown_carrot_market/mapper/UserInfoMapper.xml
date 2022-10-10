@@ -6,7 +6,7 @@
 		<result column="user_id" property="user_id" />
 		<result column="user_pw" property="user_pw" />
 		<result column="user_name" property="user_name" />
-		<result column="useremail" property="user_email" />
+		<result column="user_email" property="user_email" />
 		<result column="user_phone" property="user_phone" />
 		<result column="user_freshness" property="user_freshness" />
 		<result column="user_point" property="user_point" />
@@ -45,12 +45,10 @@
 		select user_id from invitation where invi_email=#{invi_email}
 	</select>
 	
-	
-
 	<insert id="createUser" parameterType="com.itwill.brown_carrot_market.dto.UserInfo">
 		<!-- INSERT INTO userinfo (user_id, user_pw, user_name, user_email, user_phone, user_freshness, user_point, user_profile ) -->
 		INSERT INTO userinfo
-			VALUES (#{user_id}, #{user_pw}, #{user_name}, #{user_email}, #{user_phone}, 36.5, 0, 'newCarrot.jpg')
+			VALUES (#{user_id}, #{user_pw}, #{user_name}, #{user_email}, #{user_phone}, 36.5, 0, #{user_profile})
 	</insert>
 	
 	<insert id="createAddress" parameterType="com.itwill.brown_carrot_market.dto.Address"><!-- adress_range(default)=3 -->

@@ -1,5 +1,8 @@
 package com.itwill.brown_carrot_market.controller;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -396,6 +399,7 @@ public class UserInfoRestController {
 		 *  2:초대코드로 회원가입
 		 *  3:존재하지 않는 초대코드로 회원가입 
 		 */
+		user.setUser_profile("newCarrot.jpg");	//초기 프로필이미지
 		if(address!=null) address.setAddress_range(3);
 		int result=userService.create(user,address,invitation);
 		if(result==0) {
@@ -470,9 +474,41 @@ public class UserInfoRestController {
 		return resultMap;
 	}
 	*/
-	
-	
 	/*
+	@RequestMapping(value="/transport", method=RequestMethod.POST)
+	public String transport(@RequestParam(value = "url")  String url){
+		//String paramUrl = request.getParameter("url");
+		String paramUrl = url;
+	    String data = "";
+
+	    try {
+	        URL infoURL = new URL(paramUrl);
+	        InputStream inputStream = infoURL.openStream();
+	        InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
+
+	        StringBuffer sb = new StringBuffer();
+	        int readByte;
+	        while ((readByte = inputStreamReader.read()) != -1) {
+	            sb.append((char) readByte);
+	        }
+	        inputStreamReader.close();
+	        inputStream.close();
+
+	        data = sb.toString();
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return data;
+	}
+	
+	
+	@RequestMapping("/user_kakaologin_json2")
+	public String user_kakaologin_json2(@RequestParam("code") String code,Model model,HttpServletRequest request) throws Exception{
+	
+		return code;
+	}
 	@RequestMapping("/user_kakaologin_json")
 	public Map user_kakaologin_json(@RequestParam("code") String _code,Model model,HttpServletRequest request) throws Exception{
 		Map resultMap=new HashMap();
@@ -504,18 +540,24 @@ public class UserInfoRestController {
 
         //JSON String -> JSON Object
         JSONObject userInfoJsonObject = new JSONObject(userInfo);
+        System.out.println("userInfoJsonObject :"+userInfoJsonObject);
 
         //유저의 Email 추출
         JSONObject kakaoAccountJsonObject = (JSONObject)userInfoJsonObject.get("kakao_account");
         String email = kakaoAccountJsonObject.get("email").toString();
-
+        String id_email = email.substring(0,email.indexOf("@"));
+        
         //View에서 사용할 변수 설정
         model.addAttribute("email", email);
 
         //(test)
         String profile = kakaoAccountJsonObject.get("profile").toString();
-        model.addAttribute("profile", profile);
+        //JSON String -> JSON Object
+        JSONObject profileJsonObject = new JSONObject(profile);
+        String nickname = profileJsonObject.get("nickname").toString();
 
+        String thumbnail_image_url = profileJsonObject.get("thumbnail_image_url").toString();
+        
         String id = (String)userInfoJsonObject.get("id").toString();
         //model.addAttribute("id", id);
         
@@ -524,7 +566,12 @@ public class UserInfoRestController {
 		resultMap.put("msg", msg);
 		resultMap.put("data",model);
 		resultMap.put("id",id+"K");
-		return this.user_kakaologin_action_json(resultMap,request);
+		resultMap.put("id_email",id_email);
+		resultMap.put("email",email);
+		resultMap.put("nickname",nickname);
+		resultMap.put("thumbnail_image_url",thumbnail_image_url);
+		//return this.user_kakaologin_action_json(resultMap,request);
+		return resultMap;
 	}
 	
 	@PostMapping(value = "/user_kakaologin_action_json")
@@ -566,5 +613,4 @@ public class UserInfoRestController {
 		return resultMap;
 	}
 	*/
-	
 }

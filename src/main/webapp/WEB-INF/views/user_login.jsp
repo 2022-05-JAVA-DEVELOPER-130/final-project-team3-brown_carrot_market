@@ -29,6 +29,12 @@
 <script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 <script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
 <script type="text/javascript" src="js/common/user_session_check.js"></script>
+
+	<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js"
+		integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL"
+		crossorigin="anonymous"></script>
+
+
 <script type="text/javascript">
 $(function() {
 
@@ -285,13 +291,11 @@ $(function() {
 	});
 	
 	
-	/*
 	$(document).on('click',	'#kakao-login-btn',function(e) {
 		console.log('click!');
 		
-		e.preventDefault();
+		//e.preventDefault();
 	});
-	*/
 	
 	
 });
@@ -473,9 +477,7 @@ $(function() {
 	<script src="js/wow.min.js"></script>
 	<script src="js/default/active.js"></script>
 
-	<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js"
-		integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL"
-		crossorigin="anonymous"></script>
+
 	<script>
 	  Kakao.init('a7c7231db91ae56cfc5e3c6ea06f73c6'); // 사용하려는 앱의 JavaScript 키 입력
 	</script>
@@ -483,60 +485,11 @@ $(function() {
 	<script>
 	  function loginWithKakao() {
 	    Kakao.Auth.authorize({
-	      /* redirectUri: 'https://developers.kakao.com/tool/demo/oauth', */
 	      redirectUri: 'http://localhost/brown_carrot_market/user_kakaologin',
     	  prompts: 'login'
 		  });
-	    
 	  }
-	  
-	  function kakaoLogin() {
-		    //Kakao.Auth.login({	//지원종료
-	    	Kakao.API.request({
-				  url: 'http://localhost/brown_carrot_market/user_kakaologin',
-				})
-				  .then(function(response) {
-				    console.log(response);
-				  })
-				  .catch(function(error) {
-				    console.log(error);
-				  });
-	    		/* 
-		        success: function(response) {
-		            Kakao.API.request({ // 사용자 정보 가져오기 
-		                url: '/v2/user/me',
-		                success: (response) => {
-		                	var kakaoid = response.id+"K";
-		                    $.ajax({
-		    					type : "post",
-		    					url : '/user_id_check_json', // ID중복체크를 통해 회원가입 유무를 결정한다.
-		    					data : {"userid":kakaoid},
-		    					dataType:"json",
-		    					success : function(json){   				
-		    						if(json.idExists){
-		    							// 존재하는 경우 로그인 처리
-		    							createHiddenLoginForm(kakaoid);
-		    							
-		    						} else{
-		    							console.log('error!');
-		    							// 회원가입
-		    							
-		    						}						
-		    					},
-		    					error: function(request, status, error){
-		    		                   alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
-		    		                }
-		    				});
-		                }
-		            });
-		            // window.location.href='/ex/kakao_login.html' //리다이렉트 되는 코드
-		        },
-		        fail: function(error) {
-		            alert(error);
-		        }
-		    }); */
-		}//END kakaoLogin()
-
+	/*
 		function createHiddenLoginForm(kakaoId){
 			
 			var frm = document.createElement('form');
@@ -551,8 +504,7 @@ $(function() {
 			frm.submit();
 			
 		}
-	  
-	  
+	*/
 	</script>
 
 </body>

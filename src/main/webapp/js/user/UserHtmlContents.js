@@ -38,7 +38,7 @@ UserHtmlContents.user_view_content=function(sUser) {
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="user_email">이메일주소 *</label>
-                                        <input type="email" class="form-control" name="user_email" value='${sUser.user_email}'>
+                                        <input type="text" class="form-control" name="user_email" value="${sUser.user_email}">
                                     </div>
                                 </div>
                                 <div class="col-12">

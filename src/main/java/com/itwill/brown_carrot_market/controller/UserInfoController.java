@@ -1,5 +1,8 @@
 package com.itwill.brown_carrot_market.controller;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,7 +38,7 @@ public class UserInfoController {
 	private KakaoRestJsonService kakaoRestJsonService;
 	
 	@RequestMapping("/user_kakaologin")
-	public String user_kakaologin(@RequestParam("code") String code,Model model,HttpServletRequest request) throws Exception{
+	public String user_kakaologin(@RequestParam("code") String code,Model model) throws Exception{
 		System.out.println("user_kakaologin_json() - code: "+code);
 		
 		//access_token이 포함된 JSON String을 받아온다.
@@ -49,34 +52,48 @@ public class UserInfoController {
         String accessToken = accessTokenJsonObject.get("access_token").toString();
         
         //유저 정보가 포함된 JSON String을 받아온다.
-        //GetUserInfoService getUserInfoService = new GetUserInfoService();
         String userInfo = kakaoUserGetService.getUserInfo(accessToken);
-
+        
         //JSON String -> JSON Object
         JSONObject userInfoJsonObject = new JSONObject(userInfo);
-/*
+        String id = (String)userInfoJsonObject.get("id").toString();
+
         //유저의 Email 추출
         JSONObject kakaoAccountJsonObject = (JSONObject)userInfoJsonObject.get("kakao_account");
         String email = kakaoAccountJsonObject.get("email").toString();
-
-        //View에서 사용할 변수 설정
-        model.addAttribute("email", email);
-*/
-        String id = (String)userInfoJsonObject.get("id").toString();
+        String id_email = email.substring(0,email.indexOf("@"));
+        String profile = kakaoAccountJsonObject.get("profile").toString();
         
-		return "redirect:user_kakaologin_action?user_id="+id+"K";
+        JSONObject profileJsonObject = new JSONObject(profile);
+        String nickname = profileJsonObject.get("nickname").toString();
+
+        String thumbnail_image_url = profileJsonObject.get("thumbnail_image_url").toString();
+
+        String user_pw = "K"+id+id_email;
+        
+        UserInfo kakaoUser = new UserInfo();
+        kakaoUser.setUser_id(id_email);
+        kakaoUser.setUser_name(nickname);
+        kakaoUser.setUser_email(email);
+        kakaoUser.setUser_profile(thumbnail_image_url);
+        kakaoUser.setUser_pw(user_pw);
+        
+		return "redirect:user_kakaologin_action?"+kakaoUser.toString2();
 	}
 	
 	@RequestMapping(value = "/user_kakaologin_action")
-	public String user_kakaologin_action(String user_id,HttpServletRequest request) throws Exception{
+	public String user_kakaologin_action(String user_id, String user_name,String user_email,String user_profile,String user_pw, HttpServletRequest request) throws Exception{
+		
+		UserInfo userInfo = new UserInfo(user_id, user_pw, user_name, user_email, "", 0, 0, user_profile, null);
+		
 		int code=0;
 		String url="";
 		String msg="";
 		Map resultMap=new HashMap();
 		List<UserInfo> resultList=new ArrayList<UserInfo>();
-		System.out.println("user_kakaologin_action_json - map: "+user_id);
+		System.out.println("user_kakaologin_action_json - userInfo: "+userInfo);
 		
-		UserInfo kakaoUser= userService.findUser(user_id);
+		UserInfo kakaoUser= userService.findUser(userInfo.getUser_id());
 		
 		if(kakaoUser!=null) {
 			request.getSession().setAttribute("sUserId",kakaoUser.getUser_id());
@@ -90,38 +107,16 @@ public class UserInfoController {
 				}
 			}
 			return "redirect:main";
+		}else {	//회원가입
+			userInfo.setUser_phone("010");
+			int result= userService.create(userInfo, null, null);
+			if(result==1) {
+				request.getSession().setAttribute("sUserId",userInfo.getUser_id());
+				request.getSession().setAttribute("sUser", userInfo);
+			}
+			return "redirect:user_my-account";
 		}
-		return "redirect:user_login";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	@RequestMapping("/user_login")
 	public String user_login_form() {
