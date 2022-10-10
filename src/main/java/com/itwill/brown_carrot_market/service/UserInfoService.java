@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Invitation;
+import com.itwill.brown_carrot_market.dto.Transfer;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 
 public interface UserInfoService {
@@ -46,6 +47,8 @@ public interface UserInfoService {
 	int updateAddressRange(Address addressS) throws Exception;
 	
 	int updatePoint(UserInfo user,Invitation invitation) throws Exception;
+
+	int updatePointByTransfer(Transfer transfer) throws Exception;
 
 	int updateProfile(UserInfo userInfo) throws Exception;
 	
