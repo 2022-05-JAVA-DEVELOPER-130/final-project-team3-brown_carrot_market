@@ -258,6 +258,24 @@ UserHtmlContents.user_received_reviewList2=function(reviewList){
                     -->
                 </li>`;
 	}
+	var sellerList= new Array();
+	reviewList.filter(function(item){
+		return item.userInfo.user_id == item.orders.product.userInfo.user_id;
+	}).forEach(
+		function(item){
+			sellerList.push(item);
+			console.log("reviewer: "+item.userInfo.user_id+", 판매자: "+item.orders.product.userInfo.user_id);
+		}	
+	);
+	var buyerList = new Array();
+	reviewList.filter(function(item){
+		return item.userInfo.user_id != item.orders.product.userInfo.user_id;
+	}).forEach(
+		function(item){
+			buyerList.push(item);
+			console.log("reviewer: "+item.userInfo.user_id+", 구매자: "+item.orders.product.userInfo.user_id);
+		}	
+	);
 		return `<h5>받은 거래 후기</h5>
 				<div class="product_details_tab section_padding_100_0 clearfix" style="padding-top:10px">
                         <!-- Tabs -->
@@ -266,10 +284,10 @@ UserHtmlContents.user_received_reviewList2=function(reviewList){
                                 <a href="#description" class="nav-link active" data-toggle="tab" role="tab">전체후기</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#reviews" class="nav-link" data-toggle="tab" role="tab">판매자 후기 <span class="text-muted">(3)</span></a>
+                                <a href="#reviews" class="nav-link" data-toggle="tab" role="tab">판매자 후기 <span class="text-muted">(${sellerList.length})</span></a>
                             </li>
                             <li class="nav-item">
-                                <a href="#addi-info" class="nav-link" data-toggle="tab" role="tab">구매자 후기</a>
+                                <a href="#addi-info" class="nav-link" data-toggle="tab" role="tab">구매자 후기 <span class="text-muted">(${buyerList.length})</span></a>
                             </li>
                         </ul>
                         <!-- Tab Content -->
@@ -300,104 +318,25 @@ UserHtmlContents.user_received_reviewList2=function(reviewList){
 
                             <div role="tabpanel" class="tab-pane fade" id="reviews">
                                 <div class="reviews_area">
-                                    <ul>
-                                        <li>
-                                            <div class="single_user_review mb-15">
-                                                <div class="review-rating">
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <span>for Quality</span>
-                                                </div>
-                                                <div class="review-details">
-                                                    <p>by <a href="#">Designing World</a> on <span>12 Sep 2019</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="single_user_review mb-15">
-                                                <div class="review-rating">
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <span>for Design</span>
-                                                </div>
-                                                <div class="review-details">
-                                                    <p>by <a href="#">Designing World</a> on <span>12 Sep 2019</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="single_user_review">
-                                                <div class="review-rating">
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <span>for Value</span>
-                                                </div>
-                                                <div class="review-details">
-                                                    <p>by <a href="#">Designing World</a> on <span>12 Sep 2019</span></p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="submit_a_review_area mt-50">
-                                    <h4>Submit A Review</h4>
-                                    <form action="#" method="post">
-                                        <div class="form-group">
-                                            <span>Your Ratings</span>
-                                            <div class="stars">
-                                                <input type="radio" name="star" class="star-1" id="star-1">
-                                                <label class="star-1" for="star-1">1</label>
-                                                <input type="radio" name="star" class="star-2" id="star-2">
-                                                <label class="star-2" for="star-2">2</label>
-                                                <input type="radio" name="star" class="star-3" id="star-3">
-                                                <label class="star-3" for="star-3">3</label>
-                                                <input type="radio" name="star" class="star-4" id="star-4">
-                                                <label class="star-4" for="star-4">4</label>
-                                                <input type="radio" name="star" class="star-5" id="star-5">
-                                                <label class="star-5" for="star-5">5</label>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="name">Nickname</label>
-                                            <input type="email" class="form-control" id="name" placeholder="Nazrul">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="options">Reason for your rating</label>
-                                            <select class="form-control small right py-0 w-100" id="options">
-                                                <option>Quality</option>
-                                                <option>Value</option>
-                                                <option>Design</option>
-                                                <option>Price</option>
-                                                <option>Others</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="comments">Comments</label>
-                                            <textarea class="form-control" id="comments" rows="5" data-max-length="150"></textarea>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Submit Review</button>
-                                    </form>
+	                                <h5 class="mb-4">후기 ${sellerList.length}개</h5>
+		                            <ol>
+		                                <!-- Single Comment Area -->
+		                                ${
+										sellerList.map(review_item_content2).join('')	
+										}
+		                            </ol>
                                 </div>
                             </div>
 
                             <div role="tabpanel" class="tab-pane fade" id="addi-info">
                                 <div class="additional_info_area">
-                                    <h5>Additional Info</h5>
-                                    <p>What should I do if I receive a damaged parcel?
-                                        <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit impedit similique qui, itaque delectus labore.</span></p>
-                                    <p>I have received my order but the wrong item was delivered to me.
-                                        <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis quam voluptatum beatae harum tempore, ab?</span></p>
-                                    <p>Product Receipt and Acceptance Confirmation Process
-                                        <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum ducimus, temporibus soluta impedit minus rerum?</span></p>
-                                    <p class="mb-0">How do I cancel my order?
-                                        <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum eius eum, minima!</span></p>
+	                                <h5 class="mb-4">후기 ${sellerList.length}개</h5>
+		                            <ol>
+		                                <!-- Single Comment Area -->
+		                                ${
+										buyerList.map(review_item_content2).join('')	
+										}
+		                            </ol>
                                 </div>
                             </div>
 

@@ -30,7 +30,8 @@ insert into review(review_no,review_desc,review_image,review_point,orders_no,use
     values(REVIEW_REVIEW_NO_SEQ.nextval,'별로에요','',-0.1, 2,'carrot8');   
     
 --구매자
-insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, 3,'carrot5');
+desc orders;
+insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, 3,'carrot5',sysdate);
 insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
     values(REVIEW_REVIEW_NO_SEQ.nextval,'그냥그래요','',0, ORDERS_ORDERS_NO_SEQ.currval,'carrot5');
 --판매자    
@@ -38,12 +39,12 @@ insert into review(review_no,review_desc,review_image,review_point,orders_no,use
     values(REVIEW_REVIEW_NO_SEQ.nextval,'친절해요','',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot7');  
     
 --구매자
-
+insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, 10,'carrot5',sysdate-1);
 insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
-    values(REVIEW_REVIEW_NO_SEQ.nextval,'그냥그래요','',0, 10,'carrot3');
+    values(REVIEW_REVIEW_NO_SEQ.nextval,'그냥그래요','',0, ORDERS_ORDERS_NO_SEQ.currval,'carrot3');
 --판매자    
 insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
-    values(REVIEW_REVIEW_NO_SEQ.nextval,'친절해요','',0.1, 10,'carrot6');      
+    values(REVIEW_REVIEW_NO_SEQ.nextval,'친절해요','',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot6');      
 
 desc orders;
 --구매자
@@ -53,6 +54,14 @@ insert into review(review_no,review_desc,review_image,review_point,orders_no,use
 --판매자    
 insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
     values(REVIEW_REVIEW_NO_SEQ.nextval,'친절해요','',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot3');     
+
+--구매자
+insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, 12,'carrot3',sysdate-2);
+insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
+    values(REVIEW_REVIEW_NO_SEQ.nextval,'굳굳','',0, ORDERS_ORDERS_NO_SEQ.currval,'carrot3');
+--판매자    
+insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
+    values(REVIEW_REVIEW_NO_SEQ.nextval,'굳굳','',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot8');  
     
 select * from review;
 
