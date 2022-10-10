@@ -38,15 +38,16 @@ insert into review(review_no,review_desc,review_image,review_point,orders_no,use
     values(REVIEW_REVIEW_NO_SEQ.nextval,'친절해요','',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot7');  
     
 --구매자
+
 insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
     values(REVIEW_REVIEW_NO_SEQ.nextval,'그냥그래요','',0, 10,'carrot3');
 --판매자    
 insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
     values(REVIEW_REVIEW_NO_SEQ.nextval,'친절해요','',0.1, 10,'carrot6');      
 
-
+desc orders;
 --구매자
-insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, 4,'carrot5');
+insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, 4,'carrot5',sysdate-1);
 insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
     values(REVIEW_REVIEW_NO_SEQ.nextval,'그냥그래요','',0, ORDERS_ORDERS_NO_SEQ.currval,'carrot5');
 --판매자    
@@ -78,7 +79,7 @@ select r.review_no, r.review_desc, r.review_image, r.review_point, r.user_id rev
                     from review rs
                     join userinfo us
                     on rs.user_id=us.user_id) r
-			join (select os.orders_no, os.p_no,os.user_id,us.user_name,us.user_profile
+			join (select os.orders_no, os.orders_date, os.p_no,os.user_id,us.user_name,us.user_profile
                     from orders os
                     join userinfo us
                     on os.user_id=us.user_id) oo

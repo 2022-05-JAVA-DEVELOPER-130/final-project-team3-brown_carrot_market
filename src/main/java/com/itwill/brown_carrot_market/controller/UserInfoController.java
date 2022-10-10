@@ -1,26 +1,127 @@
 package com.itwill.brown_carrot_market.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.UserInfo;
+import com.itwill.brown_carrot_market.service.KakaoUserGetService;
+import com.itwill.brown_carrot_market.service.KakaoRestJsonService;
 import com.itwill.brown_carrot_market.service.UserInfoService;
 
 @Controller
 public class UserInfoController {
 	@Autowired
 	private UserInfoService userService;
+	@Autowired
+	private KakaoUserGetService kakaoUserGetService;
+	@Autowired
+	private KakaoRestJsonService kakaoRestJsonService;
+	
+	@RequestMapping("/user_kakaologin")
+	public String user_kakaologin(@RequestParam("code") String code,Model model,HttpServletRequest request) throws Exception{
+		System.out.println("user_kakaologin_json() - code: "+code);
+		
+		//access_token이 포함된 JSON String을 받아온다.
+        String accessTokenJsonData = kakaoRestJsonService.getAccessTokenJsonData(code);
+        if(accessTokenJsonData=="error") return "redirect:user_login";
+
+        //JSON String -> JSON Object
+        JSONObject accessTokenJsonObject = new JSONObject(accessTokenJsonData);
+
+        //access_token 추출
+        String accessToken = accessTokenJsonObject.get("access_token").toString();
+        
+        //유저 정보가 포함된 JSON String을 받아온다.
+        //GetUserInfoService getUserInfoService = new GetUserInfoService();
+        String userInfo = kakaoUserGetService.getUserInfo(accessToken);
+
+        //JSON String -> JSON Object
+        JSONObject userInfoJsonObject = new JSONObject(userInfo);
+/*
+        //유저의 Email 추출
+        JSONObject kakaoAccountJsonObject = (JSONObject)userInfoJsonObject.get("kakao_account");
+        String email = kakaoAccountJsonObject.get("email").toString();
+
+        //View에서 사용할 변수 설정
+        model.addAttribute("email", email);
+*/
+        String id = (String)userInfoJsonObject.get("id").toString();
+        
+		return "redirect:user_kakaologin_action?user_id="+id+"K";
+	}
+	
+	@RequestMapping(value = "/user_kakaologin_action")
+	public String user_kakaologin_action(String user_id,HttpServletRequest request) throws Exception{
+		int code=0;
+		String url="";
+		String msg="";
+		Map resultMap=new HashMap();
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
+		System.out.println("user_kakaologin_action_json - map: "+user_id);
+		
+		UserInfo kakaoUser= userService.findUser(user_id);
+		
+		if(kakaoUser!=null) {
+			request.getSession().setAttribute("sUserId",kakaoUser.getUser_id());
+			request.getSession().setAttribute("sUser", kakaoUser);
+			
+			if(kakaoUser.getAddressList()!=null) {
+				for(Address address: kakaoUser.getAddressList()) {
+					if(address.getAddress_range()>0) {
+						request.getSession().setAttribute("sAddress", address);
+					}
+				}
+			}
+			return "redirect:main";
+		}
+		return "redirect:user_login";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	@RequestMapping("/user_login")
 	public String user_login_form() {

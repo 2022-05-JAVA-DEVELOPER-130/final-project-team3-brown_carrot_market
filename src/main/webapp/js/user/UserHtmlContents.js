@@ -2,53 +2,53 @@ function UserHtmlContents(){
 }
 
 UserHtmlContents.user_view_content=function(sUser) {
-	return `<h5 class="mb-3">Account Details</h5>
+	return `<h5 class="mb-3">회원정보수정</h5>
                         <form action="#" method="post" id="user_modify_form">
                             <div class="row">
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group">
-                                        <label for="user_id">ID *</label>
+                                        <label for="user_id">아이디 *</label>
                                         <input type="text" class="form-control" name="user_id" value="${sUser.user_id}">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="currentPass">Current Password (Leave blank to leave unchanged)</label>
-                                        <input type="password" class="form-control" name="currentPass" value="${sUser.user_pw}">
+                                        <label for="currentPass">현재 비밀번호 (Leave blank to leave unchanged)</label>
+                                        <input type="password" class="form-control" name="currentPass" value="${sUser.user_pw}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="newPass">New Password (Leave blank to leave unchanged)</label>
+                                        <label for="newPass">신규 비밀번호 (Leave blank to leave unchanged)</label>
                                         <input type="password" class="form-control" name="user_pw">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="confirmPass">Confirm New Password</label>
+                                        <label for="confirmPass">신규 비밀번호 확인</label>
                                         <input type="password" class="form-control" name="confirmPass">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="user_name">Name *</label>
+                                        <label for="user_name">이름 *</label>
                                         <input type="text" class="form-control" name="user_name" value="${sUser.user_name}">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="user_email">Email *</label>
+                                        <label for="user_email">이메일주소 *</label>
                                         <input type="email" class="form-control" name="user_email" value='${sUser.user_email}'>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="user_phone">Phone *</label>
+                                        <label for="user_phone">핸드폰번호 *</label>
                                         <input type="text" class="form-control" name="user_phone" value="${sUser.user_phone}">
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <!-- <button type="submit" class="btn btn-primary">Save Changes</button> -->
+                                    <!-- <button type="submit" class="btn btn-primary">변경사항 저장</button> -->
                                     <input type="button" id="btn_user_modify_action" class="btn btn-primary" value="Save Change">
                                 </div>
                             </div>
@@ -219,19 +219,43 @@ UserHtmlContents.user_received_reviewList=function(reviewList){
 UserHtmlContents.user_received_reviewList2=function(reviewList){
 	function review_item_content2(review){
 		return `<li class="single_comment_area">
-                    <div class="comment-wrapper clearfix" style="margin-bottom:60px">
+                    <div class="comment-wrapper clearfix" style="margin-bottom:40px">
                         <div class="comment-meta">
                             <div class="comment-author-img">
-                                <img class="img-circle" src="img/user_profile/${review.userInfo.user_profile}" alt="">
+                                <img class="review-img-circle" src="img/user_profile/${review.userInfo.user_profile}" alt="">
                             </div>
                         </div>
-                        <div class="comment-content" style="padding-left:70px">
+                        <div class="comment-content" style="padding-left:20px">
                             <h5 class="comment-author"><strong>${review.userInfo.user_id}</strong></h5>
-                            <h6 >${review.orders.product.p_address_name}</h6>
-                            <p>${review.review_desc}</p>
-                            <a href="#" class="reply">Reply</a>
+                            <h6 style="display:inline;color: #747794;">${review.orders.product.p_address_name}&nbsp;&nbsp;${review.orders.orders_date}</h6>
+                            <p style="color: #070a57">${review.review_desc}</p>
+                            <!--<a href="#" class="reply">Reply</a>-->
                         </div>
                     </div>
+                    <!--
+                    <div class="accordion bigshop-accordian-with-icon" id="bigshopAccordianIcon" >
+                    	<div class="card">
+                                <div class="card-header" id="bigshopWithIconAccordian1">
+                                    <button class="btn" type="button" data-toggle="collapse" data-target="#bswicollapseOne" aria-expanded="true" aria-controls="bswicollapseOne">
+                                        <div class="comment-author-img" style="display:inline-block">
+			                                <img class="review-img-circle" src="img/user_profile/${review.userInfo.user_profile}" alt="">
+			                            </div>
+			                            <div class="comment-content" style="padding-left:70px;display:inline-block">
+				                            <h5 class="comment-author"><strong>${review.userInfo.user_id}</strong></h5>
+				                            <h6 style="display:inline;color: #747794;">${review.orders.product.p_address_name}&nbsp;&nbsp;${review.orders.orders_date}</h6>
+				                            <p style="color: #070a57">${review.review_desc}</p>
+				                        </div>
+                                    </button>
+                                </div>
+
+                                <div id="bswicollapseOne" class="collapse show" aria-labelledby="bigshopWithIconAccordian1" data-parent="#bigshopAccordianIcon">
+                                    <div class="card-body">
+                                        <p class="mb-0">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</p>
+                                    </div>
+                                </div>
+	                    </div>
+                    </div>
+                    -->
                 </li>`;
 	}
 		return `<h5>받은 거래 후기</h5>

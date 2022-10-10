@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,13 +24,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Invitation;
 import com.itwill.brown_carrot_market.dto.UserInfo;
+import com.itwill.brown_carrot_market.service.KakaoUserGetService;
+import com.itwill.brown_carrot_market.service.KakaoRestJsonService;
 import com.itwill.brown_carrot_market.service.UserInfoService;
 
 @RestController
 public class UserInfoRestController {
 	@Autowired
 	private UserInfoService userService;
-	
+
 	@LoginCheck
 	@PostMapping(value = "/user_session_check_json")
 	public Map user_session_check_json(HttpSession session) throws Exception{
@@ -467,4 +470,101 @@ public class UserInfoRestController {
 		return resultMap;
 	}
 	*/
+	
+	
+	/*
+	@RequestMapping("/user_kakaologin_json")
+	public Map user_kakaologin_json(@RequestParam("code") String _code,Model model,HttpServletRequest request) throws Exception{
+		Map resultMap=new HashMap();
+		int code=1;
+		String url="user_kakaologin_json";
+		String msg="";
+		
+		System.out.println("user_kakaologin_json() - code: "+_code);
+		
+		KakaoRestJsonService restJsonService = new KakaoRestJsonService();
+		
+		//access_token이 포함된 JSON String을 받아온다.
+        String accessTokenJsonData = restJsonService.getAccessTokenJsonData(_code);
+        if(accessTokenJsonData=="error") msg= "error";
+
+        //JSON String -> JSON Object
+        JSONObject accessTokenJsonObject = new JSONObject(accessTokenJsonData);
+
+        //access_token 추출
+        String accessToken = accessTokenJsonObject.get("access_token").toString();
+        System.out.println("user_kakaologin_json() - access_token: "+accessToken);
+        
+        model.addAttribute("access_token", accessToken);
+		
+        
+        //유저 정보가 포함된 JSON String을 받아온다.
+        KakaoUserGetService getUserInfoService = new KakaoUserGetService();
+        String userInfo = getUserInfoService.getUserInfo(accessToken);
+
+        //JSON String -> JSON Object
+        JSONObject userInfoJsonObject = new JSONObject(userInfo);
+
+        //유저의 Email 추출
+        JSONObject kakaoAccountJsonObject = (JSONObject)userInfoJsonObject.get("kakao_account");
+        String email = kakaoAccountJsonObject.get("email").toString();
+
+        //View에서 사용할 변수 설정
+        model.addAttribute("email", email);
+
+        //(test)
+        String profile = kakaoAccountJsonObject.get("profile").toString();
+        model.addAttribute("profile", profile);
+
+        String id = (String)userInfoJsonObject.get("id").toString();
+        //model.addAttribute("id", id);
+        
+		resultMap.put("code", code);
+		resultMap.put("url", url);
+		resultMap.put("msg", msg);
+		resultMap.put("data",model);
+		resultMap.put("id",id+"K");
+		return this.user_kakaologin_action_json(resultMap,request);
+	}
+	
+	@PostMapping(value = "/user_kakaologin_action_json")
+	public Map user_kakaologin_action_json(Map map,HttpServletRequest request) throws Exception{
+		int code=0;
+		String url="";
+		String msg="";
+		Map resultMap=new HashMap();
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
+		System.out.println("user_kakaologin_action_json - map: "+map);
+		
+		//Model model = (Model)map.get("data");
+		//String user_id= (String)model.getAttribute("id");
+		String user_id= (String)map.get("id");
+		
+		UserInfo kakaoUser= userService.findUser(user_id);
+		
+		if(kakaoUser!=null) {
+			request.getSession().setAttribute("sUserId",kakaoUser.getUser_id());
+			request.getSession().setAttribute("sUser", kakaoUser);
+			
+			if(kakaoUser.getAddressList()!=null) {
+				for(Address address: kakaoUser.getAddressList()) {
+					if(address.getAddress_range()>0) {
+						request.getSession().setAttribute("sAddress", address);
+					}
+				}
+			}
+			code=2;
+			url="user_main";
+			msg="로그인 성공";
+			resultList.add(kakaoUser);
+		}
+
+		resultMap.put("code", code);
+		resultMap.put("url", url);
+		resultMap.put("msg", msg);
+		resultMap.put("data",resultList);
+		return resultMap;
+	}
+	*/
+	
 }
