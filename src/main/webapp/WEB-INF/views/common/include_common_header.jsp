@@ -87,9 +87,10 @@
                                             <li><a href="product-details.html">- 기타</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">동네생활</a>
+                                    <li><a href="townBoard_list">동네생활</a>
                                         <div class="megamenu">
                                             <ul class="single-mega cn-col-4">
+                                                <li><a href="townBoard_list">- 전체보기</a></li>
                                                 <li><a href="single-blog.html">- 동네소식</a></li>
                                                 <li><a href="single-blog.html">- 같이해요</a></li>
                                                 <li><a href="single-blog.html">- 동네질문</a></li>
@@ -99,8 +100,6 @@
                                             </ul>
                                             <ul class="single-mega cn-col-4">
                                                 <li><a href="#">- 분실/실종센터</a></li>
-                                                <li><a href="#">- 동네사건사고</a></li>
-                                                <li><a href="#">- 해주세요</a></li>
                                                 <li><a href="#">- 동네사진전</a></li>
                                                 <li><a href="#"></a></li>
                                                 <li><a href="contact.html">Contact</a></li>

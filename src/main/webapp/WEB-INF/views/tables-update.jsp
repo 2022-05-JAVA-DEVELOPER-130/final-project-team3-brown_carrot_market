@@ -17,7 +17,13 @@
     <link rel="stylesheet" href="css/board.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
-
+	
+	
+	<!-- javaScript -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
+	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
+	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 
 </head>
 
