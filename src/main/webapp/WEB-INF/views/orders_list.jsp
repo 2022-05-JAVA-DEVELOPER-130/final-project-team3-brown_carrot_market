@@ -88,7 +88,7 @@
 		                                        	${fn:substring(product_date,0,10)}
 		                                        </td>
 		                                        <td>
-		                                            <img src="img/product_img/carrot2.png" alt="Product">
+		                                            <img src="img/product_img/book1.jpg" alt="Product">
 		                                        </td>
 		                                        <td>
 		                                            <a href="/brown_carrot_market/product_detail?p_no=${Orders.product.p_no}">${Orders.product.p_title}</a>
