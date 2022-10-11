@@ -29,6 +29,9 @@ function session_check(){
 		success:function(jsonResult){
 		    if(jsonResult.code==1){ //세션에 로그인 유저 존재XX
 		    	$("#account-area").html(CommonHtmlContents.user_thumbnail());
+		    	$("#brown_carrot_pay a").attr("href", "user_login");
+		    	$("#transaction-dropdown a").attr("href", "user_login");
+		    	
 		    }else if (jsonResult.code==2) {//세션에 로그인 유저 존재
 		    	$("#account-area").html(CommonHtmlContents.user_thumbnail_login(jsonResult.data[0]));
 				connectServer(jsonResult.data[0].user_id);

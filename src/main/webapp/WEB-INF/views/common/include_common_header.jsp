@@ -110,7 +110,7 @@
                                         </div>
                                     </li>
                                     <li><a href="#">흙당근페이</a>
-                                        <ul class="dropdown">
+                                        <ul id="brown_carrot_pay" class="dropdown">
                                             <li><a href="payment">충전하기</a></li>
                                             <li><a href="#">송금하기</a></li>
                                             <li><a href="point_list">페이내역</a></li>
@@ -135,23 +135,23 @@
                             </div>
 
                             <!-- Wishlist -->
-                            <div class="wishlist-area" >
+                            <div id="wishlist-area" class="wishlist-area" >
                                 <a href="wishlist.html" class="wishlist-btn"><i class="icofont-heart"></i></a>
                             </div>
                             
                             <!-- transaction list -->
-                              <div class="account-area transaction-area" style="margin-right:8px">
+                              <div id="transaction-area" class="account-area transaction-area" style="margin-right:8px">
                                 <div class="user-thumbnail">
                                     <i class="icofont-bag"></i>
                                 </div>
-                                <ul class="user-meta-dropdown" style="width:150px">
+                                <ul id="transaction-dropdown" class="user-meta-dropdown" style="width:150px">
                                     <li><a href="orders_list">구매 내역</a></li>
                                     <li><a href="sales_list">판매내역</a></li>
                                 </ul>
                             </div>
 
-                            <!-- Cart -->
-                            <div class="cart-area" >
+                            <!-- Chat -->
+                            <div id="chat-area" class="cart-area chat-area" >
                                 <div class="cart--btn"><i class="icofont-chat"></i> <span class="cart_quantity">2</span></div>
 
                                 <!-- Cart Dropdown Content -->
