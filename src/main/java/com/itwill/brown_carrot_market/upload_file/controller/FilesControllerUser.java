@@ -61,9 +61,12 @@ public class FilesControllerUser {
 				if (!file.isEmpty()) {
 					newFileName= storageService.save(file);
 					fileNames.add(file.getOriginalFilename());
+
+					message = "Uploaded the files successfully: " + fileNames+" newFileName"+newFileName;
+				}else {
+					message="Please select a valid mediaFile..";
 				}
 			}
-			message = "Uploaded the files successfully: " + fileNames+" newFileName"+newFileName;
 			
 			result.put("message", message);
 			result.put("newFileName", newFileName);

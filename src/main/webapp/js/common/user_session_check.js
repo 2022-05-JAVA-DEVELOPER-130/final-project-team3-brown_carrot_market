@@ -28,9 +28,12 @@ function session_check(){
 		dataType:'json',
 		success:function(jsonResult){
 		    if(jsonResult.code==1){ //세션에 로그인 유저 존재XX
-		    	$(".account-area").html(CommonHtmlContents.user_thumbnail());
+		    	$("#account-area").html(CommonHtmlContents.user_thumbnail());
+		    	$("#brown_carrot_pay a").attr("href", "user_login");
+		    	$("#transaction-dropdown a").attr("href", "user_login");
+		    	
 		    }else if (jsonResult.code==2) {//세션에 로그인 유저 존재
-		    	$(".account-area").html(CommonHtmlContents.user_thumbnail_login(jsonResult.data[0]));
+		    	$("#account-area").html(CommonHtmlContents.user_thumbnail_login(jsonResult.data[0]));
 				connectServer(jsonResult.data[0].user_id);
 			}
 		}
@@ -60,9 +63,14 @@ function connectServer(loginId){
 		var msg=JSON.parse(result.data);
 		console.log(msg);
 		var id=msg.toastId;
+		var message=msg.c_content;
+		
+		if(message.startsWith("@@image!#")){
+			message="사진 전송";
+		}
 		
 		if(id==loginId){
-		toastShow(msg.c_content ,msg.user_id);
+		toastShow(message ,msg.user_id);
 		}
 		
 		
