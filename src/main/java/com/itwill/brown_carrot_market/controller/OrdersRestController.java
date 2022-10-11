@@ -26,7 +26,7 @@ public class OrdersRestController {
 		String msg = "";
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
 
-		List<Orders> ordersList = ordersService.selectAllById("carrot1");
+		List<Orders> ordersList = ordersService.selectAllById(sUserId);
 		
 		resultMap.put("code", code);
 		resultMap.put("url", url);

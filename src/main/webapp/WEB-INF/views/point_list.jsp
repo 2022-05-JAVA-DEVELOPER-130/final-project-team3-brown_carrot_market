@@ -76,26 +76,24 @@
                     </div>
                     <div class="shortcodes_content">
                         <div class="table-responsive">
-                            <table class="table mb-0 table-bordered">
+                            <table class="table mb-0 table-bordered" name="list">
                                 <thead>
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">날짜</th>
-                                        <th scope="col">입금</th>
-                                        <th scope="col">출금</th>
-                                        <th scope="col">id</th>
-                                        <th scope="col">잔액</th>
+                                        <th scope="col">입 / 출금일</th>
+                                        <th scope="col">입금액</th>
+                                        <th scope="col">출금액</th>
+                                        <th scope="col">잔 액</th>
+                                        <th scope="col">비 고</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 	<c:forEach items="${transferList}" var="transfer">
 	                                    <tr>
-	                                        <th scope="row">${transfer.transfer_no}</th>
 	                                        <td>${transfer.transfer_date}</td>
 	                                        <td>${transfer.transfer_deposit}</td>
 	                                        <td>${-transfer.transfer_withdraw}</td>
-	                                        <td>${transfer.userInfo.user_id}</td>
 	                                        <td>${transfer.t_balance}</td>
+	                                        <td></td>
 	                                    </tr>
                                    </c:forEach> 
                                 </tbody>
