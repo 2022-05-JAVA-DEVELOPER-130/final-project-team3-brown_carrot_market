@@ -135,16 +135,12 @@
                             </div>
 
                             <!-- Wishlist -->
-                            <div class="wishlist-area">
+                            <div class="wishlist-area" >
                                 <a href="wishlist.html" class="wishlist-btn"><i class="icofont-heart"></i></a>
                             </div>
                             
                             <!-- transaction list -->
-                            <div class="transaction-list wishlist-area">
-                                <a href="wishlist.html" class="wishlist-btn"><i class="icofont-bag"></i></a>
-                            </div>
-                            <!-- test -->
-                              <div class="account-area" style="margin-right:15px">
+                              <div class="account-area transaction-area" style="margin-right:8px">
                                 <div class="user-thumbnail">
                                     <i class="icofont-bag"></i>
                                 </div>
