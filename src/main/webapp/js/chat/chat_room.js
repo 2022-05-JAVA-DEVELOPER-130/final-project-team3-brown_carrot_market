@@ -445,7 +445,7 @@ function chat_head(id,img,room_no){
 										class="fa fa-handshake-o" id="btnChatAppointment"></i></a> 
 										
 										
-									<a href="javascript:void(0);" class="btn btn-outline-primary">
+									<a href="javascript:void(0);" class="btn btn-outline-primary" id="btnChatImage">
 									<i class="fa fa-image"></i></a>
 									
 									<a href="javascript:void(0);" class="btn btn-outline-dark"
@@ -849,9 +849,18 @@ function chatRoomListNew(list){
 	
 }) //약속잡기 버튼 클릭 
 
+$(document).on('click','#btnChatImage',function(e){
+	popupImage();
+})
 
 
 
+  function popupImage(){
+	 var url = "chat_photo";
+            var name = "이미지 전송";
+            var option = "width = 500, height = 500, top = 100, left = 200, location = no,  resizable=no"
+            window.open(url, name, option);
+}
   
   function popupNew(){
             var url = "chat_appointment";
