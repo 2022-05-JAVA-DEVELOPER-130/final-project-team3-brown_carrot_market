@@ -285,7 +285,7 @@ $.ajax({
 						$('#chat_history').append( `<li class="clearfix">
 
                            <div class="message admin-message" margin:auto>${item.c_content}
-                           <br>약속 장소 : <a href="javascript:void(popupMap(${promiseData.c_app_lat},${promiseData.c_app_lng}))" style="font-size:6px;",id="chat_spot_map">${promiseData.c_app_spot}</a></div>
+                           <br>현재 약속 장소 : <a href="javascript:void(popupMap(${promiseData.c_app_lat},${promiseData.c_app_lng}))" style="font-size:6px;",id="chat_spot_map">${promiseData.c_app_spot}</a></div>
                         </li>`);
 						
 					}else{
@@ -416,11 +416,10 @@ function message_admin_promise_history(chat_content){
 		data:'c_room_no='+c_room_no,
 		dataType:'JSON',
 		success:function(jsonResult){
-			//console.log("약속장소:"+spot)
 			$('#chat_history').append( `<li class="clearfix">
 
 									<div class="message admin-message" margin:auto>${chat_content.c_content}
-									<br>약속 장소 : <a href="javascript:void(popupMap(${jsonResult.data.c_app_lat},${jsonResult.data.c_app_lng}))" style="font-size:6px;",id="chat_spot_map",c_app_lat="${jsonResult.data.c_app_lat}",c_app_lng="${jsonResult.data.c_app_lng}">${jsonResult.data.c_app_spot}</a></div>
+									<br>현재 약속 장소 : <a href="javascript:void(popupMap(${jsonResult.data.c_app_lat},${jsonResult.data.c_app_lng}))" style="font-size:6px;",id="chat_spot_map",c_app_lat="${jsonResult.data.c_app_lat}",c_app_lng="${jsonResult.data.c_app_lng}">${jsonResult.data.c_app_spot}</a></div>
 								</li>`);
 			
 			
@@ -433,7 +432,7 @@ function message_admin_promise(chat_content){
 	
 	return `<li class="clearfix">
 
-									<div class="message admin-message" margin:auto>${chat_content.c_content}<br>약속 장소 :
+									<div class="message admin-message" margin:auto>${chat_content.c_content}<br>현재 약속 장소 :
 									<a href="javascript:void(popupMap(${chat_content.c_app_lat},${chat_content.c_app_lng}))" style="font-size:6px;" class="chat_spot_map" >${chat_content.c_appspot}</a></div>
 								</li>`
 }
