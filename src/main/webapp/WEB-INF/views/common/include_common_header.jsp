@@ -147,18 +147,21 @@
 							<a href="wishlist.html" class="wishlist-btn"><i
 								class="icofont-heart"></i></a>
 						</div>
-
-						<!-- transaction list -->
-						<div class="transaction-list wishlist-area">
-							<a href="wishlist.html" class="wishlist-btn"><i class="icofont-bag"></i></a>
-						</div>
-						
+                            <!-- transaction list -->
+                              <div class="account-area transaction-area" style="margin-right:8px">
+                                <div class="user-thumbnail">
+                                    <i class="icofont-bag"></i>
+                                </div>
+                                <ul class="user-meta-dropdown" style="width:150px">
+                                    <li><a href="orders_list">구매 내역</a></li>
+                                    <li><a href="sales_list">판매내역</a></li>
+                                </ul>
+                            </div>
 						<!-- Cart -->
 						<div class="cart-area">
 							<div class="cart--btn">
 								<i class="icofont-chat"></i> <span class="cart_quantity">2</span>
 							</div>
-
 							<!-- Cart Dropdown Content -->
 							<div class="cart-dropdown-content">
 								<ul class="cart-list">
