@@ -28,6 +28,11 @@ public class FileControllerChat {
 		return "chat_photo";
 	}
 	
+	@GetMapping("/chat_image_sizeUp")
+	public String chat_image_sizeUp() {
+		return "chat_img_sizeUp";
+	}
+	
 	@PostMapping("/chat_upload")
 	public ResponseEntity<Map<String,Object>> uploadFiles(
 			@RequestParam("files") MultipartFile[] files) {

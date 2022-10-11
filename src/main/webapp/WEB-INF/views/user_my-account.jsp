@@ -29,7 +29,7 @@
 	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7c7231db91ae56cfc5e3c6ea06f73c6&libraries=services"></script>
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=a7c7231db91ae56cfc5e3c6ea06f73c6&libraries=services"></script>
 <script type="text/javascript" src="js/common/user_session_check.js"></script>
 <script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 <script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
@@ -53,6 +53,20 @@
 			$(document).on('click',	'#btn_user_modify_action',function(e) {
 				console.log("click!! >> "+e.target);
 				//if(validator.form()){
+				if($("#user_pw_new").val() != ""){
+					if ($("#user_pw_new2").val() == "") {
+						alert("비밀번호확인을 입력하십시요.");
+						$("#user_pw_new").focus();
+						return false;
+					}
+					if ($("#user_pw_new").val() != $("#user_pw_new2").val()) {
+						alert("비밀번호와 비밀번호확인은 일치하여야합니다.");
+						$("#user_pw_new").focus();
+						$("#user_pw_new").select();
+						return false;
+					}
+					$('#user_pw').val($('#user_pw_new').val());
+				}
 			    var param = $('#user_modify_form').serialize();
 			    console.log(param);
 			    $.ajax({
@@ -64,7 +78,7 @@
 					    if (jsonResult.code == 1) {
 						 	$('#my-account-content').html(UserHtmlContents.user_view_content(jsonResult.data[0]));
 					    } else if (jsonResult.code == 2) {
-							
+							location.href='main';
 					    }
 					    console.log(jsonResult);
 					}
@@ -298,10 +312,6 @@
 							}
 						}
 					});
-				/*  console.log($('.img-circle').src());
-				 if($('.img-circle').src=='img/user_profile/newCarrot.jpg'){
-					 $('.remove_profile').attr('type','hidden');
-				 } */
 				e.preventDefault();
 			});
 			/*******************************************/
@@ -382,7 +392,7 @@
 			
 			//이미지가 업로드 되면
 			$(document).on('change','#chooseF',function(e){
-				console.log($.isEmptyObject($('input[type=file]')[0].files[0]));	//파일정보
+				//console.log($.isEmptyObject($('input[type=file]')[0].files[0]));	//파일정보
 				loadFile($('input[type=file]')[0]);	//첫번째 파일 로드
 				
 				$(".edit_profile").addClass("save_profile");
@@ -399,9 +409,8 @@
 			    document.getElementById('user_profile').src=URL.createObjectURL(file);
 			}
 			
-			//user_received_reviewList
+			/* user_received_reviewList********************************/
 			$(document).on('click', '#user_received_reviewList', function(e) {
-				console.log('click!!');
 				 $.ajax({
 						url:'user_received_reviewList_json',
 						method:'POST',
@@ -409,6 +418,40 @@
 						success:function(jsonResult){
 							//console.log(jsonResult);
 							$('#my-account-content').html(UserHtmlContents.user_received_reviewList2(jsonResult.data));
+						}
+					});
+				e.preventDefault();
+			});
+			
+			/* user_remove_form ********************************/
+			$(document).on('click', '#user_remove_form', function(e) {
+				console.log('user_remove_form');
+				$('#my-account-content').html(UserHtmlContents.user_remove_form(""));
+				e.preventDefault();
+			});
+			
+			/* user_remove_action ********************************/
+			$(document).on('click', '#btn_user_remove', function(e) {
+				console.log('btn_user_remove');
+				console.log($('#user_pw').val());
+				if(!$('#user_pw').val()){
+					alert('비밀번호 입력해주세요');
+					return false;
+				}
+				if(!$('#chk_remove').is(':checked')){
+					alert('checkbox를 체크해주세요');
+					return false;
+				} 
+				 $.ajax({
+						url:'user_remove_action_json',
+						method:'POST',
+						data: {"user_pw":$("#user_pw").val()},
+						success:function(jsonResult){
+							if(jsonResult.code==20){
+								location.href='main';
+							}else{
+								$('#my-account-content').html(UserHtmlContents.user_remove_form(jsonResult.msg));
+							}
 						}
 					});
 				e.preventDefault();
@@ -463,6 +506,7 @@
 							<li class=""><a href="#" id="">흙당근 포인트 내역</a></li>
 							<li class=""><a href="#" id="user_received_reviewList">받은 거래 후기</a></li>
 							<li><a href="user_logout_action">로그아웃</a></li>
+							<li><a href="#" id="user_remove_form" style="color:#6c757d">회원탈퇴</a></li>
 						</ul>
 					</div>
 				</div>

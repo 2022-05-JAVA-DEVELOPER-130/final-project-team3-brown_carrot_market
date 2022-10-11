@@ -74,7 +74,7 @@
 	                                        <th scope="col">사   진</th>
 	                                        <th scope="col">이   름</th>
 	                                        <th scope="col">상품가격</th>
-	                                        <th scope="col">비   고</th>
+	                                        <th scope="col">후   기</th>
 	                                    </tr>
 	                                </thead>
 	                                <tbody>
@@ -91,17 +91,16 @@
 		                                            <img src="img/product_img/${Orders.productImage.pi_name}" alt="ProductImage">
 		                                        </td>
 		                                        <td>
-		                                            <a href="/brown_carrot_market/product_detail?p_no=${Orders.product.p_no}">${Orders.product.p_title}</a>
+		                                            <a href="product_detail?p_no=${Orders.product.p_no}">${Orders.product.p_title}</a>
 		                                        </td>
 		                                        <td>
 		                                        	${Orders.product.p_price}
 		                                        </td>
-		                                        <!-- <td>
-		                                            <div class="quantity">
-		                                                <input type="number" class="qty-text" id="qty3" step="1" min="1" max="99" name="quantity" value="1">
+		                                        <td>
+		                                            <div class="">
+		                                                <input type="button" class="" id=""  name="" value="">
 		                                            </div>
-		                                        </td> -->
-		                                        <td></td>
+		                                        </td>
 		                                    </tr>
 										</c:forEach>    
 	                                </tbody>
