@@ -11,6 +11,7 @@ $(document).ready(function(){
 })
 
 $(document).on('change','#img_choose',function(e){
+	
 	$('#btnchatImgSubmit').show();
 })
 
@@ -47,7 +48,7 @@ $(document).on('click','#btnchatImgSubmit',function(e){
 		console.log("DB 저장 이미지 데이터:"+jsonData.data[0].c_content);
 		window.opener.message_sendDB(jsonData);
 		
-		//self.close();
+		self.close();
 		}
 	});
 	
