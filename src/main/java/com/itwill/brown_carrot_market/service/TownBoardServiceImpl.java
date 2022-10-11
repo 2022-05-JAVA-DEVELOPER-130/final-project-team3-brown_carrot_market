@@ -38,7 +38,7 @@ public class TownBoardServiceImpl implements TownBoardService{
 	public int selectNonMemberCountTownBoard() {
 		return townBoardDao.selectNonMemberCountTownBoard();
 	}
-
+	
 	@Override
 	public List<TownBoard> selectNonMemberCtgrTownBoardList(int t_ctgr_no) throws Exception {
 		return townBoardDao.selectNonMemberCtgrTownBoardList(t_ctgr_no);
