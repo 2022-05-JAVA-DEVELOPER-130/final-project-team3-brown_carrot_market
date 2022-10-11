@@ -98,7 +98,8 @@
 		                                        </td>
 		                                        <td>
 		                                            <div class="">
-		                                                <input type="button" class="" id=""  name="" value="">
+		                                                <!-- <input type="button" class="badge badge-light" id=""  name="" >후기작성 -->
+		                                                <a href="#" class="badge badge-primary" style="height:20px;font-size:1rem">작성하기</a>
 		                                            </div>
 		                                        </td>
 		                                    </tr>
