@@ -697,22 +697,9 @@ function connectWS(){
 			console.log("채팅방의 상대방 ID:"+yourId);
 			console.log(chatContentArray[0]);
 			$('#chat_history').html("");
-			$('#chatHead').html("");
+			//$('#chatHead').html("");
 			console.log(loginId);
-			/*
-			for(const item of chatContentArray){
-				
-				if(item.user_id!=loginId){
-					var youId = item.user_id;
-					break;
-			
-				}else{
-				
-					var youId = "error";
-			
-				}
-			};*/
-			$('#chatHead').append(chat_head(yourId,yourImg));
+			//$('#chatHead').append(chat_head(yourId,yourImg));
 			
 			
 			
@@ -734,6 +721,8 @@ function connectWS(){
 		}
 		});
 		return false;
+		
+		
 	}else if(onmsg.code=="3"){
 		console.log("약속 잡기");
 		$('#chat_history').append(message_admin_promise(onmsg));
