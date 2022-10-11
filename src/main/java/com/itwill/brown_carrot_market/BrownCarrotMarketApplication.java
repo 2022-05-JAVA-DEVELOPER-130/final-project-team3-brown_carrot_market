@@ -11,10 +11,8 @@ public class BrownCarrotMarketApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BrownCarrotMarketApplication.class, args);
 	}
-	
-	
-	  @Bean public ServerEndpointExporter serverEndpointExporter() { return new
-	  ServerEndpointExporter(); }
-	 
-	
+//	
+//	  @Bean public ServerEndpointExporter serverEndpointExporter() { return new
+//	  ServerEndpointExporter(); }
+//	
 }

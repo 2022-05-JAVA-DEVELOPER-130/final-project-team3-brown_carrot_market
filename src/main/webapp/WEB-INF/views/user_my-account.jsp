@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!doctype html>
 <html lang="en">
 
@@ -12,7 +14,7 @@
 <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 <!-- Title  -->
-<title>Brwon Carrot Market</title>
+<title>Brown Carrot Market</title>
 
 <!-- Favicon  -->
 <link rel="icon" href="img/core-img/favicon.ico">
@@ -402,6 +404,21 @@
 			    document.getElementById('user_profile').src=URL.createObjectURL(file);
 			}
 			
+			//user_received_reviewList
+			$(document).on('click', '#user_received_reviewList', function(e) {
+				console.log('click!!');
+				 $.ajax({
+						url:'user_received_reviewList_json',
+						method:'POST',
+						/*dataType:'json',*/
+						success:function(jsonResult){
+							//console.log(jsonResult);
+							$('#my-account-content').html(UserHtmlContents.user_received_reviewList2(jsonResult.data));
+						}
+					});
+				e.preventDefault();
+			});
+			
 		});//END
 </script>
 
@@ -448,8 +465,8 @@
 							<li class="active"><a href="user_my_account" id="user_my_account">마이페이지</a></li>
 							<li class=""><a href="#" id="user_account_details">회원정보수정</a></li>
 							<li class="active"><a href="" id="user_view_addresses">내 동네설정</a></li>
-							<li class=""><a href="#" id="">흙당근 포인트</a></li>
-							<li class=""><a href="#" id="">흙당근 매너온도</a></li>
+							<li class=""><a href="#" id="">흙당근 포인트 내역</a></li>
+							<li class=""><a href="#" id="user_received_reviewList">받은 거래 후기</a></li>
 							<li><a href="user_logout_action">로그아웃</a></li>
 						</ul>
 					</div>
@@ -459,7 +476,17 @@
 					<div id="my-account-content" class="my-account-content mb-50" style="margin-bottom: 20px">
 						<div class="shortcodes_content mb-100" style="margin-bottom: 0px">
 	                        <div class="col-12 col-lg-9">
-	                            <img class="img-circle" src="img/user_profile/${sUser.user_profile}" onerror="this.src='img/user_profile/newCarrot.jpg'">
+	                        <!-- 더나은 방법을 찾고싶다! -->
+	                        <c:set var="string" value="${sUser.user_profile}"/>
+							<c:choose>
+								<c:when test="${fn:startsWith(string,'http://')}">
+		                            <img class="img-circle" src="${sUser.user_profile}" onerror="this.src='img/user_profile/newCarrot.jpg'">
+								</c:when>
+								<c:otherwise>
+		                            <img class="img-circle" src="img/user_profile/${sUser.user_profile}" onerror="this.src='img/user_profile/newCarrot.jpg'">
+								</c:otherwise>
+							</c:choose>
+							<!-- 프로필 이미지 -->
 							<p>
 								<strong>${sUser.user_id}</strong>님, 안녕하세요? 
 							</p>

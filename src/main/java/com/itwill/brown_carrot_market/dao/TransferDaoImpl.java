@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.itwill.brown_carrot_market.dto.Product;
 import com.itwill.brown_carrot_market.dto.Transfer;
 import com.itwill.brown_carrot_market.mapper.TransferMapper;
 
@@ -27,8 +28,13 @@ public class TransferDaoImpl implements TransferDao{
 
 	@Override
 	public int insertTransfer_Deposit(int p_no) throws Exception {
+		Transfer transfer = new Transfer();
+		Product product = new Product();
+		product.setP_no(p_no);
+		transfer.setProduct(product);
 		System.out.println("#### TransferDaoImpl : insertTransfer_Deposit(Transfer transfer) 호출  ");
-		return transferMapper.insertTransfer_Deposit(p_no);
+		transferMapper.insertTransfer_Deposit(transfer);
+		return transfer.getTransfer_no();
 	}
 
 	@Override

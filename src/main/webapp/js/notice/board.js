@@ -3,7 +3,7 @@
 */
 function changeQnaList(pageno){
 	$.ajax({
-		url: "tables_rest",
+		url: "notice_list_rest",
 		method: "post",
 		data: {"pageno" :pageno},
 		dataType: "json",
@@ -13,24 +13,24 @@ function changeQnaList(pageno){
 				let data = resultObj.data;
 				let htmlBuffer = ``;
 				data.itemList.forEach(function(notice, i){
-					/*
-					let fDate = formatDate(notice.notice_date);
-					let toDate = formatDate(new Date());
-					*/
-					htmlBuffer += `<tr>
-	                                <th scope="row">${notice.notice_no}</th>
-	                                <td><a href="notice_view?notice_no=${notice.notice_no}&pageno=${data.pageMaker.curPage}">${notice.notice_title}</a>`;
-	                /*
-	                if(fDate == toDate){
-						htmlBuffer += `&nbsp;&nbsp;<span class="badge badge-danger">new</span>`;
+					
+	                if(notice.notice_fix == 1){
+						htmlBuffer += `<tr><td>&nbsp;&nbsp;<span class="badge badge-danger">중요</span></td>`
 					}
-					*/
+	                if(notice.notice_fix == 0){
+						htmlBuffer += `<tr><td>&nbsp;&nbsp;<span class="badge badge-normal">일반</span></td>`
+					}
+	                               
+					htmlBuffer += `
+	                               
+	                                <td><a href="notice_view?notice_no=${notice.notice_no}&pageno=${data.pageMaker.curPage}">${notice.notice_title}</a>`;
+	                
                     htmlBuffer += `</td>
 	                                    <td>${notice.notice_date}</td>
 	                                    <td>${notice.notice_count}</td>
 	                                </tr>`;
 				});
-				$("#qna_list_tbody").html(htmlBuffer);
+				$("#notice_list_tbody").html(htmlBuffer);
 				let paginationBuffer = ``;
 				if(data.pageMaker.prevPage > 0){
 					paginationBuffer += `<li class="page-item">
@@ -62,7 +62,7 @@ function changeQnaList(pageno){
 게시글 목록 이동
 */
 
-$(".qna_btn.list").on("click", function(){
+$(".notice_btn.list").on("click", function(){
 	let pageno = $(this).attr("pageno");
 	location.href = `notice_list?pageno=${pageno}`;
 });
@@ -70,21 +70,21 @@ $(".qna_btn.list").on("click", function(){
 /*
 게시글 삭제 
 */
-$(".qna_btn.delete").on("click", function(){
+$(".notice_btn.delete").on("click", function(){
 	let pageno = $(this).attr("pageno");
-	let q_no = $(this).attr("q_no");
+	let notice_no = $(this).attr("notice_no");
 	ToastConfirm.fire({ icon: 'question', 
 						title: "게시글을 삭제하시겠습니까?\n 삭제 후 복구가 불가능합니다"}).then((result) => {
 						if(result.isConfirmed){
 							$.ajax({
-								url: "qna_delete_rest",
+								url: "notice_delete_rest",
 								method: "post",
-								data: {"q_no":q_no},
+								data: {"notice_no":notice_no},
 								dataType: "json",
 								success:function(resultObj){
 									if(resultObj.errorCode > 0){
 										Toast.fire({ icon: 'success', title: resultObj.errorMsg }).then((result) => {
-												location.href = "qna_list?pageno=" + pageno;
+												location.href = "notice_list?pageno=" + pageno;
 											});
 									}else{
 										Toast.fire({ icon: 'error', title: resultObj.errorMsg });
@@ -98,25 +98,25 @@ $(".qna_btn.delete").on("click", function(){
 /*
 게시글 수정 폼 
 */
-$(".qna_btn.update_form").on("click", function(){
-	let q_no = $(this).attr("q_no");
+$(".notice_btn.update_form").on("click", function(){
+	let notice_no = $(this).attr("notice_no");
 	let pageno = $(this).attr("pageno");
-	location.href = `qna_update_form?q_no=${q_no}&pageno=${pageno}`;
+	location.href = `notice_update_form?notice_no=${notice_no}&pageno=${pageno}`;
 });
 
 /* 
 게시글 수정 
 */ 
-$(".qna_btn.update").on("click", function(){ 
-	if($("#q_title_txt").val() == "" || CKEDITOR.instances.q_content_area.getData() == ""){
+$(".notice_btn.update").on("click", function(){ 
+	if($("#notice_title_txt").val() == "" || CKEDITOR.instances.notice_content_area.getData() == ""){
 		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
 		return;
 	}
 		ToastConfirm.fire({ icon: 'question', 
 							title: "게시글을 수정하시겠습니까?"}).then((result) => {
 							if(result.isConfirmed){
-								let q_no = $(this).attr("q_no"); 
-								$("#qna_update_form").attr("action", "qna_update"); 
+								let notice_no = $(this).attr("notice_no"); 
+								$("#qna_update_form").attr("action", "notice_update"); 
 								$("#qna_update_form").submit(); // q_no, q_titla, q_content 
 							}
 					});
@@ -125,52 +125,71 @@ $(".qna_btn.update").on("click", function(){
 /*
 새글 등록 폼 
 */
-$(".qna_btn.write_form, .qna_btn.reply").on("click", function(){
+$(".notice_btn.write_form").on("click", function(){
 	let pageno = $(this).attr("pageno");
 	location.href = "notice_write_form?pageno=" + pageno;
 });
 
-/*
-답글 등록 폼 
-*/
-$(".qna_btn.reply").on("click", function(){
-	let pageno = $(this).attr("pageno");
-	let q_no = $(this).attr("q_no");
-	location.href = `qna_reply_form?pageno=${pageno}&q_no=${q_no}`;
-});
 
 /*
 게시글 등록
 */
-$(".qna_btn.new_write").on("click", function(){
-	if($("#q_title_txt").val() == "" || CKEDITOR.instances.q_content_area.getData() == ""){
+$(".notice_btn.new_write").on("click", function(){
+	if($("#q_title_txt").val() == "" || CKEDITOR.instances.notice_content_area.getData() == ""){
 		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
 		return;
 	}
-	$("#qna_write_form").attr("action", "qna_new_write");
-	$("#qna_write_form").submit();
+	$("#notice_write_form").attr("action", "notice_new_write");
+	$("#notice_write_form").submit();
 });
 
 /*
-답글 등록
+게시글 등록시 체크에 따라 고정글 설정
 */
-$(".qna_btn.reply_write").on("click", function(){
-	if($("#q_title_txt").val() == "" || CKEDITOR.instances.q_content_area.getData() == ""){
-		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
-		return;
-	}
-	$("#qna_reply_write_form").attr("action", "qna_reply_write");
-	$("#qna_reply_write_form").submit();
-});
+/*
+if(document.getElementById("notice_fix").checked) {
+    document.getElementById("notice_fix_hidden").disabled = true;
+}
+*/
+
+/*
+일반 회원일때 등록, 수정, 삭제 버튼 숨기기
+*/
+$()
 
 /*
 ckeditor
 */
+
 $(() => {
-	if($("#q_content_area").length != 0){
-		 CKEDITOR.replace('q_content_area', {
+	if($("#notice_content_area").length != 0){
+		 CKEDITOR.replace('notice_content_area', {
 						height: 500                                                  
                  	});
 	}
 });
+
+/*
+alert 세팅
+*/
+const Toast =  Swal.mixin({ 
+	toast: true, 
+	position: 'center', 
+	showConfirmButton: true, 
+	confirmButtonColor: '#3085d6',
+	width: '400px'
+ });
+
+const ToastConfirm =  Swal.mixin({ 
+	toast: true, 
+	position: 'center', 
+	showConfirmButton: true, 
+	confirmButtonColor: '#3085d6',
+	showDenyButton: true,
+	denyButtonText: 'Cancle',
+	width: '400px'
+ });
+
+
+
 

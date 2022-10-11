@@ -1,5 +1,7 @@
 package com.itwill.brown_carrot_market.dto;
 
+import java.sql.Date;
+
 /*
 이름        널?       유형           
 --------- -------- ------------ 
@@ -10,22 +12,22 @@ USER_ID            VARCHAR2(10)
 public class Orders {
 	private int orders_no;
 	private Product product;
-	private String user_id;
+	private UserInfo userinfo;
 	private Transfer transfer;
+	private Date orders_date;
 	
 	public Orders() {
 
 	}
 
-	public Orders(int orders_no, Product product, String user_id, Transfer transfer) {
+	public Orders(int orders_no, Product product, UserInfo userinfo, Transfer transfer, Date orders_date) {
 		super();
 		this.orders_no = orders_no;
 		this.product = product;
-		this.user_id = user_id;
+		this.userinfo = userinfo;
 		this.transfer = transfer;
+		this.orders_date = orders_date;
 	}
-
-	
 
 	public int getOrders_no() {
 		return orders_no;
@@ -43,12 +45,12 @@ public class Orders {
 		this.product = product;
 	}
 
-	public String getUser_id() {
-		return user_id;
+	public UserInfo getUserinfo() {
+		return userinfo;
 	}
 
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setUserinfo(UserInfo userinfo) {
+		this.userinfo = userinfo;
 	}
 
 	public Transfer getTransfer() {
@@ -59,18 +61,18 @@ public class Orders {
 		this.transfer = transfer;
 	}
 
-	@Override
-	public String toString() {
-		return "Orders [orders_no=" + orders_no + ", product=" + product
-				+ ", user_id=" + user_id + ", transfer=" + transfer + "]";
+	public Date getOrders_date() {
+		return orders_date;
 	}
 
-	/*
-	 * @Override public String toString() { return "\nOrders [orders_no=" +
-	 * orders_no + ", product.p_title=" + product.p_title + ", user_id=" +
-	 * user_id + ", transfer.transfer_date" + transfer.getTransfer_date()+ "]";
-	 * }
-	 */
+	public void setOrders_date(Date orders_date) {
+		this.orders_date = orders_date;
+	}
 
-	
+	@Override
+	public String toString() {
+		return "Orders [orders_no=" + orders_no + ", product=" + product + ", userinfo=" + userinfo + ", transfer="
+				+ transfer + ", orders_date=" + orders_date + "]";
+	}
+
 }

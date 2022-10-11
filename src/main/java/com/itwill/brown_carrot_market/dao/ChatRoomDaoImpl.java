@@ -33,6 +33,11 @@ public class ChatRoomDaoImpl implements ChatRoomDao {
 	public ChatRoom chatRoomSelect(Integer c_room_no) {
 		return chatRoomMapper.chatRoomSelect(c_room_no);
 	}
+	// 채팅방 목록  from,to,p_no으로 방번호 찾기
+	@Override
+	public ChatRoom chatRoomSelectFTP(String from_id, String to_id, Integer p_no) {
+		return chatRoomMapper.chatRoomSelectFTP(from_id,to_id,p_no);
+	}
 	
 	// 채팅방 생성
 	@Override

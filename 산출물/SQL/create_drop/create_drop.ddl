@@ -75,7 +75,8 @@ CREATE TABLE payment(
 CREATE TABLE orders(
 		orders_no                     		NUMBER(10)		 NULL ,
 		p_no                          		NUMBER(20)		 NULL ,
-		user_id                       		VARCHAR2(10)		 NULL 
+		user_id                       		VARCHAR2(10)		 NULL, 
+		orders_date                   		DATE		 NULL 
 );
 
 DROP SEQUENCE orders_orders_no_SEQ;
@@ -89,7 +90,9 @@ CREATE TABLE transfer(
 		transfer_withdraw             		NUMBER(10)		 NULL ,
 		transfer_date                 		DATE		 NULL ,
 		user_id                       		VARCHAR2(30)		 NULL ,
-		orders_no                     		NUMBER(10)		 NULL 
+		orders_no                     		NUMBER(10)		 NULL ,
+		p_no                          		NUMBER(20)		 NULL ,
+		t_balance							NUMBER(20)		NULL
 );
 
 DROP SEQUENCE transfer_transfer_no_SEQ;
@@ -163,13 +166,13 @@ CREATE TABLE chat_room(
 		c_room_no                     		NUMBER(10)		 NULL ,
 		from_id                       		VARCHAR2(10)		 NULL ,
 		to_id                         		VARCHAR2(20)		 NULL ,
+        from_id_in                     		NUMBER(10)		 NULL ,
+		to_id_in                            NUMBER(20)		 NULL ,
 		p_no                          		NUMBER(20)		 NULL 
 );
 
 DROP SEQUENCE chat_room_c_room_no_SEQ;
-
 CREATE SEQUENCE chat_room_c_room_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 CREATE TABLE chat_contents(
 		c_content_no                  		NUMBER(10)		 NULL ,
@@ -303,6 +306,7 @@ ALTER TABLE orders ADD CONSTRAINT IDX_orders_FK1 FOREIGN KEY (user_id) REFERENCE
 ALTER TABLE transfer ADD CONSTRAINT IDX_transfer_PK PRIMARY KEY (transfer_no);
 ALTER TABLE transfer ADD CONSTRAINT IDX_transfer_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
 ALTER TABLE transfer ADD CONSTRAINT IDX_transfer_FK1 FOREIGN KEY (orders_no) REFERENCES orders (orders_no) on delete cascade;
+ALTER TABLE transfer ADD CONSTRAINT IDX_transfer_FK2 FOREIGN KEY (p_no) REFERENCES product (p_no);
 
 ALTER TABLE product_img ADD CONSTRAINT IDX_product_img_PK PRIMARY KEY (pi_no);
 ALTER TABLE product_img ADD CONSTRAINT IDX_product_img_FK0 FOREIGN KEY (p_no) REFERENCES product (p_no);

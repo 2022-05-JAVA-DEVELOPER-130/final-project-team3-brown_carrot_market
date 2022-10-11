@@ -1,9 +1,10 @@
 var num = null;
-var loginId=getLoginId();
 var loginName=null;
+var loginId=getLoginId();
 var yourId=null;
 var mImage=null;
 var socket=null;
+
 
 
 var c_room_no=null;
@@ -33,25 +34,6 @@ function getContextPath(){
    var ctx = location.href.substr(0,lastIndexCount).replace('http', 'ws');
    return ctx;
 }
-
-//채팅 페이지 열릴 때 
-
-$(document).ready(function(){
-	
-	 
-	console.log("document ready");
-	
-	console.log("document ready end : "+loginId);
-	//connectWS();
-	
-	message_send_function();
-    
-	});
-	
-	$(window).on("load",function(){
-		//connectWS();
-	})
-	
 function getLoginId(){
 		$.ajax({
 		url:"get_id",
@@ -71,6 +53,142 @@ function getLoginId(){
 	});
 	return loginId;
 }
+
+//채팅 페이지 열릴 때 
+
+$(document).ready(function(){
+		
+		
+		
+		// 채팅방 접근 방식 확인
+	 var  path=document.getElementById("path").value;
+	 var newChatRoomNo=document.getElementById("newChatRoomNo").value;
+	 var myId=document.getElementById("loginId").value;
+	 console.log(newChatRoomNo)
+	 console.log(path);
+	 console.log(myId);
+	
+
+	
+	 
+
+
+	 
+	console.log("document ready");
+	
+	console.log("document ready end : "+loginId);
+	//connectWS();
+	
+	message_send_function();
+	
+	
+	 // 채팅방 접근 방식 확인 -- 너무 야매....
+	 var  path=document.getElementById("path").value;
+	 var newChatRoomNo=document.getElementById("newChatRoomNo").value;
+	 var myId=document.getElementById("loginId").value;
+	 console.log(newChatRoomNo)
+	 console.log(path);
+	 console.log(myId);
+	 if(path==2){
+			$('#chatHead').hide();
+			$('#plist').hide();
+			$('#chat_history').hide();			
+	 if(socket!=null){
+	socket.close();
+	}
+
+	
+
+		
+
+		
+		var chat_detail={
+			"c_room_no":newChatRoomNo,
+			"loginId":myId
+		}
+$.ajax({
+		
+		
+		url:"chat_detail_rest",
+		method:"POST",
+		//data:{"c_room_no":num},
+		data: JSON.stringify(chat_detail),
+		async: true,
+        contentType: "application/json; charset=utf-8", //헤더의 Content-Type을 설정
+        dataType: "JSON", //응답받을 데이터 타입 (XML,JSON,TEXT,HTML,JSONP)    			
+    			    			
+	
+		
+		success:function(jsonResult){
+			connectWS();
+			var chatContentArray=jsonResult.data;
+			yourId=jsonResult.yourId;
+			yourImg = jsonResult.yourImg;
+			c_room_no=jsonResult.c_room_no;
+			console.log("채팅방의 상대방 ID:"+yourId);
+			console.log(chatContentArray);
+
+			$('#chat_history').html("");
+			$('#chatHead').html("");
+			/***********숨기기**********/
+			console.log("숨기기");
+
+			console.log(loginId);
+
+			$('#chatHead').append(chat_head(yourId,yourImg,c_room_no));
+			
+			
+			
+			
+			for(const item of chatContentArray){
+		
+				
+
+				if(item.user_id!=loginId){
+					if(item.user_id=="admin"){
+						
+					$('#chat_history').append(message_admin(item));
+				}
+					else if(item.user_id=="adminP"){
+						$('#chat_history').append( `<li class="clearfix">
+
+                           <div class="message admin-message" margin:auto>${item.c_content}
+                           <br>약속 장소 : <a href="javascript:void(popupMap(${promiseData.c_app_lat},${promiseData.c_app_lng}))" style="font-size:6px;",id="chat_spot_map">${promiseData.c_app_spot}</a></div>
+                        </li>`);
+						
+					}else{
+					console.log("상대가 보낸 메세지");
+			$('#chat_history').append(message_other(item));
+			}
+				}else if(item.user_id==loginId){
+					console.log("내가 보낸 메세지");
+			$('#chat_history').append(message_you(item));
+				}
+			};
+			$('#chat_history').show();
+			$('#chatHead').show();
+			
+		}
+		
+	});
+	
+	}
+	
+//-------------------------------------------------------------------------------------------------------------------------------------------------	
+	
+	
+    
+	});
+	
+	
+	
+	$(window).on("load",function(){
+		//connectWS();
+	})
+	
+
+
+	
 	
 		
 //채팅방 내용 불러오기		
@@ -129,6 +247,9 @@ $.ajax({
 			//$('#content').html('채팅 불러오기 성공');
 			$('#chat_history').html("");
 			$('#chatHead').html("");
+			/***********숨기기**********/
+			console.log("숨기기");
+			$('#plist').hide();
 			//loginId=$('#loginId').val();
 			console.log(loginId);
 			/*
@@ -184,6 +305,7 @@ $.ajax({
 	
 	
 	});
+	
 	
 	//날짜 변환 
 	function date_string(dateString){
@@ -330,7 +452,8 @@ function chat_head(id,img,room_no){
 									id="deleteRoom">
 									<i class="fa fa-sign-out"></i></a> 
 								
-									<a href="javascript:void(0);" class="btn btn-outline-danger">
+									<a href="javascript:void(0);" class="btn btn-outline-danger"
+									id="outRoom">
 									<i class="fa fa-close" ></i></a>
 									
 								</div>
@@ -487,6 +610,52 @@ function connectWS(){
 			//내가 보낸 경우
 			$('#chat_history').append(message_you(onmsg));
 		}
+		/*****************메시지 보내는 순간 리스트 새로고침***********************/
+			
+			console.log("채팅방 새로고침");
+			$('#chatRoomList').html("");
+			var reload_id={
+		
+		"loginId":loginId
+	}
+			$.ajax({
+		
+		
+		url:"chat_room_reload_rest",
+		method:"POST",
+		data: JSON.stringify(reload_id),
+		async: true,
+        contentType: "application/json; charset=utf-8", //헤더의 Content-Type을 설정
+        dataType: "JSON", //응답받을 데이터 타입 (XML,JSON,TEXT,HTML,JSONP)  
+				
+    			    			
+	
+		
+		success:function(jsonResult){
+			var chatList=jsonResult.data;
+		
+			console.log("불러오기");
+			console.log(chatList);
+			$('#chatRoomList').html("");
+			for(const item of chatList){
+				
+			$('#chatRoomList').append(chatRoomListNew(item));
+				
+				
+			}
+
+		}
+		
+	});
+	/****************************************************************************/
+		
+		
+		
+		
+		
+		
+		
+		
 		} //입장한 경우
 		else if(onmsg.code=="2"){
 			console.log("입장한 경우");
@@ -494,6 +663,7 @@ function connectWS(){
 			"c_room_no":c_room_no,
 			"loginId":loginId
 		}
+		
 			$.ajax({
 		
 		
@@ -537,6 +707,7 @@ function connectWS(){
 				
 				if(item.user_id=="admin"){
 					$('#chat_history').append(message_admin(item));
+					
 				}
 				else if(item.user_id!=loginId){
 					console.log("내가 보낸 메세지");
@@ -562,6 +733,8 @@ function connectWS(){
 		
 	}
 }
+
+
 
 /*****************삭제....*************** */
 
@@ -606,7 +779,7 @@ $.ajax({
 			for(const item of chatList){
 				
 			$('#chatRoomList').append(chatRoomListNew(item));
-				
+			$('#plist').show();	
 				
 			}
 
@@ -615,37 +788,24 @@ $.ajax({
 	});
 	
 	});
+	/************************************ 채팅방 닫기 ******************************/
+$(document).on('click','#outRoom',function(e){
+			$('#chat_history').html("");
+			$('#chat_history').append(chatRoomOut());
+			$('#plist').show();
+			
+
+	
+	});
+	/********************************************************************** */
 function chatRoomOut(){
 	return `<li class="clearfix">
-									<div class="message-data text-right">
-										<span class="message-data-time">10:10 AM, Today</span> <img
-											src="https://bootdey.com/img/Content/avatar/avatar7.png"
-											alt="avatar">
+									<div class="message-data"><img
+											src="img/chat-img/logo_carrot.png"
+											alt>
+										<span class="message-data-adminGongji">당근 좋아하는 토끼</span>
 									</div>
-									<div class="message other-message float-right" >Hi Aiden,
-										how are you? How is the project coming along?</div>
-								</li>
-								<li class="clearfix">
-									<div class="message-data">
-										<span class="message-data-time">10:12 AM, Today</span>
-									</div>
-									<div class="message my-message">Are we meeting today?</div>
-								</li>
-								<li class="clearfix">
-									<div class="message-data">
-										<span class="message-data-time">10:15 AM, Today</span>
-									</div>
-									<div class="message my-message">Project has been already
-										finished and I have results to show you.</div>
-								</li>
-								<li class="clearfix">
-									<div class="message-data text-right">
-										<span class="message-data-time">10:10 AM, Today</span> <img
-											src="https://bootdey.com/img/Content/avatar/avatar7.png"
-											alt="avatar">
-									</div>
-									<div class="message other-message float-right">Hi Aiden,
-										how are you? How is the project coming along?</div>
+									<div class="message my-message">채팅방을 클릭해주세요</div>
 								</li>`
 }
 function chatRoomListNew(list){
@@ -660,6 +820,7 @@ function chatRoomListNew(list){
                         </div>
                  </li>`
 }
+
 
 
 

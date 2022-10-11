@@ -21,8 +21,11 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="style.css">
-
+	<!-- javaScript -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
+	<script type="text/javascript" src="js/product/product.js"></script>
 </head>
 
 <body>
@@ -138,6 +141,7 @@
                         </div>
                         -->
                         <h4 class="price mb-4">가격 : ${product.p_price} </h4>
+                        <h4 class="price mb-4">이미지 : <img class="normal_img" src="img/product_img/${product.productImagesList[0].pi_name}" alt=""></h4>
 
                         <!-- Overview -->
                         <div class="short_overview mb-4">
@@ -152,18 +156,18 @@
                        
 
                         <!-- Add to Cart Form -->
-                        <form class="cart clearfix my-5 d-flex flex-wrap align-items-center" method="post">
+                        <form class="cart clearfix my-5 d-flex flex-wrap align-items-center" method="post" name="chatStart">
                             <!--  
                             <div class="quantity">
                                 <input type="number" class="qty-text form-control" id="qty2" step="1" min="1" max="12" name="quantity" value="1">
                             </div>
                             -->
-                            <input type="hidden" name="p_no" value="${product.p_no}" />
+                            <input type="hidden" name="p_no" id="p_no" value="${product.p_no}" />
                             <input type="hidden" name="p_title" value="${product.p_title}" />
                             <input type="hidden" name="p_desc" value="${product.p_desc}" />
                             <input type="hidden" name="p_price" value="${product.p_price}" />
                             <input type="hidden" name="p_ctgr_no" value="${product.productCategory.p_ctgr_no}" />
-                            <button type="submit" name="addtocart" value="5" class="btn btn-primary mt-1 mt-md-0 ml-1 ml-md-3">Add to cart</button>
+                            <button type="button" name="btnCreate" class="btn btn-primary mt-1 mt-md-0 ml-1 ml-md-3" id="btnCreate">채팅하기</button>
                         </form>
 
                         <!-- Others Info -->

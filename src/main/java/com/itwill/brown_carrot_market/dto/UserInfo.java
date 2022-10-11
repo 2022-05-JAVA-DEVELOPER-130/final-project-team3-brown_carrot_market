@@ -156,6 +156,14 @@ public class UserInfo {
 				+ ", user_profile=" + user_profile + ", addressList="
 				+ addressList + "]";
 	}
+	public String toString2() {
+		return "user_id=" + user_id + "&user_pw=" + user_pw
+				+ "&user_name=" + user_name + "&user_email=" + user_email
+				+ "&user_phone=" + user_phone + "&user_freshness="
+				+ user_freshness + "&user_point=" + user_point
+				+ "&user_profile=" + user_profile + "&addressList="
+				+ addressList;
+	}
 
 	
 

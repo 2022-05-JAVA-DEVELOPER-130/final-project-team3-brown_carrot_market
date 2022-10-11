@@ -20,7 +20,8 @@ public class ReviewDaoImpl implements ReviewDao {
 	
 	@Override
 	public int createReview(Review review) {
-		return reviewMapper.createReview(review);
+		reviewMapper.createReview(review);
+		return review.getReview_no();	//insert된 review_no Return	
 	}
 
 	@Override
@@ -32,5 +33,11 @@ public class ReviewDaoImpl implements ReviewDao {
 	public List<Review> findReceivedReviewByBuyer(String user_id)
 			throws Exception {
 		return reviewMapper.findReceivedReviewByBuyer(user_id);
+	}
+
+	@Override
+	public List<Review> findReceivedReviewBySeller(String user_id)
+			throws Exception {
+		return reviewMapper.findReceivedReviewBySeller(user_id);
 	}
 }

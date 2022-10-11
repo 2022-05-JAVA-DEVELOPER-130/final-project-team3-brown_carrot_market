@@ -18,4 +18,6 @@ public interface ReviewMapper {
 
 	public List<Review> findReceivedReviewByBuyer(String user_id);
 
+	public List<Review> findReceivedReviewBySeller(String user_id);
+
 }

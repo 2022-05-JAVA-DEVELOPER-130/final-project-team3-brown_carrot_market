@@ -25,7 +25,9 @@
     <link rel="stylesheet" href="css/shop/board.css">
      -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="forEunbi/common/board.css">
+    <link rel="stylesheet" href="css/board.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
 
 </head>
 
@@ -73,28 +75,36 @@
                             <table class="table mb-0 table-bordered">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="board_no">번호</th>
+                                        <th scope="col" class="board_no">분류</th>
                                         <th scope="col" class="board_title">제목</th>
                                         <th scope="col" class="board_date">날짜</th>
                                         <th scope="col" class="board_count">조회수</th>
                                     </tr>
                                 </thead>
-                                <tbody id="qna_list_tbody">
+                                <tbody id="notice_list_tbody">
                                 
                                 	<!-- board start -->
                                 	<c:forEach var="notice" items="${noticeList.itemList}">
 	                                    <tr>
+	                                    <!-- 
 	                                        <th scope="row">${notice.notice_no}</th>
+	                                         -->
+	                                         <th>
+	                                         	<c:if test="${notice.notice_fix eq '1'}">
+	                                        			&nbsp;&nbsp;<span class="badge badge-danger">중요</span>
+	                                        		</c:if>
+	                                        		<c:if test="${notice.notice_fix eq '0'}">
+	                                        			&nbsp;&nbsp;<span class="badge badge-normal">일반</span>
+	                                        		</c:if>
+	                                         </th>
 	                                        <td>
 	                                       
 	                                       
 	                                        	<a href="notice_view?notice_no=${notice.notice_no}&pageno=${noticeList.pageMaker.curPage}">
 	                                        		${notice.notice_title}
-	                                        		<!--
-	                                        		<c:if test="${to_date eq notice.notice_date}">
-	                                        			&nbsp;&nbsp;<span class="badge badge-danger">new</span>
-	                                        		</c:if>
-	                                        		  -->
+	                                        		
+	                                        		
+	                                        		 
 	                                        	</a>
 	                                        	
 	                                        
@@ -110,7 +120,7 @@
 						
                         </div>
                     </div>
-					<input type="button" class="qna_btn write_form" pageno="${pageno}" value="게시글작성" />
+					<input type="button" class="notice_btn write_form" pageno="${pageno}" value="게시글작성" />
                 </div>
             </div>
             
@@ -160,8 +170,10 @@
 	<!--
 	
 	  -->
+	<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="js/notice/board.js" defer></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	
 
 </body>

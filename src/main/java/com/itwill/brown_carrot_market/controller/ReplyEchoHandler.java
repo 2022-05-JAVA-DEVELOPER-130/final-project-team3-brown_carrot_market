@@ -108,7 +108,8 @@ public class ReplyEchoHandler {
 			e.printStackTrace();
 
 		}
-
+		System.out.println("여기 확인"+mId);
+		System.out.println("여기 확인"+yourId);
 		resultMap.put("code", code);
 		resultMap.put("msg", msg);
 		resultMap.put("yourId", yourId);
@@ -166,7 +167,52 @@ public class ReplyEchoHandler {
 			return resultMap;
 		}
 	
-	
+		// 채팅방 reload-----------------------------------------------
+				@PostMapping(value = "/chat_room_reload_rest", produces = "application/json;charset=UTF-8")
+				public Map chatRoom_Reload_rest(@RequestBody Map<String, String> Id) {
+					Map resultMap = new HashMap();
+					int code = 1;
+					String url = "";
+					String msg = "";
+					String yourId = "";
+					//int room_no = Integer.parseInt(c_room_no);
+					String loginId = Id.get("loginId");
+
+					List<ChatRoomListView> resultList = new ArrayList<ChatRoomListView>();
+					
+					
+					
+					try {
+						List<ChatRoomListView> chatList = chatService.chatRoomSelectAll(loginId);
+					
+							for (ChatRoomListView chatRoomListView : chatList) {
+									
+									System.out.println(chatRoomListView.getYou_id());
+								
+									String img = userService.findUser(chatRoomListView.getYou_id()).getUser_profile();
+								
+									chatRoomListView.setYou_image(img);
+									chatRoomListView.setNot_read(chatService.chatNotRead(chatRoomListView.getC_room_no(),loginId));
+							}
+						code = 1;
+						msg = "성공";
+						resultList = chatList;
+					} catch (Exception e) {
+						code = 2;
+						msg = "성공";
+						e.printStackTrace();
+
+					}
+				
+
+					resultMap.put("code", code);
+					resultMap.put("msg", msg);
+					resultMap.put("data", resultList);
+				
+
+					return resultMap;
+				}
+			// ----------------------------------------------------------------------------
 	
 
 	
