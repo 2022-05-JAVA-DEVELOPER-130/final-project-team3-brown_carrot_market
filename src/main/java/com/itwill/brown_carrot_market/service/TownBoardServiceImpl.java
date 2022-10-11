@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.itwill.brown_carrot_market.dao.TownBoardDao;
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.TownBoard;
+import com.itwill.brown_carrot_market.util.PageMaker;
+import com.itwill.brown_carrot_market.util.PageMakerDto;
 
 @Service
 public class TownBoardServiceImpl implements TownBoardService{
@@ -20,10 +22,21 @@ public class TownBoardServiceImpl implements TownBoardService{
 	public TownBoardServiceImpl() throws Exception{
 		System.out.println(">>> townBoardServiceImpl : 기본 생성자 호출");
 	}
-
+	
+	//비회원 동네게시판 전체조회 페이징처리
 	@Override
-	public List<TownBoard> selectNonMemberTownBoardList() throws Exception {
-		return townBoardDao.selectNonMemberTownBoardList();
+	public PageMakerDto<TownBoard> selectNonMemberTownBoardList(int currentPage) throws Exception {
+		int totTownBoardNonMemberCount = townBoardDao.selectNonMemberCountTownBoard();
+		PageMaker pageMaker = new PageMaker(totTownBoardNonMemberCount, currentPage, 5, 5);
+		List<TownBoard> townBoardList = townBoardDao.selectNonMemberTownBoardList(pageMaker.getPageBegin(), pageMaker.getPageEnd());
+		PageMakerDto<TownBoard> pageMakerTownBoardList = new PageMakerDto<TownBoard>(townBoardList, pageMaker, totTownBoardNonMemberCount);
+		
+		return pageMakerTownBoardList;
+	}
+	
+	@Override
+	public int selectNonMemberCountTownBoard() {
+		return townBoardDao.selectNonMemberCountTownBoard();
 	}
 
 	@Override
@@ -83,6 +96,10 @@ public class TownBoardServiceImpl implements TownBoardService{
 	public int insertTownBoard(Map map) {
 		return townBoardDao.insertTownBoard(map);
 	}
+
+	
+
+
 	
 	
 	
