@@ -1,36 +1,126 @@
 package com.itwill.brown_carrot_market.controller;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.UserInfo;
+import com.itwill.brown_carrot_market.service.KakaoUserGetService;
+import com.itwill.brown_carrot_market.service.KakaoRestJsonService;
 import com.itwill.brown_carrot_market.service.UserInfoService;
 
 @Controller
 public class UserInfoController {
 	@Autowired
 	private UserInfoService userService;
+	@Autowired
+	private KakaoUserGetService kakaoUserGetService;
+	@Autowired
+	private KakaoRestJsonService kakaoRestJsonService;
+	
+	@RequestMapping("/user_kakaologin")
+	public String user_kakaologin(@RequestParam("code") String code,Model model) throws Exception{
+		System.out.println("user_kakaologin_json() - code: "+code);
+		
+		//access_token이 포함된 JSON String을 받아온다.
+        String accessTokenJsonData = kakaoRestJsonService.getAccessTokenJsonData(code);
+        if(accessTokenJsonData=="error") return "redirect:user_login";
+
+        //JSON String -> JSON Object
+        JSONObject accessTokenJsonObject = new JSONObject(accessTokenJsonData);
+
+        //access_token 추출
+        String accessToken = accessTokenJsonObject.get("access_token").toString();
+        
+        //유저 정보가 포함된 JSON String을 받아온다.
+        String userInfo = kakaoUserGetService.getUserInfo(accessToken);
+        
+        //JSON String -> JSON Object
+        JSONObject userInfoJsonObject = new JSONObject(userInfo);
+        String id = (String)userInfoJsonObject.get("id").toString();
+
+        //유저의 Email 추출
+        JSONObject kakaoAccountJsonObject = (JSONObject)userInfoJsonObject.get("kakao_account");
+        String email = kakaoAccountJsonObject.get("email").toString();
+        String id_email = email.substring(0,email.indexOf("@"));
+        String profile = kakaoAccountJsonObject.get("profile").toString();
+        
+        JSONObject profileJsonObject = new JSONObject(profile);
+        String nickname = profileJsonObject.get("nickname").toString();
+
+        String thumbnail_image_url = profileJsonObject.get("thumbnail_image_url").toString();
+
+        String user_pw = "K"+id+id_email;
+        
+        UserInfo kakaoUser = new UserInfo();
+        kakaoUser.setUser_id(id_email);
+        kakaoUser.setUser_name(nickname);
+        kakaoUser.setUser_email(email);
+        kakaoUser.setUser_profile(thumbnail_image_url);
+        kakaoUser.setUser_pw(user_pw);
+        
+		return "redirect:user_kakaologin_action?"+kakaoUser.toString2();
+	}
+	
+	@RequestMapping(value = "/user_kakaologin_action")
+	public String user_kakaologin_action(String user_id, String user_name,String user_email,String user_profile,String user_pw, HttpServletRequest request) throws Exception{
+		
+		UserInfo userInfo = new UserInfo(user_id, user_pw, user_name, user_email, "", 0, 0, user_profile, null);
+		
+		int code=0;
+		String url="";
+		String msg="";
+		Map resultMap=new HashMap();
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
+		System.out.println("user_kakaologin_action_json - userInfo: "+userInfo);
+		
+		UserInfo kakaoUser= userService.findUser(userInfo.getUser_id());
+		
+		if(kakaoUser!=null) {
+			request.getSession().setAttribute("sUserId",kakaoUser.getUser_id());
+			request.getSession().setAttribute("sUser", kakaoUser);
+			
+			if(kakaoUser.getAddressList()!=null) {
+				for(Address address: kakaoUser.getAddressList()) {
+					if(address.getAddress_range()>0) {
+						request.getSession().setAttribute("sAddress", address);
+					}
+				}
+			}
+			return "redirect:main";
+		}else {	//회원가입
+			userInfo.setUser_phone("010");
+			int result= userService.create(userInfo, null, null);
+			if(result==1) {
+				request.getSession().setAttribute("sUserId",userInfo.getUser_id());
+				request.getSession().setAttribute("sUser", userInfo);
+			}
+			return "redirect:user_my-account";
+		}
+	}
 
 	@RequestMapping("/user_login")
 	public String user_login_form() {
 		return "user_login";
-	}
-	
-	@RequestMapping("/user_write_form")
-	public String user_write_form() {
-		System.out.println("user_write_form 컨트롤러 호출-userService: " + userService);
-		return "user_write_form";
 	}
 	
 	@LoginCheck
@@ -91,6 +181,15 @@ public class UserInfoController {
 		}
 		return forwardPath;
 	}
+	
+/*
+	@RequestMapping("/user_write_form")
+	public String user_write_form() {
+		System.out.println("user_write_form 컨트롤러 호출-userService: " + userService);
+		return "user_write_form";
+	}
+	*/
+	
 	/*
 	 * @LoginCheck
 	 * 

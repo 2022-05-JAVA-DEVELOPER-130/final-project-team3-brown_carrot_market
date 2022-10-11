@@ -115,7 +115,7 @@ INSERT INTO userinfo (
     '010-5555-5555',
     36.5,
     0,
-    'broccoli.png'
+    'carrot5.jpg'
 );
 
 INSERT INTO userinfo (
@@ -176,6 +176,44 @@ INSERT INTO userinfo (
     36.5,
     0,
     'potato.png'
+);
+INSERT INTO userinfo (
+    user_id,
+    user_pw,
+    user_name,
+    user_email,
+    user_phone,
+    user_freshness,
+    user_point,
+    user_profile
+) VALUES (
+    'K2478707404',
+    'kakaotest1',
+    'kakao1',
+    'tjdudg@naver.com',
+    '010-1234-5678',
+    36.5,
+    0,
+    'newCarrot.jpg'
+);
+INSERT INTO userinfo (
+    user_id,
+    user_pw,
+    user_name,
+    user_email,
+    user_phone,
+    user_freshness,
+    user_point,
+    user_profile
+) VALUES (
+    'K2479051437',
+    'kakaotest2',
+    'kakao2',
+    'brv19@hanmail.net',
+    '010-1234-5678',
+    36.5,
+    0,
+    'newCarrot.jpg'
 );
 
 INSERT INTO userinfo (
@@ -790,23 +828,38 @@ insert into review(review_no,review_desc,review_image,review_point,orders_no,use
     values(REVIEW_REVIEW_NO_SEQ.nextval,'친절하고 약속시간을 잘지켜요','',0.1, 1,'carrot5');
 --판매자    
 insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
-    values(REVIEW_REVIEW_NO_SEQ.nextval,'쿨거래했어요','',0.1, 1,'carrot6');
+    values(REVIEW_REVIEW_NO_SEQ.nextval,'쿨거래했어요','',0.1, 1,'carrot1');
 
 --구매자
 insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
-    values(REVIEW_REVIEW_NO_SEQ.nextval,'최고에요!','',0.2, 2,'carrot5');
+    values(REVIEW_REVIEW_NO_SEQ.nextval,'최고에요!','',0.2, 2,'carrot2');
 --판매자    
 insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
-    values(REVIEW_REVIEW_NO_SEQ.nextval,'별로에요','',-0.1, 2,'carrot7');   
+    values(REVIEW_REVIEW_NO_SEQ.nextval,'별로에요','',-0.1, 2,'carrot8');   
+    
+--구매자
+insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, 3,'carrot5');
+insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
+    values(REVIEW_REVIEW_NO_SEQ.nextval,'그냥그래요','',0, ORDERS_ORDERS_NO_SEQ.currval,'carrot5');
+--판매자    
+insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
+    values(REVIEW_REVIEW_NO_SEQ.nextval,'친절해요','',0.1, 3,'carrot7');  
     
 --구매자
 insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
-    values(REVIEW_REVIEW_NO_SEQ.nextval,'그냥그래요','',0, 3,'carrot5');
+    values(REVIEW_REVIEW_NO_SEQ.nextval,'그냥그래요','',0, 10,'carrot3');
 --판매자    
 insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
-    values(REVIEW_REVIEW_NO_SEQ.nextval,'친절해요','',0.1, 3,'carrot7');     
-    
-    
+    values(REVIEW_REVIEW_NO_SEQ.nextval,'친절해요','',0.1, 10,'carrot6'); 
+
+--구매자
+insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, 4,'carrot5');
+insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
+    values(REVIEW_REVIEW_NO_SEQ.nextval,'그냥그래요','',0, ORDERS_ORDERS_NO_SEQ.currval,'carrot5');
+--판매자    
+insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
+    values(REVIEW_REVIEW_NO_SEQ.nextval,'친절해요','',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot3'); 
+      
 select * from review;    
 
 
