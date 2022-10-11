@@ -10,7 +10,6 @@ public class FilesStorageServiceImplChat implements FilesStorageServiceChat {
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
 
 	}
 
