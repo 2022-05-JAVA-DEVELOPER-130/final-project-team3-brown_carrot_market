@@ -515,23 +515,23 @@ select p_no, p_title, p_date, user_id, p_price from product;
 --[orders] p_no=1, 판매자 carrot1
 insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, 1,'carrot5', sysdate);
 --[transfer] 구매자 carrot5
-insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,10000, 0, sysdate-10, 'carrot5',ORDERS_ORDERS_NO_SEQ.currval,1);
+insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,10000, 0, sysdate-10, 'carrot5',ORDERS_ORDERS_NO_SEQ.currval,1, 0);
 --[transfer] 판매자 carrot1
-insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,0, 10000, sysdate-10, 'carrot1',ORDERS_ORDERS_NO_SEQ.currval,1);
+insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,0, 10000, sysdate-10, 'carrot1',ORDERS_ORDERS_NO_SEQ.currval,1, 0);
 
 --[orders] p_no=10, 판매자 carrot6
 insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, 10,'carrot3', sysdate);
 --[transfer] 구매자 carrot3
-insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,10000, 0, sysdate-8, 'carrot3',ORDERS_ORDERS_NO_SEQ.currval, 10);
+insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,10000, 0, sysdate-8, 'carrot3',ORDERS_ORDERS_NO_SEQ.currval, 10, 0);
 --[transfer] 판매자 carrot6
-insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,0, 10000, sysdate-8, 'carrot6',ORDERS_ORDERS_NO_SEQ.currval, 10);
+insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,0, 10000, sysdate-8, 'carrot6',ORDERS_ORDERS_NO_SEQ.currval, 10, 0);
 
 --[orders] p_no=2, 판매자 carrot2
 insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, 2,'carrot8', sysdate);
 --[transfer] 구매자 carrot8
-insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,5000, 0, sysdate-9, 'carrot8',ORDERS_ORDERS_NO_SEQ.currval, 2);
+insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,5000, 0, sysdate-9, 'carrot8',ORDERS_ORDERS_NO_SEQ.currval, 2, 0);
 --[transfer] 판매자 carrot2
-insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,0, 5000, sysdate-9, 'carrot2',ORDERS_ORDERS_NO_SEQ.currval, 2);
+insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,0, 5000, sysdate-9, 'carrot2',ORDERS_ORDERS_NO_SEQ.currval, 2, 0);
 
 
 --***************join [orders + transfer]

@@ -20,14 +20,15 @@ public class Transfer {
 	private String user_id;
 	private Orders orders;
 	private Product product;
-	private UserInfo userinfo;
+	private UserInfo userInfo;
+	private int t_balance;
 	
 	public Transfer() {
 	
 	}
 
 	public Transfer(int transfer_no, int transfer_deposit, int transfer_withdraw, Date transfer_date, String user_id,
-			Orders orders, Product product, UserInfo userinfo) {
+			Orders orders, Product product, UserInfo userInfo, int t_balance) {
 		super();
 		this.transfer_no = transfer_no;
 		this.transfer_deposit = transfer_deposit;
@@ -36,7 +37,8 @@ public class Transfer {
 		this.user_id = user_id;
 		this.orders = orders;
 		this.product = product;
-		this.userinfo = userinfo;
+		this.userInfo = userInfo;
+		this.t_balance = t_balance;
 	}
 
 	public int getTransfer_no() {
@@ -95,18 +97,28 @@ public class Transfer {
 		this.product = product;
 	}
 
-	public UserInfo getUserinfo() {
-		return userinfo;
+	public UserInfo getUserInfo() {
+		return userInfo;
 	}
 
-	public void setUserinfo(UserInfo userinfo) {
-		this.userinfo = userinfo;
+	public void setUserInfo(UserInfo userInfo) {
+		this.userInfo = userInfo;
+	}
+
+	public int getT_balance() {
+		return t_balance;
+	}
+
+	public void setT_balance(int t_balance) {
+		this.t_balance = t_balance;
 	}
 
 	@Override
 	public String toString() {
 		return "Transfer [transfer_no=" + transfer_no + ", transfer_deposit=" + transfer_deposit
 				+ ", transfer_withdraw=" + transfer_withdraw + ", transfer_date=" + transfer_date + ", user_id="
-				+ user_id + ", orders=" + orders + ", product=" + product + ", userinfo=" + userinfo + "]";
+				+ user_id + ", orders=" + orders + ", product=" + product + ", userInfo=" + userInfo + ", t_balance="
+				+ t_balance + "]";
 	}
+
 }

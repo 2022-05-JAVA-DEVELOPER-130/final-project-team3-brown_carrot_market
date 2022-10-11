@@ -63,6 +63,7 @@
         <a href="/brown_carrot_market/payment"><i class="icofont-check-circled"></i> 충전하기</a>
         <a href=""><i class="icofont-check-circled"></i> 송금하기</a>
         <a class="active" href="/brown_carrot_market/point_list"><i class="icofont-check-circled"></i> 페이내역</a>
+        <a href=""><i class="icofont-check-circled"></i> 환급하기</a>
     </div>
     <!-- Checkout Area End -->
     
@@ -93,8 +94,8 @@
 	                                        <td>${transfer.transfer_date}</td>
 	                                        <td>${transfer.transfer_deposit}</td>
 	                                        <td>${-transfer.transfer_withdraw}</td>
-	                                        <td>${transfer.product.userInfo.user_id}</td>
-	                                        <td>${transfer.transfer_deposit+-transfer.transfer_withdraw}</td>
+	                                        <td>${transfer.userInfo.user_id}</td>
+	                                        <td>${transfer.t_balance}</td>
 	                                    </tr>
                                    </c:forEach> 
                                 </tbody>
