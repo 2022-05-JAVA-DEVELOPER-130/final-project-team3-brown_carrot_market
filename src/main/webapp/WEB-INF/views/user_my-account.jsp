@@ -308,48 +308,39 @@
 			
 			/* Edit_user_profile********************************/
 			$(document).on('click', '.edit_profile', function(e) {
-				
 				$("#chooseF").trigger('click');
-				
-				 $(e.target).addClass("save_profile");
-				 $(e.target).removeClass("edit_profile");
-				 
-				 $(e.target).val("사진 저장");
-				
 				e.preventDefault();
 			});
 			/*******************************************/
 			
 			/* Save_user_profile********************************/
 			$(document).on('click', '.save_profile', function(e) {
-				console.log("저장해보자!");
 				
 				const formData = new FormData($('#image_form')[0]);
-				 $.ajax({
-						url:'user/upload',
-						type:'POST',
-						processData:false,	//파일전송시 반드시 false
-						contentType:false,
-						data:formData,
-						success:function(jsonResult){
-							 console.log(jsonResult);
-							 
-							 $.ajax({
-									url : 'user_update_profile_json',
-									method : 'POST',
-									data: {
-										"user_id":$("input[name='user_id']").val(),
-										"user_profile": jsonResult.newFileName 
-									},
-									dataType : 'json',
-									success : function(jsonResult) {
-										 console.log(jsonResult.msg);
-										 //수정필요
-										 $("#user_my_account").get(0).click();
-								    }
-								});
-						}
-					 });  
+					 $.ajax({
+							url:'user/upload',
+							type:'POST',
+							processData:false,	//파일전송시 반드시 false
+							contentType:false,
+							data:formData,
+							success:function(jsonResult){
+								 console.log(jsonResult);
+								 $.ajax({
+										url : 'user_update_profile_json',
+										method : 'POST',
+										data: {
+											"user_id":$("input[name='user_id']").val(),
+											"user_profile": jsonResult.newFileName 
+										},
+										dataType : 'json',
+										success : function(jsonResult) {
+											 console.log(jsonResult.msg);
+											 //수정필요
+											 $("#user_my_account").get(0).click();
+									    }
+									});
+							}
+						 });
 					e.preventDefault();
 			
 			});
@@ -357,7 +348,6 @@
 			
 			/* Remove_user_profile********************************/
 			$(document).on('click', '.remove_profile', function(e) {
-				//console.log("삭제해보자!");
 			
 				console.log($("#user_profile").attr('user_profile'));
 				 $.ajax({
@@ -392,8 +382,13 @@
 			
 			//이미지가 업로드 되면
 			$(document).on('change','#chooseF',function(e){
-				//console.log($('input[type=file]')[0].files[0]);	//파일정보
+				console.log($.isEmptyObject($('input[type=file]')[0].files[0]));	//파일정보
 				loadFile($('input[type=file]')[0]);	//첫번째 파일 로드
+				
+				$(".edit_profile").addClass("save_profile");
+				 $(".edit_profile").removeClass("edit_profile");
+				 $(".save_profile").val("사진 저장");
+				
 				 $('.remove_profile').attr('type','hidden');
 				e.preventDefault();
 			});
