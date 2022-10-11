@@ -16,11 +16,8 @@
 <h3>채팅 이미지 전송</h3>
 <form action="upload" method="post"
 		enctype="multipart/form-data" id="chat_image_form">
-		사진1: <input type="file" name="files"><br> 
-	<!-- 	사진2: <input type="file" name="files"><br>  -->
-		
-		<!-- 설명:
-		<textarea name="description" cols="50" rows="3"></textarea> -->
+		사진: <input type="file" name="files"><br> 
+	
 		<br> <input type="submit" value="전송하기" id="btnchatImgSubmit"><br>
 	</form>
 	
