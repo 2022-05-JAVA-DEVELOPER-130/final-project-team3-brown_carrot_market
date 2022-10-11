@@ -25,21 +25,23 @@ public class NoticeController {
 	private NoticeService noticeService;
 	
 	//공지사항 전체조회
-	@RequestMapping("/notice_list")
-	public String notice_list(@RequestParam(required = false, defaultValue = "1") Integer pageno,Model model, HttpSession session) throws Exception{
-		String sUserId=(String)session.getAttribute("sUserId");
+	@RequestMapping("notice_list")
+	public String notice_list(@RequestParam(required = false, defaultValue = "1") Integer pageno,Model model) throws Exception{
+		
 		try {
 		PageMakerDto<Notice> noticeList = noticeService.selectAll(pageno);
-		//List<Notice> noticeList = noticeService.selectAll();
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("pageno", pageno);
+		
 		}catch(Exception e) {
 			e.printStackTrace();
 			return "error";
 		}
 		
+		
 		return "tables";
 	}
+	
 	
 	//공지사항 상세보기
 	@RequestMapping("/notice_view")
@@ -65,8 +67,8 @@ public class NoticeController {
 	
 	@LoginCheck
 	@RequestMapping("/notice_new_write")
-	public String notice_new_write(@ModelAttribute Notice notice, @RequestParam Integer pageno, HttpSession session) {
-		String sUserId = (String)session.getAttribute("sUserId");
+	public String notice_new_write(@ModelAttribute Notice notice, @RequestParam Integer pageno) throws Exception{
+		//String sUserId = (String)session.getAttribute("sUserId");
 		if (pageno == null) {
 			return "";
 		}
@@ -91,8 +93,8 @@ public class NoticeController {
 	
 	@LoginCheck
 	@RequestMapping("/notice_write_form")
-	public String qna_write_form(Integer pageno, Model model, HttpSession session) {
-		String sUserId = (String)session.getAttribute("sUserId");
+	public String qna_write_form(Integer pageno, Model model) throws Exception{
+		//String sUserId = (String)session.getAttribute("sUserId");
 		if (pageno == null) {
 			return "";
 		}
@@ -118,14 +120,14 @@ public class NoticeController {
 	 */
 	@LoginCheck
 	@RequestMapping("/notice_update")
-	public String notice_update(@RequestParam Map<String, String> params, HttpSession session) {
-		String sUserId = (String)session.getAttribute("sUserId");
+	public String notice_update(@RequestParam Map<String, String> params) throws Exception{
+		//String sUserId = (String)session.getAttribute("sUserId");
 		String pageno = params.get("pageno");
 		String notice_no = params.get("notice_no");
 		if (pageno == null || notice_no == null) {
 			return "notice_list";
 		}
-		try {
+		//try {
 			Notice notice = new Notice();
 			notice.setNotice_no(Integer.parseInt(notice_no));
 			notice.setNotice_title(params.get("notice_title"));
@@ -133,11 +135,12 @@ public class NoticeController {
 			notice.setNotice_fix(Integer.parseInt(params.get("notice_fix")));
 			noticeService.updateNotice(notice);
 			
-			
+		/*	
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error";
 		}
+		*/
 		return "redirect:notice_view?pageno=" + pageno + "&notice_no=" + notice_no;
 	}
 
@@ -146,8 +149,8 @@ public class NoticeController {
 	 */
 	@LoginCheck
 	@RequestMapping("/notice_update_form")
-	public String notice_update_form(@RequestParam Integer pageno, Integer notice_no, Model model, HttpSession session) {
-		String sUserId = (String)session.getAttribute("sUserId");
+	public String notice_update_form(@RequestParam Integer pageno, Integer notice_no, Model model) throws Exception{
+		//String sUserId = (String)session.getAttribute("sUserId");
 		if (pageno == null || notice_no == null) {
 			return "notice_list";
 		}
