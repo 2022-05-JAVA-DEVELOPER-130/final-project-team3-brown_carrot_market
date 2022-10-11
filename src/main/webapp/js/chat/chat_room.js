@@ -703,7 +703,6 @@ function connectWS(){
 			
 			
 			
-			
 			for(const item of chatContentArray){
 				
 				if(item.user_id=="admin"){
