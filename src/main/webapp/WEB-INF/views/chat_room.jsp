@@ -99,7 +99,7 @@
      </div>
 							</div>
 						</div>
-						<div class="chat-history" id="chat-history" style="overflow-y: auto; height:700px">
+						<div class="chat-history" id="chat-history">
 							<ul class="m-b-0" id="chat_history">
 <!--  
 								<li class="clearfix">
@@ -227,7 +227,11 @@ body{
 
 .chat .chat-history {
     padding: 20px;
-    border-bottom: 2px solid #fff
+    border-bottom: 2px solid #fff;
+        /*스크롤 하단 고정*/
+    overflow-y: auto;
+    display:flex;
+    flex-direction: column-reverse;
 }
 
 .chat .chat-history ul {
