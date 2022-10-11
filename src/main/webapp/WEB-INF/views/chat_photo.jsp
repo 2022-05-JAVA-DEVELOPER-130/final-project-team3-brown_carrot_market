@@ -13,10 +13,11 @@
 
 </head>
 <body>
-<h3>채팅 이미지 전송</h3>
+<img src="img/core-img/logo.png" alt="logo">
+<h3>채팅 사진 전송</h3>
 <form action="upload" method="post"
 		enctype="multipart/form-data" id="chat_image_form">
-		사진: <input type="file" name="files" id="img_choose"><br> 
+		<input type="file" name="files" id="img_choose"><br> 
 	
 		<br> <input type="submit" value="전송하기" id="btnchatImgSubmit"><br>
 	</form>

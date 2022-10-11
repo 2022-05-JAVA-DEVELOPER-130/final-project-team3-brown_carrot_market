@@ -462,7 +462,7 @@ function chat_head(id,img,room_no){
 									<div class="chat-about">
 										<h6 class="m-b-0">${id}</h6>
 										
-										<small>Last seen: 2 hours ago</small>
+										<small>상품 정보 표시!</small>
 									</div>
 								</div>
 								<div class="col-lg-6 hidden-sm text-right">
@@ -906,7 +906,7 @@ $(document).on('click',"img[id^='chat_img_sizeUp']",function(e){
   function popupImage(){
 	 var url = "chat_photo";
             var name = "이미지 전송";
-            var option = "width = 500, height = 500, top = 100, left = 200, location = no,  resizable=no"
+            var option = "width = 400, height = 250, top = 100, left = 200, location = no,  resizable=no"
             window.open(url, name, option);
 }
   
