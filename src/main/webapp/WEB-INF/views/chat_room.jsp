@@ -99,7 +99,7 @@
      </div>
 							</div>
 						</div>
-						<div class="chat-history" style="overflow-y: auto; height:700px">
+						<div class="chat-history" id="chat-history" style="overflow-y: auto; height:700px">
 							<ul class="m-b-0" id="chat_history">
 <!--  
 								<li class="clearfix">
