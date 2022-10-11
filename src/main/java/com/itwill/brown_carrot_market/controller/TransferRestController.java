@@ -24,9 +24,9 @@ public class TransferRestController {
 		int code = 1;
 		String url = "";
 		String msg = "";
-		//String sUserId=(String)request.getSession().getAttribute("sUserId");
+		String sUserId=(String)request.getSession().getAttribute("sUserId");
 		
-		List<Transfer> resultList = transferService.selectById("carrot8");
+		List<Transfer> resultList = transferService.selectById(sUserId);
 		
 		resultMap.put("code", code);
 		resultMap.put("url", url);

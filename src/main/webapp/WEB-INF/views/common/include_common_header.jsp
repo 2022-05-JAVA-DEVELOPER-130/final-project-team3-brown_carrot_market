@@ -1,68 +1,76 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
+	pageEncoding="UTF-8"%>
+
 <header class="header_area">
- <!-- Top Header Area -->
-        <div class="top-header-area">
-            <div class="container h-100">
-                <div class="row h-100 align-items-center">
-                    <div class="col-6">
-                        <div class="welcome-note">
-                            <span class="popover--text" data-toggle="popover" data-content="동네 주민들과 가깝고 따뜻한 거래를 지금 경험해보세요."><i class="icofont-info-square"></i></span>
-                            <span class="text">동네 주민들과 가깝고 따뜻한 거래를 지금 경험해보세요.</span>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="language-currency-dropdown d-flex align-items-center justify-content-end">
-                            <!-- Language Dropdown -->
-                            <div class="language-dropdown">
-                                <div class="dropdown">
-                                    <a class="btn btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Korean
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-                                        <a class="dropdown-item" href="#">English</a>
-                                    </div>
-                                </div>
-                            </div>
+	<!-- Top Header Area -->
+	<div class="top-header-area">
+		<div class="container h-100">
+			<div class="row h-100 align-items-center">
+				<div class="col-6">
+					<div class="welcome-note">
+						<span class="popover--text" data-toggle="popover"
+							data-content="동네 주민들과 가깝고 따뜻한 거래를 지금 경험해보세요."><i
+							class="icofont-info-square"></i></span> <span class="text">동네
+							주민들과 가깝고 따뜻한 거래를 지금 경험해보세요.</span>
+					</div>
+				</div>
+				<div class="col-6">
+					<div
+						class="language-currency-dropdown d-flex align-items-center justify-content-end">
+						<!-- Language Dropdown -->
+						<div class="language-dropdown">
+							<div class="dropdown">
+								<a class="btn btn-sm dropdown-toggle" href="#" role="button"
+									id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false"> Korean </a>
+								<div class="dropdown-menu dropdown-menu-right"
+									aria-labelledby="dropdownMenu1">
+									<a class="dropdown-item" href="#">English</a>
+								</div>
+							</div>
+						</div>
 
-                            <!-- Currency Dropdown -->
-                            <div class="currency-dropdown">
-                                <div class="dropdown">
-                                    <a class="btn btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        ₩ KRW
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
-                                        <a class="dropdown-item" href="#">$ USD</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+						<!-- Currency Dropdown -->
+						<div class="currency-dropdown">
+							<div class="dropdown">
+								<a class="btn btn-sm dropdown-toggle" href="#" role="button"
+									id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false"> ₩ KRW </a>
+								<div class="dropdown-menu dropdown-menu-right"
+									aria-labelledby="dropdownMenu2">
+									<a class="dropdown-item" href="#">$ USD</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-        <!-- Main Menu -->
-        <div class="bigshop-main-menu">
-            <div class="container">
-                <div class="classy-nav-container breakpoint-off">
-                    <nav class="classy-navbar" id="bigshopNav">
+	<!-- Main Menu -->
+	<div class="bigshop-main-menu">
+		<div class="container">
+			<div class="classy-nav-container breakpoint-off">
+				<nav class="classy-navbar" id="bigshopNav">
 
-                        <!-- Nav Brand -->
-                        <a href="main" class="nav-brand"><img src="img/core-img/logo.png" alt="logo"></a>
+					<!-- Nav Brand -->
+					<a href="main" class="nav-brand"><img
+						src="img/core-img/logo.png" alt="logo"></a>
 
-                        <!-- Toggler -->
-                        <div class="classy-navbar-toggler">
-                            <span class="navbarToggler"><span></span><span></span><span></span></span>
-                        </div>
+					<!-- Toggler -->
+					<div class="classy-navbar-toggler">
+						<span class="navbarToggler"><span></span><span></span><span></span></span>
+					</div>
 
-                        <!-- Menu -->
-                        <div class="classy-menu">
-                            <!-- Close -->
-                            <div class="classycloseIcon">
-                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-                            </div>
+					<!-- Menu -->
+					<div class="classy-menu">
+						<!-- Close -->
+						<div class="classycloseIcon">
+							<div class="cross-wrap">
+								<span class="top"></span><span class="bottom"></span>
+							</div>
+						</div>
 
                             <!-- Nav -->
                             <div class="classynav">
@@ -114,6 +122,7 @@
                                             <li><a href="payment">충전하기</a></li>
                                             <li><a href="#">송금하기</a></li>
                                             <li><a href="point_list">페이내역</a></li>
+                                            <li><a href="#">환급하기</a></li>		
                                         </ul>
                                     </li>
                                     <li><a href="#">자주하는질문</a></li>
@@ -122,17 +131,20 @@
                             </div>
                         </div>
 
-                        <!-- Hero Meta -->
-                        <div class="hero_meta_area ml-auto d-flex align-items-center justify-content-end">
-                            <!-- Search -->
-                            <div class="search-area">
-                                <div class="search-btn"><i class="icofont-search"></i></div>
-                                <!-- Form -->
-                                <div class="search-form">
-                                    <input type="search" class="form-control" placeholder="Search">
-                                    <input type="submit" class="d-none" value="Send">
-                                </div>
-                            </div>
+					<!-- Hero Meta -->
+					<div
+						class="hero_meta_area ml-auto d-flex align-items-center justify-content-end">
+						<!-- Search -->
+						<div class="search-area">
+							<div class="search-btn">
+								<i class="icofont-search"></i>
+							</div>
+							<!-- Form -->
+							<div class="search-form">
+								<input type="search" class="form-control" placeholder="Search">
+								<input type="submit" class="d-none" value="Send">
+							</div>
+						</div>
 
                             <!-- Wishlist -->
                             <div id="wishlist-area" class="wishlist-area" >

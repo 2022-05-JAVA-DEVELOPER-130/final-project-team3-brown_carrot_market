@@ -16,7 +16,7 @@ public class Transfer {
 	private int transfer_no;
 	private int transfer_deposit;
 	private int transfer_withdraw;
-	private Date transfer_date;
+	private String transfer_date;
 	private String user_id;
 	private Orders orders;
 	private Product product;
@@ -27,7 +27,7 @@ public class Transfer {
 	
 	}
 
-	public Transfer(int transfer_no, int transfer_deposit, int transfer_withdraw, Date transfer_date, String user_id,
+	public Transfer(int transfer_no, int transfer_deposit, int transfer_withdraw, String transfer_date, String user_id,
 			Orders orders, Product product, UserInfo userInfo, int t_balance) {
 		super();
 		this.transfer_no = transfer_no;
@@ -65,11 +65,11 @@ public class Transfer {
 		this.transfer_withdraw = transfer_withdraw;
 	}
 
-	public Date getTransfer_date() {
+	public String getTransfer_date() {
 		return transfer_date;
 	}
 
-	public void setTransfer_date(Date transfer_date) {
+	public void setTransfer_date(String transfer_date) {
 		this.transfer_date = transfer_date;
 	}
 
