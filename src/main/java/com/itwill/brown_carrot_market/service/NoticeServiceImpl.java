@@ -17,9 +17,12 @@ public class NoticeServiceImpl implements NoticeService{
 	@Qualifier("noticeDaoImpl")
 	private NoticeDao noticeDao;
 	
+	
+	
 	public NoticeServiceImpl() throws Exception{
 		System.out.println(">>> NoticeServiceImpl : 기본 생성자 호출");
 	}
+	
 /*
 	@Override
 	public List<Notice> selectAll() throws Exception {
@@ -36,7 +39,7 @@ public class NoticeServiceImpl implements NoticeService{
 		
 		//게시글 제목 수정
 		for(Notice notice:pageMakerNoticeList.getItemList()) {
-			getTitleString(notice);
+			//getTitleString(notice);
 		}
 		return pageMakerNoticeList;
 	}
