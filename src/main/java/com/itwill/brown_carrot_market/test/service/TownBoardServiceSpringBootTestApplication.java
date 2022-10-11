@@ -40,7 +40,7 @@ public class TownBoardServiceSpringBootTestApplication {
 		ConfigurableApplicationContext context=application.run(args);
 		TownBoardService townBoardService=(TownBoardService)context.getBean(TownBoardService.class);
 		
-		System.out.println("selectNonMemberTownBoardList test:"+townBoardService.selectNonMemberTownBoardList());
+		//System.out.println("selectNonMemberTownBoardList test:"+townBoardService.selectNonMemberTownBoardList());
 		
 		System.out.println("selectNonMemberCtgrTownBoardList test:"+townBoardService.selectNonMemberCtgrTownBoardList(1));
 		

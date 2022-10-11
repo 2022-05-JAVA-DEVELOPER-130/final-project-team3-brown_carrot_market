@@ -5,11 +5,17 @@ import java.util.Map;
 
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.TownBoard;
+import com.itwill.brown_carrot_market.util.PageMakerDto;
 
 public interface TownBoardService {
 	
 	//동네 게시판 비회원이 전체조회
-	List<TownBoard> selectNonMemberTownBoardList()throws Exception;
+	PageMakerDto<TownBoard> selectNonMemberTownBoardList(int currentPage)throws Exception;
+	
+	//동네 게시판 비회원이 게시글 수 계산
+	int selectNonMemberCountTownBoard();
+	
+	
 	
 	//동네 게시판 비회원이 카테고리 조건으로 전체조회
 	List<TownBoard> selectNonMemberCtgrTownBoardList(int t_ctgr_no)throws Exception;

@@ -25,7 +25,7 @@ public class NoticeController {
 	private NoticeService noticeService;
 	
 	//공지사항 전체조회
-	@RequestMapping("notice_list")
+	@RequestMapping("/notice_list")
 	public String notice_list(@RequestParam(required = false, defaultValue = "1") Integer pageno,Model model) throws Exception{
 		
 		try {

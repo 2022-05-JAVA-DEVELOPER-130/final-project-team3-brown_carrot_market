@@ -31,7 +31,7 @@
 <div class="row clearfix">
     <div class="col-lg-12">
         <div class="card chat-app">
-            <div id="plist" class="people-list">
+            <div id="plist" class="people-list" style="overflow-y: auto; height:860px">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fa fa-search"></i></span>
@@ -58,7 +58,7 @@
                 
             </div>
             
-            <div class="chat">
+            <div class="chat" id="chat">
 
 						<div class="chat-header clearfix" id="chatHead">
 							<div class="row">
@@ -99,7 +99,7 @@
      </div>
 							</div>
 						</div>
-						<div class="chat-history">
+						<div class="chat-history" id="chat-history" >
 							<ul class="m-b-0" id="chat_history">
 <!--  
 								<li class="clearfix">
@@ -227,7 +227,12 @@ body{
 
 .chat .chat-history {
     padding: 20px;
-    border-bottom: 2px solid #fff
+    border-bottom: 2px solid #fff;
+        /*스크롤 하단 고정*/
+    height:700px;
+    overflow-y: auto;
+    display:flex;
+    flex-direction: column-reverse;
 }
 
 .chat .chat-history ul {
