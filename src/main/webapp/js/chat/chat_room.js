@@ -355,12 +355,19 @@ function message_other(chat_content){
 		chat_read="읽음";
 	}
 	
+	var chat_c=chat_content.c_content;
+	if(chat_c.startsWith("@@image!#")){
+		chat_img=chat_c.substr(9);
+		chat_c=`<div><img src='img/chat_data/${chat_img}'
+											alt="" style="width:300px; height:200px;" id="chat_img_sizeUp"+${chat_img} imgSrc='img/chat_data/${chat_img}' ><input type="hidden" value=${chat_img}></div>` ;
+	}
+	
 
 	return `<li class="clearfix">
 									<div class="message-data">
 										<span class="message-data-time">${date_string(chat_content.send_time)}</span>
 									</div>
-									<div class="message my-message">${chat_content.c_content}</div>
+									<div class="message my-message">${chat_c}</div>
 									<div class="chat_read_check">${chat_read}</div>
 								</li>`
 }
@@ -375,12 +382,19 @@ function message_you(chat_content){
 	}else if(chat_content.c_read==1){
 		chat_read="읽음";
 	}
+	
+	var chat_c=chat_content.c_content;
+	if(chat_c.startsWith("@@image!#")){
+		chat_img=chat_c.substr(9);
+		chat_c=`<div><img src='img/chat_data/${chat_img}'
+											alt="" style="width:300px; height:200px;" id="chat_img_sizeUp"+${chat_img} imgSrc='img/chat_data/${chat_img}' ><input type="hidden" value=${chat_img}></div>` ;
+	}
 	return `<li class="clearfix">
 									<div class="message-data text-right">
 										<span class="message-data-time">${date_string(chat_content.send_time)}</span>  <img src='img/user_profile/${mImage}'
 											alt="">
 									</div>
-									<div class="message other-message float-right">${chat_content.c_content}</div>
+									<div class="message other-message float-right">${chat_c}</div>
 									<div class="chat_read_check">${chat_read}</div>
 								</li>`
 }
@@ -853,7 +867,19 @@ $(document).on('click','#btnChatImage',function(e){
 	popupImage();
 })
 
+$(document).on('click',"img[id^='chat_img_sizeUp']",function(e){
+	var src=$(e.target).attr('imgSrc');
+	console.log("이미지소스:"+src);
+	popupImageSizeUp(src);
+})
 
+
+  function popupImageSizeUp(src){
+	var url = "chat_image_sizeUp?src="+src;
+            var name = "이미지 확대";
+            var option = "width = 600, height = 600, top = 100, left = 200, location = no,  resizable=yes"
+            window.open(url, name, option);
+}
 
   function popupImage(){
 	 var url = "chat_photo";
