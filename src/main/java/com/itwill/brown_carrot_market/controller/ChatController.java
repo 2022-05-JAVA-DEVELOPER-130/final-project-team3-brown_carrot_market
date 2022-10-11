@@ -88,6 +88,9 @@ public class ChatController {
 						String img = userInfoService.findUser(chatRoomListView.getYou_id()).getUser_profile();
 						chatRoomListView.setYou_image(img);
 						chatRoomListView.setNot_read(chatService.chatNotRead(chatRoomListView.getC_room_no(), userId));
+						if(chatRoomListView.getC_content().startsWith("@@image!#")) {
+							chatRoomListView.setC_content("사진 전송");
+						}
 				}
 			  System.out.println("채팅 리스트:"+chatList);
 			  model.addAttribute("chatList",chatList);

@@ -20,6 +20,8 @@
 
 	
 	<script src="js/chat/chat_room.js"></script>
+	
+	<script type="text/javascript"></script>
 </head>
 <body>
 

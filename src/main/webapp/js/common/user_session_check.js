@@ -63,9 +63,14 @@ function connectServer(loginId){
 		var msg=JSON.parse(result.data);
 		console.log(msg);
 		var id=msg.toastId;
+		var message=msg.c_content;
+		
+		if(message.startsWith("@@image!#")){
+			message="사진 전송";
+		}
 		
 		if(id==loginId){
-		toastShow(msg.c_content ,msg.user_id);
+		toastShow(message ,msg.user_id);
 		}
 		
 		
