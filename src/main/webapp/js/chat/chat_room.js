@@ -59,7 +59,7 @@ function getLoginId(){
 $(document).ready(function(){
 		
 		
-		
+	
 		// 채팅방 접근 방식 확인
 	 var  path=document.getElementById("path").value;
 	 var newChatRoomNo=document.getElementById("newChatRoomNo").value;
@@ -196,6 +196,7 @@ $(document).on('click','[id^=btnCall]',function(e){
 	if(socket!=null){
 	socket.close();
 	}
+
 	num = this.id.substr(7);
 		c_room_no=num;
 	
@@ -310,8 +311,9 @@ $.ajax({
 			};
 			
 			//$('.chat-history').scrollTop($('.chat-history').prop('scrollHeight'));
+			$('#chat-history').scrollTop($('#chat-history')[0].scrollHeight);
+			
 		}
-		
 	});
 	
 	
