@@ -6,7 +6,13 @@
 	data:null //chat_contents 
 	
 };
+$(document).ready(function(){
+	$('#btnchatImgSubmit').hide();	
+})
 
+$(document).on('change','#img_choose',function(e){
+	$('#btnchatImgSubmit').show();
+})
 
 $(document).on('click','#btnchatImgSubmit',function(e){
 	
