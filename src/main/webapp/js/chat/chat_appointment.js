@@ -277,6 +277,11 @@ jsonData.data=[{
 	//디비 전송 - 성공시 함수실행...? 
 })
 
+$('#chatAppDeleteSubmit').click(function(e){
+	e.preventDefault();
+	e.stopPropagation();
+});
+
 //약속 수정 
 $('#chatAppUpdateSubmit').click(function(e){
 	//console.log((chatAppdate+" "+chatApptime).substr(0,16));
