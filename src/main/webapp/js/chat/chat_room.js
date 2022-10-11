@@ -127,7 +127,7 @@ $.ajax({
 			c_room_no=jsonResult.c_room_no;
 			console.log("채팅방의 상대방 ID:"+yourId);
 			console.log(chatContentArray);
-
+			
 			$('#chat_history').html("");
 			$('#chatHead').html("");
 			/***********숨기기**********/
@@ -245,11 +245,22 @@ $.ajax({
 			console.log("채팅방의 상대방 ID:"+yourId);
 			console.log(chatContentArray);
 			//$('#content').html('채팅 불러오기 성공');
-			$('#chat_history').html("");
-			$('#chatHead').html("");
 			/***********숨기기**********/
 			console.log("숨기기");
 			$('#plist').hide();
+			// 채팅방 확장 
+			$(function(){
+				$("#chat").css({
+				"margin-left": "0px",
+ 			   	"border-left": "none"
+					
+					
+				});
+				
+			});
+			
+			$('#chat_history').html("");
+			$('#chatHead').html("");
 			//loginId=$('#loginId').val();
 			console.log(loginId);
 			/*
@@ -772,6 +783,16 @@ $.ajax({
 			console.log(chatList);
 			$('#chatRoomList').html("");
 			$('#chat_history').html("");
+								// 채팅방 확장 
+			$(function(){
+				$("#chat").css({
+				"margin-left": "280px",
+ 			   	"border-left": "1px solid #eaeaea"
+					
+					
+				});
+				
+			});
 			$('#chat_history').append(chatRoomOut());
 			
 			for(const item of chatList){
@@ -790,6 +811,16 @@ $.ajax({
 $(document).on('click','#outRoom',function(e){
 			socket.close();
 			$('#chat_history').html("");
+							// 채팅방 확장 
+			$(function(){
+				$("#chat").css({
+				"margin-left": "280px",
+ 			   	"border-left": "1px solid #eaeaea"
+					
+					
+				});
+				
+			});
 			$('#chat_history').append(chatRoomOut());
 			$('#plist').show();
 			
