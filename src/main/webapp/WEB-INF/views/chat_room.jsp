@@ -99,7 +99,7 @@
      </div>
 							</div>
 						</div>
-						<div class="chat-history" id="chat-history">
+						<div class="chat-history" id="chat-history" >
 							<ul class="m-b-0" id="chat_history">
 <!--  
 								<li class="clearfix">
@@ -229,6 +229,7 @@ body{
     padding: 20px;
     border-bottom: 2px solid #fff;
         /*스크롤 하단 고정*/
+    height:700px;
     overflow-y: auto;
     display:flex;
     flex-direction: column-reverse;
