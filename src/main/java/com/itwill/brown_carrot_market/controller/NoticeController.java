@@ -26,11 +26,10 @@ public class NoticeController {
 	
 	//공지사항 전체조회
 	@RequestMapping("/notice_list")
-	public String notice_list(@RequestParam(required = false, defaultValue = "1") Integer pageno,Model model, HttpSession session) throws Exception{
-		String sUserId=(String)session.getAttribute("sUserId");
+	public String notice_list(@RequestParam(required = false, defaultValue = "1") Integer pageno,Model model) throws Exception{
+		//String sUserId=(String)session.getAttribute("sUserId");
 		try {
 		PageMakerDto<Notice> noticeList = noticeService.selectAll(pageno);
-		//List<Notice> noticeList = noticeService.selectAll();
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("pageno", pageno);
 		}catch(Exception e) {
