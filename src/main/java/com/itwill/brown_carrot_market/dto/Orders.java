@@ -15,18 +15,21 @@ public class Orders {
 	private UserInfo userinfo;
 	private Transfer transfer;
 	private Date orders_date;
+	private ProductImage productImage;
 	
 	public Orders() {
 
 	}
 
-	public Orders(int orders_no, Product product, UserInfo userinfo, Transfer transfer, Date orders_date) {
+	public Orders(int orders_no, Product product, UserInfo userinfo, Transfer transfer, Date orders_date,
+			ProductImage productImage) {
 		super();
 		this.orders_no = orders_no;
 		this.product = product;
 		this.userinfo = userinfo;
 		this.transfer = transfer;
 		this.orders_date = orders_date;
+		this.productImage = productImage;
 	}
 
 	public int getOrders_no() {
@@ -69,10 +72,19 @@ public class Orders {
 		this.orders_date = orders_date;
 	}
 
+	public ProductImage getProductImage() {
+		return productImage;
+	}
+
+	public void setProductImage(ProductImage productImage) {
+		this.productImage = productImage;
+	}
+
 	@Override
 	public String toString() {
 		return "Orders [orders_no=" + orders_no + ", product=" + product + ", userinfo=" + userinfo + ", transfer="
-				+ transfer + ", orders_date=" + orders_date + "]";
+				+ transfer + ", orders_date=" + orders_date + ", productImage=" + productImage + "]";
 	}
 
+	
 }
