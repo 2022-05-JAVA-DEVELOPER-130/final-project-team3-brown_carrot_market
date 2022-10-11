@@ -83,7 +83,8 @@
 	      IMP.request_pay({ // param
 	          pg: "kakaopay",
 	          pay_method: "card",
-	          merchant_uid: "djkndsfdsfuuvy",
+	          merchant_uid: "djkndsfdsfuussvy",
+	          m_redirect_url : "",
 	          name: "노르웨이 회전 의자",
 	          amount: 100,
 	          buyer_email: "gildong@gmail.com",
@@ -101,13 +102,16 @@
 	                headers: { "Content-Type": "application/json" },
 	                data: {
 	                    imp_uid: rsp.imp_uid,
-	                    merchant_uid: rsp.merchant_uid
+	                    merchant_uid: rsp.merchant_uid,
+	                    m_redirect_url : rsp.m_redirect_url
 	                }
 	            }).done(function (data) {
 	              // 가맹점 서버 결제 API 성공시 로직
+	             
 	            })
 	          } else {
 	            alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+				
 	          }
 	        });
 	      };

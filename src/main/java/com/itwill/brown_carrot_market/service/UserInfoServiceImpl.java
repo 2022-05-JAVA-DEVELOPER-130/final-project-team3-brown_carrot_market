@@ -47,7 +47,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 			// 2.회원가입
 			int insertRowCount = userDao.createUser(user);
 
-			if (address.getAddress_lat() != 0.0) {
+			if (address != null) {
 				address.setUser_id(user.getUser_id());
 
 				int insertAddress = userDao.createAddress(address);
@@ -55,7 +55,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 				System.out.println(insertAddress);
 			}
 			
-			if (userDao.existedInvitation(invitation)) {
+			if (invitation !=null && userDao.existedInvitation(invitation)) {
 				System.out.println("초대한   사람: "+userDao.findInvitation(invitation));
 				System.out.println("초대받은 사람: "+invitation.getUser_id());
 				/***************transaction 설정 필요******************/
