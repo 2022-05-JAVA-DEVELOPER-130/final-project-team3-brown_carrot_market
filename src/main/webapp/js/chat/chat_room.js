@@ -363,12 +363,12 @@ function message_other(chat_content){
 	}
 	
 
-	return `<li class="clearfix">
+	return `<li class="clearfix" >
 									<div class="message-data">
 										<span class="message-data-time">${date_string(chat_content.send_time)}</span>
 									</div>
 									<div class="message my-message">${chat_c}</div>
-									<div class="chat_read_check">${chat_read}</div>
+									<div class="chat_read_check" id=${chat_content.c_content_no}>${chat_read}</div>
 								</li>`
 }
 
@@ -389,13 +389,13 @@ function message_you(chat_content){
 		chat_c=`<div><img src='img/chat_data/${chat_img}'
 											alt="" style="width:300px; height:200px;" id="chat_img_sizeUp"+${chat_img} imgSrc='img/chat_data/${chat_img}' ><input type="hidden" value=${chat_img}></div>` ;
 	}
-	return `<li class="clearfix">
+	return `<li class="clearfix" >
 									<div class="message-data text-right">
 										<span class="message-data-time">${date_string(chat_content.send_time)}</span>  <img src='img/user_profile/${mImage}'
 											alt="">
 									</div>
 									<div class="message other-message float-right">${chat_c}</div>
-									<div class="chat_read_check">${chat_read}</div>
+									<div class="chat_read_check" id=${chat_content.c_content_no}>${chat_read}</div>
 								</li>`
 }
 /***************** 공지 *************** */
@@ -553,6 +553,7 @@ function message_sendDB(jsonData){
     				console.log(" 내가 보낸 것 [requestPostBodyJson] : [response] : " + JSON.stringify(response));    				
     				console.log("");
     				jsonData.data[0].send_time=response.send_time;
+    				jsonData.data[0].c_content_no=response.c_content_no
     				console.log(JSON.stringify(jsonData));    	
     				
     				socket.send(JSON.stringify(jsonData));		
@@ -672,7 +673,7 @@ function connectWS(){
 		
 		} //입장한 경우
 		else if(onmsg.code=="2"){
-			console.log("입장한 경우");
+			console.log(">>>>>>>>입장한 경우");
 			var chat_detail={
 			"c_room_no":c_room_no,
 			"loginId":loginId
@@ -695,27 +696,23 @@ function connectWS(){
 			yourId=jsonResult.yourId;
 			yourImg = jsonResult.yourImg;
 			console.log("채팅방의 상대방 ID:"+yourId);
-			console.log(chatContentArray[0]);
-			$('#chat_history').html("");
+			//$('#chat_history').html("");
 			//$('#chatHead').html("");
-			console.log(loginId);
 			//$('#chatHead').append(chat_head(yourId,yourImg));
 			
 			
 			
 			for(const item of chatContentArray){
+				var chat_read="";
+				if(item.c_read==0){
+		         chat_read="전송됨";
+	            }else if(item.c_read==1){
+		         chat_read="읽음";
+	            }
+	            console.log(item.c_content_no);
+				$(`#${item.c_content_no}`).text(chat_read);
 				
-				if(item.user_id=="admin"){
-					$('#chat_history').append(message_admin(item));
-					
-				}
-				else if(item.user_id!=loginId){
-					console.log("내가 보낸 메세지");
-			$('#chat_history').append(message_other(item));
-				}else if(item.user_id==loginId){
-					console.log("상대가 보낸 메세지");
-			$('#chat_history').append(message_you(item));
-				}
+		
 			};
 		}
 		});
@@ -792,6 +789,7 @@ $.ajax({
 	});
 	/************************************ 채팅방 닫기 ******************************/
 $(document).on('click','#outRoom',function(e){
+			socket.close();
 			$('#chat_history').html("");
 			$('#chat_history').append(chatRoomOut());
 			$('#plist').show();
@@ -811,6 +809,10 @@ function chatRoomOut(){
 								</li>`
 }
 function chatRoomListNew(list){
+	var list_content=list.c_content;
+	if(list.c_content.startsWith("@@image!#")){
+		list_content="사진 전송";
+	}
 	return `        <li class="clearfix">
                         <img src='img/user_profile/${list.you_image}' alt="avatar">
                        
@@ -818,7 +820,7 @@ function chatRoomListNew(list){
 							<input name="chatRoomNo" type="hidden" value=${list.c_room_no}/>
 					<!--	<button type="button" class="btn btn-default" id="btnCall${list.c_room_no}" value=${list.c_room_no}>${list.c_room_no}</button>-->
                             <div class="name" id="btnCall${list.c_room_no}" value=${list.c_room_no}>${list.you_id}</div> 
-                            <div class="content"> <i class="fa fa-circle offline"></i>${list.c_content}</div>                                            
+                            <div class="content"> <i class="fa fa-circle offline"></i>${list_content}</div>                                            
                         </div>
                  </li>`
 }

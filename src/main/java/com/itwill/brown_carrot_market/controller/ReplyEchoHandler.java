@@ -371,14 +371,15 @@ public class ReplyEchoHandler {
 
 		rowCount = chatService.insertChat(newChat);
 		String sendTime=chatService.chatSellectOne(newChat.getC_content_no()).getSend_time();
-
+		int c_content_no=newChat.getC_content_no();
 		// insert 후 클라이언트에게 jsonObject 만들어서 보내기
 
 		JSONObject jsonObject = null;
 		try {
 			jsonObject = new JSONObject();
-			jsonObject.put("rowCount", rowCount);
+			//jsonObject.put("rowCount", rowCount);
 			jsonObject.put("send_time", sendTime);
+			jsonObject.put("c_content_no",c_content_no);
 			
 			
 		} catch (Exception e) {
