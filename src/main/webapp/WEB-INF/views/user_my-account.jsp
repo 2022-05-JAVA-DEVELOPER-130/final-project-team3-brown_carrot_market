@@ -53,6 +53,20 @@
 			$(document).on('click',	'#btn_user_modify_action',function(e) {
 				console.log("click!! >> "+e.target);
 				//if(validator.form()){
+				if($("#user_pw_new").val() != ""){
+					if ($("#user_pw_new2").val() == "") {
+						alert("비밀번호확인을 입력하십시요.");
+						$("#user_pw_new").focus();
+						return false;
+					}
+					if ($("#user_pw_new").val() != $("#user_pw_new2").val()) {
+						alert("비밀번호와 비밀번호확인은 일치하여야합니다.");
+						$("#user_pw_new").focus();
+						$("#user_pw_new").select();
+						return false;
+					}
+					$('#user_pw').val($('#user_pw_new').val());
+				}
 			    var param = $('#user_modify_form').serialize();
 			    console.log(param);
 			    $.ajax({
@@ -64,7 +78,7 @@
 					    if (jsonResult.code == 1) {
 						 	$('#my-account-content').html(UserHtmlContents.user_view_content(jsonResult.data[0]));
 					    } else if (jsonResult.code == 2) {
-							
+							location.href='main';
 					    }
 					    console.log(jsonResult);
 					}
@@ -298,10 +312,6 @@
 							}
 						}
 					});
-				/*  console.log($('.img-circle').src());
-				 if($('.img-circle').src=='img/user_profile/newCarrot.jpg'){
-					 $('.remove_profile').attr('type','hidden');
-				 } */
 				e.preventDefault();
 			});
 			/*******************************************/

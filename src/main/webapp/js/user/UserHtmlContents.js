@@ -14,19 +14,19 @@ UserHtmlContents.user_view_content=function(sUser) {
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="currentPass">현재 비밀번호 (Leave blank to leave unchanged)</label>
-                                        <input type="password" class="form-control" name="currentPass" value="${sUser.user_pw}" readonly>
+                                        <input type="password" class="form-control" id="user_pw" name="user_pw" value="${sUser.user_pw}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="newPass">신규 비밀번호 (Leave blank to leave unchanged)</label>
-                                        <input type="password" class="form-control" name="user_pw">
+                                        <input type="password" class="form-control" id="user_pw_new" name="user_pw_new">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="confirmPass">신규 비밀번호 확인</label>
-                                        <input type="password" class="form-control" name="confirmPass">
+                                        <input type="password" class="form-control" id="user_pw_new2" name="user_pw_new_confirm">
                                     </div>
                                 </div>
                                 <div class="col-12">
