@@ -91,7 +91,8 @@ CREATE TABLE transfer(
 		transfer_date                 		DATE		 NULL ,
 		user_id                       		VARCHAR2(30)		 NULL ,
 		orders_no                     		NUMBER(10)		 NULL ,
-		p_no                          		NUMBER(20)		 NULL 
+		p_no                          		NUMBER(20)		 NULL ,
+		t_balance							NUMBER(20)		NULL
 );
 
 DROP SEQUENCE transfer_transfer_no_SEQ;

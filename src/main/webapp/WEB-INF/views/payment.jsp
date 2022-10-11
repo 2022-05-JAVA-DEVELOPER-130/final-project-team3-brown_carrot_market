@@ -67,6 +67,7 @@
         <a class="active" href="/brown_carrot_market/payment"><i class="icofont-check-circled"></i> 충전하기</a>
         <a href=""><i class="icofont-check-circled"></i> 송금하기</a>
         <a href="/brown_carrot_market/point_list"><i class="icofont-check-circled"></i> 페이내역</a>
+        <a href=""><i class="icofont-check-circled"></i> 환급하기</a>
     </div>
 
     <div class="col-12">
