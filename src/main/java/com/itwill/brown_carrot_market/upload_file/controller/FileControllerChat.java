@@ -49,6 +49,7 @@ public class FileControllerChat {
 					fileNames.add(file.getOriginalFilename());
 				}
 			}
+			
 			message = "Uploaded the files successfully (CHAT): " + fileNames+" newFileName"+newFileName;
 			
 			result.put("message", message);
