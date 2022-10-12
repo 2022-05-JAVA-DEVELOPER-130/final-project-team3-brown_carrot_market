@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.brown_carrot_market.dao.ReviewDao;
 import com.itwill.brown_carrot_market.dao.UserInfoDao;
@@ -26,6 +27,7 @@ public class ReviewServiceImpl implements ReviewService{
 		System.out.println("#### ReviewServiceImpl() : 디폴트생성자 호출");
 	}
 
+	@Transactional
 	@Override
 	public int createReview(Review review) throws Exception {
 		int result = 0;
@@ -55,10 +57,16 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
+	public Review findReviewByRivewNo(int review_no) throws Exception {
+		
+		return null;
+	}
+	
+	@Override
 	public int isExistedReviewByOrdersNoId(Review review) throws Exception {
 		return reviewDao.isExistedReviewByOrdersNoId(review);
 	}
-	
+
 	
 	
 }
