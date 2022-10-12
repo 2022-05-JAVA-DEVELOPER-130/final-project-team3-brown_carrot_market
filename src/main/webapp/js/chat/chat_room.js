@@ -313,7 +313,9 @@ $.ajax({
 			//$('.chat-history').scrollTop($('.chat-history').prop('scrollHeight'));
 	
 			//$('#chat-history').scrollTop($('#chat-history')[0].scrollHeight);
-			if($('#chat-history').get(0).scrollHeight>$('#chat-history').height()){
+			console.log($('#chat-history').get(0).scrollHeight);
+			console.log($('#chat-history').height());
+			if($('#chat-history').get(0).scrollHeight>698){
     			// 세로 스크롤바가 있을 경우 처리
 			$('#chat-history').css("display","flex");
 			console.log("스크롤바 있음");
@@ -803,6 +805,7 @@ $.ajax({
 			console.log(chatList);
 			$('#chatRoomList').html("");
 			$('#chat_history').html("");
+			$('#chatHead').html("");
 								// 채팅방 확장 
 			$(function(){
 				$("#chat").css({
@@ -813,7 +816,8 @@ $.ajax({
 				});
 				
 			});
-			$('#chat_history').append(chatRoomOut());
+			$('#chatHead').append(chatRoomHeadGongji());
+			$('#chat_history').append(chatRoomGongji());
 			
 			for(const item of chatList){
 				
@@ -831,6 +835,7 @@ $.ajax({
 $(document).on('click','#outRoom',function(e){
 			socket.close();
 			$('#chat_history').html("");
+			$('#chatHead').html("");
 							// 채팅방 확장 
 			$(function(){
 				$("#chat").css({
@@ -841,21 +846,70 @@ $(document).on('click','#outRoom',function(e){
 				});
 				
 			});
-			$('#chat_history').append(chatRoomOut());
+			$('#chatHead').append(chatRoomHeadGongji());
+			$('#chat_history').append(chatRoomGongji());
 			$('#plist').show();
 			
 
 	
 	});
 	/********************************************************************** */
-function chatRoomOut(){
+function chatRoomHeadGongji(){
+	return `					<div class="row">
+								<div class="col-lg-6">
+									<a href="javascript:void(0);" data-toggle="modal"
+										data-target="#view_info"> <img
+										src="img/user_profile/wow.jpg"
+										alt="avatar">
+									</a>
+									<div class="chat-about">
+	
+										<h6 class="m-b-0"><b>대장 토끼</b></h6>
+										
+										<small>자주 묻는 질문</small>
+									</div>
+								</div>
+								<div class="col-lg-6 hidden-sm text-right">
+
+     </div>
+							</div>`
+}
+function chatRoomGongji(){
 	return `<li class="clearfix">
 									<div class="message-data"><img
 											src="img/chat-img/logo_carrot.png"
 											alt>
-										<span class="message-data-adminGongji">당근 좋아하는 토끼</span>
+										<span class="message-data-adminGongji">흙토끼</span>
 									</div>
-									<div class="message my-message">채팅방을 클릭해주세요</div>
+									<div class="message my-message">
+									<h6><b>기본매너</b></h6>
+									<p>기본적으로 지켜야하는 매너에는 무엇이 있을까요?</p>
+									<p>· 서로 존중해요. 우리 존댓말로 대화해요.<br>
+									   · 모두의 시간은 소중합니다. 시간 약속을 꼭 지켜주세요.<br>
+									   · 절대로 중간에 연락 끊기는 일이 없도록 해요.<br>
+									   · 따듯한 감사 인사로 마무리를 지어요.<br>
+									   · 늦은 시간 채팅은 부담스러울 수 있어요.<br>
+									</p>
+</div>
+								</li>
+								
+								<li class="clearfix">
+									<div class="message-data text-right"><img
+											src="img/chat-img/logo_carrot.png"
+											alt>
+										<span class="message-data-adminGongji">금토끼</span>
+									</div>
+									<div class="message other-message float-right">
+									<h6><b>이런 행동은 할 수 없어요.</b></h6>
+									<p><br>
+									   · 판매 금지 물품 거래.<br>
+									   · 중고거래 사기 등 이웃에게 손해를 입히는 행위.<br>
+									   · 허위 정보게시 등 이웃을 속이거나 기만하는 행위.<br>
+									   · 불쾌감, 성적 수치심 등을 주는 행위.<br>
+									   · 이웃을 배제하거나 소외시키는 행위.<br>
+
+									</p>
+</div>
 								</li>`
 }
 function chatRoomListNew(list){
