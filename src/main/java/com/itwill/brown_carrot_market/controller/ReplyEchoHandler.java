@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itwill.brown_carrot_market.dto.ChatContents;
 import com.itwill.brown_carrot_market.dto.ChatRoom;
 import com.itwill.brown_carrot_market.dto.ChatRoomListView;
+import com.itwill.brown_carrot_market.dto.Product;
 import com.itwill.brown_carrot_market.dto.ProductImage;
 import com.itwill.brown_carrot_market.dto.Promise;
 import com.itwill.brown_carrot_market.service.ChatService;
@@ -85,6 +86,7 @@ public class ReplyEchoHandler {
 //		String room_no = c_room_no.substring(7);
 		String room_no = chatList.get("c_room_no");
 		String mId=chatList.get("loginId");
+		String p_img;
 		
 		ChatRoom chatRoom=chatService.chatRoomSelect(Integer.parseInt(room_no));
 		
@@ -96,8 +98,14 @@ public class ReplyEchoHandler {
 			yourImg = userService.findUser(yourId).getUser_profile();
 		}
 		double yourFreshness = userService.findUser(yourId).getUser_freshness();
-		
-		
+		Product product = productService.selectByOne(chatRoom.getP_no());
+		ArrayList<ProductImage> productImage = (ArrayList<ProductImage>)productService.selectProductImgList(chatRoom.getP_no());
+		if(productImage.size()==0) {
+			 p_img = "pan.jpg";
+		}else {
+			 p_img = productImage.get(0).getPi_name();
+			
+		}
 		List<ChatContents> resultList = new ArrayList<ChatContents>();
 		try {
 			chatService.chatReadUpdate(Integer.parseInt(room_no),yourId); //상대의 기존 채팅 모두 읽음 처리
@@ -119,6 +127,8 @@ public class ReplyEchoHandler {
 		resultMap.put("yourFreshness", yourFreshness);		
 		resultMap.put("c_room_no", room_no);
 		resultMap.put("yourImg", yourImg);
+		resultMap.put("product", product);	
+		resultMap.put("p_img", p_img);
 		resultMap.put("data", resultList);
 
 		return resultMap;

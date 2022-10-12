@@ -125,6 +125,9 @@ $.ajax({
 			yourId=jsonResult.yourId;
 			yourImg = jsonResult.yourImg;
 			yourFreshness = jsonResult.yourFreshness;
+			product = jsonResult.product;
+			p_img = jsonResult.p_img;
+			console.log(product.p_sell);
 			c_room_no=jsonResult.c_room_no;
 			console.log("채팅방의 상대방 ID:"+yourId);
 			console.log(chatContentArray);
@@ -136,7 +139,7 @@ $.ajax({
 
 			console.log(loginId);
 
-			$('#chatHead').append(chat_head(yourId,yourImg,c_room_no,yourFreshness));
+			$('#chatHead').append(chat_head(yourId,yourImg,c_room_no,yourFreshness,product,p_img));
 			
 			
 			
@@ -256,6 +259,9 @@ $.ajax({
 			yourId=jsonResult.yourId;
 			yourImg = jsonResult.yourImg;
 			yourFreshness = jsonResult.yourFreshness;
+			product = jsonResult.product;
+			p_img = jsonResult.p_img;
+			console.log(product.p_sell);
 			c_room_no=jsonResult.c_room_no;
 			console.log("채팅방의 상대방 ID:"+yourId);
 			console.log(chatContentArray);
@@ -291,7 +297,7 @@ $.ajax({
 			
 				}
 			};*/
-			$('#chatHead').append(chat_head(yourId,yourImg,c_room_no,yourFreshness));
+			$('#chatHead').append(chat_head(yourId,yourImg,c_room_no,yourFreshness,product,p_img));
 			
 			
 			
@@ -491,9 +497,9 @@ function message_admin_promise(chat_content){
 }
 
 
-function chat_head(id,img,room_no,fresh){
+function chat_head(id,img,room_no,fresh,product,p_img){
 	return 	`<div class="row">
-								<div class="col-lg-6">
+								<div class="col-lg-4">
 									<a href="javascript:void(0);" data-toggle="modal"
 										data-target="#view_info"> <img
 										src="img/user_profile/${img}"
@@ -505,7 +511,13 @@ function chat_head(id,img,room_no,fresh){
 										<small>${fresh}</small>
 									</div>
 								</div>
-								<div class="col-lg-6 hidden-sm text-right">
+								<div class="col-lg-4 ">
+								<img src="img/product_img/${p_img}" style="float:left; width:50px; height:50px; border-radius: 0%">
+								<h6 class="m-b-0" style="float:left; margin-left:5px;"><b>${product.p_title}</b></h6>
+								<small style="float:left; margin-left:5px;">${product.p_price}</small>
+    							 
+    							 </div>	
+								<div class="col-lg-4 hidden-sm text-right">
 									
 									<a  href="javascript:void(0);" class="btn btn-outline-info" ><i
 										class="fa fa-handshake-o" id="btnChatAppointment"></i></a> 

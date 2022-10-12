@@ -63,7 +63,7 @@
 
 						<div class="chat-header clearfix" id="chatHead">
 							<div class="row">
-								<div class="col-lg-8">
+								<div class="col-lg-4">
 									<a href="javascript:void(0);" data-toggle="modal"
 										data-target="#view_info"> <img
 										src="img/user_profile/carrot3.png"
@@ -74,13 +74,21 @@
 										<input name="path" id="path" type="hidden" value=${path}>
 										<input name="newChatRoomNo" id="newChatRoomNo" type="hidden" value=${chat_room_no}>
 										<h6 class="m-b-0"><b>대장 토끼</b></h6>
-										
 										<small>자주 묻는 질문</small>
+										
+										
 									</div>
 								</div>
+								<div class="col-lg-4 ">
+								<img src="img/user_profile/carrot3.png" style="float:left; width:45px; height:45px; border-radius: 0%">
+								<h6 class="m-b-0" style="float:left; margin-left:5px;"><b>대장 토끼</b></h6>
+								<small style="float:left; margin-left:5px;">자주 묻는 질문</small>
+    							 
+    							 </div>	
+								
 								<div class="col-lg-4 hidden-sm text-right">
 
-     </div>
+    							 </div>
 							</div>
 						</div>
 						<div class="chat-history" id="chat-history" >
