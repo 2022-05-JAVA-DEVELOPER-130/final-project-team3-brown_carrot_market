@@ -74,12 +74,9 @@
                         <div class="widget-area catagory_section mb-30">
                             <h6>Catagory</h6>
                             <ul>
-                                <li><a href="#">동네소식 <span class="text-muted">(21)</span></a></li>
-                                <li><a href="#">같이해요 <span class="text-muted">(5)</span></a></li>
-                                <li><a href="#">동네질문 <span class="text-muted">(17)</span></a></li>
-                                <li><a href="#">동네맛집 <span class="text-muted">(11)</span></a></li>
-                                <li><a href="#">분실/실종센터 <span class="text-muted">(16)</span></a></li>
-                                <li><a href="#">동네사진전 <span class="text-muted">(9)</span></a></li>
+                            <c:forEach var="townCategory" items="${townCategoryList.itemList}">
+                                <li><a href="#">${townCategory.t_ctgr_name} <span class="text-muted">(21)</span></a></li>
+                            </c:forEach>    
                             </ul>
                         </div>
                     
