@@ -33,7 +33,7 @@ public class TownBoardServiceImpl implements TownBoardService{
 		
 		return pageMakerTownBoardList;
 	}
-	
+	//비회원이 동네 게시판 게시글 수 계산
 	@Override
 	public int selectNonMemberCountTownBoard() {
 		return townBoardDao.selectNonMemberCountTownBoard();
@@ -44,11 +44,24 @@ public class TownBoardServiceImpl implements TownBoardService{
 		return townBoardDao.selectNonMemberCtgrTownBoardList(t_ctgr_no);
 	}
 
+	//회원이 동네 게시판 전체조회 페이징
 	@Override
-	public List<TownBoard> selectTownBoardListCoordinate(Address address) throws Exception {
-		return townBoardDao.selectTownBoardListCoordinate(address);
+	public PageMakerDto<TownBoard> selectTownBoardListCoordinate(Address address,int currentPage) throws Exception {
+		int totTownBoardMemberCount = townBoardDao.selectMemberCountTownBoard(address);
+		PageMaker pageMaker = new PageMaker(totTownBoardMemberCount, currentPage, 5, 5);
+		List<TownBoard> townBoardList = townBoardDao.selectTownBoardListCoordinate(address, pageMaker.getPageBegin(), pageMaker.getPageEnd());
+		PageMakerDto<TownBoard> pageMakerTownBoardList = new PageMakerDto<TownBoard>(townBoardList, pageMaker, totTownBoardMemberCount);
+		return pageMakerTownBoardList;
+	}
+	//회원이 동네 게시판 게시글 수 계산
+	@Override
+	public int selectMemberCountTownBoard(Address address) {
+		return townBoardDao.selectMemberCountTownBoard(address);
 	}
 
+	
+	
+	
 	@Override
 	public List<TownBoard> selectTownBoardCtgrListCoordinate(int t_ctgr_no, Address address) throws Exception {
 		return townBoardDao.selectTownBoardCtgrListCoordinate(t_ctgr_no, address);
@@ -96,6 +109,8 @@ public class TownBoardServiceImpl implements TownBoardService{
 	public int insertTownBoard(Map map) {
 		return townBoardDao.insertTownBoard(map);
 	}
+
+	
 
 	
 

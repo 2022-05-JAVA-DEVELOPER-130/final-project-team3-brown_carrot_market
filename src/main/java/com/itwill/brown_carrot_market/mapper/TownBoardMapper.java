@@ -26,7 +26,12 @@ public int selectNonMemberCountTownBoard();
 public List<TownBoard> selectNonMemberCtgrTownBoardList(int t_ctgr_no);
 
 //동네 게시판 회원이 좌표값 조건으로 전체조회
-public List<TownBoard> selectTownBoardListCoordinate(Address address);
+public List<TownBoard> selectTownBoardListCoordinate(Address address,int pageStart, int pageEnd);
+//동네 게시판 회원이 게시글 수 계산
+public int selectMemberCountTownBoard(Address address);
+
+
+
 
 //동네 게시판 회원이 좌표값과 카테고리 조건으로 전체조회
 public List<TownBoard> selectTownBoardCtgrListCoordinate(int t_ctgr_no, Address address);

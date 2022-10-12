@@ -40,8 +40,7 @@
     </div>
 
     <!-- Header Area -->
-			<jsp:include page="common/include_common_header.jsp"/>
-
+		<jsp:include page="common/include_common_header.jsp"/>
     <!-- Header Area End -->
     
     <!-- Breadcumb Area -->
@@ -49,10 +48,11 @@
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
-                    <h5>구매내역</h5>
+                    <h5>후기작성</h5>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active">구매내역</li>
+                        <li class="breadcrumb-item">구매내역</li>
+                        <li class="breadcrumb-item active">후기작성</li>
                     </ol>
                 </div>
             </div>
@@ -63,96 +63,48 @@
 	    <div class="cart_area section_padding_100_70 clearfix">
 	        <div class="container">
 	            <div class="row justify-content-between">
-	            <!-- Start********************* -->
-	                <div role="tabpanel" class="tab-pane fade" id="reviews">
-                                <div class="reviews_area">
-                                    <ul>
-                                        <li>
-                                            <div class="single_user_review mb-15">
-                                                <div class="review-rating">
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <span>for Quality</span>
-                                                </div>
-                                                <div class="review-details">
-                                                    <p>by <a href="#">Designing World</a> on <span>12 Sep 2019</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="single_user_review mb-15">
-                                                <div class="review-rating">
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <span>for Design</span>
-                                                </div>
-                                                <div class="review-details">
-                                                    <p>by <a href="#">Designing World</a> on <span>12 Sep 2019</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="single_user_review">
-                                                <div class="review-rating">
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <span>for Value</span>
-                                                </div>
-                                                <div class="review-details">
-                                                    <p>by <a href="#">Designing World</a> on <span>12 Sep 2019</span></p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
+                	<div class="submit_a_review_area col-12" style="border: 1px solid #d6e6fb; padding:30px;">
+                            <h4>Submit A Review</h4>
+                            <!-- [Start]review_write_form -->
+                            <form action="#" method="post">
+                                <div class="form-group">
+                                    <span>Your Ratings</span>
+                                    <div class="stars">
+                                        <input type="radio" name="star" class="star-1" id="star-1">
+                                        <label class="star-1" for="star-1">1</label>
+                                        <input type="radio" name="star" class="star-2" id="star-2">
+                                        <label class="star-2" for="star-2">2</label>
+                                        <input type="radio" name="star" class="star-3" id="star-3">
+                                        <label class="star-3" for="star-3">3</label>
+                                        <input type="radio" name="star" class="star-4" id="star-4">
+                                        <label class="star-4" for="star-4">4</label>
+                                        <input type="radio" name="star" class="star-5" id="star-5">
+                                        <label class="star-5" for="star-5">5</label>
+                                        <span></span>
+                                    </div>
                                 </div>
-
-                                <div class="submit_a_review_area mt-50">
-                                    <h4>Submit A Review</h4>
-                                    <form action="#" method="post">
-                                        <div class="form-group">
-                                            <span>Your Ratings</span>
-                                            <div class="stars">
-                                                <input type="radio" name="star" class="star-1" id="star-1">
-                                                <label class="star-1" for="star-1">1</label>
-                                                <input type="radio" name="star" class="star-2" id="star-2">
-                                                <label class="star-2" for="star-2">2</label>
-                                                <input type="radio" name="star" class="star-3" id="star-3">
-                                                <label class="star-3" for="star-3">3</label>
-                                                <input type="radio" name="star" class="star-4" id="star-4">
-                                                <label class="star-4" for="star-4">4</label>
-                                                <input type="radio" name="star" class="star-5" id="star-5">
-                                                <label class="star-5" for="star-5">5</label>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="name">Nickname</label>
-                                            <input type="email" class="form-control" id="name" placeholder="Nazrul">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="options">Reason for your rating</label>
-                                            <select class="form-control small right py-0 w-100" id="options">
-                                                <option>Quality</option>
-                                                <option>Value</option>
-                                                <option>Design</option>
-                                                <option>Price</option>
-                                                <option>Others</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="comments">Comments</label>
-                                            <textarea class="form-control" id="comments" rows="5" data-max-length="150"></textarea>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Submit Review</button>
-                                    </form>
+                                <div class="form-group">
+                                    <label for="name">Nickname</label>
+                                    <input type="email" class="form-control" id="name" placeholder="Nazrul">
                                 </div>
-                            </div>
-                  <!-- End********************* -->
+                                <div class="form-group">
+                                    <label for="options">Reason for your rating</label>
+                                    <select class="form-control small right py-0 w-100" id="options">
+                                        <option>Quality</option>
+                                        <option>Value</option>
+                                        <option>Design</option>
+                                        <option>Price</option>
+                                        <option>Others</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="comments">Comments</label>
+                                    <textarea class="form-control" id="comments" rows="5" data-max-length="150"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit Review</button>
+                            </form>
+                            <!-- [END]review_write_form -->
+                	</div>
 	            </div>
 	        </div>
 	    </div>
