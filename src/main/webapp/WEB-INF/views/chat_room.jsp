@@ -65,52 +65,66 @@
 								<div class="col-lg-6">
 									<a href="javascript:void(0);" data-toggle="modal"
 										data-target="#view_info"> <img
-										src="https://bootdey.com/img/Content/avatar/avatar2.png"
+										src="img/user_profile/wow.jpg"
 										alt="avatar">
 									</a>
 									<div class="chat-about">
 										<input name="myId" id="myId" type="hidden" value=${loginId}>
 										<input name="path" id="path" type="hidden" value=${path}>
 										<input name="newChatRoomNo" id="newChatRoomNo" type="hidden" value=${chat_room_no}>
-										<h6 class="m-b-0">${loginId}</h6>
+										<h6 class="m-b-0"><b>대장 토끼</b></h6>
 										
-										<small>Last seen: 2 hours ago</small>
+										<small>자주 묻는 질문</small>
 									</div>
 								</div>
 								<div class="col-lg-6 hidden-sm text-right">
-								
-									<a href="javascript:void(0);" class="btn btn-outline-info">
-									<i class="fa fa-handshake-o" id="btnChatAppointment"></i></a> 
-										
-									<a href="javascript:void(0);" class="btn btn-outline-primary">
-									<i class="fa fa-image"></i></a>
-									
-									<a href="javascript:void(0);" class="btn btn-outline-dark">
-									<i class="fa fa-sign-out"></i></a> 
-								
-									<a href="javascript:void(0);" class="btn btn-outline-danger">
-									<i class="fa fa-close" ></i></a>
-
-									
-								
-
-   
 
      </div>
 							</div>
 						</div>
 						<div class="chat-history" id="chat-history" >
 							<ul class="m-b-0" id="chat_history">
-<!--  
+
 								<li class="clearfix">
 									<div class="message-data"><img
 											src="img/chat-img/logo_carrot.png"
 											alt>
-										<span class="message-data-adminGongji">당근 좋아하는 토끼</span>
+										<span class="message-data-adminGongji">흙토끼</span>
 									</div>
-									<div class="message my-message">채팅방을 클릭해주세요</div>
+									<div class="message my-message">
+									<h6><b>기본매너</b></h6>
+									<p>기본적으로 지켜야하는 매너에는 무엇이 있을까요?</p>
+									<p>· 서로 존중해요. 우리 존댓말로 대화해요.<br>
+									   · 모두의 시간은 소중합니다. 시간 약속을 꼭 지켜주세요.<br>
+									   · 절대로 중간에 연락 끊기는 일이 없도록 해요.<br>
+									   · 따듯한 감사 인사로 마무리를 지어요.<br>
+									   · 늦은 시간 채팅은 부담스러울 수 있어요.<br>
+									</p>
+</div>
 								</li>
--->	
+								
+								<li class="clearfix">
+									<div class="message-data text-right"><img
+											src="img/chat-img/logo_carrot.png"
+											alt>
+										<span class="message-data-adminGongji">금토끼</span>
+									</div>
+									<div class="message other-message float-right">
+									<h6><b>이런 행동은 할 수 없어요.</b></h6>
+									<p><br>
+									   · 판매 금지 물품 거래.<br>
+									   · 중고거래 사기 등 이웃에게 손해를 입히는 행위.<br>
+									   · 허위 정보게시 등 이웃을 속이거나 기만하는 행위.<br>
+									   · 불쾌감, 성적 수치심 등을 주는 행위.<br>
+									   · 이웃을 배제하거나 소외시키는 행위.<br>
+
+									</p>
+</div>
+								</li>
+								
+								
+								
+
 							</ul>
 						</div>
 						<div class="chat-message clearfix">
@@ -231,7 +245,7 @@ body{
         /*스크롤 하단 고정*/
     height:700px;
     overflow-y: auto;
-	display:flex;
+	display:block;
     flex-direction: column-reverse;
 }
 
@@ -323,8 +337,10 @@ body{
 .chat .chat-history .other-message {
 
     background: orange;  
-	
+	/* 내 메시지 오른쪽 정렬 
     text-align: right
+    */
+    text-align: left;
 }
 
 .chat .chat-history .other-message:after {
