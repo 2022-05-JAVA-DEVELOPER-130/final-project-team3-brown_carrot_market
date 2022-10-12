@@ -28,6 +28,7 @@
 	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+	<script type="text/javascript" src="js/product/product.js"></script>
 	
 </head>
 
@@ -226,14 +227,12 @@
                             <div class="list_view ml-3">
                                 <a href="shop-list-left-sidebar.html" data-toggle="tooltip" data-placement="top" title="List View"><i class="icofont-listine-dots"></i></a>
                             </div>
+                           </div>
+                            <div class="col-12 text-right">
+                        	<input type="button" class="btn btn-primary mb-1" value="내 물건 팔기" onClick="productCreateForm();"/>
+                    		</div>
                         </div>
-                        <select class="small right">
-                            <option selected>Short by Popularity</option>
-                            <option value="1">Short by Newest</option>
-                            <option value="2">Short by Sales</option>
-                            <option value="3">Short by Ratings</option>
-                        </select>
-                    </div>
+                        
 
                     <div class="shop_list_product_area">
                         <div class="row">
