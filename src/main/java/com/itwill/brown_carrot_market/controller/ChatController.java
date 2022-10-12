@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +24,9 @@ import com.itwill.brown_carrot_market.dto.ChatContents;
 import com.itwill.brown_carrot_market.dto.ChatRoomListView;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.ChatService;
+import com.itwill.brown_carrot_market.service.ProductService;
 import com.itwill.brown_carrot_market.service.UserInfoService;
+
 
 
 
@@ -32,6 +35,7 @@ public class ChatController {
 	
 	@Autowired private ChatService chatService;
 	@Autowired private UserInfoService userInfoService;
+	@Autowired private ProductService productService;
 	
 	/**************************************************/
 		//@RequestMapping(value="/chat_room", method=RequestMethod.POST)
@@ -70,7 +74,7 @@ public class ChatController {
 		
 		/**************************************************/
 		@RequestMapping(value="/chat_room", method=RequestMethod.GET)
-		public String chatList(HttpSession httpSession) throws Exception {
+		public String chatList(HttpSession httpSession,Model model) throws Exception {
 			
 			String userId=(String)httpSession.getAttribute("sUserId");
 			UserInfo userInfo=(UserInfo) httpSession.getAttribute("sUser");
@@ -84,12 +88,51 @@ public class ChatController {
 						String img = userInfoService.findUser(chatRoomListView.getYou_id()).getUser_profile();
 						chatRoomListView.setYou_image(img);
 						chatRoomListView.setNot_read(chatService.chatNotRead(chatRoomListView.getC_room_no(), userId));
+						if(chatRoomListView.getC_content().startsWith("@@image!#")) {
+							chatRoomListView.setC_content("사진 전송");
+						}
 				}
 			  System.out.println("채팅 리스트:"+chatList);
-			  httpSession.setAttribute("chatList",chatList);
+			  model.addAttribute("chatList",chatList);
+			  //드롭다운 채팅 클릭으로 채팅사이트 이동 
+			  model.addAttribute("path",1);
 			  httpSession.setAttribute("loginId", userId);
 			  
 			 
+			return "chat_room";
+		}	
+		/************************************채팅방 생성*************************************/
+		@RequestMapping(value="/create_room", method=RequestMethod.POST)
+		public String chatCreate(HttpSession httpSession,@RequestParam("p_no") int p_no,Model model) throws Exception{
+			String from_id = (String)httpSession.getAttribute("sUserId");
+			String to_id = productService.selectByOne(p_no).getUserInfo().getUser_id();
+			int chat_room_no;
+			boolean check = chatService.duplicateCheck(from_id, to_id, p_no);
+			if(check) {
+				System.out.println("채팅방이 이미 존재합니다");
+				chat_room_no = chatService.chatRoomSearch(from_id, to_id,p_no);
+			}else {
+				chatService.chatRoomCreate(from_id, to_id, p_no);
+				
+				chat_room_no = chatService.chatRoomSearch(from_id, to_id,p_no);
+				String admin = "admin";
+				ChatContents newChat=new ChatContents(0, "사기, 불법거래에 주의하세요.",
+						null, null, admin, chat_room_no);
+				chatService.insertChat(newChat);
+			}
+			List<ChatRoomListView> chatList = chatService.chatRoomSelectAll(from_id);
+			for (ChatRoomListView chatRoomListView : chatList) {
+				
+				System.out.println(chatRoomListView.getYou_id());
+			
+				String img = userInfoService.findUser(chatRoomListView.getYou_id()).getUser_profile();
+				chatRoomListView.setYou_image(img);
+				chatRoomListView.setNot_read(chatService.chatNotRead(chatRoomListView.getC_room_no(), from_id));
+		}
+			model.addAttribute("chatList",chatList);
+			//채팅방 생성으로 채팅사이트 이동 
+			model.addAttribute("path",2);
+			model.addAttribute("chat_room_no",chat_room_no);
 			return "chat_room";
 		}	
 		

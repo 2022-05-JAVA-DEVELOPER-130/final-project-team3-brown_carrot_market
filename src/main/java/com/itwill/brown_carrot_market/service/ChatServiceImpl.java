@@ -118,6 +118,13 @@ public class ChatServiceImpl implements ChatService {
 		}
 		return isDuplicated;
 	}
+	// 채팅방 목록  from,to,p_no으로 방번호 찾기
+	@Override
+	public int chatRoomSearch(String from_id, String to_id, Integer p_no) {
+		ChatRoom chatRoom = chatRoomDao.chatRoomSelectFTP(from_id, to_id, p_no);
+ 
+		return chatRoom.getC_room_no();
+	}
 
 	// 채팅방 전체 조회
 	@Override

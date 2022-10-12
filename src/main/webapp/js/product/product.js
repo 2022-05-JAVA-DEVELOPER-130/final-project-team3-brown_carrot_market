@@ -32,3 +32,15 @@ function productCreate() {
 	document.product_write_form.method='POST';
 	document.product_write_form.submit();
 }
+
+/********************채팅하기!!**************************/
+$(document).ready(function(){
+	$('#btnCreate').click(function(){
+		console.log('채팅방 생성 버튼 클릭');
+		document.chatStart.action="create_room";
+		document.chatStart.method='POST';
+		document.chatStart.submit();
+		
+	});
+	});
+	

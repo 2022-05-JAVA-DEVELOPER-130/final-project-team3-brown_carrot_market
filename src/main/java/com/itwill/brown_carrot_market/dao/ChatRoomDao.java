@@ -33,4 +33,6 @@ public interface ChatRoomDao {
 
 	 public int chatRoomDeleteCheck(int c_room_no);
 
+	 public ChatRoom chatRoomSelectFTP(String from_id, String to_id, Integer p_no);
+
 }

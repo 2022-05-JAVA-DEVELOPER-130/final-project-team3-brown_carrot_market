@@ -12,6 +12,7 @@ import com.itwill.brown_carrot_market.dao.TownBoardDao;
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Notice;
 import com.itwill.brown_carrot_market.dto.Orders;
+import com.itwill.brown_carrot_market.dto.ProductImage;
 import com.itwill.brown_carrot_market.dto.Review;
 import com.itwill.brown_carrot_market.dto.TownBoard;
 import com.itwill.brown_carrot_market.dto.TownCategory;
@@ -43,7 +44,7 @@ public class ReviewDaoSpringBootTestApplication {
 		ReviewDao reviewDao = (ReviewDao)context.getBean(ReviewDao.class);
 		
 		//values(REVIEW_REVIEW_NO_SEQ.nextval,'친절하고 약속시간을 잘지켜요','',0.1, 1,'carrot5');
-		Review review = new Review(0, "Dao Test", "", 0.1, new Orders(66, null, null, null), new UserInfo("carrot1", null, null, null, null, 0, 0, null, null));
+		Review review = new Review(0, "Dao Test", "", 0.1, new Orders(1, null, null, null,null, new ProductImage(0,null, 0)), new UserInfo("carrot5", null, null, null, null, 0, 0, null, null));
 		System.out.println("createReview() test: "+reviewDao.createReview(review));
 
 		System.out.println("findReceivedReview() test: "+reviewDao.findReceivedReview("carrot1"));

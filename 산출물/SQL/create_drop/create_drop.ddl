@@ -75,7 +75,8 @@ CREATE TABLE payment(
 CREATE TABLE orders(
 		orders_no                     		NUMBER(10)		 NULL ,
 		p_no                          		NUMBER(20)		 NULL ,
-		user_id                       		VARCHAR2(10)		 NULL 
+		user_id                       		VARCHAR2(10)		 NULL, 
+		orders_date                   		DATE		 NULL 
 );
 
 DROP SEQUENCE orders_orders_no_SEQ;
@@ -89,7 +90,9 @@ CREATE TABLE transfer(
 		transfer_withdraw             		NUMBER(10)		 NULL ,
 		transfer_date                 		DATE		 NULL ,
 		user_id                       		VARCHAR2(30)		 NULL ,
-		orders_no                     		NUMBER(10)		 NULL 
+		orders_no                     		NUMBER(10)		 NULL ,
+		p_no                          		NUMBER(20)		 NULL ,
+		t_balance							NUMBER(20)		NULL
 );
 
 DROP SEQUENCE transfer_transfer_no_SEQ;
@@ -163,13 +166,13 @@ CREATE TABLE chat_room(
 		c_room_no                     		NUMBER(10)		 NULL ,
 		from_id                       		VARCHAR2(10)		 NULL ,
 		to_id                         		VARCHAR2(20)		 NULL ,
+        from_id_in                     		NUMBER(10)		 NULL ,
+		to_id_in                            NUMBER(20)		 NULL ,
 		p_no                          		NUMBER(20)		 NULL 
 );
 
 DROP SEQUENCE chat_room_c_room_no_SEQ;
-
 CREATE SEQUENCE chat_room_c_room_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 CREATE TABLE chat_contents(
 		c_content_no                  		NUMBER(10)		 NULL ,
@@ -291,65 +294,66 @@ ALTER TABLE p_category ADD CONSTRAINT IDX_p_category_PK PRIMARY KEY (p_ctgr_no);
 
 ALTER TABLE product ADD CONSTRAINT IDX_product_PK PRIMARY KEY (p_no);
 ALTER TABLE product ADD CONSTRAINT IDX_product_FK0 FOREIGN KEY (p_ctgr_no) REFERENCES p_category (p_ctgr_no);
-ALTER TABLE product ADD CONSTRAINT IDX_product_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
+ALTER TABLE product ADD CONSTRAINT IDX_product_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
 
 ALTER TABLE payment ADD CONSTRAINT IDX_payment_PK PRIMARY KEY (payment_no);
-ALTER TABLE payment ADD CONSTRAINT IDX_payment_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
+ALTER TABLE payment ADD CONSTRAINT IDX_payment_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
 
 ALTER TABLE orders ADD CONSTRAINT IDX_orders_PK PRIMARY KEY (orders_no);
 ALTER TABLE orders ADD CONSTRAINT IDX_orders_FK0 FOREIGN KEY (p_no) REFERENCES product (p_no);
-ALTER TABLE orders ADD CONSTRAINT IDX_orders_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
+ALTER TABLE orders ADD CONSTRAINT IDX_orders_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
 
 ALTER TABLE transfer ADD CONSTRAINT IDX_transfer_PK PRIMARY KEY (transfer_no);
-ALTER TABLE transfer ADD CONSTRAINT IDX_transfer_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
+ALTER TABLE transfer ADD CONSTRAINT IDX_transfer_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
 ALTER TABLE transfer ADD CONSTRAINT IDX_transfer_FK1 FOREIGN KEY (orders_no) REFERENCES orders (orders_no) on delete cascade;
+ALTER TABLE transfer ADD CONSTRAINT IDX_transfer_FK2 FOREIGN KEY (p_no) REFERENCES product (p_no);
 
 ALTER TABLE product_img ADD CONSTRAINT IDX_product_img_PK PRIMARY KEY (pi_no);
 ALTER TABLE product_img ADD CONSTRAINT IDX_product_img_FK0 FOREIGN KEY (p_no) REFERENCES product (p_no);
 
 ALTER TABLE wishlist ADD CONSTRAINT IDX_wishlist_PK PRIMARY KEY (wishlist_no);
 ALTER TABLE wishlist ADD CONSTRAINT IDX_wishlist_FK0 FOREIGN KEY (p_no) REFERENCES product (p_no);
-ALTER TABLE wishlist ADD CONSTRAINT IDX_wishlist_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
+ALTER TABLE wishlist ADD CONSTRAINT IDX_wishlist_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
 
 ALTER TABLE address ADD CONSTRAINT IDX_address_PK PRIMARY KEY (address_no);
-ALTER TABLE address ADD CONSTRAINT IDX_address_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
+ALTER TABLE address ADD CONSTRAINT IDX_address_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
 
 ALTER TABLE invitation ADD CONSTRAINT IDX_invitation_PK PRIMARY KEY (invi_no);
-ALTER TABLE invitation ADD CONSTRAINT IDX_invitation_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
+ALTER TABLE invitation ADD CONSTRAINT IDX_invitation_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
 
 ALTER TABLE notice ADD CONSTRAINT IDX_notice_PK PRIMARY KEY (notice_no);
 
 ALTER TABLE chat_room ADD CONSTRAINT IDX_chat_room_PK PRIMARY KEY (c_room_no);
-ALTER TABLE chat_room ADD CONSTRAINT IDX_chat_room_FK0 FOREIGN KEY (from_id) REFERENCES userinfo (user_id);
+ALTER TABLE chat_room ADD CONSTRAINT IDX_chat_room_FK0 FOREIGN KEY (from_id) REFERENCES userinfo (user_id) on delete cascade;
 ALTER TABLE chat_room ADD CONSTRAINT IDX_chat_room_FK1 FOREIGN KEY (p_no) REFERENCES product (p_no);
-ALTER TABLE chat_room ADD CONSTRAINT IDX_chat_room_FK2 FOREIGN KEY (to_id) REFERENCES userinfo (user_id);
+ALTER TABLE chat_room ADD CONSTRAINT IDX_chat_room_FK2 FOREIGN KEY (to_id) REFERENCES userinfo (user_id) on delete cascade;
 
 ALTER TABLE chat_contents ADD CONSTRAINT IDX_chat_contents_PK PRIMARY KEY (c_content_no);
-ALTER TABLE chat_contents ADD CONSTRAINT IDX_chat_contents_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
+ALTER TABLE chat_contents ADD CONSTRAINT IDX_chat_contents_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
 ALTER TABLE chat_contents ADD CONSTRAINT IDX_chat_contents_FK1 FOREIGN KEY (c_room_no) REFERENCES chat_room (c_room_no) on delete cascade;
 
 ALTER TABLE town_category ADD CONSTRAINT IDX_town_category_PK PRIMARY KEY (t_ctgr_no);
 
 ALTER TABLE town_board ADD CONSTRAINT IDX_town_board_PK PRIMARY KEY (t_no);
 ALTER TABLE town_board ADD CONSTRAINT IDX_town_board_FK0 FOREIGN KEY (t_ctgr_no) REFERENCES town_category (t_ctgr_no);
-ALTER TABLE town_board ADD CONSTRAINT IDX_town_board_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
+ALTER TABLE town_board ADD CONSTRAINT IDX_town_board_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
 
 ALTER TABLE town_wishlist ADD CONSTRAINT IDX_town_wishlist_PK PRIMARY KEY (t_wl_no);
-ALTER TABLE town_wishlist ADD CONSTRAINT IDX_town_wishlist_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
+ALTER TABLE town_wishlist ADD CONSTRAINT IDX_town_wishlist_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
 ALTER TABLE town_wishlist ADD CONSTRAINT IDX_town_wishlist_FK1 FOREIGN KEY (t_no) REFERENCES town_board (t_no);
 
 ALTER TABLE town_img ADD CONSTRAINT IDX_town_img_PK PRIMARY KEY (t_img_no);
 ALTER TABLE town_img ADD CONSTRAINT IDX_town_img_FK0 FOREIGN KEY (t_no) REFERENCES town_board (t_no);
 
 ALTER TABLE town_reply ADD CONSTRAINT IDX_town_reply_PK PRIMARY KEY (t_reply_no);
-ALTER TABLE town_reply ADD CONSTRAINT IDX_town_reply_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
+ALTER TABLE town_reply ADD CONSTRAINT IDX_town_reply_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
 ALTER TABLE town_reply ADD CONSTRAINT IDX_town_reply_FK1 FOREIGN KEY (t_no) REFERENCES town_board (t_no);
 
 ALTER TABLE town_reaction ADD CONSTRAINT IDX_town_reaction_PK PRIMARY KEY (t_reac_no);
 ALTER TABLE town_reaction ADD CONSTRAINT IDX_town_reaction_FK0 FOREIGN KEY (t_no) REFERENCES town_board (t_no);
-ALTER TABLE town_reaction ADD CONSTRAINT IDX_town_reaction_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
+ALTER TABLE town_reaction ADD CONSTRAINT IDX_town_reaction_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
 
 ALTER TABLE review ADD CONSTRAINT IDX_review_PK PRIMARY KEY (review_no);
 ALTER TABLE review ADD CONSTRAINT IDX_review_FK0 FOREIGN KEY (orders_no) REFERENCES orders (orders_no) on delete cascade;
-ALTER TABLE review ADD CONSTRAINT IDX_review_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
+ALTER TABLE review ADD CONSTRAINT IDX_review_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
 

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.itwill.brown_carrot_market.dao.UserInfoDao;
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Invitation;
+import com.itwill.brown_carrot_market.dto.Transfer;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 
 /*
@@ -46,7 +47,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 			// 2.회원가입
 			int insertRowCount = userDao.createUser(user);
 
-			if (address.getAddress_lat() != 0.0) {
+			if (address != null) {
 				address.setUser_id(user.getUser_id());
 
 				int insertAddress = userDao.createAddress(address);
@@ -54,7 +55,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 				System.out.println(insertAddress);
 			}
 			
-			if (userDao.existedInvitation(invitation)) {
+			if (invitation !=null && userDao.existedInvitation(invitation)) {
 				System.out.println("초대한   사람: "+userDao.findInvitation(invitation));
 				System.out.println("초대받은 사람: "+invitation.getUser_id());
 				/***************transaction 설정 필요******************/
@@ -150,6 +151,19 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 		return updateInviUser * updateNewUser;
 	}
+	
+	@Override
+	public int updatePointByTransfer(Transfer transfer) throws Exception {
+		UserInfo userInfo = new UserInfo();
+		userInfo.setUser_id(transfer.getUser_id());
+		if(transfer.getTransfer_deposit()!=0) {
+			userInfo.setUser_point(transfer.getTransfer_deposit());
+		}else {
+			userInfo.setUser_point(transfer.getTransfer_withdraw());
+		}
+		return userDao.updatePoint(userInfo);
+	}
+	
 	@Override
 	public int updateProfile(UserInfo userInfo) throws Exception {
 		return userDao.updateProfile(userInfo);
@@ -215,6 +229,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 			return false;
 		}
 	}
+
+
 
 
 

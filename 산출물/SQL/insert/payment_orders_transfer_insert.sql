@@ -48,25 +48,25 @@ select p_no, p_title, p_date, user_id, p_price from product;
 
 
 --[orders] p_no=9, 판매자 carrot6
-insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, 9,'carrot5');
+insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, 9,'carrot5',sysdate);
 --[transfer] 구매자 carrot5
-insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,10000, 0, sysdate-10, 'carrot6',ORDERS_ORDERS_NO_SEQ.currval);
+insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,10000, 0, sysdate-10, 'carrot6',ORDERS_ORDERS_NO_SEQ.currval,9);
 --[transfer] 판매자 carrot6
-insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,0, 10000, sysdate-10, 'carrot5',ORDERS_ORDERS_NO_SEQ.currval);
+insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,0, 10000, sysdate-10, 'carrot5',ORDERS_ORDERS_NO_SEQ.currval,9);
 
 --[orders] p_no=10, 판매자 carrot7
-insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, 10,'carrot5');
+insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, 10,'carrot5', sysdate);
 --[transfer] 구매자 carrot5
-insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,10000, 0, sysdate-8, 'carrot5',ORDERS_ORDERS_NO_SEQ.currval);
+insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,10000, 0, sysdate-8, 'carrot5',ORDERS_ORDERS_NO_SEQ.currval,10);
 --[transfer] 판매자 carrot7
-insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,0, 10000, sysdate-8, 'carrot7',ORDERS_ORDERS_NO_SEQ.currval);
+insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,0, 10000, sysdate-8, 'carrot7',ORDERS_ORDERS_NO_SEQ.currval,10);
 
 --[orders] p_no=11, 판매자 carrot8
-insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, 10,'carrot5');
+insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, 10,'carrot5', sysdate);
 --[transfer] 구매자 carrot4
-insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,5000, 0, sysdate-9, 'carrot4',ORDERS_ORDERS_NO_SEQ.currval);
+insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,5000, 0, sysdate-9, 'carrot4',ORDERS_ORDERS_NO_SEQ.currval,11);
 --[transfer] 판매자 carrot8
-insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,0, 5000, sysdate-9, 'carrot8',ORDERS_ORDERS_NO_SEQ.currval);
+insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval,0, 5000, sysdate-9, 'carrot8',ORDERS_ORDERS_NO_SEQ.currval,11);
 
 
 --***************join [orders + transfer]

@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="">
@@ -12,7 +11,7 @@
 <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 <!-- Title  -->
-<title>Brwon Carrot Market</title>
+<title>Brown Carrot Market</title>
 
 <!-- Favicon  -->
 <link rel="icon" href="img/core-img/favicon.ico">
@@ -20,14 +19,22 @@
 <!-- Style CSS -->
 <link rel="stylesheet" href="style.css">
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <!-- 회원가입 Validate -->
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7c7231db91ae56cfc5e3c6ea06f73c6&libraries=services"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7c7231db91ae56cfc5e3c6ea06f73c6&libraries=services"></script>
 <script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 <script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
 <script type="text/javascript" src="js/common/user_session_check.js"></script>
+
+	<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js"
+		integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL"
+		crossorigin="anonymous"></script>
+
+
 <script type="text/javascript">
 $(function() {
 
@@ -199,9 +206,14 @@ $(function() {
 						console.log(jsonResult);
 						$('#msg2').html(jsonResult.msg);
 				    }else if (jsonResult.code == 2) {
+				    	var referrer = document.referrer;
 				    	
-				    	
-				    	location.href = "user_my_account";	//(수정필요)main으로 보내야 할듯
+				    	if(referrer.indexOf("user_login") != -1){
+				    		window.location.href="main";
+				    	}else {
+				    		window.location.href = referrer;
+				    	}
+				    	//location.href = "user_my_account";	//(수정필요)main으로 보내야 할듯
 				    }
 				}
 			});
@@ -278,6 +290,14 @@ $(function() {
 		e.preventDefault();
 	});
 	
+	
+	$(document).on('click',	'#kakao-login-btn',function(e) {
+		console.log('click!');
+		
+		//e.preventDefault();
+	});
+	
+	
 });
 /*************************************************/
 
@@ -293,9 +313,9 @@ $(function() {
 	</div>
 
 	<!-- Header Area -->
-   		<!-- include_common_bottom.jsp start-->
-		<jsp:include page="common/include_common_header.jsp"/>
-		<!-- include_common_bottom.jsp end-->
+	<!-- include_common_bottom.jsp start-->
+	<jsp:include page="common/include_common_header.jsp" />
+	<!-- include_common_bottom.jsp end-->
 	<!-- Header Area End -->
 
 	<!-- Breadcumb Area -->
@@ -303,10 +323,10 @@ $(function() {
 		<div class="container h-100">
 			<div class="row h-100 align-items-center">
 				<div class="col-12">
-					<h5>Login &amp; Register</h5>
+					<h5>로그인 &amp; 회원가입</h5>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-						<li class="breadcrumb-item active">Login &amp; Register</li>
+						<li class="breadcrumb-item active">로그인 &amp; 회원가입</li>
 					</ol>
 				</div>
 			</div>
@@ -322,21 +342,20 @@ $(function() {
 				<!-- LOGIN ***************************** -->
 				<div class="col-12 col-md-6">
 					<div class="login_form mb-50">
-						<h5 class="mb-3">Login</h5>
-						<font color="red" id="msg1">${msg1}</font>
-						<font color="red" id="msg2">${msg2}</font>
+						<h5 class="mb-3">로그인</h5>
+						<font color="red" id="msg1">${msg1}</font> <font color="red"
+							id="msg2">${msg2}</font>
 
 						<form id="user_login_form" action="user_login_action"
 							method="post">
 							<div class="form-group">
 								<!-- <input type="email" class="form-control" id="username" placeholder="Email or Username"> -->
 								<input class="form-control" id="login_user_id" name="user_id"
-									value="${loginUser.user_id}" placeholder="ID">
+									value="${loginUser.user_id}" placeholder="아이디">
 							</div>
 							<div class="form-group">
 								<input type="password" class="form-control" id="login_user_pw"
-									name="user_pw" value="${loginUser.user_pw}"
-									placeholder="Password">
+									name="user_pw" value="${loginUser.user_pw}" placeholder="비밀번호">
 							</div>
 							<div class="form-check">
 								<!-- 이것은 어떻게 구현하는 것인가.....  -->
@@ -348,12 +367,21 @@ $(function() {
 							</div>
 							<!-- <button type="submit" class="btn btn-primary btn-sm btn_user_login_action" >Login</button> -->
 							<!-- <input id="btn_user_login_action" type="button" value="로그인"> &nbsp; -->
-							<input type="button" id="btn_user_login_action"
+							<input type="button" id="btn_user_login_action" style="width:222px;height:54px;font-size:1rem;"
 								class="btn btn-primary btn-sm" value="로그인">
 						</form>
 						<!-- Forget Password -->
 						<div class="forget_pass mt-15">
 							<a href="#">Forget Password?</a>
+						</div>
+						<hr><br>
+						<div>
+							<!-- <a id="kakao-login-btn" href="javascript:loginWithKakao()"> width="222"-->
+							<a id="kakao-login-btn" href="javascript:loginWithKakao()"> <img
+								src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
+								width="222" alt="카카오 로그인 버튼" />
+							</a>
+							<p id="token-result"></p>
 						</div>
 					</div>
 				</div>
@@ -362,50 +390,56 @@ $(function() {
 
 				<div class="col-12 col-md-6">
 					<div class="login_form mb-50">
-						<h5 class="mb-3">Register</h5><font color="red" id="msg3"></font>
+						<h5 class="mb-3">회원가입</h5>
+						<font color="red" id="msg3"></font>
 
 						<form id="user_write_form" action="my-account.html" method="post">
 							<div class="form-group">
-								<input type="text" class="form-control" id="user_id" name="user_id" value="${fuser.user_id}"
-									placeholder="ID">
+								<input type="text" class="form-control" id="user_id"
+									name="user_id" value="${fuser.user_id}" placeholder="아이디">
 							</div>
 							<div class="form-group">
 								<input type="password" class="form-control" id="user_pw"
-									name="user_pw" value="${fuser.user_pw}" placeholder="Password">
+									name="user_pw" value="${fuser.user_pw}" placeholder="비밀번호">
 							</div>
 							<div class="form-group">
-								<input type="password" class="form-control" id="user_pw2" name="user_pw2"
-									value="${fuser.user_pw}" placeholder="Repeat Password">
+								<input type="password" class="form-control" id="user_pw2"
+									name="user_pw2" value="${fuser.user_pw}" placeholder="비밀번호 확인">
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control" id="user_name" name="user_name"
-									value="${fuser.user_name}" placeholder="Name">
+								<input type="text" class="form-control" id="user_name"
+									name="user_name" value="${fuser.user_name}" placeholder="이름">
 							</div>
 							<div class="form-group">
-								<input type="email" class="form-control" id="user_email" name="user_email"
-									value="${fuser.user_email}" placeholder="Email">
+								<input type="email" class="form-control" id="user_email"
+									name="user_email" value="${fuser.user_email}"
+									placeholder="이메일주소">
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control phone_number" id="user_phone"
-									name="user_phone" value="${fuser.user_phone}" placeholder="Phone ( - 제외 입력해주세요) ">
+								<input type="text" class="form-control phone_number"
+									id="user_phone" name="user_phone" value="${fuser.user_phone}"
+									placeholder="핸드폰번호 ( - 제외 입력해주세요) ">
 							</div>
 							<div class="form-group">
 								<input type="text" class="form-control" id="address_name"
-									name="address_name" value="" placeholder="위치접근을 '허용'해주세요. 나중에 입력가능">
+									name="address_name" value=""
+									placeholder="위치접근을 '허용'해주세요. 나중에 입력가능" readonly>
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control" id="address_lat"
+								<input type="hidden" class="form-control" id="address_lat"
 									name="address_lat" value="0.0" placeholder="위도">
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control" id="address_lng"
+								<input type="hidden" class="form-control" id="address_lng"
 									name="address_lng" value="0.0" placeholder="경도">
 							</div>
 							<div class="form-group">
 								<input type="text" class="form-control" id="invi_email"
 									name="invi_email" value="" placeholder="초대코드">
 							</div>
-							<input type="button" id="btn_user_write_action"
+							<!-- <input type="button" id="btn_user_write_action"
+								class="btn btn-primary btn-sm" value="회원가입"> -->
+								<input type="button" id="btn_user_write_action" style="width:222px;height:54px;font-size:1rem;"
 								class="btn btn-primary btn-sm" value="회원가입">
 						</form>
 					</div>
@@ -419,9 +453,9 @@ $(function() {
 	<!-- END!! **************************************************************** -->
 
 	<!-- Footer Area -->
-		<!-- include_common_bottom.jsp start-->
-		<jsp:include page="common/include_common_footer.jsp"/>
-		<!-- include_common_bottom.jsp end-->
+	<!-- include_common_bottom.jsp start-->
+	<jsp:include page="common/include_common_footer.jsp" />
+	<!-- include_common_bottom.jsp end-->
 	<!-- Footer Area -->
 
 	<!-- jQuery (Necessary for All JavaScript Plugins) -->
@@ -442,6 +476,36 @@ $(function() {
 	<script src="js/jquery.nice-select.min.js"></script>
 	<script src="js/wow.min.js"></script>
 	<script src="js/default/active.js"></script>
+
+
+	<script>
+	  Kakao.init('a7c7231db91ae56cfc5e3c6ea06f73c6'); // 사용하려는 앱의 JavaScript 키 입력
+	</script>
+
+	<script>
+	  function loginWithKakao() {
+	    Kakao.Auth.authorize({
+	      redirectUri: 'http://localhost/brown_carrot_market/user_kakaologin',
+    	  prompts: 'login'
+		  });
+	  }
+	/*
+		function createHiddenLoginForm(kakaoId){
+			
+			var frm = document.createElement('form');
+			frm.setAttribute('method', 'post');
+			frm.setAttribute('action', '/user_kakaologin_action_json');
+			var hiddenInput = document.createElement('input');
+			hiddenInput.setAttribute('type','hidden');
+			hiddenInput.setAttribute('name','user_id');
+			hiddenInput.setAttribute('value',kakaoId);
+			frm.appendChild(hiddenInput);
+			document.body.appendChild(frm);
+			frm.submit();
+			
+		}
+	*/
+	</script>
 
 </body>
 

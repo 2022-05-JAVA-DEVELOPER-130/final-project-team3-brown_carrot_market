@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!doctype html>
 <html lang="en">
 
@@ -12,7 +14,7 @@
 <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 <!-- Title  -->
-<title>Brwon Carrot Market</title>
+<title>Brown Carrot Market</title>
 
 <!-- Favicon  -->
 <link rel="icon" href="img/core-img/favicon.ico">
@@ -27,7 +29,7 @@
 	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7c7231db91ae56cfc5e3c6ea06f73c6&libraries=services"></script>
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=a7c7231db91ae56cfc5e3c6ea06f73c6&libraries=services"></script>
 <script type="text/javascript" src="js/common/user_session_check.js"></script>
 <script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 <script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
@@ -51,6 +53,20 @@
 			$(document).on('click',	'#btn_user_modify_action',function(e) {
 				console.log("click!! >> "+e.target);
 				//if(validator.form()){
+				if($("#user_pw_new").val() != ""){
+					if ($("#user_pw_new2").val() == "") {
+						alert("비밀번호확인을 입력하십시요.");
+						$("#user_pw_new").focus();
+						return false;
+					}
+					if ($("#user_pw_new").val() != $("#user_pw_new2").val()) {
+						alert("비밀번호와 비밀번호확인은 일치하여야합니다.");
+						$("#user_pw_new").focus();
+						$("#user_pw_new").select();
+						return false;
+					}
+					$('#user_pw').val($('#user_pw_new').val());
+				}
 			    var param = $('#user_modify_form').serialize();
 			    console.log(param);
 			    $.ajax({
@@ -62,7 +78,7 @@
 					    if (jsonResult.code == 1) {
 						 	$('#my-account-content').html(UserHtmlContents.user_view_content(jsonResult.data[0]));
 					    } else if (jsonResult.code == 2) {
-							
+							location.href='main';
 					    }
 					    console.log(jsonResult);
 					}
@@ -296,58 +312,45 @@
 							}
 						}
 					});
-				/*  console.log($('.img-circle').src());
-				 if($('.img-circle').src=='img/user_profile/newCarrot.jpg'){
-					 $('.remove_profile').attr('type','hidden');
-				 } */
 				e.preventDefault();
 			});
 			/*******************************************/
 			
 			/* Edit_user_profile********************************/
 			$(document).on('click', '.edit_profile', function(e) {
-				
 				$("#chooseF").trigger('click');
-				
-				 $(e.target).addClass("save_profile");
-				 $(e.target).removeClass("edit_profile");
-				 
-				 $(e.target).val("사진 저장");
-				
 				e.preventDefault();
 			});
 			/*******************************************/
 			
 			/* Save_user_profile********************************/
 			$(document).on('click', '.save_profile', function(e) {
-				console.log("저장해보자!");
 				
 				const formData = new FormData($('#image_form')[0]);
-				 $.ajax({
-						url:'user/upload',
-						type:'POST',
-						processData:false,	//파일전송시 반드시 false
-						contentType:false,
-						data:formData,
-						success:function(jsonResult){
-							 console.log(jsonResult);
-							 
-							 $.ajax({
-									url : 'user_update_profile_json',
-									method : 'POST',
-									data: {
-										"user_id":$("input[name='user_id']").val(),
-										"user_profile": jsonResult.newFileName 
-									},
-									dataType : 'json',
-									success : function(jsonResult) {
-										 console.log(jsonResult.msg);
-										 //수정필요
-										 $("#user_my_account").get(0).click();
-								    }
-								});
-						}
-					 });  
+					 $.ajax({
+							url:'user/upload',
+							type:'POST',
+							processData:false,	//파일전송시 반드시 false
+							contentType:false,
+							data:formData,
+							success:function(jsonResult){
+								 console.log(jsonResult);
+								 $.ajax({
+										url : 'user_update_profile_json',
+										method : 'POST',
+										data: {
+											"user_id":$("input[name='user_id']").val(),
+											"user_profile": jsonResult.newFileName 
+										},
+										dataType : 'json',
+										success : function(jsonResult) {
+											 console.log(jsonResult.msg);
+											 //수정필요
+											 $("#user_my_account").get(0).click();
+									    }
+									});
+							}
+						 });
 					e.preventDefault();
 			
 			});
@@ -355,7 +358,6 @@
 			
 			/* Remove_user_profile********************************/
 			$(document).on('click', '.remove_profile', function(e) {
-				//console.log("삭제해보자!");
 			
 				console.log($("#user_profile").attr('user_profile'));
 				 $.ajax({
@@ -390,8 +392,13 @@
 			
 			//이미지가 업로드 되면
 			$(document).on('change','#chooseF',function(e){
-				//console.log($('input[type=file]')[0].files[0]);	//파일정보
+				//console.log($.isEmptyObject($('input[type=file]')[0].files[0]));	//파일정보
 				loadFile($('input[type=file]')[0]);	//첫번째 파일 로드
+				
+				$(".edit_profile").addClass("save_profile");
+				 $(".edit_profile").removeClass("edit_profile");
+				 $(".save_profile").val("사진 저장");
+				
 				 $('.remove_profile').attr('type','hidden');
 				e.preventDefault();
 			});
@@ -401,6 +408,54 @@
 				var file = input.files[0];
 			    document.getElementById('user_profile').src=URL.createObjectURL(file);
 			}
+			
+			/* user_received_reviewList********************************/
+			$(document).on('click', '#user_received_reviewList', function(e) {
+				 $.ajax({
+						url:'user_received_reviewList_json',
+						method:'POST',
+						/*dataType:'json',*/
+						success:function(jsonResult){
+							//console.log(jsonResult);
+							$('#my-account-content').html(UserHtmlContents.user_received_reviewList2(jsonResult.data));
+						}
+					});
+				e.preventDefault();
+			});
+			
+			/* user_remove_form ********************************/
+			$(document).on('click', '#user_remove_form', function(e) {
+				console.log('user_remove_form');
+				$('#my-account-content').html(UserHtmlContents.user_remove_form(""));
+				e.preventDefault();
+			});
+			
+			/* user_remove_action ********************************/
+			$(document).on('click', '#btn_user_remove', function(e) {
+				console.log('btn_user_remove');
+				console.log($('#user_pw').val());
+				if(!$('#user_pw').val()){
+					alert('비밀번호 입력해주세요');
+					return false;
+				}
+				if(!$('#chk_remove').is(':checked')){
+					alert('checkbox를 체크해주세요');
+					return false;
+				} 
+				 $.ajax({
+						url:'user_remove_action_json',
+						method:'POST',
+						data: {"user_pw":$("#user_pw").val()},
+						success:function(jsonResult){
+							if(jsonResult.code==20){
+								location.href='main';
+							}else{
+								$('#my-account-content').html(UserHtmlContents.user_remove_form(jsonResult.msg));
+							}
+						}
+					});
+				e.preventDefault();
+			});
 			
 		});//END
 </script>
@@ -448,9 +503,10 @@
 							<li class="active"><a href="user_my_account" id="user_my_account">마이페이지</a></li>
 							<li class=""><a href="#" id="user_account_details">회원정보수정</a></li>
 							<li class="active"><a href="" id="user_view_addresses">내 동네설정</a></li>
-							<li class=""><a href="#" id="">흙당근 포인트</a></li>
-							<li class=""><a href="#" id="">흙당근 매너온도</a></li>
+							<li class=""><a href="#" id="">흙당근 포인트 내역</a></li>
+							<li class=""><a href="#" id="user_received_reviewList">받은 거래 후기</a></li>
 							<li><a href="user_logout_action">로그아웃</a></li>
+							<li><a href="#" id="user_remove_form" style="color:#6c757d">회원탈퇴</a></li>
 						</ul>
 					</div>
 				</div>
@@ -459,7 +515,17 @@
 					<div id="my-account-content" class="my-account-content mb-50" style="margin-bottom: 20px">
 						<div class="shortcodes_content mb-100" style="margin-bottom: 0px">
 	                        <div class="col-12 col-lg-9">
-	                            <img class="img-circle" src="img/user_profile/${sUser.user_profile}" onerror="this.src='img/user_profile/newCarrot.jpg'">
+	                        <!-- 더나은 방법을 찾고싶다! -->
+	                        <c:set var="string" value="${sUser.user_profile}"/>
+							<c:choose>
+								<c:when test="${fn:startsWith(string,'http://')}">
+		                            <img class="img-circle" src="${sUser.user_profile}" onerror="this.src='img/user_profile/newCarrot.jpg'">
+								</c:when>
+								<c:otherwise>
+		                            <img class="img-circle" src="img/user_profile/${sUser.user_profile}" onerror="this.src='img/user_profile/newCarrot.jpg'">
+								</c:otherwise>
+							</c:choose>
+							<!-- 프로필 이미지 -->
 							<p>
 								<strong>${sUser.user_id}</strong>님, 안녕하세요? 
 							</p>

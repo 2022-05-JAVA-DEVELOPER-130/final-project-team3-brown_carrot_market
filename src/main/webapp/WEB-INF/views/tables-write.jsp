@@ -16,8 +16,18 @@
     <!-- include_common_top -->
     <!-- include_common_top -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="forEunbi/common/board.css">
-
+    <link rel="stylesheet" href="css/board.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
+	
+	<!-- javaScript -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
+	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
+	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+	
+	
+	
 </head>
 
 <body>
@@ -40,7 +50,7 @@
                 <div class="col-12">
                     <h5>Board</h5>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active">Board</li>
                     </ol>
                 </div>
@@ -58,33 +68,40 @@
                     </div>
                     <div class="shortcodes_content">
                         <div class="table-responsive">
-                        	<form id="qna_write_form" method="post">
+                        	<form id="notice_write_form" method="post">
 	                            <table class="table mb-0 table-bordered">
 	                                <thead>
+	                                <tr>
+	                                	<th>제목</th>
+	                                	<th>고정글</th>
+	                                	<th>날짜</th>
+	                                </tr>
 	                                    <tr>
 	                                        <th scope="col" class="board_title">
-	                                        	<input type="text" name="notice_title" id="q_title_txt" placeholder=" title" />
+	                                        	<input type="text" name="notice_title" id="notice_title_txt" placeholder=" title" />
 	                                        </th>
-	                                        <th scope="col" class="board_writer">${sM_id}</th>
+	                                        <th scope="col" class="board_fix">
+	                                        	<input type="checkbox" name = "notice_fix" value="1" id="notice_fix" >
+	                                        	<input type="hidden" name = "notice_fix" value="0" id="notice_fix_hidden" >
+	                                        </th>
 	                                        <th scope="col" class="board_date"><fmt:formatDate value='${toDay}' pattern='yyyy-MM-dd' /></th>
 	                                    </tr>
 	                                </thead>
 	                                <tbody>
 	                                    <tr>
-	                                        <td id="qna_content_td" colspan="3">
-	                                        	<textarea name="q_content" id="q_content_area" placeholder=" content"></textarea>
+	                                        <td id="notice_content_td" colspan="3">
+	                                        	<textarea name="notice_content" id="notice_content_area" placeholder=" content"></textarea>
 	                                        </td>
 	                                    </tr>
 	                                </tbody>
 	                            </table>
                       				<input type="hidden" name="pageno" value="${pageno}" />
-                      				<input type="hidden" name="m_id" value="${sM_id}" />
                 			</form>
                         </div>
                     </div>
-                    	<div id="qna_btn_container">
-							<input class="qna_btn new_write" type="button" value="등록" />
-							<input class="qna_btn list" type="button" pageno="${pageno}" value="목록" />
+                    	<div id="notice_btn_container">
+							<input class="notice_btn new_write" type="button" value="등록" />
+							<input class="notice_btn list" type="button" pageno="${pageno}" value="목록" />
                     	</div>
                 </div>
             </div>
@@ -96,10 +113,10 @@
     <!-- Footer Area -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    
+    <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="js/notice/board.js" defer></script>
-
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
 
 </html>

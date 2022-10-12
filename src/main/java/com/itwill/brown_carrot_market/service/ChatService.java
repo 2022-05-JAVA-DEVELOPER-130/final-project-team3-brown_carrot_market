@@ -53,4 +53,6 @@ public interface ChatService {
 	public int promiseExist(int c_room_no);
 
 	public int chatRoomDelete(String user_id, int c_room_no);
+
+	public int chatRoomSearch(String from_id, String to_id, Integer p_no);
 }
