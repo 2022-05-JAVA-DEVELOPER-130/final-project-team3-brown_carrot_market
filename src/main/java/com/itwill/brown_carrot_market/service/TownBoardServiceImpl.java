@@ -39,10 +39,25 @@ public class TownBoardServiceImpl implements TownBoardService{
 		return townBoardDao.selectNonMemberCountTownBoard();
 	}
 	
+	
+	//동네 게시판 비회원이 카테고리 조건으로 전체조회
 	@Override
-	public List<TownBoard> selectNonMemberCtgrTownBoardList(int t_ctgr_no) throws Exception {
-		return townBoardDao.selectNonMemberCtgrTownBoardList(t_ctgr_no);
+	public PageMakerDto<TownBoard> selectNonMemberCtgrTownBoardList(int t_ctgr_no, int currentPage) throws Exception {
+		int totTownBoardNonMemberCtgrCount = townBoardDao.selectNonMemberCountCtgrTownBoard(t_ctgr_no);
+		PageMaker pageMaker = new PageMaker(totTownBoardNonMemberCtgrCount, currentPage, 5, 5);
+		List<TownBoard> townBoardList = townBoardDao.selectNonMemberCtgrTownBoardList(t_ctgr_no, pageMaker.getPageBegin(), pageMaker.getPageEnd());
+		PageMakerDto<TownBoard> pageMakerTownBoardList = new PageMakerDto<TownBoard>(townBoardList, pageMaker, totTownBoardNonMemberCtgrCount);
+		return pageMakerTownBoardList;
 	}
+	//동네 게시판 카테고리 조건 비회원이 게시글 수 계산
+	@Override
+	public int selectNonMemberCountCtgrTownBoard(int t_ctgr_no) {
+		return townBoardDao.selectNonMemberCountCtgrTownBoard(t_ctgr_no);
+	}
+	
+	
+	
+	
 
 	//회원이 동네 게시판 전체조회 페이징
 	@Override
@@ -109,6 +124,8 @@ public class TownBoardServiceImpl implements TownBoardService{
 	public int insertTownBoard(Map map) {
 		return townBoardDao.insertTownBoard(map);
 	}
+
+
 
 	
 

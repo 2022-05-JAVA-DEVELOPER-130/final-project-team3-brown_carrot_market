@@ -16,14 +16,21 @@ public interface TownBoardDao {
 	*/
 	//동네 게시판 비회원이 전체조회 페이징 처리
 	List<TownBoard> selectNonMemberTownBoardList(int pageStart, int pageEnd)throws Exception;
-	
 	//동네 게시판 비회원이 게시글 수 계산
 	int selectNonMemberCountTownBoard();
 	
 	
-	
+	/*
 	//동네 게시판 비회원이 카테고리 조건으로 전체조회
 	List<TownBoard> selectNonMemberCtgrTownBoardList(int t_ctgr_no)throws Exception;
+	*/
+	//동네 게시판 비회원이 카테고리 조건으로 전체조회 -- 페이징처리
+	List<TownBoard> selectNonMemberCtgrTownBoardList(int t_ctgr_no,int pageStart, int pageEnd)throws Exception;
+	//동네 게시판 카테고리 조건 비회원이 게시글 수 계산
+	int selectNonMemberCountCtgrTownBoard(int t_ctgr_no);
+	
+	
+	
 	
 	/*
 	//동네 게시판 회원이 좌표값 조건으로 전체조회 

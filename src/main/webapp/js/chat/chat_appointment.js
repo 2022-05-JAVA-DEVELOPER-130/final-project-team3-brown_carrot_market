@@ -19,9 +19,10 @@
 	var lastIndexCount=location.href.lastIndexOf('/');
 	var changeUrl=location.href.substr(lastIndexCount+1);
 	
+	console.log("수정 url:"+changeUrl);
 	
 	if(changeUrl=="chat_appointment_change"){
-		$(window).on("load",function(){
+	
 			$.ajax({
 				url:'promise_check',
 				method:"POST",
@@ -35,10 +36,14 @@
 					$('#chatAppTime').val(dateidx.substr(11));
 					$('#chatAppTime').trigger('change');
 					$('#searchChatAppSpot').val(jsonResult.data.c_app_spot);
+					chatAppspot=jsonResult.data.c_app_spot;
+					chatAppLat=jsonResult.data.c_app_lat;
+					chatAppLng=jsonResult.data.c_app_lng;
+
 					$('#btnChatAppSpot').trigger('click');
 				}
 			});
-		});
+		
 	}
 	
 	$('#datePicker').datepicker({
@@ -62,6 +67,7 @@ $('#chatAppTime').on('change',function(){
 /***약속 장소 ******/
 
 $('#btnChatAppSpot').click(function(e){
+	console.log(">>>>>>>>>장소 찾기 버튼 클릭 ");
 	    if($('#searchChatAppSpot').val()==""){
 		alert("장소를 입력해주세요");
 		return false;
@@ -132,6 +138,9 @@ function displayMarker(place) {
         infowindow.open(map, marker_org);
         
       chatAppspot=place.place_name+"("+place.road_address_name+")";
+     
+     
+    console.log("수정 load 시장소: "+chatAppspot);
 
    
 }
@@ -281,8 +290,39 @@ jsonData.data=[{
 })
 
 $('#chatAppDeleteSubmit').click(function(e){
+	alert("약속 삭제하시겠습니까?")
+	
 	e.preventDefault();
 	e.stopPropagation();
+	
+	jsonData.mId=window.opener.loginId;
+jsonData.your_id=window.opener.yourId;
+jsonData.msg="약속 삭제";
+jsonData.code="3";
+jsonData.data=[{
+			c_content_no:"",
+			c_content:`${window.opener.loginId} 님이 약속을 취소했습니다!`,
+			send_time:"",
+			c_read:"0",
+			user_id:"admin", //보내는 아이디 admin_promise 변경 
+			c_room_no:window.opener.c_room_no
+		}]
+	
+	$.ajax({
+		url:"promise_delete",
+		data:JSON.stringify(jsonData.data[0]),
+			type:"POST",
+			async:true,
+			contentType: "application/json; charset=utf-8", //헤더의 Content-Type을 설정
+    		dataType: "JSON", //응답받을 데이터 타입 (XML,JSON,TEXT,HTML,JSONP)   
+    		
+		success:function(result){
+			console.log("promsie DELETE success");
+			window.opener.socket.send(JSON.stringify(jsonData));
+  		    self.close();
+		}
+		
+	})
 });
 
 //약속 수정 

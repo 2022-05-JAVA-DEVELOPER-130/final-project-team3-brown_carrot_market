@@ -25,7 +25,6 @@
 
     <!-- javaScript -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
@@ -41,7 +40,6 @@
 
     <!-- Header Area -->
 			<jsp:include page="common/include_common_header.jsp"/>
-
     <!-- Header Area End -->
     
     <!-- Breadcumb Area -->
@@ -52,6 +50,7 @@
                     <h5>구매내역</h5>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item">거래내역</li>
                         <li class="breadcrumb-item active">구매내역</li>
                     </ol>
                 </div>
@@ -78,12 +77,15 @@
 	                                    </tr>
 	                                </thead>
 	                                <tbody>
-									    <c:forEach items="${ordersList}" var="Orders">
+	                                
+	                                
+									    <c:forEach items="${ordersList}" var="Orders" varStatus="status">
 		                                    <tr>
 		                                        <!--<th scope="row">
 		                                            <i class="icofont-close"></i>
 		                                        </th>-->
 		                                        <td>
+				                                    <input type="hidden" class="" name="orders_no_${status.index}" value="${Orders.orders_no}" >
 		                                        	<c:set var="product_date" value="${Orders.product.p_date}"/>
 		                                        	${fn:substring(product_date,0,10)}
 		                                        </td>
@@ -97,13 +99,38 @@
 		                                        	${Orders.product.p_price}
 		                                        </td>
 		                                        <td>
-		                                            <div class="">
+		                                            <div class="" name="">
 		                                                <!-- <input type="button" class="badge badge-light" id=""  name="" >후기작성 -->
-		                                                <a href="#" class="badge badge-primary" style="height:20px;font-size:1rem">작성하기</a>
+		                                                <script type="text/javascript">
+		                                                	 console.log($('input[name=orders_no_${status.index}]').val());
+		                                                	 var orders_no = $('input[name=orders_no_${status.index}]').val();
+			                                                $.ajax({
+			                                					url : 'isExisted_review_check_json',
+			                                					method : 'POST',
+			                                					dataType : 'json',
+			                                					data : {
+			                                						"orders_no": orders_no
+			                                					},
+			                                					success : function(jsonResult) {
+			                                						console.log("result: "+jsonResult.data);
+			                                						if(jsonResult.data==0){
+			                                							$('#orders_no_${status.index}_review').text('작성하기');
+			                                							$('#orders_no_${status.index}_review').addClass('badge-carrot');
+			                                							
+			                                						}else if (jsonResult.data==1) {
+			                                							$('#orders_no_${status.index}_review').text('보러가기');
+			                                							$('#orders_no_${status.index}_review').addClass('badge-secondary');
+																	}
+			                                					}
+			                                				});
+		                                                </script>
+		                                                <a href="#" class="badge" id="orders_no_${status.index}_review" style="height:20px;font-size:1rem"></a>
 		                                            </div>
 		                                        </td>
 		                                    </tr>
-										</c:forEach>    
+										</c:forEach>  
+										
+										  
 	                                </tbody>
 	                            </table>
 	                        </div>
