@@ -38,21 +38,28 @@ public class UserInfoRestController {
 
 	@LoginCheck
 	@PostMapping(value = "/user_session_check_json")
-	public Map user_session_check_json(HttpSession session) throws Exception{
+	public Map user_session_check_json(HttpServletRequest request) throws Exception{
 		Map resultMap=new HashMap();
 		int code=1;
 		String url="index";
 		String msg="세션존재 안함XX";
 		List<UserInfo> resultList=new ArrayList<UserInfo>();
-		String sUserId=(String)session.getAttribute("sUserId");
+		String sUserId=(String)request.getSession().getAttribute("sUserId");
 		System.out.println("user_session_check_json : sUserId >>> "+sUserId);
 		if(sUserId!=null) {
 			UserInfo sUser=userService.findUser(sUserId);
-			System.out.println("sUser: "+sUser);
+			request.getSession().setAttribute("sUser", sUser);
 			
 			/***********수정 필요***********/
-			Address sAddress=(Address)session.getAttribute("sAddress");
-			System.out.println("sAddress: "+sAddress);
+			//우선은 address_range()>0 인 주소만 넣었습니다.
+			if(sUser.getAddressList()!=null) {
+				for(Address address: sUser.getAddressList()) {
+					if(address.getAddress_range()>0) {
+						request.getSession().setAttribute("sAddress", address);
+						System.out.println("sAddress: "+address);
+					}
+				}
+			}
 			/******************************/
 			
 			code=2;
@@ -61,7 +68,7 @@ public class UserInfoRestController {
 			resultList.add(sUser);
 			resultMap.put("sUserId",sUserId);
 			resultMap.put("sUser",sUser);
-			resultMap.put("sAddress",sAddress);
+			//resultMap.put("sAddress",sAddress);
 		}
 		
 		resultMap.put("code", code);

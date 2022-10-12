@@ -1,11 +1,10 @@
-/*
-게시물 리스트 변경
-*/
 function changeQnaList(pageno){
 	$.ajax({
-		url: "townBoard_list_nonmember_rest",
+		url: "townBoard_list_rest",
 		method: "post",
-		data: {"pageno" :pageno},
+		data: {
+			"pageno" :pageno
+				},
 		dataType: "json",
 		success:function(resultObj){
 			console.log(resultObj);
@@ -33,10 +32,7 @@ function changeQnaList(pageno){
                             <a href="single-blog.html">Continue Reading <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                         </div>
                         `;
-                        
-                        
-	                
-                    
+                     
 				});
 				$("#townBoard_list_tbody").html(htmlBuffer);
 				let paginationBuffer = ``;
@@ -65,6 +61,8 @@ function changeQnaList(pageno){
 		}
 	});
 }
+
+
 
 /*
 게시글 목록 이동

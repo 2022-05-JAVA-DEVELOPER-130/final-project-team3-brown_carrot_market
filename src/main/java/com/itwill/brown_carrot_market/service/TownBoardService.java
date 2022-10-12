@@ -11,7 +11,6 @@ public interface TownBoardService {
 	
 	//동네 게시판 비회원이 전체조회
 	PageMakerDto<TownBoard> selectNonMemberTownBoardList(int currentPage)throws Exception;
-	
 	//동네 게시판 비회원이 게시글 수 계산
 	int selectNonMemberCountTownBoard();
 	
@@ -20,8 +19,15 @@ public interface TownBoardService {
 	//동네 게시판 비회원이 카테고리 조건으로 전체조회
 	List<TownBoard> selectNonMemberCtgrTownBoardList(int t_ctgr_no)throws Exception;
 	
-	//동네 게시판 회원이 좌표값 조건으로 전체조회 -- 좌표 범위대로 나오는지 다시 확인하기..
-	List<TownBoard> selectTownBoardListCoordinate(Address address)throws Exception;
+	
+	
+	//동네 게시판 회원이 좌표값 조건으로 전체조회 
+	PageMakerDto<TownBoard> selectTownBoardListCoordinate(Address address, int currentPage)throws Exception;
+	//동네 게시판 회원이 게시글 수 계산
+	int selectMemberCountTownBoard(Address address);
+	
+	
+	
 	
 	//동네 게시판 회원이 좌표값과 카테고리 조건으로 전체조회 -- 좌표 범위대로 나오는지 다시 확인하기..
 	List<TownBoard> selectTownBoardCtgrListCoordinate(int t_ctgr_no ,Address address)throws Exception;
