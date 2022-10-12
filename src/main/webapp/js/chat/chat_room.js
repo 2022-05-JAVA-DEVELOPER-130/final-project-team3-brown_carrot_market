@@ -776,6 +776,46 @@ function connectWS(){
 		}else{			
 		$('#chat_history').append(message_admin_promise(onmsg));
 		}
+			/*****************메시지 보내는 순간 리스트 새로고침***********************/
+			
+			console.log("채팅방 새로고침");
+			$('#chatRoomList').html("");
+			var reload_id={
+		
+		"loginId":loginId
+	}
+			$.ajax({
+		
+		
+		url:"chat_room_reload_rest",
+		method:"POST",
+		data: JSON.stringify(reload_id),
+		async: true,
+        contentType: "application/json; charset=utf-8", //헤더의 Content-Type을 설정
+        dataType: "JSON", //응답받을 데이터 타입 (XML,JSON,TEXT,HTML,JSONP)  
+				
+    			    			
+	
+		
+		success:function(jsonResult){
+			var chatList=jsonResult.data;
+		
+			console.log("불러오기");
+			console.log(chatList);
+			$('#chatRoomList').html("");
+			for(const item of chatList){
+				
+			$('#chatRoomList').append(chatRoomListNew(item));
+				
+				
+			}
+
+		}
+		
+	});
+	/****************************************************************************/
+	
+	
 	}
 	}
 	
@@ -940,7 +980,7 @@ function chatRoomListNew(list){
 		list_content="사진 전송";
 	}
 	return `        <li class="clearfix">
-                        <img src='img/user_profile/${list.you_image}' alt="avatar">
+                        <img src='img/user_profile/${list.you_image}' alt="avatar"><img src="img/product_img/${list.p_img}" style="float:right; width:45px; height:45px; border-radius: 0%">
                        
                         <div class="about">
 							<input name="chatRoomNo" type="hidden" value=${list.c_room_no}/>
