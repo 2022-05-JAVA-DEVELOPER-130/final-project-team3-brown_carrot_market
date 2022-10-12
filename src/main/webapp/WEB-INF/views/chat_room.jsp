@@ -231,7 +231,7 @@ body{
         /*스크롤 하단 고정*/
     height:700px;
     overflow-y: auto;
-    display:flex;
+	display:flex;
     flex-direction: column-reverse;
 }
 

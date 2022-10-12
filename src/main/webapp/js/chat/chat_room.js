@@ -311,7 +311,21 @@ $.ajax({
 			};
 			
 			//$('.chat-history').scrollTop($('.chat-history').prop('scrollHeight'));
-			$('#chat-history').scrollTop($('#chat-history')[0].scrollHeight);
+	
+			//$('#chat-history').scrollTop($('#chat-history')[0].scrollHeight);
+			if($('#chat-history').get(0).scrollHeight>$('#chat-history').height()){
+    			// 세로 스크롤바가 있을 경우 처리
+			$('#chat-history').css("display","flex");
+			console.log("스크롤바 있음");
+}else{
+			$('#chat-history').css("display","block");
+			console.log("스크롤바 없음");
+	
+}
+			
+			
+			
+			
 			
 		}
 	});
@@ -319,7 +333,11 @@ $.ajax({
 	
 	});
 	
-	
+
+function scrollbarVisible(element) {
+  return element.scrollHeight > element.clientHeight;
+}
+
 	//날짜 변환 
 	function date_string(dateString){
 		var dateConv = Date.parse(dateString);
