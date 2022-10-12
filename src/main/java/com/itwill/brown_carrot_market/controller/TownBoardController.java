@@ -24,13 +24,17 @@ public class TownBoardController {
 		try {
 			String sUserId = (String)session.getAttribute("sUserId");
 			Address sAddress = (Address)session.getAttribute("sAddress");
+			System.out.println("townBoard_list: sAddress" +sAddress);
 			
 			//회원 게시판 전체조회
 			if(sUserId != null) {
-				
+				PageMakerDto<TownBoard> townBoardList = townBoardService.selectTownBoardListCoordinate(sAddress, pageno);
+				model.addAttribute("townBoardList", townBoardList);
+				model.addAttribute("pageno", pageno);
 			}
+			
+			//비회원 게시판 전체조회	
 			if(sUserId == null) {
-				//비회원 게시판 전체조회	
 				PageMakerDto<TownBoard> townBoardList = townBoardService.selectNonMemberTownBoardList(pageno);
 				model.addAttribute("townBoardList", townBoardList);
 				model.addAttribute("pageno", pageno);
