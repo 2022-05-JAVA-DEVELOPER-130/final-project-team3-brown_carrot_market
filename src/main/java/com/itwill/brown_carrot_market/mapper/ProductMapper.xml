@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwill.brown_carrot_market.mapper.ProductMapper">
-	 
 	<resultMap id="productResultMap" type="com.itwill.brown_carrot_market.dto.Product" >
 		<result column="P_NO" property="p_no"/>
 		<result column="P_TITLE" property="p_title"/>
@@ -121,6 +120,10 @@
                  where p.p_no=#{p_no} 
     </update>
     
+    <!-- 판매여부 수정(p_sell) -->
+    <update id="updateProductSell" parameterType="com.itwill.brown_carrot_market.dto.Product">
+    update product p set p.p_sell=#{p_sell} where p.p_no=#{p_no}
+    </update>
     
     
     

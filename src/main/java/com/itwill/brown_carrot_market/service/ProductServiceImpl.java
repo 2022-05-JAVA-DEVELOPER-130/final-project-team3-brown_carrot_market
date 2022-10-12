@@ -92,5 +92,13 @@ public class ProductServiceImpl implements ProductService{
 		
 		return productImageDao.selectProductImgList(p_no);
 	}
+
+	@Override
+	public int updateProductSell(int p_sell, int p_no) throws Exception {
+		// TODO Auto-generated method stub
+		return productDao.updateProductSell(p_sell, p_no);
+	}
+	
+	
 	
 }
