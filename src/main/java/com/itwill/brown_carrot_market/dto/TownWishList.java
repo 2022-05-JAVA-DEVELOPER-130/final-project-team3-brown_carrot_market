@@ -6,9 +6,9 @@ T_WL_NO	NUMBER(10,0)
 USER_ID	VARCHAR2(10 BYTE)
 T_NO	NUMBER(10,0)
 	 */
-	public int t_wl_no;
-	public UserInfo userInfo;
-	public TownBoard townBoard;
+	private int t_wl_no;
+	private UserInfo userInfo;
+	private TownBoard townBoard;
 	
 	public TownWishList() {
 		// TODO Auto-generated constructor stub

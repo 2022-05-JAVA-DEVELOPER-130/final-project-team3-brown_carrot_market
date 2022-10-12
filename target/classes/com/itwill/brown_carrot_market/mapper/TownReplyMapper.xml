@@ -5,11 +5,16 @@
 	<!-- 댓글 등록 -->
 	<insert id="insertTownBoardReply" parameterType="com.itwill.brown_carrot_market.dto.TownReply">
 		insert into town_reply(T_REPLY_NO, T_REPLY_TITLE, T_REPLY_CONTENT,T_REPLY_DATE ,GROUPNO,STEP,DEPTH,user_id, t_no)
-		values(TOWN_REPLY_T_REPLY_NO_SEQ.nextval,#{t_reply_title},#{t_reply_content},sysdate,#{groupno},#{step},#{depth},#{user_id},#{t_no});
+		values(TOWN_REPLY_T_REPLY_NO_SEQ.nextval,#{t_reply_title},#{t_reply_content},sysdate,#{townBoard.t_no},#{step},#{depth},#{userInfo.user_id},#{townBoard.t_no})
 	</insert>
 	<!-- 댓글 삭제 -->
 	<delete id="deleteTownBoardReply" parameterType="int">
 		delete town_reply where t_reply_no = #{t_reply_no}
 	</delete>
+	
+	<!-- 댓글 수정 -->
+	<update id="updateTownBoardReply" parameterType="com.itwill.brown_carrot_market.dto.TownReply">
+		update town_reply set t_reply_title=#{t_reply_title}, t_reply_content=#{t_reply_content} where t_reply_no=#{t_reply_no}
+	</update>
 
 </mapper>

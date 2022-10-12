@@ -1,44 +1,90 @@
 package com.itwill.brown_carrot_market.dto;
 
+import java.sql.Date;
+
+/*
+이름        널?       유형           
+--------- -------- ------------ 
+ORDERS_NO NOT NULL NUMBER(10)   
+P_NO               NUMBER(20)   
+USER_ID            VARCHAR2(10) 
+ */
 public class Orders {
 	private int orders_no;
-	private Product p_no;
-	private UserInfo user_id;
-	public Orders() {
-		super();
-	}
+	private Product product;
+	private UserInfo userinfo;
+	private Transfer transfer;
+	private Date orders_date;
+	private ProductImage productImage;
 	
-	public Orders(int orders_no, Product p_no, UserInfo user_id) {
+	public Orders() {
+
+	}
+
+	public Orders(int orders_no, Product product, UserInfo userinfo, Transfer transfer, Date orders_date,
+			ProductImage productImage) {
 		super();
 		this.orders_no = orders_no;
-		this.p_no = p_no;
-		this.user_id = user_id;
+		this.product = product;
+		this.userinfo = userinfo;
+		this.transfer = transfer;
+		this.orders_date = orders_date;
+		this.productImage = productImage;
 	}
 
 	public int getOrders_no() {
 		return orders_no;
 	}
+
 	public void setOrders_no(int orders_no) {
 		this.orders_no = orders_no;
 	}
-	public Product getP_no() {
-		return p_no;
+
+	public Product getProduct() {
+		return product;
 	}
-	public void setP_no(Product p_no) {
-		this.p_no = p_no;
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
-	public UserInfo getUser_id() {
-		return user_id;
+
+	public UserInfo getUserinfo() {
+		return userinfo;
 	}
-	public void setUser_id(UserInfo user_id) {
-		this.user_id = user_id;
+
+	public void setUserinfo(UserInfo userinfo) {
+		this.userinfo = userinfo;
 	}
-	
+
+	public Transfer getTransfer() {
+		return transfer;
+	}
+
+	public void setTransfer(Transfer transfer) {
+		this.transfer = transfer;
+	}
+
+	public Date getOrders_date() {
+		return orders_date;
+	}
+
+	public void setOrders_date(Date orders_date) {
+		this.orders_date = orders_date;
+	}
+
+	public ProductImage getProductImage() {
+		return productImage;
+	}
+
+	public void setProductImage(ProductImage productImage) {
+		this.productImage = productImage;
+	}
+
 	@Override
 	public String toString() {
-		return "Orders [orders_no=" + orders_no + ", p_no=" + p_no + ", user_id=" + user_id + "]";
+		return "Orders [orders_no=" + orders_no + ", product=" + product + ", userinfo=" + userinfo + ", transfer="
+				+ transfer + ", orders_date=" + orders_date + ", productImage=" + productImage + "]";
 	}
-	
-	
+
 	
 }
