@@ -61,9 +61,18 @@ public class TownBoardController {
 			
 			//회원 게시판 전체조회
 			if(sUserId != null) {
-				PageMakerDto<TownBoard> townBoardList = townBoardService.selectTownBoardListCoordinate(sAddress, pageno);
-				model.addAttribute("townBoardList", townBoardList);
-				model.addAttribute("pageno", pageno);
+				
+				if(t_ctgr_no == 0) {
+					PageMakerDto<TownBoard> townBoardList = townBoardService.selectTownBoardListCoordinate(sAddress, pageno);
+					model.addAttribute("townBoardList", townBoardList);
+					model.addAttribute("pageno", pageno);
+					
+				}
+				if(t_ctgr_no != 0) {
+					//PageMakerDto<TownBoard> townBoardList = townBoardService;
+				}
+				
+				
 			}
 			
 			//비회원 게시판 전체조회	
@@ -89,7 +98,7 @@ public class TownBoardController {
 		}
 		
 		
-		return "town_boardList";
+		return "townboard_list";
 	}
 	
 	/*
@@ -121,11 +130,26 @@ public class TownBoardController {
 		}
 		
 		
-		return "town_boardList";
+		return "townboard_list";
 		
 		
 	}
 	*/
+	@RequestMapping(value = "/townboard_view", params = "t_no")
+	public String townBoard_view(@RequestParam int t_no, Model model) {
+		
+		try {
+		TownBoard townBoard = townBoardService.selectTownBoardOne(t_no);
+		model.addAttribute("townBoard", townBoard);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+		
+		return "townboard_view";
+		
+	}
+	
 	
 	
 	
