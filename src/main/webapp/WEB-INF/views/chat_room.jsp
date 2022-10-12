@@ -67,24 +67,22 @@
 									<a href="javascript:void(0);" data-toggle="modal"
 										data-target="#view_info"> <img
 										src="img/user_profile/carrot3.png"
-										alt="avatar">
+										alt="avatar" style="float:left;">
 									</a>
 									<div class="chat-about">
 										<input name="myId" id="myId" type="hidden" value=${loginId}>
 										<input name="path" id="path" type="hidden" value=${path}>
 										<input name="newChatRoomNo" id="newChatRoomNo" type="hidden" value=${chat_room_no}>
-										<h6 class="m-b-0"><b>대장 토끼</b></h6>
+										<h6 class="m-b-0" style="margin-bottom:2px;"><b>대장 토끼</b></h6>
 										<small>자주 묻는 질문</small>
 										
 										
 									</div>
 								</div>
-								<div class="col-lg-4 ">
-								<img src="img/user_profile/carrot3.png" style="float:left; width:45px; height:45px; border-radius: 0%">
-								<h6 class="m-b-0" style="float:left; margin-left:5px;"><b>대장 토끼</b></h6>
-								<small style="float:left; margin-left:5px;">자주 묻는 질문</small>
-    							 
-    							 </div>	
+								<div class="col-lg-4">
+
+								 </div>	
+								 
 								
 								<div class="col-lg-4 hidden-sm text-right">
 
@@ -249,10 +247,12 @@ body{
 }
 
 .chat .chat-header img {
-    float: left;
+    /* 헤더 프로덕트 부분 가운데 맞춤을 위해..*/
+    /*float: left;*/
     border-radius: 40px;
     width: 40px
 }
+
 
 .chat .chat-header .chat-about {
     float: left;

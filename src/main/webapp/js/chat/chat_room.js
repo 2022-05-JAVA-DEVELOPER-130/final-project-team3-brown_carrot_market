@@ -503,20 +503,29 @@ function chat_head(id,img,room_no,fresh,product,p_img){
 									<a href="javascript:void(0);" data-toggle="modal"
 										data-target="#view_info"> <img
 										src="img/user_profile/${img}"
-										alt="avatar">
+										alt="avatar" style="float:left;">
 									</a>
 									<div class="chat-about">
-										<h6 class="m-b-0">${id}</h6>
+										<h6 class="m-b-0" style="margin-bottom:1px">${id}</h6>
 										
 										<small>${fresh}</small>
 									</div>
 								</div>
-								<div class="col-lg-4 ">
-								<img src="img/product_img/${p_img}" style="float:left; width:50px; height:50px; border-radius: 0%">
-								<h6 class="m-b-0" style="float:left; margin-left:5px;"><b>${product.p_title}</b></h6>
-								<small style="float:left; margin-left:5px;">${product.p_price}</small>
-    							 
-    							 </div>	
+								
+								
+							<div class="col-lg-4">
+						 
+    							<div style="text-align:center;">
+								<img src="img/product_img/${p_img}" style="border-radius: 0%; width:50px; height:50px;">
+								<h6 class="m-b-0" style="margin-top:10px; margin-bottom:2px;"><b>${product.p_title}</b></h6>
+								<small>가격: ${product.p_price}원</small> 
+								<div>
+								<small>주소: ${product.p_address_name}</small></div>
+								 </div>	
+								 </div>
+								
+
+
 								<div class="col-lg-4 hidden-sm text-right">
 									
 									<a  href="javascript:void(0);" class="btn btn-outline-info" ><i
@@ -935,8 +944,8 @@ function chatRoomHeadGongji(){
 								<div class="col-lg-12">
 									<a href="javascript:void(0);" data-toggle="modal"
 										data-target="#view_info"> <img
-										src="img/user_profile/wow.jpg"
-										alt="avatar">
+										src="img/user_profile/carrot3.png"
+										alt="avatar" style="float:left;">
 									</a>
 									<div class="chat-about">
 	
