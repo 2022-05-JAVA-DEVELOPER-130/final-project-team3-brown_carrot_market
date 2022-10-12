@@ -319,7 +319,7 @@ jsonData.data=[{
 		success:function(result){
 			console.log("promsie DELETE success");
 			window.opener.socket.send(JSON.stringify(jsonData));
-  		    
+  		    self.close();
 		}
 		
 	})
