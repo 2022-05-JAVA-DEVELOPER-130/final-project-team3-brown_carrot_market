@@ -25,7 +25,7 @@ public class TownBoardRestController {
 	 * 게시글 리스트 반환 (REST)
 	 */
 	@RequestMapping("/townBoard_list_rest")
-	public  Map<String, Object> townBoard_list_rest(@RequestParam(required = false, defaultValue = "1") Integer pageno, HttpSession session) throws Exception{
+	public  Map<String, Object> townBoard_list_rest(@RequestParam(required = false, defaultValue = "1") Integer pageno, HttpSession session, @RequestParam(required = false, defaultValue = "0") int t_ctgr_no) throws Exception{
 		Map<String, Object> resultMap = new HashMap<>();	
 		PageMakerDto<TownBoard> townBoardList = null;
 		String sUserId = (String)session.getAttribute("sUserId");
@@ -41,11 +41,20 @@ public class TownBoardRestController {
 			}
 			//비회원 게시글 리스트 반환
 			if(sUserId == null) {
-				townBoardList = townBoardService.selectNonMemberTownBoardList(pageno);
+				if(t_ctgr_no==0) {
+					townBoardList = townBoardService.selectNonMemberTownBoardList(pageno);
+					resultMap.put("errorCode",2); 
+					resultMap.put("errorMsg", "성공");
+					resultMap.put("data", townBoardList);
+					
+				}
+				if(t_ctgr_no != 0) {
+					townBoardList = townBoardService.selectNonMemberCtgrTownBoardList(t_ctgr_no, pageno);
+					resultMap.put("errorCode",3); 
+					resultMap.put("errorMsg", "성공");
+					resultMap.put("data", townBoardList);
+				}
 				
-				resultMap.put("errorCode",2); 
-				resultMap.put("errorMsg", "성공");
-				resultMap.put("data", townBoardList);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

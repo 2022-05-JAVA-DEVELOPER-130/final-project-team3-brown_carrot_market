@@ -53,12 +53,23 @@ public class TownBoardDaoImpl implements TownBoardDao{
 	}
 	
 
+	
+	
+	//비회원이 동네 게시판 카테고리 조건 전체 조회 페이징처리
 	@Override
-	public List<TownBoard> selectNonMemberCtgrTownBoardList(int t_ctgr_no) throws Exception{
+	public List<TownBoard> selectNonMemberCtgrTownBoardList(int t_ctgr_no, int pageStart, int pageEnd) throws Exception {
 		System.out.println(">>> townBoardDaoImpl : selectNonMemberCtgrTownBoardList()호출");
-		return townBoardMapper.selectNonMemberCtgrTownBoardList(t_ctgr_no);
+		return townBoardMapper.selectNonMemberCtgrTownBoardList(t_ctgr_no, pageStart, pageEnd);
 	}
-
+	//동네 게시판 카테고리 조건 비회원이 게시글 수 계산
+	@Override
+	public int selectNonMemberCountCtgrTownBoard(int t_ctgr_no) {
+		return townBoardMapper.selectNonMemberCountCtgrTownBoard(t_ctgr_no);
+	}
+	
+	
+	
+	
 	//회원이 동네 게시판 전체 조회
 	@Override
 	public List<TownBoard> selectTownBoardListCoordinate(Address address,int pageStart, int pageEnd) throws Exception{
@@ -138,6 +149,8 @@ public class TownBoardDaoImpl implements TownBoardDao{
 		System.out.println(aa);
 		return aa;
 	}
+
+
 
 	
 

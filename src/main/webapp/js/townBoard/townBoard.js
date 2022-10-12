@@ -1,9 +1,12 @@
-function changeQnaList(pageno){
+
+
+function changeQnaList(pageno,t_ctgr_no){
 	$.ajax({
 		url: "townBoard_list_rest",
 		method: "post",
 		data: {
-			"pageno" :pageno
+			"pageno" :pageno,
+			"t_ctgr_no":t_ctgr_no
 				},
 		dataType: "json",
 		success:function(resultObj){
@@ -12,6 +15,9 @@ function changeQnaList(pageno){
 				let data = resultObj.data;
 				let htmlBuffer = ``;
 				data.itemList.forEach(function(townBoard, i){
+				
+				
+				
 				
 				   htmlBuffer += `<div class="blog_post_thumb">`;
 	               if(townBoard.townImageList.length != 0 ){

@@ -53,6 +53,11 @@ public class ReviewServiceImpl implements ReviewService{
 			throws Exception {
 		return reviewDao.findReceivedReviewBySeller(user_id);
 	}
+
+	@Override
+	public int isExistedReviewByOrdersNoId(Review review) throws Exception {
+		return reviewDao.isExistedReviewByOrdersNoId(review);
+	}
 	
 	
 	
