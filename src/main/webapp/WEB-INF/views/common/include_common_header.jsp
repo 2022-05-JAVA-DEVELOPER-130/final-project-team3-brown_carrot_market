@@ -163,9 +163,10 @@
 
                             <!-- Chat -->
                             <div id="chat-area" class="cart-area chat-area" >
-                                <div class="cart--btn"><i class="icofont-chat"></i> <span class="cart_quantity">2</span></div>
+                                <a href="chat_room" class="cart--btn" style="display:block;"><i class="icofont-chat"></i> <span class="cart_quantity">2</span></a>
 
                                 <!-- Cart Dropdown Content -->
+                                <!--  
                                 <div class="cart-dropdown-content">
                                     <ul class="cart-list">
                                         <li>
@@ -213,6 +214,7 @@
                                         <a href="checkout-1.html" class="btn btn-primary d-block">Checkout</a>
                                     </div>
                                 </div>
+                                -->
                             </div>
 <!-- [nav] Account Start!!!!! **************************************** -->
                             <!-- Account -->
@@ -223,7 +225,7 @@
                                 <ul class="user-meta-dropdown">
                                     <li class="user-title"><span>Hello,</span> Lim Sarah</li>
                                     <li><a href="my-account.html">My Account</a></li>
-                                    <li><a href="chat_room">Chatting</a></li>
+                                   
                                     <li><a href="login.html"><i class="icofont-logout"></i> 로그아웃</a></li>
                                 </ul>
                             </div>
