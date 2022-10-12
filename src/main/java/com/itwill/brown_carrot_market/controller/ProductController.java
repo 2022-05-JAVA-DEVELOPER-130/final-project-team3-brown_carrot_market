@@ -128,7 +128,20 @@ public class ProductController {
 	*/
 	
 	//상품 판매상태
-	
+	@RequestMapping(value = "/product_modify_sell_action")
+	public String product_modify_sell_action(int p_sell,@RequestParam(value = "p_no", required = false, defaultValue = "")int p_no) {
+		String forwardPath = "";
+		try {
+			int updateRowCount = productService.updateProductSell(p_sell, p_no);
+			forwardPath = "redirect:product_list";
+		} catch (Exception e) {
+			e.printStackTrace();
+			forwardPath = "product_list";
+		}
+		
+		
+		return forwardPath;
+	}
 	
 	
 	
