@@ -149,14 +149,22 @@ $.ajax({
 						
 					$('#chat_history').append(message_admin(item));
 				}
-					else if(item.user_id=="adminP"){
+					else if(item.user_id=="adminP"&&promiseData.c_app_lat!=null){
 						$('#chat_history').append( `<li class="clearfix">
 
                            <div class="message admin-message" margin:auto>${item.c_content}
                            <br>약속 장소 : <a href="javascript:void(popupMap(${promiseData.c_app_lat},${promiseData.c_app_lng}))" style="font-size:6px;",id="chat_spot_map">${promiseData.c_app_spot}</a></div>
                         </li>`);
 						
-					}else{
+					}else if(item.user_id=="adminP"){
+						$('#chat_history').append( `<li class="clearfix">
+
+                           <div class="message admin-message" margin:auto>${item.c_content}
+                           <br>약속 장소 : <a style="font-size:6px;",id="chat_spot_map">약속이 취소되었습니다.</a></div>
+                        </li>`);
+					}
+					
+					else{
 					console.log("상대가 보낸 메세지");
 			$('#chat_history').append(message_other(item));
 			}
@@ -207,9 +215,13 @@ $(document).on('click','[id^=btnCall]',function(e){
 		dataType:'JSON',
 		success:function(jsonResult){
 			//console.log("약속장소:"+spot)
+			
+			if(jsonResult.code=="1"){
 			promiseData= jsonResult.data;
 			c_app_lat=promiseData.c_app_lat;
 			c_app_lng=promiseData.c_app_lng;
+			}
+			
 			
 			
 			
@@ -293,13 +305,19 @@ $.ajax({
 					if(item.user_id=="admin"){
 					$('#chat_history').append(message_admin(item));
 				}
-					else if(item.user_id=="adminP"){
+					else if(item.user_id=="adminP"&&c_app_lat!=null){
 						$('#chat_history').append( `<li class="clearfix">
 
                            <div class="message admin-message" margin:auto>${item.c_content}
-                           <br>현재 약속 장소 : <a href="javascript:void(popupMap(${promiseData.c_app_lat},${promiseData.c_app_lng}))" style="font-size:6px;",id="chat_spot_map">${promiseData.c_app_spot}</a></div>
+                           <br>약속 장소 : <a href="javascript:void(popupMap(${promiseData.c_app_lat},${promiseData.c_app_lng}))" style="font-size:6px;",id="chat_spot_map">${promiseData.c_app_spot}</a></div>
                         </li>`);
 						
+					}else if(item.user_id=="adminP"){
+						$('#chat_history').append( `<li class="clearfix">
+
+                           <div class="message admin-message" margin:auto>${item.c_content}
+                           <br>약속 장소 : <a style="font-size:6px;",id="chat_spot_map">약속이 취소되었습니다.</a></div>
+                        </li>`);
 					}else{
 					console.log("상대가 보낸 메세지");
 			$('#chat_history').append(message_other(item));
@@ -753,7 +771,11 @@ function connectWS(){
 		
 	}else if(onmsg.code=="3"){
 		console.log("약속 잡기");
+		if(onmsg.user_id=='admin'){
+			$('#chat_history').append(message_admin(onmsg));
+		}else{			
 		$('#chat_history').append(message_admin_promise(onmsg));
+		}
 	}
 	}
 	

@@ -424,6 +424,25 @@ public class ReplyEchoHandler {
 		return resultMap;
 	}
 	
+	//약속 삭제 
+	@PostMapping(value="/promise_delete")
+	public Map deletePromise(@RequestBody Map<String,String> message) {
+		Map resultMap=new HashMap();
+		String code="";
+		
+		ChatContents newChat = new ChatContents(0, String.valueOf(message.get("c_content")), null, null,
+				String.valueOf(message.get("user_id")), Integer.valueOf(message.get("c_room_no")));
+		try {
+			chatService.promiseDelete(Integer.valueOf(message.get("c_room_no")));
+			chatService.insertChat(newChat);
+			code="2";
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		resultMap.put("code", code);
+		return resultMap;
+	}
+	
 	//약속 존재하는지 판단 
 	@PostMapping(value="/promise_check",produces = "application/json;charset=UTF-8")
 	public Map promiseExist(@RequestParam int c_room_no) {
