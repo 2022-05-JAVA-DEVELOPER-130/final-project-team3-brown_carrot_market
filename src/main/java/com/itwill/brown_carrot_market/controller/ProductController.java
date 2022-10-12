@@ -114,6 +114,21 @@ public class ProductController {
 		return forwardPath;
 	}
 	
+	@RequestMapping(value = "/product_delete_action", method = RequestMethod.GET)
+	public String product_delete_action_get() {
+		return "redirect : product_list";
+	}
+	
+	/* 상품삭제
+	@RequestMapping(value = "/product_delete_action", method = RequestMethod.POST)
+	public String product_delete_action() {
+		
+		return "";
+	}
+	*/
+	
+	//상품 판매상태
+	
 	
 	
 	

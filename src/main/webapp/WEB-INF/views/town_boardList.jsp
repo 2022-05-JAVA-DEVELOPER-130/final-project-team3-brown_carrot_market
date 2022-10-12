@@ -71,18 +71,56 @@
                     <div class="blog_sidebar">
                     
                      <!-- Catagory -->
+                    
                         <div class="widget-area catagory_section mb-30">
+                        <div id = "category_list">
                             <h6>Catagory</h6>
                             <ul>
-                                <li><a href="#">동네소식 <span class="text-muted">(21)</span></a></li>
-                                <li><a href="#">같이해요 <span class="text-muted">(5)</span></a></li>
-                                <li><a href="#">동네질문 <span class="text-muted">(17)</span></a></li>
-                                <li><a href="#">동네맛집 <span class="text-muted">(11)</span></a></li>
-                                <li><a href="#">분실/실종센터 <span class="text-muted">(16)</span></a></li>
-                                <li><a href="#">동네사진전 <span class="text-muted">(9)</span></a></li>
+                              <li>
+	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no1" value=1>
+	                              <a href="#">동네생활 <span class="text-muted">(21)</span></a>
+                              </li>
+                              <li>
+	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no2" value=2>
+	                              <a href="#">같이해요<span class="text-muted">(21)</span></a>
+                              </li>
+                              <li>
+	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no3" value=3>
+	                              <a href="#">동네질문<span class="text-muted">(21)</span></a>
+                              </li>
+                              <li>
+	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no4" value=4>
+	                              <a href="#">동네맛집<span class="text-muted">(21)</span></a>
+                              </li>
+                              <li>
+	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no5" value=5>
+	                              <a href="#">취미생활<span class="text-muted">(21)</span></a>
+                              </li>
+                              <li>
+	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no6" value=6>
+	                              <a href="#">일상<span class="text-muted">(21)</span></a>
+                              </li>
+                              <li>
+	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no7" value=7>
+	                              <a href="#">분실/실종센터<span class="text-muted">(21)</span></a>
+                              </li>
+                              <li>
+	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no8" value=8>
+	                              <a href="#">동네사건사고<span class="text-muted">(21)</span></a>
+                              </li>
+                              <li>
+	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no9" value=9>
+	                              <a href="#">해주세요<span class="text-muted">(21)</span></a>
+                              </li>
+                              <li>
+	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no10" value=10>
+	                              <a href="#">동네사진전<span class="text-muted">(21)</span></a>
+                              </li>
+                                
+                               
                             </ul>
                         </div>
-                    
+                    </div>
                     
                         
 
