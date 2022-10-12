@@ -120,7 +120,7 @@
 	hr{
 color:orange;
 border:1px solid orange;
-}
+ }
 	
 	
 	#map{
