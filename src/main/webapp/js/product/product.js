@@ -33,6 +33,12 @@ function productCreate() {
 	document.product_write_form.submit();
 }
 
+function productSell(){
+	document.product_modify_sell_action.action = " product_modify_sell_action"
+	document.product_modify_sell_action.method='POST';
+	document.product_modify_sell_action.submit();
+}
+
 /********************채팅하기!!**************************/
 $(document).ready(function(){
 	$('#btnCreate').click(function(){

@@ -30,6 +30,14 @@
 	background-color: orange;
 }
 */
+.btn-carrot {
+	color: white;
+	background-color: orange;
+}
+.btn-carrot:hover {
+	color: darkgray;
+}
+
 .badge-carrot {
     color: #fff;
     background-color: orange;
