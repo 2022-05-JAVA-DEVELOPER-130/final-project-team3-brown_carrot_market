@@ -22,7 +22,7 @@ public class TownBoardRestController {
 	private TownBoardService townBoardService;
 	
 	/*
-	 * 게시글 리스트 반환 (REST) -- 비회원 전체조회
+	 * 게시글 리스트 반환 (REST)
 	 */
 	@RequestMapping("/townBoard_list_rest")
 	public  Map<String, Object> townBoard_list_rest(@RequestParam(required = false, defaultValue = "1") Integer pageno, HttpSession session) throws Exception{
@@ -31,7 +31,7 @@ public class TownBoardRestController {
 		String sUserId = (String)session.getAttribute("sUserId");
 		Address sAddress = (Address)session.getAttribute("sAddress");
 		try {
-			
+			//회원 게시글 리스트 반환
 			if(sUserId != null) {
 				townBoardList = townBoardService.selectTownBoardListCoordinate(sAddress, pageno);
 				
@@ -39,7 +39,7 @@ public class TownBoardRestController {
 				resultMap.put("errorMsg", "성공");
 				resultMap.put("data", townBoardList);
 			}
-			
+			//비회원 게시글 리스트 반환
 			if(sUserId == null) {
 				townBoardList = townBoardService.selectNonMemberTownBoardList(pageno);
 				
