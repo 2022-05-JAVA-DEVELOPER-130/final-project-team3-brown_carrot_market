@@ -64,10 +64,10 @@ CREATE SEQUENCE product_p_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
 CREATE TABLE payment(
-		payment_no                    		VARCHAR2(30)		 NULL ,
+		merchant_uid                    	VARCHAR2(30)		 NULL ,
 		payment_method                		VARCHAR2(30)		 NULL ,
 		payment_amount                		NUMBER(10)		 NULL ,
-		payment_date                  		DATE		 NULL ,
+		payment_date                  		VARCHAR2(30)		 NULL ,
 		user_id                       		VARCHAR2(30)		 NULL 
 );
 
