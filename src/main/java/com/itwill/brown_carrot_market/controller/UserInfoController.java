@@ -84,7 +84,7 @@ public class UserInfoController {
 	@RequestMapping(value = "/user_kakaologin_action")
 	public String user_kakaologin_action(String user_id, String user_name,String user_email,String user_profile,String user_pw, HttpServletRequest request) throws Exception{
 		
-		UserInfo userInfo = new UserInfo(user_id, user_pw, user_name, user_email, "", 0, 0, user_profile, null);
+		UserInfo userInfo = new UserInfo(user_id, user_pw, user_name, user_email, "010", 0, 0, user_profile, null);
 		
 		int code=0;
 		String url="";
@@ -98,7 +98,6 @@ public class UserInfoController {
 		if(kakaoUser!=null) {
 			request.getSession().setAttribute("sUserId",kakaoUser.getUser_id());
 			request.getSession().setAttribute("sUser", kakaoUser);
-			
 			if(kakaoUser.getAddressList()!=null) {
 				for(Address address: kakaoUser.getAddressList()) {
 					if(address.getAddress_range()>0) {
@@ -108,18 +107,31 @@ public class UserInfoController {
 			}
 			return "redirect:main";
 		}else {	//회원가입
-			userInfo.setUser_phone("010");
+			System.out.println("kakaoUser 회원가입");
 			int result= userService.create(userInfo, null, null);
-			if(result==1) {
+			/*
+			 *  0:아이디중복
+			 *  1:회원가입성공
+			 *  2:초대코드로 회원가입
+			 *  3:존재하지 않는 초대코드로 회원가입 
+			 */
+			if(result!=0) {
+				System.out.print("create - result: "+result);
 				request.getSession().setAttribute("sUserId",userInfo.getUser_id());
-				request.getSession().setAttribute("sUser", userInfo);
+				request.getSession().setAttribute("sUser", userService.findUser(user_id));
+				return "redirect:user_my_account";
+			}else {
+				return "redirect:main";
 			}
-			return "redirect:user_my-account";
 		}
 	}
 
 	@RequestMapping("/user_login")
-	public String user_login_form() {
+	public String user_login_form(HttpServletRequest request) {
+		String sUserId = (String) request.getSession().getAttribute("sUserId");
+		if(sUserId!=null) {
+			return "redirect:user_my_account";
+		}
 		return "user_login";
 	}
 	
@@ -136,24 +148,26 @@ public class UserInfoController {
 		/************** login check **************/
 		System.out.println("기본Controller - user_my_account");
 		String sUserId = (String) request.getSession().getAttribute("sUserId");
-
-		UserInfo sUser = userService.findUser(sUserId);
-		request.getSession().setAttribute("sUser", sUser);
-
-		System.out.println("sUserId: " + sUserId);
-		System.out.println("sUser: " + sUser);
-
-		/*********** 수정 필요 ***********/
-		if (sUser.getAddressList() != null) {
-			for (Address address : sUser.getAddressList()) {
-				if (address.getAddress_range() > 0) {
-					request.getSession().setAttribute("sAddress", address);
-					System.out.println("sAddress : " + address);
+		if(sUserId!=null) {
+			UserInfo sUser = userService.findUser(sUserId);
+			request.getSession().setAttribute("sUser", sUser);
+	
+			System.out.println("sUserId: " + sUserId);
+			System.out.println("sUser: " + sUser);
+	
+			/*********** 수정 필요 ***********/
+			if (sUser.getAddressList() != null) {
+				for (Address address : sUser.getAddressList()) {
+					if (address.getAddress_range() > 0) {
+						request.getSession().setAttribute("sAddress", address);
+						System.out.println("sAddress : " + address);
+					}
 				}
 			}
+			/******************************/
+			return "user_my-account";
 		}
-		/******************************/
-		return "user_my-account";
+		return "redirect:main";
 	}
 
 	@RequestMapping(value = "/user_login_action", method = RequestMethod.POST)

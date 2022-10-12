@@ -1,0 +1,24 @@
+
+#townBoard_list_tbody .blog_post_content{
+	margin-bottom: 50px;
+}
+
+
+.single_blog_area .blog_post_thumb img {
+    border-radius: 6px 6px 0 0;
+    width: 100%;
+}
+
+.single_latest_post {
+    position: relative;
+    z-index: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+

@@ -11,7 +11,13 @@ import com.itwill.brown_carrot_market.dto.TownBoard;
 public interface TownBoardDao {
 	
 	//동네 게시판 비회원이 전체조회
-	List<TownBoard> selectNonMemberTownBoardList()throws Exception;
+	//List<TownBoard> selectNonMemberTownBoardList()throws Exception;
+	//동네 게시판 비회원이 전체조회 페이징 처리
+	List<TownBoard> selectNonMemberTownBoardList(int pageStart, int pageEnd)throws Exception;
+	
+	//동네 게시판 비회원이 게시글 수 계산
+	int selectNonMemberCountTownBoard();
+	
 	
 	//동네 게시판 비회원이 카테고리 조건으로 전체조회
 	List<TownBoard> selectNonMemberCtgrTownBoardList(int t_ctgr_no)throws Exception;

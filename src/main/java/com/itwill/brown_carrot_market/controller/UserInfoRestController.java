@@ -38,21 +38,28 @@ public class UserInfoRestController {
 
 	@LoginCheck
 	@PostMapping(value = "/user_session_check_json")
-	public Map user_session_check_json(HttpSession session) throws Exception{
+	public Map user_session_check_json(HttpServletRequest request) throws Exception{
 		Map resultMap=new HashMap();
 		int code=1;
 		String url="index";
 		String msg="세션존재 안함XX";
 		List<UserInfo> resultList=new ArrayList<UserInfo>();
-		String sUserId=(String)session.getAttribute("sUserId");
+		String sUserId=(String)request.getSession().getAttribute("sUserId");
 		System.out.println("user_session_check_json : sUserId >>> "+sUserId);
 		if(sUserId!=null) {
 			UserInfo sUser=userService.findUser(sUserId);
-			System.out.println("sUser: "+sUser);
+			request.getSession().setAttribute("sUser", sUser);
 			
 			/***********수정 필요***********/
-			Address sAddress=(Address)session.getAttribute("sAddress");
-			System.out.println("sAddress: "+sAddress);
+			//우선은 address_range()>0 인 주소만 넣었습니다.
+			if(sUser.getAddressList()!=null) {
+				for(Address address: sUser.getAddressList()) {
+					if(address.getAddress_range()>0) {
+						request.getSession().setAttribute("sAddress", address);
+						System.out.println("sAddress: "+address);
+					}
+				}
+			}
 			/******************************/
 			
 			code=2;
@@ -61,7 +68,7 @@ public class UserInfoRestController {
 			resultList.add(sUser);
 			resultMap.put("sUserId",sUserId);
 			resultMap.put("sUser",sUser);
-			resultMap.put("sAddress",sAddress);
+			//resultMap.put("sAddress",sAddress);
 		}
 		
 		resultMap.put("code", code);
@@ -302,21 +309,47 @@ public class UserInfoRestController {
 	
 	@LoginCheck
 	@PostMapping("/user_remove_action_json")
-	public Map user_remove_action_json(HttpServletRequest request) throws Exception{
-		Map resultMap=new HashMap();
-		int code=1;
-		String url="user_main";
-		String msg="";
-		List<UserInfo> resultList=new ArrayList<UserInfo>();
-		String sUserId=(String)request.getSession().getAttribute("sUserId");
-		int row_count=userService.remove(sUserId);
+	public Map user_remove_action_json(@RequestParam(value="user_pw") String user_pw,HttpServletRequest request) throws Exception{
 		
-		request.getSession().invalidate();
+		System.out.println("user_pw: "+user_pw);
+		Map resultMap=new HashMap();
+		int code=0;
+		String url="user_main";
+		String msg="user_remove_action_json";
+		String sUserId=(String)request.getSession().getAttribute("sUserId");
+		int row_count= 0;
+		
+		//1.패스워드 일치여부
+		int result = userService.login(sUserId, user_pw);
+		//login() >> 0:아이디존재안함 1:패쓰워드 불일치 2:로그인성공
+		switch (result) {
+			case 0 :
+				msg="부적절한 접근입니다.";
+				break;
+			case 1 :
+				code=1;
+				msg="비밀번호가 일치하지 않습니다.";
+				break;
+			case 2 :
+				code=2;
+				msg="비밀번호 일치";
+				row_count=userService.remove(sUserId);
+				if(row_count==1) {
+					request.getSession().invalidate();
+					code=20;
+					msg="user_remove_action_json >> success!";
+					break;
+				}else {
+					code=0;
+					msg="user_remove_action_json >> fail!";
+					break;
+				}
+		}
 		
 		resultMap.put("code", code);
 		resultMap.put("url", url);
 		resultMap.put("msg", msg);
-		resultMap.put("data",resultList);
+		resultMap.put("data","");
 		return resultMap;
 	}
 	

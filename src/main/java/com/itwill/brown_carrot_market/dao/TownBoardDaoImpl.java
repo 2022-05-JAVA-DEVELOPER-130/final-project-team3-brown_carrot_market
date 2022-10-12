@@ -29,11 +29,29 @@ public class TownBoardDaoImpl implements TownBoardDao{
 		this.townBoardMapper = townBoardMapper;
 	}
 	
+	/*
+	비회원이 동네 게시판 전체 조회
 	@Override
 	public List<TownBoard> selectNonMemberTownBoardList() throws Exception{
 		System.out.println(">>> townBoardDaoImpl : selectNonMemberTownBoardList()호출");
 		return townBoardMapper.selectNonMemberTownBoardList();
 	}
+	*/
+	//비회원이 동네 게시판 전체 조회 페이징처리
+	@Override
+	public List<TownBoard> selectNonMemberTownBoardList(int pageStart, int pageEnd) throws Exception {
+		Map<String, Integer>map = new HashMap<>();
+		map.put("pageStart", pageStart);
+		map.put("pageEnd", pageEnd);
+		return townBoardMapper.selectNonMemberTownBoardList(pageStart,pageEnd);
+	}
+	
+	//동네 게시판 비회원이 게시글 수 계산
+	@Override
+	public int selectNonMemberCountTownBoard() {
+		return townBoardMapper.selectNonMemberCountTownBoard();
+	}
+	
 
 	@Override
 	public List<TownBoard> selectNonMemberCtgrTownBoardList(int t_ctgr_no) throws Exception{
@@ -109,6 +127,10 @@ public class TownBoardDaoImpl implements TownBoardDao{
 		System.out.println(aa);
 		return aa;
 	}
+
+	
+
+	
 	
 	
 

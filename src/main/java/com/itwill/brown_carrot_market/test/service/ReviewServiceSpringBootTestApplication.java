@@ -40,11 +40,11 @@ public class ReviewServiceSpringBootTestApplication {
 		ConfigurableApplicationContext context=application.run(args);
 		ReviewService reviewService=(ReviewService)context.getBean(ReviewService.class);
 		
-		System.out.println("findReceivedReview() test: "+reviewService.findReceivedReview("carrot1"));
+		//System.out.println("findReceivedReview() test: "+reviewService.findReceivedReview("carrot1"));
 		
-		System.out.println("findReceivedReviewByBuyer() test: "+reviewService.findReceivedReviewByBuyer("carrot3"));
+		//System.out.println("findReceivedReviewByBuyer() test: "+reviewService.findReceivedReviewByBuyer("carrot3"));
 		
-		System.out.println("findReceivedReviewBySeller() test: "+reviewService.findReceivedReviewBySeller("carrot1"));	
+		//System.out.println("findReceivedReviewBySeller() test: "+reviewService.findReceivedReviewBySeller("carrot1"));	
 
 	}
 }

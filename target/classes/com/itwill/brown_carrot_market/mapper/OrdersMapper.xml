@@ -3,35 +3,16 @@
 <mapper namespace="com.itwill.brown_carrot_market.mapper.OrdersMapper">
 	<resultMap id="ordersResultMap" type="com.itwill.brown_carrot_market.dto.Orders">
 		<result column="orders_no" property="orders_no" />
-		<result column="orders_date" property="orders_date" />
-			<association property="userinfo" javaType="com.itwill.brown_carrot_market.dto.UserInfo">
-				<result column="USER_ID" property="user_id"/>
-				<result column="USER_PW" property="user_pw"/>
-				<result column="USER_NAME" property="user_name"/>
-				<result column="USER_EMAIL" property="user_email"/>
-				<result column="USER_PHONE" property="user_phone"/>
-				<result column="USER_FRESHNESS" property="user_freshness"/>
-				<result column="USER_POINT" property="user_point"/>
-				<result column="USER_PROFILE" property="user_profile"/>
-			</association>
+		<result column="user_id" property="userinfo.user_id" />
 			<association property="transfer" javaType="com.itwill.brown_carrot_market.dto.Transfer">
 				<result column="transfer_no" property="transfer_no" />
-				<result column="transfer_deposit" property="transfer_deposit" />
-				<result column="transfer_withdraw" property="transfer_withdraw" />
-				<result column="transfer_date" property="transfer_date"/>
-				<result column="user_id" property="user_id"/>
+		<result column="transfer_deposit" property="transfer_deposit" />
+		<result column="transfer_withdraw" property="transfer_withdraw" />
+		<result column="transfer_date" property="transfer_date"/>
+		<result column="user_id" property="user_id"/>
 			<association property="orders" javaType="com.itwill.brown_carrot_market.dto.Orders">
 				<result column="orders_no" property="orders_no"/>
-				<association property="userinfo" javaType="com.itwill.brown_carrot_market.dto.UserInfo">
-					<result column="USER_ID" property="user_id"/>
-					<result column="USER_PW" property="user_pw"/>
-					<result column="USER_NAME" property="user_name"/>
-					<result column="USER_EMAIL" property="user_email"/>
-					<result column="USER_PHONE" property="user_phone"/>
-					<result column="USER_FRESHNESS" property="user_freshness"/>
-					<result column="USER_POINT" property="user_point"/>
-					<result column="USER_PROFILE" property="user_profile"/>
-				</association>
+				<result column="user_id" property="userinfo.user_id"/>
 					<association property="product" javaType="com.itwill.brown_carrot_market.dto.Product">
 						<result property="p_no" column="p_no" />
 					    <result property="p_title" column="p_title" />
@@ -66,22 +47,23 @@
 			<association property="userInfo" javaType="com.itwill.brown_carrot_market.dto.UserInfo">
 				<result column="USER_ID" property="user_id"/>
 			</association>
-			<collection property="productImagesList" javaType="java.util.List" ofType="com.itwill.brown_carrot_market.dto.ProductImage">
-				<result column="PI_NO " property="pi_no"/>
-				<result column="PI_NAME " property="pi_name"/>
-				<result column="P_NO " property="p_no"/>
-			</collection>
+		</association>
+		<association property="productImage" javaType="com.itwill.brown_carrot_market.dto.ProductImage">
+				<result column="pi_no" property="pi_no"/>
+				<result column="pi_name" property="pi_name"/>
+				<result column="p_no" property="p_no"/>
 		</association>
 	</resultMap>
+	
 	<select id="selectAllById" resultMap="ordersResultMap">
-		select * from orders o join product p on o.p_no = p.p_no where o.user_id=#{userinfo.user_id}
+		select * from orders o join (select pi.pi_no, pi.pi_name, p.p_no, p.p_title, p.p_date, p.p_price from product p join product_img pi on p.p_no=pi.p_no)s on o.p_no = s.p_no where user_id=#{user_id} order by s.pi_no desc	
 	</select>
 	<select id="selectByNo" resultMap="ordersResultMap">
 		select * from orders where orders_no=#{orders_no}
 	</select>
 	<insert id="insertOrders"
 		parameterType="com.itwill.brown_carrot_market.dto.Orders">
-		insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, #{product.p_no}, #{userinfo.user_id}, sysdate)
+		insert into orders values(ORDERS_ORDERS_NO_SEQ.nextval, #{product.p_no}, #{user_id})
 	</insert>
 	<delete id="deleteOrders"
 		parameterType="com.itwill.brown_carrot_market.dto.Orders">

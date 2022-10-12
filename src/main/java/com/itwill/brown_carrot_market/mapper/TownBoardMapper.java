@@ -11,9 +11,16 @@ import com.itwill.brown_carrot_market.dto.TownBoard;
 
 @Mapper 
 public interface TownBoardMapper {
-
+/*
 //동네 게시판 비회원이 전체조회
 public List<TownBoard> selectNonMemberTownBoardList();
+*/
+//동네 게시판 비회원이 전체조회 - 페이징 처리
+public List<TownBoard> selectNonMemberTownBoardList(int pageStart, int pageEnd);
+
+//동네 게시판 비회원이 게시글 수 계산
+public int selectNonMemberCountTownBoard();
+
 
 //동네 게시판 비회원이 카테고리 조건으로 전체조회
 public List<TownBoard> selectNonMemberCtgrTownBoardList(int t_ctgr_no);
