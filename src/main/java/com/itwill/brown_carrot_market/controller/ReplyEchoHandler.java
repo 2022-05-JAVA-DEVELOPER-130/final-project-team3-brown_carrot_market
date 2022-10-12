@@ -29,8 +29,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itwill.brown_carrot_market.dto.ChatContents;
 import com.itwill.brown_carrot_market.dto.ChatRoom;
 import com.itwill.brown_carrot_market.dto.ChatRoomListView;
+import com.itwill.brown_carrot_market.dto.ProductImage;
 import com.itwill.brown_carrot_market.dto.Promise;
 import com.itwill.brown_carrot_market.service.ChatService;
+import com.itwill.brown_carrot_market.service.ProductService;
 import com.itwill.brown_carrot_market.service.UserInfoService;
 
 
@@ -42,7 +44,7 @@ public class ReplyEchoHandler {
 	
 	@Autowired
 	private UserInfoService userService;
-
+	@Autowired private ProductService productService;
 	private static Map<String, Session> userSessions = new HashMap();
 	String userId="";
 	String userKey="";
@@ -93,6 +95,7 @@ public class ReplyEchoHandler {
 			yourId=chatRoom.getFrom_id();
 			yourImg = userService.findUser(yourId).getUser_profile();
 		}
+		double yourFreshness = userService.findUser(yourId).getUser_freshness();
 		
 		
 		List<ChatContents> resultList = new ArrayList<ChatContents>();
@@ -113,6 +116,7 @@ public class ReplyEchoHandler {
 		resultMap.put("code", code);
 		resultMap.put("msg", msg);
 		resultMap.put("yourId", yourId);
+		resultMap.put("yourFreshness", yourFreshness);		
 		resultMap.put("c_room_no", room_no);
 		resultMap.put("yourImg", yourImg);
 		resultMap.put("data", resultList);
@@ -190,7 +194,13 @@ public class ReplyEchoHandler {
 									System.out.println(chatRoomListView.getYou_id());
 								
 									String img = userService.findUser(chatRoomListView.getYou_id()).getUser_profile();
-								
+									ArrayList<ProductImage> productImage = (ArrayList<ProductImage>)productService.selectProductImgList(chatRoomListView.getP_no());
+									if(productImage.size()==0) {
+										chatRoomListView.setP_img("pan.jpg");
+									}else {
+										chatRoomListView.setP_img(productImage.get(0).getPi_name());
+										
+									}
 									chatRoomListView.setYou_image(img);
 									chatRoomListView.setNot_read(chatService.chatNotRead(chatRoomListView.getC_room_no(),loginId));
 							}
@@ -421,6 +431,25 @@ public class ReplyEchoHandler {
 			e.printStackTrace();
 		}
 		resultMap.put("msg", msg);
+		return resultMap;
+	}
+	
+	//약속 삭제 
+	@PostMapping(value="/promise_delete")
+	public Map deletePromise(@RequestBody Map<String,String> message) {
+		Map resultMap=new HashMap();
+		String code="";
+		
+		ChatContents newChat = new ChatContents(0, String.valueOf(message.get("c_content")), null, null,
+				String.valueOf(message.get("user_id")), Integer.valueOf(message.get("c_room_no")));
+		try {
+			chatService.promiseDelete(Integer.valueOf(message.get("c_room_no")));
+			chatService.insertChat(newChat);
+			code="2";
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		resultMap.put("code", code);
 		return resultMap;
 	}
 	
