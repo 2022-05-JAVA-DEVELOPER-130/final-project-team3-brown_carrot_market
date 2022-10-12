@@ -1,38 +1,4 @@
 
-function ctgrList(){
-	$.ajax({
-		url:"townBoard_list_rest",
-		method:"post",
-		data:{
-			"t_ctgr_no":t_ctgr_no,
-			"t_ctgr_name":t_ctgr_name
-		},
-		dataType:"json",
-		success:function(){
-			console.log(resultObj);
-			if(resultObj.errorCode > 0){
-				let data = resultObj.data;
-				let htmlBuffer = ``;
-				data.itemList.forEach(function(townCategory,i){
-					htmlBuffer += `
-						<div class="widget-area catagory_section mb-30">
-                            <h6>Catagory</h6>
-                            <ul>
-                                <li><a href="#">${townCategory.t_ctgr_name} <span class="text-muted">(21)</span></a></li>
-                            </ul>
-                        </div>
-					
-					`;
-				}
-				)
-			}
-		}
-	});
-}				
-				
-
-
-
 
 function changeQnaList(pageno,t_ctgr_no){
 	$.ajax({
