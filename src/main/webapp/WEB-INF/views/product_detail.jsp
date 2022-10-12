@@ -74,8 +74,8 @@
                             <!-- Carousel Inner -->
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <a class="gallery_img" href="img/product-img/pd-big-thumb-1.png" title="First Slide">
-                                        <img class="d-block w-100" src="img/product-img/pd-big-thumb-1.png" alt="First slide">
+                                    <a class="gallery_img" href="img/product_img/${product.productImagesList[0].pi_name}" title="First Slide">
+                                        <img class="d-block w-100" src="img/product_img/${product.productImagesList[0].pi_name}" alt="First slide">
                                     </a>
                                     <!-- Product Badge -->
                                     <div class="product_badge">
@@ -83,8 +83,8 @@
                                     </div>
                                 </div>
                                 <div class="carousel-item">
-                                    <a class="gallery_img" href="img/product-img/pd-big-thumb-2.png" title="Second Slide">
-                                        <img class="d-block w-100" src="img/product-img/pd-big-thumb-2.png" alt="Second slide">
+                                    <a class="gallery_img" href="img/product_img/${product.productImagesList[0].pi_name}" title="Second Slide">
+                                        <img class="d-block w-100" src="img/product_img/${product.productImagesList[0].pi_name}" alt="Second slide">
                                     </a>
                                     <!-- Product Badge -->
                                     <div class="product_badge">
@@ -113,7 +113,7 @@
 
                             <!-- Carosel Indicators -->
                             <ol class="carousel-indicators">
-                                <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(img/product-img/pd-big-thumb-1.png);">
+                                <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(img/product_img/${product.productImagesList[0].pi_name});">
                                 </li>
                                 <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(img/product-img/pd-big-thumb-2.png);">
                                 </li>
@@ -141,8 +141,7 @@
                         </div>
                         -->
                         <h4 class="price mb-4">가격 : ${product.p_price} </h4>
-                        <h4 class="price mb-4">이미지 : <img class="normal_img" src="img/product_img/${product.productImagesList[0].pi_name}" alt=""></h4>
-
+                        
                         <!-- Overview -->
                         <div class="short_overview mb-4">
                             <h6>Overview</h6>
