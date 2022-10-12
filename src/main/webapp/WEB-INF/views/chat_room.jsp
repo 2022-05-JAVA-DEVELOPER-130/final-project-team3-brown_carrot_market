@@ -50,6 +50,7 @@
 					<!--	<button type="button" class="btn btn-default" id="btnCall${list.c_room_no}" value=${list.c_room_no}>${list.c_room_no}</button>-->
                             <div class="name" id="btnCall${list.c_room_no}" value=${list.c_room_no}>${list.you_id}</div> 
                             <div class="content"> <i class="fa fa-circle offline"></i>${list.c_content}</div>                                            
+                            <div class="p_img">${list.p_img}</div> 
                         </div>
                  </li>
                 </c:forEach>

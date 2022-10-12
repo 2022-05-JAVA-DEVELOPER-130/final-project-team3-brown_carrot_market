@@ -20,8 +20,8 @@ public interface ChatRoomMapper {
 	
 	
 	//채팅방 목록 
-	@Select("select a.c_room_no,send_time,c_content\r\n"
-			+"from (select c_room_no from chat_room  where (from_id =#{user_id} and from_id_in=1) or (to_id = #{user_id} and to_id_in=1))a \r\n" 
+	@Select("select a.c_room_no,send_time,c_content,p_no \r\n"
+			+"from (select c_room_no,p_no from chat_room  where (from_id =#{user_id} and from_id_in=1) or (to_id = #{user_id} and to_id_in=1))a \r\n" 
 			+"inner join (select a.send_time,a.c_room_no,a.c_content from chat_contents a \r\n"
 			+"left join chat_contents b \r\n"
 			+"on a.c_room_no = b.c_room_no and a.send_time<b.send_time \r\n"
