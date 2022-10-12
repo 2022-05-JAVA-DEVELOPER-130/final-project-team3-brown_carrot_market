@@ -105,5 +105,9 @@
 					where o.user_id = #{user_id})
 	</select>
 	
+	<select id="isExistedReviewByOrdersNoId" parameterType="com.itwill.brown_carrot_market.dto.Review" resultType="int">
+		select count(*) from review 
+			where orders_no = #{orders.orders_no} and user_id=#{userInfo.user_id}
+	</select>
 
 </mapper>

@@ -40,4 +40,9 @@ public class ReviewDaoImpl implements ReviewDao {
 			throws Exception {
 		return reviewMapper.findReceivedReviewBySeller(user_id);
 	}
+
+	@Override
+	public int isExistedReviewByOrdersNoId(Review review) throws Exception {
+		return reviewMapper.isExistedReviewByOrdersNoId(review);
+	}
 }

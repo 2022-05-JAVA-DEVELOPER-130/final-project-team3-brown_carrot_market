@@ -250,13 +250,13 @@
 				}
 			   $('#msg1').html("");
 			   $('#msg2').html("");
+			 */
 			   // 로그인 정보 저장 
 			   if($("#customChe").is(":checked")){	//저장 체크시
 				   saveLogin($("#login_user_id").val());
 			   }else {	//체크 해제시
 					saveLogin("");
 				}
-			 */
 			//console.log($('#user_login_form').serialize());
 			if (validator2.form()) {
 				$.ajax({
