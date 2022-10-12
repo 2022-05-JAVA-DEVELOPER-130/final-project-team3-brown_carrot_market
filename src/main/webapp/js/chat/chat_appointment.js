@@ -18,6 +18,8 @@
   $(document).ready(function(){
 	var lastIndexCount=location.href.lastIndexOf('/');
 	var changeUrl=location.href.substr(lastIndexCount+1);
+	
+	
 	if(changeUrl=="chat_appointment_change"){
 		$(window).on("load",function(){
 			$.ajax({
@@ -27,6 +29,7 @@
 				dataType:'JSON',
 				success:function(jsonResult){
 					var dateidx=jsonResult.data.c_app_date
+					console.log("기존 약속 날짜"+dateidx);
 					$('#datePicker').val(dateidx.substr(0,10));
 					$('#datePicker').trigger('change');
 					$('#chatAppTime').val(dateidx.substr(11));

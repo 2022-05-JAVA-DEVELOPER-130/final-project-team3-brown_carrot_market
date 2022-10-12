@@ -59,12 +59,23 @@ public class TownBoardDaoImpl implements TownBoardDao{
 		return townBoardMapper.selectNonMemberCtgrTownBoardList(t_ctgr_no);
 	}
 
-	
+	//회원이 동네 게시판 전체 조회
 	@Override
-	public List<TownBoard> selectTownBoardListCoordinate(Address address) throws Exception{
+	public List<TownBoard> selectTownBoardListCoordinate(Address address,int pageStart, int pageEnd) throws Exception{
 		System.out.println(">>> townBoardDaoImpl : selectTownBoardListCoordinate()호출");
-		return townBoardMapper.selectTownBoardListCoordinate(address);
+		Map<String, Integer>map = new HashMap<>();
+		map.put("pageStart", pageStart);
+		map.put("pageEnd", pageEnd);
+		return townBoardMapper.selectTownBoardListCoordinate(address,pageStart,pageEnd);
 	}
+	//회원의 동네 게시판 게시글 수 계산
+	@Override
+	public int selectMemberCountTownBoard(Address address) {
+		return townBoardMapper.selectMemberCountTownBoard(address);
+	}
+	
+	
+	
 
 	@Override
 	public List<TownBoard> selectTownBoardCtgrListCoordinate(int t_ctgr_no, Address address) throws Exception{
@@ -127,6 +138,8 @@ public class TownBoardDaoImpl implements TownBoardDao{
 		System.out.println(aa);
 		return aa;
 	}
+
+	
 
 	
 

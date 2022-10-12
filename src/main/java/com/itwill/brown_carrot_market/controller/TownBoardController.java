@@ -18,19 +18,23 @@ public class TownBoardController {
 	@Autowired
 	private TownBoardService townBoardService;
 	
-	//우리동네 게시판 전체 조회(비회원)
+	//우리동네 게시판 전체 조회
 	@RequestMapping("/townBoard_list")
 	public String townBoard_list(@RequestParam(required = false, defaultValue = "1") Integer pageno,Model model, HttpSession session) {
 		try {
 			String sUserId = (String)session.getAttribute("sUserId");
 			Address sAddress = (Address)session.getAttribute("sAddress");
+			System.out.println("townBoard_list: sAddress" +sAddress);
 			
 			//회원 게시판 전체조회
 			if(sUserId != null) {
-				
+				PageMakerDto<TownBoard> townBoardList = townBoardService.selectTownBoardListCoordinate(sAddress, pageno);
+				model.addAttribute("townBoardList", townBoardList);
+				model.addAttribute("pageno", pageno);
 			}
+			
+			//비회원 게시판 전체조회	
 			if(sUserId == null) {
-				//비회원 게시판 전체조회	
 				PageMakerDto<TownBoard> townBoardList = townBoardService.selectNonMemberTownBoardList(pageno);
 				model.addAttribute("townBoardList", townBoardList);
 				model.addAttribute("pageno", pageno);

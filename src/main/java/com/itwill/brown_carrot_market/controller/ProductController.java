@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -60,9 +62,19 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/product_write_form")
-	public String product_write_form()throws Exception {
-			System.out.println("product_write_form 컨트롤러 호출-productService: " + productService);
-		return "product_write_form";
+	public String product_write_form(HttpSession session)throws Exception {
+		System.out.println("product_write_form 컨트롤러 호출-productService: " + productService);
+		String forwardPath = "";
+		String sUserId = (String)session.getAttribute("sUserId");
+		//비회원 로그인폼으로 보내버리기
+		forwardPath = "user_login";
+		//회원 상품등록
+		if(sUserId != null) {
+				
+			forwardPath = "product_write_form";
+		}
+		
+		return forwardPath;
 	}
 	
 	@RequestMapping(value = "/product_write_action", method = RequestMethod.GET)
@@ -75,11 +87,11 @@ public class ProductController {
 	public String product_write_action(@RequestParam Map<String, Object> map, Model model, HttpSession session) {
 		String forwardPath = "";
 		String sUserId = (String)session.getAttribute("sUserId");
-		map.put("user_id", sUserId);
 
+		map.put("user_id", sUserId);
 		Address sAddress = (Address)session.getAttribute("sAddress");
 		map.put("address", sAddress);
-		
+
 		try {
 
 			UserInfo userInfo = new UserInfo(sUserId, sUserId, sUserId, sUserId, forwardPath, 0, 0, sUserId, null);
@@ -101,6 +113,7 @@ public class ProductController {
 		}
 		return forwardPath;
 	}
+	
 	
 	
 	

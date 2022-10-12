@@ -34,7 +34,7 @@ public class TransferServiceSpringBootTestApplication {
 //		System.out.println(transferService.insertTransfer_Withdraw(8));
 //		System.out.println(transferService.insertTransfer_Withdraw_Cancle(8));
 //		System.out.println(transferService.insertTransfer_Deposit_Cancle(8));
-//		System.out.println(transferService.selectById("carrot1"));
+		System.out.println(transferService.selectById("carrot1"));
 
 	}
 
