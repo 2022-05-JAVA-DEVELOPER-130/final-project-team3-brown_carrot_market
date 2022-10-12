@@ -110,6 +110,12 @@ public class ProductDaoImpl implements ProductDao{
 		System.out.println(aa);
 		return aa;
 	}
+
+	@Override
+	public int updateProductSell(int p_sell, int p_no) throws Exception {
+		// TODO Auto-generated method stub
+		return productMapper.updateProductSell(p_sell, p_no);
+	}
 	
 	
 	

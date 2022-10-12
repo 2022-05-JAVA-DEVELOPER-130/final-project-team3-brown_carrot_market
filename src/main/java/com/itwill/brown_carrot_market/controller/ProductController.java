@@ -114,6 +114,34 @@ public class ProductController {
 		return forwardPath;
 	}
 	
+	@RequestMapping(value = "/product_delete_action", method = RequestMethod.GET)
+	public String product_delete_action_get() {
+		return "redirect : product_list";
+	}
+	
+	/* 상품삭제
+	@RequestMapping(value = "/product_delete_action", method = RequestMethod.POST)
+	public String product_delete_action() {
+		
+		return "";
+	}
+	*/
+	
+	//상품 판매상태
+	@RequestMapping(value = "/product_modify_sell_action")
+	public String product_modify_sell_action(int p_sell,@RequestParam(value = "p_no", required = false, defaultValue = "")int p_no) {
+		String forwardPath = "";
+		try {
+			int updateRowCount = productService.updateProductSell(p_sell, p_no);
+			forwardPath = "redirect:product_list";
+		} catch (Exception e) {
+			e.printStackTrace();
+			forwardPath = "product_list";
+		}
+		
+		
+		return forwardPath;
+	}
 	
 	
 	

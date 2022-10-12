@@ -44,13 +44,13 @@
                 <c:forEach var="list" items="${chatList}">
                
                 <li class="clearfix">
-                        <img src="img/user_profile/${list.you_image}" alt="avatar">
+                        <img src="img/user_profile/${list.you_image}" alt="avatar"><img src="img/product_img/${list.p_img}" style="float:right; width:45px; height:45px; border-radius: 0%">
                         <div class="about">
 							<input name="chatRoomNo" type="hidden" value=${list.c_room_no}/>
 					<!--	<button type="button" class="btn btn-default" id="btnCall${list.c_room_no}" value=${list.c_room_no}>${list.c_room_no}</button>-->
                             <div class="name" id="btnCall${list.c_room_no}" value=${list.c_room_no}>${list.you_id}</div> 
                             <div class="content"> <i class="fa fa-circle offline"></i>${list.c_content}</div>                                            
-                            <div class="p_img">${list.p_img}</div> 
+                            
                         </div>
                  </li>
                 </c:forEach>
@@ -63,10 +63,10 @@
 
 						<div class="chat-header clearfix" id="chatHead">
 							<div class="row">
-								<div class="col-lg-6">
+								<div class="col-lg-4">
 									<a href="javascript:void(0);" data-toggle="modal"
 										data-target="#view_info"> <img
-										src="img/user_profile/wow.jpg"
+										src="img/user_profile/carrot3.png"
 										alt="avatar">
 									</a>
 									<div class="chat-about">
@@ -74,13 +74,21 @@
 										<input name="path" id="path" type="hidden" value=${path}>
 										<input name="newChatRoomNo" id="newChatRoomNo" type="hidden" value=${chat_room_no}>
 										<h6 class="m-b-0"><b>대장 토끼</b></h6>
-										
 										<small>자주 묻는 질문</small>
+										
+										
 									</div>
 								</div>
-								<div class="col-lg-6 hidden-sm text-right">
+								<div class="col-lg-4 ">
+								<img src="img/user_profile/carrot3.png" style="float:left; width:45px; height:45px; border-radius: 0%">
+								<h6 class="m-b-0" style="float:left; margin-left:5px;"><b>대장 토끼</b></h6>
+								<small style="float:left; margin-left:5px;">자주 묻는 질문</small>
+    							 
+    							 </div>	
+								
+								<div class="col-lg-4 hidden-sm text-right">
 
-     </div>
+    							 </div>
 							</div>
 						</div>
 						<div class="chat-history" id="chat-history" >
@@ -152,6 +160,14 @@ body{
     background-color: #f4f7f6;
     margin-top:20px;
 }
+
+.content{
+  width        : 120px;     /* 너비는 변경될수 있습니다. */
+  text-overflow: ellipsis;  /* 위에 설정한 100px 보다 길면 말줄임표처럼 표시합니다. */
+  white-space  : nowrap;    /* 줄바꿈을 하지 않습니다. */
+  overflow     : hidden;    /* 내용이 길면 감춤니다 */
+  display      : block;     /* ie6이상 현재요소를 블럭처리합니다. */
+}
 /*     삭제하기.... */
 
 .card {
@@ -186,7 +202,10 @@ body{
 }
 
 .people-list .chat-list li {
-    padding: 10px 15px;
+/*상품이미지 추가 우측 여백 수정*/
+/*    padding: 10px 15px; */
+    padding: 10px 0px;
+    
     list-style: none;
     border-radius: 3px
 }

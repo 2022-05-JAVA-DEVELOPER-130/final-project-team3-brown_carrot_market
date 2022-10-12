@@ -77,7 +77,7 @@
 	<button type="button" id="chatAppUpdateSubmit" class="appChange">약속 수정하기</button>
 	</div>
 	<div class="chatAppdeleteBtn">
-	<button type="button" id="chatAppDeleteSubmit" class="appChange">약속 삭제하기</button>
+	<button type="button" id="chatAppDeleteSubmit" class="appChange">약속 취소하기</button>
 	</div>
 	</div>
 	

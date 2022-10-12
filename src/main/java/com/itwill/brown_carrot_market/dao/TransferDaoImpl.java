@@ -28,13 +28,8 @@ public class TransferDaoImpl implements TransferDao{
 
 	@Override
 	public int insertTransfer_Deposit(int p_no) throws Exception {
-		Transfer transfer = new Transfer();
-		Product product = new Product();
-		product.setP_no(p_no);
-		transfer.setProduct(product);
 		System.out.println("#### TransferDaoImpl : insertTransfer_Deposit(Transfer transfer) 호출  ");
-		transferMapper.insertTransfer_Deposit(transfer);
-		return transfer.getTransfer_no();
+		return transferMapper.insertTransfer_Deposit(p_no);
 	}
 
 	@Override

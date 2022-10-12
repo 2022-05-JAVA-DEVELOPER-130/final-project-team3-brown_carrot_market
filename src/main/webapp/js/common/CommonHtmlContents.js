@@ -18,7 +18,7 @@ CommonHtmlContents.user_thumbnail_login=function(sUser){
                             <ul class="user-meta-dropdown">
                                 <li class="user-title"><span>안녕하세요,</span> ${sUser.user_name} 님</li>
                                 <li><a href="user_my_account">마이페이지</a></li>
-                                <li><a href="chat_room">Chatting</a></li>
+                                
                                 <li><a href="user_logout_action"><i class="icofont-logout"></i> 로그아웃</a></li>
                             </ul>`;
 	}
@@ -28,7 +28,7 @@ CommonHtmlContents.user_thumbnail_login=function(sUser){
                             <ul class="user-meta-dropdown">
                                 <li class="user-title"><span>안녕하세요,</span> ${sUser.user_name} 님</li>
                                 <li><a href="user_my_account">마이페이지</a></li>
-                                <li><a href="chat_room">Chatting</a></li>
+                                
                                 <li><a href="user_logout_action"><i class="icofont-logout"></i> 로그아웃</a></li>
                             </ul>`;
 }	
