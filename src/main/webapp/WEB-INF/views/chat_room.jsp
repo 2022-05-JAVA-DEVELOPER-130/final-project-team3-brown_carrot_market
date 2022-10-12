@@ -63,10 +63,10 @@
 
 						<div class="chat-header clearfix" id="chatHead">
 							<div class="row">
-								<div class="col-lg-6">
+								<div class="col-lg-8">
 									<a href="javascript:void(0);" data-toggle="modal"
 										data-target="#view_info"> <img
-										src="img/user_profile/wow.jpg"
+										src="img/user_profile/carrot3.png"
 										alt="avatar">
 									</a>
 									<div class="chat-about">
@@ -78,7 +78,7 @@
 										<small>자주 묻는 질문</small>
 									</div>
 								</div>
-								<div class="col-lg-6 hidden-sm text-right">
+								<div class="col-lg-4 hidden-sm text-right">
 
      </div>
 							</div>

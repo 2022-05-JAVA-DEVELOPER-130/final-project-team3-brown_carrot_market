@@ -95,6 +95,7 @@ public class ReplyEchoHandler {
 			yourId=chatRoom.getFrom_id();
 			yourImg = userService.findUser(yourId).getUser_profile();
 		}
+		double yourFreshness = userService.findUser(yourId).getUser_freshness();
 		
 		
 		List<ChatContents> resultList = new ArrayList<ChatContents>();
@@ -115,6 +116,7 @@ public class ReplyEchoHandler {
 		resultMap.put("code", code);
 		resultMap.put("msg", msg);
 		resultMap.put("yourId", yourId);
+		resultMap.put("yourFreshness", yourFreshness);		
 		resultMap.put("c_room_no", room_no);
 		resultMap.put("yourImg", yourImg);
 		resultMap.put("data", resultList);

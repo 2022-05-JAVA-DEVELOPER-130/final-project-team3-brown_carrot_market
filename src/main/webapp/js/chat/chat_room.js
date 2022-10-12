@@ -124,6 +124,7 @@ $.ajax({
 			var chatContentArray=jsonResult.data;
 			yourId=jsonResult.yourId;
 			yourImg = jsonResult.yourImg;
+			yourFreshness = jsonResult.yourFreshness;
 			c_room_no=jsonResult.c_room_no;
 			console.log("채팅방의 상대방 ID:"+yourId);
 			console.log(chatContentArray);
@@ -135,7 +136,7 @@ $.ajax({
 
 			console.log(loginId);
 
-			$('#chatHead').append(chat_head(yourId,yourImg,c_room_no));
+			$('#chatHead').append(chat_head(yourId,yourImg,c_room_no,yourFreshness));
 			
 			
 			
@@ -254,6 +255,7 @@ $.ajax({
 			var chatContentArray=jsonResult.data;
 			yourId=jsonResult.yourId;
 			yourImg = jsonResult.yourImg;
+			yourFreshness = jsonResult.yourFreshness;
 			c_room_no=jsonResult.c_room_no;
 			console.log("채팅방의 상대방 ID:"+yourId);
 			console.log(chatContentArray);
@@ -289,7 +291,7 @@ $.ajax({
 			
 				}
 			};*/
-			$('#chatHead').append(chat_head(yourId,yourImg,c_room_no));
+			$('#chatHead').append(chat_head(yourId,yourImg,c_room_no,yourFreshness));
 			
 			
 			
@@ -489,7 +491,7 @@ function message_admin_promise(chat_content){
 }
 
 
-function chat_head(id,img,room_no){
+function chat_head(id,img,room_no,fresh){
 	return 	`<div class="row">
 								<div class="col-lg-6">
 									<a href="javascript:void(0);" data-toggle="modal"
@@ -500,7 +502,7 @@ function chat_head(id,img,room_no){
 									<div class="chat-about">
 										<h6 class="m-b-0">${id}</h6>
 										
-										<small>상품 정보 표시!</small>
+										<small>${fresh}</small>
 									</div>
 								</div>
 								<div class="col-lg-6 hidden-sm text-right">
@@ -918,7 +920,7 @@ $(document).on('click','#outRoom',function(e){
 	/********************************************************************** */
 function chatRoomHeadGongji(){
 	return `					<div class="row">
-								<div class="col-lg-6">
+								<div class="col-lg-12">
 									<a href="javascript:void(0);" data-toggle="modal"
 										data-target="#view_info"> <img
 										src="img/user_profile/wow.jpg"
@@ -931,9 +933,7 @@ function chatRoomHeadGongji(){
 										<small>자주 묻는 질문</small>
 									</div>
 								</div>
-								<div class="col-lg-6 hidden-sm text-right">
 
-     </div>
 							</div>`
 }
 function chatRoomGongji(){
