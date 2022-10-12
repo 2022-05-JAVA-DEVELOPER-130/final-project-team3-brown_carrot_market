@@ -13,4 +13,6 @@ public interface ReviewDao {
 	public List<Review> findReceivedReviewByBuyer(String user_id) throws Exception;
 	
 	public List<Review> findReceivedReviewBySeller(String user_id) throws Exception;
+	
+	public int isExistedReviewByOrdersNoId(Review review) throws Exception;
 }

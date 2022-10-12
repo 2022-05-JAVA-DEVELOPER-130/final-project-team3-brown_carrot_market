@@ -11,12 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.brown_carrot_market.dto.Orders;
 import com.itwill.brown_carrot_market.service.OrdersService;
+import com.itwill.brown_carrot_market.service.ReviewService;
 
 
 @Controller
 public class OrdersController {
 	@Autowired
 	private OrdersService ordersService;
+	@Autowired
+	private ReviewService reviewService;
+	
 	@LoginCheck
 	@RequestMapping(value = "/orders_list")
 	public String orders_list(Model model, HttpServletRequest request) throws Exception{

@@ -47,3 +47,44 @@ public class TransferServiceImpl implements TransferService{
 	
 	
 }
+
+
+/*
+@Service
+public class TransferServiceImpl implements TransferService{
+	@Autowired
+	@Qualifier("transferDaoImpl")
+	private TransferDao transferDao;
+	
+	public TransferServiceImpl() {
+		System.out.println("#### TransferServiceImpl() : 디폴트생성자 호출  ");
+	}
+	
+	@Override
+	public int insertTransfer_Deposit(int p_no) throws Exception {
+		return transferDao.insertTransfer_Deposit(p_no);
+	}
+	
+	@Override
+	public int insertTransfer_Withdraw(int p_no) throws Exception {
+		return transferDao.insertTransfer_Withdraw(p_no);
+	}
+	
+	@Override
+	public int insertTransfer_Withdraw_Cancle(int p_no) throws Exception {
+		return transferDao.insertTransfer_Withdraw_Cancle(p_no);
+	}
+	
+	@Override
+	public int insertTransfer_Deposit_Cancle(int p_no) throws Exception {
+		return transferDao.insertTransfer_Deposit_Cancle(p_no);
+	}
+	
+	@Override
+	public List<Transfer> selectById(String user_id) throws Exception {
+		return transferDao.selectById(user_id);
+	}
+	
+	
+}
+*/
