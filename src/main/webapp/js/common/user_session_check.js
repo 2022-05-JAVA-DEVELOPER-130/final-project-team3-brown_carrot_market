@@ -171,7 +171,7 @@ function connectServer(loginId){
 	      toastr.options.positionClass = "toast-top-right";
 	      toastr['warning'](msg.user_id+" : "+message);
 	      
-	      
+	      /******************채팅수증가******* */
 	 /*    var tmp = document.getElementbyclass('cart_quantity').innerHTML;
 	      console.log(tmp);
 	      tmp++;
