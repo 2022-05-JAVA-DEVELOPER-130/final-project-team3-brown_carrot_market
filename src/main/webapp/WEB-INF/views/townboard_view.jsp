@@ -31,6 +31,14 @@
 	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+	
+	<!-- toast -->
+ <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
+	
+	
+	
 </head>
 
 <body>
@@ -182,7 +190,8 @@
                     <!-- Blog Details Area -->
                     <div class="blog-details-area mb-50">                        
                         <!-- Image -->
-                        <img class="mb-30" src="img/bg-img/blog-3.jpg" alt="blog-img">
+                        <img class="mb-30" src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-img">
+                        <img class="mb-30" src="img/townBoard-img/${townImage.t_img_name}" alt="blog-img">
                         
                         <!-- Blog Title -->
                         <h3 class="mb-30">${townBoard.t_title}</h3>
@@ -192,6 +201,8 @@
                             <a href="#"><i class="icofont-user-male"></i> ${townBoard.userInfo.user_id }</a>
                             <a href="#"><i class="icofont-ui-clock"></i> ${townBoard.t_date }</a>
                             <a href="#"><i class="icofont-speech-comments"></i> 3 Comments</a>
+                           <input class="townBoard_i delete" type="button" pageno="${pageno}" t_no=${townBoard.t_no} value="삭제하기" />
+                           
                         </div>
 
                         <!-- Single Blog Details Area -->
@@ -333,6 +344,27 @@
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
     <script src="js/townBoard/townBoard.js"></script>
+
+	<style type="text/css">
+#toast-container > .toast {
+    background-image: none !important;
+}
+
+ #toast-container > .toast:before {
+    position: relative;
+    font-family: FontAwesome;
+    font-size: 24px;
+    line-height: 18px;
+    float: left;
+    color: #FFF;
+    padding-right: 0.5em;
+    margin: auto 0.5em auto -1.5em;
+}       
+    #toast-container > .toast-warning:before {
+     content: "\f27a"; 
+ 
+}
+
 
 </body>
 
