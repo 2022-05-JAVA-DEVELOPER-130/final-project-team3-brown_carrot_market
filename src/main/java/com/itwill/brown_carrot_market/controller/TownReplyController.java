@@ -27,7 +27,7 @@ public class TownReplyController {
 		String sUserId = (String)session.getAttribute("sUserId");
 		Address sAddress = (Address)session.getAttribute("sAddress");
 		
-		List<TownReply> 
+		//List<TownReply> 
 		
 		
 		return null;
