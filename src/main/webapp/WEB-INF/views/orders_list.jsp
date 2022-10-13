@@ -25,10 +25,11 @@
 
     <!-- javaScript -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
+	<script type="text/javascript" src="js/review/review.js"></script>
+	<script type="text/javascript" src="js/review/ReviewHtmlContents.js"></script>
 </head>
 
 <body>
@@ -41,7 +42,6 @@
 
     <!-- Header Area -->
 			<jsp:include page="common/include_common_header.jsp"/>
-
     <!-- Header Area End -->
     
     <!-- Breadcumb Area -->
@@ -52,6 +52,7 @@
                     <h5>구매내역</h5>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item">거래내역</li>
                         <li class="breadcrumb-item active">구매내역</li>
                     </ol>
                 </div>
@@ -62,7 +63,7 @@
     <!-- Cart Area -->
 	    <div class="cart_area section_padding_100_70 clearfix">
 	        <div class="container">
-	            <div class="row justify-content-between">
+	            <div id="container_contents" class="row justify-content-between">
 	                <div class="col-12">
 	                    <div class="cart-table">
 	                        <div class="table-responsive">
@@ -74,36 +75,39 @@
 	                                        <th scope="col">사   진</th>
 	                                        <th scope="col">이   름</th>
 	                                        <th scope="col">상품가격</th>
-	                                        <th scope="col">비   고</th>
+	                                        <th scope="col">후   기</th>
 	                                    </tr>
 	                                </thead>
 	                                <tbody>
-									    <c:forEach items="${ordersList}" var="Orders">
+	                                
+									    <c:forEach items="${ordersList}" var="Orders" varStatus="status">
 		                                    <tr>
 		                                        <!--<th scope="row">
 		                                            <i class="icofont-close"></i>
 		                                        </th>-->
 		                                        <td>
+				                                    <input type="hidden" class="" name="orders_no_${status.index}" value="${Orders.orders_no}" >
 		                                        	<c:set var="product_date" value="${Orders.product.p_date}"/>
 		                                        	${fn:substring(product_date,0,10)}
 		                                        </td>
 		                                        <td>
-		                                            <img src="img/product_img/carrot2.png" alt="Product">
+		                                            <img src="img/product_img/${Orders.productImage.pi_name}" alt="ProductImage">
 		                                        </td>
 		                                        <td>
-		                                            <a href="/brown_carrot_market/product_detail?p_no=${Orders.product.p_no}">${Orders.product.p_title}</a>
+		                                            <a href="product_detail?p_no=${Orders.product.p_no}">${Orders.product.p_title}</a>
 		                                        </td>
 		                                        <td>
 		                                        	${Orders.product.p_price}
 		                                        </td>
-		                                        <!-- <td>
-		                                            <div class="quantity">
-		                                                <input type="number" class="qty-text" id="qty3" step="1" min="1" max="99" name="quantity" value="1">
+		                                        <td>
+		                                            <div class="" name="check_review">
+		                                                <script>check_isExisted_review($('input[name=orders_no_${status.index}]').val())</script>
+		                                                <a href="#" class="badge" id="${Orders.orders_no}" style="height:20px;font-size:1rem"></a>
 		                                            </div>
-		                                        </td> -->
-		                                        <td></td>
+		                                        </td>
 		                                    </tr>
-										</c:forEach>    
+										</c:forEach>  
+										
 	                                </tbody>
 	                            </table>
 	                        </div>

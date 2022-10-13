@@ -87,9 +87,10 @@
                                             <li><a href="product-details.html">- 기타</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">동네생활</a>
+                                    <li><a href="townBoard_list">동네생활</a>
                                         <div class="megamenu">
                                             <ul class="single-mega cn-col-4">
+                                                <li><a href="townBoard_list">- 전체보기</a></li>
                                                 <li><a href="single-blog.html">- 동네소식</a></li>
                                                 <li><a href="single-blog.html">- 같이해요</a></li>
                                                 <li><a href="single-blog.html">- 동네질문</a></li>
@@ -99,8 +100,6 @@
                                             </ul>
                                             <ul class="single-mega cn-col-4">
                                                 <li><a href="#">- 분실/실종센터</a></li>
-                                                <li><a href="#">- 동네사건사고</a></li>
-                                                <li><a href="#">- 해주세요</a></li>
                                                 <li><a href="#">- 동네사진전</a></li>
                                                 <li><a href="#"></a></li>
                                                 <li><a href="contact.html">Contact</a></li>
@@ -164,9 +163,10 @@
 
                             <!-- Chat -->
                             <div id="chat-area" class="cart-area chat-area" >
-                                <div class="cart--btn"><i class="icofont-chat"></i> <span class="cart_quantity">2</span></div>
+                                <a href="chat_room" class="cart--btn" style="display:block;"><i class="icofont-chat"></i> <span class="cart_quantity">2</span></a>
 
                                 <!-- Cart Dropdown Content -->
+                                <!--  
                                 <div class="cart-dropdown-content">
                                     <ul class="cart-list">
                                         <li>
@@ -214,6 +214,7 @@
                                         <a href="checkout-1.html" class="btn btn-primary d-block">Checkout</a>
                                     </div>
                                 </div>
+                                -->
                             </div>
 <!-- [nav] Account Start!!!!! **************************************** -->
                             <!-- Account -->
@@ -224,7 +225,7 @@
                                 <ul class="user-meta-dropdown">
                                     <li class="user-title"><span>Hello,</span> Lim Sarah</li>
                                     <li><a href="my-account.html">My Account</a></li>
-                                    <li><a href="chat_room">Chatting</a></li>
+                                   
                                     <li><a href="login.html"><i class="icofont-logout"></i> 로그아웃</a></li>
                                 </ul>
                             </div>

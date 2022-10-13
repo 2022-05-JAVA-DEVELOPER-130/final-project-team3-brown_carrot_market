@@ -5,23 +5,48 @@ import java.util.Map;
 
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.TownBoard;
+import com.itwill.brown_carrot_market.util.PageMakerDto;
 
 public interface TownBoardService {
 	
 	//동네 게시판 비회원이 전체조회
-	List<TownBoard> selectNonMemberTownBoardList()throws Exception;
+	PageMakerDto<TownBoard> selectNonMemberTownBoardList(int currentPage)throws Exception;
+	//동네 게시판 비회원이 게시글 수 계산
+	int selectNonMemberCountTownBoard();
+	
+	
 	
 	//동네 게시판 비회원이 카테고리 조건으로 전체조회
-	List<TownBoard> selectNonMemberCtgrTownBoardList(int t_ctgr_no)throws Exception;
+	PageMakerDto<TownBoard> selectNonMemberCtgrTownBoardList(int t_ctgr_no, int currentPage)throws Exception;
+	//동네 게시판 카테고리 조건 비회원이 게시글 수 계산
+	int selectNonMemberCountCtgrTownBoard(int t_ctgr_no);
 	
-	//동네 게시판 회원이 좌표값 조건으로 전체조회 -- 좌표 범위대로 나오는지 다시 확인하기..
-	List<TownBoard> selectTownBoardListCoordinate(Address address)throws Exception;
 	
-	//동네 게시판 회원이 좌표값과 카테고리 조건으로 전체조회 -- 좌표 범위대로 나오는지 다시 확인하기..
-	List<TownBoard> selectTownBoardCtgrListCoordinate(int t_ctgr_no ,Address address)throws Exception;
+	//동네 게시판 회원이 좌표값 조건으로 전체조회 
+	PageMakerDto<TownBoard> selectTownBoardListCoordinate(Address address, int currentPage)throws Exception;
+	//동네 게시판 회원이 게시글 수 계산
+	int selectMemberCountTownBoard(Address address);
+	
+	
+	
+	
+	
+	//동네 게시판 회원이 좌표값과 카테고리 조건으로 전체조회 -- 페이징처리
+	PageMakerDto<TownBoard> selectTownBoardCtgrListCoordinate(Map map, int currentPage)throws Exception;
+	//회원이 카테고리 조건 게시판 게시글 수 계산
+	int selectMemberCtgrCountTownBoard(Map map);
+	//회원이 카테고리 조건 게시판 게시글 수 계산을 위한 파라메타 맵 만들기
+	Map selectMemberCtgrTownBoardAddress(int t_ctgr_no,String user_id,int address_no);
+	
+	
+	
+	
+	
 	
 	//동네 게시판 게시글 한개 조회
 	TownBoard selectTownBoardOne(int t_no)throws Exception;
+	
+	
 	
 	//동네 게시판 글 하나 삭제
 	int deleteTownBoardOne(int t_no) throws Exception;

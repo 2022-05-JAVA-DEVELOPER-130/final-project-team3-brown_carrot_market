@@ -39,8 +39,8 @@ public class TownBoardServiceSpringBootTestApplication {
 		application.setWebApplicationType(WebApplicationType.NONE);
 		ConfigurableApplicationContext context=application.run(args);
 		TownBoardService townBoardService=(TownBoardService)context.getBean(TownBoardService.class);
-		
-		System.out.println("selectNonMemberTownBoardList test:"+townBoardService.selectNonMemberTownBoardList());
+		/*
+		//System.out.println("selectNonMemberTownBoardList test:"+townBoardService.selectNonMemberTownBoardList());
 		
 		System.out.println("selectNonMemberCtgrTownBoardList test:"+townBoardService.selectNonMemberCtgrTownBoardList(1));
 		
@@ -68,7 +68,7 @@ public class TownBoardServiceSpringBootTestApplication {
 		pmap.put("address", map);
 		
 		townBoardService.insertTownBoard(pmap);
-		
+		*/
 		
 	}
 }

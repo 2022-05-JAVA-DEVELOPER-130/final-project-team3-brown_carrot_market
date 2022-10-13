@@ -1,5 +1,6 @@
 package com.itwill.brown_carrot_market.controller;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwill.brown_carrot_market.dto.ChatContents;
 import com.itwill.brown_carrot_market.dto.ChatRoomListView;
+import com.itwill.brown_carrot_market.dto.ProductImage;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.ChatService;
 import com.itwill.brown_carrot_market.service.ProductService;
@@ -86,7 +88,15 @@ public class ChatController {
 						System.out.println(chatRoomListView.getYou_id());
 					
 						String img = userInfoService.findUser(chatRoomListView.getYou_id()).getUser_profile();
+						ArrayList<ProductImage> productImage = (ArrayList<ProductImage>)productService.selectProductImgList(chatRoomListView.getP_no());
+						if(productImage.size()==0) {
+							chatRoomListView.setP_img("pan.jpg");
+						}else {
+							chatRoomListView.setP_img(productImage.get(0).getPi_name());
+							
+						}
 						chatRoomListView.setYou_image(img);
+						
 						chatRoomListView.setNot_read(chatService.chatNotRead(chatRoomListView.getC_room_no(), userId));
 						if(chatRoomListView.getC_content().startsWith("@@image!#")) {
 							chatRoomListView.setC_content("사진 전송");

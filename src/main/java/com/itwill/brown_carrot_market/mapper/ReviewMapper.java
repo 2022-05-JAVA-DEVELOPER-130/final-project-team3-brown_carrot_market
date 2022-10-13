@@ -20,4 +20,9 @@ public interface ReviewMapper {
 
 	public List<Review> findReceivedReviewBySeller(String user_id);
 
+	public Review findReviewByRivewNo(int review_no);
+
+	public int isExistedReviewByOrdersNoId(Review review);
+	
+
 }

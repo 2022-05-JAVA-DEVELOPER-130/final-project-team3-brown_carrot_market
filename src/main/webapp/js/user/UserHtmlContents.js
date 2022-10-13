@@ -14,19 +14,19 @@ UserHtmlContents.user_view_content=function(sUser) {
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="currentPass">현재 비밀번호 (Leave blank to leave unchanged)</label>
-                                        <input type="password" class="form-control" name="currentPass" value="${sUser.user_pw}" readonly>
+                                        <input type="password" class="form-control" id="user_pw" name="user_pw" value="${sUser.user_pw}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="newPass">신규 비밀번호 (Leave blank to leave unchanged)</label>
-                                        <input type="password" class="form-control" name="user_pw">
+                                        <input type="password" class="form-control" id="user_pw_new" name="user_pw_new">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="confirmPass">신규 비밀번호 확인</label>
-                                        <input type="password" class="form-control" name="confirmPass">
+                                        <input type="password" class="form-control" id="user_pw_new2" name="user_pw_new_confirm">
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -176,46 +176,25 @@ UserHtmlContents.user_profile_edit=function(sUser){
 						</div>
 						</profile>`;
 }
-UserHtmlContents.user_received_reviewList=function(reviewList){
-	return `<div class="col-12">
-                    <div class="shortcodes_title mb-30">
-                        <h4>Bigshop Tables</h4>
-                    </div>
-                    <div class="shortcodes_content">
-                        <div class="table-responsive">
-                            <table class="table mb-0 table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">orders_no</th>
-                                        <th scope="col">p_title</th>
-                                        <th scope="col">reviewr_id</th>
-                                        <th scope="col">reviewr_profile</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${
-										reviewList.map(review_item_content).join('')	
-									}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>`;
-	function review_item_content(review){
-		return `<tr>
-	                <th scope="row">${review.review_no}</th>
-	                <td>${review.review_desc}</td>
-	                <td>${review.review_image}</td>
-	                <td>${review.orders.orders_no}</td>
-	                <td>${review.orders.product.p_title}</td>
-	                <td>${review.userInfo.user_id}</td>
-	                <td>${review.userInfo.user_profile}</td>
-	            </tr>`;
-	}
+
+UserHtmlContents.user_remove_form=function(msg){
+	return `<div class="shortcodes_content mb-100">
+				<h5 class="mb-4">회원 탈퇴</h5>
+                        <form id="user_remove_pw_form" name="user_remove_form">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">비밀번호 확인</label>
+                                <font color="red" id="msg">${msg}</font>
+                                <input type="password" class="form-control" id="user_pw" name="user_pw" placeholder="비밀번호">
+                            </div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="chk_remove">
+                                <label class="form-check-label" for="exampleCheck1">정말로 흙당근 마켓에서 탈퇴하시겠습니까?</label>
+                            </div>
+                            <button type="submit" id="btn_user_remove" class="btn btn-primary">탈퇴하기</button>
+                        </form>
+                    </div>`;
 }
+
 UserHtmlContents.user_received_reviewList2=function(reviewList){
 	function review_item_content2(review){
 		return `<li class="single_comment_area">
