@@ -1,5 +1,7 @@
 package com.itwill.brown_carrot_market.dao;
 
+import java.util.List;
+
 import com.itwill.brown_carrot_market.dto.Promise;
 
 public interface PromiseDao {
@@ -12,6 +14,8 @@ public interface PromiseDao {
 	public int promiseUpdate(Promise promise);
 	
 	public int promiseExist(int c_room_no);
+	
+	public List<Promise> promiseAlert(String user_id);
 
 
 	

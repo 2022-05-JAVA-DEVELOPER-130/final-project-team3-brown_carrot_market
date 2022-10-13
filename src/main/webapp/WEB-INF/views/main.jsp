@@ -18,6 +18,7 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="css/chat_toast.css">
 
 	<!-- javaScript -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -26,6 +27,7 @@
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 	
 	<!-- toast -->
+ <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
 
@@ -1122,6 +1124,31 @@
     <script src="js/jquery.nice-select.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
+
+<style type="text/css">
+#toast-container > .toast {
+    background-image: none !important;
+}
+
+ #toast-container > .toast:before {
+    position: relative;
+    font-family: FontAwesome;
+    font-size: 24px;
+    line-height: 18px;
+    float: left;
+    color: #FFF;
+    padding-right: 0.5em;
+    margin: auto 0.5em auto -1.5em;
+}       
+    #toast-container > .toast-warning:before {
+     content: "\f27a"; 
+ 
+} 
+
+ #toast-container > .toast-success:before {
+     content: "\f2b5"; 
+ 
+} 
 
 </body>
 

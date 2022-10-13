@@ -1,22 +1,30 @@
 package com.itwill.brown_carrot_market.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.brown_carrot_market.dao.ReviewDao;
+import com.itwill.brown_carrot_market.dao.ReviewImageDao;
 import com.itwill.brown_carrot_market.dao.UserInfoDao;
 import com.itwill.brown_carrot_market.dto.Review;
+import com.itwill.brown_carrot_market.dto.ReviewImage;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 
 @Service
 public class ReviewServiceImpl implements ReviewService{
 
 	@Autowired
-	@Qualifier("ReviewDaoImpl")
+	@Qualifier("reviewDaoImpl")
 	private ReviewDao reviewDao;
+	
+	@Autowired
+	@Qualifier("reviewImageDaoImpl")
+	private ReviewImageDao reviewImageDao;
 	
 	@Autowired
 	@Qualifier("userDaoImpl")
@@ -26,14 +34,20 @@ public class ReviewServiceImpl implements ReviewService{
 		System.out.println("#### ReviewServiceImpl() : 디폴트생성자 호출");
 	}
 
+	@Transactional
 	@Override
 	public int createReview(Review review) throws Exception {
 		int result = 0;
+		int review_no = reviewDao.createReview(review);
 		
-		reviewDao.createReview(review);
-		//UserInfo updateUser = new UserInfo(null, null, null, null, null, result, result, null, null)
-		//userInfoDao.updateFreshness();
-		
+		if(review.getReviewImageList()!=null) {
+			List<ReviewImage> imageList = new ArrayList();
+			for (ReviewImage image : review.getReviewImageList()) {
+				image.setReview_no(review_no);
+				imageList.add(image);
+			}
+			result= reviewImageDao.insertReviewImgList(imageList);
+		}
 		return result;
 	}
 
@@ -55,10 +69,16 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
+	public Review findReviewByRivewNo(int review_no) throws Exception {
+		
+		return null;
+	}
+	
+	@Override
 	public int isExistedReviewByOrdersNoId(Review review) throws Exception {
 		return reviewDao.isExistedReviewByOrdersNoId(review);
 	}
-	
+
 	
 	
 }

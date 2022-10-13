@@ -67,8 +67,8 @@ public class NoticeController {
 	
 	@LoginCheck
 	@RequestMapping("/notice_new_write")
-	public String notice_new_write(@ModelAttribute Notice notice, @RequestParam Integer pageno) throws Exception{
-		//String sUserId = (String)session.getAttribute("sUserId");
+	public String notice_new_write(@ModelAttribute Notice notice, @RequestParam Integer pageno, HttpSession session) throws Exception{
+		String sUserId = (String)session.getAttribute("sUserId");
 		if (pageno == null) {
 			return "";
 		}
@@ -93,8 +93,8 @@ public class NoticeController {
 	
 	@LoginCheck
 	@RequestMapping("/notice_write_form")
-	public String qna_write_form(Integer pageno, Model model) throws Exception{
-		//String sUserId = (String)session.getAttribute("sUserId");
+	public String qna_write_form(Integer pageno, Model model,HttpSession session) throws Exception{
+		String sUserId = (String)session.getAttribute("sUserId");
 		if (pageno == null) {
 			return "";
 		}
@@ -104,9 +104,7 @@ public class NoticeController {
 		}
 		*/
 		try {
-			//List<Cart> cartList = cartService.cartListAll((String) session.getAttribute("sM_id"));
 			model.addAttribute("pageno", pageno);
-			//model.addAttribute("cartList", cartList);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error";

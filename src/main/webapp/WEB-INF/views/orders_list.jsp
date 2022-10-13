@@ -28,10 +28,8 @@
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
-	<!-- toast -->
-	<link href="[//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css)" rel="stylesheet" />
-	<link rel="stylesheet" type="text/css" href="[https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css](https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css)"/>
-	<script type="text/javascript" src="[https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js](https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js)"></script>
+	<script type="text/javascript" src="js/review/review.js"></script>
+	<script type="text/javascript" src="js/review/ReviewHtmlContents.js"></script>
 </head>
 
 <body>
@@ -65,7 +63,7 @@
     <!-- Cart Area -->
 	    <div class="cart_area section_padding_100_70 clearfix">
 	        <div class="container">
-	            <div class="row justify-content-between">
+	            <div id="container_contents" class="row justify-content-between">
 	                <div class="col-12">
 	                    <div class="cart-table">
 	                        <div class="table-responsive">
@@ -77,13 +75,10 @@
 	                                        <th scope="col">사   진</th>
 	                                        <th scope="col">이   름</th>
 	                                        <th scope="col">상품가격</th>
-	                                        <th scope="col">상   태</th>
 	                                        <th scope="col">후   기</th>
-	                                        <th scope="col">비   고</th>
 	                                    </tr>
 	                                </thead>
 	                                <tbody>
-	                                
 	                                
 									    <c:forEach items="${ordersList}" var="Orders" varStatus="status">
 		                                    <tr>
@@ -105,49 +100,14 @@
 		                                        	${Orders.product.p_price}
 		                                        </td>
 		                                        <td>
-		                                        	<script>
-			                                        	if(${Orders.product.p_sell}==1){
-			                                        		document.write("판매 중")
-			                                        	}else if(${Orders.product.p_sell}==2){
-			                                        		document.write("예약 중")	
-			                                        	}else if(${Orders.product.p_sell}==3){
-			                                        		document.write("거래 완료")
-			                                        	}
-		                                        	</script>
-		                                        </td>
-		                                        <td>
-		                                            <div class="" name="">
-		                                                <!-- <input type="button" class="badge badge-light" id=""  name="" >후기작성 -->
-		                                                <script type="text/javascript">
-		                                                	 console.log($('input[name=orders_no_${status.index}]').val());
-		                                                	 var orders_no = $('input[name=orders_no_${status.index}]').val();
-			                                                $.ajax({
-			                                					url : 'isExisted_review_check_json',
-			                                					method : 'POST',
-			                                					dataType : 'json',
-			                                					data : {
-			                                						"orders_no": orders_no
-			                                					},
-			                                					success : function(jsonResult) {
-			                                						console.log("result: "+jsonResult.data);
-			                                						if(jsonResult.data==0){
-			                                							$('#orders_no_${status.index}_review').text('작성하기');
-			                                							$('#orders_no_${status.index}_review').addClass('badge-carrot');
-			                                							
-			                                						}else if (jsonResult.data==1) {
-			                                							$('#orders_no_${status.index}_review').text('보러가기');
-			                                							$('#orders_no_${status.index}_review').addClass('badge-secondary');
-																	}
-			                                					}
-			                                				});
-		                                                </script>
-		                                                <a href="#" class="badge" id="orders_no_${status.index}_review" style="height:20px;font-size:1rem"></a>
+		                                            <div class="" name="check_review">
+		                                                <script>check_isExisted_review($('input[name=orders_no_${status.index}]').val())</script>
+		                                                <a href="#" class="badge" id="${Orders.orders_no}" style="height:20px;font-size:1rem"></a>
 		                                            </div>
-		                                        </td>
-		                                        <td>
 		                                        </td>
 		                                    </tr>
 										</c:forEach>  
+										
 	                                </tbody>
 	                            </table>
 	                        </div>
@@ -178,26 +138,7 @@
     <script src="js/jquery.nice-select.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
-	
+
 </body>
-<style type="text/css">
-		#toast-container > .toast {
-		background-image: none !important;
-		}
-		
-		#toast-container > .toast:before {
-		position: relative;
-		font-family: FontAwesome;
-		font-size: 24px;
-		line-height: 18px;
-		float: left;
-		color: #FFF;
-		padding-right: 0.5em;
-		margin: auto 0.5em auto -1.5em;
-		}
-		#toast-container > .toast-warning:before {
-		content: "\f27a";
-		
-		}
-</style>
+
 </html>

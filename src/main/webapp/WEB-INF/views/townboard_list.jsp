@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>	
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+
 <!doctype html>
 <html lang="en">
 
@@ -30,7 +33,10 @@
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 	
-	
+	<!-- toast -->
+ <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
 	
 </head>
 
@@ -77,44 +83,46 @@
                             <h6>Catagory</h6>
                             <ul>
                               <li>
+                              
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no1" value=1>
-	                              <a href="#">동네생활 <span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,1)">동네생활 <span class="text-muted">(21)</span></a>
+
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no2" value=2>
-	                              <a href="#">같이해요<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,2)">같이해요<span class="text-muted">(21)</span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no3" value=3>
-	                              <a href="#">동네질문<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,3)">동네질문<span class="text-muted">(21)</span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no4" value=4>
-	                              <a href="#">동네맛집<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,4)">동네맛집<span class="text-muted">(21)</span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no5" value=5>
-	                              <a href="#">취미생활<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,5)">취미생활<span class="text-muted">(21)</span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no6" value=6>
-	                              <a href="#">일상<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,6)">일상<span class="text-muted">(21)</span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no7" value=7>
-	                              <a href="#">분실/실종센터<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,7)">분실/실종센터<span class="text-muted">(21)</span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no8" value=8>
-	                              <a href="#">동네사건사고<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,8)">동네사건사고<span class="text-muted">(21)</span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no9" value=9>
-	                              <a href="#">해주세요<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,9)">해주세요<span class="text-muted">(21)</span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no10" value=10>
-	                              <a href="#">동네사진전<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,10)"s>동네사진전<span class="text-muted">(21)</span></a>
                               </li>
                                 
                                
@@ -186,16 +194,17 @@
                     <c:forEach var="townBoard" items="${townBoardList.itemList}">
                         <div class="blog_post_thumb">
                        	<c:if test="${townBoard.townImageList.size() != 0}">
-                            <a href="single-blog.html"><img src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-post-thumb"></a>
+                            <a href="townboard_view?t_no=${townBoard.t_no}" p_no="${townBoard.t_no}"><img src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-post-thumb"></a>
                             </c:if>
-                            <!-- Post Date -->
+                            
+                        </div>
+                        <div class="blog_post_content">
+                        <!-- Post Date -->
                             <div class="post-date">
                                 <a href="#">${townBoard.townCategory.t_ctgr_name}</a>
                                 <span>조회수 : ${townBoard.t_count}</span>
                             </div>
-                        </div>
-                        <div class="blog_post_content">
-                            <a href="single-blog.html" class="blog_title">${townBoard.t_title}</a>
+                            <a href="townboard_view?t_no=${townBoard.t_no}" p_no="${townBoard.t_no}" class="blog_title">${townBoard.t_title}</a>
                             <p>${townBoard.t_content}</p>
                             <a href="single-blog.html">Continue Reading <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                         </div>
@@ -271,7 +280,27 @@
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
     <script src="js/townBoard/townBoard.js"></script>
+	
+	<style type="text/css">
+#toast-container > .toast {
+background-image: none !important;
+}
 
+#toast-container > .toast:before {
+position: relative;
+font-family: FontAwesome;
+font-size: 24px;
+line-height: 18px;
+float: left;
+color: #FFF;
+padding-right: 0.5em;
+margin: auto 0.5em auto -1.5em;
+}
+#toast-container > .toast-warning:before {
+content: "\f27a";
+
+}
+	
 </body>
 
 </html>

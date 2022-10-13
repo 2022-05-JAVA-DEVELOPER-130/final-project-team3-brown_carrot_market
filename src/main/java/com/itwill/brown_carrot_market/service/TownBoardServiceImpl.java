@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.itwill.brown_carrot_market.dao.TownBoardDao;
+import com.itwill.brown_carrot_market.dao.UserInfoDao;
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.TownBoard;
 import com.itwill.brown_carrot_market.util.PageMaker;
@@ -18,6 +19,10 @@ public class TownBoardServiceImpl implements TownBoardService{
 	@Autowired
 	@Qualifier("townBoardDaoImpl")
 	private TownBoardDao townBoardDao;
+	
+	private UserInfoDao userInfoDao;
+	
+	
 	
 	public TownBoardServiceImpl() throws Exception{
 		System.out.println(">>> townBoardServiceImpl : 기본 생성자 호출");
@@ -72,21 +77,48 @@ public class TownBoardServiceImpl implements TownBoardService{
 	@Override
 	public int selectMemberCountTownBoard(Address address) {
 		return townBoardDao.selectMemberCountTownBoard(address);
+		
 	}
 
 	
 	
 	
+	//동네 게시판 회원이 좌표값과 카테고리 조건으로 전체조회 -- 페이징처리
 	@Override
-	public List<TownBoard> selectTownBoardCtgrListCoordinate(int t_ctgr_no, Address address) throws Exception {
-		return townBoardDao.selectTownBoardCtgrListCoordinate(t_ctgr_no, address);
+	public PageMakerDto<TownBoard> selectTownBoardCtgrListCoordinate(Map map, int t_ctgr_no, int currentPage) throws Exception {
+		//(추가)
+		System.out.println("selectTownBoardCtgrListCoordinate- map >>"+map);
+		
+		int totTownBoardMemberCtgrCount = townBoardDao.selectMemberCtgrCountTownBoard(map, t_ctgr_no);
+		PageMaker pageMaker = new PageMaker(totTownBoardMemberCtgrCount, currentPage, 5, 5);
+		List<TownBoard> townBoardList = townBoardDao.selectTownBoardCtgrListCoordinate(map,t_ctgr_no ,pageMaker.getPageBegin(), pageMaker.getPageEnd());
+		PageMakerDto<TownBoard> pageMakerTownBoardList = new PageMakerDto<TownBoard>(townBoardList, pageMaker, totTownBoardMemberCtgrCount);
+		return pageMakerTownBoardList;
 	}
+	
+	//회원이 카테고리 조건 게시판 게시글 수 계산
+	@Override
+	public int selectMemberCtgrCountTownBoard(Map map,int t_ctgr_no) {
+		System.out.println("selectMemberCtgrCountTownBoard서비스 - map: "+map);
+		
+		return townBoardDao.selectMemberCtgrCountTownBoard(map,t_ctgr_no);
+	}
+	//회원이 카테고리 조건 게시판 게시글 수 계산을 위한 파라메타 맵 만들기
+	@Override
+	public Map selectMemberCtgrTownBoardAddress(String user_id, int address_no) {
+		return townBoardDao.selectMemberCtgrTownBoardAddress(user_id, address_no);
+	}
+	
+	
+	
+	
 
 	@Override
 	public TownBoard selectTownBoardOne(int t_no) throws Exception {
 		return townBoardDao.selectTownBoardOne(t_no);
 	}
-
+	
+	//게시글 삭제
 	@Override
 	public int deleteTownBoardOne(int t_no) throws Exception {
 		return townBoardDao.deleteTownBoardOne(t_no);
@@ -124,6 +156,8 @@ public class TownBoardServiceImpl implements TownBoardService{
 	public int insertTownBoard(Map map) {
 		return townBoardDao.insertTownBoard(map);
 	}
+
+
 
 
 

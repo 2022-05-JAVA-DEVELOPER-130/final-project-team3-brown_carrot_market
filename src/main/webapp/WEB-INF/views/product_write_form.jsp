@@ -18,6 +18,7 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/product.css">
 	
 	<!-- javaScript -->
     <script type="text/javascript"
@@ -26,6 +27,11 @@
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 	<script type="text/javascript" src="js/product/product.js"></script>
 	
+	<!-- toast -->
+	<link href="[//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css)" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="[https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css](https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css)"/>
+	<script type="text/javascript" src="[https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js](https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js)"></script>
+		
 	
 </head>
 
@@ -100,16 +106,116 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <!-- 사진 넣기 임시 
+                                    <div>
+                                    <ul style="display : flex">
+                                    <li>
+                                    <label style="display:inline-block;">
                                     <span>사진1: <input type="file" name="files"></span>
 									<span>사진2: <input type="file" name="files"></span>
 									<span>사진3: <input type="file" name="files"></span>
-									<span>사진4: <input type="file" name="files"></span> 
+									<span>사진4: <input type="file" name="files"></span>
+									</label>
+									</li> 
+									</ul>
+									</div>
+									사진 넣기 임시 끝-->
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <textarea name="p_desc" class="form-control" id="p_desc" cols="30" rows="10" placeholder="물건 설명" required></textarea>
                                         	</div>
                                         </div>
                                     </div>
+                                    <!-- 이미지 업로드 부분 시작-->
+                                   <div class="img_box">
+                                   <ul class="imgul" style="display : flex;">
+                                    <li>
+                                    	<label for="up_file4" style="display : inline-block; cursor:pointer; position : relative;">
+                                    		<input type="file" name="files" id="up_file4"
+                                    				style="position : absolue; 
+                                    					   top : 0 !important; 
+                                    					   left :  0 !important;
+                                    					   line-height:  0 !important;
+                                    					   font-size:  0 !important;
+                                    					   width:  0 !important;
+                                    					   height:  0 !important;
+                                    					   color : transparent !important;
+                                    					   overflow : hidden !important;
+                                    					   opacity: 0;">
+                                    		<span class="imgspan" style = "display : block;
+                                    						width:100px;
+                                    						height:100px;
+                                    						border:1px solid #ddd;
+                                    						position:relative;">
+                                    		</span>	   
+                                    	</label>
+                                    </li>
+                                    <li>
+                                    	<label for="up_file4" style="display : inline-block; cursor:pointer; position : relative;">
+                                    		<input type="file" name="files" id="up_file4"
+                                    				style="position : absolue; 
+                                    					   top : 0 !important; 
+                                    					   left :  0 !important;
+                                    					   line-height:  0 !important;
+                                    					   font-size:  0 !important;
+                                    					   width:  0 !important;
+                                    					   height:  0 !important;
+                                    					   color : transparent !important;
+                                    					   overflow : hidden !important;
+                                    					   opacity: 0;">
+                                    		<span class="imgspan" style = "display : block;
+                                    						width:100px;
+                                    						height:100px;
+                                    						border:1px solid #ddd;
+                                    						position:relative;">
+                                    		</span>	   
+                                    	</label>
+                                    </li>
+                                    <li>
+                                    	<label for="up_file4" style="display : inline-block; cursor:pointer; position : relative;">
+                                    		<input type="file" name="files" id="up_file4"
+                                    				style="position : absolue; 
+                                    					   top : 0 !important; 
+                                    					   left :  0 !important;
+                                    					   line-height:  0 !important;
+                                    					   font-size:  0 !important;
+                                    					   width:  0 !important;
+                                    					   height:  0 !important;
+                                    					   color : transparent !important;
+                                    					   overflow : hidden !important;
+                                    					   opacity: 0;">
+                                    		<span class="imgspan" style = "display :block;
+                                    						width:100px;
+                                    						height:100px;
+                                    						border:1px solid #ddd;
+                                    						position:relative;">
+                                    		</span>	   
+                                    	</label>
+                                    </li>
+                                    <li>
+                                    	<label for="up_file4" style="display : inline-block; cursor:pointer; position : relative;">
+                                    		<input type="file" name="files" id="up_file4"
+                                    				style="position : absolue; 
+                                    					   top : 0 !important; 
+                                    					   left :  0 !important;
+                                    					   line-height:  0 !important;
+                                    					   font-size:  0 !important;
+                                    					   width:  0 !important;
+                                    					   height:  0 !important;
+                                    					   color : transparent !important;
+                                    					   overflow : hidden !important;
+                                    					   opacity: 0;">
+                                    		<span class="imgspan" style = "display : block;
+                                    						width:100px;
+                                    						height:100px;
+                                    						border:1px solid #ddd;
+                                    						position:relative;">
+                                    		</span>	   
+                                    	</label>
+                                    </li>
+                                    </ul>
+                                    </div>
+                                     <!-- 이미지 업로드 부분 끝-->
                                     <div class="col-12 text-center">
                                         <input type="button" id="btn_product_write_action" class="btn btn-primary w-40" value="물건 올리기" onclick="productCreate()">&nbsp; 
                                         <input type="button" class="btn btn-primary w-40" value="동네물건목록" onclick="productList()">
@@ -145,6 +251,29 @@
     <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
+
+<style type="text/css">
+#toast-container > .toast {
+background-image: none !important;
+}
+
+#toast-container > .toast:before {
+position: relative;
+font-family: FontAwesome;
+font-size: 24px;
+line-height: 18px;
+float: left;
+color: #FFF;
+padding-right: 0.5em;
+margin: auto 0.5em auto -1.5em;
+}
+#toast-container > .toast-warning:before {
+content: "\f27a";
+
+}
+#toast-container > .toast-success:before {
+content: "\f2b5";
+}
 
 </body>
 

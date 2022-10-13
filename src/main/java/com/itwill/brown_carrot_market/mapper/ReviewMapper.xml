@@ -38,6 +38,11 @@
 		 		</association>
 	 		</association>
  		</association>
+ 		<collection property="reviewImageList" javaType="java.util.List" ofType="com.itwill.brown_carrot_market.dto.ReviewImage">
+ 			<result column="review_img_no" property="review_img_no"/>
+ 			<result column="review_img_name" property="review_img_name"/>
+ 			<result column="review_no" property="review_no"/>
+ 		</collection>
  	</resultMap>
  
  
@@ -104,6 +109,16 @@
 					on p.p_no=o.p_no
 					where o.user_id = #{user_id})
 	</select>
+	
+	<!-- 후기 1개 보기  -->
+	<select id="findReviewByRivewNo" parameterType="int" resultType="com.itwill.brown_carrot_market.dto.Review">
+		select r.*, o.*, r.user_id reviewr, o.user_id buyer
+			from review r
+			join orders o
+			on r.orders_no=o.orders_no
+			where review_no=#{review_no}
+	</select>
+
 	
 	<select id="isExistedReviewByOrdersNoId" parameterType="com.itwill.brown_carrot_market.dto.Review" resultType="int">
 		select count(*) from review 

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.itwill.brown_carrot_market.dto.Review;
 import com.itwill.brown_carrot_market.mapper.ReviewMapper;
 
-@Repository(value = "ReviewDaoImpl")
+@Repository(value = "reviewDaoImpl")
 public class ReviewDaoImpl implements ReviewDao {
 
 	@Autowired
@@ -39,6 +39,11 @@ public class ReviewDaoImpl implements ReviewDao {
 	public List<Review> findReceivedReviewBySeller(String user_id)
 			throws Exception {
 		return reviewMapper.findReceivedReviewBySeller(user_id);
+	}
+	
+	@Override
+	public Review findReviewByRivewNo(int review_no) {
+		return reviewMapper.findReviewByRivewNo(review_no);
 	}
 
 	@Override
