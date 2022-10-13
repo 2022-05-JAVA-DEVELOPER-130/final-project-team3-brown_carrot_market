@@ -23,12 +23,14 @@ function changeQnaList(pageno,t_ctgr_no){
 	               
 					htmlBuffer += `
 	                              
-                            <div class="post-date">
+                            
+                        </div>
+                        <div class="blog_post_content">
+                        
+                        <div class="post-date">
                                 <a href="#">${townBoard.townCategory.t_ctgr_name}</a>
                                 <span>조회수 : ${townBoard.t_count}</span>
                             </div>
-                        </div>
-                        <div class="blog_post_content">
                             <a href="townboard_view?t_no=${townBoard.t_no}" p_no="${townBoard.t_no}" class="blog_title">${townBoard.t_title}</a>
                             <p>${townBoard.t_content}</p>
                             <a href="single-blog.html">Continue Reading <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
