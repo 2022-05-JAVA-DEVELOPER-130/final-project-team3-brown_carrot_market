@@ -11,13 +11,24 @@
     <!--  All snippets are MIT license http://bootdey.com/license -->
     <title>chat</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+     <!-- Favicon  -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+    
+        <link rel="stylesheet" href="style.css">
+    
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
 	
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
 	 <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.js"></script>
+	
 
+	
+	<!-- js -->
+	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
+    <script type="text/javascript" src="js/common/user_session_check.js"></script>
 	
 	<script src="js/chat/chat_room.js"></script>
 	
@@ -25,6 +36,14 @@
 </head>
 <body>
 
+
+    <!-- Header Area -->
+   		<!-- include_common_bottom.jsp start-->
+		<jsp:include page="common/include_common_header.jsp"/>
+		<!-- include_common_bottom.jsp end-->
+    <!-- Header Area End -->
+    
+    
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
 <div class="container">
@@ -153,10 +172,22 @@
 </div>
 </div>
 
+ <!-- Footer Area -->
+   		<!-- include_common_bottom.jsp start-->
+		<jsp:include page="common/include_common_footer.jsp"/>
+		<!-- include_common_bottom.jsp end-->
+    <!-- Footer Area -->
+    
+  
+
 <style type="text/css">
 body{
     background-color: #f4f7f6;
     margin-top:20px;
+}
+
+a{
+color:#070a57;
 }
 
 .content{
