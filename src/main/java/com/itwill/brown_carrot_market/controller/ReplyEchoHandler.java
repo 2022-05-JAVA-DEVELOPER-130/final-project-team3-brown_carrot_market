@@ -515,6 +515,24 @@ public class ReplyEchoHandler {
 		return resultMap;
 		
 	}
+	
+	@PostMapping(value="/promise_alert")
+	public Map promiseAlert(@RequestParam String user_id) {
+		Map resultMap = new HashMap();
+		String code="";
+		List<Promise> result=null;
+		
+		try {
+			result=chatService.promiseAlert(user_id);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		resultMap.put("data", result);
+		return resultMap;
+	}
+	
+	//약속목록가져오기 
 
 	
 

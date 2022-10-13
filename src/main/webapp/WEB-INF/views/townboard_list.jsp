@@ -34,11 +34,9 @@
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 	
 	<!-- toast -->
-<link href="[//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css)" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="[https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css](https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css)"/>
-<script type="text/javascript" src="[https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js](https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js)"></script>
-	
-	
+ <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
 	
 </head>
 
@@ -198,13 +196,14 @@
                        	<c:if test="${townBoard.townImageList.size() != 0}">
                             <a href="townboard_view?t_no=${townBoard.t_no}" p_no="${townBoard.t_no}"><img src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-post-thumb"></a>
                             </c:if>
-                            <!-- Post Date -->
+                            
+                        </div>
+                        <div class="blog_post_content">
+                        <!-- Post Date -->
                             <div class="post-date">
                                 <a href="#">${townBoard.townCategory.t_ctgr_name}</a>
                                 <span>조회수 : ${townBoard.t_count}</span>
                             </div>
-                        </div>
-                        <div class="blog_post_content">
                             <a href="townboard_view?t_no=${townBoard.t_no}" p_no="${townBoard.t_no}" class="blog_title">${townBoard.t_title}</a>
                             <p>${townBoard.t_content}</p>
                             <a href="single-blog.html">Continue Reading <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>

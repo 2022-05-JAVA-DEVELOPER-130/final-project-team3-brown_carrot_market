@@ -23,12 +23,14 @@ function changeQnaList(pageno,t_ctgr_no){
 	               
 					htmlBuffer += `
 	                              
-                            <div class="post-date">
+                            
+                        </div>
+                        <div class="blog_post_content">
+                        
+                        <div class="post-date">
                                 <a href="#">${townBoard.townCategory.t_ctgr_name}</a>
                                 <span>조회수 : ${townBoard.t_count}</span>
                             </div>
-                        </div>
-                        <div class="blog_post_content">
                             <a href="townboard_view?t_no=${townBoard.t_no}" p_no="${townBoard.t_no}" class="blog_title">${townBoard.t_title}</a>
                             <p>${townBoard.t_content}</p>
                             <a href="single-blog.html">Continue Reading <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
@@ -65,6 +67,38 @@ function changeQnaList(pageno,t_ctgr_no){
 }
 
 
+/*
+게시글 삭제 
+*/
+$(".townBoard_i.delete").on("click", function(){
+	let pageno = $(this).attr("pageno");
+	let t_no = $(this).attr("t_no");
+	ToastConfirm.fire({ icon: 'question', 
+						title: "게시글을 삭제하시겠습니까?\n 삭제 후 복구가 불가능합니다"}).then((result) => {
+						if(result.isConfirmed){
+							$.ajax({
+								url: "townBoard_delete_rest",
+								method: "post",
+								data: {"t_no":t_no},
+								dataType: "json",
+								success:function(resultObj){
+									if(resultObj.errorCode > 0){
+										Toast.fire({ icon: 'success', title: resultObj.errorMsg }).then((result) => {
+												location.href = "townBoard_list?pageno=" + pageno;
+											});
+									}else{
+										Toast.fire({ icon: 'error', title: resultObj.errorMsg });
+									}
+								}
+							});
+						}
+	});
+});
+
+
+
+
+
 
 /*
 게시글 목록 이동
@@ -75,33 +109,7 @@ $(".notice_btn.list").on("click", function(){
 	location.href = `notice_list?pageno=${pageno}`;
 });
 
-/*
-게시글 삭제 
-*/
-$(".notice_btn.delete").on("click", function(){
-	let pageno = $(this).attr("pageno");
-	let notice_no = $(this).attr("notice_no");
-	ToastConfirm.fire({ icon: 'question', 
-						title: "게시글을 삭제하시겠습니까?\n 삭제 후 복구가 불가능합니다"}).then((result) => {
-						if(result.isConfirmed){
-							$.ajax({
-								url: "notice_delete_rest",
-								method: "post",
-								data: {"notice_no":notice_no},
-								dataType: "json",
-								success:function(resultObj){
-									if(resultObj.errorCode > 0){
-										Toast.fire({ icon: 'success', title: resultObj.errorMsg }).then((result) => {
-												location.href = "notice_list?pageno=" + pageno;
-											});
-									}else{
-										Toast.fire({ icon: 'error', title: resultObj.errorMsg });
-									}
-								}
-							});
-						}
-	});
-});
+
 
 /*
 게시글 수정 폼 

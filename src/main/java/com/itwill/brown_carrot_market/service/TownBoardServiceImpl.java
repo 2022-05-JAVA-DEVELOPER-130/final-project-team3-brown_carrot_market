@@ -117,7 +117,8 @@ public class TownBoardServiceImpl implements TownBoardService{
 	public TownBoard selectTownBoardOne(int t_no) throws Exception {
 		return townBoardDao.selectTownBoardOne(t_no);
 	}
-
+	
+	//게시글 삭제
 	@Override
 	public int deleteTownBoardOne(int t_no) throws Exception {
 		return townBoardDao.deleteTownBoardOne(t_no);

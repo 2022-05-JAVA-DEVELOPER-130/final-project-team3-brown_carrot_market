@@ -18,6 +18,7 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="css/chat_toast.css">
 
 	<!-- javaScript -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -1142,7 +1143,12 @@
     #toast-container > .toast-warning:before {
      content: "\f27a"; 
  
-}
+} 
+
+ #toast-container > .toast-success:before {
+     content: "\f2b5"; 
+ 
+} 
 
 </body>
 
