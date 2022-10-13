@@ -1,9 +1,10 @@
-function changeQnaList(pageno,t_ctgr_no){
+function changeQnaList(pageno,map,t_ctgr_no){
 	$.ajax({
 		url: "townBoard_list_rest",
 		method: "post",
 		data: {
 			"pageno" :pageno,
+			"map":map,
 			"t_ctgr_no":t_ctgr_no
 				},
 		dataType: "json",
