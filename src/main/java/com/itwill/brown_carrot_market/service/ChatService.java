@@ -51,6 +51,10 @@ public interface ChatService {
 	public int promiseUpdate(Promise promise);
 	
 	public int promiseExist(int c_room_no);
+	
+	public List<Promise> promiseAlert(String user_id);
+	
+	/************/
 
 	public int chatRoomDelete(String user_id, int c_room_no);
 
