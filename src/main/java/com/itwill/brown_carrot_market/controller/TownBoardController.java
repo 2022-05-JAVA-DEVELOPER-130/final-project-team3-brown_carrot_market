@@ -55,7 +55,7 @@ public class TownBoardController {
 	
 	//우리동네 게시판 전체 조회 카테고리까지
 	@RequestMapping("/townBoard_list")
-	public String townBoard_list(@RequestParam(required = false, defaultValue = "1") Integer pageno,Model model, HttpSession session, @RequestParam(required = false, defaultValue = "0") int t_ctgr_no) {
+	public String townBoard_list(@RequestParam(required = false, defaultValue = "1") Integer pageno,Model model, HttpSession session, @RequestParam Map<String, Object> map, @RequestParam(required = false, defaultValue = "0") int t_ctgr_no) {
 		try {
 			String sUserId = (String)session.getAttribute("sUserId");
 			Address sAddress = (Address)session.getAttribute("sAddress");
@@ -63,15 +63,24 @@ public class TownBoardController {
 			
 			//회원 게시판 전체조회
 			if(sUserId != null) {
-				
+				//카테고리 조건 없을때
 				if(t_ctgr_no == 0) {
 					PageMakerDto<TownBoard> townBoardList = townBoardService.selectTownBoardListCoordinate(sAddress, pageno);
 					model.addAttribute("townBoardList", townBoardList);
 					model.addAttribute("pageno", pageno);
 					
 				}
+				//카테고리 조건 있을때
 				if(t_ctgr_no != 0) {
-					//PageMakerDto<TownBoard> townBoardList = townBoardService;
+					
+					map.put("t_ctgr_no", t_ctgr_no);
+					map.put("user_id", sUserId);
+					map.put("address_no", sAddress.getAddress_no());
+					
+					PageMakerDto<TownBoard> townBoardList = townBoardService.selectTownBoardCtgrListCoordinate(map, pageno);
+					model.addAttribute("townBoardList", townBoardList);
+					model.addAttribute("pageno", pageno);
+					
 				}
 				
 				
@@ -79,6 +88,7 @@ public class TownBoardController {
 			
 			//비회원 게시판 전체조회	
 			if(sUserId == null) {
+				//카테고리 조건 없을때
 				if(t_ctgr_no == 0) {
 					PageMakerDto<TownBoard> townBoardList = townBoardService.selectNonMemberTownBoardList(pageno);
 					model.addAttribute("townBoardList", townBoardList);

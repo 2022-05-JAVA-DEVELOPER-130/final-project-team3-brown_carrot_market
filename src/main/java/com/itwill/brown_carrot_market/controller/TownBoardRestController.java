@@ -25,33 +25,48 @@ public class TownBoardRestController {
 	 * 게시글 리스트 반환 (REST)
 	 */
 	@RequestMapping("/townBoard_list_rest")
-	public  Map<String, Object> townBoard_list_rest(@RequestParam(required = false, defaultValue = "1") Integer pageno, HttpSession session, @RequestParam(required = false, defaultValue = "0") int t_ctgr_no) throws Exception{
+	public  Map<String, Object> townBoard_list_rest(@RequestParam(required = false, defaultValue = "1") Integer pageno, HttpSession session, @RequestParam Map<String, Object> map, @RequestParam(required = false, defaultValue = "0") int t_ctgr_no) throws Exception{
 		Map<String, Object> resultMap = new HashMap<>();	
 		PageMakerDto<TownBoard> townBoardList = null;
 		String sUserId = (String)session.getAttribute("sUserId");
 		Address sAddress = (Address)session.getAttribute("sAddress");
-		try {
+		try { 
 			//회원 게시글 리스트 반환
 			if(sUserId != null) {
-				townBoardList = townBoardService.selectTownBoardListCoordinate(sAddress, pageno);
+				if(t_ctgr_no==0) {
+					townBoardList = townBoardService.selectTownBoardListCoordinate(sAddress, pageno);
+					resultMap.put("errorCode", 1); 
+					resultMap.put("errorMsg", "회원 일반 성공");
+					resultMap.put("data", townBoardList);
+					
+				}
+				if(t_ctgr_no != 0) {
+					
+					map.put("t_ctgr_no", t_ctgr_no);
+					map.put("user_id", sUserId);
+					map.put("address_no", sAddress.getAddress_no());
+					
+					townBoardList = townBoardService.selectTownBoardCtgrListCoordinate(map, pageno);
+					resultMap.put("errorCode", 2); 
+					resultMap.put("errorMsg", "회원 카테고리 성공");
+					resultMap.put("data", townBoardList);
+					
+				}
 				
-				resultMap.put("errorCode", 1); 
-				resultMap.put("errorMsg", "성공");
-				resultMap.put("data", townBoardList);
 			}
 			//비회원 게시글 리스트 반환
 			if(sUserId == null) {
 				if(t_ctgr_no==0) {
 					townBoardList = townBoardService.selectNonMemberTownBoardList(pageno);
-					resultMap.put("errorCode",2); 
-					resultMap.put("errorMsg", "성공");
+					resultMap.put("errorCode",3); 
+					resultMap.put("errorMsg", "비회원 일반 성공");
 					resultMap.put("data", townBoardList);
 					
 				}
 				if(t_ctgr_no != 0) {
 					townBoardList = townBoardService.selectNonMemberCtgrTownBoardList(t_ctgr_no, pageno);
-					resultMap.put("errorCode",3); 
-					resultMap.put("errorMsg", "성공");
+					resultMap.put("errorCode",4); 
+					resultMap.put("errorMsg", "비회원 카테고리 성공");
 					resultMap.put("data", townBoardList);
 				}
 				
