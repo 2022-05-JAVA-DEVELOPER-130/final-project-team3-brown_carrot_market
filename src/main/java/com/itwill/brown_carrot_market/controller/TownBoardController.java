@@ -56,6 +56,8 @@ public class TownBoardController {
 	//우리동네 게시판 전체 조회 카테고리까지
 	@RequestMapping("/townBoard_list")
 	public String townBoard_list(@RequestParam(required = false, defaultValue = "1") Integer pageno,Model model, HttpSession session, @RequestParam Map<String, Object> map, @RequestParam(required = false, defaultValue = "0") int t_ctgr_no) {
+		
+		System.out.println("townBoard_list컨트롤러 map: "+map);
 		try {
 			String sUserId = (String)session.getAttribute("sUserId");
 			Address sAddress = (Address)session.getAttribute("sAddress");
@@ -74,7 +76,8 @@ public class TownBoardController {
 				if(t_ctgr_no != 0) {
 					
 					map.put("user_id", sUserId);
-					map.put("address_no", sAddress.getAddress_no());
+					//map.put("address_no", sAddress.getAddress_no());
+					map.put("address", sAddress);
 					
 					PageMakerDto<TownBoard> townBoardList = townBoardService.selectTownBoardCtgrListCoordinate(map, t_ctgr_no, pageno);
 					model.addAttribute("townBoardList", townBoardList);

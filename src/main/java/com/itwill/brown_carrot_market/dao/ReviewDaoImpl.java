@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.itwill.brown_carrot_market.dto.Review;
 import com.itwill.brown_carrot_market.mapper.ReviewMapper;
 
-@Repository(value = "ReviewDaoImpl")
+@Repository(value = "reviewDaoImpl")
 public class ReviewDaoImpl implements ReviewDao {
 
 	@Autowired
