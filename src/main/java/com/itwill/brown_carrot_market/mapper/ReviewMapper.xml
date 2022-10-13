@@ -38,6 +38,11 @@
 		 		</association>
 	 		</association>
  		</association>
+ 		<collection property="reviewImageList" javaType="java.util.List" ofType="com.itwill.brown_carrot_market.dto.ReviewImage">
+ 			<result column="review_img_no" property="review_img_no"/>
+ 			<result column="review_img_name" property="review_img_name"/>
+ 			<result column="review_no" property="review_no"/>
+ 		</collection>
  	</resultMap>
  
  
