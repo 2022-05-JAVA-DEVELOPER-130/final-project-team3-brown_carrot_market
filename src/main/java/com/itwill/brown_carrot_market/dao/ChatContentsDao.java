@@ -17,5 +17,7 @@ public List<ChatContents> chatSellectByRoom(int c_room_no);
 	public int deleteChatUpdate(int c_content_no);
 	
 	public int insertChat(ChatContents chat_contents);
+	
+	public int selectReadChatCount(String user_id);
 
 }

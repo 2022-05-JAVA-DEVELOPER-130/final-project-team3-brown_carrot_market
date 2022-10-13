@@ -40,6 +40,8 @@ public interface ChatService {
 
 	public int chatNotRead(int c_room_no, String user_id);
 	
+	//안읽은메세지 수 
+	public int selectReadChatCount(String user_id);
 	
 	/***약속잡기***/
 	public Promise promiseSelect(int c_room_no);
