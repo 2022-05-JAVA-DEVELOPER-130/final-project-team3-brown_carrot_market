@@ -87,15 +87,18 @@ public class ReplyEchoHandler {
 		String room_no = chatList.get("c_room_no");
 		String mId=chatList.get("loginId");
 		String p_img;
+		int checkSeller;
 		
 		ChatRoom chatRoom=chatService.chatRoomSelect(Integer.parseInt(room_no));
 		
 		if(chatRoom.getFrom_id().equals(mId)) {
 			yourId=chatRoom.getTo_id();
 			yourImg = userService.findUser(yourId).getUser_profile();
+			checkSeller=0;
 		}else {
 			yourId=chatRoom.getFrom_id();
 			yourImg = userService.findUser(yourId).getUser_profile();
+			checkSeller=1;
 		}
 		double yourFreshness = userService.findUser(yourId).getUser_freshness();
 		Product product = productService.selectByOne(chatRoom.getP_no());
@@ -130,6 +133,7 @@ public class ReplyEchoHandler {
 		resultMap.put("product", product);	
 		resultMap.put("p_img", p_img);
 		resultMap.put("data", resultList);
+		resultMap.put("checkSeller", checkSeller);
 
 		return resultMap;
 	}
@@ -156,8 +160,16 @@ public class ReplyEchoHandler {
 					for (ChatRoomListView chatRoomListView : chatList) {
 							
 							System.out.println(chatRoomListView.getYou_id());
-						
+							
 							String img = userService.findUser(chatRoomListView.getYou_id()).getUser_profile();
+							ArrayList<ProductImage> productImage = (ArrayList<ProductImage>)productService.selectProductImgList(chatRoomListView.getP_no());
+							if(productImage.size()==0) {
+								chatRoomListView.setP_img("pan.jpg");
+							}else {
+								chatRoomListView.setP_img(productImage.get(0).getPi_name());
+								
+							}
+							
 							System.out.println("이미지.."+img);
 							chatRoomListView.setYou_image(img);
 							chatRoomListView.setNot_read(chatService.chatNotRead(chatRoomListView.getC_room_no(),loginId));
@@ -233,7 +245,34 @@ public class ReplyEchoHandler {
 					return resultMap;
 				}
 			// ----------------------------------------------------------------------------
-	
+				//예약완료
+				
+				@PostMapping(value = "/chat_reserve_rest")
+				public Map chatReserve_rest(@RequestBody Map<String, Product> reserve) throws Exception  {
+					Map resultMap = new HashMap();
+
+					Product product = reserve.get("product");
+					product.setP_sell(2);
+					productService.updateProductSell(2, product.getP_no());
+					resultMap.put("product", product);	
+
+
+					return resultMap;
+				}
+				 //판매완료
+				
+				@PostMapping(value = "/chat_soldout_rest")
+				public Map chatSoldOut_rest(@RequestBody Map<String, Product> reserve) throws Exception  {
+					Map resultMap = new HashMap();
+
+					Product product = reserve.get("product");
+					product.setP_sell(3);
+					productService.updateProductSell(3, product.getP_no());
+					resultMap.put("product", product);	
+
+
+					return resultMap;
+				}
 
 	
 	/******************* 소켓 관련****************************************************/
@@ -507,7 +546,41 @@ public class ReplyEchoHandler {
 		return resultMap;
 		
 	}
-
+	
+	@PostMapping(value="/promise_alert")
+	public Map promiseAlert(@RequestParam String user_id) {
+		Map resultMap = new HashMap();
+		String code="";
+		List<Promise> result=null;
+		
+		try {
+			result=chatService.promiseAlert(user_id);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		resultMap.put("data", result);
+		return resultMap;
+	}
+	
+	//약속목록가져오기 
+	
+	//안읽은채팅수
+	@PostMapping(value="/readChat_num")
+	public Map readChatnum(@RequestParam String user_id) {
+		Map resultMap = new HashMap();
+		String code="";
+		int result=0;
+		
+		try {
+			result=chatService.selectReadChatCount(user_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		resultMap.put("data", result);
+		return resultMap;
+	}
 	
 
 }

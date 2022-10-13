@@ -188,6 +188,20 @@ public class ChatServiceImpl implements ChatService {
 		// TODO Auto-generated method stub
 		return promiseDao.promiseExist(c_room_no);
 	}
+
+	@Override
+	public List<Promise> promiseAlert(String user_id) {
+		// TODO Auto-generated method stub
+		return promiseDao.promiseAlert(user_id);
+	}
+	
+	//안읽은메세지수
+
+	@Override
+	public int selectReadChatCount(String user_id) {
+		// TODO Auto-generated method stub
+		return chat_contentsDao.selectReadChatCount(user_id);
+	}
 	
 	
 	

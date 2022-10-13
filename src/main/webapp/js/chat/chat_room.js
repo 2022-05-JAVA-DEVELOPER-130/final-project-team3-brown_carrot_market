@@ -5,7 +5,11 @@ var yourId=null;
 var mImage=null;
 var socket=null;
 
-
+var checkSeller=null;
+var	yourImg = null;
+var	yourFreshness = null;
+var	product = null;
+var	p_img = null;
 
 var c_room_no=null;
 var contextPath=getContextPath();
@@ -261,6 +265,8 @@ $.ajax({
 			yourFreshness = jsonResult.yourFreshness;
 			product = jsonResult.product;
 			p_img = jsonResult.p_img;
+			/***************판매자************/
+			checkSeller = jsonResult.checkSeller;
 			console.log(product.p_sell);
 			c_room_no=jsonResult.c_room_no;
 			console.log("채팅방의 상대방 ID:"+yourId);
@@ -297,7 +303,7 @@ $.ajax({
 			
 				}
 			};*/
-			$('#chatHead').append(chat_head(yourId,yourImg,c_room_no,yourFreshness,product,p_img));
+			$('#chatHead').append(chat_head(yourId,yourImg,c_room_no,yourFreshness,product,p_img,checkSeller));
 			
 			
 			
@@ -496,36 +502,62 @@ function message_admin_promise(chat_content){
 								</li>`
 }
 
-
-function chat_head(id,img,room_no,fresh,product,p_img){
+//상단헤드
+function chat_head(id,img,room_no,fresh,product,p_img,check){
+	var a="";
+	if(product.p_sell==1){
+		p_sell="판매중";
+		if(check==1){
+			a=	'<button class="dropdown-item" type="button" id="reserveBtn"><b>예약 완료하기</b></button>';
+		}
+	}else if(product.p_sell==2){
+		p_sell="예약중";
+		if(check==1){
+		a=	'<button class="dropdown-item" type="button" id="soldOutBtn"><b>판매 완료하기</b></button>';
+		}
+	}else if(product.p_sell==3){
+		p_sell="판매완료";
+		
+	}
+	
 	return 	`<div class="row">
 								<div class="col-lg-4">
 									<a href="javascript:void(0);" data-toggle="modal"
 										data-target="#view_info"> <img
 										src="img/user_profile/${img}"
-										alt="avatar">
+										alt="avatar" style="float:left;">
 									</a>
 									<div class="chat-about">
-										<h6 class="m-b-0">${id}</h6>
+										<h6 class="m-b-0" style="margin-bottom:1px">${id}</h6>
 										
 										<small>${fresh}</small>
 									</div>
 								</div>
-								<div class="col-lg-4 ">
-								<img src="img/product_img/${p_img}" style="float:left; width:50px; height:50px; border-radius: 0%">
-								<h6 class="m-b-0" style="float:left; margin-left:5px;"><b>${product.p_title}</b></h6>
-								<small style="float:left; margin-left:5px;">${product.p_price}</small>
-    							 
-    							 </div>	
+								
+								
+							<div class="col-lg-4">
+						 
+    							<div style="text-align:center;">
+								<img src="img/product_img/${p_img}" style="border-radius: 0%; width:50px; height:50px;">
+								<h6 class="m-b-0" style="margin-top:10px; margin-bottom:2px;"><b>${product.p_title}</b></h6>
+								<small><b><${p_sell}></b> 가격: ${product.p_price}원</small> 
+								<div>
+								<small>주소: ${product.p_address_name}</small></div>
+								 </div>	
+								 </div>
+								
+
+
 								<div class="col-lg-4 hidden-sm text-right">
+									
+									
 									
 									<a  href="javascript:void(0);" class="btn btn-outline-info" ><i
 										class="fa fa-handshake-o" id="btnChatAppointment"></i></a> 
-										
-										
+											
 									<a href="javascript:void(0);" class="btn btn-outline-primary" id="btnChatImage">
 									<i class="fa fa-image"></i></a>
-									
+							<!-- 삭제 , 나가기 		
 									<a href="javascript:void(0);" class="btn btn-outline-dark"
 									id="deleteRoom">
 									<i class="fa fa-sign-out"></i></a> 
@@ -533,12 +565,103 @@ function chat_head(id,img,room_no,fresh,product,p_img){
 									<a href="javascript:void(0);" class="btn btn-outline-danger"
 									id="outRoom">
 									<i class="fa fa-close" ></i></a>
+							-->		
+									<div class="btn-group">
+  									<button type="button" class="btn" style="border-color:orange"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   									 <i class="fa fa-align-justify" style="color:orange"></i>
+  									</button>
+ 									<div class="dropdown-menu dropdown-menu-right" style="width:100px;">
+  									<button class="dropdown-item" type="button" id="outRoom"><b>채팅방 닫기</b></button>
+  									<button class="dropdown-item" type="button" id="deleteRoom"><b>채팅방 나가기</b></button>
+  									<div class="dropdown-divider"></div>
+   									<button class="dropdown-item" type="button" id="btnChatAppointment"><b>약속잡기</b></button>
+   									<button class="dropdown-item" type="button" id="btnChatImage"><b>사진보내기</b></button>
+   									<div class="dropdown-divider"></div>
+   									${a}
+  </div>
+</div>
 									
 								</div>
 							</div>`
 	
 	
 }
+//예약, 판매완료 클릭
+ $(document).on('click','#reserveBtn',function(e){
+	
+	var result = confirm("상품을 예약중으로 변경하시겠습니까?");
+	if(result){
+		var reserve={
+		"product":product
+	}
+$.ajax({
+		
+		
+		url:"chat_reserve_rest",
+		method:"POST",
+		data: JSON.stringify(reserve),
+		async: true,
+        contentType: "application/json; charset=utf-8", //헤더의 Content-Type을 설정
+        dataType: "JSON", //응답받을 데이터 타입 (XML,JSON,TEXT,HTML,JSONP)  
+				
+    			    			
+	
+		
+		success:function(jsonResult){
+		product=jsonResult.product;
+		$('#chatHead').html("");
+		$('#chatHead').append(chat_head(yourId,yourImg,c_room_no,yourFreshness,product,p_img,checkSeller));
+		}
+		
+		
+		})
+		
+		
+		
+		
+		
+		
+	}else{}
+
+})
+//예약, 판매완료 클릭
+ $(document).on('click','#soldOutBtn',function(e){
+	
+	var result = confirm("상품을 판매완료로 변경하시겠습니까?");
+	if(result){
+		var reserve={
+		"product":product
+	}
+$.ajax({
+		
+		
+		url:"chat_soldout_rest",
+		method:"POST",
+		data: JSON.stringify(reserve),
+		async: true,
+        contentType: "application/json; charset=utf-8", //헤더의 Content-Type을 설정
+        dataType: "JSON", //응답받을 데이터 타입 (XML,JSON,TEXT,HTML,JSONP)  
+				
+    			    			
+	
+		
+		success:function(jsonResult){
+		product=jsonResult.product;
+		$('#chatHead').html("");
+		$('#chatHead').append(chat_head(yourId,yourImg,c_room_no,yourFreshness,product,p_img,checkSeller));
+		}
+		
+		
+		})
+		
+		
+		
+		
+		
+		
+	}else{}
+
+})
 
 
 //메세지 전송 
@@ -935,8 +1058,8 @@ function chatRoomHeadGongji(){
 								<div class="col-lg-12">
 									<a href="javascript:void(0);" data-toggle="modal"
 										data-target="#view_info"> <img
-										src="img/user_profile/wow.jpg"
-										alt="avatar">
+										src="img/user_profile/carrot3.png"
+										alt="avatar" style="float:left;">
 									</a>
 									<div class="chat-about">
 	
@@ -1059,14 +1182,14 @@ $(document).on('click',"img[id^='chat_img_sizeUp']",function(e){
   function popupNew(){
             var url = "chat_appointment";
             var name = "약속 잡기";
-            var option = "width = 500, height = 500, top = 100, left = 200, location = no,  resizable=no"
+            var option = "width = 470, height = 790, top = 100, left = 200, location = no,  resizable=no"
             window.open(url, name, option);
         }
         
   function popupChange(){
             var url = "chat_appointment_change";
             var name = "약속 수정";
-            var option = "width = 500, height = 500, top = 100, left = 200, location = no,  resizable=no"
+            var option = "width = 470, height = 790, top = 100, left = 200, location = no,  resizable=no"
             window.open(url, name, option);
         }
         

@@ -40,6 +40,8 @@ public interface ChatService {
 
 	public int chatNotRead(int c_room_no, String user_id);
 	
+	//안읽은메세지 수 
+	public int selectReadChatCount(String user_id);
 	
 	/***약속잡기***/
 	public Promise promiseSelect(int c_room_no);
@@ -51,6 +53,10 @@ public interface ChatService {
 	public int promiseUpdate(Promise promise);
 	
 	public int promiseExist(int c_room_no);
+	
+	public List<Promise> promiseAlert(String user_id);
+	
+	/************/
 
 	public int chatRoomDelete(String user_id, int c_room_no);
 

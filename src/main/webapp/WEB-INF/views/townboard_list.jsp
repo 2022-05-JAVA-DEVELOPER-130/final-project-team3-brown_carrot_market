@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>	
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+
 <!doctype html>
 <html lang="en">
 
@@ -22,15 +25,10 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/townBoard.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
-	
+	<!-- toast -->
+ 	<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
 	<!-- javaScript -->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
-	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
-	<script type="text/javascript" src="js/common/user_session_check.js"></script>
-	
-	
 	
 </head>
 
@@ -77,8 +75,10 @@
                             <h6>Catagory</h6>
                             <ul>
                               <li>
+                              
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no1" value=1>
 	                              <a href="#" onclick="changeQnaList(1,1)">동네생활 <span class="text-muted">(21)</span></a>
+
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no2" value=2>
@@ -182,19 +182,20 @@
                     <!-- Single News Area -->
                     
                     <div class="single_blog_area">
-                    <div id="townBoard_list_tbody">
+                    <div id="townBoard_list_tbody_all">
                     <c:forEach var="townBoard" items="${townBoardList.itemList}">
                         <div class="blog_post_thumb">
                        	<c:if test="${townBoard.townImageList.size() != 0}">
                             <a href="townboard_view?t_no=${townBoard.t_no}" p_no="${townBoard.t_no}"><img src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-post-thumb"></a>
                             </c:if>
-                            <!-- Post Date -->
+                            
+                        </div>
+                        <div class="blog_post_content">
+                        <!-- Post Date -->
                             <div class="post-date">
                                 <a href="#">${townBoard.townCategory.t_ctgr_name}</a>
                                 <span>조회수 : ${townBoard.t_count}</span>
                             </div>
-                        </div>
-                        <div class="blog_post_content">
                             <a href="townboard_view?t_no=${townBoard.t_no}" p_no="${townBoard.t_no}" class="blog_title">${townBoard.t_title}</a>
                             <p>${townBoard.t_content}</p>
                             <a href="single-blog.html">Continue Reading <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
@@ -253,7 +254,13 @@
     <!-- Footer Area -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
+	<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+	
+   
+	
     <script src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.easing.min.js"></script>
@@ -270,8 +277,34 @@
     <script src="js/jquery.nice-select.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
-    <script src="js/townBoard/townBoard.js"></script>
+    
+    
+   
+    <script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
+	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
+	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+	 <script src="js/townBoard/townBoard.js"></script>
+	
+	<style type="text/css">
+#toast-container > .toast {
+background-image: none !important;
+}
 
+#toast-container > .toast:before {
+position: relative;
+font-family: FontAwesome;
+font-size: 24px;
+line-height: 18px;
+float: left;
+color: #FFF;
+padding-right: 0.5em;
+margin: auto 0.5em auto -1.5em;
+}
+#toast-container > .toast-warning:before {
+content: "\f27a";
+
+}
+	
 </body>
 
 </html>

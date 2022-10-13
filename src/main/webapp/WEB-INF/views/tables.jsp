@@ -34,6 +34,12 @@
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 	
+	<!-- toast -->
+ <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
+	
+	
 	
 </head>
 
@@ -48,8 +54,9 @@
 	 -->
 	 
     <!-- Header Area -->
-    
-  	<jsp:include page="common/include_common_header.jsp"/>
+    <!-- include_common_header.jsp start-->
+			<jsp:include page="common/include_common_header.jsp"/>
+		<!-- include_common_header.jsp end-->
   	
     <!-- Header Area End -->
     
@@ -168,17 +175,55 @@
     </div>     
             
     <!-- Footer Area -->
-    
+    	<!-- include_common_bottom.jsp start-->
+			<jsp:include page="common/include_common_footer.jsp"/>
+		<!-- include_common_bottom.jsp end-->
     <!-- Footer Area -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/default/classy-nav.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/default/scrollup.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jarallax.min.js"></script>
+    <script src="js/jarallax-video.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/default/active.js"></script>
 	<!--
 	
 	  -->
 	<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 	<script src="js/notice/board.js" defer></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	
+	<style type="text/css">
+#toast-container > .toast {
+    background-image: none !important;
+}
+
+ #toast-container > .toast:before {
+    position: relative;
+    font-family: FontAwesome;
+    font-size: 24px;
+    line-height: 18px;
+    float: left;
+    color: #FFF;
+    padding-right: 0.5em;
+    margin: auto 0.5em auto -1.5em;
+}       
+    #toast-container > .toast-warning:before {
+     content: "\f27a"; 
+ 
+}
 	
 
 </body>

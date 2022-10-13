@@ -14,10 +14,15 @@
 addJavascript('/js/user/UserHtmlContents.js');
 addJavascript('/js/chat/socket.js');*/
 
+var promise_time=[];
+var today = new Date();
+var number ;
 
 $(document).ready(function(){
 	
-	session_check();
+	session_check(); 
+	
+	
 });
 
 function session_check(){
@@ -29,17 +34,109 @@ function session_check(){
 		success:function(jsonResult){
 		    if(jsonResult.code==1){ //세션에 로그인 유저 존재XX
 		    	$("#account-area").html(CommonHtmlContents.user_thumbnail());
+		    	$("#chat-area a").attr("href", "user_login");
+		    	$(".cart_quantity").remove();
 		    	$("#brown_carrot_pay a").attr("href", "user_login");
 		    	$("#transaction-dropdown a").attr("href", "user_login");
 		    	
 		    }else if (jsonResult.code==2) {//세션에 로그인 유저 존재
 		    	$("#account-area").html(CommonHtmlContents.user_thumbnail_login(jsonResult.data[0]));
 				connectServer(jsonResult.data[0].user_id);
+				
+			//약속 목록 가져오기	
+	        $.ajax({
+		      url:'promise_alert',
+		      method:"POST",
+		      data:'user_id='+jsonResult.data[0].user_id,
+		      dataType:'json',
+		      success:function(jsonResult){
+			
+			 
+			  for(var promise of jsonResult.data){
+				 
+				 if(promise.c_app_date.substr(0,10)==getDateFormat(today)){
+				
+				var id="";
+				if(promise.from_id==jsonResult.data[0].user_id){
+					id=promise.to_id;
+				}else{
+					id=promise.from_id;
+				}
+				
+			
+				  
+				  
+                 	//약속 시간 체크
+	              timerFunc(promise.c_app_date,id,promise.c_app_spot);//인자로 넘겨주는 dateTime은 'yyyyMMddhhmiss"의 기본형
+				
+				}
+			}
+			
+			
+			
+		}
+		
+		
+	         }); // 약속 알림 설정 끝 
+	         
+	         	
+				
+				//안읽은채팅 가져오기 
+				$.ajax({
+					url:'readChat_num',
+					method:"POST",
+					data:'user_id='+jsonResult.data[0].user_id,
+					dataType:'json',
+					success:function(jsonResult){
+						console.log("안읽은채팅:"+jsonResult.data);
+				$(".cart_quantity").text(jsonResult.data);
+					}
+				})
 			}
 		}
 	});
 	
 }
+
+
+function getDateFormat(date) {
+    return date.getFullYear() + "-" + (date.getMonth() + 1).toString().padStart(2, 0) + "-" + date.getDate();
+}
+
+
+
+
+function timerFunc(dateTime,id,spot){
+	
+    var year = Number(dateTime.substring(0,4));
+    var month = Number(dateTime.substring(5,7));
+    var day = Number(dateTime.substring(8,11));
+    
+    var time = Number(dateTime.substring(11,13));
+    var minute = Number(dateTime.substring(14,16));
+    var second = Number(dateTime.substring(17,19));
+
+    var oprDate = new Date(year, month-1, day, time-1, minute, second); //동작을 원하는 시간의 Date 객체를 생성합니다.
+    var nowDate = new Date();
+
+    var timer = oprDate.getTime() - nowDate.getTime(); //동작시간의 밀리세컨과 현재시간의 밀리세컨의 차이를 계산합니다.
+    console.log("약속 시간:"+time+":"+minute);
+   	
+   	var msg=`오늘 ${id} 님과 ${time}시 ${minute} 분에 약속이 있어요! <br> 약속 장소 : ${spot}`;
+   	
+   	//"오늘 "+id+"님과 "+time+"시 "+minute+"분에 "+spot+" 에서 약속이 있어요!";
+   	
+    if(timer < 0){ //타이머가 0보다 작으면 함수를 종료합니다.
+       return;
+    }else{
+       setTimeout(function(){
+	toastr.options.positionClass = 'toast-top-full-width' ;
+	toastr['success'](msg);
+}, timer);
+    }
+}
+
+
 
 function connectServer(loginId){
 	console.log("connectWS 실행 : "+loginId)
@@ -70,7 +167,16 @@ function connectServer(loginId){
 		}
 		
 		if(id==loginId){
-		toastShow(message ,msg.user_id);
+	    //  new Toast('warning', 'toast-top-right', msg.user_id+":"+message);
+	      toastr.options.positionClass = "toast-top-right";
+	      toastr['warning'](msg.user_id+" : "+message);
+	      
+	      /******************채팅수증가******* */
+	 /*    var tmp = document.getElementbyclass('cart_quantity').innerHTML;
+	      console.log(tmp);
+	      tmp++;
+	      $(".cart_quantity").text(tmp);*/
+		
 		}
 		
 		
@@ -85,114 +191,35 @@ function connectServer(loginId){
 	}
 }
 
-function toastShow(title, content){
-    		console.log("");
-    		console.log("[toastShow] : [start]"); 
-    		console.log("");
-
-    		// [토스트 옵션 지정 실시]
-    		toastr.options.escapeHtml = true; // [escapeHtml 허용여부]
-    		toastr.options.closeButton = true; // [closeButton을 생성여부]
-    		toastr.options.progressBar = true; // [프로그래스바 표시 여부]
-    		toastr.options.newestOnTop = true; // [창의 위치, true이면 가장 위 포지션, false면 가장 아래 포지션]
-    		//toastr.options.rtl = true; // [글자를 오른쪽 정렬 여부]    		
-    		//toastr.options.closeDuration = 300; // [메시지 창의 애니메이션 효과 시간]    		
-    		//toastr.options.onShown = function() { console.log("show"); } // [추가될 때 이벤트]
-    		//toastr.options.onHidden = function() { console.log("hide"); } // [사라질 때 이벤트]
-    		//toastr.options.onclick = function() { console.log("click"); } // [클릭될 때 이벤트]
-    		//toastr.options.onCloseClick = function() { console.log("close"); } // [닫기 버튼이 눌릴 때 이벤트]
-    		toastr.options.preventDuplicates = false; // [메시지 중복 허용 여부, 두개 이상 메시지가 생성될 때 이 전꺼는 사라짐]
-    		toastr.options.timeOut = 10; // [메시지가 표시되는 시간]
-    		//toastr.options.extendedTimeOut = 60; // [메시지 위로 커서를 올렸을 때 표시되는 시간]
-    		//toastr.remove(); // [fadeout 효과없이 바로 메시지 창을 제거]
-    		toastr.clear(); // [fadeout 효과로 메시지창을 닫기]
 
 
 
-    		// [토스트 위치 지정 실시]
-    		//toastr.options.positionClass = "toast-bottom-full-width"; // [위치 및 크기 설정 : 바닥 >> 꽉차게 설정]
-    		//toastr.options.positionClass = "toast-bottom-right"; // [위치 및 크기 설정 : 바닥 >> 오른쪽]
-    		//toastr.options.positionClass = "toast-bottom-left"; // [위치 및 크기 설정 : 바닥 >> 왼쪽]
-    		//toastr.options.positionClass = "toast-bottom-center"; // [위치 및 크기 설정 : 바닥 >> 중앙]
 
-    		//toastr.options.positionClass = "toast-top-full-width"; // [위치 및 크기 설정 : 위쪽 >> 꽉차게 설정]
-    		toastr.options.positionClass = "toast-top-right"; // [위치 및 크기 설정 : 위쪽 >> 오른쪽]
-    		//toastr.options.positionClass = "toast-top-left"; // [위치 및 크기 설정 : 위쪽 >> 왼쪽]
-    		//toastr.options.positionClass = "toast-top-center"; // [위치 및 크기 설정 : 위쪽 >> 중앙]
+/*알림창 설정*/
+$(function() {
+function Toast(type, css, msg) {
+        this.type = type;
+        this.css = css;
+        this.msg = msg;
+    }
+    
+     toastr.options.extendedTimeOut = 0; //1000;
+    toastr.options.timeOut = 10000;
+    toastr.options.fadeOut = 250;
+    toastr.options.fadeIn = 250;
+    toastr.options.preventDuplicates = false;
+    toastr.options.closeButton = true;
+    toastr.options.positionClass = "toast-top-right";
+    toastr.options.onclick = function() { 
+	console.log("click");
+	location.href="chat_room";
+	
+	 }
 
+})
 
+    
 
-    		// [토스트 위치 지정 실시 : 커스텀]
-    		toastr.options.positionClass = "toast-bottom-full-width"; // [위치 및 크기 설정 : css 커스텀 설정 : 위쪽 표시 >> top 5% 조정]
-    		/*
-    		[css 코드]
-    		.toast-bottom-full-width {
-    			top:5%;
-    		}					
-    		*/
-
-
-
-    		// [토스트 위치 지정 실시 : 커스텀]
-    		//toastr.options.positionClass = "toast-bottom-full-width"; // [위치 및 크기 설정 : css 커스텀 설정 : 아래 표시 >> top 93% 조정]
-    		/*
-    		[css 코드]
-    		.toast-bottom-full-width {
-    			top:88%;
-    		}					
-    		*/
-
-
-
-    		// [토스트 위치 지정 실시 : 커스텀]
-    		//toastr.options.positionClass = "toast-bottom-center"; // [위치 및 크기 설정 : css 커스텀 설정 : 중앙 표시 >> top 45% 조정]
-    		/*
-    		[css 코드]
-    		.toast-bottom-center {
-    			top:45%;
-    		}					
-    		*/
-
-
-
-    		// [토스트 애니메이션 지정 실시]
-    		/*toastr.options.showEasing = 'swing';
-    		toastr.options.hideEasing = 'linear';
-    		toastr.options.closeEasing = 'linear';
-    		toastr.options.showMethod = 'slideDown'; // [fadeIn, slideDown]
-    		toastr.options.hideMethod = 'slideUp'; // [fadeOut, slideUp]
-    		toastr.options.closeMethod = 'slideUp'; // [fadeOut, slideUp]*/
-
-
-
-    		// [토스트 활성 실시]
-    		//toastr.info(title, content, {timeOut: 5000}); // [일반]
-    		toastr.success(title, content, {timeOut: 5000}); // [성공]
-    		//toastr.warning(title, content, {timeOut: 5000}); // [경고]
-    		//toastr.error(title, content, {timeOut: 5000}); // [에러]
-
-
-
-    		// [토스트 커스텀 스타일 지정 실시]
-    		/*
-    		[css 코드 : 투명도 설정]
-    		.toast {
-				opacity: 1 !important;
-			}
-    		*/
-
-
-    		/*
-    		[css 코드 : 커스텀 폰트 사이즈 변경]
-    		.toast-title {			
-				font-size: 100%;
-			}
-
-			.toast-message {			
-				font-size: 100%;
-			}    		
-    		*/
-    	};
 
 
 

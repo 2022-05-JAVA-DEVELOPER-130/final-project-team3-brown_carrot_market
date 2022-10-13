@@ -341,6 +341,9 @@ ALTER TABLE town_board ADD CONSTRAINT IDX_town_board_FK1 FOREIGN KEY (user_id) R
 ALTER TABLE town_wishlist ADD CONSTRAINT IDX_town_wishlist_PK PRIMARY KEY (t_wl_no);
 ALTER TABLE town_wishlist ADD CONSTRAINT IDX_town_wishlist_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
 ALTER TABLE town_wishlist ADD CONSTRAINT IDX_town_wishlist_FK1 FOREIGN KEY (t_no) REFERENCES town_board (t_no);
+ALTER TABLE town_wishlist DROP FOREIGN KEY IDX_town_wishlist_FK1;
+ALTER TABLE town_wishlist ADD CONSTRAINT IDX_town_wishlist_FK1 FOREIGN KEY (t_no) REFERENCES town_board (t_no) on delete cascade;
+
 
 ALTER TABLE town_img ADD CONSTRAINT IDX_town_img_PK PRIMARY KEY (t_img_no);
 ALTER TABLE town_img ADD CONSTRAINT IDX_town_img_FK0 FOREIGN KEY (t_no) REFERENCES town_board (t_no);

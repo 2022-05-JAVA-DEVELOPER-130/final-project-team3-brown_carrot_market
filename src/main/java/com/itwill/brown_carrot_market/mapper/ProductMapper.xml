@@ -174,20 +174,23 @@
    		select a.ADDRESS_NAME,a.ADDRESS_LAT,a.ADDRESS_LNG from ADDRESS a where a.user_id=#{user_id} and a.address_no=#{address.address_no}
    </select>	  
 	  
-	<insert id="insertProduct" parameterType="map">
-		insert into product p values(PRODUCT_P_NO_SEQ.nextval, 
-                           #{product.p_title},
-                		   #{product.p_desc},
-               			   #{product.p_price},
+	<insert id="insertProduct" parameterType="map" useGeneratedKeys="true">
+		<selectKey keyProperty="p_no" order="BEFORE" resultType="int">
+			select PRODUCT_P_NO_SEQ.nextval from dual
+		</selectKey>
+		insert into product p values(#{p_no}, 
+                           #{p_title},
+                		   #{p_desc},
+               			   #{p_price},
                			   sysdate,
-               			   0,
+               			   1,
                			   0,
                			   0,				
                            #{address.address_name},
                            #{address.address_lat},
                            #{address.address_lng},
-                           #{product.productCategory.p_ctgr_no},
-                           #{product.userInfo.user_id})
+                           #{productCategory.p_ctgr_no},
+                           #{userInfo.user_id})
 	</insert>
 	
 	<!-- 사진 -->

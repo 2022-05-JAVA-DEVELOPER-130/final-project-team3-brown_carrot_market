@@ -124,7 +124,7 @@
                                             <li><a href="#">환급하기</a></li>		
                                         </ul>
                                     </li>
-                                    <li><a href="#">자주하는질문</a></li>
+                                    <li><a href="faq">자주하는질문</a></li>
                                     <li><a href="notice_list">공지사항</a></li>
                                 </ul>
                             </div>
@@ -163,7 +163,7 @@
 
                             <!-- Chat -->
                             <div id="chat-area" class="cart-area chat-area" >
-                                <a href="chat_room" class="cart--btn" style="display:block;"><i class="icofont-chat"></i> <span class="cart_quantity">2</span></a>
+                                <a href="chat_room" class="cart--btn" style="display:block;"><i class="icofont-chat"></i> <span class="cart_quantity">1</span></a>
 
                                 <!-- Cart Dropdown Content -->
                                 <!--  
