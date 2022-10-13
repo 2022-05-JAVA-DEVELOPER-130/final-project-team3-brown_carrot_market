@@ -17,7 +17,7 @@ addJavascript('/js/chat/socket.js');*/
 
 $(document).ready(function(){
 	
-	session_check();
+	session_check(); 
 });
 
 function session_check(){
@@ -29,6 +29,8 @@ function session_check(){
 		success:function(jsonResult){
 		    if(jsonResult.code==1){ //세션에 로그인 유저 존재XX
 		    	$("#account-area").html(CommonHtmlContents.user_thumbnail());
+		    	$("#chat-area a").attr("href", "user_login");
+		    	$(".cart_quantity").remove();
 		    	$("#brown_carrot_pay a").attr("href", "user_login");
 		    	$("#transaction-dropdown a").attr("href", "user_login");
 		    	

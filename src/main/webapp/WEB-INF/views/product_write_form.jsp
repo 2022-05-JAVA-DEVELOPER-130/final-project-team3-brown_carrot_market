@@ -63,7 +63,8 @@
     <!-- Message Now Area -->
                 <div class="col-12">
                     <div class="contact_from mb-50">
-                        <form name="product_write_form" action="product_write_action" method="post" id="main_contact_form">
+                        <form name="product_write_form" action="product_write_action" 
+                        	method="post" enctype="multipart/form-data" id="main_contact_form">
                             <div class="contact_input_area">
                                 <div id="success_fail_info"></div>
                                 <div class="row">
@@ -99,6 +100,10 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <span>사진1: <input type="file" name="files"></span>
+									<span>사진2: <input type="file" name="files"></span>
+									<span>사진3: <input type="file" name="files"></span>
+									<span>사진4: <input type="file" name="files"></span> 
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <textarea name="p_desc" class="form-control" id="p_desc" cols="30" rows="10" placeholder="물건 설명" required></textarea>

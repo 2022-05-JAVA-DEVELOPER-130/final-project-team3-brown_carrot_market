@@ -95,6 +95,7 @@ position: fixed;
 	 border-color:orange;
 	 border: 2px solid ;
 }
+
 </style>
 </body>
 </html>

@@ -31,7 +31,7 @@ public class ProductDaoSpringBootTestApplication {
 		//System.out.println(productDao.selectListByRange(new Address(1, null, 0, 0, 0, "carrot1")));
 		//System.out.println(productDao.selectListByRangeCtgr(2, new Address(1, null, 0, 0, 0, "carrot1")));
 		//System.out.println(productDao.selectByUserId("carrot1"));
-		System.out.println(productDao.selectByOne(3));
+		//System.out.println(productDao.selectByOne(3));
 		//상품 삭제 이미지 on DELETE CASCADE 써줘야함
 		//https://wakestand.tistory.com/205
 		//System.out.println(productDao.deleteByPNo(11));
@@ -54,6 +54,7 @@ public class ProductDaoSpringBootTestApplication {
 		pmap.put("address", map);
 		productDao.insertProduct(pmap);
 		*/
+		System.out.println(productDao.updateProductSell(1, 15));
 	}
 	
 /*

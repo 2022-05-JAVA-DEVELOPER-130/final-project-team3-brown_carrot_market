@@ -28,6 +28,8 @@ public interface ProductMapper {
 
 	public int updateProduct(Product product);
 	
+	public int updateProductSell(int p_sell, int p_no);
+
 	public int updateProductWishCount(int p_no); 
 	
 	public Map selectProductAddress(Map map);

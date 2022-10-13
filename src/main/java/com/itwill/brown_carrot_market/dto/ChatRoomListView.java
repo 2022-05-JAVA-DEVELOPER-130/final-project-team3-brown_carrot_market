@@ -13,7 +13,7 @@ public class ChatRoomListView {
 	private String c_content;
 	private String you_id;
 	private String you_image;
-	// p_image
+	private String p_img;
 	// you_image
 	// you_locate
 	// 
@@ -23,7 +23,7 @@ public class ChatRoomListView {
 	}
 
 	public ChatRoomListView(Integer c_room_no, Integer p_no, Integer not_read, String send_time, String c_content,
-			String you_id,String you_image) {
+			String you_id,String you_image,String p_img) {
 		super();
 		this.c_room_no = c_room_no;
 		this.p_no = p_no;
@@ -32,6 +32,7 @@ public class ChatRoomListView {
 		this.c_content = c_content;
 		this.you_id = you_id;
 		this.you_image = you_image;
+		this.p_img=p_img;
 	}
 
 	public Integer getC_room_no() {
@@ -89,12 +90,24 @@ public class ChatRoomListView {
 	public void setYou_image(String you_image) {
 		this.you_image = you_image;
 	}
+	
+
+	public String getP_img() {
+		return p_img;
+	}
+
+	public void setP_img(String p_img) {
+		this.p_img = p_img;
+	}
 
 	@Override
 	public String toString() {
 		return "ChatRoomListView [c_room_no=" + c_room_no + ", p_no=" + p_no + ", not_read=" + not_read + ", send_time="
-				+ send_time + ", c_content=" + c_content + ", you_id=" + you_id + ", you_image=" + you_image + "]";
+				+ send_time + ", c_content=" + c_content + ", you_id=" + you_id + ", you_image=" + you_image
+				+ ", p_img=" + p_img + "]";
 	}
+
+
 
 
 	
