@@ -24,18 +24,10 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/townBoard.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
-	
-	<!-- javaScript -->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
-	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
-	<script type="text/javascript" src="js/common/user_session_check.js"></script>
-	
 	<!-- toast -->
- <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+ 	<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
+
 	
 	
 	
@@ -183,12 +175,15 @@
                     
                 </div>
                 </div>
+                
+                
                 <div class="col-12 col-lg-8">
                 
                 
                 
                     <!-- Blog Details Area -->
-                    <div class="blog-details-area mb-50">                        
+                    <div id = "townBoard_list_tbody_all">
+                    <div class="blog-details-area mb-50" id="townBoard_list_tbody">                        
                         <!-- Image -->
                         <img class="mb-30" src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-img">
                         <img class="mb-30" src="img/townBoard-img/${townImage.t_img_name}" alt="blog-img">
@@ -223,7 +218,7 @@
                                             </div>
                                         </div>
                                         <div class="comment-content">
-                                            <h5 class="comment-author"><a href="#">Lim Jannat</a></h5>
+                                            <h5 class="comment-author"><a href="#">${'새주' }</a></h5>
                                             <p>This post is very helpful. I like your fashion tips. Keep up awesome job!</p>
                                             <a href="#" class="reply">Reply</a>
                                         </div>
@@ -312,9 +307,11 @@
                         </div>
                     </div>
                 </div>
-
                 
-            </div>
+                ////댓글까지 끝
+				</div>
+                
+            </div> ///내용끝
         </div>
     </section>
     <!-- Single Blog Post Area -->
@@ -326,6 +323,12 @@
     <!-- Footer Area -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    
+	
+	<!-- javaScript -->
+	<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+	
+	
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -343,7 +346,14 @@
     <script src="js/jquery.nice-select.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
+    
     <script src="js/townBoard/townBoard.js"></script>
+    <script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
+	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
+	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 
 	<style type="text/css">
 #toast-container > .toast {
