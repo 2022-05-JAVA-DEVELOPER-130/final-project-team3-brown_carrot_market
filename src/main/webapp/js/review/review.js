@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	
-	/* review_write_form ****/
+	/* review_write_form 보여주기****/
 	$('.badge-carrot').on('click',function(e){
 		console.log(e.target.id);
 		$("#container_contents").html(ReviewHtmlContents.review_write_form(e.target.id));
@@ -8,6 +8,7 @@ $(document).ready(function(){
 		$(".breadcrumb li:last-child").removeClass('active');
 		$(".breadcrumb li:last-child").html('<a href="orders_list">구매내역</a>');
 		$(".breadcrumb").append('<li class="breadcrumb-item active">후기작성</li>');
+		e.preventDefault();
 	});
 	
 	$(".stars *").on('click',function(e){
@@ -20,18 +21,10 @@ $(document).ready(function(){
 		}
 	});
 		
-		//$('#review_point').val(val);
-	/* review_write_action ****/
-	/*
-	$('#review_write_form').on('submit',function(e){
-		console.log('click!!');
-	});
-	*/
 });
 
 function setPoint(id){
 	console.log(id);
-	//console.log(id.val());
 	var val = $("label[for='"+id+"']").text();
 	console.log(val);
 	$('#review_point').val(val);

@@ -19,9 +19,16 @@
 		입력폼의 method를 POST으로 지정하고,<br> enctype 속성의 값을 multipart/form-data로
 		설정합니다.
 	</p>
+	<form name="fileForm" action="requestupload2" method="post" enctype="multipart/form-data">
+		<input multiple="multiple" type="file" name="file" />
+		<input type="text" name="src" />
+		<input type="submit" value="전송" />
+	</form>
+	
+	
 	<form id="image_form"  name="image_form" 
 		enctype="multipart/form-data">
-		사진1: <input type="file" name="files" id="chooseF"><br> 
+		사진1: <input multiple="multiple" type="file" name="files" id="chooseF"><br> 
 		사진2: <input type="file" name="files"><br> 
 		사진3: <input type="file" name="files"><br> 
 		사진4: <input type="file" name="files"><br> 
