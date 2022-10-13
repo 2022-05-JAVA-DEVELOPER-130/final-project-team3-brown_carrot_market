@@ -83,7 +83,7 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public int insertProduct(Map map) throws Exception {
-		// TODO Auto-generated method stub
+		
 		return productDao.insertProduct(map);
 	}
 	// 채팅에서 사용 
