@@ -178,10 +178,10 @@
 		<selectKey keyProperty="p_no" order="BEFORE" resultType="int">
 			select PRODUCT_P_NO_SEQ.nextval from dual
 		</selectKey>
-		insert into product p values(#{product.p_no}, 
-                           #{product.p_title},
-                		   #{product.p_desc},
-               			   #{product.p_price},
+		insert into product p values(#{p_no}, 
+                           #{p_title},
+                		   #{p_desc},
+               			   #{p_price},
                			   sysdate,
                			   1,
                			   0,
@@ -189,8 +189,8 @@
                            #{address.address_name},
                            #{address.address_lat},
                            #{address.address_lng},
-                           #{product.productCategory.p_ctgr_no},
-                           #{product.userInfo.user_id})
+                           #{productCategory.p_ctgr_no},
+                           #{userInfo.user_id})
 	</insert>
 	
 	<!-- 사진 -->
