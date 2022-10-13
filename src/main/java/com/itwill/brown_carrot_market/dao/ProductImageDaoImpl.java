@@ -51,13 +51,13 @@ public class ProductImageDaoImpl implements ProductImageDao{
 		return productImageMapper.deleteProductImg(pi_no);
 	}
 	
-	/*
+	
 	@Override
-	public int insertProductListImg(ProductImage productImage) throws Exception {
+	public int insertProductListImg(List<ProductImage> productImageList) throws Exception {
 		System.out.println("### productImageDaoImpl : insertProductListImg 호출");
-		return productImageMapper.insertProductListImg(productImage);
+		return productImageMapper.insertProductListImg(productImageList);
 	}
-	*/
+	
 	
 	
 }
