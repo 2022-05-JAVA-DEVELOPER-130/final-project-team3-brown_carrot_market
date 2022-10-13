@@ -90,16 +90,20 @@ public class TownBoardDaoImpl implements TownBoardDao{
 	//동네 게시판 회원이 좌표값과 카테고리 조건으로 전체조회 -- 페이징처리
 	@Override
 	public List<TownBoard> selectTownBoardCtgrListCoordinate(Map map,int t_ctgr_no, int pageStart, int pageEnd) throws Exception{
+		//(추가)
+		System.out.println("selectTownBoardCtgrListCoordinate디에이오- map >>"+map);
+		
 		System.out.println(">>> townBoardDaoImpl : selectTownBoardCtgrListCoordinate()호출");
 		Map<String, Integer> map1 = new HashMap<>();
 		map1.put("pageStart", pageStart);
 		map1.put("pageEnd", pageEnd);
-		return townBoardMapper.selectTownBoardCtgrListCoordinate(map,t_ctgr_no, pageStart, pageEnd);
+		return townBoardMapper.selectTownBoardCtgrListCoordinate(map, pageStart, pageEnd);
 	}
 	//회원이 카테고리 조건 게시판 게시글 수 계산
 	@Override
 	public int selectMemberCtgrCountTownBoard(Map map,int t_ctgr_no) {
-		
+		//(추가)
+		System.out.println("selectMemberCtgrCountTownBoard디에이오- map >>"+map);
 		return townBoardMapper.selectMemberCtgrCountTownBoard(map,t_ctgr_no);
 	}
 	//회원이 카테고리 조건 게시판 게시글 수 계산을 위한 파라메타 맵 만들기
