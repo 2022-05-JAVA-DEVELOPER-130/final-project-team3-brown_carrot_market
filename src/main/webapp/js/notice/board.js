@@ -125,11 +125,16 @@ $(".notice_btn.update").on("click", function(){
 /*
 새글 등록 폼 
 */
+/*
+var sUserId = (String)session.getAttribute("sUserId");
 $(".notice_btn.write_form").on("click", function(){
+	if(sUserId.equal("admin")){
 	let pageno = $(this).attr("pageno");
 	location.href = "notice_write_form?pageno=" + pageno;
+		
+	}
 });
-
+*/
 
 /*
 게시글 등록

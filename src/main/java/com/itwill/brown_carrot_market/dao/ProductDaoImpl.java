@@ -90,7 +90,10 @@ public class ProductDaoImpl implements ProductDao{
 	public int insertProduct(Map map) {
 		System.out.println("###ProductDaoImpl : insertProduct 호출");
 		productMapper.insertProduct(map);
-		return 1;
+		System.out.println(map);
+		//System.out.println(map.get("p_no"));
+		//map.get("p_no");
+		return (int) map.get("p_no");
 	}
 	
 	
