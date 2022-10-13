@@ -17,7 +17,7 @@ addJavascript('/js/chat/socket.js');*/
 
 $(document).ready(function(){
 	
-	session_check();
+	session_check(); 
 });
 
 function session_check(){
