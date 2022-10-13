@@ -33,6 +33,11 @@
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 	
+	<!-- toast -->
+<link href="[//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css)" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="[https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css](https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css)"/>
+<script type="text/javascript" src="[https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js](https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js)"></script>
+	
 	
 	
 </head>
@@ -80,8 +85,13 @@
                             <h6>Catagory</h6>
                             <ul>
                               <li>
+                              
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no1" value=1>
+<<<<<<< HEAD
 	                              <a href="#" onclick="changeQnaList(1,0,1)">동네생활 <span class="text-muted">(21)</span></a>
+=======
+	                              <a href="#" onclick="changeQnaList(1, 0 ,1)">동네생활 <span class="text-muted">(21)</span></a>
+>>>>>>> branch 'master' of https://github.com/2022-05-JAVA-DEVELOPER/final-project-team3-brown_carrot_market.git
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no2" value=2>
@@ -274,7 +284,27 @@
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
     <script src="js/townBoard/townBoard.js"></script>
+	
+	<style type="text/css">
+#toast-container > .toast {
+background-image: none !important;
+}
 
+#toast-container > .toast:before {
+position: relative;
+font-family: FontAwesome;
+font-size: 24px;
+line-height: 18px;
+float: left;
+color: #FFF;
+padding-right: 0.5em;
+margin: auto 0.5em auto -1.5em;
+}
+#toast-container > .toast-warning:before {
+content: "\f27a";
+
+}
+	
 </body>
 
 </html>

@@ -55,7 +55,7 @@ public class TownBoardRestController {
 					resultMap.put("data", townBoardList);
 					
 				}
-				
+					
 			}
 			//비회원 게시글 리스트 반환
 			if(sUserId == null) {

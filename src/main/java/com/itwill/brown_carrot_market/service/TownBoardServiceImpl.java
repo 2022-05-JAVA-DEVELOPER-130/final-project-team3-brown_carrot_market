@@ -86,6 +86,9 @@ public class TownBoardServiceImpl implements TownBoardService{
 	//동네 게시판 회원이 좌표값과 카테고리 조건으로 전체조회 -- 페이징처리
 	@Override
 	public PageMakerDto<TownBoard> selectTownBoardCtgrListCoordinate(Map map, int t_ctgr_no, int currentPage) throws Exception {
+		//(추가)
+		System.out.println("selectTownBoardCtgrListCoordinate- map >>"+map);
+		
 		int totTownBoardMemberCtgrCount = townBoardDao.selectMemberCtgrCountTownBoard(map, t_ctgr_no);
 		PageMaker pageMaker = new PageMaker(totTownBoardMemberCtgrCount, currentPage, 5, 5);
 		List<TownBoard> townBoardList = townBoardDao.selectTownBoardCtgrListCoordinate(map,t_ctgr_no ,pageMaker.getPageBegin(), pageMaker.getPageEnd());

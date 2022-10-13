@@ -5,7 +5,6 @@ function changeQnaList(pageno,map,t_ctgr_no){
 		method: "post",
 		data: {
 			"pageno" :pageno,
-			"map":map,
 			"t_ctgr_no":t_ctgr_no
 				},
 		dataType: "json",
