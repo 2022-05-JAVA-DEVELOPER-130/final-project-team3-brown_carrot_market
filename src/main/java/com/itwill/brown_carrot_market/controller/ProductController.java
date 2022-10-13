@@ -1,5 +1,6 @@
 package com.itwill.brown_carrot_market.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Product;
@@ -87,23 +89,48 @@ public class ProductController {
 	public String product_write_action(@RequestParam Map<String, Object> map, Model model, HttpSession session) {
 		String forwardPath = "";
 		String sUserId = (String)session.getAttribute("sUserId");
-
-		map.put("user_id", sUserId);
+		//map.put("user_id", sUserId);
 		Address sAddress = (Address)session.getAttribute("sAddress");
 		map.put("address", sAddress);
+		
+		String message = "";
+		String newFileName= "";
 
 		try {
 
 			UserInfo userInfo = new UserInfo(sUserId, sUserId, sUserId, sUserId, forwardPath, 0, 0, sUserId, null);
-			map.put("userInfo", userInfo);
-			
+			map.put("userInfo", userInfo);	
 			ProductCategory productCategory = new ProductCategory(Integer.parseInt(map.get("p_ctgr_no").toString()), "");
 			map.put("productCategory", productCategory);
+			map.remove("p_ctgr_no");
+			//map.put("product", map);
 			
-			map.put("product", map);
-			System.out.println(map);
 			
+			/*사진
+			List<String> fileNames = new ArrayList<>();
+
+			for (MultipartFile file : files) {
+				System.out.println(file.isEmpty());
+				if (!file.isEmpty()) {
+					newFileName= storageService.save(file);
+					fileNames.add(file.getOriginalFilename());
+
+					message = "Uploaded the files successfully: " + fileNames+" newFileName"+newFileName;
+				}else {
+					message="Please select a valid mediaFile..";
+				}
+			}
+			map.put("newFileName",newFileName);
+			*/
+			
+			System.out.println("controller map : "+map);
+			
+			
+			
+			
+			//인서트해주기
 			int insertRowCount = productService.insertProduct(map);
+			
 			
 			forwardPath = "redirect:product_list";
 		} catch (Exception e) {
