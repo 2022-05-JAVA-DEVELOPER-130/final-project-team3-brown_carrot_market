@@ -28,6 +28,10 @@
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
+	<!-- toast -->
+	<link href="[//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css)" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="[https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css](https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css)"/>
+	<script type="text/javascript" src="[https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js](https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js)"></script>
 </head>
 
 <body>
@@ -73,7 +77,9 @@
 	                                        <th scope="col">사   진</th>
 	                                        <th scope="col">이   름</th>
 	                                        <th scope="col">상품가격</th>
+	                                        <th scope="col">상   태</th>
 	                                        <th scope="col">후   기</th>
+	                                        <th scope="col">비   고</th>
 	                                    </tr>
 	                                </thead>
 	                                <tbody>
@@ -97,6 +103,17 @@
 		                                        </td>
 		                                        <td>
 		                                        	${Orders.product.p_price}
+		                                        </td>
+		                                        <td>
+		                                        	<script>
+			                                        	if(${Orders.product.p_sell}==1){
+			                                        		document.write("판매 중")
+			                                        	}else if(${Orders.product.p_sell}==2){
+			                                        		document.write("예약 중")	
+			                                        	}else if(${Orders.product.p_sell}==3){
+			                                        		document.write("거래 완료")
+			                                        	}
+		                                        	</script>
 		                                        </td>
 		                                        <td>
 		                                            <div class="" name="">
@@ -127,10 +144,10 @@
 		                                                <a href="#" class="badge" id="orders_no_${status.index}_review" style="height:20px;font-size:1rem"></a>
 		                                            </div>
 		                                        </td>
+		                                        <td>
+		                                        </td>
 		                                    </tr>
 										</c:forEach>  
-										
-										  
 	                                </tbody>
 	                            </table>
 	                        </div>
@@ -161,7 +178,26 @@
     <script src="js/jquery.nice-select.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
-
+	
 </body>
-
+<style type="text/css">
+		#toast-container > .toast {
+		background-image: none !important;
+		}
+		
+		#toast-container > .toast:before {
+		position: relative;
+		font-family: FontAwesome;
+		font-size: 24px;
+		line-height: 18px;
+		float: left;
+		color: #FFF;
+		padding-right: 0.5em;
+		margin: auto 0.5em auto -1.5em;
+		}
+		#toast-container > .toast-warning:before {
+		content: "\f27a";
+		
+		}
+</style>
 </html>

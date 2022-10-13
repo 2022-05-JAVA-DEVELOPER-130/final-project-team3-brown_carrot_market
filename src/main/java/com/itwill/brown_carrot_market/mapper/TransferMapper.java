@@ -25,6 +25,6 @@ public interface TransferMapper {
 	@Insert("insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval, (select p_price from product where p_no = #{p_no}), 0, sysdate, (select user_id from product where p_no = #{p_no}), (select orders_no from orders where p_no = #{p_no}),#{p_no},0)")
 	int insertTransfer_Withdraw_Cancle(int p_no);
 	
-	@Select("select s.user_id, s.transfer_no, s.transfer_deposit, s.transfer_withdraw, s.transfer_date, s.t_balance from (select t.user_id, t.transfer_no, t.transfer_deposit, t.transfer_withdraw, t.transfer_date, t.t_balance from transfer t join orders o on t.p_no = o.p_no)s join userinfo u on s.user_id=u.user_id where s.user_id=#{user_id} order by s.transfer_date desc")
+	@Select("select s.user_id, s.transfer_no, s.transfer_deposit, s.transfer_withdraw, s.transfer_date, s.t_balance from (select t.user_id, t.transfer_no, t.transfer_deposit, t.transfer_withdraw, t.transfer_date, t.t_balance from transfer t left outer join orders o on t.p_no = o.p_no)s join userinfo u on s.user_id=u.user_id where s.user_id=#{user_id} order by s.transfer_date desc")
 	List<Transfer> selectById(String user_id);
 }
