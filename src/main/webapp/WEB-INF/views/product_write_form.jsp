@@ -110,6 +110,29 @@
                                         	</div>
                                         </div>
                                     </div>
+                                    <!-- 이미지 업로드 부분 시작-->
+                                    <li>
+                                    	<label for="up_file4" style="display : inline-block; cursor:pointer; position : relative;">
+                                    		<input type="file" name="files" id="up_file4"
+                                    				style="position : absolue; 
+                                    					   top : 0 !important; 
+                                    					   left :  0 !important;
+                                    					   line-height:  0 !important;
+                                    					   font-size:  0 !important;
+                                    					   width:  0 !important;
+                                    					   height:  0 !important;
+                                    					   color : transparent !important;
+                                    					   overflow : hidden !important;
+                                    					   opacity: 0;">
+                                    		<span style = "display : block;
+                                    						width:100px;
+                                    						height:100px;
+                                    						border:1px solid #ddd;
+                                    						position:relative;">
+                                    		</span>	   
+                                    	</label>
+                                    </li>
+                                    <!-- 이미지 업로드 부분 끝-->
                                     <div class="col-12 text-center">
                                         <input type="button" id="btn_product_write_action" class="btn btn-primary w-40" value="물건 올리기" onclick="productCreate()">&nbsp; 
                                         <input type="button" class="btn btn-primary w-40" value="동네물건목록" onclick="productList()">
