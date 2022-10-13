@@ -42,11 +42,10 @@ public class TownBoardRestController {
 				}
 				if(t_ctgr_no != 0) {
 					
-					map.put("t_ctgr_no", t_ctgr_no);
 					map.put("user_id", sUserId);
 					map.put("address_no", sAddress.getAddress_no());
 					
-					townBoardList = townBoardService.selectTownBoardCtgrListCoordinate(map, pageno);
+					townBoardList = townBoardService.selectTownBoardCtgrListCoordinate(map,t_ctgr_no, pageno);
 					resultMap.put("errorCode", 2); 
 					resultMap.put("errorMsg", "회원 카테고리 성공");
 					resultMap.put("data", townBoardList);
