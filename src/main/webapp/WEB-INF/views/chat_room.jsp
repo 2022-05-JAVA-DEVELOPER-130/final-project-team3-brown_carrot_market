@@ -37,6 +37,8 @@
 	<script src="js/chat/chat_room.js"></script>
 	
 	<script type="text/javascript"></script>
+	
+	
 </head>
 
 <body>
@@ -109,7 +111,17 @@
 								 
 								
 								<div class="col-lg-4 hidden-sm text-right">
-
+									<div class="btn-group">
+  									<button type="button" class="btn" style="border-color:orange"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   									 <i class="fa fa-align-justify" style="color:orange"></i>
+  									</button>
+ 									<div class="dropdown-menu dropdown-menu-right">
+  									<button class="dropdown-item" type="button">채팅방 닫기</button>
+  									<button class="dropdown-item" type="button">채팅방 나가기</button>
+   									<button class="dropdown-item" type="button">Something else here</button>
+   									
+  </div>
+</div>
     							 </div>
 							</div>
 						</div>
@@ -122,6 +134,7 @@
 											alt>
 										<span class="message-data-adminGongji">흙토끼</span>
 									</div>
+									
 									<div class="message my-message">
 									<h6><b>기본매너</b></h6>
 									<p>기본적으로 지켜야하는 매너에는 무엇이 있을까요?</p>
@@ -512,5 +525,7 @@ color:#070a57;
     <script src="js/jquery.nice-select.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
+    
+    
 </body>
 </html>

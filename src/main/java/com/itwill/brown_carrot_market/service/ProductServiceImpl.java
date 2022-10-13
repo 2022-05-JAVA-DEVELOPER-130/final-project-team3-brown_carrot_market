@@ -1,5 +1,6 @@
 package com.itwill.brown_carrot_market.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import com.itwill.brown_carrot_market.dao.ProductImageDao;
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Product;
 import com.itwill.brown_carrot_market.dto.ProductImage;
+import com.itwill.brown_carrot_market.dto.ReviewImage;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -83,8 +85,20 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public int insertProduct(Map map) throws Exception {
-		// TODO Auto-generated method stub
-		return productDao.insertProduct(map);
+		int result = 0;
+		int p_no = productDao.insertProduct(map);
+		//Product product = (Product)map;
+		/*
+		if(product.getProductImagesList()!=null) {
+		List<ProductImage> productImageList = new ArrayList();
+		for (ProductImage productImage : product.getProductImagesList()) {
+			productImage.setP_no(p_no);
+			productImageList.add(productImage);
+			}
+		result = productImageDao.insertProductListImg(productImageList);
+		}
+		 */
+		return result;
 	}
 	// 채팅에서 사용 
 	@Override

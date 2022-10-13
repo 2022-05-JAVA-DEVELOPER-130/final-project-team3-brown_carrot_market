@@ -83,6 +83,37 @@ public class TownBoardRestController {
 	}
 	
 	
+	//게시글 삭제
+	@RequestMapping("/townBoard_delete_rest")
+	public Map<String, Object> townBoard_delete_rest(Integer pageno,@RequestParam Integer t_no){
+		//String sUserId = (String)session.getAttribute("sUserId");
+		Map<String, Object> resultMap = new HashMap<>();
+		
+		if (pageno == null || t_no == null) {
+			resultMap.put("errorCode", -1);
+			resultMap.put("errorMsg", "잘못된 접근입니다");
+		}
+		
+		try {
+			
+			int result = townBoardService.deleteTownBoardOne(t_no);
+			if (result == 1) {
+				resultMap.put("errorCode", 1);
+				resultMap.put("errorMsg", "게시글을 삭제하였습니다");
+			} else {
+				resultMap.put("errorCode", -2);
+				resultMap.put("errorMsg", "게시글이 삭제되지 않았습니다");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			resultMap.put("errorCode", -3);
+			resultMap.put("errorMsg", "관리자에게 문의하세요");
+		}
+		
+		return resultMap;
+	}
+	
+	
 	
 	
 	

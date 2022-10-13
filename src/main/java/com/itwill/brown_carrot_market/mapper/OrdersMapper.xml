@@ -19,6 +19,7 @@
 					    <result property="p_desc" column="p_desc" />
 					    <result property="p_price" column="p_price" />
 					    <result property="p_date" column="p_date" />
+					    <result property="p_sell" column="p_sell" />
 					<association property="userInfo" javaType="com.itwill.brown_carrot_market.dto.UserInfo">
 							<result column="USER_ID" property="user_id"/>
 							<result column="USER_NAME" property="user_name"/>
@@ -32,6 +33,7 @@
 			    <result property="p_desc" column="p_desc" />
 			    <result property="p_price" column="p_price" />
 			    <result property="p_date" column="p_date" />
+			    <result property="p_sell" column="p_sell" />
 				<association property="userInfo" javaType="com.itwill.brown_carrot_market.dto.UserInfo">
 					<result column="USER_ID" property="user_id"/>
 					<result column="USER_NAME" property="user_name"/>
@@ -44,6 +46,7 @@
 			<result column="P_TITLE" property="p_title" />
 			<result column="P_PRICE" property="p_price" />
 			<result column="P_DATE" property="p_date" />
+			<result column="P_SELL" property="p_sell" />
 			<association property="userInfo" javaType="com.itwill.brown_carrot_market.dto.UserInfo">
 				<result column="USER_ID" property="user_id"/>
 			</association>
@@ -57,7 +60,8 @@
 	
 	<select id="selectAllById" resultMap="ordersResultMap">
 		select * from orders o
-			join (select pi.pi_no, pi.pi_name, p.p_no, p.p_title, p.p_date, p.p_price from product p join product_img pi on p.p_no=pi.p_no)s on o.p_no = s.p_no where user_id=#{user_id} order by s.pi_no desc	
+			join (select pi.pi_no, pi.pi_name, p.p_no, p.p_title, p.p_date, p.p_price, p.p_sell from product p join product_img pi on p.p_no=pi.p_no)s on o.p_no = s.p_no where user_id=#{user_id} order by s.pi_no desc
+		<!-- select * from (select * from orders o join (select pi.pi_no, pi.pi_name, p.p_no, p.p_title, p.p_date, p.p_price, p.p_sell from product p join product_img pi on p.p_no=pi.p_no)s on o.p_no = s.p_no where user_id='carrot8' order by s.pi_no desc) where rownum=1 -->	
 	</select>
 	<select id="selectByNo" resultMap="ordersResultMap">
 		select * from orders where orders_no=#{orders_no}
