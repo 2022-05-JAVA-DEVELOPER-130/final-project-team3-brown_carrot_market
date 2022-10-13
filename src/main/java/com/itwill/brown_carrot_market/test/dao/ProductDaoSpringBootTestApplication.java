@@ -39,14 +39,14 @@ public class ProductDaoSpringBootTestApplication {
 		//System.out.println(productDao.updateProduct(new Product(11, "한글책수정", "수정해봅니다", 10000, null, 1, 0, 0, null, 0, 0, new ProductCategory(5, null), null, null, null)));
 		//이거 됨
 		//System.out.println(productDao.updateProductWishCount(15));
-		/* 안됨
+		/*
 		List<Address> addressList = new ArrayList<Address>();
         addressList.add(new Address(1, null, 0.0, 0.0, 0, null));
-		System.out.println(productDao.insertProduct(new Product(0, "제발요", "되게해주세요", 1000, null, 0, 0, 0, null, 0, 0, new ProductCategory(1, null), new UserInfo("carrot1", null, null, null, null, 0, 0, null, null), null, addressList)));
-		*/
+		//System.out.println(productDao.insertProduct(new Product(0, "제발요", "되게해주세요", 1000, null, 0, 0, 0, null, 0, 0, new ProductCategory(1, null), new UserInfo("carrot1", null, null, null, null, 0, 0, null, null), null, addressList)));
+		
 		
 		//address를 뽑아옴
-		/*
+	
 		Map map=productDao.selectProductAddress("carrot3", 5);
 		
 		Map pmap=new HashMap();
@@ -54,7 +54,7 @@ public class ProductDaoSpringBootTestApplication {
 		pmap.put("address", map);
 		productDao.insertProduct(pmap);
 		*/
-		System.out.println(productDao.updateProductSell(1, 15));
+		//System.out.println(productDao.updateProductSell(1, 15));
 	}
 	
 /*

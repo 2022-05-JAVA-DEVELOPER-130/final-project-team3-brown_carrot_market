@@ -31,6 +31,14 @@
 	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+	
+	<!-- toast -->
+ <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
+	
+	
+	
 </head>
 
 <body>
@@ -182,42 +190,23 @@
                     <!-- Blog Details Area -->
                     <div class="blog-details-area mb-50">                        
                         <!-- Image -->
-                        <img class="mb-30" src="img/bg-img/blog-3.jpg" alt="blog-img">
+                        <img class="mb-30" src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-img">
+                        <img class="mb-30" src="img/townBoard-img/${townImage.t_img_name}" alt="blog-img">
                         
                         <!-- Blog Title -->
-                        <h3 class="mb-30">Top 10 Handbags in 2019</h3>
+                        <h3 class="mb-30">${townBoard.t_title}</h3>
                         
                         <!-- Bar Area -->
                         <div class="status-bar mb-15">
-                            <a href="#"><i class="icofont-user-male"></i> Jannatun</a>
-                            <a href="#"><i class="icofont-ui-clock"></i> 16 Sep, 19</a>
-                            <a href="#"><i class="icofont-tags"></i> Handbags</a>
+                            <a href="#"><i class="icofont-user-male"></i> ${townBoard.userInfo.user_id }</a>
+                            <a href="#"><i class="icofont-ui-clock"></i> ${townBoard.t_date }</a>
                             <a href="#"><i class="icofont-speech-comments"></i> 3 Comments</a>
+                           <input class="townBoard_i delete" type="button" pageno="${pageno}" t_no=${townBoard.t_no} value="삭제하기" />
+                           
                         </div>
 
                         <!-- Single Blog Details Area -->
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae to vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt.ut labore et dolore magnam aliquam quaerat voluptatem.</p>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam qui, molestiae est, rerum molestias esse sunt eos odio provident quos nihil repellat iusto alias repellendus. Sapiente animi voluptatum laudantium molestiae vel voluptates atque nisi, possimus tempora dicta illum consectetur. Sint dolore voluptate, doloribus facere ea ratione dolorem, iusto reprehenderit repellendus ut labore! Corporis voluptatum perspiciatis neque, ipsa sapiente quibusdam culpa veniam nesciunt, dolore eos, ad omnis repellendus quia.</p>
-
-                        <div class="row">
-                            <div class="col-12 col-lg-7">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In architecto rem omnis quia ipsa. Nulla sapiente aut illum error modi, repellendus temporibus non ipsum alias recusandae ex hic veritatis cum.</p>
-                            </div>
-                            <div class="col-12 col-lg-5">
-                                <img class="mb-3" src="img/bg-img/blog-1.jpg" alt="">
-                            </div>
-                        </div>
-
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae to vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates officiis consectetur incidunt eveniet mollitia itaque tempore eius asperiores. Iste praesentium libero unde maiores, aspernatur numquam deserunt quisquam doloremque reprehenderit, hic ducimus fugit. Distinctio maxime harum ipsam sunt, voluptatem quod ut?</p>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias corporis itaque qui expedita eligendi error asperiores tempore voluptates officia. Cum inventore laborum ipsum eum harum? Obcaecati tenetur facere sint officiis voluptate quam quidem magnam quibusdam praesentium asperiores accusantium et sed reprehenderit animi, tempora unde necessitatibus ad ut accusamus repudiandae inventore hic, velit distinctio. Voluptatem, quo, nesciunt. Ipsam ducimus illo et nihil unde, non numquam tenetur est dicta eveniet iusto cum recusandae voluptatem hic tempora ad laborum quasi qui.</p>
-
-                        <img class="mb-3" src="img/bg-img/blog-5.jpg" alt="">
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est veritatis, aspernatur amet modi et, atque, molestiae impedit facilis non aliquid adipisci perferendis eius quas saepe. Optio sapiente temporibus rerum, est quasi similique voluptatibus officia laudantium ducimus alias, deleniti repellat nesciunt repudiandae autem.</p>
+                        <p class = "">${townBoard.t_content}</p>
                     </div>
 
                     <div class="comments-area">
@@ -355,6 +344,27 @@
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
     <script src="js/townBoard/townBoard.js"></script>
+
+	<style type="text/css">
+#toast-container > .toast {
+    background-image: none !important;
+}
+
+ #toast-container > .toast:before {
+    position: relative;
+    font-family: FontAwesome;
+    font-size: 24px;
+    line-height: 18px;
+    float: left;
+    color: #FFF;
+    padding-right: 0.5em;
+    margin: auto 0.5em auto -1.5em;
+}       
+    #toast-container > .toast-warning:before {
+     content: "\f27a"; 
+ 
+}
+
 
 </body>
 

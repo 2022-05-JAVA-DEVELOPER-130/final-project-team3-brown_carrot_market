@@ -85,23 +85,28 @@ public class TownBoardServiceImpl implements TownBoardService{
 	
 	//동네 게시판 회원이 좌표값과 카테고리 조건으로 전체조회 -- 페이징처리
 	@Override
-	public PageMakerDto<TownBoard> selectTownBoardCtgrListCoordinate(Map map, int currentPage) throws Exception {
-		int totTownBoardMemberCtgrCount = townBoardDao.selectMemberCtgrCountTownBoard(map);
+	public PageMakerDto<TownBoard> selectTownBoardCtgrListCoordinate(Map map, int t_ctgr_no, int currentPage) throws Exception {
+		//(추가)
+		System.out.println("selectTownBoardCtgrListCoordinate- map >>"+map);
+		
+		int totTownBoardMemberCtgrCount = townBoardDao.selectMemberCtgrCountTownBoard(map, t_ctgr_no);
 		PageMaker pageMaker = new PageMaker(totTownBoardMemberCtgrCount, currentPage, 5, 5);
-		List<TownBoard> townBoardList = townBoardDao.selectTownBoardCtgrListCoordinate(map, pageMaker.getPageBegin(), pageMaker.getPageEnd());
+		List<TownBoard> townBoardList = townBoardDao.selectTownBoardCtgrListCoordinate(map,t_ctgr_no ,pageMaker.getPageBegin(), pageMaker.getPageEnd());
 		PageMakerDto<TownBoard> pageMakerTownBoardList = new PageMakerDto<TownBoard>(townBoardList, pageMaker, totTownBoardMemberCtgrCount);
 		return pageMakerTownBoardList;
 	}
 	
 	//회원이 카테고리 조건 게시판 게시글 수 계산
 	@Override
-	public int selectMemberCtgrCountTownBoard(Map map) {
-		return townBoardDao.selectMemberCtgrCountTownBoard(map);
+	public int selectMemberCtgrCountTownBoard(Map map,int t_ctgr_no) {
+		System.out.println("selectMemberCtgrCountTownBoard서비스 - map: "+map);
+		
+		return townBoardDao.selectMemberCtgrCountTownBoard(map,t_ctgr_no);
 	}
 	//회원이 카테고리 조건 게시판 게시글 수 계산을 위한 파라메타 맵 만들기
 	@Override
-	public Map selectMemberCtgrTownBoardAddress(int t_ctgr_no, String user_id, int address_no) {
-		return townBoardDao.selectMemberCtgrTownBoardAddress(t_ctgr_no, user_id, address_no);
+	public Map selectMemberCtgrTownBoardAddress(String user_id, int address_no) {
+		return townBoardDao.selectMemberCtgrTownBoardAddress(user_id, address_no);
 	}
 	
 	
@@ -112,7 +117,8 @@ public class TownBoardServiceImpl implements TownBoardService{
 	public TownBoard selectTownBoardOne(int t_no) throws Exception {
 		return townBoardDao.selectTownBoardOne(t_no);
 	}
-
+	
+	//게시글 삭제
 	@Override
 	public int deleteTownBoardOne(int t_no) throws Exception {
 		return townBoardDao.deleteTownBoardOne(t_no);

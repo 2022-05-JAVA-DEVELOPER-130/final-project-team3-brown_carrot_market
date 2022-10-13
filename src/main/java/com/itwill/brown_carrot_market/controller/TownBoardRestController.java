@@ -30,6 +30,9 @@ public class TownBoardRestController {
 		PageMakerDto<TownBoard> townBoardList = null;
 		String sUserId = (String)session.getAttribute("sUserId");
 		Address sAddress = (Address)session.getAttribute("sAddress");
+		
+		System.out.println("townBoard_list_rest컨트롤러 map :"+map);
+		
 		try { 
 			//회원 게시글 리스트 반환
 			if(sUserId != null) {
@@ -42,17 +45,17 @@ public class TownBoardRestController {
 				}
 				if(t_ctgr_no != 0) {
 					
-					map.put("t_ctgr_no", t_ctgr_no);
 					map.put("user_id", sUserId);
 					map.put("address_no", sAddress.getAddress_no());
+					map.put("address", sAddress);
 					
-					townBoardList = townBoardService.selectTownBoardCtgrListCoordinate(map, pageno);
+					townBoardList = townBoardService.selectTownBoardCtgrListCoordinate(map,t_ctgr_no, pageno);
 					resultMap.put("errorCode", 2); 
 					resultMap.put("errorMsg", "회원 카테고리 성공");
 					resultMap.put("data", townBoardList);
 					
 				}
-				
+					
 			}
 			//비회원 게시글 리스트 반환
 			if(sUserId == null) {
@@ -76,6 +79,37 @@ public class TownBoardRestController {
 			resultMap.put("errorCode", -1);
 			resultMap.put("errorMsg", "관리자에게 문의하세요");
 		}
+		return resultMap;
+	}
+	
+	
+	//게시글 삭제
+	@RequestMapping("/townBoard_delete_rest")
+	public Map<String, Object> townBoard_delete_rest(Integer pageno,@RequestParam Integer t_no){
+		//String sUserId = (String)session.getAttribute("sUserId");
+		Map<String, Object> resultMap = new HashMap<>();
+		
+		if (pageno == null || t_no == null) {
+			resultMap.put("errorCode", -1);
+			resultMap.put("errorMsg", "잘못된 접근입니다");
+		}
+		
+		try {
+			
+			int result = townBoardService.deleteTownBoardOne(t_no);
+			if (result == 1) {
+				resultMap.put("errorCode", 1);
+				resultMap.put("errorMsg", "게시글을 삭제하였습니다");
+			} else {
+				resultMap.put("errorCode", -2);
+				resultMap.put("errorMsg", "게시글이 삭제되지 않았습니다");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			resultMap.put("errorCode", -3);
+			resultMap.put("errorMsg", "관리자에게 문의하세요");
+		}
+		
 		return resultMap;
 	}
 	

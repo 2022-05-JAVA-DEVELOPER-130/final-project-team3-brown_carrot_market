@@ -1,5 +1,7 @@
 package com.itwill.brown_carrot_market.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -38,6 +40,12 @@ public class PromiseDaoImpl implements PromiseDao {
 	public int promiseExist(int c_room_no) {
 		// TODO Auto-generated method stub
 		return promiseMapper.promiseExist(c_room_no);
+	}
+
+	@Override
+	public List<Promise> promiseAlert(String user_id) {
+		// TODO Auto-generated method stub
+		return promiseMapper.promiseAlert(user_id);
 	}
 
 }

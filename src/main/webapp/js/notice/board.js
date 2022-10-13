@@ -125,9 +125,12 @@ $(".notice_btn.update").on("click", function(){
 /*
 새글 등록 폼 
 */
+
 $(".notice_btn.write_form").on("click", function(){
 	let pageno = $(this).attr("pageno");
 	location.href = "notice_write_form?pageno=" + pageno;
+		
+	
 });
 
 
