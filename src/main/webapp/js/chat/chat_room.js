@@ -1068,14 +1068,14 @@ $(document).on('click',"img[id^='chat_img_sizeUp']",function(e){
   function popupNew(){
             var url = "chat_appointment";
             var name = "약속 잡기";
-            var option = "width = 500, height = 500, top = 100, left = 200, location = no,  resizable=no"
+            var option = "width = 470, height = 790, top = 100, left = 200, location = no,  resizable=no"
             window.open(url, name, option);
         }
         
   function popupChange(){
             var url = "chat_appointment_change";
             var name = "약속 수정";
-            var option = "width = 500, height = 500, top = 100, left = 200, location = no,  resizable=no"
+            var option = "width = 470, height = 790, top = 100, left = 200, location = no,  resizable=no"
             window.open(url, name, option);
         }
         
