@@ -180,7 +180,7 @@
                 		   #{product.p_desc},
                			   #{product.p_price},
                			   sysdate,
-               			   0,
+               			   1,
                			   0,
                			   0,				
                            #{address.address_name},

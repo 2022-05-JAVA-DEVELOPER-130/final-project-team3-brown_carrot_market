@@ -24,7 +24,11 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
 	 <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.js"></script>
 	
+<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
 
+	
 	
 	<!-- js -->
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
@@ -490,5 +494,23 @@ color:#070a57;
 <script type="text/javascript">
 
 </script>
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/default/classy-nav.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/default/scrollup.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jarallax.min.js"></script>
+    <script src="js/jarallax-video.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/default/active.js"></script>
 </body>
 </html>
