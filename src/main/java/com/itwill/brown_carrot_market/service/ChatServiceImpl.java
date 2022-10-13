@@ -195,6 +195,14 @@ public class ChatServiceImpl implements ChatService {
 		return promiseDao.promiseAlert(user_id);
 	}
 	
+	//안읽은메세지수
+
+	@Override
+	public int selectReadChatCount(String user_id) {
+		// TODO Auto-generated method stub
+		return chat_contentsDao.selectReadChatCount(user_id);
+	}
+	
 	
 	
 

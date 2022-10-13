@@ -51,5 +51,10 @@ public class ChatContentsDaoImpl implements ChatContentsDao {
 		// TODO Auto-generated method stub
 		return chatContentsMapper.insertChat(chat_contents);
 	}
+	@Override
+	public int selectReadChatCount(String user_id) {
+		// TODO Auto-generated method stub
+		return chatContentsMapper.selectReadChatCount(user_id);
+	}
 
 }

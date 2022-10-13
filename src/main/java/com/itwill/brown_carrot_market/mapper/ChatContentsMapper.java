@@ -51,5 +51,9 @@ public interface ChatContentsMapper {
 	resultType = Integer.class
 	)
 	public int insertChat(ChatContents chat_contents);
+	
+	//안읽은메세지 총 갯수
+	@Select("select count(*) from (select * from chat_contents where c_room_no in(select c_room_no from chat_room c where (from_id = #{user_id} and from_id_in=1) or (to_id = #{user_id} and to_id_in=1))) tb where tb.c_read=0 and tb.user_id!=#{user_id} and tb.user_id!='adminP' and tb.user_id!='admin'")
+	public int selectReadChatCount(@Param("user_id") String user_id);
 
 }

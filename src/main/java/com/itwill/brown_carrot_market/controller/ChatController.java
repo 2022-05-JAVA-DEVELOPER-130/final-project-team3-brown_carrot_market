@@ -71,8 +71,12 @@ public class ChatController {
 		return "chat_appointment_map";	
 		}
 		
-	
+		/***faq****/
 		
+		@RequestMapping(value="/faq",method=RequestMethod.GET)
+		public String faq(HttpServletRequest req, HttpServletResponse resp, HttpSession session){
+		return "faq";	
+		}
 		
 		/**************************************************/
 		@RequestMapping(value="/chat_room", method=RequestMethod.GET)

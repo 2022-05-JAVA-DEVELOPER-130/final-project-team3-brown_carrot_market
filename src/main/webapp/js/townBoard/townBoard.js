@@ -38,7 +38,8 @@ function changeQnaList(pageno,t_ctgr_no){
                         `;
                      
 				});
-				$("#townBoard_list_tbody").html(htmlBuffer);
+				$("#townBoard_list_tbody_all" ).html(htmlBuffer);
+				
 				let paginationBuffer = ``;
 				if(data.pageMaker.prevPage > 0){
 					paginationBuffer += `<li class="page-item">
