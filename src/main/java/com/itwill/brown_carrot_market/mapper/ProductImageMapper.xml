@@ -24,13 +24,23 @@
 		values (product_img_pi_no_seq.nextval,#{pi_name},#{p_no})
 	</insert>
 	
-	<!-- 사진 여러장 인서트 -->
-	<insert id="insertProductListImg" parameterType="com.itwill.brown_carrot_market.dto.ProductImage">
+	<!-- 사진 여러장 인서트 
+	<update id="insertProductListImg" parameterType="com.itwill.brown_carrot_market.dto.ProductImage">
 		insert into product_img(pi_no,pi_name,p_no) values 
-		<foreach collection="list" item="imgList" separator=" , ">
-		(product_img_pi_no_seq.nextval,#{pi_name},#{p_no})
+		<foreach collection="productImageList" item="productImage" separator=" , ">
+		(product_img_pi_no_seq.nextval,#{productImage.pi_name},#{productImage.p_no})
 		</foreach>
+	</update>
+	-->
+	<insert id="insertProductListImg" parameterType="com.itwill.brown_carrot_market.dto.ProductImage"> 
+		insert into product_img(pi_no,pi_name,p_no) select product_img_pi_no_seq.nextval, P.* from(
+	<foreach collection="productImageList" item="productImage" separator="UNION ALL">
+		select #{productImage.pi_name} as pi_name,#{productImage.p_no} as p_no from Dual
+	</foreach>) P
 	</insert>
+	
+	
+	
 	
 	<!-- 사진 삭제 -->
 	<delete id="deleteProductImg" parameterType="int">
