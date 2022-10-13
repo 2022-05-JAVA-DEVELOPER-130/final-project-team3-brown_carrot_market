@@ -15,10 +15,10 @@
      <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
     
-        <link rel="stylesheet" href="style.css">
-    
+    <link rel="stylesheet" href="style.css">
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+    
 	
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -37,6 +37,9 @@
 	<script src="js/chat/chat_room.js"></script>
 	
 	<script type="text/javascript"></script>
+	
+	
+    
 	
 	
 </head>
@@ -122,6 +125,10 @@
    									
   </div>
 </div>
+
+
+
+
     							 </div>
 							</div>
 						</div>
@@ -509,20 +516,20 @@ color:#070a57;
 </script>
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
     <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.easing.min.js"></script>
     <script src="js/default/classy-nav.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/default/scrollup.js"></script>
     <script src="js/waypoints.min.js"></script>
-    <script src="js/jquery.countdown.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
     <script src="js/jarallax.min.js"></script>
     <script src="js/jarallax-video.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
     
