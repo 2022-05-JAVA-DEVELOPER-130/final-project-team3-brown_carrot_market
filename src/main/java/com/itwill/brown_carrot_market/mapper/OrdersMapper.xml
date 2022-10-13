@@ -56,7 +56,8 @@
 	</resultMap>
 	
 	<select id="selectAllById" resultMap="ordersResultMap">
-		select * from orders o join (select pi.pi_no, pi.pi_name, p.p_no, p.p_title, p.p_date, p.p_price from product p join product_img pi on p.p_no=pi.p_no)s on o.p_no = s.p_no where user_id=#{user_id} order by s.pi_no desc	
+		select * from orders o
+			join (select pi.pi_no, pi.pi_name, p.p_no, p.p_title, p.p_date, p.p_price from product p join product_img pi on p.p_no=pi.p_no)s on o.p_no = s.p_no where user_id=#{user_id} order by s.pi_no desc	
 	</select>
 	<select id="selectByNo" resultMap="ordersResultMap">
 		select * from orders where orders_no=#{orders_no}

@@ -51,10 +51,10 @@
 				<result column="USER_POINT" property="user_point"/>
 		</association>
 	</resultMap>
-
+<!-- 
 	<insert id = "insertTransfer_Deposit" parameterType="com.itwill.brown_carrot_market.dto.Transfer">
-		<!-- insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval, (select p_price from product where p_no = #{p_no}), 0, sysdate, (select user_id from orders where p_no = #{p_no}), (select orders_no from orders where p_no = #{p_no}),#{p_no},0)
-	 -->
+		insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval, (select p_price from product where p_no = #{p_no}), 0, sysdate, (select user_id from orders where p_no = #{p_no}), (select orders_no from orders where p_no = #{p_no}),#{p_no},0)
+	
 	 <selectKey keyProperty="transfer_no" order="BEFORE" resultType="int">
 			select TRANSFER_TRANSFER_NO_SEQ.nextval from dual
 	</selectKey>
@@ -62,7 +62,7 @@
 	</insert>
 	
 	<insert id = "insertTransfer_Withdraw" parameterType="int">
-		insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval, 0, (select p_price from product where p_no = #{p_no}), sysdate, (select user_id from product where p_no = #{p_no}), (select orders_no from orders where p_no = #{p_no}),#{p_no},0)
+		insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval, (select p_price from product where p_no = #{p_no}), 0, sysdate, (select user_id from product where p_no = #{p_no}), (select orders_no from orders where p_no = #{p_no}),#{p_no},0)
 	</insert>
 
 	<insert id = "insertTransfer_Deposit_Cancle" parameterType="int">
@@ -75,5 +75,5 @@
 
 	<select id = "selectById" resultMap="transferResultMap">
 		select s.user_id, s.transfer_no, s.transfer_deposit, s.transfer_withdraw, s.transfer_date, s.t_balance from (select t.user_id, t.transfer_no, t.transfer_deposit, t.transfer_withdraw, t.transfer_date, t.t_balance from transfer t join orders o on t.p_no = o.p_no)s join userinfo u on s.user_id=u.user_id where s.user_id=#{user_id}
-	</select>
+	</select> -->
 </mapper>

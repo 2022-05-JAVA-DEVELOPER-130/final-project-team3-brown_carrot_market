@@ -8,15 +8,21 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.itwill.brown_carrot_market.dao.ProductDao;
+import com.itwill.brown_carrot_market.dao.ProductImageDao;
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Product;
+import com.itwill.brown_carrot_market.dto.ProductImage;
 
 @Service
 public class ProductServiceImpl implements ProductService{
 	@Autowired
 	@Qualifier("productDaoImpl")
 	private ProductDao productDao;
-	
+	/**************채팅방*********************/
+	@Autowired
+	@Qualifier("productImageDaoImpl")
+	private ProductImageDao productImageDao;
+	/****************************************/
 	public ProductServiceImpl() throws Exception{
 		System.out.println("### productServiceImpl : 기본생성자 호출");
 	}
@@ -80,5 +86,19 @@ public class ProductServiceImpl implements ProductService{
 		// TODO Auto-generated method stub
 		return productDao.insertProduct(map);
 	}
+	// 채팅에서 사용 
+	@Override
+	public List<ProductImage> selectProductImgList(int p_no) throws Exception{
+		
+		return productImageDao.selectProductImgList(p_no);
+	}
+
+	@Override
+	public int updateProductSell(int p_sell, int p_no) throws Exception {
+		// TODO Auto-generated method stub
+		return productDao.updateProductSell(p_sell, p_no);
+	}
+	
+	
 	
 }

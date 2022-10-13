@@ -105,5 +105,19 @@
 					where o.user_id = #{user_id})
 	</select>
 	
+	<!-- 후기 1개 보기  -->
+	<select id="findReviewByRivewNo" parameterType="int" resultType="com.itwill.brown_carrot_market.dto.Review">
+		select r.*, o.*, r.user_id reviewr, o.user_id buyer
+			from review r
+			join orders o
+			on r.orders_no=o.orders_no
+			where review_no=#{review_no}
+	</select>
+
+	
+	<select id="isExistedReviewByOrdersNoId" parameterType="com.itwill.brown_carrot_market.dto.Review" resultType="int">
+		select count(*) from review 
+			where orders_no = #{orders.orders_no} and user_id=#{userInfo.user_id}
+	</select>
 
 </mapper>

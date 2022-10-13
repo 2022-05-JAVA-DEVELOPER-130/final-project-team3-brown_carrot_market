@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Product;
+import com.itwill.brown_carrot_market.dto.ProductImage;
 
 public interface ProductService {
 	
@@ -32,10 +33,16 @@ public interface ProductService {
 		//선택한 상품 업데이트
 		int updateProduct(Product product)throws Exception;
 		
+		//상품 판매상태 수정
+		int updateProductSell(int p_sell, int p_no)throws Exception;
+		
 		//상품 조회수 증가
 		int updateProductCount(int p_no)throws Exception;
 		
 		int insertProduct(Map map)throws Exception;
+
+		//채팅에서 사용 
+		List<ProductImage> selectProductImgList(int p_no) throws Exception;
 		
 		/*
 		 * insert랑 updateWishCount 추가하기

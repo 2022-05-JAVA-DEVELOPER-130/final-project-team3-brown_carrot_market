@@ -1,11 +1,11 @@
-/*
-게시물 리스트 변경
-*/
-function changeQnaList(pageno){
+function changeQnaList(pageno,t_ctgr_no){
 	$.ajax({
-		url: "townBoard_list_nonmember_rest",
+		url: "townBoard_list_rest",
 		method: "post",
-		data: {"pageno" :pageno},
+		data: {
+			"pageno" :pageno,
+			"t_ctgr_no":t_ctgr_no
+				},
 		dataType: "json",
 		success:function(resultObj){
 			console.log(resultObj);
@@ -17,7 +17,7 @@ function changeQnaList(pageno){
 				   htmlBuffer += `<div class="blog_post_thumb">`;
 	               if(townBoard.townImageList.length != 0 ){
 						htmlBuffer += `
-                            <a href="single-blog.html"><img src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-post-thumb"></a>`;
+                            <a href="townboard_view?t_no=${townBoard.t_no}" p_no="${townBoard.t_no}"><img src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-post-thumb"></a>`;
 					}
 	               
 					htmlBuffer += `
@@ -28,15 +28,12 @@ function changeQnaList(pageno){
                             </div>
                         </div>
                         <div class="blog_post_content">
-                            <a href="single-blog.html" class="blog_title">${townBoard.t_title}</a>
+                            <a href="townboard_view?t_no=${townBoard.t_no}" p_no="${townBoard.t_no}" class="blog_title">${townBoard.t_title}</a>
                             <p>${townBoard.t_content}</p>
                             <a href="single-blog.html">Continue Reading <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                         </div>
                         `;
-                        
-                        
-	                
-                    
+                     
 				});
 				$("#townBoard_list_tbody").html(htmlBuffer);
 				let paginationBuffer = ``;
@@ -65,6 +62,8 @@ function changeQnaList(pageno){
 		}
 	});
 }
+
+
 
 /*
 게시글 목록 이동
