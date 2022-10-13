@@ -81,11 +81,11 @@
                             <ul>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no1" value=1>
-	                              <a href="#" onclick="changeQnaList(1,${map},1)">동네생활 <span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,0,1)">동네생활 <span class="text-muted">(21)</span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no2" value=2>
-	                              <a href="#" onclick="changeQnaList(1,2)">같이해요<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,0,2)">같이해요<span class="text-muted">(21)</span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no3" value=3>

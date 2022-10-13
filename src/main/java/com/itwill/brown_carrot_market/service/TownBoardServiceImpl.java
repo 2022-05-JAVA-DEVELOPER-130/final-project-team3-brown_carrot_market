@@ -96,6 +96,8 @@ public class TownBoardServiceImpl implements TownBoardService{
 	//회원이 카테고리 조건 게시판 게시글 수 계산
 	@Override
 	public int selectMemberCtgrCountTownBoard(Map map,int t_ctgr_no) {
+		System.out.println("selectMemberCtgrCountTownBoard서비스 - map: "+map);
+		
 		return townBoardDao.selectMemberCtgrCountTownBoard(map,t_ctgr_no);
 	}
 	//회원이 카테고리 조건 게시판 게시글 수 계산을 위한 파라메타 맵 만들기
