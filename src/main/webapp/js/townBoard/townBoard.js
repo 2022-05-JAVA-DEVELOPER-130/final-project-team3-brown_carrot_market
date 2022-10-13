@@ -38,7 +38,8 @@ function changeQnaList(pageno,t_ctgr_no){
                         `;
                      
 				});
-				$("#townBoard_list_tbody").html(htmlBuffer);
+				$("#townBoard_list_tbody_all" ).html(htmlBuffer);
+				
 				let paginationBuffer = ``;
 				if(data.pageMaker.prevPage > 0){
 					paginationBuffer += `<li class="page-item">
@@ -67,6 +68,38 @@ function changeQnaList(pageno,t_ctgr_no){
 }
 
 
+/*
+게시글 삭제 
+*/
+$(".townBoard_i.delete").on("click", function(){
+	let pageno = $(this).attr("pageno");
+	let t_no = $(this).attr("t_no");
+	ToastConfirm.fire({ icon: 'question', 
+						title: "게시글을 삭제하시겠습니까?\n 삭제 후 복구가 불가능합니다"}).then((result) => {
+						if(result.isConfirmed){
+							$.ajax({
+								url: "townBoard_delete_rest",
+								method: "post",
+								data: {"t_no":t_no},
+								dataType: "json",
+								success:function(resultObj){
+									if(resultObj.errorCode > 0){
+										Toast.fire({ icon: 'success', title: resultObj.errorMsg }).then((result) => {
+												location.href = "townBoard_list?pageno=" + pageno;
+											});
+									}else{
+										Toast.fire({ icon: 'error', title: resultObj.errorMsg });
+									}
+								}
+							});
+						}
+	});
+});
+
+
+
+
+
 
 /*
 게시글 목록 이동
@@ -77,33 +110,7 @@ $(".notice_btn.list").on("click", function(){
 	location.href = `notice_list?pageno=${pageno}`;
 });
 
-/*
-게시글 삭제 
-*/
-$(".notice_btn.delete").on("click", function(){
-	let pageno = $(this).attr("pageno");
-	let notice_no = $(this).attr("notice_no");
-	ToastConfirm.fire({ icon: 'question', 
-						title: "게시글을 삭제하시겠습니까?\n 삭제 후 복구가 불가능합니다"}).then((result) => {
-						if(result.isConfirmed){
-							$.ajax({
-								url: "notice_delete_rest",
-								method: "post",
-								data: {"notice_no":notice_no},
-								dataType: "json",
-								success:function(resultObj){
-									if(resultObj.errorCode > 0){
-										Toast.fire({ icon: 'success', title: resultObj.errorMsg }).then((result) => {
-												location.href = "notice_list?pageno=" + pageno;
-											});
-									}else{
-										Toast.fire({ icon: 'error', title: resultObj.errorMsg });
-									}
-								}
-							});
-						}
-	});
-});
+
 
 /*
 게시글 수정 폼 

@@ -152,6 +152,7 @@ public class TownBoardController {
 		
 	}
 */	
+	//게시글 상세보기
 	@RequestMapping(value = "/townboard_view", params = "t_no")
 	public String townBoard_view(@RequestParam int t_no, Model model) {
 		
@@ -166,6 +167,10 @@ public class TownBoardController {
 		return "townboard_view";
 		
 	}
+	
+	
+	
+	
 	
 	
 	

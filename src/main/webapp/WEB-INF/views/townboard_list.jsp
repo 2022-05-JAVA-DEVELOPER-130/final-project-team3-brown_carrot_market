@@ -25,18 +25,10 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/townBoard.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
-	
-	<!-- javaScript -->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
-	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
-	<script type="text/javascript" src="js/common/user_session_check.js"></script>
-	
 	<!-- toast -->
- <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+ 	<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
+	<!-- javaScript -->
 	
 </head>
 
@@ -190,7 +182,7 @@
                     <!-- Single News Area -->
                     
                     <div class="single_blog_area">
-                    <div id="townBoard_list_tbody">
+                    <div id="townBoard_list_tbody_all">
                     <c:forEach var="townBoard" items="${townBoardList.itemList}">
                         <div class="blog_post_thumb">
                        	<c:if test="${townBoard.townImageList.size() != 0}">
@@ -262,7 +254,13 @@
     <!-- Footer Area -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
+	<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+	
+   
+	
     <script src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.easing.min.js"></script>
@@ -279,7 +277,13 @@
     <script src="js/jquery.nice-select.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
-    <script src="js/townBoard/townBoard.js"></script>
+    
+    
+   
+    <script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
+	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
+	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+	 <script src="js/townBoard/townBoard.js"></script>
 	
 	<style type="text/css">
 #toast-container > .toast {

@@ -1,4 +1,4 @@
-package com.itwill.brown_carrot_market.test.dao;
+package com.itwill.brown_carrot_market.test.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,16 +16,17 @@ import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Product;
 import com.itwill.brown_carrot_market.dto.ProductCategory;
 import com.itwill.brown_carrot_market.dto.UserInfo;
+import com.itwill.brown_carrot_market.service.ProductService;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.itwill.brown_carrot_market"})
-public class ProductDaoSpringBootTestApplication {
+public class ProductServiceSpringBootTestApplication {
 	public static void main(String[] args) throws Exception{
 		SpringApplication application = 
-				new SpringApplication(ProductDaoSpringBootTestApplication.class);
+				new SpringApplication(ProductServiceSpringBootTestApplication.class);
 		application.setWebApplicationType(WebApplicationType.NONE);
 		ConfigurableApplicationContext context=application.run(args);
-		ProductDao productDao=(ProductDao)context.getBean(ProductDao.class);
+		ProductService productService=(ProductService)context.getBean(ProductService.class);
 		//System.out.println(productDao.selectProductAll());
 		//System.out.println(productDao.selectAllByCtgr(2));
 		//System.out.println(productDao.selectListByRange(new Address(1, null, 0, 0, 0, "carrot1")));
@@ -56,6 +57,10 @@ public class ProductDaoSpringBootTestApplication {
 		System.out.println(productDao.insertProduct(pmap));
 		*/
 		//System.out.println(productDao.updateProductSell(1, 15));
+		
+		Map pmap=new HashMap();
+		pmap.put("product",new Product(0, "이미지테스트", "되게해주세요", 1000, null, 0, 0, 0, null, 0, 0, new ProductCategory(1, ""), new UserInfo("carrot3", null, null, null, null, 0, 0, null, null), null, null));
+		
 	}
 	
 /*

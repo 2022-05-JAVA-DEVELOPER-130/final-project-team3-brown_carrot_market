@@ -28,10 +28,9 @@
 	<script type="text/javascript" src="js/product/product.js"></script>
 	
 	<!-- toast -->
-	<link href="[//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css)" rel="stylesheet" />
-	<link rel="stylesheet" type="text/css" href="[https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css](https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css)"/>
-	<script type="text/javascript" src="[https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js](https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js)"></script>
-		
+ <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
 	
 </head>
 
@@ -57,8 +56,8 @@
                     <h5>Contact</h5>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="main">흙당근마켓</a></li>
-                        <li class="breadcrumb-item"><a href="product_list">동네물건</a></li>
-                        <li class="breadcrumb-item active">내 물건 팔기</li>
+                        <li class="breadcrumb-item"><a href="townBoard_list">동네 게시판</a></li>
+                        <li class="breadcrumb-item active">게시글 작성</li>
                     </ol>
                 </div>
             </div>
@@ -76,7 +75,7 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="p_title" id="p_title" placeholder= 제목 required>
+                                            <input type="text" class="form-control" name="t_title" id="t_title" placeholder= 제목 required>
                                         </div>
                                     </div>
                                     <!--  
@@ -87,25 +86,32 @@
                                     </div>
                                     -->
                                     
+                                    
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <select id="p_ctgr_no" name="p_ctgr_no" class="custom-select form-control w-100">
+                                                <option selected disabled="disabled">카테고리</option>
+                                                <option value="1">-동네생활</option>
+                                                <option value="2">-같이해요</option>
+                                                <option value="3">-동네질문</option>
+                                                <option value="4">-동네맛집</option>
+                                                <option value="5">-취미생활</option>
+                                                <option value="6">-일상</option>
+                                                <option value="7">-분실/실종센터</option>
+                                                <option value="8">-동네사건사고</option>
+                                                <option value="9">-해주세요</option>
+                                                <option value="10">-동네사진전</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <input type="text" class="form-control" name="p_price" id="p_price" placeholder="가격" required>
                                         </div>
                                     </div>
                                     
-                                    <div class="col-md-6 mb-3">
-                                        <div class="form-group">
-                                            <select id="p_ctgr_no" name="p_ctgr_no" class="custom-select form-control w-100">
-                                                <option selected disabled="disabled">카테고리</option>
-                                                <option value="1">-가전제품</option>
-                                                <option value="2">-가구</option>
-                                                <option value="3">-의류</option>
-                                                <option value="4">-생활용품</option>
-                                                <option value="5">-취미/게임/음반/도서</option>
-                                                <option value="6">-기타</option>
-                                            </select>
-                                        </div>
-                                    </div>
                                     <!-- 사진 넣기 임시 
                                     <div>
                                     <ul style="display : flex">
@@ -122,7 +128,7 @@
 									사진 넣기 임시 끝-->
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea name="p_desc" class="form-control" id="p_desc" cols="30" rows="10" placeholder="물건 설명" required></textarea>
+                                            <textarea name="t_content" class="form-control" id="t_content" cols="30" rows="10" placeholder="내용" required></textarea>
                                         	</div>
                                         </div>
                                     </div>
@@ -217,8 +223,8 @@
                                     </div>
                                      <!-- 이미지 업로드 부분 끝-->
                                     <div class="col-12 text-center">
-                                        <input type="button" id="btn_product_write_action" class="btn btn-primary w-40" value="물건 올리기" onclick="productCreate()">&nbsp; 
-                                        <input type="button" class="btn btn-primary w-40" value="동네물건목록" onclick="productList()">
+                                        <input type="button" id="btn_product_write_action" class="btn btn-primary w-40" value="게시글 올리기" onclick="productCreate()">&nbsp; 
+                                        <input type="button" class="btn btn-primary w-40" value="동네게시글목록" onclick="productList()">
                                 </div>
                             </div>
                         </form>
@@ -251,8 +257,8 @@
     <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
-
-<style type="text/css">
+    
+    <style type="text/css">
 #toast-container > .toast {
 background-image: none !important;
 }
@@ -271,9 +277,7 @@ margin: auto 0.5em auto -1.5em;
 content: "\f27a";
 
 }
-#toast-container > .toast-success:before {
-content: "\f2b5";
-}
+	
 
 </body>
 
