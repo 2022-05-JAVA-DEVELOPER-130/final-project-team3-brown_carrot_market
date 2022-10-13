@@ -39,7 +39,8 @@ public int selectMemberCountTownBoard(Address address);
 //동네 게시판 회원이 좌표값과 카테고리 조건으로 전체조회
 //public List<TownBoard> selectTownBoardCtgrListCoordinate(int t_ctgr_no, Address address);
 //회원이 카테고리 조건으로 게시판 전체조회
-public List<TownBoard> selectTownBoardCtgrListCoordinate(Map map,int t_ctgr_no,int pageStart, int pageEnd);
+//public List<TownBoard> selectTownBoardCtgrListCoordinate(Map map,int t_ctgr_no,int pageStart, int pageEnd);
+public List<TownBoard> selectTownBoardCtgrListCoordinate(Map map,int pageStart, int pageEnd);
 //회원이 카테고리 조건 게시판 게시글 수 계산
 public int selectMemberCtgrCountTownBoard(Map map, int t_ctgr_no);
 //회원이 카테고리 조건 게시판 게시글 수 계산을 위한 파라메타 맵 만들기
