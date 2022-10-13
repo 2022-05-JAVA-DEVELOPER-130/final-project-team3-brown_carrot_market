@@ -28,6 +28,8 @@
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
+	<script type="text/javascript" src="js/review/review.js"></script>
+	<script type="text/javascript" src="js/review/ReviewHtmlContents.js"></script>
 </head>
 
 <body>
@@ -61,7 +63,7 @@
     <!-- Cart Area -->
 	    <div class="cart_area section_padding_100_70 clearfix">
 	        <div class="container">
-	            <div class="row justify-content-between">
+	            <div id="container_contents" class="row justify-content-between">
 	                <div class="col-12">
 	                    <div class="cart-table">
 	                        <div class="table-responsive">
@@ -77,7 +79,6 @@
 	                                    </tr>
 	                                </thead>
 	                                <tbody>
-	                                
 	                                
 									    <c:forEach items="${ordersList}" var="Orders" varStatus="status">
 		                                    <tr>
@@ -99,38 +100,14 @@
 		                                        	${Orders.product.p_price}
 		                                        </td>
 		                                        <td>
-		                                            <div class="" name="">
-		                                                <!-- <input type="button" class="badge badge-light" id=""  name="" >후기작성 -->
-		                                                <script type="text/javascript">
-		                                                	 console.log($('input[name=orders_no_${status.index}]').val());
-		                                                	 var orders_no = $('input[name=orders_no_${status.index}]').val();
-			                                                $.ajax({
-			                                					url : 'isExisted_review_check_json',
-			                                					method : 'POST',
-			                                					dataType : 'json',
-			                                					data : {
-			                                						"orders_no": orders_no
-			                                					},
-			                                					success : function(jsonResult) {
-			                                						console.log("result: "+jsonResult.data);
-			                                						if(jsonResult.data==0){
-			                                							$('#orders_no_${status.index}_review').text('작성하기');
-			                                							$('#orders_no_${status.index}_review').addClass('badge-carrot');
-			                                							
-			                                						}else if (jsonResult.data==1) {
-			                                							$('#orders_no_${status.index}_review').text('보러가기');
-			                                							$('#orders_no_${status.index}_review').addClass('badge-secondary');
-																	}
-			                                					}
-			                                				});
-		                                                </script>
-		                                                <a href="#" class="badge" id="orders_no_${status.index}_review" style="height:20px;font-size:1rem"></a>
+		                                            <div class="" name="check_review">
+		                                                <script>check_isExisted_review($('input[name=orders_no_${status.index}]').val())</script>
+		                                                <a href="#" class="badge" id="${Orders.orders_no}" style="height:20px;font-size:1rem"></a>
 		                                            </div>
 		                                        </td>
 		                                    </tr>
 										</c:forEach>  
 										
-										  
 	                                </tbody>
 	                            </table>
 	                        </div>

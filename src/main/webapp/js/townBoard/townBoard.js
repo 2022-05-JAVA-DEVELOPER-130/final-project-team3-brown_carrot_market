@@ -1,11 +1,10 @@
-
-
-function changeQnaList(pageno,t_ctgr_no){
+function changeQnaList(pageno,map,t_ctgr_no){
 	$.ajax({
 		url: "townBoard_list_rest",
 		method: "post",
 		data: {
 			"pageno" :pageno,
+			"map":map,
 			"t_ctgr_no":t_ctgr_no
 				},
 		dataType: "json",
@@ -16,13 +15,10 @@ function changeQnaList(pageno,t_ctgr_no){
 				let htmlBuffer = ``;
 				data.itemList.forEach(function(townBoard, i){
 				
-				
-				
-				
 				   htmlBuffer += `<div class="blog_post_thumb">`;
 	               if(townBoard.townImageList.length != 0 ){
 						htmlBuffer += `
-                            <a href="single-blog.html"><img src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-post-thumb"></a>`;
+                            <a href="townboard_view?t_no=${townBoard.t_no}" p_no="${townBoard.t_no}"><img src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-post-thumb"></a>`;
 					}
 	               
 					htmlBuffer += `
@@ -33,7 +29,7 @@ function changeQnaList(pageno,t_ctgr_no){
                             </div>
                         </div>
                         <div class="blog_post_content">
-                            <a href="single-blog.html" class="blog_title">${townBoard.t_title}</a>
+                            <a href="townboard_view?t_no=${townBoard.t_no}" p_no="${townBoard.t_no}" class="blog_title">${townBoard.t_title}</a>
                             <p>${townBoard.t_content}</p>
                             <a href="single-blog.html">Continue Reading <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                         </div>

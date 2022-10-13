@@ -11,20 +11,40 @@
     <!--  All snippets are MIT license http://bootdey.com/license -->
     <title>chat</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+     <!-- Favicon  -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+    
+        <link rel="stylesheet" href="style.css">
+    
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
 	
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
 	 <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.js"></script>
+	
 
+	
+	<!-- js -->
+	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
+    <script type="text/javascript" src="js/common/user_session_check.js"></script>
 	
 	<script src="js/chat/chat_room.js"></script>
 	
 	<script type="text/javascript"></script>
 </head>
+
 <body>
 
+
+    <!-- Header Area -->
+   		<!-- include_common_bottom.jsp start-->
+		<jsp:include page="common/include_common_header.jsp"/>
+		<!-- include_common_bottom.jsp end-->
+    <!-- Header Area End -->
+    
+    
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
 <div class="container">
@@ -67,24 +87,22 @@
 									<a href="javascript:void(0);" data-toggle="modal"
 										data-target="#view_info"> <img
 										src="img/user_profile/carrot3.png"
-										alt="avatar">
+										alt="avatar" style="float:left;">
 									</a>
 									<div class="chat-about">
 										<input name="myId" id="myId" type="hidden" value=${loginId}>
 										<input name="path" id="path" type="hidden" value=${path}>
 										<input name="newChatRoomNo" id="newChatRoomNo" type="hidden" value=${chat_room_no}>
-										<h6 class="m-b-0"><b>대장 토끼</b></h6>
+										<h6 class="m-b-0" style="margin-bottom:2px;"><b>대장 토끼</b></h6>
 										<small>자주 묻는 질문</small>
 										
 										
 									</div>
 								</div>
-								<div class="col-lg-4 ">
-								<img src="img/user_profile/carrot3.png" style="float:left; width:45px; height:45px; border-radius: 0%">
-								<h6 class="m-b-0" style="float:left; margin-left:5px;"><b>대장 토끼</b></h6>
-								<small style="float:left; margin-left:5px;">자주 묻는 질문</small>
-    							 
-    							 </div>	
+								<div class="col-lg-4">
+
+								 </div>	
+								 
 								
 								<div class="col-lg-4 hidden-sm text-right">
 
@@ -155,10 +173,22 @@
 </div>
 </div>
 
+ <!-- Footer Area -->
+   		<!-- include_common_bottom.jsp start-->
+		<jsp:include page="common/include_common_footer.jsp"/>
+		<!-- include_common_bottom.jsp end-->
+    <!-- Footer Area -->
+    
+  
+
 <style type="text/css">
 body{
     background-color: #f4f7f6;
     margin-top:20px;
+}
+
+a{
+color:#070a57;
 }
 
 .content{
@@ -249,10 +279,12 @@ body{
 }
 
 .chat .chat-header img {
-    float: left;
+    /* 헤더 프로덕트 부분 가운데 맞춤을 위해..*/
+    /*float: left;*/
     border-radius: 40px;
     width: 40px
 }
+
 
 .chat .chat-header .chat-about {
     float: left;
@@ -458,5 +490,23 @@ body{
 <script type="text/javascript">
 
 </script>
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/default/classy-nav.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/default/scrollup.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jarallax.min.js"></script>
+    <script src="js/jarallax-video.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/default/active.js"></script>
 </body>
 </html>
