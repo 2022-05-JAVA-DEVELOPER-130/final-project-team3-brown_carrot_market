@@ -14,5 +14,5 @@ public class BrownCarrotMarketApplication {
 
 	  @Bean public ServerEndpointExporter serverEndpointExporter() { return new
 	  ServerEndpointExporter(); }
-	 
+
 }

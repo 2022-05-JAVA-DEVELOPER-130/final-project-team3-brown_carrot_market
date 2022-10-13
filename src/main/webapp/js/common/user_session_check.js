@@ -90,6 +90,10 @@ function connectServer(loginId){
 	}
 }
 
+
+
+
+
 /*알림창 설정*/
 $(function() {
 function Toast(type, css, msg) {
