@@ -16,6 +16,7 @@ addJavascript('/js/chat/socket.js');*/
 
 var promise_time=[];
 var today = new Date();
+var number ;
 
 $(document).ready(function(){
 	
@@ -62,8 +63,7 @@ function session_check(){
 					id=promise.from_id;
 				}
 				
-				  console.log(promise.c_app_date);
-				  console.log(promise);
+			
 				  
 				  
                  	//약속 시간 체크
@@ -77,13 +77,21 @@ function session_check(){
 		}
 		
 		
-	         });
+	         }); // 약속 알림 설정 끝 
 	         
 	         	
 				
 				//안읽은채팅 가져오기 
-				
-				$(".cart_quantity").remove();
+				$.ajax({
+					url:'readChat_num',
+					method:"POST",
+					data:'user_id='+jsonResult.data[0].user_id,
+					dataType:'json',
+					success:function(jsonResult){
+						console.log("안읽은채팅:"+jsonResult.data);
+				$(".cart_quantity").text(jsonResult.data);
+					}
+				})
 			}
 		}
 	});
@@ -162,7 +170,12 @@ function connectServer(loginId){
 	    //  new Toast('warning', 'toast-top-right', msg.user_id+":"+message);
 	      toastr.options.positionClass = "toast-top-right";
 	      toastr['warning'](msg.user_id+" : "+message);
-		//toastShow(message ,msg.user_id);
+	      
+	      /******************채팅수증가******* */
+	 /*    var tmp = document.getElementbyclass('cart_quantity').innerHTML;
+	      console.log(tmp);
+	      tmp++;
+	      $(".cart_quantity").text(tmp);*/
 		
 		}
 		

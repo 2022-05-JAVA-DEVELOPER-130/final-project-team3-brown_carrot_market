@@ -564,7 +564,23 @@ public class ReplyEchoHandler {
 	}
 	
 	//약속목록가져오기 
-
+	
+	//안읽은채팅수
+	@PostMapping(value="/readChat_num")
+	public Map readChatnum(@RequestParam String user_id) {
+		Map resultMap = new HashMap();
+		String code="";
+		int result=0;
+		
+		try {
+			result=chatService.selectReadChatCount(user_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		resultMap.put("data", result);
+		return resultMap;
+	}
 	
 
 }
