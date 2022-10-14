@@ -29,7 +29,10 @@ function productCreate() {
 	
 	//사진 리스트 업로드
 	const formData1 = new FormData();
-	formData1.append('pi',$("up_file4")); //이게 맞나?
+	formData1.append('files',$('#files')[0]); //이게 맞나?
+	formData1.append('files',$('#files')[1]); 
+	formData1.append('files',$('#files')[2]); 
+	formData1.append('files',$('#files')[3]); 
 	$.ajax({
 		url:'product/upload',
 		type:'POST',
