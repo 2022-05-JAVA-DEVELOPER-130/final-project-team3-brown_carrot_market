@@ -111,12 +111,13 @@
 	</select>
 	
 	<!-- 후기 1개 보기  -->
-	<select id="findReviewByRivewNo" parameterType="int" resultType="com.itwill.brown_carrot_market.dto.Review">
-		select r.*, o.*, r.user_id reviewr, o.user_id buyer
+	<select id="findReviewByRivewNo" parameterType="int" resultMap="reviewResultMap">
+		<!-- select r.*, o.*, r.user_id reviewer, o.user_id buyer -->
+		select *
 			from review r
-			join orders o
-			on r.orders_no=o.orders_no
-			where review_no=#{review_no}
+			left outer join review_img ri
+			on r.review_no=ri.review_no
+			where r.review_no=${review_no}
 	</select>
 
 	

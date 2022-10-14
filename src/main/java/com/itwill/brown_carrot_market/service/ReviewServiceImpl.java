@@ -70,7 +70,7 @@ public class ReviewServiceImpl implements ReviewService{
 
 	@Override
 	public Review findReviewByRivewNo(int review_no) throws Exception {
-		return null;
+		return reviewDao.findReviewByRivewNo(review_no);
 	}
 	
 	@Override

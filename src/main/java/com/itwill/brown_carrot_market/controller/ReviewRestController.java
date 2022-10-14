@@ -24,20 +24,44 @@ public class ReviewRestController {
 	@Autowired
 	private ReviewService reviewService;
 	
-	//@PostMapping("user_received_reviewList_json")
-	@RequestMapping("user_received_reviewList_json")
-	public Map review_view_json(HttpServletRequest request) throws Exception{
-		System.out.println("user_received_reviewList_json");
+	@RequestMapping("review_view_json")
+	public Map review_view_json(int review_no,HttpServletRequest request) throws Exception{
+		System.out.println("review_view_json >>> review_no :"+review_no);
 		Map resultMap=new HashMap();
 		int code=1;
 		String url="review_view_json";
 		String msg="review_view_json 실패";
 		
+		//String sUserId=(String)request.getSession().getAttribute("sUserId");
+		Review review=
+		reviewService.findReviewByRivewNo(review_no);
+		
+		System.out.println("result :"+review);
+
+		if(review!=null) {
+			code=2;
+			msg="review_view_json 성공";
+		}
+		resultMap.put("code", code);
+		resultMap.put("url", url);
+		resultMap.put("msg", msg);
+		resultMap.put("data",review);
+		return resultMap;
+	}
+	
+	@RequestMapping("user_received_reviewList_json")
+	public Map received_reviewList_json(HttpServletRequest request) throws Exception{
+		System.out.println("user_received_reviewList_json");
+		Map resultMap=new HashMap();
+		int code=1;
+		String url="user_received_reviewList_json";
+		String msg="user_received_reviewList_json 실패";
+		
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
 		List<Review> reviewList=
 		reviewService.findReceivedReview(sUserId);
 		code=2;
-		msg="review_view_json 성공";
+		msg="user_received_reviewList_json 성공";
 
 		resultMap.put("code", code);
 		resultMap.put("url", url);
