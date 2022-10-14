@@ -56,8 +56,8 @@
 				<div class="col-12">
 					<div class="order_complated_area clearfix">
 						<h5>구매 완료</h5>
-						<p>구매 상품명 : </p>
-						<p class="orderid mb-0"> 판매자 ${Product.userInfo.user_id}님께 ${Product.p_price}포인트가 송금 되었습니다.</p>
+						<p>구매 상품명 : ${product.p_title}</p>
+						<p class="orderid mb-0"> 판매자 ${product.userInfo.user_id}님께 ${product.p_price}포인트가 송금 되었습니다.</p>
 						<div class="col-12">
 							<div class="checkout_pagination mt-50">
 								<button class="btn btn-primary" onclick="location.href = 'orders_list'">구매내역</button>

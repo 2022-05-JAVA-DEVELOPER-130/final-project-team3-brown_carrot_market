@@ -563,7 +563,7 @@ color:#070a57;
 <!-- 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
  -->	
 	<script src="js/chat/chat_room.js"></script>
-	
+	<script src="js/orders/orders.js"></script>
 	<script type="text/javascript"></script>
     
     

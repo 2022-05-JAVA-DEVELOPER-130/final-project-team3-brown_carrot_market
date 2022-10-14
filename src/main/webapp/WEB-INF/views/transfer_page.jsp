@@ -36,20 +36,16 @@
  <form id="chatAppDateTimeSpot">
 	<div>
 		<label>구매 물품</label>
- <c:forEach items="${transferList}" var="Transfer" varStatus="status">
-		<p>${transfer.user_id}</p>
+		${product.p_title}
 			
-</c:forEach>
 		<input type="text" id="datePicker" >
 	</div>
 	
 	<br>
 	
 	<div>
-	<label>송금 받는 사람</label> 
-	<c:forEach items="${transferList}" var="Transfer" varStatus="status">
-		${Transfer.user_id}
-	  </c:forEach>
+	<label>판매자 ID</label> 
+		${product.userInfo.user_id}
   <p><input type="time" id="chatAppTime"></p>
   </div>
 </form>
@@ -58,9 +54,7 @@
 	
 	<div>
 	<label>구매 물품 금액</label> 
-	<c:forEach items="${transferList}" var="Transfer" varStatus="status">
-	</c:forEach>
-	
+		${product.p_price}
 	<p>
 	<div>
 	<div class="textSpot">
@@ -85,6 +79,11 @@
 	<br>
 	<button type="button" id="TransferSubmit">송금 하기!</button>
 	
+	<script type="text/javascript">
+		$(document).on('click','#TransferSubmit',function(e){
+			location.href="transfer_action?p_no="+${product.p_no};
+		})
+	</script>
 	
 	<style type="text/css">
 	

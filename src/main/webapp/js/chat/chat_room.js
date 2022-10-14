@@ -644,8 +644,8 @@ function chat_head(id,img,room_no,fresh,product,p_img,check){
 
 								<div class="col-lg-4 hidden-sm text-right">
 									
-									<a  href="javascript:void(0);" class="btn btn-outline-info" style="border-color:green"><i
-										class="fa fa-won" id="btnCarrot_Pay" style="color:green;"></i></a> 
+									<a  href="#" class="btn btn-outline-info" style="border-color:green"><i
+										class="fa fa-won" id="btnCarrot_Pay" p_no="${product.p_no}" style="color:green;"></i></a> 
 									
 									<a  href="javascript:void(0);" class="btn btn-outline-info" ><i
 										class="fa fa-handshake-o" id="btnChatAppointment"></i></a> 
@@ -728,23 +728,39 @@ $.ajax({
 		var reserve={
 		"product":product
 	}
-$.ajax({
-		
-		
+	$.ajax({
 		url:"chat_reserve_rest",
 		method:"POST",
 		data: JSON.stringify(reserve),
 		async: true,
         contentType: "application/json; charset=utf-8", //헤더의 Content-Type을 설정
         dataType: "JSON", //응답받을 데이터 타입 (XML,JSON,TEXT,HTML,JSONP)  
-				
-    			    			
-	
-		
 		success:function(jsonResult){
 		product=jsonResult.product;
+		
+		console.log(product);
 		$('#chatHead').html("");
 		$('#chatHead').append(chat_head(yourId,yourImg,c_room_no,yourFreshness,product,p_img,checkSeller));
+		/****************** */
+			$.ajax({
+				url:"orders_insert_json",
+				method:"POST",
+				data:{ 
+					"p_no" : product.p_no,
+					"user_id" : product.userInfo.user_id,
+					"yourId" : yourId
+				},
+				success:function(jsonResult){
+					console.log(jsonResult.msg+jsonResult.msg2);
+					alert('예약이 완료되었습니다. 송금이 가능합니다.');
+				},error:function(jsonResult){
+					console.log(jsonResult.msg+jsonResult.msg2);
+					alert('예약이 실패하였습니다.');
+				}
+				
+				
+			});		
+		/****************** */
 		}
 		
 		
@@ -1244,11 +1260,13 @@ $(document).on('click',"img[id^='chat_img_sizeUp']",function(e){
 })
 
 $(document).on('click','#btnCarrot_Pay',function(e){
-	popupCarrotPay();
+	console.log($(e.target).attr("p_no"));
+	popupCarrotPay($(e.target).attr("p_no"));
+	e.preventDefault;
 })
 
-  function popupCarrotPay(){
-	 var url = "transfer_page";
+  function popupCarrotPay(p_no){
+	 var url = "transfer_page?p_no="+p_no;
             var name = "당근 페이";
             var option = "width = 470, height = 790, top = 100, left = 200, location = no,  resizable=no";
             window.open(url, name, option);

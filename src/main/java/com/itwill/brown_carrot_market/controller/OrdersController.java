@@ -18,8 +18,6 @@ import com.itwill.brown_carrot_market.service.ReviewService;
 public class OrdersController {
 	@Autowired
 	private OrdersService ordersService;
-	@Autowired
-	private ReviewService reviewService;
 	
 	@LoginCheck
 	@RequestMapping(value = "/orders_list")
