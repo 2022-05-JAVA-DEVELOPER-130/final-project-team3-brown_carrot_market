@@ -62,7 +62,7 @@ function getLoginId(){
 
 $(document).ready(function(){
 		
-		
+	
 	
 		// 채팅방 접근 방식 확인
 	 var  path=document.getElementById("path").value;
@@ -200,6 +200,7 @@ $.ajax({
 	
 	$(window).on("load",function(){
 		//connectWS();
+		
 	})
 	
 

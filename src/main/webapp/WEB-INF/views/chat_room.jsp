@@ -19,25 +19,15 @@
     <link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
 	
-	
-	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
-    
 	<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
-	
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
-	 <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.js"></script>
 	
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
 
 	
 	
-	<!-- js -->
-	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
-    <script type="text/javascript" src="js/common/user_session_check.js"></script>
 	
-	<script src="js/chat/chat_room.js"></script>
+	
+	
 	
 	<script type="text/javascript"></script>
 	
@@ -515,8 +505,13 @@ color:#070a57;
 <script type="text/javascript">
 
 </script>
+
+<!-- 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+ -->	
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
     <script src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+    
     <script src="js/jquery.easing.min.js"></script>
     <script src="js/jquery.countdown.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
@@ -534,7 +529,17 @@ color:#070a57;
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
     
-    <script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
+    
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.js"></script>
+
+	<!-- toastr -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>   
+    
+	
+
+<!-- js -->
+	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
     <script type="text/javascript" src="js/common/user_session_check.js"></script>
 	
 	<script src="js/chat/chat_room.js"></script>

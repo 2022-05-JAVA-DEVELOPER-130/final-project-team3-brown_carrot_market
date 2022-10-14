@@ -101,7 +101,12 @@ function getChatNum(userId){
 					dataType:'json',
 					success:function(jsonResult){
 						console.log("안읽은채팅:"+jsonResult.data);
-				$(".cart_quantity").text(jsonResult.data);
+						if(jsonResult.data=='0'){
+							$(".cart_quantity").hide();
+						}else{
+							$(".cart_quantity").show();
+				       $(".cart_quantity").text(jsonResult.data);
+						}
 					}
 				})
 }
