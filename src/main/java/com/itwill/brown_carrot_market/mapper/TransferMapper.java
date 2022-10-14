@@ -12,7 +12,7 @@ import com.itwill.brown_carrot_market.dto.Transfer;
 
 @Mapper
 public interface TransferMapper {
-	
+	 
 	@SelectKey(keyProperty = "transfer_no" , resultType = int.class , before = true ,statement = "select TRANSFER_TRANSFER_NO_SEQ.nextval from dual")
 	@Insert("insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval, 0, (-1*(select p_price from product where p_no = #{product.p_no})), sysdate-5, (select user_id from orders where p_no =#{product.p_no}), (select orders_no from orders where p_no = #{product.p_no}), #{product.p_no},(select user_point from userinfo where user_id=(select user_id from orders where p_no = #{product.p_no}))-(select p_price from product where p_no = #{product.p_no}))")
 	int insertTransfer_Deposit(int p_no);
