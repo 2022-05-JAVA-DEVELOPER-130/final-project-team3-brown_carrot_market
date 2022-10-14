@@ -32,6 +32,6 @@ public interface TransferMapper {
 	List<Transfer> selectById(String user_id);
 	
 	@ResultMap(value = { "transferResultMap" })
-	@Select("select p.user_id, p.p_price, p.p_title from transfer t join product p on t.p_no=p.p_no where p.p_no=#{p_no}")
-	List<Transfer> selectByP_No(int p_no);
+	@Select("select p.user_id, p.p_no, p.p_price, p.p_title from transfer t join product p on t.p_no = p.p_no where t.user_id=#{user_id}")
+	List<Transfer> selectByP_Id(String user_id);
 }

@@ -48,7 +48,7 @@
 	<div>
 	<label>송금 받는 사람</label> 
 	<c:forEach items="${transferList}" var="Transfer" varStatus="status">
-		${Transfer.user_id}	
+		${Transfer.user_id}
 	  </c:forEach>
   <p><input type="time" id="chatAppTime"></p>
   </div>

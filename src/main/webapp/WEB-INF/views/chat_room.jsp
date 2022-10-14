@@ -49,17 +49,19 @@
     
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
-<div class="container">
+<div class="container" style="border-top:1px solid #f4f7f6;">
 <div class="row clearfix">
     <div class="col-lg-12">
         <div class="card chat-app">
             <div id="plist" class="people-list" style="overflow-y: auto; height:860px">
+              <!--  
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fa fa-search"></i></span>
                     </div>
                     <input type="text" class="form-control" placeholder="Search...">
                 </div>
+                -->
 
 				<input name="loginId" id="loginId" type="hidden" value=${loginId}>
                 <ul class="list-unstyled chat-list mt-2 mb-0" id="chatRoomList">
@@ -186,13 +188,14 @@
 
 <style type="text/css">
 body{
-    background-color: #f4f7f6;
-    margin-top:20px;
+    background-color: #fff;
+    margin-top:0px;
 }
 
 a{
 color:#070a57;
 }
+
 
 .content{
   width        : 120px;     /* 너비는 변경될수 있습니다. */
@@ -402,7 +405,7 @@ color:#070a57;
    
     border-bottom-color: orange; 
 
-    left: 93%
+    left: 73%
 }
 
 .chat .chat-message {
