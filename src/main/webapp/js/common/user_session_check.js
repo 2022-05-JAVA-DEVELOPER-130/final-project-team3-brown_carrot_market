@@ -88,7 +88,7 @@ function session_check(){
 				getChatNum(jsonResult.data[0].user_id);
 			}
 		}
-	});
+	}); //ajax 끝
 	
 }
 
@@ -185,10 +185,7 @@ function connectServer(loginId){
 	      
 	      /******************채팅수증가******* */
 	     getChatNum(loginId);
-	 /*    var tmp = document.getElementbyclass('cart_quantity').innerHTML;
-	      console.log(tmp);
-	      tmp++;
-	      $(".cart_quantity").text(tmp);*/
+	
 		
 		}
 		
