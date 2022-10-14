@@ -594,6 +594,7 @@ function message_admin_promise(chat_content){
 //상단헤드
 function chat_head(id,img,room_no,fresh,product,p_img,check){
 	var a="";
+		var b ="";
 	if(product.p_sell==1){
 		p_sell="판매중";
 		if(check==1){
@@ -606,7 +607,7 @@ function chat_head(id,img,room_no,fresh,product,p_img,check){
 		}
 	}else if(product.p_sell==3){
 		p_sell="판매완료";
-		
+		b='<button class="dropdown-item" type="button" id="btnChatImage"><b>판매중으로 변경</b></button><button class="dropdown-item" type="button" id="btnChatImage"><b>예약중으로 변경</b></button>';	
 	}
 	
 	return 	`<div class="row">
@@ -668,6 +669,7 @@ function chat_head(id,img,room_no,fresh,product,p_img,check){
    									<button class="dropdown-item" type="button" id="btnChatImage"><b>사진보내기</b></button>
    									<div class="dropdown-divider"></div>
    									${a}
+   									${b}
   </div>
 </div>
 									
