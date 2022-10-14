@@ -190,6 +190,10 @@ ReviewHtmlContents.review_write_form=function(orders_no) {
 }
 
 ReviewHtmlContents.review_view=function(review) {
+	//var obj = JSON.parse(review);
+	console.log(review.review_no);
+	//console.log($(review));
+	
 	return `<div class="submit_a_review_area col-12" style="border: 1px solid #d6e6fb; padding:30px;">
                         <h4>후기작성</h4>
                         <!-- [Start]review_write_form -->
