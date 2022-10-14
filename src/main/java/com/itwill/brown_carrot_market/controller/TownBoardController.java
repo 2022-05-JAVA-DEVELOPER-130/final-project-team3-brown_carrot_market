@@ -162,6 +162,7 @@ public class TownBoardController {
 		
 		try {
 		TownBoard townBoard = townBoardService.selectTownBoardOne(t_no);
+		townBoardService.updateTownBoardCount(t_no);
 		model.addAttribute("townBoard", townBoard);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -187,10 +188,6 @@ public class TownBoardController {
 		}
 		return forwardPath;
 	}
-	
-	
-	
-	
 
 	//새글 등록 
 	@RequestMapping(value = "/townboard_write_action")
@@ -242,7 +239,28 @@ public class TownBoardController {
 	}
 	
 	
-
+	
+	//게시글 수정폼
+	@RequestMapping("/townboard_update_form")
+	public String townboard_update_form(@RequestParam Integer pageno, Integer notice_no, Model model, HttpSession session) {
+		String sUserId = (String)session.getAttribute("sUserId");
+		String forwardPath = "";
+		//비회원일때
+		if(sUserId == null) {
+			forwardPath = "user_login";
+		}
+		//회원일때
+		if(sUserId != null) {
+			forwardPath = "townboard_update";
+		}
+		return forwardPath;
+	}
+	
+	//게시글 수정
+	
+	
+	
+	
 	
 	
 	
