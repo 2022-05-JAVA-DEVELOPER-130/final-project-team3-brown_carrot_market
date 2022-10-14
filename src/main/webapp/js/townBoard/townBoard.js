@@ -135,8 +135,9 @@ $(".townBoard_btn.update").on("click", function(){
 							title: "게시글을 수정하시겠습니까?"}).then((result) => {
 							if(result.isConfirmed){
 								let t_no = $(this).attr("t_no"); 
+								let pageno = $(this).attr("pageno");
 								$("#townBoard_update_form").attr("action", "townboard_update_action"); 
-								$("#townBoard_update_form").submit(); // q_no, q_titla, q_content 
+								$("#townBoard_update_form").submit(); 
 							}
 					});
 });
