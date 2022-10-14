@@ -500,6 +500,12 @@ color:#070a57;
 	
 }
 
+.chat_read_check{
+	color: orange;
+    font-size: 12px;
+    display: inline-block;
+    vertical-align: bottom;
+}
 </style>
 
 
