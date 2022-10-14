@@ -28,8 +28,9 @@ function productCreate() {
 	}
 	
 	//사진 리스트 업로드
-	const formData1 = new FormData();
-	formData1.append('files',$('input[name=files]')[0]); //이게 맞나?
+	//var fileInput = document.querySelector("#files");
+	const formData1 = new FormData($('#main_contact_form')[0]);
+   	//console.log("사진 데이터:"+formData1);
 
 	$.ajax({
 		url:'product_upload',
@@ -57,16 +58,18 @@ function productCreate() {
 			console.log("JSON 오류:"+xhr);
 		}
 	});
+	/*
 	const formData2 = new FormData();
 	formData2.append('p_title',$("p_title"));
 	formData2.append('p_price',$("p_price"));
 	formData2.append('p_desc',$("p_desc"));
 	formData2.append('p_ctgr_no',$("p_ctgr_no"));
+	*/
 	
 	
-	/*document.product_write_form.action = "product_write_action";
+	document.product_write_form.action = "product_write_action";
 	document.product_write_form.method='POST';
-	document.product_write_form.submit();*/
+	document.product_write_form.submit();
 }
 
 function productSell(){

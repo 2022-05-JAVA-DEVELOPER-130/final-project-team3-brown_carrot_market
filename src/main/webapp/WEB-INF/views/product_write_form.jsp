@@ -107,17 +107,16 @@
                                         </div>
                                     </div>
                                     <!-- 사진 넣기 임시 -->
-                                    <div>
-                                    <ul style="display : flex">
-                                    <li>
-                                    <label style="display:inline-block;">
-                                    <span>사진1: <input type="file" name="files" ></span>
+                                    <div class="form-group">
+                                   
+                                    
+                        
+                                    <span>사진1: <input type="file" name="files"></span>
 									<span>사진2: <input type="file" name="files"></span>
 									<span>사진3: <input type="file" name="files"></span>
 									<span>사진4: <input type="file" name="files"></span>
-									</label>
-									</li> 
-									</ul>
+									
+									
 									</div>
 									<!-- 사진 넣기 임시 끝-->
                                     <div class="col-md-12">
