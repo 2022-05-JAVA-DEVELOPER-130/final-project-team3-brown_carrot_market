@@ -541,8 +541,8 @@ color:#070a57;
 
 <!-- js -->
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
-    <script type="text/javascript" src="js/common/user_session_check.js"></script>
-	
+<!-- 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+ -->	
 	<script src="js/chat/chat_room.js"></script>
 	
 	<script type="text/javascript"></script>
