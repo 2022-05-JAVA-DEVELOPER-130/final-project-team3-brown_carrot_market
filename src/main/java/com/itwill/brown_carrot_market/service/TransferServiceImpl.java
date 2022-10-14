@@ -9,9 +9,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.brown_carrot_market.dao.TransferDao;
 import com.itwill.brown_carrot_market.dto.Transfer;
@@ -164,6 +162,10 @@ public class TransferServiceImpl implements TransferService {
 
 	public List<Transfer> selectById(String user_id) throws Exception {
 		return transferDao.selectById(user_id);
+	}
+
+	public List<Transfer> selectByP_No(int p_no) throws Exception {
+		return transferDao.selectByP_No(p_no);
 	}
 
 }

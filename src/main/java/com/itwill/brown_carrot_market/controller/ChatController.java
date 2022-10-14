@@ -120,7 +120,7 @@ public class ChatController {
 		public String chatCreate(HttpSession httpSession,@RequestParam("p_no") int p_no,Model model) throws Exception{
 			String from_id = (String)httpSession.getAttribute("sUserId");
 			String to_id = productService.selectByOne(p_no).getUserInfo().getUser_id();
-			int chat_room_no;
+			int chat_room_no =0;
 			boolean check = chatService.duplicateCheck(from_id, to_id, p_no);
 			if(check) {
 				System.out.println("채팅방이 이미 존재합니다");
@@ -139,6 +139,15 @@ public class ChatController {
 				
 				System.out.println(chatRoomListView.getYou_id());
 			
+				ArrayList<ProductImage> productImage = (ArrayList<ProductImage>)productService.selectProductImgList(chatRoomListView.getP_no());
+				if(productImage.size()==0) {
+					chatRoomListView.setP_img("pan.jpg");
+				}else {
+					chatRoomListView.setP_img(productImage.get(0).getPi_name());
+					
+				}
+				
+				
 				String img = userInfoService.findUser(chatRoomListView.getYou_id()).getUser_profile();
 				chatRoomListView.setYou_image(img);
 				chatRoomListView.setNot_read(chatService.chatNotRead(chatRoomListView.getC_room_no(), from_id));
