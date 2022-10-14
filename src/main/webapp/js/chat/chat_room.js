@@ -594,7 +594,7 @@ function message_admin_promise(chat_content){
 //상단헤드
 function chat_head(id,img,room_no,fresh,product,p_img,check){
 	var a="";
-		var b ="";
+	var b ="";
 	if(product.p_sell==1){
 		p_sell="판매중";
 		if(check==1){
@@ -607,7 +607,7 @@ function chat_head(id,img,room_no,fresh,product,p_img,check){
 		}
 	}else if(product.p_sell==3){
 		p_sell="판매완료";
-		b='<button class="dropdown-item" type="button" id="btnChatImage"><b>판매중으로 변경</b></button><button class="dropdown-item" type="button" id="btnChatImage"><b>예약중으로 변경</b></button>';	
+		b='<button class="dropdown-item" type="button" id="sellBtn"><b>판매중으로 변경</b></button><button class="dropdown-item" type="button" id="reserveBtn"><b>예약중으로 변경</b></button>';	
 	}
 	
 	return 	`<div class="row">
@@ -678,7 +678,45 @@ function chat_head(id,img,room_no,fresh,product,p_img,check){
 	
 	
 }
-//예약, 판매완료 클릭
+//판매중으로 변경 클릭
+ $(document).on('click','#sellBtn',function(e){
+	
+	var result = confirm("상품을 판매중으로 변경하시겠습니까?");
+	if(result){
+		var reserve={
+		"product":product
+	}
+$.ajax({
+		
+		
+		url:"chat_sell_rest",
+		method:"POST",
+		data: JSON.stringify(reserve),
+		async: true,
+        contentType: "application/json; charset=utf-8", //헤더의 Content-Type을 설정
+        dataType: "JSON", //응답받을 데이터 타입 (XML,JSON,TEXT,HTML,JSONP)  
+				
+    			    			
+	
+		
+		success:function(jsonResult){
+		product=jsonResult.product;
+		$('#chatHead').html("");
+		$('#chatHead').append(chat_head(yourId,yourImg,c_room_no,yourFreshness,product,p_img,checkSeller));
+		}
+		
+		
+		})
+		
+		
+		
+		
+		
+		
+	}else{}
+
+})
+//예약 클릭
  $(document).on('click','#reserveBtn',function(e){
 	
 	var result = confirm("상품을 예약중으로 변경하시겠습니까?");
@@ -716,7 +754,7 @@ $.ajax({
 	}else{}
 
 })
-//예약, 판매완료 클릭
+//판매완료 클릭
  $(document).on('click','#soldOutBtn',function(e){
 	
 	var result = confirm("상품을 판매완료로 변경하시겠습니까?");
