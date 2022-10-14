@@ -95,19 +95,17 @@
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <select id="t_ctgr_no" name="t_ctgr_no" class="custom-select form-control w-100">
-                                                <c:forEach var="item" items="${List}" varStatus="status">
-	                                                <option value="${item.id}">${item.nm}</option>
-	                                                <option value="1">-동네생활</option>
-	                                                <option value="2">-같이해요</option>
-	                                                <option value="3">-동네질문</option>
-	                                                <option value="4">-동네맛집</option>
-	                                                <option value="5">-취미생활</option>
-	                                                <option value="6">-일상</option>
-	                                                <option value="7">-분실/실종센터</option>
-	                                                <option value="8">-동네사건사고</option>
-	                                                <option value="9">-해주세요</option>
-	                                                <option value="10">-동네사진전</option>
-                                                </c:forEach>
+                                                <option selected disabled="disabled" >${townBoard.townCategory.t_ctgr_name}</option>
+                                                <option value="1">-동네생활</option>
+                                                <option value="2">-같이해요</option>
+                                                <option value="3">-동네질문</option>
+                                                <option value="4">-동네맛집</option>
+                                                <option value="5">-취미생활</option>
+                                                <option value="6">-일상</option>
+                                                <option value="7">-분실/실종센터</option>
+                                                <option value="8">-동네사건사고</option>
+                                                <option value="9">-해주세요</option>
+                                                <option value="10">-동네사진전</option>
                                             </select>
                                         </div>
                                     </div>
