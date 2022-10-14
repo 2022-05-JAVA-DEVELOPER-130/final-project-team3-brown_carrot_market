@@ -508,12 +508,12 @@ function chat_head(id,img,room_no,fresh,product,p_img,check){
 	if(product.p_sell==1){
 		p_sell="판매중";
 		if(check==1){
-			a=	'<button class="dropdown-item" type="button" id="reserveBtn">예약 완료하기</button>';
+			a=	'<button class="dropdown-item" type="button" id="reserveBtn"><b>예약 완료하기</b></button>';
 		}
 	}else if(product.p_sell==2){
 		p_sell="예약중";
 		if(check==1){
-		a=	'<button class="dropdown-item" type="button" id="soldOutBtn">판매 완료하기</button>';
+		a=	'<button class="dropdown-item" type="button" id="soldOutBtn"><b>판매 완료하기</b></button>';
 		}
 	}else if(product.p_sell==3){
 		p_sell="판매완료";
@@ -557,7 +557,7 @@ function chat_head(id,img,room_no,fresh,product,p_img,check){
 											
 									<a href="javascript:void(0);" class="btn btn-outline-primary" id="btnChatImage">
 									<i class="fa fa-image"></i></a>
-									
+							<!-- 삭제 , 나가기 		
 									<a href="javascript:void(0);" class="btn btn-outline-dark"
 									id="deleteRoom">
 									<i class="fa fa-sign-out"></i></a> 
@@ -565,15 +565,18 @@ function chat_head(id,img,room_no,fresh,product,p_img,check){
 									<a href="javascript:void(0);" class="btn btn-outline-danger"
 									id="outRoom">
 									<i class="fa fa-close" ></i></a>
-									
+							-->		
 									<div class="btn-group">
   									<button type="button" class="btn" style="border-color:orange"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
    									 <i class="fa fa-align-justify" style="color:orange"></i>
   									</button>
- 									<div class="dropdown-menu dropdown-menu-right">
-  									<button class="dropdown-item" type="button" id="outRoom">채팅방 닫기</button>
-  									<button class="dropdown-item" type="button" id="deleteRoom">채팅방 나가기</button>
-   									<button class="dropdown-item" type="button">Something else here</button>
+ 									<div class="dropdown-menu dropdown-menu-right" style="width:100px;">
+  									<button class="dropdown-item" type="button" id="outRoom"><b>채팅방 닫기</b></button>
+  									<button class="dropdown-item" type="button" id="deleteRoom"><b>채팅방 나가기</b></button>
+  									<div class="dropdown-divider"></div>
+   									<button class="dropdown-item" type="button" id="btnChatAppointment"><b>약속잡기</b></button>
+   									<button class="dropdown-item" type="button" id="btnChatImage"><b>사진보내기</b></button>
+   									<div class="dropdown-divider"></div>
    									${a}
   </div>
 </div>

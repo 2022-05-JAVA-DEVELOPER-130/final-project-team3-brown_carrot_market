@@ -15,17 +15,20 @@
      <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
     
-        <link rel="stylesheet" href="style.css">
-    
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+	
+	
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+    
+	<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
 	
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
 	 <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.js"></script>
 	
-<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
 
 	
@@ -37,6 +40,9 @@
 	<script src="js/chat/chat_room.js"></script>
 	
 	<script type="text/javascript"></script>
+	
+	
+    
 	
 	
 </head>
@@ -111,17 +117,7 @@
 								 
 								
 								<div class="col-lg-4 hidden-sm text-right">
-									<div class="btn-group">
-  									<button type="button" class="btn" style="border-color:orange"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-   									 <i class="fa fa-align-justify" style="color:orange"></i>
-  									</button>
- 									<div class="dropdown-menu dropdown-menu-right">
-  									<button class="dropdown-item" type="button">채팅방 닫기</button>
-  									<button class="dropdown-item" type="button">채팅방 나가기</button>
-   									<button class="dropdown-item" type="button">Something else here</button>
-   									
-  </div>
-</div>
+
     							 </div>
 							</div>
 						</div>
@@ -501,6 +497,18 @@ color:#070a57;
         overflow-x: auto
     }
 }
+.dropdown-menu button{
+	font-size:13px;
+	
+}
+.dropdown-menu {
+	width:240px;
+	box-shadow:
+	0 0 8px 0 rgb(47 91 234 / 15%);
+	border-radius: 6px;
+	
+	
+}
 
 </style>
 
@@ -509,22 +517,29 @@ color:#070a57;
 </script>
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
     <script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.easing.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+  <!-- <script src="js/popper.min.js"></script>--> 
+  <!-- <script src="js/bootstrap.min.js"></script>--> 
     <script src="js/default/classy-nav.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/default/scrollup.js"></script>
     <script src="js/waypoints.min.js"></script>
-    <script src="js/jquery.countdown.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/jarallax.min.js"></script>
-    <script src="js/jarallax-video.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
+  <!-- <script src="js/jarallax.min.js"></script>--> 
+  <!-- <script src="js/jarallax-video.min.js"></script>--> 
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
+    
+    <script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
+    <script type="text/javascript" src="js/common/user_session_check.js"></script>
+	
+	<script src="js/chat/chat_room.js"></script>
+	
+	<script type="text/javascript"></script>
     
     
 </body>
