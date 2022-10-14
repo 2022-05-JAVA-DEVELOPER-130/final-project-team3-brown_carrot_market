@@ -43,12 +43,39 @@
 	<select id="selectTownBoardAddress" parameterType="map" resultType="map">
 		select a.ADDRESS_NAME,a.ADDRESS_LAT,a.ADDRESS_LNG from ADDRESS a where a.user_id=#{user_id} and a.address_no=#{address_no}
 	</select>
-	
+	<!-- 
 	<insert id="insertTownBoard" parameterType="map">
 		insert into town_board(t_no, t_title, t_content, t_date, t_count, t_ctgr_no,t_address_name, t_address_lat,t_address_lng,user_id)
-		values(TOWN_BOARD_T_NO_SEQ.nextval, #{townBoard.t_title},#{townBoard.t_content},sysdate,#{townBoard.t_count},#{townBoard.townCategory.t_ctgr_no},#{address.ADDRESS_NAME},#{address.ADDRESS_LAT}, #{address.ADDRESS_LNG},#{townBoard.userInfo.user_id})
+		values(TOWN_BOARD_T_NO_SEQ.nextval, #{t_title},#{t_content},sysdate,#{t_count},#{townBoard.townCategory.t_ctgr_no},#{address.ADDRESS_NAME},#{address.ADDRESS_LAT}, #{address.ADDRESS_LNG},#{townBoard.userInfo.user_id})
 	</insert>
-	 
+	 -->
+	<insert id="insertTownBoard" parameterType="map" useGeneratedKeys="true">
+		<selectKey keyProperty="t_no" order="BEFORE" resultType="int">
+			select TOWN_BOARD_T_NO_SEQ.nextval from dual
+		</selectKey>
+		insert into town_board values(#{t_no}, #{t_title},#{t_content},sysdate,0,#{townCategory.t_ctgr_no},#{address.address_name},#{address.address_lat}, #{address.address_lng},#{userInfo.user_id})
+	</insert>
+	
+<!-- 
+	<insert id="insertProduct" parameterType="map" useGeneratedKeys="true">
+		<selectKey keyProperty="p_no" order="BEFORE" resultType="int">
+			select PRODUCT_P_NO_SEQ.nextval from dual
+		</selectKey>
+		insert into product p values(#{p_no}, 
+                           #{p_title},
+                		   #{p_desc},
+               			   #{p_price},
+               			   sysdate,
+               			   1,
+               			   0,
+               			   0,				
+                           #{address.address_name},
+                           #{address.address_lat},
+                           #{address.address_lng},
+                           #{productCategory.p_ctgr_no},
+                           #{userInfo.user_id})
+	</insert>
+	  -->	
 	
 	
 	<!-- 비회원이 동네게시판 글 전체 조회.. -->

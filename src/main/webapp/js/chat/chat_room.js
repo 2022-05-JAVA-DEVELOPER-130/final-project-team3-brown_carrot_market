@@ -502,9 +502,9 @@ dayformat=hour+":"+mm+" "+ampm+","+" "+dayString;
 function message_other(chat_content){
 	var chat_read="";
 	if(chat_content.c_read==0){
-		chat_read="전송됨";
+		chat_read="";
 	}else if(chat_content.c_read==1){
-		chat_read="읽음";
+		chat_read=`<i class="fa fa-check"></i>`;
 	}
 	
 	var chat_c=chat_content.c_content;
@@ -526,13 +526,12 @@ function message_other(chat_content){
 
 
 
-
 function message_you(chat_content){
 	var chat_read="";
 	if(chat_content.c_read==0){
-		chat_read="전송됨";
+		chat_read="";
 	}else if(chat_content.c_read==1){
-		chat_read="읽음";
+		chat_read=`<i class="fa fa-check"></i>`;
 	}
 	
 	var chat_c=chat_content.c_content;
@@ -547,7 +546,7 @@ function message_you(chat_content){
 											alt="">
 									</div>
 									<div class="message other-message float-right">${chat_c}</div>
-									<div class="chat_read_check" id=${chat_content.c_content_no}>${chat_read}</div>
+									<div class="chat_read_check_right" id=${chat_content.c_content_no}>${chat_read}</div>
 								</li>`
 }
 /***************** 공지 *************** */
@@ -1000,9 +999,9 @@ function connectWS(){
 			for(const item of chatContentArray){
 				var chat_read="";
 				if(item.c_read==0){
-		         chat_read="전송됨";
+		         chat_read="";
 	            }else if(item.c_read==1){
-		         chat_read="읽음";
+		         chat_read=`<i class="fa fa-check"></i>`;
 	            }
 	            console.log(item.c_content_no);
 				$(`#${item.c_content_no}`).text(chat_read);
