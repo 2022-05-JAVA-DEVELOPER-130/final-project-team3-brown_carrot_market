@@ -308,7 +308,12 @@ where tb.t_address_lat
 	
 	<!-- 게시글 한개 찾기(글 번호로) -->
 	<select id="selectTownBoardOne" parameterType="java.lang.Integer" resultMap="townBoradResultMap">
-		select * from town_board where t_no=#{t_no}
+		select * from town_board tb 
+		left outer join town_img ti 
+		on tb.t_no = ti.t_no
+		join town_category tc
+		on tc.t_ctgr_no = tb.t_ctgr_no
+		where tb.t_no=#{t_no}
 	</select>
 	
 	<!-- 게시글 아이디로 찾기(내가 쓴 게시물리스트 찾기) -->

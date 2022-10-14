@@ -21,6 +21,8 @@ public interface ProductMapper {
 	public List<Product> selectByUserId(String user_id);
 	
 	public Product selectByOne(int p_no);
+	public int selectProductPK();
+	
 	
 	public int deleteByPNo(int p_no);
 	

@@ -78,43 +78,43 @@
                             <ul>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no1" value=1>
-	                              <a href="#" onclick="changeQnaList(1,1)">동네생활 <span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,1)">동네생활 <span class="text-muted"></span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no2" value=2>
-	                              <a href="#" onclick="changeQnaList(1,2)">같이해요<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,2)">같이해요<span class="text-muted"></span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no3" value=3>
-	                              <a href="#" onclick="changeQnaList(1,3)">동네질문<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,3)">동네질문<span class="text-muted"></span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no4" value=4>
-	                              <a href="#" onclick="changeQnaList(1,4)">동네맛집<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,4)">동네맛집<span class="text-muted"></span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no5" value=5>
-	                              <a href="#" onclick="changeQnaList(1,5)">취미생활<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,5)">취미생활<span class="text-muted"></span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no6" value=6>
-	                              <a href="#" onclick="changeQnaList(1,6)">일상<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,6)">일상<span class="text-muted"></span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no7" value=7>
-	                              <a href="#" onclick="changeQnaList(1,7)">분실/실종센터<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,7)">분실/실종센터<span class="text-muted"></span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no8" value=8>
-	                              <a href="#" onclick="changeQnaList(1,8)">동네사건사고<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,8)">동네사건사고<span class="text-muted"></span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no9" value=9>
-	                              <a href="#" onclick="changeQnaList(1,9)">해주세요<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,9)">해주세요<span class="text-muted"></span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no10" value=10>
-	                              <a href="#" onclick="changeQnaList(1,10)"s>동네사진전<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,10)"s>동네사진전<span class="text-muted"></span></a>
                               </li>
                                 
                                
@@ -195,14 +195,17 @@
                             <a href="#"><i class="icofont-user-male"></i> ${townBoard.userInfo.user_id }</a>
                             <a href="#"><i class="icofont-ui-clock"></i> ${townBoard.t_date }</a>
                             <a href="#"><i class="icofont-speech-comments"></i> 3 Comments</a>
-                           <input class="townBoard_i delete" type="button" pageno="${pageno}" t_no=${townBoard.t_no} value="삭제하기" />
+                           
                            
                         </div>
 
                         <!-- Single Blog Details Area -->
                         <p class = "">${townBoard.t_content}</p>
                     </div>
-
+					
+					<input class="townBoard_i delete" type="button" pageno="${pageno}" t_no="${townBoard.t_no}" value="삭제하기" />
+					<input class="townBoard_btn update_form" type="button" pageno="${pageno}" t_no="${townBoard.t_no}" value="수정하기" />
+					
                     <div class="comments-area">
                         <div class="comment_area mb-50 clearfix">
                             <h5 class="mb-4">3 Comments</h5>

@@ -157,13 +157,14 @@ public class TownBoardController {
 	}
 */	
 	//게시글 상세보기
-	@RequestMapping(value = "/townboard_view", params = "t_no")
-	public String townBoard_view(@RequestParam int t_no, Model model) {
+	@RequestMapping(value = "/townboard_view")
+	public String townBoard_view(@RequestParam int t_no,@RequestParam int pageno, Model model) throws Exception{
 		
 		try {
 		TownBoard townBoard = townBoardService.selectTownBoardOne(t_no);
 		townBoardService.updateTownBoardCount(t_no);
 		model.addAttribute("townBoard", townBoard);
+		model.addAttribute("pageno", pageno);
 		}catch (Exception e) {
 			e.printStackTrace();
 			return "error";
@@ -175,7 +176,7 @@ public class TownBoardController {
 	
 	//게시글 작성 폼
 	@RequestMapping("/townboard_write_form")
-	public String townboard_write_form(HttpSession session) {
+	public String townboard_write_form(HttpSession session) throws Exception{
 		String sUserId = (String)session.getAttribute("sUserId");
 		String forwardPath = "";
 		//비회원일때
@@ -191,7 +192,7 @@ public class TownBoardController {
 
 	//새글 등록 
 	@RequestMapping(value = "/townboard_write_action")
-	public String townBoard_write_action(@RequestParam Map<String, Object> map, Model model, HttpSession session) {
+	public String townBoard_write_action(@RequestParam Map<String, Object> map, Model model, HttpSession session) throws Exception{
 		String forwardPath = "";
 		String sUserId = (String)session.getAttribute("sUserId");
 		Address sAddress = (Address)session.getAttribute("sAddress");
@@ -242,7 +243,7 @@ public class TownBoardController {
 	
 	//게시글 수정폼
 	@RequestMapping("/townboard_update_form")
-	public String townboard_update_form(@RequestParam Integer pageno, Integer notice_no, Model model, HttpSession session) {
+	public String townboard_update_form(@RequestParam Integer pageno, Integer t_no, Model model, HttpSession session) throws Exception{
 		String sUserId = (String)session.getAttribute("sUserId");
 		String forwardPath = "";
 		//비회원일때
@@ -251,12 +252,40 @@ public class TownBoardController {
 		}
 		//회원일때
 		if(sUserId != null) {
+			
+			TownBoard townBoard = townBoardService.selectTownBoardOne(t_no);
+			model.addAttribute("townBoard", townBoard);
+			
 			forwardPath = "townboard_update";
+			
 		}
+		
+		
 		return forwardPath;
 	}
 	
 	//게시글 수정
+	@RequestMapping("/townboard_update_action")
+	public String townboard_update_action(@RequestParam Map<String, String> map, Model model, HttpSession session) throws Exception{
+		String forwardPath = "";
+		String pageno = map.get("pageno");
+		String t_no = map.get("t_no");
+		
+	
+		
+		
+		
+		/*
+		townBoard.setT_no(Integer.parseInt(t_no));
+		townBoard.setT_title(map.get("t_title"));
+		townBoard.setT_content(map.get("t_content"));
+		*/
+		//townBoardService.updateTownBoardOne(townBoard);
+		
+		
+		return "redirect:townBoard_list";
+	}
+	
 	
 	
 	
