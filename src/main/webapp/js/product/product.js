@@ -30,18 +30,17 @@ function productCreate() {
 	//사진 리스트 업로드
 	const formData1 = new FormData();
 	formData1.append('files',$('#files')[0]); //이게 맞나?
-	formData1.append('files',$('#files')[1]); 
-	formData1.append('files',$('#files')[2]); 
-	formData1.append('files',$('#files')[3]); 
+
 	$.ajax({
-		url:'product/upload',
+		url:'product_upload',
 		type:'POST',
 		processData:false,	//파일전송시 반드시 false
 		contentType:false,
 		data:formData1,
 		success:function(jsonResult){
-		console.log(jsonResult);
+		console.log("폼 데이터:"+jsonResult);
 		 //사진이름받기
+		/*
 		 $.ajax({
 				  url : 'product_write_action',
 				  method : 'POST',
@@ -53,6 +52,9 @@ function productCreate() {
 								console.log(jsonResult.msg);
 			}
 		  });
+		  */
+		},error:function(xhr){
+			console.log("JSON 오류:"+xhr);
 		}
 	});
 	const formData2 = new FormData();
@@ -60,7 +62,6 @@ function productCreate() {
 	formData2.append('p_price',$("p_price"));
 	formData2.append('p_desc',$("p_desc"));
 	formData2.append('p_ctgr_no',$("p_ctgr_no"));
-	
 	
 	
 	document.product_write_form.action = "product_write_action";

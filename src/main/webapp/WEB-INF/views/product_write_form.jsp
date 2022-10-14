@@ -28,7 +28,7 @@
 	<script type="text/javascript" src="js/product/product.js"></script>
 	
 	<!-- toast -->
-	<link href="[//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css)" rel="stylesheet" />
+	<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css)" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="[https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css](https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css)"/>
 	<script type="text/javascript" src="[https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js](https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js)"></script>
 		
@@ -131,7 +131,7 @@
                                    <ul class="imgul" style="display : flex;">
                                     <li>
                                     	<label for="up_file4" style="display : inline-block; cursor:pointer; position : relative;">
-                                    		<input type="file" name="files" id="up_file4"
+                                    		<input type="file" name="files" id="files"
                                     				style="position : absolue; 
                                     					   top : 0 !important; 
                                     					   left :  0 !important;
@@ -152,7 +152,7 @@
                                     </li>
                                     <li>
                                     	<label for="up_file4" style="display : inline-block; cursor:pointer; position : relative;">
-                                    		<input type="file" name="files" id="up_file4"
+                                    		<input type="file" name="files" id="files"
                                     				style="position : absolue; 
                                     					   top : 0 !important; 
                                     					   left :  0 !important;
@@ -173,7 +173,7 @@
                                     </li>
                                     <li>
                                     	<label for="up_file4" style="display : inline-block; cursor:pointer; position : relative;">
-                                    		<input type="file" name="files" id="up_file4"
+                                    		<input type="file" name="files" id="files"
                                     				style="position : absolue; 
                                     					   top : 0 !important; 
                                     					   left :  0 !important;
@@ -194,7 +194,7 @@
                                     </li>
                                     <li>
                                     	<label for="up_file4" style="display : inline-block; cursor:pointer; position : relative;">
-                                    		<input type="file" name="files" id="up_file4"
+                                    		<input type="file" name="files" id="files"
                                     				style="position : absolue; 
                                     					   top : 0 !important; 
                                     					   left :  0 !important;
