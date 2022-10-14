@@ -15,6 +15,7 @@ public class UserInfo {
 	USER_POINT              NUMBER(10)    
 	USER_PROFILE            VARCHAR2(200) 
 	 */
+	
 	private String user_id;
 	private String user_pw;
 	private String user_name;
