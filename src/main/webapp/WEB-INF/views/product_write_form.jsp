@@ -106,7 +106,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <!-- 사진 넣기 임시 
+                                    <!-- 사진 넣기 임시 -->
                                     <div>
                                     <ul style="display : flex">
                                     <li>
@@ -119,14 +119,14 @@
 									</li> 
 									</ul>
 									</div>
-									사진 넣기 임시 끝-->
+									<!-- 사진 넣기 임시 끝-->
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <textarea name="p_desc" class="form-control" id="p_desc" cols="30" rows="10" placeholder="물건 설명" required></textarea>
                                         	</div>
                                         </div>
                                     </div>
-                                    <!-- 이미지 업로드 부분 시작-->
+                                    <!-- 이미지 업로드 부분 시작
                                    <div class="img_box">
                                    <ul class="imgul" style="display : flex;">
                                     <li>
@@ -215,7 +215,7 @@
                                     </li>
                                     </ul>
                                     </div>
-                                     <!-- 이미지 업로드 부분 끝-->
+                                      이미지 업로드 부분 끝-->
                                     <div class="col-12 text-center">
                                         <input type="button" id="btn_product_write_action" class="btn btn-primary w-40" value="물건 올리기" onclick="productCreate()">&nbsp; 
                                         <input type="button" class="btn btn-primary w-40" value="동네물건목록" onclick="productList()">

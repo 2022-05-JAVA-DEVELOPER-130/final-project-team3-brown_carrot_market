@@ -245,6 +245,20 @@ public class ReplyEchoHandler {
 					return resultMap;
 				}
 			// ----------------------------------------------------------------------------
+				//판매중 변경
+				
+				@PostMapping(value = "/chat_sell_rest")
+				public Map chatSell_rest(@RequestBody Map<String, Product> reserve) throws Exception  {
+					Map resultMap = new HashMap();
+
+					Product product = reserve.get("product");
+					product.setP_sell(1);
+					productService.updateProductSell(1, product.getP_no());
+					resultMap.put("product", product);	
+
+
+					return resultMap;
+				}
 				//예약완료
 				
 				@PostMapping(value = "/chat_reserve_rest")
