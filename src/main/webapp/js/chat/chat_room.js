@@ -949,6 +949,16 @@ function connectWS(){
 			 reloadChatList();
 	/****************************************************************************/
 		
+	/*************메시지 보내는 순간 메시지 포커스************/	
+		if($('#chat-history').get(0).scrollHeight>698){
+    			// 세로 스크롤바가 있을 경우 처리
+			$('#chat-history').css("display","flex");
+			console.log("스크롤바 있음");
+		}else{
+			$('#chat-history').css("display","block");
+			console.log("스크롤바 없음");
+	
+		}
 		
 		
 		
