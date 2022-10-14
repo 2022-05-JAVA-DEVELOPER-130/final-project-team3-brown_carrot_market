@@ -526,7 +526,6 @@ function message_other(chat_content){
 
 
 
-
 function message_you(chat_content){
 	var chat_read="";
 	if(chat_content.c_read==0){
