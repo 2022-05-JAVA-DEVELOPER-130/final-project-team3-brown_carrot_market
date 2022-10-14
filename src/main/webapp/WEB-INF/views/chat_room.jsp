@@ -49,7 +49,7 @@
     
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
-<div class="container">
+<div class="container" style="border-top:1px solid #f4f7f6;">
 <div class="row clearfix">
     <div class="col-lg-12">
         <div class="card chat-app">
@@ -189,12 +189,13 @@
 <style type="text/css">
 body{
     background-color: #fff;
-    margin-top:20px;
+    margin-top:0px;
 }
 
 a{
 color:#070a57;
 }
+
 
 .content{
   width        : 120px;     /* 너비는 변경될수 있습니다. */
