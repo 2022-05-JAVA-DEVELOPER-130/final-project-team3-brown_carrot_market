@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Product;
 import com.itwill.brown_carrot_market.dto.ProductCategory;
+import com.itwill.brown_carrot_market.dto.ProductImage;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.ProductService;
 
@@ -97,7 +98,11 @@ public class ProductController {
 		String newFileName= "";
 
 		try {
-
+			/*
+			List<ProductImage> productImageList = new ArrayList<>();
+			productImageList.add(new ProductImage(0, newFileName, 0));
+			map.put("pi_name",newFileName);
+			*/
 			UserInfo userInfo = new UserInfo(sUserId, sUserId, sUserId, sUserId, forwardPath, 0, 0, sUserId, null);
 			map.put("userInfo", userInfo);	
 			ProductCategory productCategory = new ProductCategory(Integer.parseInt(map.get("p_ctgr_no").toString()), "");
@@ -106,22 +111,11 @@ public class ProductController {
 			//map.put("product", map);
 			
 			
-			/*사진
-			List<String> fileNames = new ArrayList<>();
-
-			for (MultipartFile file : files) {
-				System.out.println(file.isEmpty());
-				if (!file.isEmpty()) {
-					newFileName= storageService.save(file);
-					fileNames.add(file.getOriginalFilename());
-
-					message = "Uploaded the files successfully: " + fileNames+" newFileName"+newFileName;
-				}else {
-					message="Please select a valid mediaFile..";
-				}
-			}
-			map.put("newFileName",newFileName);
-			*/
+			//사진
+			
+			
+			
+			
 			
 			System.out.println("controller map : "+map);
 			

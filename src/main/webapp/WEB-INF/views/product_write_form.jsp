@@ -130,7 +130,7 @@
                                    <ul class="imgul" style="display : flex;">
                                     <li>
                                     	<label for="up_file4" style="display : inline-block; cursor:pointer; position : relative;">
-                                    		<input type="file" name="files" id="files"
+                                    		<input type="file" name="files" 
                                     				style="position : absolue; 
                                     					   top : 0 !important; 
                                     					   left :  0 !important;
@@ -151,7 +151,7 @@
                                     </li>
                                     <li>
                                     	<label for="up_file4" style="display : inline-block; cursor:pointer; position : relative;">
-                                    		<input type="file" name="files" id="files"
+                                    		<input type="file" name="files" 
                                     				style="position : absolue; 
                                     					   top : 0 !important; 
                                     					   left :  0 !important;
@@ -172,7 +172,7 @@
                                     </li>
                                     <li>
                                     	<label for="up_file4" style="display : inline-block; cursor:pointer; position : relative;">
-                                    		<input type="file" name="files" id="files"
+                                    		<input type="file" name="files" 
                                     				style="position : absolue; 
                                     					   top : 0 !important; 
                                     					   left :  0 !important;
@@ -193,7 +193,7 @@
                                     </li>
                                     <li>
                                     	<label for="up_file4" style="display : inline-block; cursor:pointer; position : relative;">
-                                    		<input type="file" name="files" id="files"
+                                    		<input type="file" name="files" 
                                     				style="position : absolue; 
                                     					   top : 0 !important; 
                                     					   left :  0 !important;
