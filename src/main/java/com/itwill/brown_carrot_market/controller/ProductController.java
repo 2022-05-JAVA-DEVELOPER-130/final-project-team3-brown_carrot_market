@@ -94,7 +94,7 @@ public class ProductController {
 		Address sAddress = (Address)session.getAttribute("sAddress");
 		map.put("address", sAddress);
 		map.put("p_no", 0);
-		System.out.println("p_no확인 :"+map);
+		System.out.println();
 		
 		String message = "";
 		String newFileName= "";
@@ -125,8 +125,8 @@ public class ProductController {
 			
 			
 			//인서트해주기
-			int p_no = productService.insertProduct(map);
-			System.out.println(">>>>>>>>>>>>>>>>>"+p_no);
+			int insertRowCount = productService.insertProduct(map);
+			
 			
 			forwardPath = "redirect:product_list";
 		} catch (Exception e) {

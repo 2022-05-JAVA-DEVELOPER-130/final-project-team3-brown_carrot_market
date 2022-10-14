@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.Resource;
@@ -15,7 +13,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,7 +37,7 @@ public class FileControllerProduct {
 	
 	@PostMapping("/product_upload")
 	public ResponseEntity<Map<String,Object>> uploadFiles(
-			@RequestParam("files") MultipartFile[] files,@RequestParam Map<String, Object> map, Model model, HttpSession session) {
+			@RequestParam("files") MultipartFile[] files) {
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>파일"+files);
 		Map<String,Object> result = new HashMap();
 		
@@ -67,7 +64,7 @@ public class FileControllerProduct {
 			result.put("message", message);
 			result.put("newFileName", newFileName);
 			
-			productService.insertProduct(result);
+			//productService.insertProduct(result);
 			
 			//return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
 			return ResponseEntity.status(HttpStatus.OK).body(result);
