@@ -15,6 +15,6 @@ public interface TransferDao {
 	
 	List<Transfer> selectById(String user_id) throws Exception;
 	
-	List<Transfer> selectByP_No(int p_no) throws Exception;
+	List<Transfer> selectByP_Id(String user_id) throws Exception;
 
 }

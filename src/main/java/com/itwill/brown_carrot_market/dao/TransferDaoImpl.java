@@ -57,8 +57,8 @@ public class TransferDaoImpl implements TransferDao{
 	}
 
 	@Override
-	public List<Transfer> selectByP_No(int p_no) throws Exception {
-		return transferMapper.selectByP_No(p_no);
+	public List<Transfer> selectByP_Id(String user_id) throws Exception {
+		return transferMapper.selectByP_Id(user_id);
 	}
 	
 	
