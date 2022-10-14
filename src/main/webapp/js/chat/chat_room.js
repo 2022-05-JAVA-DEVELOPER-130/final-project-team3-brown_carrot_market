@@ -607,8 +607,11 @@ function chat_head(id,img,room_no,fresh,product,p_img,check){
 		b= '<button class="dropdown-item" type="button" id="sellBtn"><b>판매중으로 변경</b></button>';
 		}
 	}else if(product.p_sell==3){
+		if(check==1){
 		p_sell="판매완료";
-		b='<button class="dropdown-item" type="button" id="sellBtn"><b>판매중으로 변경</b></button><button class="dropdown-item" type="button" id="reserveBtn"><b>예약중으로 변경</b></button>';	
+		a='<button class="dropdown-item" type="button" id="reserveBtn"><b>예약중으로 변경</b></button>';	
+		b='<button class="dropdown-item" type="button" id="sellBtn"><b>판매중으로 변경</b></button>';	
+	}
 	}
 	
 	return 	`<div class="row">
