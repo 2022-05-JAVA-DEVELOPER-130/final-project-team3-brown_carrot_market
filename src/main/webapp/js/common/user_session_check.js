@@ -18,6 +18,9 @@ var promise_time=[];
 var today = new Date();
 var number ;
 
+
+
+
 $(document).ready(function(){
 	
 	session_check(); 
@@ -82,20 +85,30 @@ function session_check(){
 	         	
 				
 				//안읽은채팅 가져오기 
-				$.ajax({
-					url:'readChat_num',
-					method:"POST",
-					data:'user_id='+jsonResult.data[0].user_id,
-					dataType:'json',
-					success:function(jsonResult){
-						console.log("안읽은채팅:"+jsonResult.data);
-				$(".cart_quantity").text(jsonResult.data);
-					}
-				})
+				getChatNum(jsonResult.data[0].user_id);
 			}
 		}
 	});
 	
+}
+
+function getChatNum(userId){
+		
+		$.ajax({
+					url:'readChat_num',
+					method:"POST",
+					data:'user_id='+userId,
+					dataType:'json',
+					success:function(jsonResult){
+						console.log("안읽은채팅:"+jsonResult.data);
+						if(jsonResult.data=='0'){
+							$(".cart_quantity").hide();
+						}else{
+							$(".cart_quantity").show();
+				       $(".cart_quantity").text(jsonResult.data);
+						}
+					}
+				})
 }
 
 
@@ -124,7 +137,6 @@ function timerFunc(dateTime,id,spot){
    	
    	var msg=`오늘 ${id} 님과 ${time}시 ${minute} 분에 약속이 있어요! <br> 약속 장소 : ${spot}`;
    	
-   	//"오늘 "+id+"님과 "+time+"시 "+minute+"분에 "+spot+" 에서 약속이 있어요!";
    	
     if(timer < 0){ //타이머가 0보다 작으면 함수를 종료합니다.
        return;
@@ -172,6 +184,7 @@ function connectServer(loginId){
 	      toastr['warning'](msg.user_id+" : "+message);
 	      
 	      /******************채팅수증가******* */
+	     getChatNum(loginId);
 	 /*    var tmp = document.getElementbyclass('cart_quantity').innerHTML;
 	      console.log(tmp);
 	      tmp++;
