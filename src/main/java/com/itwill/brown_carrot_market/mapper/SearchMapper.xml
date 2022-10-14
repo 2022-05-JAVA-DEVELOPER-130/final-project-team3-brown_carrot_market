@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.itwill.brown_carrot_market.mapper.SearchMapper">
+	<resultMap id="productResultMap" type="com.itwill.brown_carrot_market.dto.Product" >
+		<result column="P_NO" property="p_no"/>
+		<result column="P_TITLE" property="p_title"/>
+		<result column="P_DESC" property="p_desc"/>
+		<result column="P_PRICE" property="p_price"/>
+		<result column="P_DATE" property="p_date"/>
+		<result column="P_SELL" property="p_sell"/>
+		<result column="P_COUNT" property="p_count"/>
+		<result column="P_WISH" property="p_wish"/>
+		<result column="P_ADDRESS_NAME" property="p_address_name"/>
+		<result column="P_ADDRESS_LAT"  property="p_address_lat"/>
+		<result column="P_ADDRESS_LNG" property="p_address_lng"/>
+		<association property="productCategory" javaType="com.itwill.brown_carrot_market.dto.ProductCategory">
+			<result column="P_CTGR_NO" property="p_ctgr_no"/>
+			<result column="P_CTGR_NAME" property="p_ctgr_name"/>
+		</association>
+		<association property="userInfo" javaType="com.itwill.brown_carrot_market.dto.UserInfo">
+			<result column="USER_ID" property="user_id"/>
+			<result column="USER_PW" property="user_pw"/>
+			<result column="USER_NAME" property="user_name"/>
+			<result column="USER_EMAIL" property="user_email"/>
+			<result column="USER_PHONE" property="user_phone"/>
+			<result column="USER_FRESHNESS" property="user_freshness"/>
+			<result column="USER_POINT" property="user_point"/>
+			<result column="USER_PROFILE" property="user_profile"/>
+		</association>
+		<collection property="productImagesList" javaType="java.util.List" ofType="com.itwill.brown_carrot_market.dto.ProductImage">
+			<result column="PI_NO" property="pi_no"/>
+			<result column="PI_NAME" property="pi_name"/>
+			<result column="P_NO" property="p_no"/>
+		</collection>
+		<collection property="addressList" javaType="java.util.List" ofType="com.itwill.brown_carrot_market.dto.Address">
+			<result column="ADDRESS_NO" property="address_no"/>
+			<result column="ADDRESS_NAME" property="address_name"/>
+			<result column="ADDRESS_LAT" property="address_lat"/>
+			<result column="ADDRESS_LNG" property="address_lng"/>
+			<result column="ADDRESS_RANGE" property="address_range"/>
+			<result column="USER_ID" property="user_id"/>
+		</collection> 
+	</resultMap> 
+	
+	
+	
+	<!-- 로그인한 회원 범위안 상품 리스트 검색해서  불러오기-->
+	<select id="selectListSearch" parameterType="map" resultMap="productResultMap">
+		select * from (select * from product p left outer join product_img pi on p.p_no=pi.p_no
+                                       join p_category pc on p.p_ctgr_no=pc.p_ctgr_no
+             where p.p_address_lat 
+             between (select a.address_lat from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})-0.004504505*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
+                AND (select a.address_lat from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})+0.004504505*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no}))pp
+        where pp.p_address_lng
+        between (select a.address_lng from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})-0.056344377*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
+            AND (select a.address_lng from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})+0.056344377*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
+            and p_desc like '#{search_keyword}' or p_title like '#{search_keyword}'
+            order by pp.p_date desc           
+	</select>
+</mapper>
