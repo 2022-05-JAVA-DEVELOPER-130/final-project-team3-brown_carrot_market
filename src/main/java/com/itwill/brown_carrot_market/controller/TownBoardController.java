@@ -283,7 +283,7 @@ public class TownBoardController {
 		//townBoardService.updateTownBoardOne(townBoard);
 		
 		
-		return "redirect:townboard_view?pageno="+ pageno + "&t_no=" + t_no;
+		return "redirect:townBoard_list";
 	}
 	
 	
