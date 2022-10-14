@@ -27,6 +27,31 @@ function productCreate() {
 		return false;
 	}
 	
+	//사진 리스트 업로드
+	const formData = new FormData();
+	formData.append('pi',$("up_file4")); //이게 맞나?
+	$.ajax({
+		url:'user/upload',
+		type:'POST',
+		processData:false,	//파일전송시 반드시 false
+		contentType:false,
+		data:formData,
+		success:function(jsonResult){
+		console.log(jsonResult);
+		 $.ajax({
+				  url : 'product_write_action',
+				  method : 'POST',
+				  data: {
+						"pi_name": jsonResult.newFileName 
+							},
+							dataType : 'json',
+							success : function(jsonResult) {
+								console.log(jsonResult.msg);
+			}
+		  });
+		}
+	});
+	
 
 	document.product_write_form.action = "product_write_action";
 	document.product_write_form.method='POST';
@@ -34,7 +59,7 @@ function productCreate() {
 }
 
 function productSell(){
-	document.product_modify_sell_action.action = " product_modify_sell_action"
+	document.product_modify_sell_action.action = "product_modify_sell_action"
 	document.product_modify_sell_action.method='POST';
 	document.product_modify_sell_action.submit();
 }
