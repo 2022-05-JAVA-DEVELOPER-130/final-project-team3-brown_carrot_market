@@ -252,8 +252,15 @@ public class TownBoardController {
 		}
 		//회원일때
 		if(sUserId != null) {
+			
+			TownBoard townBoard = townBoardService.selectTownBoardOne(t_no);
+			model.addAttribute("townBoard", townBoard);
+			
 			forwardPath = "townboard_update";
+			
 		}
+		
+		
 		return forwardPath;
 	}
 	
@@ -266,11 +273,14 @@ public class TownBoardController {
 		
 	
 		
-		TownBoard townBoard = new TownBoard();
+		
+		
+		/*
 		townBoard.setT_no(Integer.parseInt(t_no));
 		townBoard.setT_title(map.get("t_title"));
 		townBoard.setT_content(map.get("t_content"));
-		townBoardService.updateTownBoardOne(townBoard);
+		*/
+		//townBoardService.updateTownBoardOne(townBoard);
 		
 		
 		return "redirect:townboard_view?pageno="+ pageno + "$t_no=" + t_no;

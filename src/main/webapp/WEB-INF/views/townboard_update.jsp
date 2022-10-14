@@ -79,7 +79,7 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="t_title" id="t_title_txt" placeholder= "제목" value="${townBoard.t_title }" required>
+                                            <input type="text" class="form-control" name="t_title" id="t_title_txt" value="${townBoard.t_title }" placeholder= "제목" required>
                                         </div>
                                     </div>
                                     <!--  
@@ -95,7 +95,7 @@
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <select id="t_ctgr_no" name="t_ctgr_no" class="custom-select form-control w-100">
-                                                <option selected disabled="disabled" >${townBoard.townCategory.t_ctgr_name}</option>
+                                                <option selected disabled="disabled" >카테고리 :${townBoard.townCategory.t_ctgr_name}</option>
                                                 <option value="1">-동네생활</option>
                                                 <option value="2">-같이해요</option>
                                                 <option value="3">-동네질문</option>
@@ -141,7 +141,6 @@
                                         
                                         
                                     </div>
-                                    
                                     
                                     <!-- 이미지 업로드 부분 시작-->
                                    <div class="img_box">
@@ -274,6 +273,8 @@
     <script src="js/jquery.nice-select.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
+    <script src="js/townBoard/townBoard.js"></script>
+    
     <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript" src="js/townBoard/townBoard.js"></script>
