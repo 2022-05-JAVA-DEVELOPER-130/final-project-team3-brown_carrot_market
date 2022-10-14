@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>	
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="toDay" class="java.util.Date" />
 <!doctype html>
 <html lang="en">
 
@@ -10,34 +13,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <!-- Title  -->
-    <title>Bigshop | Responsive E-commerce Template</title>
-
-    <!-- Favicon  -->
-    <link rel="icon" href="img/core-img/favicon.ico">
-
-    <!-- Style CSS -->
+    <!-- include_common_top -->
+    <!-- include_common_top -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="css/product.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="css/townBoard.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
 	
 	<!-- javaScript -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
-    <script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
+	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
-	
-	<script type="text/javascript" src="js/product/product.js"></script>
-	<script type="text/javascript" src="js/townBoard/townBoard.js"></script>
 	
 	<!-- toast -->
  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
 	
+	
+	
+	
+	
 </head>
 
+	
 <body>
     <!-- Preloader -->
     <div id="preloader">
@@ -51,6 +51,7 @@
 	<jsp:include page="common/include_common_header.jsp"/>
 	<!-- include_common_bottom.jsp end-->
     <!-- Header Area End -->
+    
     
     <!-- Breadcumb Area -->
     <div class="breadcumb_area">
@@ -72,8 +73,7 @@
     <!-- Message Now Area -->
                 <div class="col-12">
                     <div class="contact_from mb-50">
-                        <form id="townBoard_write_form" action="product_write_action" 
-                        	method="post" enctype="multipart/form-data" id="main_contact_form">
+                        <form id="townBoard_write_form" method="post" >
                             <div class="contact_input_area">
                                 <div id="success_fail_info"></div>
                                 <div class="row">
@@ -94,7 +94,7 @@
                                     
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <select id="p_ctgr_no" name="p_ctgr_no" class="custom-select form-control w-100">
+                                            <select id="t_ctgr_no" name="t_ctgr_no" class="custom-select form-control w-100">
                                                 <option selected disabled="disabled">카테고리</option>
                                                 <option value="1">-동네생활</option>
                                                 <option value="2">-같이해요</option>
@@ -135,7 +135,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                            <!--  <textarea name="t_content" class="form-control" id="t_content" cols="30" rows="10" placeholder="내용" required></textarea> -->
-                                        	<textarea name="townBoard_content" id="townBoard_content_area" placeholder=" content"></textarea>
+                                        	<textarea name="t_content" id="townBoard_content_area" placeholder=" content"></textarea>
                                         	</div>
                                         </div>
                                         
@@ -232,12 +232,17 @@
                                     </li>
                                     </ul>
                                     </div>
+                                    <input type="hidden" name="pageno" value="${pageno}" />
                                      <!-- 이미지 업로드 부분 끝-->
+                                     
                                     <div class="col-12 text-center">
                                         <input type="button" class="townBoard_btn new_write" value="게시글 올리기" />&nbsp; 
-                                        <input type="button" class="btn btn-primary w-40" value="동네게시글목록" onclick="productList()"/>
-                                </div>
+                                        <input class="townBoard_btn list" type="button" pageno="${pageno}" value="동네게시글목록"/>
+                               		 </div>
+                                
+                                
                             </div>
+                            
                         </form>
                     </div>
                 </div>
@@ -246,8 +251,8 @@
     <!-- Message Now Area -->
 
     <!-- Footer Area -->
-		<!-- include_common_bottom.jsp start-->
-		<jsp:include page="common/include_common_footer.jsp"/>
+    	<!-- include_common_bottom.jsp start-->
+			<jsp:include page="common/include_common_footer.jsp"/>
 		<!-- include_common_bottom.jsp end-->
     <!-- Footer Area -->
 
@@ -266,32 +271,35 @@
     <script src="js/jarallax.min.js"></script>
     <script src="js/jarallax-video.min.js"></script>
     <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
     <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    
-    <style type="text/css">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script type="text/javascript" src="js/townBoard/townBoard.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	
+	<style type="text/css">
 #toast-container > .toast {
-background-image: none !important;
+    background-image: none !important;
 }
 
-#toast-container > .toast:before {
-position: relative;
-font-family: FontAwesome;
-font-size: 24px;
-line-height: 18px;
-float: left;
-color: #FFF;
-padding-right: 0.5em;
-margin: auto 0.5em auto -1.5em;
-}
-#toast-container > .toast-warning:before {
-content: "\f27a";
-
+ #toast-container > .toast:before {
+    position: relative;
+    font-family: FontAwesome;
+    font-size: 24px;
+    line-height: 18px;
+    float: left;
+    color: #FFF;
+    padding-right: 0.5em;
+    margin: auto 0.5em auto -1.5em;
+}       
+    #toast-container > .toast-warning:before {
+     content: "\f27a"; 
+ 
 }
 	
-
+	
 </body>
 
 </html>

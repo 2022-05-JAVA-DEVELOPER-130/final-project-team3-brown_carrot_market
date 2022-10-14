@@ -188,8 +188,12 @@ public class TownBoardController {
 		return forwardPath;
 	}
 	
+	
+	
+	
+
 	//새글 등록 
-	@RequestMapping(value = "/townboard_write_action", method = RequestMethod.POST)
+	@RequestMapping(value = "/townboard_write_action")
 	public String townBoard_write_action(@RequestParam Map<String, Object> map, Model model, HttpSession session) {
 		String forwardPath = "";
 		String sUserId = (String)session.getAttribute("sUserId");
@@ -197,6 +201,7 @@ public class TownBoardController {
 		map.put("address", sAddress);
 		
 		try {
+			
 		UserInfo userInfo = new UserInfo(sUserId, sUserId, sUserId, sUserId, forwardPath, 0, 0, sUserId, null);
 		map.put("userInfo", userInfo);	
 		TownCategory townCategory = new TownCategory(Integer.parseInt(map.get("t_ctgr_no").toString()), "");

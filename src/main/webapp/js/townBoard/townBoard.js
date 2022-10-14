@@ -105,9 +105,9 @@ $(".townBoard_i.delete").on("click", function(){
 게시글 목록 이동
 */
 
-$(".notice_btn.list").on("click", function(){
+$(".townBoard_btn.list").on("click", function(){
 	let pageno = $(this).attr("pageno");
-	location.href = `notice_list?pageno=${pageno}`;
+	location.href = `townBoard_list?pageno=${pageno}`;
 });
 
 
@@ -151,11 +151,6 @@ $(".townBoard_btn.write_form").on("click", function(){
 /*
 게시글 등록
 */
-
-$(".townBoard_btn.new_write").on("click", function(){
-	
-	
-	});
 $(".townBoard_btn.new_write").on("click", function(){
 	if($("#t_title_txt").val() == "" || CKEDITOR.instances.townBoard_content_area.getData() == ""){
 		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });

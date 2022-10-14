@@ -177,7 +177,6 @@
                 </div>
                 
                 
-                
                 <div class="col-12 col-md-7 col-lg-8">
                     <!-- Single News Area -->
                     
@@ -248,6 +247,8 @@
                     
                 </div>
             </div>
+            //페이징 끝
+            
         </div>
     </section>
     <!-- Blog Area End -->
