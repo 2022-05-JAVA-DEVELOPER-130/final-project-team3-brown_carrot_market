@@ -42,3 +42,28 @@
     color: #fff;
     background-color: orange;
 }
+/* review_image_upload *******************/
+/* 
+#review_write_form>#drop:hover {
+	background-color: orange;
+}
+ */
+.drag-over {
+	background-color: orange;
+}
+
+.thumb {
+	width: 200px;
+	padding: 5px;
+	float: left;
+}
+
+.thumb>img {
+	width: 100%;
+}
+
+.thumb>.close {
+	position: absolute;
+	background-color: red;
+	cursor: pointer;
+}

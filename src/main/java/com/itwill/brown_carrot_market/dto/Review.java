@@ -27,9 +27,8 @@ public class Review {
 	public Review() {
 	}
 
-	public Review(int review_no, String review_desc, String review_image,
-			double review_point, Orders orders, UserInfo userInfo,
-			List<ReviewImage> reviewImageList) {
+	public Review(int review_no, String review_desc, String review_image, double review_point, Orders orders,
+			UserInfo userInfo, List<ReviewImage> reviewImageList) {
 		super();
 		this.review_no = review_no;
 		this.review_desc = review_desc;
@@ -98,10 +97,9 @@ public class Review {
 
 	@Override
 	public String toString() {
-		return "Review [review_no=" + review_no + ", review_desc=" + review_desc
-				+ ", review_image=" + review_image + ", review_point="
-				+ review_point + ", orders=" + orders + ", userInfo=" + userInfo
+		return "Review [review_no=" + review_no + ", review_desc=" + review_desc + ", review_image=" + review_image
+				+ ", review_point=" + review_point + ", orders=" + orders + ", userInfo=" + userInfo
 				+ ", reviewImageList=" + reviewImageList + "]";
 	}
-
+	
 }
