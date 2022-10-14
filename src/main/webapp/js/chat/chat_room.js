@@ -639,7 +639,8 @@ function chat_head(id,img,room_no,fresh,product,p_img,check){
 
 								<div class="col-lg-4 hidden-sm text-right">
 									
-									
+									<a  href="javascript:void(0);" class="btn btn-outline-info" style="border-color:green"><i
+										class="fa fa-won" id="결제하기" style="color:green;"></i></a> 
 									
 									<a  href="javascript:void(0);" class="btn btn-outline-info" ><i
 										class="fa fa-handshake-o" id="btnChatAppointment"></i></a> 
