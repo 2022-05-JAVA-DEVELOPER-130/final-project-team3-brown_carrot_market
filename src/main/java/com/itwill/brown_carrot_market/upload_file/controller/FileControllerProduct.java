@@ -30,10 +30,10 @@ public class FileControllerProduct {
 	@Qualifier(value="FilesStorageServiceImplProduct")
 	FilesStorageServiceProduct storageService;
 	
-	@PostMapping("/product/upload")
+	@PostMapping("/product_upload")
 	public ResponseEntity<Map<String,Object>> uploadFiles(
 			@RequestParam("files") MultipartFile[] files) {
-		
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>파일"+files);
 		Map<String,Object> result = new HashMap();
 		
 		System.out.println(files.length);
