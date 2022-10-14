@@ -1224,6 +1224,7 @@ $(document).on('click',"img[id^='chat_img_sizeUp']",function(e){
             window.open(url, name, option);
         }
        
+/***********팝업창 */		
 		
 		/*****************채팅목록 다시 부르기 */
 		
