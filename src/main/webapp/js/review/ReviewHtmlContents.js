@@ -96,7 +96,7 @@ ReviewHtmlContents.review_write_form=function(orders_no) {
     		e.preventDefault();
 
     	});
-    		
+    		  
     	$("#thumbnails").on("click", ".close", function(e) {
     		var $target = $(e.target); 
     		var idx = $target.attr('data-idx');
