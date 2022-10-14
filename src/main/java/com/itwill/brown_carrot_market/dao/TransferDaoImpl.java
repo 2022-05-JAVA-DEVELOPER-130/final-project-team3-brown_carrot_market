@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.itwill.brown_carrot_market.dto.Product;
 import com.itwill.brown_carrot_market.dto.Transfer;
 import com.itwill.brown_carrot_market.mapper.TransferMapper;
 
@@ -13,6 +12,7 @@ import com.itwill.brown_carrot_market.mapper.TransferMapper;
 public class TransferDaoImpl implements TransferDao{
 	@Autowired(required = true)
 	private TransferMapper transferMapper;
+	
 	public TransferDaoImpl() {
 		System.out.println("#### TransferDaoImplMyBatisMapperInterface() : 디폴트생성자 호출  ");
 
@@ -54,6 +54,11 @@ public class TransferDaoImpl implements TransferDao{
 	public List<Transfer> selectById(String user_id) throws Exception {
 		System.out.println("#### TransferDaoImpl : selectById(String user_id) 호출  ");
 		return transferMapper.selectById(user_id);
+	}
+
+	@Override
+	public List<Transfer> selectByP_No(int p_no) throws Exception {
+		return transferMapper.selectByP_No(p_no);
 	}
 	
 	

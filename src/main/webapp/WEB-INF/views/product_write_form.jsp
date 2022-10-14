@@ -111,7 +111,7 @@
                                     <ul style="display : flex">
                                     <li>
                                     <label style="display:inline-block;">
-                                    <span>사진1: <input type="file" name="files"></span>
+                                    <span>사진1: <input type="file" name="files" ></span>
 									<span>사진2: <input type="file" name="files"></span>
 									<span>사진3: <input type="file" name="files"></span>
 									<span>사진4: <input type="file" name="files"></span>

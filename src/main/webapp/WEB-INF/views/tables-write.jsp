@@ -15,6 +15,8 @@
 
     <!-- include_common_top -->
     <!-- include_common_top -->
+    
+    <!-- css -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/board.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">

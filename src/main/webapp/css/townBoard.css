@@ -1,5 +1,5 @@
 
-#townBoard_list_tbody .blog_post_content{
+#townBoard_list_tbody_all .blog_post_content{
 	margin-bottom: 50px;
 }
 
@@ -45,6 +45,27 @@
     height: 30px;
     line-height: 30px;
     font-size: 12px;
+}
+
+li{
+	margin-left: 10px;
+}
+
+.imgspan::after{
+	width:30px;
+	height:30px;
+	background-color: #eee;
+	border-radius: 50%;
+	top: 50%;
+	left:50%;
+	transform: translate(-50%,-50%);
+	background-position: center;
+	background-size: contain;
+	background-image: url("p-img/plus.png");
+	content: '';
+	display: block;
+	position: absolute;
+	
 }
 
 
