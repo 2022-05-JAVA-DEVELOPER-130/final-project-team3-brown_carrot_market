@@ -172,13 +172,17 @@
 	-->
    <select id="selectProductAddress" parameterType="map" resultType="map">
    		select a.ADDRESS_NAME,a.ADDRESS_LAT,a.ADDRESS_LNG from ADDRESS a where a.user_id=#{user_id} and a.address_no=#{address.address_no}
+   </select>	
+     
+   <select id="selectProductPK"  resultType="int">
+   		select PRODUCT_P_NO_SEQ.currval from dual
    </select>	  
 	  
 	<insert id="insertProduct" parameterType="map" useGeneratedKeys="true">
-		<selectKey keyProperty="p_no" order="BEFORE" resultType="int">
+		<!-- <selectKey keyProperty="p_no" order="BEFORE" resultType="int">
 			select PRODUCT_P_NO_SEQ.nextval from dual
-		</selectKey>
-		insert into product p values(#{p_no}, 
+		</selectKey> -->
+		insert into product p values(PRODUCT_P_NO_SEQ.nextval, 
                            #{p_title},
                 		   #{p_desc},
                			   #{p_price},
@@ -191,6 +195,10 @@
                            #{address.address_lng},
                            #{productCategory.p_ctgr_no},
                            #{userInfo.user_id})
+         <selectKey keyProperty="p_no" order="AFTER" resultType="int">
+			select PRODUCT_P_NO_SEQ.currval from dual
+		</selectKey>                  
+                           
 	</insert>
 	
 	<!-- 사진 -->

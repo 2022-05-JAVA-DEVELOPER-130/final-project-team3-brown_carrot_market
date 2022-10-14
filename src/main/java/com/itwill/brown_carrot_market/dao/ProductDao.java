@@ -45,4 +45,6 @@ public interface ProductDao {
 	
 	//상품 등록
 	int insertProduct(Map map)throws Exception;
+	public int selectProductPK()throws Exception;
+	
 }

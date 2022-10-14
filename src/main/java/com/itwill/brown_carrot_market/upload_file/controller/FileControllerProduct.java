@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
+import com.itwill.brown_carrot_market.service.ProductService;
+import com.itwill.brown_carrot_market.service.ProductServiceImpl;
 import com.itwill.brown_carrot_market.upload_file.model.FileInfo;
 import com.itwill.brown_carrot_market.upload_file.service.FilesStorageServiceProduct;
 
@@ -29,6 +31,9 @@ public class FileControllerProduct {
 	@Autowired
 	@Qualifier(value="FilesStorageServiceImplProduct")
 	FilesStorageServiceProduct storageService;
+	
+	@Autowired
+	private ProductService  productService; 
 	
 	@PostMapping("/product_upload")
 	public ResponseEntity<Map<String,Object>> uploadFiles(
@@ -58,6 +63,8 @@ public class FileControllerProduct {
 			
 			result.put("message", message);
 			result.put("newFileName", newFileName);
+			
+			//productService.insertProduct(result);
 			
 			//return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
 			return ResponseEntity.status(HttpStatus.OK).body(result);

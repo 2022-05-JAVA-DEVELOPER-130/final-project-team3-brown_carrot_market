@@ -30,6 +30,13 @@ function productCreate() {
 	//사진 리스트 업로드
 	//var fileInput = document.querySelector("#files");
 	const formData1 = new FormData($('#main_contact_form')[0]);
+	/*
+	const formData1 = new FormData();
+	for (let i = 0; i < $('#main_contact_form').length; i++) {
+        formData1.append('files', $('#main_contact_form')[i]);
+    }
+	*/
+	
    	//console.log("사진 데이터:"+formData1);
 
 	$.ajax({
