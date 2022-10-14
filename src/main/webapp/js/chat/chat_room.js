@@ -641,7 +641,7 @@ function chat_head(id,img,room_no,fresh,product,p_img,check){
 								<div class="col-lg-4 hidden-sm text-right">
 									
 									<a  href="javascript:void(0);" class="btn btn-outline-info" style="border-color:green"><i
-										class="fa fa-won" id="결제하기" style="color:green;"></i></a> 
+										class="fa fa-won" id="btnCarrot_Pay" style="color:green;"></i></a> 
 									
 									<a  href="javascript:void(0);" class="btn btn-outline-info" ><i
 										class="fa fa-handshake-o" id="btnChatAppointment"></i></a> 
@@ -1191,6 +1191,16 @@ $(document).on('click',"img[id^='chat_img_sizeUp']",function(e){
 	popupImageSizeUp(src);
 })
 
+$(document).on('click','#btnCarrot_Pay',function(e){
+	popupCarrotPay();
+})
+
+  function popupCarrotPay(){
+	 var url = "transfer_page";
+            var name = "당근 페이";
+            var option = "width = 470, height = 790, top = 100, left = 200, location = no,  resizable=no";
+            window.open(url, name, option);
+}
 
   function popupImageSizeUp(src){
 	var url = "chat_image_sizeUp?src="+src;
