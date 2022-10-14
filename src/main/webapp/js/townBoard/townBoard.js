@@ -31,7 +31,7 @@ function changeQnaList(pageno,t_ctgr_no){
                                 <a href="#">${townBoard.townCategory.t_ctgr_name}</a>
                                 <span>조회수 : ${townBoard.t_count}</span>
                             </div>
-                            <a href="townboard_view?t_no=${townBoard.t_no}" p_no="${townBoard.t_no}" class="blog_title">${townBoard.t_title}</a>
+                            <a href="townboard_view?t_no=${townBoard.t_no}&pageno=${pageno}" t_no="${townBoard.t_no}" class="blog_title">${townBoard.t_title}</a>
                             <p>${townBoard.t_content}</p>
                             <a href="single-blog.html">Continue Reading <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                         </div>
@@ -115,26 +115,28 @@ $(".townBoard_btn.list").on("click", function(){
 /*
 게시글 수정 폼 
 */
-$(".notice_btn.update_form").on("click", function(){
-	let notice_no = $(this).attr("notice_no");
+$(".townBoard_btn.update_form").on("click", function(){
+	let t_no = $(this).attr("t_no");
 	let pageno = $(this).attr("pageno");
-	location.href = `notice_update_form?notice_no=${notice_no}&pageno=${pageno}`;
+	console.log(t_no);
+	console.log(pageno);
+	location.href = `townboard_update_form?t_no=${t_no}&pageno=${pageno}`;
 });
 
 /* 
 게시글 수정 
 */ 
-$(".notice_btn.update").on("click", function(){ 
-	if($("#notice_title_txt").val() == "" || CKEDITOR.instances.notice_content_area.getData() == ""){
+$(".townBoard_btn.update").on("click", function(){ 
+	if($("#t_title_txt").val() == "" || CKEDITOR.instances.townBoard_content_area.getData() == ""){
 		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
 		return;
 	}
 		ToastConfirm.fire({ icon: 'question', 
 							title: "게시글을 수정하시겠습니까?"}).then((result) => {
 							if(result.isConfirmed){
-								let notice_no = $(this).attr("notice_no"); 
-								$("#qna_update_form").attr("action", "notice_update"); 
-								$("#qna_update_form").submit(); // q_no, q_titla, q_content 
+								let t_no = $(this).attr("t_no"); 
+								$("#townBoard_update_form").attr("action", "townboard_update_action"); 
+								$("#townBoard_update_form").submit(); // q_no, q_titla, q_content 
 							}
 					});
 });
