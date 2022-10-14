@@ -597,12 +597,14 @@ function chat_head(id,img,room_no,fresh,product,p_img,check){
 	if(product.p_sell==1){
 		p_sell="판매중";
 		if(check==1){
-			a=	'<button class="dropdown-item" type="button" id="reserveBtn"><b>예약 완료하기</b></button>';
+			a=	'<button class="dropdown-item" type="button" id="reserveBtn"><b>예약중으로 변경</b></button>';
+			b='<button class="dropdown-item" type="button" id="soldOutBtn"><b>판매 완료하기</b></button>';
 		}
 	}else if(product.p_sell==2){
 		p_sell="예약중";
-		if(check==1){
+		if(check==1){	
 		a=	'<button class="dropdown-item" type="button" id="soldOutBtn"><b>판매 완료하기</b></button>';
+		b= '<button class="dropdown-item" type="button" id="sellBtn"><b>판매중으로 변경</b></button>';
 		}
 	}else if(product.p_sell==3){
 		p_sell="판매완료";
