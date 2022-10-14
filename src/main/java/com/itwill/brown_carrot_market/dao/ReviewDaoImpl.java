@@ -47,7 +47,7 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 
 	@Override
-	public int isExistedReviewByOrdersNoId(Review review) throws Exception {
+	public Review isExistedReviewByOrdersNoId(Review review) throws Exception {
 		return reviewMapper.isExistedReviewByOrdersNoId(review);
 	}
 }

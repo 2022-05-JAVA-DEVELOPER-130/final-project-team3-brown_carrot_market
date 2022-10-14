@@ -61,8 +61,8 @@ public class ReviewRestController {
 		Review review = new Review();
 		review.setOrders(new Orders(ordersNo, null, null, null, null, null));
 		review.setUserInfo(new UserInfo(sUserId, sUserId, sUserId, url, msg, ordersNo, code, sUserId, null));
-		int result = reviewService.isExistedReviewByOrdersNoId(review);
-		if(result>0) {
+		Review result = reviewService.isExistedReviewByOrdersNoId(review);
+		if(result!=null) {
 			code=2;
 			msg="review 존재";
 		}

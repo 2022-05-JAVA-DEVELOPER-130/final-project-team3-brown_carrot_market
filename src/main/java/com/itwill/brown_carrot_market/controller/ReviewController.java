@@ -39,28 +39,27 @@ public class ReviewController {
 	}
 	
 	@PostMapping("/review_write_action")
-	public String review_write_action(@RequestParam Map<String, Object> images, HttpServletRequest request) throws Exception {
+	public String review_write_action(@RequestParam Map<String, Object> map, HttpServletRequest request) throws Exception {
 		
 		//System.out.println("****review_write_action-review: "+review);
-		System.out.println("****review_write_action-images: "+images);
+		System.out.println("****review_write_action-images: "+map);
 		
-		String json = images.get("images").toString();
+		String json = map.get("review").toString();
 		ObjectMapper mapper = new ObjectMapper();
-		List<ReviewImage> reviewImages = mapper.readValue(json, new TypeReference<ArrayList<ReviewImage>>(){});
-		System.out.println("reviewImages >>"+reviewImages);
-		
-		json = images.get("review").toString();
-		//ObjectMapper mapper = new ObjectMapper();
 		Review review = mapper.readValue(json, new TypeReference<Review>(){});
 		System.out.println("review >>"+review);
 		
-		json = images.get("orders_no").toString();
+		json = map.get("orders_no").toString();
 		int orders_no= mapper.readValue(json, new TypeReference<Integer>(){});
 		System.out.println("orders_no >>"+orders_no);
-		
 		review.setOrders(new Orders(orders_no, null, null, null, null, null));
-		
-		review.setReviewImageList(reviewImages);
+
+		json = map.get("images").toString();
+		if(json!=null && json!="") {	//image가 업로드 된 경우에만
+			List<ReviewImage> reviewImages = mapper.readValue(json, new TypeReference<ArrayList<ReviewImage>>(){});
+			System.out.println("reviewImages >>"+reviewImages);
+			review.setReviewImageList(reviewImages);
+		}
 		
 		UserInfo sUser = (UserInfo)request.getSession().getAttribute("sUser");
 		review.setUserInfo(sUser);

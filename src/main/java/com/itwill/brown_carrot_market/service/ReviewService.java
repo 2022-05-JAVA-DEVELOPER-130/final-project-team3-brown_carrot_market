@@ -16,5 +16,5 @@ public interface ReviewService {
 	
 	public Review findReviewByRivewNo(int review_no) throws Exception;
 	
-	public int isExistedReviewByOrdersNoId(Review review) throws Exception;
+	public Review isExistedReviewByOrdersNoId(Review review) throws Exception;
 }

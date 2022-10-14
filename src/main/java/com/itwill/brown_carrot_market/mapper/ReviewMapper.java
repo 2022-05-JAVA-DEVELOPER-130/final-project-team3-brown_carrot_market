@@ -22,7 +22,7 @@ public interface ReviewMapper {
 
 	public Review findReviewByRivewNo(int review_no);
 
-	public int isExistedReviewByOrdersNoId(Review review);
+	public Review isExistedReviewByOrdersNoId(Review review);
 	
 
 }

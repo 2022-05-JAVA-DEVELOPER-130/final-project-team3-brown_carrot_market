@@ -70,12 +70,11 @@ public class ReviewServiceImpl implements ReviewService{
 
 	@Override
 	public Review findReviewByRivewNo(int review_no) throws Exception {
-		
 		return null;
 	}
 	
 	@Override
-	public int isExistedReviewByOrdersNoId(Review review) throws Exception {
+	public Review isExistedReviewByOrdersNoId(Review review) throws Exception {
 		return reviewDao.isExistedReviewByOrdersNoId(review);
 	}
 

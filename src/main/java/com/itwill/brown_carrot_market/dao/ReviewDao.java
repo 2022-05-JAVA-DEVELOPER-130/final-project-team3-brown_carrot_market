@@ -16,6 +16,6 @@ public interface ReviewDao {
 	
 	public Review findReviewByRivewNo(int review_no);
 
-	public int isExistedReviewByOrdersNoId(Review review) throws Exception;
+	public Review isExistedReviewByOrdersNoId(Review review) throws Exception;
 	
 }

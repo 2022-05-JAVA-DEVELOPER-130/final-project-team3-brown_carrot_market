@@ -57,44 +57,58 @@ ReviewHtmlContents.review_write_form=function(orders_no) {
     			formData.append('files', file); 
     		});
     		
-    		$.ajax({
-    			url : 'review/upload',
-    			type : 'POST',
-    			processData : false, //파일전송시 반드시 false
-    			contentType : false,
-    			data : formData,
-    			success : function(jsonResult) {
-					console.log(jsonResult.newFileNames);
-    				console.log('성공!!');
-    				
-    				var review = {
-						"review_point":$('#review_point').val(),
-						"review_desc":$('#review_desc').val(),
-						"review_image":$('#review_image').val()
+			var review = {
+				"review_point":$('#review_point').val(),
+				"review_desc":$('#review_desc').val(),
+				"review_image":$('#review_image').val()
+			}
+			
+    		if(formData.get("files")!=null){
+	    		$.ajax({
+	    			url : 'review/upload',
+	    			type : 'POST',
+	    			processData : false, //파일전송시 반드시 false
+	    			contentType : false,
+	    			data : formData,
+	    			success : function(jsonResult) {
+	    				$.ajax({
+							url : 'review_write_action',
+							method : 'POST',
+							data: {
+								"orders_no": orders_no,
+								"review":JSON.stringify(review),
+								"images": JSON.stringify(jsonResult.newFileNames)
+								},
+							success : function(jsonResult) {
+								 console.log(jsonResult.msg);
+								 location.href='orders_list';
+						    },error:  function(jsonResult) {
+			    				console.log('error!!: review_write_action');
+							}
+						});
+	    			},
+	    			error : function() {
+	    				console.log('error!!');
+	    			}
+	    		});
+    		}else{	//이미지가 업로드되지 않은 경우
+				$.ajax({
+					url : 'review_write_action',
+					method : 'POST',
+					data: {
+						"orders_no": orders_no,
+						"review":JSON.stringify(review),
+						"images": null
+						},
+					success : function(jsonResult) {
+						 console.log(jsonResult.msg);
+						 location.href='orders_list';
+				    },error:  function(jsonResult) {
+	    				console.log('error!!: review_write_action');
 					}
-    				$.ajax({
-						url : 'review_write_action',
-						method : 'POST',
-						data: {
-							"orders_no": orders_no,
-							"review":JSON.stringify(review),
-							"images": JSON.stringify(jsonResult.newFileNames)
-							},
-						success : function(jsonResult) {
-							 console.log(jsonResult.msg);
-							 //수정필요
-							 //$("#user_my_account").get(0).click();
-					    },error:  function(jsonResult) {
-		    				console.log('error!!: review_write_action');
-						}
-					});
-    			},
-    			error : function() {
-    				console.log('error!!');
-    			}
-    		});
+				});
+			}
     		e.preventDefault();
-
     	});
     		  
     	$("#thumbnails").on("click", ".close", function(e) {
@@ -108,13 +122,11 @@ ReviewHtmlContents.review_write_form=function(orders_no) {
 	});//END
 	
 	return `<div class="submit_a_review_area col-12" style="border: 1px solid #d6e6fb; padding:30px;">
-                        <h4>Submit A Review</h4>
+                        <h4>후기작성</h4>
                         <!-- [Start]review_write_form -->
-                        <!-- <form id="review_write_form" name="review_write_form" action="#" method="post"> -->
                         <form id="review_write_form" name="review_write_form" action="review_write_action" method="post">
-                            <!--<input type="hidden" class="" name="orders.orders_no" value="">-->
                                 <div class="form-group">
-                                    <span>Your Ratings</span>
+                                    <span>별점주기</span>
                                     <input type="hidden" id="review_point" name="review_point" class="" value="">
                                     <input type="hidden" id="review_image" name="review_image" class="" value="test">
                                     <div class="stars">
@@ -159,24 +171,89 @@ ReviewHtmlContents.review_write_form=function(orders_no) {
                                 </div>
                                 -->
                                 <div class="form-group">
-                                    <label for="comments">Comments</label>
+                                    <label for="review_desc">내용</label>
                                     <textarea class="form-control" id="review_desc" name="review_desc" rows="5" data-max-length="150"></textarea>
                                 </div>
                                 
                                 <!-- 이미지 업로드 -->
+                                <label for="drop">사진 첨부</label>
 								<div id="drop" class="form-group"
 									style="border: 1px solid black; width: 400px; height: 300px; padding: 3px">
-									여기로 drag & drop
+									여기로 drag & drop 해주세요
 									<div id="thumbnails"></div>
 								</div>
                                 <input type="button" id="btnSubmit" class="btn btn-primary" value="Submit Review" />
                                 
-                                <!--<button type="submit" id="btn_review_write_form" class="btn btn-primary">Submit Review</button>-->
                             </form>
                         <!-- [END]review_write_form -->
                 	</div>`;
 }
 
-ReviewHtmlContents.review_write_form2=function(orders_no) {
-
+ReviewHtmlContents.review_view=function(review) {
+	return `<div class="submit_a_review_area col-12" style="border: 1px solid #d6e6fb; padding:30px;">
+                        <h4>후기작성</h4>
+                        <!-- [Start]review_write_form -->
+                        <form id="review_write_form" name="review_write_form" action="review_write_action" method="post">
+                                <div class="form-group">
+                                    <span>별점</span>
+                                    <input type="hidden" id="review_point" name="review_point" class="" value="">
+                                    <input type="hidden" id="review_image" name="review_image" class="" value="test">
+                                    <div class="stars">
+                                        <input type="radio" name="star" class="star-0_5" id="star-0_5" onclick='setPoint(this.id);'>
+                                        <label class="star-0_5" for="star-0_5">0.5</label>
+                                        <input type="radio" name="star" class="star-1" id="star-1" onclick='setPoint(this.id);'>
+                                        <label class="star-1" for="star-1">1</label>
+                                        <input type="radio" name="star" class="star-1_5" id="star-1_5" onclick='setPoint(this.id);'>
+                                        <label class="star-1_5" for="star-1_5">1.5</label>
+                                        <input type="radio" name="star" class="star-2" id="star-2" onclick='setPoint(this.id);'>
+                                        <label class="star-2" for="star-2">2</label>
+                                        <input type="radio" name="star" class="star-2_5" id="star-2_5" onclick='setPoint(this.id);'>
+                                        <label class="star-2_5" for="star-2_5">2.5</label>
+                                        <input type="radio" name="star" class="star-3" id="star-3" onclick='setPoint(this.id);'>
+                                        <label class="star-3" for="star-3">3</label>
+                                        <input type="radio" name="star" class="star-3_5" id="star-3_5" onclick='setPoint(this.id);'>
+                                        <label class="star-3_5" for="star-3_5">3.5</label>
+                                        <input type="radio" name="star" class="star-4" id="star-4" onclick='setPoint(this.id);'>
+                                        <label class="star-4" for="star-4">4</label>
+                                        <input type="radio" name="star" class="star-4_5" id="star-4_5" onclick='setPoint(this.id);'>
+                                        <label class="star-4_5" for="star-4_5">4.5</label>
+                                        <input type="radio" name="star" class="star-5" id="star-5" onclick='setPoint(this.id);'>
+                                        <label class="star-5" for="star-5">5</label>
+                                        <span></span>
+                                    </div>
+                                </div>
+                                
+                                <!--
+                                <div class="form-group">
+                                    <label for="name">Nickname</label>
+                                    <input type="email" class="form-control" id="name" placeholder="Nazrul">
+                                </div>
+                                <div class="form-group">
+                                    <label for="options">Reason for your rating</label>
+                                    <select class="form-control small right py-0 w-100" id="options">
+                                        <option>Quality</option>
+                                        <option>Value</option>
+                                        <option>Design</option>
+                                        <option>Price</option>
+                                        <option>Others</option>
+                                    </select>
+                                </div>
+                                -->
+                                <div class="form-group">
+                                    <label for="review_desc">내용</label>
+                                    <textarea class="form-control" id="review_desc" name="review_desc" rows="5" data-max-length="150"></textarea>
+                                </div>
+                                
+                                <!-- 이미지 업로드 -->
+                                <label for="drop">첨부 사진</label>
+								<div id="show" class="form-group"
+									style="border: 1px solid black; width: 400px; height: 300px; padding: 3px">
+									<div id="thumbnails"></div>
+								</div>
+                                <!--<input type="button" id="btnSubmit" class="btn btn-primary" value="Submit Review" />-->
+                                <input type="button" id="btn_review_edit" class="btn btn-primary" value="Edit Review" />
+                                <input type="button" id="btn_review_remove" class="btn btn-primary" value="Delete Review" />
+                            </form>
+                        <!-- [END]review_write_form -->
+                	</div> `;
 }
