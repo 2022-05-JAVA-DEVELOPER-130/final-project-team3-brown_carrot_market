@@ -196,8 +196,8 @@ ReviewHtmlContents.review_view=function(review) {
                         <form id="review_write_form" name="review_write_form" action="review_write_action" method="post">
                                 <div class="form-group">
                                     <span>별점</span>
-                                    <input type="hidden" id="review_point" name="review_point" class="" value="">
-                                    <input type="hidden" id="review_image" name="review_image" class="" value="test">
+                                    <input type="text" id="review_point" name="review_point" class="" value="${review.review_point}">
+                                    <input type="text" id="review_image" name="review_image" class="" value="${review.review_image}">
                                     <div class="stars">
                                         <input type="radio" name="star" class="star-0_5" id="star-0_5" onclick='setPoint(this.id);'>
                                         <label class="star-0_5" for="star-0_5">0.5</label>
@@ -241,7 +241,7 @@ ReviewHtmlContents.review_view=function(review) {
                                 -->
                                 <div class="form-group">
                                     <label for="review_desc">내용</label>
-                                    <textarea class="form-control" id="review_desc" name="review_desc" rows="5" data-max-length="150"></textarea>
+                                    <textarea class="form-control" id="review_desc" name="review_desc" rows="5" data-max-length="150">${review.review_desc}</textarea>
                                 </div>
                                 
                                 <!-- 이미지 업로드 -->
