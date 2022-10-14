@@ -38,6 +38,7 @@ function productCreate() {
 		data:formData,
 		success:function(jsonResult){
 		console.log(jsonResult);
+		 //사진이름받기
 		 $.ajax({
 				  url : 'product_write_action',
 				  method : 'POST',
@@ -52,7 +53,7 @@ function productCreate() {
 		}
 	});
 	
-
+	
 	document.product_write_form.action = "product_write_action";
 	document.product_write_form.method='POST';
 	document.product_write_form.submit();
