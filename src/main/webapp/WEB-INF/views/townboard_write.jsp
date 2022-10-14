@@ -19,13 +19,17 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/product.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
 	
 	<!-- javaScript -->
-    <script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
     <script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+	
 	<script type="text/javascript" src="js/product/product.js"></script>
+	<script type="text/javascript" src="js/townBoard/townBoard.js"></script>
 	
 	<!-- toast -->
  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
@@ -68,14 +72,14 @@
     <!-- Message Now Area -->
                 <div class="col-12">
                     <div class="contact_from mb-50">
-                        <form name="product_write_form" action="product_write_action" 
+                        <form id="townBoard_write_form" action="product_write_action" 
                         	method="post" enctype="multipart/form-data" id="main_contact_form">
                             <div class="contact_input_area">
                                 <div id="success_fail_info"></div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="t_title" id="t_title" placeholder= 제목 required>
+                                            <input type="text" class="form-control" name="t_title" id="t_title_txt" placeholder= 제목 required>
                                         </div>
                                     </div>
                                     <!--  
@@ -105,12 +109,13 @@
                                             </select>
                                         </div>
                                     </div>
-                                    
+                                    <!-- 
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <input type="text" class="form-control" name="p_price" id="p_price" placeholder="가격" required>
                                         </div>
                                     </div>
+                                     -->
                                     
                                     <!-- 사진 넣기 임시 
                                     <div>
@@ -126,12 +131,18 @@
 									</ul>
 									</div>
 									사진 넣기 임시 끝-->
+									
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea name="t_content" class="form-control" id="t_content" cols="30" rows="10" placeholder="내용" required></textarea>
+                                           <!--  <textarea name="t_content" class="form-control" id="t_content" cols="30" rows="10" placeholder="내용" required></textarea> -->
+                                        	<textarea name="townBoard_content" id="townBoard_content_area" placeholder=" content"></textarea>
                                         	</div>
                                         </div>
+                                        
+                                        
                                     </div>
+                                    
+                                    
                                     <!-- 이미지 업로드 부분 시작-->
                                    <div class="img_box">
                                    <ul class="imgul" style="display : flex;">
@@ -223,8 +234,8 @@
                                     </div>
                                      <!-- 이미지 업로드 부분 끝-->
                                     <div class="col-12 text-center">
-                                        <input type="button" id="btn_product_write_action" class="btn btn-primary w-40" value="게시글 올리기" onclick="productCreate()">&nbsp; 
-                                        <input type="button" class="btn btn-primary w-40" value="동네게시글목록" onclick="productList()">
+                                        <input type="button" class="townBoard_btn new_write" value="게시글 올리기" />&nbsp; 
+                                        <input type="button" class="btn btn-primary w-40" value="동네게시글목록" onclick="productList()"/>
                                 </div>
                             </div>
                         </form>
@@ -257,6 +268,8 @@
     <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
+    <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     
     <style type="text/css">
 #toast-container > .toast {

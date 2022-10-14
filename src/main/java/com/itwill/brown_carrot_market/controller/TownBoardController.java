@@ -8,10 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.brown_carrot_market.dto.Address;
+import com.itwill.brown_carrot_market.dto.ProductCategory;
 import com.itwill.brown_carrot_market.dto.TownBoard;
+import com.itwill.brown_carrot_market.dto.TownCategory;
+import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.TownBoardService;
 import com.itwill.brown_carrot_market.util.PageMakerDto;
 
@@ -168,9 +172,72 @@ public class TownBoardController {
 		
 	}
 	
+	//게시글 작성 폼
+	@RequestMapping("/townboard_write_form")
+	public String townboard_write_form(HttpSession session) {
+		String sUserId = (String)session.getAttribute("sUserId");
+		String forwardPath = "";
+		//비회원일때
+		if(sUserId == null) {
+			forwardPath = "user_login";
+		}
+		//회원일때
+		if(sUserId != null) {
+			forwardPath = "townboard_write";
+		}
+		return forwardPath;
+	}
+	
+	//새글 등록 
+	@RequestMapping(value = "/townboard_write_action", method = RequestMethod.POST)
+	public String townBoard_write_action(@RequestParam Map<String, Object> map, Model model, HttpSession session) {
+		String forwardPath = "";
+		String sUserId = (String)session.getAttribute("sUserId");
+		Address sAddress = (Address)session.getAttribute("sAddress");
+		map.put("address", sAddress);
+		
+		try {
+		UserInfo userInfo = new UserInfo(sUserId, sUserId, sUserId, sUserId, forwardPath, 0, 0, sUserId, null);
+		map.put("userInfo", userInfo);	
+		TownCategory townCategory = new TownCategory(Integer.parseInt(map.get("t_ctgr_no").toString()), "");
+		map.put("townCategory", townCategory);
+		map.remove("t_ctgr_no");
+		
+		//map.put("product", map);
+		
+		/*사진
+		List<String> fileNames = new ArrayList<>();
+
+		for (MultipartFile file : files) {
+			System.out.println(file.isEmpty());
+			if (!file.isEmpty()) {
+				newFileName= storageService.save(file);
+				fileNames.add(file.getOriginalFilename());
+
+				message = "Uploaded the files successfully: " + fileNames+" newFileName"+newFileName;
+			}else {
+				message="Please select a valid mediaFile..";
+			}
+		}
+		map.put("newFileName",newFileName);
+		*/
+		
+		System.out.println("controller map : "+map);
+		
+		
+		int insertCount = townBoardService.insertTownBoard(map);
+		forwardPath = "redirect:townBoard_list";
+		}catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("MSG", "잘모르는실패!!!");
+			forwardPath = "redirect:main";
+		}
+		
+		return forwardPath;
+	}
 	
 	
-	
+
 	
 	
 	

@@ -203,8 +203,13 @@
                    </c:forEach>
                     </div>
                     </div>
-
+					
+					
+					<input type="button" class="townBoard_btn write_form" pageno="${pageno}" value="게시글작성" />
+					
                 </div>
+                
+                
             </div>
 
             <div class="row">

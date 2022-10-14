@@ -142,37 +142,29 @@ $(".notice_btn.update").on("click", function(){
 /*
 새글 등록 폼 
 */
-$(".notice_btn.write_form").on("click", function(){
+$(".townBoard_btn.write_form").on("click", function(){
 	let pageno = $(this).attr("pageno");
-	location.href = "notice_write_form?pageno=" + pageno;
+	location.href = "townboard_write_form?pageno=" + pageno;
 });
 
 
 /*
 게시글 등록
 */
-$(".notice_btn.new_write").on("click", function(){
-	if($("#q_title_txt").val() == "" || CKEDITOR.instances.notice_content_area.getData() == ""){
+
+$(".townBoard_btn.new_write").on("click", function(){
+	
+	
+	});
+$(".townBoard_btn.new_write").on("click", function(){
+	if($("#t_title_txt").val() == "" || CKEDITOR.instances.townBoard_content_area.getData() == ""){
 		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
 		return;
 	}
-	$("#notice_write_form").attr("action", "notice_new_write");
-	$("#notice_write_form").submit();
+	$("#townBoard_write_form").attr("action", "townboard_write_action");
+	$("#townBoard_write_form").submit();
 });
 
-/*
-게시글 등록시 체크에 따라 고정글 설정
-*/
-/*
-if(document.getElementById("notice_fix").checked) {
-    document.getElementById("notice_fix_hidden").disabled = true;
-}
-*/
-
-/*
-일반 회원일때 등록, 수정, 삭제 버튼 숨기기
-*/
-$()
 
 /*
 ckeditor
@@ -185,6 +177,14 @@ $(() => {
                  	});
 	}
 });
+$(() => {
+	if($("#townBoard_content_area").length != 0){
+		 CKEDITOR.replace('townBoard_content_area', {
+						height: 500                                                  
+                 	});
+	}
+});
+
 
 /*
 alert 세팅
