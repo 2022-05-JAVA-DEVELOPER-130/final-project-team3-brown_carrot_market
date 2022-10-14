@@ -177,7 +177,6 @@
                 </div>
                 
                 
-                
                 <div class="col-12 col-md-7 col-lg-8">
                     <!-- Single News Area -->
                     
@@ -203,8 +202,13 @@
                    </c:forEach>
                     </div>
                     </div>
-
+					
+					
+					<input type="button" class="townBoard_btn write_form" pageno="${pageno}" value="게시글작성" />
+					
                 </div>
+                
+                
             </div>
 
             <div class="row">
@@ -243,6 +247,8 @@
                     
                 </div>
             </div>
+            //페이징 끝
+            
         </div>
     </section>
     <!-- Blog Area End -->

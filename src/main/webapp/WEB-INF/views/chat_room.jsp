@@ -502,9 +502,19 @@ color:#070a57;
 
 .chat_read_check{
 	color: orange;
-    font-size: 12px;
+    font-size: 13px;
     display: inline-block;
     vertical-align: bottom;
+    padding-left: 3px;
+}
+
+.chat_read_check_right{
+	color: orange;
+    font-size: 13px;
+    display: inline-block;
+    float: right;
+    padding-right: 10px;
+    padding-top: 40px;
 }
 </style>
 
