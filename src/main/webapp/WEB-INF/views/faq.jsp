@@ -118,7 +118,10 @@
                                 </div>
                                 <div id="bswicollapseThree" class="collapse" aria-labelledby="bigshopWithIconAccordian3" data-parent="#bigshopAccordianIcon">
                                     <div class="card-body">
-                                        <p class="mb-0">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</p>
+                                        <p class="mb-0">흙당근마켓에서 사고 싶은 물건을 발견했나요? 구매하는 방법은 간단해요!<br><br> 게시글 하단 [채팅으로 거래하기] 버튼을 눌러보세요. 판매자와 채팅을 할 수 있어요. 구매 전에 궁금한 것이 있다면 직접 물어볼 수도 있어요.
+                                        <br>거래 방법은 크게 두 가지가 있어요. <br><br> 첫 번째, 직거래 <br> 직거래할 경우 거래 약속 시간과 장소를 정해야 해요. 채팅방에서 [약속하기] 기능을 통해 시간과 장소를 정해보세요! 약속 시간 1시간 전에 판매자와 사용자에게 알림을 보내주고 있어요.
+                                        <br> 직접 만나 물건을 확인한 뒤 거래가 성사되면 현금을 전달하거나, 계좌이체 해주시면 돼요.<br> 채팅방의 [당근페이]를 이용하면 상대방에게 보다 편리하게 송금할 수 있어요.
+                                        <br><br>두 번째, 택배 거래 <br> 택배 거래할 경우 보통 입금이 먼저 진행돼요. 입금이 확인되면 판매자가 택배를 보낼 거예요. <br> 다만 택배 거래의 경우 중고거래 특성상 사기 피해가 발생할 수 있으니 유의해주세요. </p>
                                     </div>
                                 </div>
                             </div>
@@ -185,7 +188,7 @@
                                 </div>
                                 <div id="bswicollapseThree" class="collapse" aria-labelledby="bigshopWithIconAccordian3" data-parent="#bigshopAccordianIcon">
                                     <div class="card-body">
-                                        <p class="mb-0">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</p>
+                                        <p class="mb-0"> </p>
                                     </div>
                                 </div>
                             </div>
