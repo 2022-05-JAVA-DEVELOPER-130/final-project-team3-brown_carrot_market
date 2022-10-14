@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.Resource;
@@ -13,6 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
+import com.itwill.brown_carrot_market.service.ProductService;
+import com.itwill.brown_carrot_market.service.ProductServiceImpl;
 import com.itwill.brown_carrot_market.upload_file.model.FileInfo;
 import com.itwill.brown_carrot_market.upload_file.service.FilesStorageServiceProduct;
 
@@ -30,9 +35,12 @@ public class FileControllerProduct {
 	@Qualifier(value="FilesStorageServiceImplProduct")
 	FilesStorageServiceProduct storageService;
 	
+	@Autowired
+	private ProductService  productService; 
+	
 	@PostMapping("/product_upload")
 	public ResponseEntity<Map<String,Object>> uploadFiles(
-			@RequestParam("files") MultipartFile[] files) {
+			@RequestParam("files") MultipartFile[] files,@RequestParam Map<String, Object> map, Model model, HttpSession session) {
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>파일"+files);
 		Map<String,Object> result = new HashMap();
 		
@@ -58,6 +66,8 @@ public class FileControllerProduct {
 			
 			result.put("message", message);
 			result.put("newFileName", newFileName);
+			
+			productService.insertProduct(result);
 			
 			//return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
 			return ResponseEntity.status(HttpStatus.OK).body(result);

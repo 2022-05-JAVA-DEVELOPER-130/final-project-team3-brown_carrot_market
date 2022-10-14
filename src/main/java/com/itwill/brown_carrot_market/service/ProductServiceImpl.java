@@ -87,7 +87,7 @@ public class ProductServiceImpl implements ProductService{
 	public int insertProduct(Map map) throws Exception {
 		int result = 0;
 		int p_no = productDao.insertProduct(map);
-		/*
+		
 		Product product = (Product)map;
 		
 		if(product.getProductImagesList()!=null) {
@@ -98,8 +98,8 @@ public class ProductServiceImpl implements ProductService{
 			}
 		result = productImageDao.insertProductListImg(productImageList);
 		}
-		*/
-		return result;
+		
+		return p_no;
 	}
 	// 채팅에서 사용 
 	@Override

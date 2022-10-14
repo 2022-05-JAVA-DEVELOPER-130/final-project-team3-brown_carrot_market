@@ -87,13 +87,14 @@ public class ProductDaoImpl implements ProductDao{
 	}
 	
 	@Override
-	public int insertProduct(Map map) {
+	public int insertProduct(Map map) throws Exception{
 		System.out.println("###ProductDaoImpl : insertProduct 호출");
 		productMapper.insertProduct(map);
 		System.out.println(map);
 		//System.out.println(map.get("p_no"));
 		//map.get("p_no");
-		return (int) map.get("p_no");
+		return selectProductPK();
+		
 	}
 	
 	
@@ -118,6 +119,12 @@ public class ProductDaoImpl implements ProductDao{
 	public int updateProductSell(int p_sell, int p_no) throws Exception {
 		// TODO Auto-generated method stub
 		return productMapper.updateProductSell(p_sell, p_no);
+	}
+
+	@Override
+	public int selectProductPK() throws Exception {
+		// TODO Auto-generated method stub
+		return productMapper.selectProductPK();
 	}
 	
 	
