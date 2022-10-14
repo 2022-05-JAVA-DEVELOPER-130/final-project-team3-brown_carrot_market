@@ -28,14 +28,14 @@ function productCreate() {
 	}
 	
 	//사진 리스트 업로드
-	const formData = new FormData();
-	formData.append('pi',$("up_file4")); //이게 맞나?
+	const formData1 = new FormData();
+	formData1.append('pi',$("up_file4")); //이게 맞나?
 	$.ajax({
-		url:'user/upload',
+		url:'product/upload',
 		type:'POST',
 		processData:false,	//파일전송시 반드시 false
 		contentType:false,
-		data:formData,
+		data:formData1,
 		success:function(jsonResult){
 		console.log(jsonResult);
 		 //사진이름받기
@@ -52,6 +52,12 @@ function productCreate() {
 		  });
 		}
 	});
+	const formData2 = new FormData();
+	formData2.append('p_title',$("p_title"));
+	formData2.append('p_price',$("p_price"));
+	formData2.append('p_desc',$("p_desc"));
+	formData2.append('p_ctgr_no',$("p_ctgr_no"));
+	
 	
 	
 	document.product_write_form.action = "product_write_action";
