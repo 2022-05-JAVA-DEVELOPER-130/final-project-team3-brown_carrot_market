@@ -31,7 +31,7 @@ public class TransferController {
 			return forwardPath;
 		}
 	}
-
+ 
 	@LoginCheck
 	@RequestMapping(value = "/transfer_page")
 	public String transfer_page(Model model, HttpServletRequest request) throws Exception {
@@ -47,7 +47,7 @@ public class TransferController {
 		}
 
 	}
-	
+	 
 	@LoginCheck
 	@RequestMapping(value = "/transfer_complate")
 	public String transfer_complate(Model model, HttpServletRequest request) throws Exception {
