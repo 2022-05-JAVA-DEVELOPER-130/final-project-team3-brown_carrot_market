@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.itwill.brown_carrot_market.dao.UserInfoDao;
 import com.itwill.brown_carrot_market.dto.Invitation;
+import com.itwill.brown_carrot_market.dto.UserInfo;
 
 @Service
 public class MailServiceImpl implements MailService {
@@ -70,6 +71,55 @@ public class MailServiceImpl implements MailService {
 		}
 		return b;
 	}
+	
+	@Override
+	public boolean mailsenderFindPw(UserInfo userInfo) throws Exception {
+		
+		String newPw = RandomString();
+		
+		
+		boolean b = false;
+		JavaMailSenderImpl sender = new JavaMailSenderImpl();
+		String id = "browncarrotmarket@gmail.com";
+		String passwd = "ltxxmvgyzxwwfgpc";
+
+		sender.setHost("smtp.gmail.com");
+		sender.setPort(587);
+		sender.setUsername(id);
+		sender.setPassword(passwd);
+		sender.setDefaultEncoding("UTF-8");
+		Properties javaMailProperties = new Properties();
+		javaMailProperties.put("mail.smtp.auth", true);
+		javaMailProperties.put("mail.smtp.starttls.enable", true);
+
+		/*
+		 * javaMailProperties.put("mail.smtp.ssl.enable", true);
+		 * javaMailProperties.put("mail.smtp.ssl.trust","smtp.gmail.com" );
+		 */
+		sender.setJavaMailProperties(javaMailProperties);
+
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
+
+			@Override
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(userInfo.getUser_email())); // 수신 메일
+				mimeMessage.setSubject("[흙당근마켓]홈페이지 임시비밀번호를 안내 해드립니다.", "UTF-8");
+				mimeMessage.setText(userInfo.getUser_id()+" 회원님, 흙당근마켓 임시비밀번호를 안내해드립니다.\n임시로 발급 받으신 비밀번호로 로그인한 후, 새로운 비밀번호로 변경하시기 바랍니다.\n임시비밀번호 : "+newPw, "UTF-8");
+			}
+		};
+		try {
+			sender.send(preparator);
+			//메일이 성공적으로 보내지면, update pw
+			userInfo.setUser_pw(newPw);
+			userDao.updatePwById(userInfo);
+			
+			b = true;
+		} catch (MailException mex) {
+			System.out.println(mex.getMessage());
+		}
+		return b;
+	}
+	
 	//create-randomString
 	public static String RandomString() {
 		

@@ -1,5 +1,7 @@
 package com.itwill.brown_carrot_market.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -21,6 +23,7 @@ public class TownReplyDaoImpl implements TownReplyDao{
 		System.out.println(">>> townReplyDaoImpl : setTownReplyMapper()호출");
 		this.townReplyMapper = townReplyMapper;
 	}
+	//댓글등록
 	@Override
 	public int insertTownBoardReply(TownReply townReply) throws Exception{
 		System.out.println(">>> townReplyDaoImpl: insertTownBoardReply()호출");
@@ -35,6 +38,12 @@ public class TownReplyDaoImpl implements TownReplyDao{
 	public int updateTownBoardReply(TownReply townReply) throws Exception{
 		System.out.println(">>> townReplyDaoImpl :updateTownBoardReply()호출");
 		return townReplyMapper.updateTownBoardReply(townReply);
+	}
+	
+	//해당 게시물의 댓글 전체 조회
+	@Override
+	public List<TownReply> selectTownBoardReplyList(int t_no) {
+		return townReplyMapper.selectTownBoardReplyList(t_no);
 	}
 	
 	

@@ -74,6 +74,7 @@
                 <div class="col-12">
                     <div class="contact_from mb-50">
                         <form id="townBoard_update_form" method="post" >
+                        <input type="hidden" name="t_no" value="${townBoard.t_no}" />
                             <div class="contact_input_area">
                                 <div id="success_fail_info"></div>
                                 <div class="row">
@@ -95,7 +96,7 @@
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <select id="t_ctgr_no" name="t_ctgr_no" class="custom-select form-control w-100">
-                                                <option selected disabled="disabled" >카테고리 :${townBoard.townCategory.t_ctgr_name}</option>
+                                                <option value="${townBoard.townCategory.t_ctgr_no }">카테고리 :${townBoard.townCategory.t_ctgr_name}</option>
                                                 <option value="1">-동네생활</option>
                                                 <option value="2">-같이해요</option>
                                                 <option value="3">-동네질문</option>

@@ -97,6 +97,10 @@
 				user_email : {
 					required : '이메일을 입력하세요',
 					email : '이메일형식이 잘못되었습니다.'
+				},
+				user_phone : {
+					required : '핸드폰번호를 입력하세요',
+					phone : '핸드폰번호형식이 잘못되었습니다'
 				}
 			},
 			errorClass : 'error',
@@ -394,7 +398,7 @@
 				<div class="col-12">
 					<h5>로그인 &amp; 회원가입</h5>
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+						<li class="breadcrumb-item"><a href="main">Home</a></li>
 						<li class="breadcrumb-item active">로그인 &amp; 회원가입</li>
 					</ol>
 				</div>
@@ -442,7 +446,7 @@
 						</form>
 						<!-- Forget Password -->
 						<div class="forget_pass mt-15">
-							<a href="#">Forget Password?</a>
+							<i class="icofont-lock"></i> <a href="user_find_idpw" id="findIdPw">아이디 / 비밀번호 찾기</a>
 						</div>
 						<hr>
 						<br>

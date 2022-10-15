@@ -114,7 +114,26 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public UserInfo findUser(String user_id) throws Exception {
 		return userDao.findUser(user_id);
 	}
-
+	/*
+	 * [아이디찾기] 이름+이메일주소
+	 */
+	@Override
+	public String findIdByNameEmail(UserInfo userInfo) throws Exception {
+		return userDao.findIdByNameEmail(userInfo);
+	}
+	/*
+	 * [비밀번호찾기] 아이디+이메일주소
+	 */
+	@Override
+	public int findPwByIdEmail(UserInfo userInfo) throws Exception {
+		return userDao.findPwByIdEmail(userInfo);
+	}
+	//비밀번호 업데이트
+	@Override
+	public int updatePwById(UserInfo userInfo) throws Exception {
+		return userDao.updatePwById(userInfo);
+	}
+	
 	/*
 	 * 회원수정
 	 */
@@ -233,6 +252,11 @@ public class UserInfoServiceImpl implements UserInfoService {
 			return false;
 		}
 	}
+
+
+
+
+
 
 
 

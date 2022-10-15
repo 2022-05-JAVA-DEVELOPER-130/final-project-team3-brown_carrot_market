@@ -39,7 +39,8 @@ public interface TownBoardService {
 	Map selectMemberCtgrTownBoardAddress(String user_id,int address_no);
 	
 	
-	
+	//비회원 인기글 리스트 
+	List<TownBoard> selectNonMemberTownBoardListTop3();
 	
 	
 	
