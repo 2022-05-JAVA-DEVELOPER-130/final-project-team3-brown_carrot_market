@@ -32,9 +32,19 @@
 	</resultMap>
 
 	<!-- 댓글 등록 -->
+	<!--
 	<insert id="insertTownBoardReply" parameterType="com.itwill.brown_carrot_market.dto.TownReply">
 		insert into town_reply(T_REPLY_NO, T_REPLY_TITLE, T_REPLY_CONTENT,T_REPLY_DATE ,GROUPNO,STEP,DEPTH,user_id, t_no)
 		values(TOWN_REPLY_T_REPLY_NO_SEQ.nextval,#{t_reply_title},#{t_reply_content},sysdate,#{townBoard.t_no},#{step},#{depth},#{userInfo.user_id},#{townBoard.t_no})
+	</insert>
+	  -->
+	
+	<insert id="insertTownBoardReply" parameterType="com.itwill.brown_carrot_market.dto.TownReply">
+		<selectKey resultType="java.lang.Integer" keyProperty="t_reply_no" order="BEFORE">
+				SELECT TOWN_REPLY_T_REPLY_NO_SEQ.nextval FROM DUAL
+		</selectKey>
+		insert into town_reply(T_REPLY_NO, T_REPLY_TITLE, T_REPLY_CONTENT,T_REPLY_DATE ,GROUPNO,STEP,DEPTH,user_id, t_no)
+		values(#{t_reply_no},#{t_reply_title},#{t_reply_content},sysdate,#{townBoard.t_no},#{step},#{depth},#{userInfo.user_id},#{townBoard.t_no})
 	</insert>
 	
 	<!-- 대댓글 등록 -->
