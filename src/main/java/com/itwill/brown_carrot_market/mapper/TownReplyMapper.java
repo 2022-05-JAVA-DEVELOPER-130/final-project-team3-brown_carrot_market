@@ -1,5 +1,7 @@
 package com.itwill.brown_carrot_market.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.itwill.brown_carrot_market.dto.TownReply;
@@ -15,6 +17,9 @@ public interface TownReplyMapper {
 	
 	//댓글수정
 	public int updateTownBoardReply(TownReply townReply);
+	
+	//해당 게시물의 댓글 전체 조회
+	public List<TownReply> selectTownBoardReplyList(int t_no);
 	
 	
 }

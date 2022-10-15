@@ -1,5 +1,6 @@
 package com.itwill.brown_carrot_market.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -7,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,14 +17,18 @@ import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.ProductCategory;
 import com.itwill.brown_carrot_market.dto.TownBoard;
 import com.itwill.brown_carrot_market.dto.TownCategory;
+import com.itwill.brown_carrot_market.dto.TownReply;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.TownBoardService;
+import com.itwill.brown_carrot_market.service.TownReplyService;
 import com.itwill.brown_carrot_market.util.PageMakerDto;
 
 @Controller
 public class TownBoardController {
 	@Autowired
 	private TownBoardService townBoardService;
+	@Autowired
+	private TownReplyService townReplyService;
 	
 	/*
 	//우리동네 게시판 전체 조회
@@ -165,6 +171,10 @@ public class TownBoardController {
 		townBoardService.updateTownBoardCount(t_no);
 		model.addAttribute("townBoard", townBoard);
 		model.addAttribute("pageno", pageno);
+		
+		List<TownReply> townReplyList = townReplyService.selectTownBoardReplyList(t_no);
+		model.addAttribute("townReplyList", townReplyList);
+		
 		}catch (Exception e) {
 			e.printStackTrace();
 			return "error";
@@ -243,7 +253,7 @@ public class TownBoardController {
 	
 	//게시글 수정폼
 	@RequestMapping("/townboard_update_form")
-	public String townboard_update_form(@RequestParam Integer pageno, Integer t_no, Model model, HttpSession session) throws Exception{
+	public String townboard_update_form(@RequestParam Integer pageno,@RequestParam Integer t_no, Model model, HttpSession session) throws Exception{
 		String sUserId = (String)session.getAttribute("sUserId");
 		String forwardPath = "";
 		//비회원일때
@@ -266,23 +276,24 @@ public class TownBoardController {
 	
 	//게시글 수정
 	@RequestMapping("/townboard_update_action")
-	public String townboard_update_action(@RequestParam Map<String, String> map, Model model, HttpSession session) throws Exception{
-		String forwardPath = "";
-		String pageno = map.get("pageno");
-		String t_no = map.get("t_no");
+	public String townboard_update_action( @ModelAttribute TownBoard townBoard, HttpSession session) throws Exception{
 		
+		int updateTownboard = townBoardService.updateTownBoardOne(townBoard);
 	
-		
-		
-		
 		/*
+		
+		
+		
 		townBoard.setT_no(Integer.parseInt(t_no));
 		townBoard.setT_title(map.get("t_title"));
 		townBoard.setT_content(map.get("t_content"));
+		townBoard.setT_content(map.get("t_ctgr_no"));
+		
+		townBoardService.updateTownBoardOne(townBoard);
+		model.addAttribute("townBoard", townBoard);
+		
+		"redirect:townboard_view?t_no="+townBoard.getT_no()+"&pageno="+pageno;
 		*/
-		//townBoardService.updateTownBoardOne(townBoard);
-		
-		
 		return "redirect:townBoard_list";
 	}
 	

@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>약속 잡기</title>
+<title>송금하기</title>
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
@@ -33,37 +33,21 @@
    <img src="img/core-img/logo.png" alt="logo">
 <hr>
 <br>
- <form id="chatAppDateTimeSpot">
 	<div>
-		<label>구매 물품</label>
-		${product.p_title}
-			
-		<input type="text" id="datePicker" >
+		<label>구매 상품</label>
+			${product.p_title}
 	</div>
-	
 	<br>
-	
+  	<br>
 	<div>
-	<label>판매자 ID</label> 
-		${product.userInfo.user_id}
-  <p><input type="time" id="chatAppTime"></p>
-  </div>
-</form>
-	
-	<br>
-	
+		<label>판매자 ID</label> 
+			${product.userInfo.user_id}
+  	</div>
+  	<br>
+  	<br>
 	<div>
-	<label>구매 물품 금액</label> 
-		${product.p_price}
-	<p>
-	<div>
-	<div class="textSpot">
-	<input type="text" id="searchChatAppSpot" placeholder="장소를 입력하세요" >
-	</div>
-	<div class="btnSpot">
-	<button type="button" id="btnChatAppSpot">찾기</button>
-	</div>
-	</div>
+		<label>구매 상품 금액</label> 
+			${product.p_price}
 <br>
 <br>
 <br>

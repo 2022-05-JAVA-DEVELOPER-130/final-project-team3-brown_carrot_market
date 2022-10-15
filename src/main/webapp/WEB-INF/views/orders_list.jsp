@@ -73,7 +73,7 @@
 	                                    <tr>
 	                                        <!--<th scope="col"><i class="icofont-ui-delete"></i></th>-->
 	                                        <th scope="col">구매일자</th>
-	                                        <th scope="col">사   진</th>
+	                                        <th scope="col">상품 이미지</th>
 	                                        <th scope="col">이   름</th>
 	                                        <th scope="col">상품가격</th>
 	                                        <th scope="col">후   기</th>
@@ -92,7 +92,7 @@
 		                                        	${fn:substring(product_date,0,10)}
 		                                        </td>
 		                                        <td>
-		                                            <img src="img/product_img/${Orders.productImage.pi_name}" alt="ProductImage">
+		                                            <img src="img/product_img/${Orders.productImage.pi_name}" onerror="this.src='img/user_profile/newCarrot.jpg'">
 		                                        </td>
 		                                        <td>
 		                                            <a href="product_detail?p_no=${Orders.product.p_no}">${Orders.product.p_title}</a>
