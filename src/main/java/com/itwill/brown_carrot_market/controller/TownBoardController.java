@@ -80,7 +80,10 @@ public class TownBoardController {
 					PageMakerDto<TownBoard> townBoardList = townBoardService.selectTownBoardListCoordinate(sAddress, pageno);
 					model.addAttribute("townBoardList", townBoardList);
 					model.addAttribute("pageno", pageno);
-					
+					/*
+					List<TownBoard> townBoardListTop = townBoardService.selectNonMemberTownBoardListTop3();
+					model.addAttribute("townBoardListTop", townBoardListTop);
+					*/
 				}
 				//카테고리 조건 있을때
 				if(t_ctgr_no != 0) {

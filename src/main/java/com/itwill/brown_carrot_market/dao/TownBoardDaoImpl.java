@@ -70,6 +70,7 @@ public class TownBoardDaoImpl implements TownBoardDao{
 	
 	
 	
+	
 	//회원이 동네 게시판 전체 조회
 	@Override
 	public List<TownBoard> selectTownBoardListCoordinate(Address address,int pageStart, int pageEnd) throws Exception{
@@ -121,6 +122,12 @@ public class TownBoardDaoImpl implements TownBoardDao{
 	}
 	
 	
+	//비회원 인기글 리스트
+	@Override
+	public List<TownBoard> selectNonMemberTownBoardListTop3() {
+		System.out.println(">>> townBoardDaoImpl : selectNonMemberTownBoardListTop3()()호출");
+		return townBoardMapper.selectNonMemberTownBoardListTop3();
+	}
 	
 	
 
@@ -179,6 +186,8 @@ public class TownBoardDaoImpl implements TownBoardDao{
 		System.out.println(aa);
 		return aa;
 	}
+
+
 
 	
 

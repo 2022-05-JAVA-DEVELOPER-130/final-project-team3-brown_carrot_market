@@ -1,6 +1,7 @@
 package com.itwill.brown_carrot_market.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -46,6 +47,8 @@ public class TownBoardRestController {
 					resultMap.put("errorCode", 1); 
 					resultMap.put("errorMsg", "회원 일반 성공");
 					resultMap.put("data", townBoardList);
+					
+					List<TownBoard> townBoardListTop = townBoardService.selectNonMemberTownBoardListTop3();
 					
 				}
 				if(t_ctgr_no != 0) {
