@@ -115,6 +115,15 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	public String findIdByNameEmail(UserInfo userInfo) throws Exception {
 		return userMapper.findIdByNameEmail(userInfo);
 	}
+	
+	@Override
+	public int findPwByIdEmail(UserInfo userInfo) {
+		return userMapper.findPwByIdEmail(userInfo);
+	}
+	@Override
+	public int updatePwById(UserInfo userInfo) throws Exception {
+		return userMapper.updatePwById(userInfo);
+	}
 
 	@Override
 	public boolean existedInvitation(Invitation invitation) throws Exception {
@@ -140,14 +149,5 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		}
 
 	}
-
-	
-
-
-
-
-
-
-
 
 }

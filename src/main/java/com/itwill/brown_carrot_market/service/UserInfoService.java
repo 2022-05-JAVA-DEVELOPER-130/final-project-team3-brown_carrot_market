@@ -41,6 +41,12 @@ public interface UserInfoService {
 	 * [아이디찾기] 이름+이메일주소
 	 */
 	String findIdByNameEmail(UserInfo userInfo) throws Exception;
+	/*
+	 * [비밀번호찾기] 아이디+이메일주소
+	 */
+	int findPwByIdEmail(UserInfo userInfo) throws Exception;
+	//비밀번호 update
+	int updatePwById(UserInfo userInfo) throws Exception;
 	
 	/*
 	 * 회원수정

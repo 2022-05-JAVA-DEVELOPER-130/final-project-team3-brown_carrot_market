@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.brown_carrot_market.dto.Invitation;
+import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.MailService;
 
 
@@ -55,6 +56,36 @@ public class MailController {
 			code=2;
 			url="";
 			msg="메일 실패";
+			e.printStackTrace();
+		}
+		resultMap.put("code", code);
+		resultMap.put("url", url);
+		resultMap.put("msg", msg);
+		resultMap.put("data",b);
+		
+		return resultMap;
+	}
+
+	@PostMapping(value="springMail/findPw", produces = "application/json;charset=UTF-8")
+	public Map mailSenerfindPw(HttpServletRequest request, UserInfo userInfo) throws Exception{
+		
+		System.out.println("controller에서 param>>>"+userInfo);
+		
+		Map resultMap=new HashMap();
+		int code=2;
+		String url="springMail/findPw";
+		String msg="springMail/findPw 실패";
+		boolean b=false;
+		
+		try {
+			code=1;
+			url="";
+			msg="";
+			b=mailService.mailsenderFindPw(userInfo);
+		} catch (Exception e) {
+			code=2;
+			url="";
+			msg="springMail/findPw메일 실패";
 			e.printStackTrace();
 		}
 		resultMap.put("code", code);

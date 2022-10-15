@@ -118,7 +118,8 @@
 									<!-- <button type="submit" class="btn btn-primary btn-sm btn_user_login_action" >Login</button> -->
 									<!-- <input id="btn_user_login_action" type="button" value="로그인"> &nbsp; -->
 									<input type="button" id="btn_find_pw_action" style="width: 222px; height: 54px; font-size: 1rem;"
-										class="btn btn-carrot btn-sm" value="다음">
+										class="btn btn-carrot btn-sm" value="다음"
+										data-toggle="modal" data-target="">
 								</form>
 							</div>
 							<!-- (END)Find_pw -->
@@ -132,7 +133,7 @@
 							<!-- +++++++++++++++++++
 			                Bootstrap Default Modals
 			                ++++++++++++++++++++ -->
-							<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+							<div class="modal fade" id="findIdModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		                        <div class="modal-dialog modal-dialog-centered" role="document">
 		                            <div class="modal-content">
 		                                <div class="modal-header">
@@ -142,12 +143,38 @@
 		                                    </button>
 		                                </div>
 		                                <div class="modal-body" style="text-align:center">
-		                                	<h6 id="find_h6">고객님의 정보와 일치하는 아이디입니다</h6>
-		                                    <p class="mb-0" id="find_modal_body" ></p>
+		                                	<h6 id="find_id_h6">이거아님</h6>
+		                                    <p class="mb-0" id="find_id_modal_body" ></p>
 		                                </div>
 		                                <div class="modal-footer">
 		                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-		                                    <button type="button" class="btn btn-primary find_pw" >비밀번호찾기<!-- (Save changes) --></button>
+		                                    <button type="button" class="btn btn-primary find_pw" data-dismiss="modal" onclick="find_form_check(2)">비밀번호찾기</button>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+			                <!-- +++++++++++++++++++
+			                Bootstrap Default Modals
+			                ++++++++++++++++++++ -->
+							<!-- +++++++++++++++++++
+			                Bootstrap Default Modals
+			                ++++++++++++++++++++ -->
+							<div class="modal fade" id="findPwModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		                        <div class="modal-dialog modal-dialog-centered" role="document">
+		                            <div class="modal-content">
+		                                <div class="modal-header">
+		                                    <h5 class="modal-title" id="exampleModalCenterTitle"><img src="img/core-img/logo.png" style="height:30px;"></h5>
+		                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                                        <span aria-hidden="true">&times;</span>
+		                                    </button>
+		                                </div>
+		                                <div class="modal-body" style="text-align:center">
+		                                	<h6 id="find_pw_h6">고객님의 정보로 임시비밀번호를 발급해드렸습니다.</h6>
+		                                    <p class="mb-0" id="find_pw_modal_body" ></p>
+		                                </div>
+		                                <div class="modal-footer">
+		                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+		                                    <button type="button" class="btn btn-primary go_login" data-dismiss="modal" onclick="">로그인하러가기</button>
 		                                </div>
 		                            </div>
 		                        </div>

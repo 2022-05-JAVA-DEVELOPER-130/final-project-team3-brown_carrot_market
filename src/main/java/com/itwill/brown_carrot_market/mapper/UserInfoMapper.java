@@ -59,9 +59,13 @@ public interface UserInfoMapper {
 	public List<UserInfo> findUserList();
 
 	public String findInvitation(Invitation invitation);
-
+	//아이디찾기
 	public String findIdByNameEmail(UserInfo userInfo);
-
+	//비밀번호찾기
+	public int findPwByIdEmail(UserInfo userInfo);
+	//비밀번호 업데이트
+	public int updatePwById(UserInfo userInfo);
+	
 	//@Select("")
 	public int existedInvitation(Invitation invitation);
 	

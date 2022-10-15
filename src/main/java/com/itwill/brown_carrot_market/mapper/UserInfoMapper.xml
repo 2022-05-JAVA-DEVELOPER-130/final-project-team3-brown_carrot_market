@@ -53,6 +53,17 @@
 	</select>
 	
 	<!-- [비밀번호찾기] 아이디+이메일주소 -->
+	<select id="findPwByIdEmail" parameterType="com.itwill.brown_carrot_market.dto.UserInfo" resultType="int">
+		 select count(*)
+			 from userinfo
+			 where user_email=#{user_email} and user_id=#{user_id}
+	</select>
+	
+	<update id="updatePwById" parameterType="com.itwill.brown_carrot_market.dto.UserInfo" >
+	 	update userinfo set user_pw=#{user_pw}
+			where  user_id=#{user_id}
+	</update>
+	
 	
 	
 	<insert id="createUser" parameterType="com.itwill.brown_carrot_market.dto.UserInfo">
@@ -106,6 +117,11 @@
 	 	update userinfo set user_profile=#{user_profile}
 		where user_id=#{user_id}
 	</update>
+	
+
+	
+	
+	
 	
 	<!-- <delete id="remove" parameterType="String"> -->
 	<delete id="removeUser" parameterType="com.itwill.brown_carrot_market.dto.UserInfo">
