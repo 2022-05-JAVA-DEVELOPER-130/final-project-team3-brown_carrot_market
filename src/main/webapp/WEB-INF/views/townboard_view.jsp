@@ -208,48 +208,22 @@
 					
                     <div class="comments-area">
                         <div class="comment_area mb-50 clearfix">
-                            <h5 class="mb-4">3 Comments</h5>
+                            <h5 class="mb-4">Comments</h5>
                             
                             <ol>
-                                <!-- Single Comment Area -->
-                                <!-- 
-                                <li class="single_comment_area">
-                                    <div class="comment-wrapper clearfix">
-                                        <div class="comment-meta">
-                                            <div class="comment-author-img">
-                                                <img class="img-circle" src="img/partner-img/tes-1.png" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="comment-content">
-                                            <h5 class="comment-author"><a href="#">${'새주' }</a></h5>
-                                            <p>This post is very helpful. I like your fashion tips. Keep up awesome job!</p>
-                                            <a href="#" class="reply">Reply</a>
-                                        </div>
-                                    </div>
-                                    <ul class="children">
-                                        <li class="single_comment_area">
-                                            <div class="comment-wrapper clearfix">
-                                                <div class="comment-meta">
-                                                    <div class="comment-author-img">
-                                                        <img class="img-circle" src="img/partner-img/tes-2.png" alt="">
-                                                    </div>
-                                                </div>
-                                                <div class="comment-content">
-                                                    <h5 class="comment-author"><a href="#">Nazrul Islam</a></h5>
-                                                    <p>Thanks for your valuable feedback @Lim Jannat. Stay with us.</p>
-                                                    <a href="#" class="reply">Reply</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </li>
-								 -->
+                                
 								 <li class="single_comment_area">
-								 <c:forEach var="townReply" items="${townReplyList}" >
+								 
+								<c:forEach var="townReply" items="${townReplyList}" >
+								 <c:if test="${townReply.depth == 1}">
                                     <div class="comment-wrapper clearfix">
                                         <div class="comment-meta">
-                                            <div class="comment-author-img">
-                                                <img class="img-circle" src="img/partner-img/tes-1.png" alt="">
+                                        <!-- 
+                                            사진.. 다시 하기
+                                             -->
+                                             
+                                             <div class="comment-author-img">
+                                                <img class="img-circle" src="img/user_profile/${townReply.userInfo.user_profile}" alt="">
                                             </div>
                                         </div>
                                         <div class="comment-content">
@@ -259,6 +233,26 @@
                                             <a href="#" class="reply">Reply</a>
                                         </div>
                                     </div>
+                                    </c:if>
+                                    <c:if test="${townReply.depth != 1}">
+                                    <ul class="children">
+                                        <li class="single_comment_area">
+                                            <div class="comment-wrapper clearfix">
+                                                <div class="comment-meta">
+                                                    <div class="comment-author-img">
+                                                        <img class="img-circle" src="img/partner-img/tes-2.png" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="comment-content">
+		                                            <h5 class="comment-author"><a href="#">${townReply.userInfo.user_id}</a></h5>
+		                                            <p>${townReply.t_reply_title }</p>
+		                                            <p>${townReply.t_reply_content }</p>
+		                                            <a href="#" class="reply">Reply</a>
+		                                        </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    </c:if>
                                     </c:forEach> 
                                     
                                 </li>
@@ -301,10 +295,9 @@
                     </div>
                 </div>
                 
-                ////댓글까지 끝
 				</div>
                 
-            </div> ///내용끝
+            </div> 
         </div>
     </section>
     <!-- Single Blog Post Area -->
