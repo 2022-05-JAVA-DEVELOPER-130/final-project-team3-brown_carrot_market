@@ -112,6 +112,20 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	}
 	
 	@Override
+	public String findIdByNameEmail(UserInfo userInfo) throws Exception {
+		return userMapper.findIdByNameEmail(userInfo);
+	}
+	
+	@Override
+	public int findPwByIdEmail(UserInfo userInfo) {
+		return userMapper.findPwByIdEmail(userInfo);
+	}
+	@Override
+	public int updatePwById(UserInfo userInfo) throws Exception {
+		return userMapper.updatePwById(userInfo);
+	}
+
+	@Override
 	public boolean existedInvitation(Invitation invitation) throws Exception {
 		System.out.println("#### UserDaoImpl : existedInvitation 호출  ");
 		int count = userMapper.existedInvitation(invitation);
@@ -135,13 +149,5 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		}
 
 	}
-
-
-
-
-
-
-
-
 
 }

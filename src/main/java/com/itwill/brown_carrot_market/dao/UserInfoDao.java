@@ -47,7 +47,13 @@ public interface UserInfoDao {
 	UserInfo findUser(String user_id) throws Exception;
 	
 	String findInvitation(Invitation invitation) throws Exception;
-
+	
+	String findIdByNameEmail(UserInfo userInfo) throws Exception;
+	//비밀번호찾기
+	public int findPwByIdEmail(UserInfo userInfo);
+	//비밀번호 업데이트
+	int updatePwById(UserInfo userInfo) throws Exception;
+	
 	/*
 	 * 모든사용자 정보를 데이타베이스에서 찾아서 List<User> 콜렉션 에 저장하여 반환
 	 */
