@@ -22,12 +22,15 @@ import com.itwill.brown_carrot_market.dto.Review;
 import com.itwill.brown_carrot_market.dto.ReviewImage;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.ReviewService;
+import com.itwill.brown_carrot_market.service.UserInfoService;
 
 @Controller
 public class ReviewController {
 
 	@Autowired
 	private ReviewService reviewService;
+	@Autowired
+	private UserInfoService userInfoService;
 	
 	public ReviewController() {
 		System.out.println(">> ReviewController()생성");
@@ -65,6 +68,26 @@ public class ReviewController {
 		review.setUserInfo(sUser);
 		
 		int result= reviewService.createReview(review);
+		if(result>0) {//review INSERT성공시 -> 상대방user_freshness UPDATE
+			String your_id=map.get("your_id").toString();
+			System.out.println("user_freshness UPDATE: your_id >>"+your_id);
+			
+			UserInfo you = userInfoService.findUser(your_id);
+			
+			//your_id가 받은 review갯수
+			double yourReviewCount=reviewService.countReceivedReview(your_id);
+			System.out.println("your_id의 기존Freshness: "+you.getUser_freshness()+", 리뷰갯수: "+yourReviewCount);
+			//your_id의 freshness
+			//you.getUser_freshness();
+			//내가 준 review_point
+			//review.getReview_point();
+			// [{(your_id의 freshness)*(your_id가 받은 review갯수)}+내가 준 review_point]/(your_id가 받은 review갯수+1)
+			double updateFreshness = ((you.getUser_freshness()*yourReviewCount)+review.getReview_point())/(yourReviewCount+1);
+			you.setUser_freshness(updateFreshness);
+			//your_id의 매너온도 UPDATE
+			int updateResult = userInfoService.updateFreshness(you);
+			System.out.println("your_id의 updateFreshness: "+updateFreshness+", result: "+updateResult);
+		}
 		
 		return "redirect:orders_list";
 	}

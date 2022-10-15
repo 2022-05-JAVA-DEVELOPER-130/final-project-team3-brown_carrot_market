@@ -3,7 +3,8 @@ $(document).ready(function(){
 	/* review_write_form 보여주기****/
 	$('.btn_review_write').on('click',function(e){
 		console.log("orders_no: "+e.target.id);
-		$("#container_contents").html(ReviewHtmlContents.review_write_form(e.target.id));
+		console.log("seller_id: "+$("#"+e.target.id).attr("seller_id"));
+		$("#container_contents").html(ReviewHtmlContents.review_write_form(e.target.id,$("#"+e.target.id).attr("seller_id")));
 		$(".breadcrumb").prev('h5').text('후기작성');
 		$(".breadcrumb li:last-child").removeClass('active');
 		$(".breadcrumb li:last-child").html('<a href="orders_list">구매내역</a>');

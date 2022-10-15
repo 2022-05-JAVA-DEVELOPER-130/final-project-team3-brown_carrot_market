@@ -1,7 +1,12 @@
 function ReviewHtmlContents(){
 }
-
-ReviewHtmlContents.review_write_form=function(orders_no) {
+/*
+	[기준]구매목록: 구매자(buyer)가 작성하는 review -> orders.user_id = review.user_id
+						=> 상대방id(your_id) = product.user_id (seller)
+	[기준]판매목록: 판매자(seller)가 작성하는 review -> product.user_id = review.user_id
+						=> 상대방id(your_id) = orders.user_id (buyer)
+*/
+ReviewHtmlContents.review_write_form=function(orders_no,your_id) {
 	
 	$(function() {
     	var $drop = $("#drop");
@@ -64,20 +69,22 @@ ReviewHtmlContents.review_write_form=function(orders_no) {
 			}
 			
     		if(formData.get("files")!=null){
-	    		$.ajax({
+	    		$.ajax({	// review_image 업로드
 	    			url : 'review/upload',
 	    			type : 'POST',
 	    			processData : false, //파일전송시 반드시 false
 	    			contentType : false,
 	    			data : formData,
 	    			success : function(jsonResult) {
-	    				$.ajax({
+		console.log(jsonResult.newFileNames);
+	    				$.ajax({	// review INSERT
 							url : 'review_write_action',
 							method : 'POST',
 							data: {
 								"orders_no": orders_no,
 								"review":JSON.stringify(review),
-								"images": JSON.stringify(jsonResult.newFileNames)
+								"images": JSON.stringify(jsonResult.newFileNames),
+								"your_id": your_id
 								},
 							success : function(jsonResult) {
 								 console.log(jsonResult.msg);
@@ -92,13 +99,14 @@ ReviewHtmlContents.review_write_form=function(orders_no) {
 	    			}
 	    		});
     		}else{	//이미지가 업로드되지 않은 경우
-				$.ajax({
+				$.ajax({	// review INSERT
 					url : 'review_write_action',
 					method : 'POST',
 					data: {
 						"orders_no": orders_no,
 						"review":JSON.stringify(review),
-						"images": null
+						"images": null,
+						"your_id": your_id
 						},
 					success : function(jsonResult) {
 						 console.log(jsonResult.msg);
@@ -191,8 +199,15 @@ ReviewHtmlContents.review_write_form=function(orders_no) {
 
 ReviewHtmlContents.review_view=function(review) {
 	const star = 20 * review.review_point;
+	
+	function reviewImage_item(review_img){
+		return`
+			<img class="img-circle" src="img/review_img/${review_img.review_img_name}" onerror="this.src='img/user_profile/newCarrot.jpg'">
+		`;
+	}
+	
 	return `<div class="submit_a_review_area col-12" style="border: 1px solid #d6e6fb; padding:30px;">
-                        <h4>후기작성</h4>
+                        <h4>작성한 후기</h4>
                         <!-- [Start]review_write_form -->
                         <form id="review_write_form" name="review_write_form" action="review_write_action" method="post">
                                 <div class="form-group">
@@ -203,7 +218,7 @@ ReviewHtmlContents.review_view=function(review) {
                                         <span style="width:${star}%"></span>
                                     </div>
                                 </div>
-                                    review_image(다른data활용예정): <input type="text" id="review_image" name="review_image" class="" value="${review.review_image}">
+                                    <!--review_image(다른data활용예정): "${review.review_image}"-->
                                 
                                 <!--
                                 <div class="form-group">
@@ -232,9 +247,9 @@ ReviewHtmlContents.review_view=function(review) {
 									style="border: 1px solid black; width: 400px; height: 300px; padding: 3px">
 									<div id="thumbnails">
 									
-									
-										<img class="img-circle" src="img/review_img/${review.reviewImageList[0].review_img_name}" onerror="this.src='img/user_profile/newCarrot.jpg'">
-									
+									${
+										review.reviewImageList.map(reviewImage_item).join('')
+									}
 									
 									</div>
 								</div>
