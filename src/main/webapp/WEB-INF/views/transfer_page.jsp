@@ -19,20 +19,32 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.kr.min.js"></script>
-
-<!-- 지도scipt -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7c7231db91ae56cfc5e3c6ea06f73c6&libraries=services,clusterer,drawing"></script>
-
+	
+<script type="text/javascript">
+		
+	
+	$(document).on('click','#TransferSubmit',function(e){
+		var action = confirm("정말 송금하시겠습니까?");
+		if(action){
+			location.href="transfer_action?p_no="+${product.p_no}
+		}else {
+			alert("송금을 취소하셨습니다.");
+		}
+		
+	});
+	
+	$(document).on('click','#TransferCancel',function(e){
+		window.close();
+	});
+	</script>
 <!-- 내 js -->
 <script src="js/chat/chat_appointment.js"></script>
-
-
 
 </head>
 <body>
    <img src="img/core-img/logo.png" alt="logo">
 <hr>
-<br>
+<br><br><br><br>
 	<div>
 		<label>구매 상품</label>
 			${product.p_title}
@@ -48,12 +60,10 @@
 	<div>
 		<label>구매 상품 금액</label> 
 			${product.p_price}
-<br>
-<br>
-<br>
-	
-	<div id="map" style="width:300px;height:300px;"></div>
 	</div>
+<br>
+<br>
+<br>
 	
 	<input type="hidden" id="chatApp_lat" value="">
 	<input type="hidden" id="chatApp_lng" value="">
@@ -61,24 +71,40 @@
 	</form>
 	<br>
 	<br>
-	<button type="button" id="TransferSubmit">송금 하기!</button>
-	
-	<script type="text/javascript">
-		$(document).on('click','#TransferSubmit',function(e){
-			location.href="transfer_action?p_no="+${product.p_no};
-		})
-	</script>
-	
+		<div>
+			<button type="button" id="TransferSubmit">송금하기</button>
+			<button type="button" id="TransferCancel">취소</button>
+		</div>
 	<style type="text/css">
 	
 	#TransferSubmit{
 	position: fixed;
     left: 0;
     bottom: 0;
-    margin: 0 auto;
-    width: 100%;
+    margin: 1 auto;
+    width: 45%;
     height: 44px;
-    display: block;
+    display:block;
+    /* text-align: center; */
+    /* position: relative; */
+    border-radius: 8px;
+    background-color: orange;
+    border-color: orange;
+    cursor: pointer;
+    color: white;
+    border: 1px solid;
+    font-weight: 700;
+    font-size: 14pt;
+    padding: 0 px;
+	}
+	#TransferCancel{
+	position: fixed;
+    right: 0;
+    bottom: 0;
+    margin: 1 auto;
+    width: 45%;
+    height: 44px;
+    display:inline-block;
     /* text-align: center; */
     /* position: relative; */
     border-radius: 8px;
@@ -93,6 +119,12 @@
 	}
 	
 	#TransferSubmit:hover{
+	color:orange;
+	 background-color:white;
+	 border-color:orange;
+	 border: 2px solid ;
+	}
+	#TransferCancel:hover{
 	color:orange;
 	 background-color:white;
 	 border-color:orange;

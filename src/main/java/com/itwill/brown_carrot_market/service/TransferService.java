@@ -6,7 +6,7 @@ import com.itwill.brown_carrot_market.dto.Transfer;
 
 public interface TransferService {
 	
-	void transfer_transaction(int p_no) throws Exception;
+	boolean transfer_transaction(int p_no) throws Exception;
 	
 	int insertTransfer_Deposit_Cancle(int p_no) throws Exception;
 	

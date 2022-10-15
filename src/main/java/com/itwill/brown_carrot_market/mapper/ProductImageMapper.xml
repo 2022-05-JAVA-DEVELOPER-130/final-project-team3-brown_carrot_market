@@ -36,7 +36,7 @@
 		insert into product_img(pi_no,pi_name,p_no) select product_img_pi_no_seq.nextval, P.* from(
 	<foreach collection="productImageList" item="productImage" separator="UNION ALL">
 		select #{productImage.pi_name} as pi_name,#{productImage.p_no} as p_no from Dual
-	</foreach>) P
+	</foreach>
 	</insert>
 	
 	

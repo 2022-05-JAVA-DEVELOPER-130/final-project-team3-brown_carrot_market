@@ -588,29 +588,39 @@ function message_admin_promise(chat_content){
 								</li>`
 }
 
-
-
 //상단헤드
 function chat_head(id,img,room_no,fresh,product,p_img,check){
-	var a="";
+	var a ="";
 	var b ="";
+var c ="";
 	if(product.p_sell==1){
 		p_sell="판매중";
 		if(check==1){
-			a=	'<button class="dropdown-item" type="button" id="reserveBtn"><b>예약중으로 변경</b></button>';
+			console.log('1.판매자:'+product.userInfo.user_id);
+			console.log('1.구매자:'+loginId);
+			a='<button class="dropdown-item" type="button" id="reserveBtn"><b>예약중으로 변경</b></button>';
 			b='<button class="dropdown-item" type="button" id="soldOutBtn"><b>판매 완료하기</b></button>';
+			c=`<a href="#" class="btn btn-outline-info" style="display:none"><i class="fa fa-won" id="btnCarrot_Pay" p_no=${product.p_no} style="color:green"></i></a>`;
 		}
 	}else if(product.p_sell==2){
 		p_sell="예약중";
-		if(check==1){	
-		a=	'<button class="dropdown-item" type="button" id="soldOutBtn"><b>판매 완료하기</b></button>';
-		b= '<button class="dropdown-item" type="button" id="sellBtn"><b>판매중으로 변경</b></button>';
+		if(check==0){
+			console.log('2.세션 = 구매자 : '+loginId);
+			c=`<a href="#" class="btn btn-outline-info" style="border-color:green"><i class="fa fa-won" id="btnCarrot_Pay" p_no=${product.p_no} style="color:green"></i></a>`;
+		}else if(check==1){	
+			console.log('2.세션 = 판매자 : '+loginId);
+			a='<button class="dropdown-item" type="button" id="soldOutBtn"><b>판매 완료하기</b></button>';
+			b='<button class="dropdown-item" type="button" id="sellBtn"><b>판매중으로 변경</b></button>';
+			c=`<a href="#" class="btn btn-outline-info" style="display:none"><i class="fa fa-won" id="btnCarrot_Pay" p_no=${product.p_no} style="color:green"></i></a>`;
 		}
-	}else if(product.p_sell==3){
-		if(check==1){
+		}else if(product.p_sell==3){
 		p_sell="판매완료";
-		a='<button class="dropdown-item" type="button" id="reserveBtn"><b>예약중으로 변경</b></button>';	
-		b='<button class="dropdown-item" type="button" id="sellBtn"><b>판매중으로 변경</b></button>';	
+			if(check==1){
+			console.log('3.판매자:'+product.userInfo.user_id);
+			console.log('3.구매자:'+loginId);
+			a='<button class="dropdown-item" type="button" id="reserveBtn"><b>예약중으로 변경</b></button>';	
+			b='<button class="dropdown-item" type="button" id="sellBtn"><b>판매중으로 변경</b></button>';	
+			c=`<a href="#" class="btn btn-outline-info" style="display:none"><i class="fa fa-won" id="btnCarrot_Pay" p_no=${product.p_no} style="color:green;"></i></a>`;
 	}
 	}
 	
@@ -640,12 +650,9 @@ function chat_head(id,img,room_no,fresh,product,p_img,check){
 								 </div>	
 								 </div>
 								
-
-
 								<div class="col-lg-4 hidden-sm text-right">
 									
-									<a  href="#" class="btn btn-outline-info" style="border-color:green"><i
-										class="fa fa-won" id="btnCarrot_Pay" p_no="${product.p_no}" style="color:green;"></i></a> 
+									${c} 
 									
 									<a  href="javascript:void(0);" class="btn btn-outline-info" ><i
 										class="fa fa-handshake-o" id="btnChatAppointment"></i></a> 
@@ -752,7 +759,7 @@ $.ajax({
 				},
 				success:function(jsonResult){
 					console.log(jsonResult.msg+jsonResult.msg2);
-					alert('예약이 완료되었습니다. 송금이 가능합니다.');
+					alert('예약이 완료되었습니다.');
 				},error:function(jsonResult){
 					console.log(jsonResult.msg+jsonResult.msg2);
 					alert('예약이 실패하였습니다.');
