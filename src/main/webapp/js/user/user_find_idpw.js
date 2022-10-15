@@ -1,4 +1,12 @@
 $(document).ready(function(){
+	//<i class="icofont-spinner icofont-spin"></i>
+	$(this).ajaxStart(function(){
+      $("#preloader").show();
+	});
+	$(this).ajaxStop(function() {
+   		$("#preloader").fadeOut();
+	});
+	
 	
 	/* validator객체변수선언 */
 	var validator = null;
@@ -54,6 +62,7 @@ $(document).ready(function(){
 								$(".find_pw").show();
 							}else if(jsonResult.code==1){
 								$("#find_id_h6").text("고객님의 정보와 일치하는 아이디가 없습니다.");
+								$("#find_id_modal_body").text("");
 								$(".find_pw").hide();
 							}
 					}
@@ -75,28 +84,29 @@ $(document).ready(function(){
 					data : $('#find_pw_form').serialize(),
 					success : function(jsonResult) {
 							console.log(jsonResult);
+							//$("#btn_find_pw_action").attr("data-target","#findPwModalCenter");
 							if(jsonResult.code==2){
 									//일치하는 회원이 존재하면 비밀번호변경&메일발송
-									$("#btn_find_pw_action").attr("data-target","#findPwModalCenter");
 									$.ajax({
 											url : 'springMail/findPw',
 											method : 'POST',
 											dataType : 'json',
 											data : $('#find_pw_form').serialize(),
 											complete : function(jsonResult) {
-													console.log(jsonResult.code);
-													if(jsonResult.code==1){//성공
+													if(jsonResult.responseJSON.code==1){//성공
 														$("#find_pw_h6").text("고객님의 이메일로 임시비밀번호를 발급해드렸습니다. 이메일을 확인해주세요.");
 														//$("#find_pw_modal_body").text(jsonResult.data);
 														$(".go_login").show();
+														$("#btn_find_pw_action2").trigger("click");
 													}else {
 														alert('메일전송 error');
 													}
 											}
 									});
 							}else if(jsonResult.code==1){
-								$("#find_id_h6").text("입력하신 정보와 일치하는 회원이 없습니다.\n 다시 확인부탁드립니다.");
+								$("#find_pw_h6").text("입력하신 정보와 일치하는 회원이 없습니다.\n 다시 확인해주세요.");
 								$(".go_login").hide();
+								$("#btn_find_pw_action2").trigger("click");
 							}
 					}
 				});

@@ -118,8 +118,8 @@
 									<!-- <button type="submit" class="btn btn-primary btn-sm btn_user_login_action" >Login</button> -->
 									<!-- <input id="btn_user_login_action" type="button" value="로그인"> &nbsp; -->
 									<input type="button" id="btn_find_pw_action" style="width: 222px; height: 54px; font-size: 1rem;"
-										class="btn btn-carrot btn-sm" value="다음"
-										data-toggle="modal" data-target="">
+										class="btn btn-carrot btn-sm" value="다음" >
+									<input type="hidden" id="btn_find_pw_action2" class="btn btn-primary" data-toggle="modal" data-target="#findPwModalCenter">
 								</form>
 							</div>
 							<!-- (END)Find_pw -->
@@ -143,7 +143,7 @@
 		                                    </button>
 		                                </div>
 		                                <div class="modal-body" style="text-align:center">
-		                                	<h6 id="find_id_h6">이거아님</h6>
+		                                	<h6 id="find_id_h6">고객님의 정보와 일치하는 아이디입니다</h6>
 		                                    <p class="mb-0" id="find_id_modal_body" ></p>
 		                                </div>
 		                                <div class="modal-footer">
@@ -174,7 +174,7 @@
 		                                </div>
 		                                <div class="modal-footer">
 		                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-		                                    <button type="button" class="btn btn-primary go_login" data-dismiss="modal" onclick="">로그인하러가기</button>
+		                                    <button type="button" class="btn btn-primary go_login" data-dismiss="modal" onclick="location.href='user_login'">로그인하러가기</button>
 		                                </div>
 		                            </div>
 		                        </div>
