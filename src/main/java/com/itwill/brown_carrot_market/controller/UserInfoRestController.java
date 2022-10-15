@@ -464,6 +464,30 @@ public class UserInfoRestController {
 		return resultMap;
 	}
 	
+	@PostMapping(value = "/user_find_id_action_json")
+	public Map user_find_id_action_json(@ModelAttribute UserInfo userInfo) throws Exception{
+		Map resultMap=new HashMap();
+		int code=1;
+		String url="user_find_id_action_json";
+		String msg="user_find_id_action_json 실패!";
+
+		System.out.println("user_find_id_action_json >> userInfo :"+userInfo);
+		String find_id=
+		userService.findIdByNameEmail(userInfo);
+
+		if(find_id!=null) {
+			code=2;
+			msg="user_find_id_action_json 성공!";
+		}
+		
+		resultMap.put("code", code);
+		resultMap.put("url", url);
+		resultMap.put("msg", msg);
+		resultMap.put("data", find_id);
+		return resultMap;
+	}
+	
+	
 	/*
 	@LoginCheck
 	@PostMapping("/user_account_details")

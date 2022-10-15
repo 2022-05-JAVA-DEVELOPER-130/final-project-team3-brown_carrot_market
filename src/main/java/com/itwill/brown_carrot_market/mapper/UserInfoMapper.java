@@ -60,6 +60,8 @@ public interface UserInfoMapper {
 
 	public String findInvitation(Invitation invitation);
 
+	public String findIdByNameEmail(UserInfo userInfo);
+
 	//@Select("")
 	public int existedInvitation(Invitation invitation);
 	

@@ -38,6 +38,11 @@ public interface UserInfoService {
 	 */
 	UserInfo findUser(String userId) throws Exception;
 	/*
+	 * [아이디찾기] 이름+이메일주소
+	 */
+	String findIdByNameEmail(UserInfo userInfo) throws Exception;
+	
+	/*
 	 * 회원수정
 	 */
 	int update(UserInfo user) throws Exception;

@@ -142,6 +142,32 @@ public class UserInfoController {
 		return "redirect:main";
 	}
 
+	@RequestMapping(value = "/user_login_action", method = RequestMethod.POST)
+	public String user_login_action_post(@ModelAttribute(value = "fuser") UserInfo user, HttpServletRequest request)
+			throws Exception {
+		String forwardPath = "";
+		int result = userService.login(user.getUser_id(), user.getUser_pw());
+		System.out.println("user_login_action_post호출-result: " + result);
+		 //회원로그인 0:아이디존재안함 1:패쓰워드 불일치 2:로그인성공(세션)
+		switch (result) {
+		case 0:
+			request.setAttribute("msg1", user.getUser_id() + " 는 존재하지않는 아이디 입니다.");
+			// forwardPath = "user_login_form";
+			forwardPath = "user_login";
+			break;
+		case 1:
+			request.setAttribute("msg2", "패쓰워드가 일치하지 않습니다.");
+			// forwardPath = "user_login_form";
+			forwardPath = "user_login";
+			break;
+		case 2:
+			request.getSession().setAttribute("sUserId", user.getUser_id());
+			forwardPath = "redirect:user_my-account";
+			break;
+		}
+		return forwardPath;
+	}
+
 	@LoginCheck
 	@RequestMapping("/user_my_account")
 	public String user_my_account(HttpServletRequest request) throws Exception {
@@ -170,31 +196,11 @@ public class UserInfoController {
 		return "redirect:main";
 	}
 
-	@RequestMapping(value = "/user_login_action", method = RequestMethod.POST)
-	public String user_login_action_post(@ModelAttribute(value = "fuser") UserInfo user, HttpServletRequest request)
-			throws Exception {
-		String forwardPath = "";
-		int result = userService.login(user.getUser_id(), user.getUser_pw());
-		System.out.println("user_login_action_post호출-result: " + result);
-		 //회원로그인 0:아이디존재안함 1:패쓰워드 불일치 2:로그인성공(세션)
-		switch (result) {
-		case 0:
-			request.setAttribute("msg1", user.getUser_id() + " 는 존재하지않는 아이디 입니다.");
-			// forwardPath = "user_login_form";
-			forwardPath = "user_login";
-			break;
-		case 1:
-			request.setAttribute("msg2", "패쓰워드가 일치하지 않습니다.");
-			// forwardPath = "user_login_form";
-			forwardPath = "user_login";
-			break;
-		case 2:
-			request.getSession().setAttribute("sUserId", user.getUser_id());
-			forwardPath = "redirect:user_my-account";
-			break;
-		}
-		return forwardPath;
+	@RequestMapping("/user_find_idpw")
+	public String user_find_idpw(HttpServletRequest request) throws Exception {
+		return "user_find_idpw";
 	}
+	
 	
 /*
 	@RequestMapping("/user_write_form")
