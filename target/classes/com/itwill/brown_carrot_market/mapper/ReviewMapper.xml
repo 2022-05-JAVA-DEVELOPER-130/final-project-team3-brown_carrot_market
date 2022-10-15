@@ -54,6 +54,21 @@
     		values(#{review_no},#{review_desc},#{review_image},#{review_point}, #{orders.orders_no},#{userInfo.user_id})
 	</insert>
 	
+	<select id="countReceivedReview" parameterType="String" resultType="int">
+		select count(*)
+        from review r
+			where r.user_id in
+				(select o.user_id buyer from product p
+				join orders o
+				on p.p_no=o.p_no
+				where p.user_id = #{user_id})
+			or r.user_id in
+				(select p.user_id seller from product p
+				join orders o
+				on p.p_no=o.p_no
+				where o.user_id = #{user_id})
+	</select>
+	
 	<!-- 전체후기 : 판매자 or 구매자가 나에게 남긴 후기 -->
 	<select id="findReceivedReview" parameterType="String" resultMap="reviewResultMap">
  		select r.review_no, r.review_desc, r.review_image, r.review_point, r.user_id reviewer_id, r.user_name reviewer_name, r.user_profile reviewer_profile,
@@ -111,12 +126,13 @@
 	</select>
 	
 	<!-- 후기 1개 보기  -->
-	<select id="findReviewByRivewNo" parameterType="int" resultType="com.itwill.brown_carrot_market.dto.Review">
-		select r.*, o.*, r.user_id reviewr, o.user_id buyer
+	<select id="findReviewByRivewNo" parameterType="int" resultMap="reviewResultMap">
+		<!-- select r.*, o.*, r.user_id reviewer, o.user_id buyer -->
+		select *
 			from review r
-			join orders o
-			on r.orders_no=o.orders_no
-			where review_no=#{review_no}
+			left outer join review_img ri
+			on r.review_no=ri.review_no
+			where r.review_no=${review_no}
 	</select>
 
 	

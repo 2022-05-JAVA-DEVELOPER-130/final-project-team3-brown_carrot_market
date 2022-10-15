@@ -8,6 +8,8 @@ public interface ReviewService {
 	
 	int createReview(Review review) throws Exception;
 
+	int countReceivedReview(String user_id) throws Exception;
+	
 	List<Review> findReceivedReview(String user_id) throws Exception;
 	
 	List<Review> findReceivedReviewByBuyer(String user_id) throws Exception;

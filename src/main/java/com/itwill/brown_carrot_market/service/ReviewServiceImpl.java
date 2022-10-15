@@ -40,7 +40,7 @@ public class ReviewServiceImpl implements ReviewService{
 		int result = 0;
 		int review_no = reviewDao.createReview(review);
 		
-		if(review.getReviewImageList()!=null) {
+		if(review.getReviewImageList()!=null) {//review이미지가 존재하면
 			List<ReviewImage> imageList = new ArrayList();
 			for (ReviewImage image : review.getReviewImageList()) {
 				image.setReview_no(review_no);
@@ -49,6 +49,11 @@ public class ReviewServiceImpl implements ReviewService{
 			result= reviewImageDao.insertReviewImgList(imageList);
 		}
 		return result;
+	}
+	
+	@Override
+	public int countReceivedReview(String user_id) throws Exception {
+		return reviewDao.countReceivedReview(user_id);
 	}
 
 	@Override
@@ -70,13 +75,15 @@ public class ReviewServiceImpl implements ReviewService{
 
 	@Override
 	public Review findReviewByRivewNo(int review_no) throws Exception {
-		return null;
+		return reviewDao.findReviewByRivewNo(review_no);
 	}
 	
 	@Override
 	public Review isExistedReviewByOrdersNoId(Review review) throws Exception {
 		return reviewDao.isExistedReviewByOrdersNoId(review);
 	}
+
+
 
 	
 	

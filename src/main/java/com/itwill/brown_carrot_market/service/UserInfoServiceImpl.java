@@ -169,6 +169,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 		return userDao.updateProfile(userInfo);
 	}
 	
+	@Override
+	public int updateFreshness(UserInfo userInfo) throws Exception {
+		return userDao.updateFreshness(userInfo);
+	}
 	
 	
 	@Override

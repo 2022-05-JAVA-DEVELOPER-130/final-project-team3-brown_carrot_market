@@ -52,6 +52,7 @@ public interface UserInfoService {
 
 	int updateProfile(UserInfo userInfo) throws Exception;
 	
+	int updateFreshness(UserInfo userInfo) throws Exception;
 
 	/*
 	 * 회원탈퇴
@@ -69,6 +70,7 @@ public interface UserInfoService {
 	 * 아이디중복체크
 	 */
 	boolean isDuplicateId(String userId) throws Exception;
+
 
 
 }

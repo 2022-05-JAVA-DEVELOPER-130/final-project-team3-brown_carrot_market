@@ -56,7 +56,7 @@ public class FilesControllerReview {
 		String newFileName= "";
 		try {
 			List<String> fileNames = new ArrayList<>();
-			List<ReviewImage> newFileList = new ArrayList<>();
+			List<ReviewImage> reviewImageList = new ArrayList<>();
 			ReviewImage reviewImage = new ReviewImage();
 
 			for (MultipartFile file : files) {
@@ -66,15 +66,16 @@ public class FilesControllerReview {
 					
 					newFileName= storageService.save(file);
 					reviewImage.setReview_img_name(newFileName);
-					newFileList.add(reviewImage);
+					reviewImageList.add(reviewImage);
 					message = "Uploaded the files successfully: " + fileNames+" newFileName"+newFileName;
+					System.out.println("newFileName: "+newFileName);
 				}else {
 					message="Please select a valid mediaFile..";
 				}
 			}
 			
 			result.put("message", message);
-			result.put("newFileNames", newFileList);
+			result.put("newFileNames", reviewImageList);
 			result.put("fileNames", fileNames);
 			
 			//return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));

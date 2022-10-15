@@ -103,7 +103,7 @@
 		                                        <td>
 		                                            <div class="" name="check_review">
 		                                                <script>check_isExisted_review($('input[name=orders_no_${status.index}]').val())</script>
-		                                                <a href="#" class="badge" id="${Orders.orders_no}" style="height:20px;font-size:1rem"></a>
+		                                                <a href="#" class="badge" id="${Orders.orders_no}" seller_id="${Orders.product.userInfo.user_id}" style="height:20px;font-size:1rem"></a>
 		                                            </div>
 		                                        </td>
 		                                    </tr>

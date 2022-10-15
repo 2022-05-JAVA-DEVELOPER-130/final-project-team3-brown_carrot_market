@@ -23,6 +23,11 @@ public class ReviewDaoImpl implements ReviewDao {
 		reviewMapper.createReview(review);
 		return review.getReview_no();	//insert된 review_no Return	
 	}
+	
+	@Override
+	public int countReceivedReview(String user_id) throws Exception {
+		return reviewMapper.countReceivedReview(user_id);
+	}
 
 	@Override
 	public List<Review> findReceivedReview(String user_id) throws Exception {
@@ -50,4 +55,6 @@ public class ReviewDaoImpl implements ReviewDao {
 	public Review isExistedReviewByOrdersNoId(Review review) throws Exception {
 		return reviewMapper.isExistedReviewByOrdersNoId(review);
 	}
+
+
 }

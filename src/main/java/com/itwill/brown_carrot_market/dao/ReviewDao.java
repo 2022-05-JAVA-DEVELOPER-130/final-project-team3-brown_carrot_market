@@ -6,16 +6,18 @@ import com.itwill.brown_carrot_market.dto.Review;
 
 public interface ReviewDao {
 
-	public int createReview(Review review) throws Exception;
+	int createReview(Review review) throws Exception;
 	
-	public List<Review> findReceivedReview(String user_id) throws Exception;
+	int countReceivedReview(String user_id) throws Exception;
 	
-	public List<Review> findReceivedReviewByBuyer(String user_id) throws Exception;
+	List<Review> findReceivedReview(String user_id) throws Exception;
 	
-	public List<Review> findReceivedReviewBySeller(String user_id) throws Exception;
+	List<Review> findReceivedReviewByBuyer(String user_id) throws Exception;
 	
-	public Review findReviewByRivewNo(int review_no);
+	List<Review> findReceivedReviewBySeller(String user_id) throws Exception;
+	
+	Review findReviewByRivewNo(int review_no);
 
-	public Review isExistedReviewByOrdersNoId(Review review) throws Exception;
+	Review isExistedReviewByOrdersNoId(Review review) throws Exception;
 	
 }

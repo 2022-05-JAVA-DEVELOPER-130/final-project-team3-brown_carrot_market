@@ -1,7 +1,12 @@
 function ReviewHtmlContents(){
 }
-
-ReviewHtmlContents.review_write_form=function(orders_no) {
+/*
+	[기준]구매목록: 구매자(buyer)가 작성하는 review -> orders.user_id = review.user_id
+						=> 상대방id(your_id) = product.user_id (seller)
+	[기준]판매목록: 판매자(seller)가 작성하는 review -> product.user_id = review.user_id
+						=> 상대방id(your_id) = orders.user_id (buyer)
+*/
+ReviewHtmlContents.review_write_form=function(orders_no,your_id) {
 	
 	$(function() {
     	var $drop = $("#drop");
@@ -64,20 +69,22 @@ ReviewHtmlContents.review_write_form=function(orders_no) {
 			}
 			
     		if(formData.get("files")!=null){
-	    		$.ajax({
+	    		$.ajax({	// review_image 업로드
 	    			url : 'review/upload',
 	    			type : 'POST',
 	    			processData : false, //파일전송시 반드시 false
 	    			contentType : false,
 	    			data : formData,
 	    			success : function(jsonResult) {
-	    				$.ajax({
+		console.log(jsonResult.newFileNames);
+	    				$.ajax({	// review INSERT
 							url : 'review_write_action',
 							method : 'POST',
 							data: {
 								"orders_no": orders_no,
 								"review":JSON.stringify(review),
-								"images": JSON.stringify(jsonResult.newFileNames)
+								"images": JSON.stringify(jsonResult.newFileNames),
+								"your_id": your_id
 								},
 							success : function(jsonResult) {
 								 console.log(jsonResult.msg);
@@ -92,13 +99,14 @@ ReviewHtmlContents.review_write_form=function(orders_no) {
 	    			}
 	    		});
     		}else{	//이미지가 업로드되지 않은 경우
-				$.ajax({
+				$.ajax({	// review INSERT
 					url : 'review_write_action',
 					method : 'POST',
 					data: {
 						"orders_no": orders_no,
 						"review":JSON.stringify(review),
-						"images": null
+						"images": null,
+						"your_id": your_id
 						},
 					success : function(jsonResult) {
 						 console.log(jsonResult.msg);
@@ -190,42 +198,27 @@ ReviewHtmlContents.review_write_form=function(orders_no) {
 }
 
 ReviewHtmlContents.review_view=function(review) {
-	//var obj = JSON.parse(review);
-	console.log(review.review_no);
-	//console.log($(review));
+	const star = 20 * review.review_point;
+	
+	function reviewImage_item(review_img){
+		return`
+			<img class="img-circle" src="img/review_img/${review_img.review_img_name}" onerror="this.src='img/user_profile/newCarrot.jpg'">
+		`;
+	}
 	
 	return `<div class="submit_a_review_area col-12" style="border: 1px solid #d6e6fb; padding:30px;">
-                        <h4>후기작성</h4>
+                        <h4>작성한 후기</h4>
                         <!-- [Start]review_write_form -->
                         <form id="review_write_form" name="review_write_form" action="review_write_action" method="post">
                                 <div class="form-group">
                                     <span>별점</span>
-                                    <input type="text" id="review_point" name="review_point" class="" value="${review.review_point}">
-                                    <input type="text" id="review_image" name="review_image" class="" value="${review.review_image}">
                                     <div class="stars">
-                                        <input type="radio" name="star" class="star-0_5" id="star-0_5" onclick='setPoint(this.id);'>
-                                        <label class="star-0_5" for="star-0_5">0.5</label>
-                                        <input type="radio" name="star" class="star-1" id="star-1" onclick='setPoint(this.id);'>
-                                        <label class="star-1" for="star-1">1</label>
-                                        <input type="radio" name="star" class="star-1_5" id="star-1_5" onclick='setPoint(this.id);'>
-                                        <label class="star-1_5" for="star-1_5">1.5</label>
-                                        <input type="radio" name="star" class="star-2" id="star-2" onclick='setPoint(this.id);'>
-                                        <label class="star-2" for="star-2">2</label>
-                                        <input type="radio" name="star" class="star-2_5" id="star-2_5" onclick='setPoint(this.id);'>
-                                        <label class="star-2_5" for="star-2_5">2.5</label>
-                                        <input type="radio" name="star" class="star-3" id="star-3" onclick='setPoint(this.id);'>
-                                        <label class="star-3" for="star-3">3</label>
-                                        <input type="radio" name="star" class="star-3_5" id="star-3_5" onclick='setPoint(this.id);'>
-                                        <label class="star-3_5" for="star-3_5">3.5</label>
-                                        <input type="radio" name="star" class="star-4" id="star-4" onclick='setPoint(this.id);'>
-                                        <label class="star-4" for="star-4">4</label>
-                                        <input type="radio" name="star" class="star-4_5" id="star-4_5" onclick='setPoint(this.id);'>
-                                        <label class="star-4_5" for="star-4_5">4.5</label>
-                                        <input type="radio" name="star" class="star-5" id="star-5" onclick='setPoint(this.id);'>
-                                        <label class="star-5" for="star-5">5</label>
-                                        <span></span>
+                                        <input type="radio" name="star" class="star-${review.review_point}" id="star-${review.review_point}" checked>
+                                        <label class="star-${review.review_point}" for="star-${review.review_point}">${review.review_point}</label>
+                                        <span style="width:${star}%"></span>
                                     </div>
                                 </div>
+                                    <!--review_image(다른data활용예정): "${review.review_image}"-->
                                 
                                 <!--
                                 <div class="form-group">
@@ -252,7 +245,13 @@ ReviewHtmlContents.review_view=function(review) {
                                 <label for="drop">첨부 사진</label>
 								<div id="show" class="form-group"
 									style="border: 1px solid black; width: 400px; height: 300px; padding: 3px">
-									<div id="thumbnails"></div>
+									<div id="thumbnails">
+									
+									${
+										review.reviewImageList.map(reviewImage_item).join('')
+									}
+									
+									</div>
 								</div>
                                 <!--<input type="button" id="btnSubmit" class="btn btn-primary" value="Submit Review" />-->
                                 <input type="button" id="btn_review_edit" class="btn btn-primary" value="Edit Review" />

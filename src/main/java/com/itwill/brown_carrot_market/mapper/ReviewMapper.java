@@ -13,6 +13,8 @@ public interface ReviewMapper {
 	 * @Insert("")
 	 */
 	public int createReview(Review review);
+
+	public int countReceivedReview(String user_id);
 	
 	public List<Review> findReceivedReview(String user_id);
 
