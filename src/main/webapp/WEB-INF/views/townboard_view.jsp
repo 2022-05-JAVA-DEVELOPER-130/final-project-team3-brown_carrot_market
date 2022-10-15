@@ -264,18 +264,9 @@
                         <div class="contact_from mb-50">
                             <h5 class="mb-4">Leave a Comment</h5>
 
-                            <form action="#" method="post">
+                            <form id="townReply_write_form" action="#" method="post">
                                 <div class="row">
-                                    <div class="col-12 col-lg-6">
-                                        <div class="form-group mb-30">
-                                            <input type="text" class="form-control" name="author" value="" placeholder="Name" tabindex="1">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-lg-6">
-                                        <div class="form-group mb-30">
-                                            <input type="text" class="form-control" name="email" value="" placeholder="Email" tabindex="2">
-                                        </div>
-                                    </div>
+                                   
                                     <div class="col-12">
                                         <div class="form-group mb-30">
                                             <input type="text" class="form-control" name="url" value="" placeholder="Website (Optional)" tabindex="3">

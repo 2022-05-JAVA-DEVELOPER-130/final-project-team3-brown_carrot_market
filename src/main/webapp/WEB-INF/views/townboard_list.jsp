@@ -185,7 +185,7 @@
                     <c:forEach var="townBoard" items="${townBoardList.itemList}">
                         <div class="blog_post_thumb">
                        	<c:if test="${townBoard.townImageList.size() != 0}">
-                            <a href="townboard_view?t_no=${townBoard.t_no}&pageno=${townBoardList.pageMaker.curPage}" p_no="${townBoard.t_no}"><img src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-post-thumb"></a>
+                            <a href="townboard_view?t_no=${townBoard.t_no}&pageno=${townBoardList.pageMaker.curPage}" t_no="${townBoard.t_no}"><img src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-post-thumb"></a>
                             </c:if>
                             
                         </div>
@@ -195,7 +195,7 @@
                                 <a href="#">${townBoard.townCategory.t_ctgr_name}</a>
                                 <span>조회수 : ${townBoard.t_count}</span>
                             </div>
-                            <a href="townboard_view?t_no=${townBoard.t_no}&pageno=${townBoardList.pageMaker.curPage}" t_no="${townBoard.t_no}" class="blog_title">${townBoard.t_title}</a>
+                            <a href="townboard_view?t_no=${townBoard.t_no}&pageno=${townBoardList.pageMaker.curPage}" t_no="${townBoard.t_no}" pageno="${pageno}" class="blog_title">${townBoard.t_title}</a>
                             <p>${townBoard.t_content}</p>
                             <a href="single-blog.html">Continue Reading <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                         </div>

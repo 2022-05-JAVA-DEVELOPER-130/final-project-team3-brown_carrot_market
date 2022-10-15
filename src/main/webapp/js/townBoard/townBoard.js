@@ -18,7 +18,7 @@ function changeQnaList(pageno,t_ctgr_no){
 				   htmlBuffer += `<div class="blog_post_thumb">`;
 	               if(townBoard.townImageList.length != 0 ){
 						htmlBuffer += `
-                            <a href="townboard_view?t_no=${townBoard.t_no}" p_no="${townBoard.t_no}"><img src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-post-thumb"></a>`;
+                            <a href="townboard_view?t_no=${townBoard.t_no}&pageno=${pageno}" t_no="${townBoard.t_no}"><img src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-post-thumb"></a>`;
 					}
 	               
 					htmlBuffer += `
@@ -31,7 +31,7 @@ function changeQnaList(pageno,t_ctgr_no){
                                 <a href="#">${townBoard.townCategory.t_ctgr_name}</a>
                                 <span>조회수 : ${townBoard.t_count}</span>
                             </div>
-                            <a href="townboard_view?t_no=${townBoard.t_no}&pageno=${pageno}" t_no="${townBoard.t_no}" class="blog_title">${townBoard.t_title}</a>
+                            <a href="townboard_view?t_no=${townBoard.t_no}&pageno=${pageno}" t_no="${townBoard.t_no}" pageno="${pageno}" class="blog_title">${townBoard.t_title}</a>
                             <p>${townBoard.t_content}</p>
                             <a href="single-blog.html">Continue Reading <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                         </div>
@@ -162,6 +162,31 @@ $(".townBoard_btn.new_write").on("click", function(){
 	$("#townBoard_write_form").attr("action", "townboard_write_action");
 	$("#townBoard_write_form").submit();
 });
+
+
+
+/*
+답글 등록 폼 
+*/
+$(".qna_btn.reply").on("click", function(){
+	let pageno = $(this).attr("pageno");
+	let q_no = $(this).attr("q_no");
+	location.href = `qna_reply_form?pageno=${pageno}&q_no=${q_no}`;
+});
+
+
+/*
+답글 등록
+*/
+$(".qna_btn.reply_write").on("click", function(){
+	if($("#q_title_txt").val() == "" || CKEDITOR.instances.q_content_area.getData() == ""){
+		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
+		return;
+	}
+	$("#qna_reply_write_form").attr("action", "qna_reply_write");
+	$("#qna_reply_write_form").submit();
+});
+
 
 
 /*

@@ -19,10 +19,14 @@ public class TownReplyServiceImpl implements TownReplyService{
 		System.out.println(">>> townReplyDaoImpl: 기본 생성자 호출");
 	}
 
+	//댓글등록
 	@Override
 	public int insertTownBoardReply(TownReply townReply) throws Exception {
 		return townReplyDao.insertTownBoardReply(townReply);
 	}
+	
+	//대댓글 등록
+	
 
 	@Override
 	public int deleteTownBoardReply(int t_reply_no) throws Exception {
