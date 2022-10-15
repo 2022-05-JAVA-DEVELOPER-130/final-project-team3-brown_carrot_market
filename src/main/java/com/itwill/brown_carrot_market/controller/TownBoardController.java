@@ -1,5 +1,6 @@
 package com.itwill.brown_carrot_market.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -16,14 +17,18 @@ import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.ProductCategory;
 import com.itwill.brown_carrot_market.dto.TownBoard;
 import com.itwill.brown_carrot_market.dto.TownCategory;
+import com.itwill.brown_carrot_market.dto.TownReply;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.TownBoardService;
+import com.itwill.brown_carrot_market.service.TownReplyService;
 import com.itwill.brown_carrot_market.util.PageMakerDto;
 
 @Controller
 public class TownBoardController {
 	@Autowired
 	private TownBoardService townBoardService;
+	@Autowired
+	private TownReplyService townReplyService;
 	
 	/*
 	//우리동네 게시판 전체 조회
@@ -166,6 +171,10 @@ public class TownBoardController {
 		townBoardService.updateTownBoardCount(t_no);
 		model.addAttribute("townBoard", townBoard);
 		model.addAttribute("pageno", pageno);
+		
+		List<TownReply> townReplyList = townReplyService.selectTownBoardReplyList(t_no);
+		model.addAttribute("townReplyList", townReplyList);
+		
 		}catch (Exception e) {
 			e.printStackTrace();
 			return "error";

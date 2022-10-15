@@ -1,5 +1,7 @@
 package com.itwill.brown_carrot_market.dao;
 
+import java.util.List;
+
 import com.itwill.brown_carrot_market.dto.TownReply;
 
 public interface TownReplyDao {
@@ -12,6 +14,9 @@ public interface TownReplyDao {
 	
 	//댓글수정
 	int updateTownBoardReply(TownReply townReply)throws Exception;
+	
+	//해당 게시물의 댓글 전체 조회
+	List<TownReply> selectTownBoardReplyList(int t_no);
 	
 	
 }

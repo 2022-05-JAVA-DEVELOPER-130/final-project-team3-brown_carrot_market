@@ -184,9 +184,9 @@
                     <div id = "townBoard_list_tbody_all">
                     <div class="blog-details-area mb-50" id="townBoard_list_tbody">                        
                         <!-- Image -->
-                        <img class="mb-30" src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-img">
-                        <img class="mb-30" src="img/townBoard-img/${townImage.t_img_name}" alt="blog-img">
-                        
+                        <c:if test="${townBoard.townImageList.size() != 0}">
+                        	<img class="mb-30" src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-img">
+                        </c:if>
                         <!-- Blog Title -->
                         <h3 class="mb-30">${townBoard.t_title}</h3>
                         
@@ -212,6 +212,7 @@
                             
                             <ol>
                                 <!-- Single Comment Area -->
+                                <!-- 
                                 <li class="single_comment_area">
                                     <div class="comment-wrapper clearfix">
                                         <div class="comment-meta">
@@ -242,37 +243,27 @@
                                         </li>
                                     </ul>
                                 </li>
-
-                                <li class="single_comment_area">
-                                    <div class="comment-wrapper d-flex clearfix">
+								 -->
+								 <li class="single_comment_area">
+								 <c:forEach var="townReply" items="${townReplyList}" >
+                                    <div class="comment-wrapper clearfix">
                                         <div class="comment-meta">
                                             <div class="comment-author-img">
-                                                <img class="img-circle" src="img/partner-img/tes-3.png" alt="">
+                                                <img class="img-circle" src="img/partner-img/tes-1.png" alt="">
                                             </div>
                                         </div>
                                         <div class="comment-content">
-                                            <h5 class="comment-author"><a href="#">Naznin Ritu</a></h5>
-                                            <p>Great post about treanding fashion 2019. Thank you.</p>
+                                            <h5 class="comment-author"><a href="#">${townReply.userInfo.user_id}</a></h5>
+                                            <p>${townReply.t_reply_title }</p>
+                                            <p>${townReply.t_reply_content }</p>
                                             <a href="#" class="reply">Reply</a>
                                         </div>
                                     </div>
-                                    <ul class="children">
-                                        <li class="single_comment_area">
-                                            <div class="comment-wrapper clearfix">
-                                                <div class="comment-meta">
-                                                    <div class="comment-author-img">
-                                                        <img class="img-circle" src="img/partner-img/tes-2.png" alt="">
-                                                    </div>
-                                                </div>
-                                                <div class="comment-content">
-                                                    <h5 class="comment-author"><a href="#">Nazrul Islam</a></h5>
-                                                    <p>Thanks for your valuable feedback @Naznin Ritu, Stay with us.</p>
-                                                    <a href="#" class="reply">Reply</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                    </c:forEach> 
+                                    
                                 </li>
+								 
+								 
                             </ol>
                         </div>
 
