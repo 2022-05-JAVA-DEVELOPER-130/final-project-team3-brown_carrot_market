@@ -123,7 +123,7 @@ public class TownBoardRestController {
 		return resultMap;
 	}
 	
-	
+	 
 	
 	//댓글등록
 	@RequestMapping("/townReply_wirte_rest")
