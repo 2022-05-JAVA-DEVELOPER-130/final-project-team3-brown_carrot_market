@@ -1,6 +1,7 @@
 package com.itwill.brown_carrot_market.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -87,19 +88,39 @@ public class ProductServiceImpl implements ProductService{
 	public int insertProduct(Map map) throws Exception {
 		int result = 0;
 		int p_no = productDao.insertProduct(map);
+		System.out.println(">>>>>Service map"+map);
+		//List<String> fileNames = new ArrayList<>();
+		System.out.println(">>>service map의 pi_name"+map.get("ImageNameList"));
+		//System.out.println(map.size());
 		
-		Product product = (Product)map;
 		
-		if(product.getProductImagesList()!=null) {
-		List<ProductImage> productImageList = new ArrayList();
-		for (ProductImage productImage : product.getProductImagesList()) {
+		//Product product = (Product) map;
+		
+		List<String> imageList = new ArrayList<>();
+		imageList = (List<String>) map.get("ImageNameList");
+
+		if(imageList!=null) {
+		for (int i=0; i < imageList.size(); i++) {
+			String pi_name = imageList.get(i).toString();
+			ProductImage productImage = new ProductImage();
 			productImage.setP_no(p_no);
+			productImage.setPi_name(pi_name);
+			
+			result = productImageDao.insertProductImg(productImage);
+			
+			}
+			//System.out.println(imageList.get(2).toString());
+		}	
+			/*
+			List<ProductImage> productImageList = new ArrayList();
+			((Product) productImageList).setP_no(p_no);
+			((ProductImage) productImageList).setPi_name("pi_name");
 			productImageList.add(productImage);
 			}
 		result = productImageDao.insertProductListImg(productImageList);
 		}
-		
-		return p_no;
+		*/ 
+		return result;
 	}
 	// 채팅에서 사용 
 	@Override
