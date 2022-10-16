@@ -81,9 +81,11 @@ public class TownBoardController {
 					model.addAttribute("townBoardList", townBoardList);
 					model.addAttribute("pageno", pageno);
 					/*
+					 은비깨비 똥꾸멍
+					 */
 					List<TownBoard> townBoardListTop = townBoardService.selectNonMemberTownBoardListTop3();
 					model.addAttribute("townBoardListTop", townBoardListTop);
-					*/
+					System.out.println("townBoard_list컨트롤러 - townBoardListTop: "+townBoardListTop);
 				}
 				//카테고리 조건 있을때
 				if(t_ctgr_no != 0) {
