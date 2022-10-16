@@ -33,6 +33,7 @@ public class MailController {
 	@Autowired
 	private MailService mailService;
 	
+	//[마이페이지]초대코드 발송
 	@PostMapping(value="springMail", produces = "application/json;charset=UTF-8")
 	public Map mailSener(HttpServletRequest request, Invitation invitation) throws Exception{
 		
@@ -66,6 +67,7 @@ public class MailController {
 		return resultMap;
 	}
 
+	//[비밀번호찾기]임시비밀번호 발송
 	@PostMapping(value="springMail/findPw", produces = "application/json;charset=UTF-8")
 	public Map mailSenerfindPw(HttpServletRequest request, UserInfo userInfo) throws Exception{
 		
