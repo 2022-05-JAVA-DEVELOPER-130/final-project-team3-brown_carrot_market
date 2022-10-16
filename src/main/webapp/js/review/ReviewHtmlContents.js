@@ -127,7 +127,7 @@ ReviewHtmlContents.review_write_form=function(orders_no,your_id) {
 ReviewHtmlContents.review_view=function(review) {
 	console.log(review.reviewImageList.length);
 	const star = 20 * review.review_point;
-	const showHeight = 220 * (review.reviewImageList.length/2);
+	const showHeight = 220 * parseInt(review.reviewImageList.length/2+1);
 	//$('#show').style("height",showHeight+"px");
 	
 	function reviewImage_item(review_img){

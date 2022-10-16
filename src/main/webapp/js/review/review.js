@@ -26,12 +26,10 @@ $(document).ready(function(){
 			}
 		});
 		
-		/*
 		$(".breadcrumb").prev('h5').text('후기작성');
 		$(".breadcrumb li:last-child").removeClass('active');
 		$(".breadcrumb li:last-child").html('<a href="orders_list">구매내역</a>');
 		$(".breadcrumb").append('<li class="breadcrumb-item active">후기작성</li>');
-		*/
 		e.preventDefault();
 	});
 	
