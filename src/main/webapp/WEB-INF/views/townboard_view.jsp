@@ -216,6 +216,7 @@
 								 
 								<c:forEach var="townReply" items="${townReplyList}" >
 								
+								<!-- 댓글 -->
 								 <c:if test="${townReply.depth == 1}">
                                     <div class="comment-wrapper clearfix">
                                         <div class="comment-meta">
@@ -317,7 +318,8 @@
 
                         <div class="contact_from mb-50">
                             <h5 class="mb-4">Leave a Comment</h5>
-
+                            
+							<!-- 메인 댓글달기 -->
                             <form class="townReply_write_form" method="post">
                             
                                 <div class="row">
