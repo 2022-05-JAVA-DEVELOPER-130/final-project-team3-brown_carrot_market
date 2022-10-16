@@ -54,11 +54,13 @@ public class ProductController {
 	
 	
 	@RequestMapping(value = "/product_detail", params = "p_no")
-	public String guest_view(@RequestParam int p_no, Model model) throws Exception {
+	public String guest_view(@RequestParam int p_no,Model model) throws Exception {
 		
 		Product product = productService.selectByOne(p_no);
 		System.out.println(product);
 		model.addAttribute("product", product);
+		//List<Product> productList = productService.selectByUserId(user_id);
+		//model.addAttribute("productList",productList);
 		
 		return "product_detail";
 	}
@@ -146,11 +148,14 @@ public class ProductController {
 		return "redirect : product_list";
 	}
 	
-	/* 상품삭제
+	/*상품삭제
 	@RequestMapping(value = "/product_delete_action", method = RequestMethod.POST)
-	public String product_delete_action() {
+	public String product_delete_action(@RequestParam int p_no,HttpSession session) throws Exception {
+		String sUserId = (String)session.getAttribute("sUserId");
 		
-		return "";
+		int insertRowCount = productService.deleteByPNo(p_no);
+		
+		return "redirect : product_list";
 	}
 	*/
 	
