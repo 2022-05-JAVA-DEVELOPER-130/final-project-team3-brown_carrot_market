@@ -78,4 +78,64 @@ li{
 	margin-top: 15px;
 }
 
+/*
+댓글 토글 시작~~~
+*/
+/*
+.section {
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+  height: auto;
+  max-height: 600px;
+}
+
+.section.collapsed {
+  max-height: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+p {
+  margin: 10px;
+}
+
+.container {
+  border: 3px solid #393D4F;
+  margin: 0 auto;
+  max-width: 300px;
+  border-radius: 3px;
+}
+.container .section {
+  border: 3px solid #ccc;
+}
+
+button {
+  display: block;
+  --webkit-appearance:none;
+  font-size: 18px;
+  border: none;
+  border-radius: 3px;
+  background: #393D4F;
+  color: white;
+  margin: 15px auto;
+  padding: 15px;
+  cursor: pointer;
+  transition: box-shadow 0.5s ease-out;
+}
+button:hover {
+  box-shadow: 0px 0px 15px lightgrey;
+}
+button:active {
+  box-shadow: 0px 0px 10px lightgrey;
+}
+button:focus {
+  outline: none;
+}
+*/
+/*
+댓글 토글 끝~~~
+*/
+
 

@@ -184,11 +184,11 @@ $(".qna_btn.reply_write").on("click", function(){
 댓글등록 -- 일단 db에 들어가기는 함.. 근데 step, depth가 0으로 들어가는중.. 그리고 알람창 안나오고 삭제하는 내용으로 나온다.. 그리고 리턴 실패
 */
 
-$("#replysubmit").on("click", function(){
+$(".btn.btn-primary.reply").on("click", function(){
 	console.log('댓글 등록 클릭')
 	let pageno = $(this).attr("pageno");
 	let t_no = $(this).attr("t_no");
-	if($("#t_reply_title").val() == "" || $("#t_reply_content").val() == ""){
+	if($(".t_reply_title").val() == "" || $(".t_reply_content").val() == ""){
 		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
 		return;
 	}else{
@@ -220,8 +220,8 @@ $("#replysubmit").on("click", function(){
 					});				
 	
 /////여기 자리
-	$("#townReply_write_form").attr("action", "townReply_wirte_rest");
-	$("#townReply_write_form").submit();	
+	$(".townReply_write_form").attr("action", "townReply_wirte_rest");
+	$(".townReply_write_form").submit();	
 }	
 	
 });
@@ -256,6 +256,30 @@ $(".townReply.delete").on("click", function(){
 						}
 	});
 });
+
+
+/*
+댓글 토글?
+*/
+/*
+document.querySelector('#toggle-button').addEventListener('click', function() {
+  document.querySelector('.section.collapsible').classList.toggle('collapsed');
+});
+*/
+
+
+/*
+댓글 토글2
+*/
+$(document).ready(function() {
+  $(".content").hide();
+  //content 클래스를 가진 div를 표시/숨김(토글)
+  $(".heading").click(function()
+  {
+    $(this).next(".content").slideToggle(500);
+  });
+});
+
 
 
 
