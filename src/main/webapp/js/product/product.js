@@ -43,6 +43,7 @@ function productCreate() {
       data:formData1,
       success:function(jsonResult){
       console.log(jsonResult);
+      window.location.href="product_list";
        /*사진이름받기
        $.ajax({
               url : 'product_write_action_json',
