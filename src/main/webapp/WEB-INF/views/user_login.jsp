@@ -24,13 +24,13 @@
 <!-- 회원가입 Validate -->
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
-
+<!-- kakao map api -->
 <script type="text/javascript"
 	src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=a7c7231db91ae56cfc5e3c6ea06f73c6&libraries=services"></script>
 <script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 <script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
 <script type="text/javascript" src="js/common/user_session_check.js"></script>
-
+<!-- kakao Login api -->
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js"
 	integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL"
 	crossorigin="anonymous"></script>
@@ -241,20 +241,6 @@
 			 $('#user_login_form').validate();
 		/* user_login_action ************************************/
 		$(document).on("click", "#btn_user_login_action", function(e) {
-			/*	
-				if ($("#login_user_id").val() == "") {
-					alert("사용자 아이디를 입력하십시요.");
-					$("#login_user_id").focus();
-					return;
-				}
-				if ($("#login_user_pw").val() == "") {
-					alert("비밀번호를 입력하십시요.");
-					$("#login_user_pw").focus();
-					return;
-				}
-			   $('#msg1').html("");
-			   $('#msg2').html("");
-			 */
 			   // 로그인 정보 저장 
 			   if($("#customChe").is(":checked")){	//저장 체크시
 				   saveLogin($("#login_user_id").val());
@@ -297,40 +283,6 @@
 		/****************user_write_action******************/
 		$(document).on('click', '#btn_user_write_action', function(e) {
 			console.log('click!! - #btn_user_write_action');
-			/************ 유효성체크 ************/
-			/*
-			if ($("#user_id").val() == "") {
-				alert("사용자 아이디를 입력하십시요.");
-				$("#user_id").focus();
-				return false;
-			}
-			if ($("#user_pw").val() == "") {
-				alert("비밀번호를 입력하십시요.");
-				$("#user_pw").focus();
-				return false;
-			}
-			if ($("#user_pw2").val() == "") {
-				alert("비밀번호확인을 입력하십시요.");
-				$("#user_pw2").focus();
-				return false;
-			}
-			if ($("#user_name").val() == "") {
-				alert("이름을 입력하십시요.");
-				$("#user_name").focus();
-				return false;
-			}
-			if ($("#user_email").val() == "") {
-				alert("이메일 주소를 입력하십시요.");
-				$("#user_email").focus();
-				return false;
-			}
-			if ($("#user_pw").val() != $("#user_pw2").val()) {
-				alert("비밀번호와 비밀번호확인은 일치하여야합니다.");
-				$("#user_pw").focus();
-				$("#user_pw").select();
-				return false;
-			}
-			*/
 			if(validator.form()){
 			console.log($('#user_write_form').serialize());
 			$.ajax({

@@ -52,7 +52,7 @@
                 <div class="col-12">
                     <h5>구매내역</h5>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="main">Home</a></li>
                         <li class="breadcrumb-item">거래내역</li>
                         <li class="breadcrumb-item active">구매내역</li>
                     </ol>

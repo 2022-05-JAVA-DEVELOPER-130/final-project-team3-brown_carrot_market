@@ -8,18 +8,18 @@ UserHtmlContents.user_view_content=function(sUser) {
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group">
                                         <label for="user_id">아이디 *</label>
-                                        <input type="text" class="form-control" name="user_id" value="${sUser.user_id}">
+                                        <input type="text" class="form-control" name="user_id" value="${sUser.user_id}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="currentPass">현재 비밀번호 (Leave blank to leave unchanged)</label>
+                                        <label for="currentPass">현재 비밀번호 </label>
                                         <input type="password" class="form-control" id="user_pw" name="user_pw" value="${sUser.user_pw}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="newPass">신규 비밀번호 (Leave blank to leave unchanged)</label>
+                                        <label for="newPass">신규 비밀번호 (빈칸으로 두시면, 현재 비밀번호로 유지됩니다.)</label>
                                         <input type="password" class="form-control" id="user_pw_new" name="user_pw_new">
                                     </div>
                                 </div>
@@ -32,19 +32,19 @@ UserHtmlContents.user_view_content=function(sUser) {
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="user_name">이름 *</label>
-                                        <input type="text" class="form-control" name="user_name" value="${sUser.user_name}">
+                                        <input type="text" class="form-control" id="user_name" name="user_name" value="${sUser.user_name}">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="user_email">이메일주소 *</label>
-                                        <input type="text" class="form-control" name="user_email" value="${sUser.user_email}">
+                                        <input type="email" class="form-control" id="user_email" name="user_email" value="${sUser.user_email}">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="user_phone">핸드폰번호 *</label>
-                                        <input type="text" class="form-control" name="user_phone" value="${sUser.user_phone}">
+                                        <input type="text" class="form-control" id="user_phone" name="user_phone" value="${sUser.user_phone}">
                                     </div>
                                 </div>
                                 <div class="col-12">

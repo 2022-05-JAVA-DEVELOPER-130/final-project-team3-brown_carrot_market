@@ -25,55 +25,108 @@
 <link rel="stylesheet" href="css/user.css">
 
 <!-- javaScript -->
+
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<!-- 회원정보수정 Validate -->
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+
 <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=a7c7231db91ae56cfc5e3c6ea06f73c6&libraries=services"></script>
 <script type="text/javascript" src="js/common/user_session_check.js"></script>
 <script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 <script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
 <script type="text/javascript">
 		$(function() {
-			
-			
-			/****************user_modify_action******************/
-			$(document).on('click',	'#btn_user_modify_action',function(e) {
-				console.log("click!! >> "+e.target);
-				//if(validator.form()){
-				if($("#user_pw_new").val() != ""){
-					if ($("#user_pw_new2").val() == "") {
-						alert("비밀번호확인을 입력하십시요.");
-						$("#user_pw_new").focus();
-						return false;
+			/* [회원정보수정]user_modify_form ******************************************/
+			/*
+			// validator객체변수선언 
+			var validator = null;
+			//validator객체 디폴트속성 설정
+			$.validator.setDefaults({
+					rules : {
+						user_pw_new : {
+							required : false
+						},
+						user_pw_new2 : {
+							required : false,
+							equalTo : "#user_pw_new2"
+						},
+						user_name : {
+							required : true
+						},
+						user_email : {
+							required : true,
+							email : true
+						},
+						user_phone:{
+							required: true,
+							phone : true
+						}
+					},
+					messages : {
+						user_pw : {
+							//required : '비밀번호를 입력하세요'
+						},
+						user_pw2 : {
+							//required : '비밀번호확인을 입력하세요',
+							equalTo : '비밀번호와 비밀번호확인은 일치하여야 합니다'
+						},
+						user_name : {
+							required : '이름을 입력하세요'
+						},
+						user_email : {
+							required : '이메일을 입력하세요',
+							email : '이메일형식이 잘못되었습니다.'
+						},
+						user_phone : {
+							required : '핸드폰번호를 입력하세요',
+							phone : '핸드폰번호형식이 잘못되었습니다'
+						}
+					},
+					errorClass : 'error',
+					validClass : 'valid'
+				});
+			 validator = $('#user_modify_form').validate();
+			 */
+			 /****************user_modify_action******************/
+				$(document).on('click',	'#btn_user_modify_action',function(e) {
+					console.log("click!! >> "+e.target);
+					//if(validator.form()){
+					if($("#user_pw_new").val() != ""){
+						if ($("#user_pw_new2").val() == "") {
+							alert("비밀번호확인을 입력하십시요.");
+							$("#user_pw_new").focus();
+							return false;
+						}
+						if ($("#user_pw_new").val() != $("#user_pw_new2").val()) {
+							alert("비밀번호와 비밀번호확인은 일치하여야합니다.");
+							$("#user_pw_new").focus();
+							$("#user_pw_new").select();
+							return false;
+						}
+						$('#user_pw').val($('#user_pw_new').val());
 					}
-					if ($("#user_pw_new").val() != $("#user_pw_new2").val()) {
-						alert("비밀번호와 비밀번호확인은 일치하여야합니다.");
-						$("#user_pw_new").focus();
-						$("#user_pw_new").select();
-						return false;
-					}
-					$('#user_pw').val($('#user_pw_new').val());
-				}
-			    var param = $('#user_modify_form').serialize();
-			    console.log(param);
-			    $.ajax({
-					url : 'user_modify_action_json',
-					method : 'POST',
-					dataType : 'json',
-					data : param,
-					success : function(jsonResult) {
-					    if (jsonResult.code == 1) {
-						 	$('#my-account-content').html(UserHtmlContents.user_view_content(jsonResult.data[0]));
-					    } else if (jsonResult.code == 2) {
-							location.href='main';
-					    }
-					    console.log(jsonResult);
-					}
-			    });
-				//}
-				e.preventDefault();
-			});
+				    var param = $('#user_modify_form').serialize();
+				    console.log(param);
+				    $.ajax({
+						url : 'user_modify_action_json',
+						method : 'POST',
+						dataType : 'json',
+						data : param,
+						success : function(jsonResult) {
+						    if (jsonResult.code == 1) {
+							 	$('#my-account-content').html(UserHtmlContents.user_view_content(jsonResult.data[0]));
+						    } else if (jsonResult.code == 2) {
+								location.href='main';
+						    }
+						    console.log(jsonResult);
+						}
+				    });
+					//}
+					e.preventDefault();
+				});
 			/****************user_view_addresses******************/
 			$(document).on('click',	'#user_view_addresses',function(e) {
 				console.log("click!! >> #user_view_addresses");
@@ -264,7 +317,6 @@
 			
 			/* View_user_profile********************************/
 			$(document).on('click', '.img-circle', function(e) {
-				
 				 $.ajax({
 						url:'user_view_json',
 						method:'POST',
@@ -387,6 +439,7 @@
 					});
 				e.preventDefault();
 			});
+			
 			
 			/* user_remove_form ********************************/
 			$(document).on('click', '#user_remove_form', function(e) {
@@ -521,7 +574,7 @@
 	<!-- Footer Area -->
 
 	<!-- jQuery (Necessary for All JavaScript Plugins) -->
-	<script src="js/jquery.min.js"></script>
+	<!-- <script src="js/jquery.min.js"></script> -->
 	<script src="js/popper.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.easing.min.js"></script>
@@ -538,7 +591,7 @@
 	<script src="js/jquery.nice-select.min.js"></script>
 	<script src="js/wow.min.js"></script>
 	<script src="js/default/active.js"></script>
-	
+
 	<script type="text/javascript" src="js/user/user_my_account.js"></script>
 
 </body>

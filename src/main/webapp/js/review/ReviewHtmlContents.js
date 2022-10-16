@@ -7,8 +7,11 @@ function ReviewHtmlContents(){
 						=> 상대방id(your_id) = orders.user_id (buyer)
 */
 ReviewHtmlContents.review_write_form=function(orders_no,your_id) {
-	
+	var dropHeight =220;
 	$(function() {
+		
+		
+		
     	var $drop = $("#drop");
 		 $drop.on('click',function(e){
 			console.log(this);
@@ -17,39 +20,38 @@ ReviewHtmlContents.review_write_form=function(orders_no,your_id) {
 		
 		/* 이미지 upload *********************************************/
     	var uploadFiles = [];
-
+    	
     	$drop.on("dragenter", function(e) { //드래그 요소가 들어왔을떄 
     		console.log('dragenter 실행!');
     		$(this).addClass('drag-over');
-    		//$(e.target).addClass('drag-over');
     	}).on("dragleave", function(e) {  //드래그 요소가 나갔을때  
     		console.log('drag-over 실행!');
     		$(this).removeClass('drag-over');
-    		//$(e.target).removeClass('drag-over');
     	}).on("dragover", function(e) { 
     		e.stopPropagation(); 
     		e.preventDefault();
     	}).on('drop', function(e) {  //드래그한 항목을 떨어뜨렸을때
     		console.log('drop 실행!');
     		e.preventDefault(); 
-    		$(this).removeClass('drag-over'); 
-    		//$(e.target).removeClass('drag-over'); 
+    		$(this).removeClass('drag-over');
     		var files = e.originalEvent.dataTransfer.files;  //드래그&드랍 항목 
     		for(var i = 0; i < files.length; i++) {
     			var file = files[i];   
     			var size = uploadFiles.push(file);  //업로드 목록에 추가 
-    			preview(file, size - 1);  //미리보기 만들기 
+    			preview(file, size - 1);  //미리보기 만들기
     			} 
-    		});
-    	function preview(file, idx) { 
+		//$(this).style("height",dropHeight+"px");
+		});
+		function preview(file, idx) { 
 			var reader = new FileReader();
 			reader.onload = (function(f, idx) { 
 				return	function(e) { 
 					var div = "<div class='thumb'><div class='close' data-idx=" + idx + ">X</div><img src=" + e.target.result + " title=" + escape(f.name) + "/></div>";  
 					$("#thumbnails").append(div);  
 					}; 
-				})(file, idx); 
+			})(file, idx); 
 			reader.readAsDataURL(file);
+			dropHeight += 220 * ($(".thumb").length%2);//사실 안되는 듯..
 		}
     		
     	$(document).on('click', '#btnSubmit', function(e) {
@@ -184,11 +186,13 @@ ReviewHtmlContents.review_write_form=function(orders_no,your_id) {
                                 </div>
                                 
                                 <!-- 이미지 업로드 -->
-                                <label for="drop">사진 첨부</label>
-								<div id="drop" class="form-group"
-									style="border: 1px solid black; width: 400px; height: 300px; padding: 3px">
-									여기로 drag & drop 해주세요
-									<div id="thumbnails"></div>
+                                <div class="form-group">
+	                                <label for="drop">사진 첨부 <span style="color:dimgray;font-size:10px"> (하단에 drag & drop 해주세요)</span></label>
+									<div id="drop" class="form-control"
+										style="height: ${dropHeight}px; padding: 3px">
+										
+										<div id="thumbnails" ></div>
+									</div>
 								</div>
                                 <input type="button" id="btnSubmit" class="btn btn-primary" value="Submit Review" />
                                 
@@ -198,11 +202,14 @@ ReviewHtmlContents.review_write_form=function(orders_no,your_id) {
 }
 
 ReviewHtmlContents.review_view=function(review) {
+	console.log(review.reviewImageList.length);
 	const star = 20 * review.review_point;
+	const showHeight = 220 * (review.reviewImageList.length/2);
+	//$('#show').style("height",showHeight+"px");
 	
 	function reviewImage_item(review_img){
 		return`
-			<img class="img-circle" src="img/review_img/${review_img.review_img_name}" onerror="this.src='img/user_profile/newCarrot.jpg'">
+			<img class="thumb" src="img/review_img/${review_img.review_img_name}" onerror="this.src='img/user_profile/newCarrot.jpg'">
 		`;
 	}
 	
@@ -242,15 +249,17 @@ ReviewHtmlContents.review_view=function(review) {
                                 </div>
                                 
                                 <!-- 이미지 업로드 -->
-                                <label for="drop">첨부 사진</label>
-								<div id="show" class="form-group"
-									style="border: 1px solid black; width: 400px; height: 300px; padding: 3px">
-									<div id="thumbnails">
-									
-									${
-										review.reviewImageList.map(reviewImage_item).join('')
-									}
-									
+                                <div class="form-group">
+	                                <label for="drop">첨부 사진</label>
+									<div id="show" class="form-control"
+										style="height: ${showHeight}px; padding: 3px">
+										<div id="thumbnails">
+										
+										${
+											review.reviewImageList.map(reviewImage_item).join('')
+										}
+										
+										</div>
 									</div>
 								</div>
                                 <!--<input type="button" id="btnSubmit" class="btn btn-primary" value="Submit Review" />-->
