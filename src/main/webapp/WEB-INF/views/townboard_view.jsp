@@ -231,6 +231,27 @@
                                             <p>${townReply.t_reply_title }</p>
                                             <p>${townReply.t_reply_content }</p>
                                             <a href="#" class="reply">Reply</a>
+                                            <form id="townReply_write_form" method="post">
+				                                <div class="row">
+				                                   
+				                                    <div class="col-12 rereply">
+				                                        <div class="form-group mb-30">
+				                                            <input type="text" class="form-control" name="t_reply_title" id="t_reply_title" placeholder="댓글 제목" tabindex="1">
+				                                        </div>
+				                                    </div>
+				                                    <div class="col-12 rereply">
+				                                        <div class="form-group mb-30">
+				                                            <textarea class="form-control rereply" name="t_reply_content" id="t_reply_content" cols="30" rows="7" placeholder="내용" tabindex="2"></textarea>
+				                                        </div>
+				                                    </div>
+				                                    <input type="hidden" class="form-control" name="t_no" value="${townBoard.t_no}"/>
+				                                   <!--  <input type="hidden" class="form-control" name="step" value="1"/> 이렇게 하면 모든 setp이 1로 나와서 xx 증가해야함 -->
+				                                    <input type="hidden" class="form-control" name="depth" value="2"/>
+				                                    <div class="col-12 ">
+				                                        <button id="replysubmit" class="btn btn-primary" type="submit">Submit Comment</button>
+				                                    </div>
+				                                </div>
+				                            </form>
                                             <input class="townReply delete" type="button" pageno="${pageno}" t_no="${townBoard.t_no }" t_reply_no="${townReply.t_reply_no}" value="삭제하기" />
                                         </div>
                                     </div>
@@ -249,11 +270,13 @@
 		                                            <p>${townReply.t_reply_title }</p>
 		                                            <p>${townReply.t_reply_content }</p>
 		                                            <a href="#" class="reply">Reply</a>
+		                                             <input class="townReply delete" type="button" pageno="${pageno}" t_no="${townBoard.t_no }" t_reply_no="${townReply.t_reply_no}" value="삭제하기" />
 		                                        </div>
                                             </div>
                                         </li>
                                     </ul>
                                     </c:if>
+                                   
                                     </c:forEach> 
                                     
                                 </li>
@@ -271,15 +294,17 @@
                                    
                                     <div class="col-12">
                                         <div class="form-group mb-30">
-                                            <input type="text" class="form-control" name="t_reply_title" value="" placeholder="댓글 제목" tabindex="1">
+                                            <input type="text" class="form-control" name="t_reply_title" id="t_reply_title" placeholder="댓글 제목" tabindex="1">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group mb-30">
-                                            <textarea class="form-control" name="t_reply_content" cols="30" rows="7" placeholder="내용" tabindex="2"></textarea>
+                                            <textarea class="form-control" name="t_reply_content" id="t_reply_content" cols="30" rows="7" placeholder="내용" tabindex="2"></textarea>
                                         </div>
                                     </div>
                                     <input type="hidden" class="form-control" name="t_no" value="${townBoard.t_no}"/>
+                                   <!--  <input type="hidden" class="form-control" name="step" value="1"/> 이렇게 하면 모든 setp이 1로 나와서 xx 증가해야함 -->
+                                    <input type="hidden" class="form-control" name="depth" value="1"/>
                                     <div class="col-12">
                                         <button id="replysubmit" class="btn btn-primary" type="submit">Submit Comment</button>
                                     </div>
@@ -334,6 +359,10 @@
     <script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+
+
+
+
 
 	<style type="text/css">
 #toast-container > .toast {

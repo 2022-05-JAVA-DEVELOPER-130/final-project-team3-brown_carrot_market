@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +17,7 @@ import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Notice;
 import com.itwill.brown_carrot_market.dto.TownBoard;
 import com.itwill.brown_carrot_market.dto.TownReply;
+import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.TownBoardService;
 import com.itwill.brown_carrot_market.service.TownReplyService;
 import com.itwill.brown_carrot_market.util.PageMakerDto;
@@ -130,13 +132,20 @@ public class TownBoardRestController {
 		String sUserId = (String)session.getAttribute("sUserId");
 		
 		try {
+			
+			townReply.setUserInfo(new UserInfo(sUserId, "", "", "", "", 0, 0, "", null));
+			townReply.setTownBoard(new TownBoard(t_no, "", "", "", 0, null, "", 0, 0, null, null, null));
+			System.out.println(">>> rest controller: insertTownBoardReply(townReply)호출");
 			int result = townReplyService.insertTownBoardReply(townReply);
+			/////흠 여기서 뭐라고 써줘야하지.. 리턴말고..ㅜ
+			
 			if (result == 1) {
 				resultMap.put("errorCode", 1);
-				resultMap.put("errorMsg", "게시글을 삭제하였습니다");
+				resultMap.put("errorMsg", "댓글을 등록하였습니다");
+				
 			} else {
 				resultMap.put("errorCode", -2);
-				resultMap.put("errorMsg", "게시글이 삭제되지 않았습니다");
+				resultMap.put("errorMsg", "댓글이 등록되지 않았습니다");
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -146,6 +155,7 @@ public class TownBoardRestController {
 		
 		return resultMap;
 	}
+	
 	
 	//댓글 삭제
 		@RequestMapping("/townReply_delete_rest")

@@ -30,38 +30,6 @@ public class TownBoardController {
 	@Autowired
 	private TownReplyService townReplyService;
 	
-	/*
-	//우리동네 게시판 전체 조회
-	@RequestMapping("/townBoard_list")
-	public String townBoard_list(@RequestParam(required = false, defaultValue = "1") Integer pageno,Model model, HttpSession session) {
-		try {
-			String sUserId = (String)session.getAttribute("sUserId");
-			Address sAddress = (Address)session.getAttribute("sAddress");
-			System.out.println("townBoard_list: sAddress" +sAddress);
-			
-			//회원 게시판 전체조회
-			if(sUserId != null) {
-				PageMakerDto<TownBoard> townBoardList = townBoardService.selectTownBoardListCoordinate(sAddress, pageno);
-				model.addAttribute("townBoardList", townBoardList);
-				model.addAttribute("pageno", pageno);
-			}
-			
-			//비회원 게시판 전체조회	
-			if(sUserId == null) {
-				PageMakerDto<TownBoard> townBoardList = townBoardService.selectNonMemberTownBoardList(pageno);
-				model.addAttribute("townBoardList", townBoardList);
-				model.addAttribute("pageno", pageno);
-			}
-			
-		}catch (Exception e) {
-			e.printStackTrace();
-			return "error";
-		}
-		
-		
-		return "town_boardList";
-	}
-	*/
 	
 	//우리동네 게시판 전체 조회 카테고리까지
 	@RequestMapping("/townBoard_list")
@@ -139,43 +107,7 @@ public class TownBoardController {
 		return "townboard_list";
 	}
 	
-/*	
-	//우리동네 게시판 카테고리 조건 전체 조회
-	@RequestMapping("/townBoard_Ctgr_list")
-	public String townBoard_Ctgr_list(@RequestParam(required = false, defaultValue = "1") Integer pageno, @RequestParam Map<String, Object> map,Model model, HttpSession session, int t_ctgr_no) {
-		try {
-			String sUserId = (String)session.getAttribute("sUserId");
-			map.put("user_id", sUserId);
-			
-			Address sAddress = (Address)session.getAttribute("sAddress");
-			map.put("address", sAddress);
-			
-			//회원 게시판 카테고리 조건 전체조회
-			
-			if(sUserId != null) {
-				PageMakerDto<TownBoard> townBoardList = townBoardService.selectTownBoardCtgrListCoordinate(map, t_ctgr_no);
-				model.addAttribute("townBoardList", townBoardList);
-				model.addAttribute("pageno", pageno);
-			}
-			
-			//비회원 게시판 카테고리 조건 전체조회	
-			if(sUserId == null) {
-				PageMakerDto<TownBoard> townBoardList = townBoardService.selectNonMemberCtgrTownBoardList(t_ctgr_no, pageno);
-				model.addAttribute("townBoardList", townBoardList);
-				model.addAttribute("pageno", pageno);
-			}
-			
-		}catch (Exception e) {
-			e.printStackTrace();
-			return "error";
-		}
-		
-		
-		return "townboard_list";
-		
-		
-	}
-*/	
+
 	//게시글 상세보기
 	@RequestMapping(value = "/townboard_view")
 	public String townBoard_view(@RequestParam int t_no,@RequestParam int pageno, Model model,HttpSession session, @ModelAttribute TownReply townReply) throws Exception{
@@ -192,6 +124,7 @@ public class TownBoardController {
 		List<TownReply> townReplyList = townReplyService.selectTownBoardReplyList(t_no);
 		model.addAttribute("townReplyList", townReplyList);
 		
+		//댓글 등록
 		//townReplyService.insertTownBoardReply(townReply);
 		
 		

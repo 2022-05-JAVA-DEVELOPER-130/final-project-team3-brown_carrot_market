@@ -68,4 +68,14 @@ li{
 	
 }
 
+.form-control.rereply{
+	height: 100px;
+}
+.col-12.rereply{
+	margin-bottom: -10px;
+}
+.townReply.delete{
+	margin-top: 15px;
+}
+
 
