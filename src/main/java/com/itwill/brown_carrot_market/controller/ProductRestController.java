@@ -104,11 +104,14 @@ public class ProductRestController {
 		
 		} catch (Exception e) {
 			e.printStackTrace();
+			url = "product_list";
 			message = "Fail to upload files!";
 			resultMap.put("message", message);
+			resultMap.put("url", url);
 			
 			//return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
 			return resultMap;
 		}
-	}
+		
+		}
 }
