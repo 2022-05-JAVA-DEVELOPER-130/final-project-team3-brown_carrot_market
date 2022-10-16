@@ -122,14 +122,18 @@ public class FilesControllerReview {
 	}
 	
 	@PostMapping("/review/delete")
-	public ResponseEntity<Map<String,Object>> deleteFiles(@RequestParam("user_profile")String fileName) {
-		Map<String,Object> result = new HashMap();
-		
-		boolean deleteResult= storageService.delete(fileName);
-		
-		result.put("result",deleteResult);
-		
-		return ResponseEntity.status(HttpStatus.OK).body(result);
+	public ResponseEntity<Map<String,Object>> deleteFiles(@RequestParam("user_profile")List<String> fileNames) {
+		Map<String,Object> resultMap = new HashMap();
+		List<Boolean> result = new ArrayList();
+		boolean deleteResult= false;
+		if(fileNames!=null) {
+			for (String fileName : fileNames) {
+				deleteResult= storageService.delete(fileName);
+			}
+			result.add(deleteResult);
+		}
+		resultMap.put("result",result);
+		return ResponseEntity.status(HttpStatus.OK).body(resultMap);
 	}
 }
 	

@@ -7,52 +7,6 @@ function ReviewHtmlContents(){
 						=> 상대방id(your_id) = orders.user_id (buyer)
 */
 ReviewHtmlContents.review_write_form=function(orders_no,your_id) {
-	var dropHeight =220;
-	$(function() {
-		
-    	var $drop = $("#drop");
-		 $drop.on('click',function(e){
-			console.log(this);
-			e.preventDefault(); 
-		});
-		
-		/* 이미지 upload *********************************************/
-    	var uploadFiles = [];
-    	
-    	$drop.on("dragenter", function(e) { //드래그 요소가 들어왔을떄 
-    		console.log('dragenter 실행!');
-    		$(this).addClass('drag-over');
-    	}).on("dragleave", function(e) {  //드래그 요소가 나갔을때  
-    		console.log('drag-over 실행!');
-    		$(this).removeClass('drag-over');
-    	}).on("dragover", function(e) { 
-    		e.stopPropagation(); 
-    		e.preventDefault();
-    	}).on('drop', function(e) {  //드래그한 항목을 떨어뜨렸을때
-    		console.log('drop 실행!');
-    		e.preventDefault(); 
-    		$(this).removeClass('drag-over');
-    		var files = e.originalEvent.dataTransfer.files;  //드래그&드랍 항목 
-    		for(var i = 0; i < files.length; i++) {
-    			var file = files[i];   
-    			var size = uploadFiles.push(file);  //업로드 목록에 추가 
-    			preview(file, size - 1);  //미리보기 만들기
-    			} 
-		//$(this).style("height",dropHeight+"px");
-		});
-		function preview(file, idx) { 
-			var reader = new FileReader();
-			reader.onload = (function(f, idx) { 
-				return	function(e) { 
-					var div = "<div class='thumb'><div class='close' data-idx=" + idx + ">X</div><img src=" + e.target.result + " title=" + escape(f.name) + "/></div>";  
-					$("#thumbnails").append(div);  
-					}; 
-			})(file, idx); 
-			reader.readAsDataURL(file);
-			dropHeight += 220 * ($(".thumb").length%2);//사실 안되는 듯..
-		}
-    		
-	});//END
 	
 	return `<div class="submit_a_review_area col-12" style="border: 1px solid #d6e6fb; padding:30px;">
                         <h4>후기작성</h4>
@@ -112,7 +66,7 @@ ReviewHtmlContents.review_write_form=function(orders_no,your_id) {
                                 <div class="form-group">
 	                                <label for="drop">사진 첨부 <span style="color:dimgray;font-size:10px"> (하단에 drag & drop 해주세요)</span></label>
 									<div id="drop" class="form-control"
-										style="height: ${dropHeight}px; padding: 3px">
+										style="height: 220px; padding: 3px">
 										
 										<div id="thumbnails" ></div>
 									</div>
