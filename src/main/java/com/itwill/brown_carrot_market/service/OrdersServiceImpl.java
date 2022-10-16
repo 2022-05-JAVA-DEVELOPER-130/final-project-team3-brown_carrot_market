@@ -38,5 +38,10 @@ public class OrdersServiceImpl implements OrdersService{
 	public List<Orders> selectAllById(String user_id) throws Exception {
 		return ordersDao.selectAllById(user_id);
 	}
+
+	@Override
+	public int selectByOrdersCount(int p_no) throws Exception {
+		return ordersDao.selectByOrdersCount(p_no);
+	}
 	
 }

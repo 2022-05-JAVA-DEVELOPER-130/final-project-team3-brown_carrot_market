@@ -46,7 +46,7 @@
 <hr>
 <br><br><br><br>
 	<div>
-		<label>구매 상품</label>
+		<label>상 품 명</label>
 			${product.p_title}
 	</div>
 	<br>
@@ -58,7 +58,7 @@
   	<br>
   	<br>
 	<div>
-		<label>구매 상품 금액</label> 
+		<label>상품 가격</label> 
 			${product.p_price}
 	</div>
 <br>
@@ -225,7 +225,6 @@
 	}
 </body>
 </html>
-
 <%-- <!DOCTYPE html>
 <html>
 <head>
@@ -241,7 +240,6 @@
 	height: 100%;
 	display: none;
 }
-
 #pop>article {
 	width: 700px;
 	height: 400px;
@@ -253,7 +251,6 @@
 	cursor: pointer;
 	text-align: center;
 }
-
 .black {
 	background: rgba(0, 0, 0, 0.6);
 } */

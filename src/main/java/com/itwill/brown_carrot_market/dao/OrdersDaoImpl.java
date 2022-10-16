@@ -53,4 +53,11 @@ public class OrdersDaoImpl implements OrdersDao{
 		return ordersMapper.selectAllById(user_id);
 	}
 
+	@Override
+	public int selectByOrdersCount(int p_no) throws Exception {
+		System.out.println("#### OrdersDaoImplMyBatisMapperInterface : selectByOrdersCount(int p_no) 호출  ");
+		System.out.println("selectByOrdersCount(int p_no) 메소드 : " + ordersMapper);
+		return ordersMapper.selectByOrdersCount(p_no);
+	}
+
 }

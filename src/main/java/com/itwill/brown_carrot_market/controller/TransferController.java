@@ -9,12 +9,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.itwill.brown_carrot_market.dto.Orders;
 import com.itwill.brown_carrot_market.dto.Product;
+import com.itwill.brown_carrot_market.dto.ProductImage;
 import com.itwill.brown_carrot_market.dto.Transfer;
 import com.itwill.brown_carrot_market.dto.UserInfo;
+import com.itwill.brown_carrot_market.service.OrdersService;
 import com.itwill.brown_carrot_market.service.ProductService;
 import com.itwill.brown_carrot_market.service.TransferService;
 import com.itwill.brown_carrot_market.service.UserInfoService;
+import com.itwill.brown_carrot_market.test.dao.ProductImageDaoSpringBootTestApplication;
 
 @Controller
 public class TransferController {
@@ -24,7 +28,7 @@ public class TransferController {
 	private ProductService productService;
 	@Autowired
 	private UserInfoService userInfoService;
-
+	
 	@LoginCheck
 	@RequestMapping(value = "/point_list")
 	public String transfer_list(Model model, HttpServletRequest request) throws Exception {
