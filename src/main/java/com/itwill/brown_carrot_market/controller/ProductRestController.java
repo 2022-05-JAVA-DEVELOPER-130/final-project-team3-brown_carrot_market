@@ -51,7 +51,10 @@ public class ProductRestController {
 				System.out.println(file.isEmpty());
 				if (!file.isEmpty()) {
 					newFileName= storageService.save(file);
-					fileNames.add(file.getOriginalFilename());
+					//fileNames.add(file.getOriginalFilename());
+					fileNames.add(newFileName);
+					
+					System.out.println(fileNames);
 					message = "Uploaded the files successfully: " + fileNames+" newFileName"+newFileName;
 				}else {
 					message="Please select a valid mediaFile..";
@@ -75,7 +78,7 @@ public class ProductRestController {
 		map.put("userInfo", userInfo);	
 		ProductCategory productCategory = new ProductCategory(Integer.parseInt(map.get("p_ctgr_no").toString()), "");
 		map.put("productCategory", productCategory);
-		map.put("pi_name", fileNames);
+		map.put("ImageNameList", fileNames);
 		
 		
 		map.remove("p_ctgr_no");
