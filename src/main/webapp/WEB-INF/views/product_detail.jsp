@@ -78,6 +78,7 @@
                         <div id="product_details_slider" class="carousel slide" data-ride="carousel">
 
                             <!-- Carousel Inner -->
+                           
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
                                     <a class="gallery_img" href="img/product_img/${product.productImagesList[0].pi_name}" title="First Slide">
@@ -88,9 +89,11 @@
                                         <span class="badge-new">New</span>
                                     </div>
                                 </div>
+                              
+                             
                                 <div class="carousel-item">
-                                    <a class="gallery_img" href="img/product_img/${product.productImagesList[0].pi_name}" title="Second Slide">
-                                        <img class="d-block w-100" src="img/product_img/${product.productImagesList[0].pi_name}" alt="Second slide">
+                                    <a class="gallery_img" href="img/product-img/pd-big-thumb-2.png" title="Second Slide">
+                                        <img class="d-block w-100" src="img/product-img/pd-big-thumb-2.png" alt="Second slide">
                                     </a>
                                     <!-- Product Badge -->
                                     <div class="product_badge">
@@ -116,17 +119,22 @@
                                     </div>
                                 </div>
                             </div>
-
+						
                             <!-- Carosel Indicators -->
                             <ol class="carousel-indicators">
-                                <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(img/product_img/${product.productImagesList[0].pi_name});">
+                       
+                                <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(img/product_img/${product.productImagesList[i].pi_name});">
                                 </li>
-                                <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(img/product-img/pd-big-thumb-2.png);">
+                              
+                                
+                               
+                                <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(img/product_img/${product.productImagesList[i+1].pi_name});">
                                 </li>
                                 <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(img/product-img/pd-big-thumb-3.png);">
                                 </li>
                                 <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(img/product-img/pd-big-thumb-4.png);">
                                 </li>
+                              
                             </ol>
                         </div>
                     </div>
@@ -135,7 +143,11 @@
                 <!-- Single Product Description -->
                 <div class="col-12 col-lg-6">
                     <div class="single_product_desc">
-                        <h4 class="title mb-2">${product.p_title}</h4>
+                        <h4 class="title mb-2">판매자 : ${product.userInfo.user_id}</h4>
+                        <h4 class="title mb-2">매너온도 : ${product.userInfo.user_freshness}</h4>
+                        <hr>
+                        <h3 class="title mb-2">${product.p_title}</h3>
+                        <p>${product.productCategory.p_ctgr_name}</p>
                         <!--  
                         <div class="single_product_ratings mb-2">
                             <i class="fa fa-star" aria-hidden="true"></i>
@@ -146,13 +158,16 @@
                             <span class="text-muted">(8 Reviews)</span>
                         </div>
                         -->
-                        <h4 class="price mb-4">가격 : ${product.p_price} </h4>
+                        <h4 class="price mb-4">가격 : ${product.p_price} 원 </h4>
                         
                         <!-- Overview -->
                         <div class="short_overview mb-4">
-                            <h6>Overview</h6>
-                            <p>${product.p_desc}</p>
+                            <h5>설명</h5>
+                            <h6>${product.p_desc}</h6>
                         </div>
+                         <div class="short_overview mb-4">
+                         	<p>관심  ${product.p_wish} 조회수  ${product.p_count}</p>
+                         </div>
 
                         <!-- Color Option -->
                        
@@ -172,6 +187,7 @@
                             <input type="hidden" name="p_desc" value="${product.p_desc}" />
                             <input type="hidden" name="p_price" value="${product.p_price}" />
                             <input type="hidden" name="p_ctgr_no" value="${product.productCategory.p_ctgr_no}" />
+                            <input type="hidden" name="user_id" value="${product.userInfo.user_id}" />
                             <button type="button" name="btnCreate" class="btn btn-primary mt-1 mt-md-0 ml-1 ml-md-3" id="btnCreate">채팅하기</button>
                         </form>
                         
@@ -192,7 +208,7 @@
                         <div class="others_info_area mb-3 d-flex flex-wrap">
                             <a class="add_to_wishlist" href="wishlist.html"><i class="fa fa-heart" aria-hidden="true"></i> 찜하기</a>
                             <a class="add_to_compare" href="compare.html"><i class="fa fa-th" aria-hidden="true"></i> 수정하기</a>
-                            <a class="share_with_friend" href="#"><i class="fa fa-share" aria-hidden="true"></i> SHARE WITH FRIEND</a>
+                            <a class="share_with_friend" href="product_delete_action"><i class="fa fa-share" aria-hidden="true"></i> 삭제하기</a>
                         </div>
 
                         <!-- Size Guide -->
@@ -201,8 +217,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
+                <!--  
                     <div class="product_details_tab section_padding_100_0 clearfix">
-                        <!-- Tabs -->
+                    -->
+                        <!-- Tabs 
                         <ul class="nav nav-tabs" role="tablist" id="product-details-tab">
                             <li class="nav-item">
                                 <a href="#description" class="nav-link active" data-toggle="tab" role="tab">Description</a>
@@ -217,7 +235,8 @@
                                 <a href="#refund" class="nav-link" data-toggle="tab" role="tab">Return &amp; Cancellation</a>
                             </li>
                         </ul>
-                        <!-- Tab Content -->
+                        -->
+                        <!-- Tab Content 
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane fade show active" id="description">
                                 <div class="description_area">
@@ -365,11 +384,13 @@
                                     <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum eius eum, minima!</p>
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+                            -->
     </section>
     <!-- Single Product Details Area End -->
 
@@ -384,6 +405,7 @@
                 </div>
             </div>
             <div class="row">
+            
                 <div class="col-12">
                     <div class="you_make_like_slider owl-carousel">
                         <!-- Single Product -->
@@ -426,6 +448,7 @@
                                 <h6 class="product-price">$48.99</h6>
                             </div>
                         </div>
+                        
 
                         <!-- Single Product -->
                         <div class="single-product-area">

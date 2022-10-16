@@ -104,6 +104,12 @@
     <delete id="deleteByPNo" parameterType="int">
     	delete product where p_no=#{p_no}
     </delete>
+   
+    
+    <delete id="deleteByPNoUserId" parameterType="int">
+    	delete product where p_no=#{p_no} and user_id=#{user_id}
+    </delete>
+    
      
     <!-- 조회수 수정 -->
     <update id="updateProductCount" parameterType="int">
