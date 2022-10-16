@@ -46,7 +46,80 @@ $(document).ready(function(){
 		}
 	});
 	*/
-	
+	$(document).on('click', '#btnSubmit', function(e) {
+    		console.log('click - #btnSubmit');
+    		
+    		var formData = new FormData();
+    		
+    		$.each(uploadFiles, function(i, file) {
+    			if(file.upload != 'disable')  //삭제하지 않은 이미지만 업로드 항목으로 추가     
+    			formData.append('files', file); 
+    		});
+    		
+			var review = {
+				"review_point":$('#review_point').val(),
+				"review_desc":$('#review_desc').val(),
+				"review_image":$('#review_image').val()
+			}
+			
+    		if(formData.get("files")!=null){
+	    		$.ajax({	// review_image 업로드
+	    			url : 'review/upload',
+	    			type : 'POST',
+	    			processData : false, //파일전송시 반드시 false
+	    			contentType : false,
+	    			data : formData,
+	    			success : function(jsonResult) {
+		console.log(jsonResult.newFileNames);
+	    				$.ajax({	// review INSERT
+							url : 'review_write_action',
+							method : 'POST',
+							data: {
+								"orders_no": orders_no,
+								"review":JSON.stringify(review),
+								"images": JSON.stringify(jsonResult.newFileNames),
+								"your_id": your_id
+								},
+							success : function(jsonResult) {
+								 console.log(jsonResult.msg);
+								 location.href='orders_list';
+						    },error:  function(jsonResult) {
+			    				console.log('error!!: review_write_action');
+							}
+						});
+	    			},
+	    			error : function() {
+	    				console.log('error!!');
+	    			}
+	    		});
+    		}else{	//이미지가 업로드되지 않은 경우
+				$.ajax({	// review INSERT
+					url : 'review_write_action',
+					method : 'POST',
+					data: {
+						"orders_no": orders_no,
+						"review":JSON.stringify(review),
+						"images": null,
+						"your_id": your_id
+						},
+					success : function(jsonResult) {
+						 console.log(jsonResult.msg);
+						 location.href='orders_list';
+				    },error:  function(jsonResult) {
+	    				console.log('error!!: review_write_action');
+					}
+				});
+			}
+    		e.preventDefault();
+    	});
+    		  
+    	$("#thumbnails").on("click", ".close", function(e) {
+    		var $target = $(e.target); 
+    		var idx = $target.attr('data-idx');
+    		uploadFiles[idx].upload = 'disable';  //삭제된 항목은 업로드하지 않기 위해 플래그 생성
+    		$target.parent().remove();  //프리뷰 삭제
+    	});
+    	/* (END)이미지 upload *********************************************/
 	
     			
 });//(END)ready
