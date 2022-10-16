@@ -87,17 +87,23 @@ public class ProductServiceImpl implements ProductService{
 	public int insertProduct(Map map) throws Exception {
 		int result = 0;
 		int p_no = productDao.insertProduct(map);
-		//Product product = (Product)map;
+		System.out.println(">>>>>Service map"+map);
+		//List<String> fileNames = new ArrayList<>();
+		System.out.println(map.get("pi_name"));
+		
 		/*
-		if(product.getProductImagesList()!=null) {
+		Product product = (Product) map;
+		if(map.get("pi_name")!=null) {
 		List<ProductImage> productImageList = new ArrayList();
 		for (ProductImage productImage : product.getProductImagesList()) {
 			productImage.setP_no(p_no);
+			map.get("pi_name");
+			productImage.setPi_name("pi_name");
 			productImageList.add(productImage);
 			}
 		result = productImageDao.insertProductListImg(productImageList);
 		}
-		 */
+		*/ 
 		return result;
 	}
 	// 채팅에서 사용 

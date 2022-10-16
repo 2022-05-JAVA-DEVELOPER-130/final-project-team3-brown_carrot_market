@@ -28,24 +28,30 @@ function productCreate() {
 	}
 	
 	//사진 리스트 업로드
-	const formData1 = new FormData();
+	const formData1 = new FormData($('#main_contact_form')[0]);
+	/*
 	formData1.append('files',$('#files')[0]); //이게 맞나?
 	formData1.append('files',$('#files')[1]); 
 	formData1.append('files',$('#files')[2]); 
 	formData1.append('files',$('#files')[3]); 
+	*/
 	$.ajax({
-		url:'product/upload',
+		url:'product_write_action_json',
 		type:'POST',
 		processData:false,	//파일전송시 반드시 false
 		contentType:false,
 		data:formData1,
 		success:function(jsonResult){
 		console.log(jsonResult);
-		 //사진이름받기
+		 /*사진이름받기
 		 $.ajax({
-				  url : 'product_write_action',
+				  url : 'product_write_action_json',
 				  method : 'POST',
 				  data: {
+						"p_title":$("input[name='p_title']").val(),
+						"p_price":$("input[name='p_price']").val(),
+						"p_ctgr_no":$("input[name='p_ctgr_no']").val(),
+						"p_desc":$("input[name='p_desc']").val(),
 						"pi_name": jsonResult.newFileName 
 							},
 							dataType : 'json',
@@ -53,20 +59,24 @@ function productCreate() {
 								console.log(jsonResult.msg);
 			}
 		  });
+		  */
 		}
 	});
+	}
+	/*
 	const formData2 = new FormData();
 	formData2.append('p_title',$("p_title"));
 	formData2.append('p_price',$("p_price"));
 	formData2.append('p_desc',$("p_desc"));
 	formData2.append('p_ctgr_no',$("p_ctgr_no"));
+	*/
 	
-	
-	
-	document.product_write_form.action = "product_write_action";
+	/*
+	document.product_write_form.action = "product_write_action_json";
 	document.product_write_form.method='POST';
 	document.product_write_form.submit();
 }
+	*/
 
 function productSell(){
 	document.product_modify_sell_action.action = "product_modify_sell_action"
@@ -83,5 +93,4 @@ $(document).ready(function(){
 		document.chatStart.submit();
 		
 	});
-	});
-	
+	});	

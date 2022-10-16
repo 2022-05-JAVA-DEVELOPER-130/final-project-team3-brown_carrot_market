@@ -84,7 +84,7 @@ public class ProductController {
 		return "redirect : product_list";
 	}
 	
-
+	/*
 	@RequestMapping(value = "/product_write_action", method = RequestMethod.POST)
 	public String product_write_action(@RequestParam Map<String, Object> map, Model model, HttpSession session) {
 		String forwardPath = "";
@@ -121,7 +121,7 @@ public class ProductController {
 				}
 			}
 			map.put("newFileName",newFileName);
-			*/
+			
 			
 			System.out.println("controller map : "+map);
 			
@@ -140,7 +140,7 @@ public class ProductController {
 		}
 		return forwardPath;
 	}
-	
+	*/
 	@RequestMapping(value = "/product_delete_action", method = RequestMethod.GET)
 	public String product_delete_action_get() {
 		return "redirect : product_list";
