@@ -47,7 +47,8 @@ public Map selectMemberCtgrTownBoardAddress(Map map);
 
 
 
-
+//비회원 인기글 리스트 
+public List<TownBoard> selectNonMemberTownBoardListTop3();
 
 
 //동네 게시판 게시글 한개 조회

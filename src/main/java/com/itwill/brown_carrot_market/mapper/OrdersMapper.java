@@ -10,6 +10,8 @@ import com.itwill.brown_carrot_market.dto.Orders;
 public interface OrdersMapper {
 	
 	int insertOrders(Orders orders);
+
+	int selectByOrdersCount(int p_no);
 	
 	Orders selectByNo(int orders_no);
 	

@@ -130,17 +130,17 @@
 
                             <!-- Recent Post1 -->
                             
-                           	<c:forEach var="townBoard" items="${townBoardList.itemList}" begin="0" end="2">
+                           	<c:forEach var="townBoardTop" items="${townBoardListTop}" begin="1" end="2">
 	                            <div class="single_latest_post">
 	                            
 	                                <div class="post-thumbnail">
-	                                <c:if test="${townBoard.townImageList.size() != 0}">
-	                                    <img src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-post-thumb">
+	                                <c:if test="${townBoardTop.townImageList.size() != 0}">
+	                                    <img src="img/townBoard-img/${townBoardTop.townImageList[0].t_img_name}" alt="blog-post-thumb">
 	                                	</c:if>
 	                                </div>
 	                                <div class="post-content">
-	                                    <a href="#">${townBoard.t_title }</a>
-	                                    <p>${townBoard.t_count }</p>
+	                                    <a href="#">${townBoardTop.t_title }</a>
+	                                    <p>${townBoardTop.t_count }</p>
 	                                </div>
 	                            </div>
                             </c:forEach>

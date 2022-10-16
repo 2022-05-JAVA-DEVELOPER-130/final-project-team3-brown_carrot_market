@@ -56,6 +56,8 @@ public interface TownBoardDao {
 	Map selectMemberCtgrTownBoardAddress(String user_id,int address_no);
 	
 	
+	//비회원 인기글 리스트 
+	List<TownBoard> selectNonMemberTownBoardListTop3();
 	
 	
 	//동네 게시판 게시글 한개 조회

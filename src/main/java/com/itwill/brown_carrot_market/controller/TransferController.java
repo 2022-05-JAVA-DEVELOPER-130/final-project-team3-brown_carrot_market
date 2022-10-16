@@ -9,11 +9,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.itwill.brown_carrot_market.dto.Orders;
 import com.itwill.brown_carrot_market.dto.Product;
 import com.itwill.brown_carrot_market.dto.ProductImage;
 import com.itwill.brown_carrot_market.dto.Transfer;
+import com.itwill.brown_carrot_market.dto.UserInfo;
+import com.itwill.brown_carrot_market.service.OrdersService;
 import com.itwill.brown_carrot_market.service.ProductService;
 import com.itwill.brown_carrot_market.service.TransferService;
+import com.itwill.brown_carrot_market.service.UserInfoService;
+import com.itwill.brown_carrot_market.test.dao.ProductImageDaoSpringBootTestApplication;
 
 @Controller
 public class TransferController {
@@ -21,7 +26,9 @@ public class TransferController {
 	private TransferService transferService;
 	@Autowired
 	private ProductService productService;
-
+	@Autowired
+	private UserInfoService userInfoService;
+	
 	@LoginCheck
 	@RequestMapping(value = "/point_list")
 	public String transfer_list(Model model, HttpServletRequest request) throws Exception {
@@ -39,7 +46,7 @@ public class TransferController {
  
 	@LoginCheck
 	@RequestMapping(value = "/transfer_page")
-	public String transfer_page(int p_no, Model model, HttpServletRequest request) throws Exception {
+	public String transfer_page(int p_no,Model model, HttpServletRequest request) throws Exception {
 		String forwardPath = "";
 		String sUserId = (String) request.getSession().getAttribute("sUserId");
 		Product product = productService.selectByOne(p_no);
@@ -49,16 +56,16 @@ public class TransferController {
 
 	}
 	
-	@RequestMapping(value = "/transfer_complete_action")
-	public String transfer_action(int p_no, Model model, HttpServletRequest request) throws Exception {
-		transferService.transfer_transaction(p_no);
-		return "redirect:transfer_complete?p_no="+p_no;
-	}
-	
-	@RequestMapping(value = "/transfer_cancle_action")
-	public String transfer_cancle_action(int p_no, Model model, HttpServletRequest request) throws Exception {
-		transferService.transfer_transaction(p_no);
-		return "redirect:transfer_cancle?p_no="+p_no;
+	@RequestMapping(value = "/transfer_action")
+	public String transfer_action(int p_no, HttpServletRequest request) throws Exception {
+		String forwardPath="";
+		boolean result = transferService.transfer_transaction(p_no);
+		if(result == true){
+			forwardPath="redirect:transfer_fail?p_no="+p_no;
+		}else if(result == false){
+			forwardPath="redirect:transfer_complete?p_no="+p_no;
+		}
+		return forwardPath;
 	}
 	
 	@LoginCheck
@@ -69,14 +76,16 @@ public class TransferController {
 		model.addAttribute("product", product);
 		return "/transfer_complete";
 	}
-	
+
 	@LoginCheck
-	@RequestMapping(value = "/transfer_cancle")
-	public String transfer_cancle(int p_no,Model model, HttpServletRequest request) throws Exception {
+	@RequestMapping(value = "/transfer_fail")
+	public String transfer_fail(int p_no,Model model, HttpServletRequest request) throws Exception {
 		String sUserId = (String) request.getSession().getAttribute("sUserId");
 		Product product = productService.selectByOne(p_no);
+		UserInfo userInfo = userInfoService.findUser(sUserId);
 		model.addAttribute("product", product);
-		return "/transfer_cancle";
+		model.addAttribute("userInfo", userInfo);
+		return "/transfer_fail";
 	}
 
 }

@@ -110,6 +110,11 @@ public class TownBoardServiceImpl implements TownBoardService{
 	}
 	
 	
+	//비회원 인기글 리스트
+	@Override
+	public List<TownBoard> selectNonMemberTownBoardListTop3() {
+		return townBoardDao.selectNonMemberTownBoardListTop3();
+	}
 	
 	
 
@@ -156,6 +161,8 @@ public class TownBoardServiceImpl implements TownBoardService{
 	public int insertTownBoard(Map map) {
 		return townBoardDao.insertTownBoard(map);
 	}
+
+	
 
 
 

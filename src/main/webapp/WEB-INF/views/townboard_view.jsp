@@ -231,6 +231,7 @@
                                             <p>${townReply.t_reply_title }</p>
                                             <p>${townReply.t_reply_content }</p>
                                             <a href="#" class="reply">Reply</a>
+                                            <input class="townReply delete" type="button" pageno="${pageno}" t_no="${townBoard.t_no }" t_reply_no="${townReply.t_reply_no}" value="삭제하기" />
                                         </div>
                                     </div>
                                     </c:if>
@@ -264,21 +265,23 @@
                         <div class="contact_from mb-50">
                             <h5 class="mb-4">Leave a Comment</h5>
 
-                            <form id="townReply_write_form" action="#" method="post">
+                            <form id="townReply_write_form" method="post">
+                            
                                 <div class="row">
                                    
                                     <div class="col-12">
                                         <div class="form-group mb-30">
-                                            <input type="text" class="form-control" name="url" value="" placeholder="Website (Optional)" tabindex="3">
+                                            <input type="text" class="form-control" name="t_reply_title" value="" placeholder="댓글 제목" tabindex="1">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group mb-30">
-                                            <textarea class="form-control" name="comment" cols="30" rows="7" placeholder="Comment" tabindex="4"></textarea>
+                                            <textarea class="form-control" name="t_reply_content" cols="30" rows="7" placeholder="내용" tabindex="2"></textarea>
                                         </div>
                                     </div>
+                                    <input type="hidden" class="form-control" name="t_no" value="${townBoard.t_no}"/>
                                     <div class="col-12">
-                                        <button class="btn btn-primary" type="submit">Submit Comment</button>
+                                        <button id="replysubmit" class="btn btn-primary" type="submit">Submit Comment</button>
                                     </div>
                                 </div>
                             </form>

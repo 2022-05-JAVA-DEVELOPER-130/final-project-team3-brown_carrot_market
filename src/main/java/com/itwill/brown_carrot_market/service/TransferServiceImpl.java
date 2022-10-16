@@ -20,7 +20,8 @@ public class TransferServiceImpl implements TransferService {
 	@Qualifier("transferDaoImpl")
 	private TransferDao transferDao;
 	
-	public void transfer_transaction(int p_no) throws Exception {
+	public boolean transfer_transaction(int p_no) throws Exception {
+		boolean result = false;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -87,17 +88,17 @@ public class TransferServiceImpl implements TransferService {
 					 * transaction end [rollback]
 					 */
 					con.rollback();
-					System.out.println("4-1.구매자 포인트 잔액 " + t_balance + " 음수--> Rollback!");
+					System.out.println("5-1.구매자 포인트 잔액 " + t_balance + " 음수--> Rollback!");
 					pstmt.close();
+					result = true;
 				} else {
 					/*
 					 * transaction end [commit]
 					 */
 					con.commit();
-					System.out.println("4-1.구매자 포인트 잔액 " + t_balance + " 양수--> Commit!");
+					System.out.println("5-1.구매자 포인트 잔액 " + t_balance + " 양수--> Commit!");
 					pstmt.close();
 				}
-
 			} else {
 				throw new Exception("unknown error!!");
 			}
@@ -111,17 +112,17 @@ public class TransferServiceImpl implements TransferService {
 					 * transaction end [rollback]
 					 */
 					con.rollback();
-					System.out.println("4-2.판매자 포인트 잔액 " + t_balance + " 음수 --> Rollback!");
+					System.out.println("5-2.판매자 포인트 잔액 " + t_balance + " 음수 --> Rollback!");
 					con.close();
+					result = true;
 				} else {
 					/*
 					 * transaction end [commit]
 					 */
 					con.commit();
-					System.out.println("4-2.판매자 포인트 잔액 " + t_balance + " 양수 --> Commit!");
+					System.out.println("5-2.판매자 포인트 잔액 " + t_balance + " 양수 --> Commit!");
 					con.close();
 				}
-
 			} else {
 				throw new Exception("unknown error!!");
 			}
@@ -139,8 +140,8 @@ public class TransferServiceImpl implements TransferService {
 				e1.printStackTrace();
 				con.close();
 			}
-
 		}
+		return result;
 
 	}
 

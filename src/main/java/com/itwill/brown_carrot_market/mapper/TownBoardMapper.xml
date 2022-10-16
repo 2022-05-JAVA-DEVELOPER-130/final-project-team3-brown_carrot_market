@@ -342,8 +342,15 @@ where tb.t_address_lat
 		update town_board set t_count=t_count+1 where t_no=#{t_no}
 	</update>
 	
-	
-	
+	<!-- 비회원 인기글 조회 -->
+	<select id="selectNonMemberTownBoardListTop3" resultMap="townBoradResultMap">
+		select * from town_board tb 
+		left outer join town_img ti 
+		on tb.t_no = ti.t_no
+		join town_category tc
+		on tc.t_ctgr_no = tb.t_ctgr_no
+		order by tb.t_count desc
+	</select>
 
 	
 	

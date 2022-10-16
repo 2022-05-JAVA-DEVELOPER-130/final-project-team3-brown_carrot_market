@@ -80,7 +80,10 @@ public class TownBoardController {
 					PageMakerDto<TownBoard> townBoardList = townBoardService.selectTownBoardListCoordinate(sAddress, pageno);
 					model.addAttribute("townBoardList", townBoardList);
 					model.addAttribute("pageno", pageno);
-					
+					/*
+					List<TownBoard> townBoardListTop = townBoardService.selectNonMemberTownBoardListTop3();
+					model.addAttribute("townBoardListTop", townBoardListTop);
+					*/
 				}
 				//카테고리 조건 있을때
 				if(t_ctgr_no != 0) {
@@ -164,7 +167,9 @@ public class TownBoardController {
 */	
 	//게시글 상세보기
 	@RequestMapping(value = "/townboard_view")
-	public String townBoard_view(@RequestParam int t_no,@RequestParam int pageno, Model model) throws Exception{
+	public String townBoard_view(@RequestParam int t_no,@RequestParam int pageno, Model model,HttpSession session, @ModelAttribute TownReply townReply) throws Exception{
+		String forwardPath = "";
+		String sUserId = (String)session.getAttribute("sUserId");
 		
 		try {
 		TownBoard townBoard = townBoardService.selectTownBoardOne(t_no);
@@ -172,8 +177,12 @@ public class TownBoardController {
 		model.addAttribute("townBoard", townBoard);
 		model.addAttribute("pageno", pageno);
 		
+		//해당 게시물의 댓글 전체 조회
 		List<TownReply> townReplyList = townReplyService.selectTownBoardReplyList(t_no);
 		model.addAttribute("townReplyList", townReplyList);
+		
+		//townReplyService.insertTownBoardReply(townReply);
+		
 		
 		}catch (Exception e) {
 			e.printStackTrace();

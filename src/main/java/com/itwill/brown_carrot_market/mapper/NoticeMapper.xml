@@ -24,6 +24,7 @@
 	<select id = "selectByNo" parameterType="java.lang.Integer" resultType="com.itwill.brown_carrot_market.dto.Notice">
 		select * from notice where notice_no=#{notice_no}
 	</select>
+	
 	<insert id="insertNotice" parameterType="com.itwill.brown_carrot_market.dto.Notice">
 		<selectKey resultType="java.lang.Integer"
 				keyProperty="notice_no" order="BEFORE">
@@ -32,6 +33,7 @@
 		insert into notice values(#{notice_no}, #{notice_title}, #{notice_content}, 
 									sysdate,#{notice_count},#{notice_fix})
 	</insert>
+	
 	<delete id="deleteNotice" parameterType="java.lang.Integer">
 		delete notice where notice_no=#{notice_no}
 	</delete>
