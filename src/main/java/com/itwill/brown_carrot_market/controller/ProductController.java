@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Product;
 import com.itwill.brown_carrot_market.dto.ProductCategory;
-import com.itwill.brown_carrot_market.dto.ProductImage;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.ProductService;
 
@@ -85,7 +84,7 @@ public class ProductController {
 		return "redirect : product_list";
 	}
 	
-
+	/*
 	@RequestMapping(value = "/product_write_action", method = RequestMethod.POST)
 	public String product_write_action(@RequestParam Map<String, Object> map, Model model, HttpSession session) {
 		String forwardPath = "";
@@ -93,18 +92,12 @@ public class ProductController {
 		//map.put("user_id", sUserId);
 		Address sAddress = (Address)session.getAttribute("sAddress");
 		map.put("address", sAddress);
-		map.put("p_no", 0);
-		System.out.println();
 		
 		String message = "";
 		String newFileName= "";
 
 		try {
-			/*
-			List<ProductImage> productImageList = new ArrayList<>();
-			productImageList.add(new ProductImage(0, newFileName, 0));
-			map.put("pi_name",newFileName);
-			*/
+
 			UserInfo userInfo = new UserInfo(sUserId, sUserId, sUserId, sUserId, forwardPath, 0, 0, sUserId, null);
 			map.put("userInfo", userInfo);	
 			ProductCategory productCategory = new ProductCategory(Integer.parseInt(map.get("p_ctgr_no").toString()), "");
@@ -113,10 +106,21 @@ public class ProductController {
 			//map.put("product", map);
 			
 			
-			//사진
-			
-			
-			
+			/*사진
+			List<String> fileNames = new ArrayList<>();
+
+			for (MultipartFile file : files) {
+				System.out.println(file.isEmpty());
+				if (!file.isEmpty()) {
+					newFileName= storageService.save(file);
+					fileNames.add(file.getOriginalFilename());
+
+					message = "Uploaded the files successfully: " + fileNames+" newFileName"+newFileName;
+				}else {
+					message="Please select a valid mediaFile..";
+				}
+			}
+			map.put("newFileName",newFileName);
 			
 			
 			System.out.println("controller map : "+map);
@@ -136,7 +140,7 @@ public class ProductController {
 		}
 		return forwardPath;
 	}
-	
+	*/
 	@RequestMapping(value = "/product_delete_action", method = RequestMethod.GET)
 	public String product_delete_action_get() {
 		return "redirect : product_list";
