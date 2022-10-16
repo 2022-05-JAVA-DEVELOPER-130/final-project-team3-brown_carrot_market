@@ -129,6 +129,13 @@ public class TownBoardDaoImpl implements TownBoardDao{
 		return townBoardMapper.selectNonMemberTownBoardListTop3();
 	}
 	
+	//회원 인기글 리스트
+	@Override
+	public List<TownBoard> selectMemberTownBoardListTop3(Address address) {
+		System.out.println(">>> townBoardDaoImpl : selectMemberTownBoardListTop3()()호출");
+		return townBoardMapper.selectMemberTownBoardListTop3(address);
+	}
+	
 	
 
 
@@ -186,6 +193,8 @@ public class TownBoardDaoImpl implements TownBoardDao{
 		System.out.println(aa);
 		return aa;
 	}
+
+
 
 
 

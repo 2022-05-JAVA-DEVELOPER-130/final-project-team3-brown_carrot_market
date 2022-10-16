@@ -80,12 +80,14 @@ public class TownBoardController {
 					PageMakerDto<TownBoard> townBoardList = townBoardService.selectTownBoardListCoordinate(sAddress, pageno);
 					model.addAttribute("townBoardList", townBoardList);
 					model.addAttribute("pageno", pageno);
-					/*
-					 은비깨비 똥꾸멍
-					 */
-					List<TownBoard> townBoardListTop = townBoardService.selectNonMemberTownBoardListTop3();
+					
+					
+					//회원 인기글 리스트
+					List<TownBoard> townBoardListTop = townBoardService.selectMemberTownBoardListTop3(sAddress);
 					model.addAttribute("townBoardListTop", townBoardListTop);
 					System.out.println("townBoard_list컨트롤러 - townBoardListTop: "+townBoardListTop);
+					
+					
 				}
 				//카테고리 조건 있을때
 				if(t_ctgr_no != 0) {
@@ -110,6 +112,13 @@ public class TownBoardController {
 					PageMakerDto<TownBoard> townBoardList = townBoardService.selectNonMemberTownBoardList(pageno);
 					model.addAttribute("townBoardList", townBoardList);
 					model.addAttribute("pageno", pageno);
+					
+					/*
+					 비회원 인기글 리스트
+					 */
+					List<TownBoard> townBoardListTop = townBoardService.selectNonMemberTownBoardListTop3();
+					model.addAttribute("townBoardListTop", townBoardListTop);
+					System.out.println("townBoard_list컨트롤러 - townBoardListTop: "+townBoardListTop);
 					
 				}
 				//비회원이 카테고리 조건 전체조회
