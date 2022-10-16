@@ -110,7 +110,7 @@
     border-radius: 8px;
     background-color: orange;
     border-color: orange;
-    cursor: pointer;
+    cursor: pointer; 
     color: white;
     border: 1px solid;
     font-weight: 700;
