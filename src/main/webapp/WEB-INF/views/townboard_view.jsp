@@ -279,6 +279,7 @@
 		                                            <p>${townReply.t_reply_title }</p>
 		                                            <p>${townReply.t_reply_content }</p>
 		                                            <input class="townReply delete" type="button" pageno="${pageno}" t_no="${townBoard.t_no }" t_reply_no="${townReply.t_reply_no}" value="삭제하기" />
+                                           <!-- 
                                             <button class="heading">댓글달기</button>
                                             <div  class="content">
                                             <form class="townReply_write_form"  method="post">
@@ -294,7 +295,7 @@
 				                                        </div>
 				                                    </div>
 				                                    <input type="hidden" class="form-control" name="t_no" value="${townBoard.t_no}"/>
-				                                   <!--  <input type="hidden" class="form-control" name="step" value="1"/> 이렇게 하면 모든 setp이 1로 나와서 xx 증가해야함 -->
+				                                    <input type="hidden" class="form-control" name="step" value="1"/> 이렇게 하면 모든 setp이 1로 나와서 xx 증가해야함 
 				                                    <input type="hidden" class="form-control" name="depth" value="2"/>
 				                                    <div class="col-12 ">
 				                                        <button class="btn btn-primary reply" type="submit">Submit Comment</button>
@@ -302,6 +303,8 @@
 				                                </div>
 				                            </form>
 				                            </div>
+				                             -->
+				                            
 		                                        </div>
                                             </div>
                                         </li>
