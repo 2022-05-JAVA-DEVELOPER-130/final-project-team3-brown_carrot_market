@@ -655,8 +655,8 @@ var c ="";
 									
 									${c} 
 									
-									<a  href="javascript:void(0);" class="btn btn-outline-info" ><i
-										class="fa fa-handshake-o" id="btnChatAppointment"></i></a> 
+									<a  href="javascript:void(0);" class="btn btn-outline-info" id="btnChatAppointment"><i
+										class="fa fa-handshake-o" ></i></a> 
 											
 									<a href="javascript:void(0);" class="btn btn-outline-primary" id="btnChatImage">
 									<i class="fa fa-image"></i></a>
