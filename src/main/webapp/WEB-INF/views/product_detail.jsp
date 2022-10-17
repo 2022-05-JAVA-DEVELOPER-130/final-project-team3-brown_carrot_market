@@ -144,7 +144,16 @@
                 <div class="col-12 col-lg-6">
                     <div class="single_product_desc">
                         <h4 class="title mb-2">판매자 : ${product.userInfo.user_id}</h4>
-                        <h4 class="title mb-2">매너온도 : ${product.userInfo.user_freshness}</h4>
+                       <!-- 신선도 해결
+                        <div class="form-group">
+                                    <span>신선도</span>
+                                    <div class="stars">
+                                        <input type="radio" name="star" class="star-${product.userInfo.user_freshness}" id="star-${product.userInfo.user_freshness}" checked>
+                                        <label class="star-${product.userInfo.user_freshness}" for="star-${product.userInfo.user_freshness}">${product.userInfo.user_freshness}</label>
+                                        <span style="width:${star}%"></span>
+                                    </div>
+                                </div>
+                             -->     
                         <hr>
                         <h3 class="title mb-2">${product.p_title}</h3>
                         <p>${product.productCategory.p_ctgr_name}</p>
