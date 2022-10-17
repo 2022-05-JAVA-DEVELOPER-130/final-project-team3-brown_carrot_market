@@ -162,19 +162,44 @@
                             <div class="card">
                                 <div class="card-header" id="bigshopWithIconAccordian1">
                                     <button class="btn" type="button" data-toggle="collapse" data-target="#bswicollapseOne" aria-expanded="true" aria-controls="bswicollapseOne">
-                                        <i class="icofont-rounded-up"></i><i class="icofont-rounded-down"></i> 당근마켓에서 믿고 거래하세요 <i class="fa fa-handshake-o"></i>
+                                        <i class="icofont-rounded-up"></i><i class="icofont-rounded-down"></i> 동네생활 가이드라인
                                     </button>
                                 </div>
 
                                 <div id="bswicollapseOne" class="collapse show" aria-labelledby="bigshopWithIconAccordian1" data-parent="#bigshopAccordianIcon">
                                     <div class="card-body">
-                                        <p class="mb-0">   <div style="font-weight:900;"><i class="fa fa-home"></i> 동네인증한 사용자만 거래해요</div> <br> 우리 동네에서 거래하려면 동네 인증이 필요해요. 동네인증은 해당 동네에 있어야만 할 수 있어요.<br> GPS로 우리 동네를 인증한 당신 근처의 이웃들과 거래하세요.</p>
+                                        <p class="mb-0">   <div style="font-weight:900;">다양성을 존중하고 배려해요</div>
+                                        <br>• 호칭은<i class="fa fa-circle-o"></i><i class="fa fa-circle-o"></i>님으로 불러요. 나이와 상관없이 서로 존중하고 존댓말로 대화해요.<br>
+                                        <br>• 관심사를 중심으로 이야기해요. 개인 정보나 사생활에 대해 지나치게 묻지 않아요.  <br>
+                                        <br>• 서로의 다양한 가치관과 생각에 대해 공감하고 배려해요.<br>
+                                        <br>• 청소년을 포함하여 다양한 이웃이 자유롭게 이용하는 공간임을 기억해주세요.<br>
+                                        <br>• 댓글이나 그룹채팅에서 대화해요. 개인채팅은 서로 원할 때, 서로를 존중하며 시작해요.</p>
                                         <br>
-                                        <p class="mb-0">   <div style="font-weight:900;"><i class="fa fa-commenting-o"></i> 1:1 당근채팅으로 대화해요</div> <br> 흙당근마켓 내의 채팅을 통해 거래하는 게 가장 안전해요. 당근채팅에서는 메세지 전송뿐만 아니라 사진도 주고 받고, 약속을 잡을 수도 있어요.</p>
-                                   		 <br>
-                                        <p class="mb-0">   <div style="font-weight:900;"><i class="fa fa-map-pin"></i> 당신 근처에서 만나요</div> <br> 중고거래 사기의 대부분은 택배거래에서 발생한다는 사실, 알고 계셨나요? 근처 이웃들과 사고 파는 흙당근마켓에서는 직거래를 권장하고 있어요. 직거래할 때는 누구나 찾기 쉽고 안전한 공공장소가 좋아요. 이웃과 따뜻하게 거래하세요.</p>
+                                        <p class="mb-0">   <div style="font-weight:900;">처음 방문한 이웃도 참여할 수 있는 대화를 해요.</div>
+                                        <br>• 친분을 과시하는 행동은 안돼요. <br>
+                                        <br>• 특정 누군가를 언급하면서 게시글을 작성하고 대화를 시작하면 안돼요.<br>
+                                        <br>• 댓글에서 소통할 때, 게시글 내용에 대해서만 이야기해요.<br></p>
+                                   		<br>
+                                   		<p class="mb-0">   <div style="font-weight:900;">건강하고 따뜻한 같이해요 문화를 함께 만들어요.</div>
+                                        <br>• 누구나 찾기 쉽고 안전한 공공장소에서 모여요.<br>
+                                        <br>• 3명 이상의 이웃이 동네에서 함께 해요.<br>
+                                        <br>• 당근채팅으로 대화하는 것이 가장 안전해요.<br></p>
                                         <br>
-                                        <p class="mb-0">   <div style="font-weight:900;"><i class="fa fa-thermometer"></i> 매너온도를 확인하세요</div> <br> 거래하기 전 매너온도를 확인하세요. 온도는 36.5도에서 시작해서 99도까지 올라갈 수 있어요. 신뢰할 수 있는 이웃은 매너온도도 높답니다.</p>
+                                        <p class="mb-0">   <div style="font-weight:900;">코로나 추가 확산을 막기 위한 생활 수칙을 실천해요.</div>
+                                        <br>• 마스크는 모임 내내 꼭 착용해요. <br>
+                                        <br>• 아프면 약속을 취소하고 집에서 쉬어요.<br>
+                                        <br>• 실외 모임이나 온라인 모임을 활용해요..<br></p>
+                                        <br>
+                                        <p class="mb-0">   <div style="font-weight:900;">친절하게 정보를 공유해요.</div>
+                                        <br>• 동네 소식이나 정보를 서로 공유해요.<br>
+                                        <br>• 동네 가게부터 산책길까지 사소한 정보도 이웃에게는 큰 도움이 돼요.<br>
+                                        <br>• 친절하게 답변해준 이웃에게는 감사의 말을 전해요.<br></p>
+                                        <br>
+                                        <p class="mb-0">   <div style="font-weight:900;">동네 커뮤니티에 어울리는 글을 작성해요.</div>
+                                        <br>• 관심주제 혹은 동네와 관련된 이야기를 해요.<br>
+                                        <br>• 개인적인 이야기를 반복적으로 올리시는 건 지양해요.<br>
+                                        <br>• 초상권은 소중해요. 자신의 얼굴을 담은 사진이나, 초상권 침해 우려가 있는 사진은 제외하고 올려요.<br></p>
+                                       
                                    
                                    
                                     </div>
@@ -183,24 +208,49 @@
                             <div class="card">
                                 <div class="card-header" id="bigshopWithIconAccordian2">
                                     <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#bswicollapseTwo" aria-expanded="false" aria-controls="bswicollapseTwo">
-                                        <i class="icofont-rounded-up"></i><i class="icofont-rounded-down"></i> 어떻게 판매하나요? (판매 방법)
+                                        <i class="icofont-rounded-up"></i><i class="icofont-rounded-down"></i> 안전한 동네생활을 위해 함께해주세요
                                     </button>
                                 </div>
                                 <div id="bswicollapseTwo" class="collapse" aria-labelledby="bigshopWithIconAccordian2" data-parent="#bigshopAccordianIcon">
                                     <div class="card-body">
-                                        <p class="mb-0">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</p>
+                                        <p class="mb-0">흙당근마켓은 모든 사용자의 개인정보를 보호하려 노력해요. 
+                                        				<br>이때 <b>모든 사용자는 게시글 작성자의 정보도 포함되어 있어요.</b>
+                                        				<br>따라서 타인 혹은 나의 개인정보가 첨부될 경우 게시글이 미노출처리 될 수 있어요.
+														<br><br>
+														번거로우시겠지만 타인의 얼굴 및 개인정보를 꼼꼼하게 가린 후 게시글을 작성해주시길 부탁드려요.
+														<br>얼굴(셀카 등)이 촬영된 사진이 게시되지 않도록 한 번 더 확인해주세요.
+														<br>흙당근마켓도 온 힘을 다해 모든 이웃의 개인정보를 지키기 위해 노력할게요.
+														<br><br>
+														특히, 카드/신분증 분실물을 발견하셨을 때는 번거로우시겠지만 노출되지 않아야 하는 면은 사진을 잘라서 올려주시기를 부탁드려요.
+														카드사에 연락하여 분실물 접수를 할 경우, 가장 안전하고 빠르게 전달될 수 있어요.
+														<br><br>
+														만일, 오신고를 받으셨다면 번거로우시겠지만, 고객센터 문의하기로 문의 남겨주시길 바랍니다.
+														<br>빠르게 확인하여 조치 취하도록 할게요.</p>
+                                       
+ 
                                     </div>
                                 </div>
                             </div>
                             <div class="card">
                                 <div class="card-header" id="bigshopWithIconAccordian3">
                                     <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#bswicollapseThree" aria-expanded="false" aria-controls="bswicollapseThree">
-                                        <i class="icofont-rounded-up"></i><i class="icofont-rounded-down"></i> 어떻게 구매하나요? (구매 방법)
+                                        <i class="icofont-rounded-up"></i><i class="icofont-rounded-down"></i>금전이나 물품을 요구하는 내용은 지양해주세요
                                     </button>
                                 </div>
                                 <div id="bswicollapseThree" class="collapse" aria-labelledby="bigshopWithIconAccordian3" data-parent="#bigshopAccordianIcon">
                                     <div class="card-body">
-                                        <p class="mb-0"> </p>
+                                        <p class="mb-0">중고거래, 동네생활 모두 포함해서 흙당근마켓에서는 <b>금전이나 물품, 헌혈증</b>을 무료로 요구하는 내용은 작성
+                                        				할 수 없어요. 이웃의 간단한 도움이 아닌, 전문적인 도움을 무료로 요구하거나 재능 기부를 요구하는 게시글도 작성할 수 없어요.
+                                        				<br><br>
+                                        				작성하기 어려운 게시글 예시는 다음과 같아요.<br>
+                                        				<br>• 헌혈증 주실 분 구해요<br>
+                                        				<br>• 영어 회화 재능기부 해주실 분 구해요<br>
+                                        				<br>• 안쓰면 저한테 버려주실 분, 기부해주실 분 구해요<br>
+                                       					<br>• 조금만 소분해서 나눠주실 분 구해요<br><br>
+                                       					
+                                       					만일 물품 거래가 필요한 상황이라면, 중고거래 게시판을 이용해보시면 어떨까요?<br>
+														거래할 수 있도록 흙당근마켓은 중고거래 게시판 서비스를 제공하고 있어요.
+</p>
                                     </div>
                                 </div>
                             </div>
@@ -218,7 +268,7 @@
                 <div class="col-12">
                     <!-- Shortcodes Title -->
                     <div class="shortcodes_title mb-30">
-                        <h5>당근페이</h5>
+                        <h5>흙당근페이</h5>
                     </div>
 
                     <!-- +++++++++++++++++++++++
@@ -229,19 +279,24 @@
                             <div class="card">
                                 <div class="card-header" id="bigshopWithIconAccordian1">
                                     <button class="btn" type="button" data-toggle="collapse" data-target="#bswicollapseOne" aria-expanded="true" aria-controls="bswicollapseOne">
-                                        <i class="icofont-rounded-up"></i><i class="icofont-rounded-down"></i> 당근마켓에서 믿고 거래하세요 <i class="fa fa-handshake-o"></i>
+                                        <i class="icofont-rounded-up"></i><i class="icofont-rounded-down"></i>흙당근하는 새로운 방법을 소개해요
                                     </button>
                                 </div>
 
                                 <div id="bswicollapseOne" class="collapse show" aria-labelledby="bigshopWithIconAccordian1" data-parent="#bigshopAccordianIcon">
                                     <div class="card-body">
-                                        <p class="mb-0">   <div style="font-weight:900;"><i class="fa fa-home"></i> 동네인증한 사용자만 거래해요</div> <br> 우리 동네에서 거래하려면 동네 인증이 필요해요. 동네인증은 해당 동네에 있어야만 할 수 있어요.<br> GPS로 우리 동네를 인증한 당신 근처의 이웃들과 거래하세요.</p>
-                                        <br>
-                                        <p class="mb-0">   <div style="font-weight:900;"><i class="fa fa-commenting-o"></i> 1:1 당근채팅으로 대화해요</div> <br> 흙당근마켓 내의 채팅을 통해 거래하는 게 가장 안전해요. 당근채팅에서는 메세지 전송뿐만 아니라 사진도 주고 받고, 약속을 잡을 수도 있어요.</p>
-                                   		 <br>
-                                        <p class="mb-0">   <div style="font-weight:900;"><i class="fa fa-map-pin"></i> 당신 근처에서 만나요</div> <br> 중고거래 사기의 대부분은 택배거래에서 발생한다는 사실, 알고 계셨나요? 근처 이웃들과 사고 파는 흙당근마켓에서는 직거래를 권장하고 있어요. 직거래할 때는 누구나 찾기 쉽고 안전한 공공장소가 좋아요. 이웃과 따뜻하게 거래하세요.</p>
-                                        <br>
-                                        <p class="mb-0">   <div style="font-weight:900;"><i class="fa fa-thermometer"></i> 매너온도를 확인하세요</div> <br> 거래하기 전 매너온도를 확인하세요. 온도는 36.5도에서 시작해서 99도까지 올라갈 수 있어요. 신뢰할 수 있는 이웃은 매너온도도 높답니다.</p>
+										<p class="mb-0"><div style="font-weight:900;">흙당근하는 새로운 방법, 흙당근페이</div>
+                                        <br>중고거래는 이제 흙당근페이로 해보세요.<br>
+                                       </p>
+                                       <br>
+                                       <p class="mb-0"><div style="font-weight:900;">채팅방에서 바로 송금</div>
+                                        <br>채팅창 상단 송금하기 버튼을 눌러 중고거래중인 이웃에게 바로 송금해요.<br>
+                                       </p>
+                                       <br>
+                                    	<p class="mb-0"><div style="font-weight:900;">이웃송금</div>
+                                        <br>이제는 현금 챙길 필요가 없어요.<br>
+                                        <br>중고래중인 이웃과 간편하고 빠르게 송금해요.<br>
+                                       </p>
                                    
                                    
                                     </div>
@@ -268,6 +323,128 @@
                                 <div id="bswicollapseThree" class="collapse" aria-labelledby="bigshopWithIconAccordian3" data-parent="#bigshopAccordianIcon">
                                     <div class="card-body">
                                         <p class="mb-0">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- +++++++++++++++++++++++
+                    Bigshop Accordian With Icon
+                    +++++++++++++++++++++++ -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shortcodes_area section_padding_100">
+        <div class="container">
+            <!-- Shortcodes Content -->
+            <div class="row">
+                <div class="col-12">
+                    <!-- Shortcodes Title -->
+                    <div class="shortcodes_title mb-30">
+                        <h5>거래 품목</h5>
+                    </div>
+
+                    <!-- +++++++++++++++++++++++
+                    Bigshop Accordian With Icon
+                    +++++++++++++++++++++++ -->
+                    <div class="shortcodes_content mb-100">
+                        <div class="accordion bigshop-accordian-with-icon" id="bigshopAccordianIcon">
+                            <div class="card">
+                                <div class="card-header" id="bigshopWithIconAccordian1">
+                                    <button class="btn" type="button" data-toggle="collapse" data-target="#bswicollapseOne" aria-expanded="true" aria-controls="bswicollapseOne">
+                                        <i class="icofont-rounded-up"></i><i class="icofont-rounded-down"></i>판매 금지 물품
+                                    </button>
+                                </div>
+
+                                <div id="bswicollapseOne" class="collapse show" aria-labelledby="bigshopWithIconAccordian1" data-parent="#bigshopAccordianIcon">
+                                    <div class="card-body">
+										<p class="mb-0"><div style="font-weight:900;">흙당근마켓 판매 금지 물품</div>
+                                       	<br>• 가품∙이미테이션 (상표권, 저작권 침해 물품, 특정 브랜드의 스타일을 모방한 물품)<br>
+                                       	<br>• 주류(무알콜 주류 포함), 담배, 전자담배, 모의총포 및 그 부속품 일체 (ex. 라이터, 비비탄 총알 등 청소년 유해물건)<br>
+                                       	<br>• 경유, LPG, 휘발유 등의 유류 거래<br>
+                                       	<br>• 반려동물, 생명이 있는 동물·곤충 (무료분양, 열대어 포함)<br>
+                                       	<br>• 한약∙의약품 ∙ 의료기기∙마약류 (청소년 유해약물∙유해화학물질)<br>
+                                       	<br>• 반영구 화장 등 면허나 자격 없는 자의 불법 유사 의료 행위 홍보/모집글<br>
+                                       	<br>• 수제 음식물∙건강기능식품 : 직접 만들거나 가공한 음식, 건강기능식품(지자체 및 영업 신고를 한 사람만 판매할 수 있음) <br>
+                                       	<br>• 유통기한이 지난 제품, 포장이 훼손되거나 개봉된 식품<br>
+                                       	<br>• 도수 있는 안경∙선글라스 (온라인 판매 불법)<br>
+                                       	<br>• 콘택트 렌즈, 써클 렌즈 (온라인 판매 불법)<br>
+                                       	<br>• 반복/다량 판매하는 핸드메이드 제품<br>
+                                       	<br>• 화장품 샘플 (온라인 판매 불법)<br>
+                                       	<br>• 화장품제조업 및 화장품책임판매업의 등록 없이 직접 제조한 화장품<br>
+                                       	<br>• 완제품이 아닌 직접 소분한 화장품<br>
+                                       	<br>• 화장품법에 따른 라벨 및 기재사항이 없는 화장품<br>
+                                       	<br>• 음란물 (청소년 유해 매체물)<br>
+                                       	<br>• 촬영 여부를 상대방이 알기 어려운 카메라 혹은 그밖에 유사한 기능을 갖춘 기계장치(불법 카메라 등)<br>
+                                       	<br>• 성생활용품<br>
+                                       	<br>• 개인정보 (게임 계정, 추천인 계정 포함)<br>
+                                       	<br>• 조건부 무료나눔<br>
+                                       	<br>• 렌탈 제품<br>
+                                       	<br>• 헌혈증 (무료나눔만 가능)<br>
+                                       	<br>• 초대권 (무료로 받은 초대권을 유료로 판매하는 경우 / 무료나눔만 가능)<br>
+                                       	<br>• 군용품∙군마트용품∙경찰용품∙도검∙화약류∙분사기∙전자충격기∙석궁∙활 (안전확인∙안전인증표시 없는 전기용품 및 단전지 또는 공산품)<br>
+                                       	<br>• USD 1000달러 이상의 외환 거래나 매매차익을 목적으로 하는 반복적인 외환 거래 (매매차익을 목적으로 하지 않는 1000달러 미만의 외환 거래는 허용) <br>
+                                       	<br>• 나라미, 정부 지원 생필품, 지역상품권, 문화누리카드 등 법률에 의해 재판매 할 수 없는 물품<br>
+                                       	<br>• 종량제봉투<br>
+                                       	<br>• 통신사 데이터, 인터넷 상품<br>
+                                       	<br>• 반입한 날로부터 1년 이상 경과하지 않은 전파인증이 면제된 해외직구 전자제품을 판매하는 행위<br>
+                                       	<br>• 스스로 사용할 목적으로 세금을 면제받은 해외직구 물품을 국내에서 재판매 하는 행위<br>
+                                       	<br>• 낚시로 포획한 수산물 거래 행위<br>
+                                       	<br>• 암표매매 행위<br>
+                                       	<br>• 종자 (삽수,어린묘목 등)<br>
+                                       	<br>• 국가기관 인증을 받지 않고 친환경, 무농약, 유기농, 오가닉, 무공해 라는 표현을 사용하여 판매하는 행위<br>
+                                       	<br>• 100만 원 이상 금 제품 (골드바, 금괴, 금으로 제작된 목걸이, 팔찌, 귀걸이 등)<br>
+                                       	<br>• 리콜로 인한 회수/폐기 물품<br>
+                                       	<br>• 이외 법률을 위반하는 모든 물품<br>
+                                       	<br>• 당근마켓 광고주센터에 등록되지 않은 모든 홍보/광고<br>
+                                       	<br><br>
+                                       	당근마켓은 현행법령상 판매가 허용되지 않는 불법상품 및 유해 상품을 판매하는 것은 제한하고 있어요.<br> 
+                                       	판매 자격을 갖췄더라도 개인 간 거래를 지향하는 당근마켓에서는 해당 물품을 판매할 수 없어요.<br>
+                                       	현행법을 위반할 경우 처벌 받을 수 있습니다. 이 점 유의해주시길 바랍니다.
+                                     </p>
+                                       
+                                   
+                                   
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="bigshopWithIconAccordian2">
+                                    <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#bswicollapseTwo" aria-expanded="false" aria-controls="bswicollapseTwo">
+                                        <i class="icofont-rounded-up"></i><i class="icofont-rounded-down"></i> 코로나19 자가진단 키트는 판매할 수 없어요
+                                    </button>
+                                </div>
+                                <div id="bswicollapseTwo" class="collapse" aria-labelledby="bigshopWithIconAccordian2" data-parent="#bigshopAccordianIcon">
+                                    <div class="card-body">
+                                        <p class="mb-0">코로나19 자가진단 키트는 의료제품, 의료기기로 <b>흙당근마켓에서 판매 및 무료나눔 할 수 없어요.</b><br>
+                                      					  (사용 후 양성,음성 결과가 나온 자가검사키트, 신속 항원검사 키트 포함)<br><br>
+                                      					  또한, 식품의약품안전처의 공중보건 위기대응 의료제품 온라인 유통개선조치 시행됨에 따라,<br>
+                                      					  온라인에서 해당 제품을 판매할 경우, "공중보건 위기대응 의료제품의 개발 촉진 및 긴급 공급을 위한 특별법" 
+                                      					  제33조 제1항 제2호에 따라 2년 이하 징역 또는 5천만원 이하의 벌금 등 불이익이 있을 수 있어요.<br><br>
+                                      					  *<b>의약품, 의료기기는 판매 금지 품목</b>으로 당근마켓에서 판매할 수 없으며, 나눔, 교환, 삽니다 게시글 또한 허용되지 않습니다.
+                                        
+                                        
+                                        
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="bigshopWithIconAccordian3">
+                                    <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#bswicollapseThree" aria-expanded="false" aria-controls="bswicollapseThree">
+                                        <i class="icofont-rounded-up"></i><i class="icofont-rounded-down"></i> 형편없는 물건을 판매해요 ㅋㅋㅋㅋ
+                                    </button>
+                                </div>
+                                <div id="bswicollapseThree" class="collapse" aria-labelledby="bigshopWithIconAccordian3" data-parent="#bigshopAccordianIcon">
+                                    <div class="card-body">
+                                        <p class="mb-0">흙당근마켓은 <b>판매 금지 물품</b> 이외의 물건에 대해서는 직접적으로 제재하지 않아요.<br><br>
+                                        				하지만 사용할 수 없을 정도의 물건은 판매하지 않는 것이 좋아요. <br>
+                                        				물건의 상태가 좋지 않다면 구매자로부터 환불 요구를 받을 가능성도 커져요.<br>
+                                        				
+                                        
+                                        </p>
                                     </div>
                                 </div>
                             </div>
