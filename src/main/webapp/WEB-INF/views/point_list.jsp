@@ -60,11 +60,10 @@
     
     <!-- Checkout Steps Area -->
     <div class="checkout_steps_area">
-        <a href="/brown_carrot_market/payment"><i class="icofont-check-circled"></i> 충전하기</a>
-        <a href=""><i class="icofont-check-circled"></i> 송금하기</a>
-        <a class="active" href="/brown_carrot_market/point_list"><i class="icofont-check-circled"></i> 페이내역</a>
-        <a href=""><i class="icofont-check-circled"></i> 환급하기</a>
-    </div>
+		<a href="/brown_carrot_market/payment"><i class="icofont-check-circled"></i> 페이 충전</a> 
+		<a class="active" href="/brown_carrot_market/point_list"><i class="icofont-check-circled"></i> 페이 내역</a> 
+		<a href="/brown_carrot_market/payment_withdraw"><i class="icofont-check-circled"></i> 페이 출금</a>
+	</div>
     <!-- Checkout Area End -->
     
     <!-- Breadcumb Area -->
