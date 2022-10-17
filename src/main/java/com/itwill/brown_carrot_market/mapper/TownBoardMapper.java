@@ -79,6 +79,8 @@ public Map selectTownBoardAddress(Map map);
 
 public int insertTownBoard(Map map);
 
+public int selectTownBoardPK();
+
 /**********************************************/
 
 

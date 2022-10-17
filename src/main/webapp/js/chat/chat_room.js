@@ -642,7 +642,8 @@ var c ="";
 							<div class="col-lg-4">
 						 
     							<div style="text-align:center;">
-								<img src="img/product_img/${p_img}" style="border-radius: 0%; width:50px; height:50px;">
+    							<a href="product_detail?p_no=${product.p_no}";>
+								<img src="img/product_img/${p_img}" style="border-radius: 0%; width:50px; height:50px;"></a>
 								<h6 class="m-b-0" style="margin-top:10px; margin-bottom:2px;"><b>${product.p_title}</b></h6>
 								<small><b><${p_sell}></b> 가격: ${product.p_price}원</small> 
 								<div>
@@ -654,8 +655,8 @@ var c ="";
 									
 									${c} 
 									
-									<a  href="javascript:void(0);" class="btn btn-outline-info" ><i
-										class="fa fa-handshake-o" id="btnChatAppointment"></i></a> 
+									<a  href="javascript:void(0);" class="btn btn-outline-info" id="btnChatAppointment"><i
+										class="fa fa-handshake-o" ></i></a> 
 											
 									<a href="javascript:void(0);" class="btn btn-outline-primary" id="btnChatImage">
 									<i class="fa fa-image"></i></a>
@@ -826,6 +827,57 @@ $.ajax({
 function message_send_function(){
 		$('#chat_content_msg').focus();
 		
+	$("#chat_content_msg").keydown(function(e) {
+		if( e.keyCode == 13 ){
+			console.log('Enter');
+		e.preventDefault();
+		e.stopPropagation();
+		if($('#chat_content_msg').val()==""){
+			alert('내용을 입력하세요');
+			$('#chat_content_msg').focus();
+			return false;
+		}
+		console.log("send 버튼 클릭");
+		timestamp = new Date().getTime();
+		
+	
+		
+		//제이슨데이터 만들기 
+		// 임시 데이터 test
+		
+		jsonData.mId=loginId;
+		
+		
+		/*****상대방 아이디 / 채팅방 데이터 받아와야 함  */
+		jsonData.your_id=yourId;
+		jsonData.msg="메세지 전송(socket.send)";
+		jsonData.code="1";
+		jsonData.data=[{
+			c_content_no:"",
+			c_content:$('#chat_content_msg').val(),
+			send_time:"",
+			c_read:"0",
+			user_id:loginId,
+			c_room_no:c_room_no
+		}]
+		
+		
+
+			
+		
+		console.log("json데이터만들기 끝")
+		
+		
+		
+		
+		
+			
+		message_sendDB(jsonData);
+		console.log("DB 전송")		
+		return false;
+			
+		}
+	});	
 		
 	$('#btnChatSend').click(function(e){
 		e.preventDefault();
@@ -1275,7 +1327,7 @@ $(document).on('click','#btnCarrot_Pay',function(e){
   function popupCarrotPay(p_no){
 	 var url = "transfer_page?p_no="+p_no;
             var name = "당근 페이";
-            var option = "width = 470, height = 790, top = 100, left = 200, location = no,  resizable=no";
+            var option = "width = 470, height = 650, top = 100, left = 200, location = no,  resizable=no";
             window.open(url, name, option);
 }
 

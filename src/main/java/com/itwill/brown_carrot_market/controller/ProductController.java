@@ -86,6 +86,64 @@ public class ProductController {
 		return "redirect : product_list";
 	}
 	
+	//상품 수정하기 폼
+	@RequestMapping(value = "/product_modify_form")
+	public String product_modify_form(@RequestParam int p_no,Model model, HttpSession session) {
+		System.out.println("product_modify_form 컨트롤러 호출-productService: " + productService);
+		String forwardPath = "";
+		String sUserId = (String)session.getAttribute("sUserId");
+		//비회원 로그인폼으로 보내버리기
+		forwardPath = "user_login";
+		//회원 상품등록
+		if(sUserId != null) {
+			if(p_no == 0) {
+				forwardPath = "redirect:product_list";
+			}else {
+				try {
+					Product product = productService.selectByOne(p_no);
+					model.addAttribute("product", product);
+					System.out.println("modify>>>"+product);
+					forwardPath = "product_modify_form";
+					
+				}catch(Exception e) {
+					e.printStackTrace();
+					model.addAttribute("MSG", e.getMessage());
+					forwardPath = "product_error";
+				}
+			}
+		}
+		
+		return forwardPath;
+	}
+	
+	@RequestMapping(value = "/product_modify_action", method = RequestMethod.GET)
+	public String product_modify_action_get() {
+		return "redirect : product_list";
+	}
+	
+	/*
+	@RequestMapping(value = "/product_modify_action", method = RequestMethod.POST)
+	public String product_modify_action(@RequestParam Map<String, Object> map,Model model) throws Exception {
+		String forwardPath = "";
+		try {
+			int p_no = Integer.parseInt((String) map.get("p_no"));
+			ProductCategory productCategory = new ProductCategory(Integer.parseInt(map.get("p_ctgr_no").toString()), "");
+			map.put("productCategory", productCategory);
+			map.remove("p_ctgr_no");
+			
+			int updateRowCount = productService.updateProduct(map);
+			System.out.println(">>>modify product"+map);
+			
+			forwardPath = "redirect:product_detail?p_no=" + p_no;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			model.addAttribute("MSG", e.getMessage());
+			forwardPath = "product_error";
+		}
+		return forwardPath;
+	}
+	*/
 	/*
 	@RequestMapping(value = "/product_write_action", method = RequestMethod.POST)
 	public String product_write_action(@RequestParam Map<String, Object> map, Model model, HttpSession session) {

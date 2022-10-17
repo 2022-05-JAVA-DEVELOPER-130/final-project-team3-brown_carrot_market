@@ -14,5 +14,5 @@ public interface ProductImageDao {
 	
 	int insertProductListImg(List<ProductImage> productImageList)throws Exception;
 	
-	int deleteProductImg(int pi_no)throws Exception;
+	int deleteProductImg(int p_no)throws Exception;
 }

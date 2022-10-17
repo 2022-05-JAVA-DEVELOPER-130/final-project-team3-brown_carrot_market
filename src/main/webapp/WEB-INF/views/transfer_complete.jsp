@@ -14,53 +14,73 @@
 	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
 	
 	
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.standalone.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.kr.min.js"></script>
+ <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.standalone.min.css"> -->
+<%-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> --%>
+<%-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.kr.min.js"></script> --%>
 	
 <script type="text/javascript">
+var jsonData={
+		code:null,
+		url:null,
+		msg:null,
+		your_id:null, // 상대 아이디 
+		data:null //chat_contents 
 		
+	};
+
+	$(document).ready(function(){
+		jsonData.mId=window.opener.loginId;
+		var loginId=window.opener.loginId;
+		console.log("송금아이디:"+ window.opener.loginId);
+		jsonData.your_id=window.opener.yourId;
+		jsonData.msg="송금 완료";
+		jsonData.code="3";
+		jsonData.data=[{
+					c_content_no:"",
+					c_content:`${loginId} 님이 ${product.p_price}원을 송금했습니다.`,
+					send_time:"",
+					c_read:"0",
+					user_id:"admin", //보내는 아이디 admin_promise 변경 
+					c_room_no:window.opener.c_room_no
+				}]
+		$.ajax({
+			url:'chat_message_rest',
+			data:JSON.stringify(jsonData.data[0]),
+			type:"POST",
+			async:true,
+			contentType: "application/json; charset=utf-8", //헤더의 Content-Type을 설정
+			dataType: "JSON",
+			success:function(response){
+				window.opener.socket.send(JSON.stringify(jsonData));
+				
+			}
+		})
+	 
+	})
 	
 	$(document).on('click','#btn-close',function(e){
 		window.close();
 	});
 	</script>
-<!-- 내 js -->
-<script src="js/chat/chat_appointment.js"></script>
+
 
 </head>
 <body>
    <img src="img/core-img/logo.png" alt="logo">
 <hr>
-<br><br><br><br>
+<br>
 	<div>
 		<h1>송금 완료</h1>
 		<h3>송금이 완료되었습니다.</h3>
 		<h3 class="orderid mb-0"> ${product.userInfo.user_id}님께 ${product.p_price}포인트가 송금 되었습니다.</h3>
+		<br>
+		<hr>
+		<br>
+		<h4>상 품 명 : <label>${product.p_title}</label></h4>
+		<h4>상품 가격 : <label>${product.p_price}</label></h4>
 	</div>
-	<br>
-	<br>
-	<div>
-		<label> 상 품 명 : </label>
-		${product.p_title}
-	</div>
-	<br>
-	<div>
-		<label> 상 품 가 격 : </label>
-		${product.p_price}
-	</div>
-<%-- 	<h5>송금 완료</h5>
-		<p>상 품 명 : ${product.p_title}</p>
-		<p class="orderid mb-0"> ${product.userInfo.user_id}님께 ${product.p_price}포인트가 송금 되었습니다.</p>
-<div class="col-12">
-<div class="checkout_pagination mt-50">
-<button class="btn btn-primary" onclick="location.href = 'orders_list'">구매내역</button>
-&emsp;
-<button class="btn btn-primary" onclick="location.href = 'main'">메인으로</button>
-							</div>
-						</div> --%>
 <br>
 <br>
 <br>
@@ -121,17 +141,22 @@
 	}
 	
 	h1{
+		color: #7f3808;	
 		text-align: center;
 	}
 	
 	h3{
+		color: #7f3808;
+		text-align: center;
+	}
+	h4{
+		color: #7f3808;
 		text-align: center;
 	}
 	
 	label{
 	font-size: 15px;
     font-weight: normal;
-    margin-left: 40px;
     color: #7f3808;
     text-decoration: underline;
     text-decoration-color: orange;

@@ -44,11 +44,17 @@
 <body>
    <img src="img/core-img/logo.png" alt="logo">
 <hr>
-<br><br><br><br>
+<br>
 	<div>
 		<h1>송금 취소</h1>
 		<h3>송금이 취소되었습니다.</h3>
-		<label> 사유 : </label>
+		<h4>송금할 포인트가 부족합니다.</h4>
+		<br>
+		<hr>
+		<br><br>
+		<h4>물건 금액 : <label>${product.p_price} 포인트</label></h4>
+		<h4>현재 포인트: <label>${userInfo.user_point} 포인트</label></h4>
+		<h4>부족 포인트: <label>${product.p_price-userInfo.user_point} 포인트</label></h4>
 	</div>
 	<div>
 	</div>
@@ -124,17 +130,22 @@
 	}
 	
 	h1{
+		color: #7f3808;	
 		text-align: center;
 	}
 	
 	h3{
+		color: #7f3808;
+		text-align: center;
+	}
+	h4{
+		color: #7f3808;
 		text-align: center;
 	}
 	
 	label{
 	font-size: 15px;
     font-weight: normal;
-    margin-left: 40px;
     color: #7f3808;
     text-decoration: underline;
     text-decoration-color: orange;

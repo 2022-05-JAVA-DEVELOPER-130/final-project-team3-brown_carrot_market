@@ -79,12 +79,12 @@
                                     <li><a href="product_list">동네상품</a>
                                         <ul class="dropdown">
                                             <li><a href="product_list">- 전체보기</a></li>
-                                            <li><a href="product-details.html">- 가전제품</a></li>
-                                            <li><a href="product-details.html">- 가구</a></li>
-                                            <li><a href="product-details.html">- 의류</a></li>
-                                            <li><a href="product-details.html">- 생활용품</a></li>
-                                            <li><a href="product-details.html">- 취미/게임/음반/도서</a></li>
-                                            <li><a href="product-details.html">- 기타</a></li>
+                                            <li><a href="product_category?category_no=1">- 가전제품</a></li>
+                                            <li><a href="product_category?category_no=2">- 가구</a></li>
+                                            <li><a href="product_category?category_no=3">- 의류</a></li>
+                                            <li><a href="product_category?category_no=4">- 생활용품</a></li>
+                                            <li><a href="product_category?category_no=5">- 취미/게임/음반/도서</a></li>
+                                            <li><a href="product_category?category_no=6">- 기타</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="townBoard_list">동네생활</a>
@@ -140,8 +140,8 @@
 							</div>
 							<!-- Form -->
 							<div class="search-form">
-								<input type="search" class="form-control" placeholder="Search">
-								<input type="submit" class="d-none" value="Send">
+								<input type="search" class="form-control" id="searchKey" placeholder="검색">
+								<input type="submit" class="d-none" value="검색">
 							</div>
 						</div>
 
