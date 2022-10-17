@@ -21,7 +21,7 @@ import com.itwill.brown_carrot_market.dao.ProductImageDao;
 import com.itwill.brown_carrot_market.dto.ProductImage;
 
 @Service(value="FilesStorageServiceImplTownBoard")
-public class FilesStorageServiceImplTownBoard implements FilesStorageServiceProduct{
+public class FilesStorageServiceImplTownBoard implements FilesStorageServiceTownBoard{
 	
 	@Value("${townBoard-img.dir}")
 	private Path root;

@@ -2207,7 +2207,7 @@ textarea:focus,
     .widget.size .widget-desc a:hover, .widget.size .widget-desc a:focus, .widget.size .widget-desc a:visited {
       background-color: #070a57; }
   .widget.price .ui-slider-handle {
-    background-color: #0f99f3;
+    background-color: #fcbb7b;
     border: none;
     border-radius: 0;
     width: 12px;
@@ -2215,7 +2215,7 @@ textarea:focus,
     top: -3px;
     margin-left: -2px; }
   .widget.price .ui-slider-range.ui-corner-all.ui-widget-header {
-    background-color: #0f99f3; }
+    background-color: #fcbb7b; }
   .widget.price .ui-slider-horizontal {
     height: 8px; }
   .widget.price .range-price {
