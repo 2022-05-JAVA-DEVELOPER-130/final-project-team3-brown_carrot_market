@@ -1,4 +1,5 @@
 DROP TABLE review CASCADE CONSTRAINTS;
+DROP TABLE review_img CASCADE CONSTRAINTS;
 DROP TABLE town_reaction CASCADE CONSTRAINTS;
 DROP TABLE town_reply CASCADE CONSTRAINTS;
 DROP TABLE town_img CASCADE CONSTRAINTS;
@@ -285,6 +286,16 @@ DROP SEQUENCE review_review_no_SEQ;
 
 CREATE SEQUENCE review_review_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+DROP TABLE review_img CASCADE CONSTRAINTS;
+
+CREATE TABLE review_img(
+		review_img_no                 		NUMBER(10)		 NULL ,
+		review_img_name               		VARCHAR2(200)		 NOT NULL,
+		review_no                     		NUMBER(10)		 NULL 
+);
+
+DROP SEQUENCE review_img_review_img_no_SEQ;
+
 
 
 
@@ -360,3 +371,5 @@ ALTER TABLE review ADD CONSTRAINT IDX_review_PK PRIMARY KEY (review_no);
 ALTER TABLE review ADD CONSTRAINT IDX_review_FK0 FOREIGN KEY (orders_no) REFERENCES orders (orders_no) on delete cascade;
 ALTER TABLE review ADD CONSTRAINT IDX_review_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
 
+ALTER TABLE review_img ADD CONSTRAINT IDX_review_img_PK PRIMARY KEY (review_img_no);
+ALTER TABLE review_img ADD CONSTRAINT IDX_review_img_FK0 FOREIGN KEY (review_no) REFERENCES review (review_no) on delete cascade;

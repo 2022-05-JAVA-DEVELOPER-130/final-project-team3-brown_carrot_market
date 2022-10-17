@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.brown_carrot_market.dto.Transfer;
@@ -29,25 +32,6 @@ public class TransferRestController {
 		String msg = "";
 		String sUserId = (String) request.getSession().getAttribute("sUserId");
 		System.out.println(sUserId);
-		List<Transfer> resultList = transferService.selectById(sUserId);
-
-		resultMap.put("code", code);
-		resultMap.put("url", url);
-		resultMap.put("msg", msg);
-		resultMap.put("data", resultList);
-
-		return resultMap;
-	}
-
-
-	@RequestMapping(value = "/transfer_page_json")
-	public Map transfer_page(Model model, HttpServletRequest request) throws Exception {
-		Map resultMap = new HashMap();
-		int code = 1;
-		String url = "";
-		String msg = "";
-		String sUserId = (String) request.getSession().getAttribute("sUserId");
-
 		List<Transfer> resultList = transferService.selectById(sUserId);
 
 		resultMap.put("code", code);

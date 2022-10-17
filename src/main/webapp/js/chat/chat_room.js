@@ -827,6 +827,57 @@ $.ajax({
 function message_send_function(){
 		$('#chat_content_msg').focus();
 		
+	$("#chat_content_msg").keydown(function(e) {
+		if( e.keyCode == 13 ){
+			console.log('Enter');
+		e.preventDefault();
+		e.stopPropagation();
+		if($('#chat_content_msg').val()==""){
+			alert('내용을 입력하세요');
+			$('#chat_content_msg').focus();
+			return false;
+		}
+		console.log("send 버튼 클릭");
+		timestamp = new Date().getTime();
+		
+	
+		
+		//제이슨데이터 만들기 
+		// 임시 데이터 test
+		
+		jsonData.mId=loginId;
+		
+		
+		/*****상대방 아이디 / 채팅방 데이터 받아와야 함  */
+		jsonData.your_id=yourId;
+		jsonData.msg="메세지 전송(socket.send)";
+		jsonData.code="1";
+		jsonData.data=[{
+			c_content_no:"",
+			c_content:$('#chat_content_msg').val(),
+			send_time:"",
+			c_read:"0",
+			user_id:loginId,
+			c_room_no:c_room_no
+		}]
+		
+		
+
+			
+		
+		console.log("json데이터만들기 끝")
+		
+		
+		
+		
+		
+			
+		message_sendDB(jsonData);
+		console.log("DB 전송")		
+		return false;
+			
+		}
+	});	
 		
 	$('#btnChatSend').click(function(e){
 		e.preventDefault();

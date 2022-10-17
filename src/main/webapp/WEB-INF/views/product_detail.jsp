@@ -144,7 +144,16 @@
                 <div class="col-12 col-lg-6">
                     <div class="single_product_desc">
                         <h4 class="title mb-2">판매자 : ${product.userInfo.user_id}</h4>
-                        <h4 class="title mb-2">매너온도 : ${product.userInfo.user_freshness}</h4>
+                       <!-- 신선도 해결
+                        <div class="form-group">
+                                    <span>신선도</span>
+                                    <div class="stars">
+                                        <input type="radio" name="star" class="star-${product.userInfo.user_freshness}" id="star-${product.userInfo.user_freshness}" checked>
+                                        <label class="star-${product.userInfo.user_freshness}" for="star-${product.userInfo.user_freshness}">${product.userInfo.user_freshness}</label>
+                                        <span style="width:${star}%"></span>
+                                    </div>
+                                </div>
+                             -->     
                         <hr>
                         <h3 class="title mb-2">${product.p_title}</h3>
                         <p>${product.productCategory.p_ctgr_name}</p>
@@ -211,7 +220,7 @@
                         <!-- Others Info -->
                         <div class="others_info_area mb-3 d-flex flex-wrap">
                             <a class="add_to_wishlist" href="wishlist.html"><i class="fa fa-heart" aria-hidden="true"></i> 찜하기</a>
-                            <a class="add_to_compare" href="compare.html"><i class="fa fa-th" aria-hidden="true"></i> 수정하기</a>
+                            <a class="" href="product_modify_form?p_no=${product.p_no}" p_no="${product.p_no}" id="product_modify_form"><i class="fa fa-th" aria-hidden="true"></i> 수정하기</a>
                             <a class="share_with_friend" href="product_delete_action"><i class="fa fa-share" aria-hidden="true"></i> 삭제하기</a>
                         </div>
 

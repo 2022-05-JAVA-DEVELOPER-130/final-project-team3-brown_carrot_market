@@ -28,7 +28,7 @@ public interface ProductMapper {
 	
 	public int updateProductCount(int p_no);
 
-	public int updateProduct(Product product);
+	public int updateProduct(Map map);
 	
 	public int updateProductSell(int p_sell, int p_no);
 

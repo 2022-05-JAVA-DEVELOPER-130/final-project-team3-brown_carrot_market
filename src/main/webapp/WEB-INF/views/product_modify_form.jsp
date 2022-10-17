@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!doctype html>
 <html lang="en">
 
@@ -69,7 +71,7 @@
     <!-- Message Now Area -->
                 <div class="col-12">
                     <div class="contact_from mb-50">
-                        <form name="product_write_form" action="product_write_action" 
+                        <form name="product_modify_form" action="product_modify_action" 
                         	method="post" enctype="multipart/form-data" id="main_contact_form">
                             <div class="contact_input_area">
                                 <div id="success_fail_info"></div>
@@ -109,10 +111,13 @@
                                     </div>
                                     <!-- 사진 넣기 임시 -->
                                     <div class="form-group">
-                                   
                                     
-                        
-                                    <span>사진1: <input type="file" name="files"></span>
+                                    <div class="col-xl-3">
+	                           			 <img id="product" src='img/product_img/${product.productImagesList[0].pi_name}' alt="" pi_name='${product.productImagesList[0].pi_name}' style="width:100px; height:100px; border:1px solid #ddd;
+                                    						position:relative;" ><br>
+                                    <span>${product.productImagesList[0].pi_name}<input type="file" name="files"></span>
+	                       			 </div>
+                        			
 									<span>사진2: <input type="file" name="files"></span>
 									<span>사진3: <input type="file" name="files"></span>
 									<span>사진4: <input type="file" name="files"></span>
@@ -122,7 +127,7 @@
 									<!-- 사진 넣기 임시 끝-->
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea name="p_desc" class="form-control" id="p_desc" cols="30" rows="10" placeholder="${product.p_desc}" required></textarea>
+                                            <textarea name="p_desc" class="form-control" id="p_desc" cols="30" rows="10" >${product.p_desc}</textarea>
                                         	</div>
                                         </div>
                                     </div>
@@ -217,7 +222,7 @@
                                     </div>
                                       이미지 업로드 부분 끝-->
                                     <div class="col-12 text-center">
-                                        <input type="button" id="btn_product_update_action" class="btn btn-primary w-40" value="수정하기" onclick="productUpdateAction()">&nbsp; 
+                                        <input type="button" id="btn_product_modify_action" class="btn btn-primary w-40" value="수정하기" onclick="productUpdateAction()">&nbsp; 
                                         <input type="button" class="btn btn-primary w-40" value="동네물건목록" onclick="productList()">
                                 </div>
                             </div>
