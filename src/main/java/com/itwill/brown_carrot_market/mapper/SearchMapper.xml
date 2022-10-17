@@ -55,7 +55,11 @@
         where pp.p_address_lng
         between (select a.address_lng from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})-0.056344377*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
             AND (select a.address_lng from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})+0.056344377*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
-            and p_desc like '#{search_keyword}' or p_title like '#{search_keyword}'
+            and p_desc like '%'||#{search_keyword}||'%' or p_title like '%'||#{search_keyword}||'%'
             order by pp.p_date desc           
+	</select>
+	
+	<select id="selectListNotLogin" parameterType="java.lang.String" resultMap="productResultMap">
+	select * from product p join product_img i on p.p_no=i.p_no where p_desc like '%'||#{search_keyword}||'%' or p_title like '%'||#{search_keyword}||'%'
 	</select>
 </mapper>

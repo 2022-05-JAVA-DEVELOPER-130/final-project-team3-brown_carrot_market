@@ -34,33 +34,17 @@
 <body>
    <img src="img/core-img/logo.png" alt="logo">
 <hr>
-<br><br><br><br>
+<br>
 	<div>
 		<h1>송금 완료</h1>
 		<h3>송금이 완료되었습니다.</h3>
 		<h3 class="orderid mb-0"> ${product.userInfo.user_id}님께 ${product.p_price}포인트가 송금 되었습니다.</h3>
+		<br>
+		<hr>
+		<br>
+		<h4>상 품 명 : <label>${product.p_title}</label></h4>
+		<h4>상품 가격 : <label>${product.p_price}</label></h4>
 	</div>
-	<br>
-	<br>
-	<div>
-		<label> 상 품 명 : </label>
-		${product.p_title}
-	</div>
-	<br>
-	<div>
-		<label> 상 품 가 격 : </label>
-		${product.p_price}
-	</div>
-<%-- 	<h5>송금 완료</h5>
-		<p>상 품 명 : ${product.p_title}</p>
-		<p class="orderid mb-0"> ${product.userInfo.user_id}님께 ${product.p_price}포인트가 송금 되었습니다.</p>
-<div class="col-12">
-<div class="checkout_pagination mt-50">
-<button class="btn btn-primary" onclick="location.href = 'orders_list'">구매내역</button>
-&emsp;
-<button class="btn btn-primary" onclick="location.href = 'main'">메인으로</button>
-							</div>
-						</div> --%>
 <br>
 <br>
 <br>
@@ -121,17 +105,22 @@
 	}
 	
 	h1{
+		color: #7f3808;	
 		text-align: center;
 	}
 	
 	h3{
+		color: #7f3808;
+		text-align: center;
+	}
+	h4{
+		color: #7f3808;
 		text-align: center;
 	}
 	
 	label{
 	font-size: 15px;
     font-weight: normal;
-    margin-left: 40px;
     color: #7f3808;
     text-decoration: underline;
     text-decoration-color: orange;

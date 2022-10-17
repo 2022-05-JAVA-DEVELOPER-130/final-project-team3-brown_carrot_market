@@ -1275,7 +1275,7 @@ $(document).on('click','#btnCarrot_Pay',function(e){
   function popupCarrotPay(p_no){
 	 var url = "transfer_page?p_no="+p_no;
             var name = "당근 페이";
-            var option = "width = 470, height = 790, top = 100, left = 200, location = no,  resizable=no";
+            var option = "width = 470, height = 650, top = 100, left = 200, location = no,  resizable=no";
             window.open(url, name, option);
 }
 
