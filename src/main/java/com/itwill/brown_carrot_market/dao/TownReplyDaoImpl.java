@@ -39,6 +39,13 @@ public class TownReplyDaoImpl implements TownReplyDao{
 		return townReplyMapper.insertTownBoardReReply(townReply);
 	}
 	
+	//대댓글 step 증가
+	@Override
+	public int updateStep(TownReply townReply) throws Exception{
+		System.out.println(">>> townReplyDaoImpl: updateStep(TownReply townReply)호출");
+		return townReplyMapper.updateStep(townReply);
+	}
+	
 	@Override
 	public int deleteTownBoardReply(int t_reply_no) throws Exception{
 		System.out.println(">>> townReplyDaoImpl : deleteTownBoardReply()호출");
@@ -55,6 +62,14 @@ public class TownReplyDaoImpl implements TownReplyDao{
 	public List<TownReply> selectTownBoardReplyList(int t_no) {
 		return townReplyMapper.selectTownBoardReplyList(t_no);
 	}
+	
+	//댓글 한개 조회
+	@Override
+	public TownReply selectTownBoardReplyOne(int t_reply_no) {
+		System.out.println(">>> townReplyDaoImpl :selectTownBoardReplyOne(int t_reply_no)호출");
+		return townReplyMapper.selectTownBoardReplyOne(t_reply_no);
+	}
+
 	
 	
 	

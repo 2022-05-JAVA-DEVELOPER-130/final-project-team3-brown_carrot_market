@@ -252,12 +252,13 @@
 				                                    </div>
 				                                    <input type="hidden" class="form-control" name="t_no" value="${townBoard.t_no}"/>
                                  				    <input type="hidden" class="form-control" name="page_no" value="${pageno}" />
-                                 				    <input type="hidden" class="form-control" name="groupno" value="${townReply.t_reply_no}" />
+                                 				    <input type="hidden" class="form-control" name="t_reply_no" value="${townReply.t_reply_no}" />
+                                 				    <!-- 
                                  				    <input type="hidden" class="form-control" name="step" value="${townReply.step}" />
+                                 				     -->
 				                                    <input type="hidden" class="form-control" name="depth" value="2"/>
-				                                   <!--  <input type="hidden" class="form-control" name="step" value="1"/> 이렇게 하면 모든 setp이 1로 나와서 xx 증가해야함 -->
 				                                    <div class="col-12 ">
-				                                        <button  class="btn btn-primary rereply" type="submit">Submit Comment</button>
+				                                        <button  class="btn btn-primary rereply" type="submit" >Submit Comment</button>
 				                                    </div>
 				                                </div>
 				                            </form>
@@ -342,7 +343,7 @@
                                     </div>
                                     <input type="hidden" class="form-control" name="t_no" value="${townBoard.t_no}"/>
                                     <input type="hidden" class="form-control" name="page_no" value="${pageno}" />
-                                   <!--  <input type="hidden" class="form-control" name="step" value="1"/> 이렇게 하면 모든 setp이 1로 나와서 xx 증가해야함 -->
+                                   <!-- <input type="hidden" class="form-control" name="step" value="1"/> --> 
                                     <input type="hidden" class="form-control" name="depth" value="1"/>
                                     <div class="col-12">
                                         <button class="btn btn-primary reply"  id="townMainReplyBtn" type="submit">Submit Comment</button>
