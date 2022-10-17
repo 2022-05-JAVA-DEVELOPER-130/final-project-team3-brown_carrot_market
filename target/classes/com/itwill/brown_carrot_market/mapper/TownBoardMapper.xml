@@ -118,12 +118,14 @@
 	<select id="selectNonMemberTownBoardList" resultMap="townBoradResultMap">
 		select ss.* from 
 		(select rownum idx, s.* from
-		(select plist.*,pmg.t_img_name from town_img pmg 
-right outer join (select tb.*,imgno from (select max(i.t_img_no)imgno,t_no from town_img i
-group by i.t_no)img 
+		(select ctlist.* from (select plist.*,pmg.t_img_name from town_img pmg 
+right outer join (select tb.*,imgno from 
+                    (select max(i.t_img_no)imgno,t_no from town_img i group by i.t_no)img 
 right outer join town_Board tb
 on img.t_no=tb.t_no)plist
-on pmg.t_img_no=plist.imgno)s
+on pmg.t_img_no=plist.imgno) ctlist
+join town_category tc
+on ctlist.t_ctgr_no = tc.t_ctgr_no)s
 		)ss
 		where ss.idx <![CDATA[ >= ]]> #{pageStart} and ss.idx <![CDATA[ <= ]]> #{pageEnd}
 	</select>

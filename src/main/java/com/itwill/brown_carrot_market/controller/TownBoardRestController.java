@@ -229,15 +229,45 @@ public class TownBoardRestController {
 			townReply.setTownBoard(new TownBoard(t_no, "", "", "", 0, null, "", 0, 0, null, null, null));
 			System.out.println(">>> rest controller: insertTownBoardReply(townReply)호출");
 			int result = townReplyService.insertTownBoardReply(townReply);
-			/////흠 여기서 뭐라고 써줘야하지.. 리턴말고..ㅜ
 			
-			if (result == 1) {
+			if (result == 1 ) {
 				resultMap.put("errorCode", 1);
 				resultMap.put("errorMsg", "댓글을 등록하였습니다");
 				
 			} else {
 				resultMap.put("errorCode", -2);
 				resultMap.put("errorMsg", "댓글이 등록되지 않았습니다");
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			resultMap.put("errorCode", -3);
+			resultMap.put("errorMsg", "관리자에게 문의하세요");
+		}
+		
+		return resultMap;
+	}
+	
+	
+	//대댓글등록
+	@PostMapping(value="/townReReply_wirte_rest",produces = "application/json;charset=UTF-8")
+	public Map<String, Object> townReReply_write_action(Integer pageno, @RequestParam Integer t_no, @ModelAttribute TownReply townReply, HttpSession session) {
+		Map<String, Object> resultMap = new HashMap<>();
+		String sUserId = (String)session.getAttribute("sUserId");
+		
+		try {
+			
+			townReply.setUserInfo(new UserInfo(sUserId, "", "", "", "", 0, 0, "", null));
+			townReply.setTownBoard(new TownBoard(t_no, "", "", "", 0, null, "", 0, 0, null, null, null));
+			System.out.println(">>> rest controller: insertTownBoardReply(townReply)호출");
+			int result = townReplyService.insertTownBoardReReply(townReply);
+			
+			if (result == 1 ) {
+				resultMap.put("errorCode", 1);
+				resultMap.put("errorMsg", "대댓글을 등록하였습니다");
+				
+			} else {
+				resultMap.put("errorCode", -2);
+				resultMap.put("errorMsg", "대댓글이 등록되지 않았습니다");
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
