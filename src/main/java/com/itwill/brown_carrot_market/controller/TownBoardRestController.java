@@ -217,7 +217,7 @@ public class TownBoardRestController {
 	 
 	
 	//댓글등록
-	@RequestMapping("/townReply_wirte_rest")
+	@PostMapping(value="/townReply_wirte_rest",produces = "application/json;charset=UTF-8")
 	public Map<String, Object> townReply_write_action(Integer pageno, @RequestParam Integer t_no, @ModelAttribute TownReply townReply, HttpSession session) {
 		Map<String, Object> resultMap = new HashMap<>();
 		String sUserId = (String)session.getAttribute("sUserId");
