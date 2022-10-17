@@ -92,7 +92,18 @@ $(document).ready(function(){
 											method : 'POST',
 											dataType : 'json',
 											data : $('#find_pw_form').serialize(),
+											beforeSend:function(e){
+												//수정필요
+												$('.add_progress').append("<div class='progress' style='margin-top:16px'><div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' aria-valuenow='10' aria-valuemin='0' aria-valuemax='100' style='width: 10%'></div></div>");
+												//$('.form-group').append("<div class='progress'><div class='bar'></div ><div class='percent'>0%</div ></div>");
+												 var curIdx = $(".progress-bar").attr("aria-valuenow");
+												  curIdx = parseInt(curIdx);
+												     $(".progress-bar").animate({
+												        "width": (10 * (curIdx+1))+"%"
+												     },1000);
+											},
 											complete : function(jsonResult) {
+												$('.progress').remove();
 													if(jsonResult.responseJSON.code==1){//성공
 														$("#find_pw_h6").text("고객님의 이메일로 임시비밀번호를 발급해드렸습니다. 이메일을 확인해주세요.");
 														//$("#find_pw_modal_body").text(jsonResult.data);
