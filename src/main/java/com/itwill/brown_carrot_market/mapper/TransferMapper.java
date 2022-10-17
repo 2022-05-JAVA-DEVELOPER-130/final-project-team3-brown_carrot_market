@@ -20,10 +20,10 @@ public interface TransferMapper {
 	@Insert("insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval, (select p_price from product where p_no = #{p_no}), 0, sysdate, (select user_id from product where p_no = #{p_no}), (select orders_no from orders where p_no = #{p_no}),#{p_no},0)")
 	int insertTransfer_Withdraw(int p_no);
 	
-	@Insert("insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval, 0, (select p_price from product where p_no = #{p_no}), sysdate, (select user_id from orders where p_no = #{p_no}), (select orders_no from orders where p_no = #{p_no}),#{p_no},0)")
+	@Insert("insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval, (select p_price from product where p_no = #{p_no}), 0, sysdate, (select user_id from product where p_no = #{p_no}), (select orders_no from orders where p_no = #{p_no}),#{p_no},0)")
 	int insertTransfer_Deposit_Cancle(int p_no);
 	
-	@Insert("insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval, (select p_price from product where p_no = #{p_no}), 0, sysdate, (select user_id from product where p_no = #{p_no}), (select orders_no from orders where p_no = #{p_no}),#{p_no},0)")
+	@Insert("insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval, 0, (select p_price from product where p_no = #{p_no}), sysdate, (select user_id from orders where p_no = #{p_no}), (select orders_no from orders where p_no = #{p_no}),#{p_no},0)")
 	int insertTransfer_Withdraw_Cancle(int p_no);
 	
 	@ResultMap(value = {"transferResultMap"})

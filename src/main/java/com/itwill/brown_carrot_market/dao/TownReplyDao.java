@@ -9,6 +9,9 @@ public interface TownReplyDao {
 	//댓글등록
 	int insertTownBoardReply(TownReply townReply)throws Exception;
 	
+	//대댓글 등록
+	int insertTownBoardReReply(TownReply townReply)throws Exception;
+	
 	//댓글삭제
 	int deleteTownBoardReply(int t_reply_no)throws Exception;
 	
