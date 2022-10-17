@@ -23,12 +23,22 @@ public class TownReplyDaoImpl implements TownReplyDao{
 		System.out.println(">>> townReplyDaoImpl : setTownReplyMapper()호출");
 		this.townReplyMapper = townReplyMapper;
 	}
+	
+	
 	//댓글등록
 	@Override
 	public int insertTownBoardReply(TownReply townReply) throws Exception{
 		System.out.println(">>> townReplyDaoImpl: insertTownBoardReply()호출");
 		return townReplyMapper.insertTownBoardReply(townReply);
 	}
+	
+	//대댓글 등록
+	@Override
+	public int insertTownBoardReReply(TownReply townReply) throws Exception {
+		System.out.println(">>> townReplyDaoImpl: insertTownBoardReReply(TownReply townReply)호출");
+		return townReplyMapper.insertTownBoardReReply(townReply);
+	}
+	
 	@Override
 	public int deleteTownBoardReply(int t_reply_no) throws Exception{
 		System.out.println(">>> townReplyDaoImpl : deleteTownBoardReply()호출");
@@ -45,6 +55,7 @@ public class TownReplyDaoImpl implements TownReplyDao{
 	public List<TownReply> selectTownBoardReplyList(int t_no) {
 		return townReplyMapper.selectTownBoardReplyList(t_no);
 	}
+	
 	
 	
 	

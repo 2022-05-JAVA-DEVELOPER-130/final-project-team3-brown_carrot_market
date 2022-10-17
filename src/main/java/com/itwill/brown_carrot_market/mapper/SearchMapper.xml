@@ -55,7 +55,31 @@
         where pp.p_address_lng
         between (select a.address_lng from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})-0.056344377*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
             AND (select a.address_lng from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})+0.056344377*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
-            and p_desc like '#{search_keyword}' or p_title like '#{search_keyword}'
+            and p_desc like '%'||#{search_keyword}||'%' or p_title like '%'||#{search_keyword}||'%'
             order by pp.p_date desc           
 	</select>
+	
+	<select id="selectListNotLogin" resultMap="productResultMap">
+	
+	select sss.* from (select rownum idx,plist.*,pmg.pi_name from product_img pmg 
+right outer join (select p.*,imgno from (select max(i.pi_no)imgno,p_no from product_img i
+group by i.p_no)img 
+right outer join (select *
+from product p where p_desc like '%'||#{search_keyword}||'%' or p_title like '%'||#{search_keyword}||'%')p 
+on img.p_no=p.p_no)plist
+on pmg.pi_no=plist.imgno)sss
+where sss.idx<![CDATA[ >= ]]> #{pageStart} and sss.idx<![CDATA[ <= ]]> #{pageEnd}
+
+	</select>
+	
+	<select id="selectListNotLoginCount" parameterType="java.lang.String" resultType="int">
+	select count(*) from product_img pmg 
+right outer join (select p.*,imgno from (select max(i.pi_no)imgno,p_no from product_img i
+group by i.p_no)img 
+right outer join (select *
+from product p where p_desc like '%'||#{search_keyword}||'%' or p_title like '%'||#{search_keyword}||'%')p 
+on img.p_no=p.p_no)plist
+on pmg.pi_no=plist.imgno
+	</select>
+	
 </mapper>

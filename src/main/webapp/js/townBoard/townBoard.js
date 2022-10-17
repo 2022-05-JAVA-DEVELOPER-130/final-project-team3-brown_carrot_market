@@ -151,114 +151,175 @@ $(".townBoard_btn.write_form").on("click", function(){
 });
 
 
+
+
 /*
 게시글 등록
 */
-$(".townBoard_btn.new_write").on("click", function(){
+/*
+$(".townBoard_btn.new_write").on("click", function(e){
+	e.preventDefault();
+	e.stopPropagation();
+	var form=$("#townBoard_write_form");
+	let pageno = form.find($('input[name="page_no"]')).val();
+	let t_no = form.find($('input[name="t_no"]')).val();
+
 	if($("#t_title_txt").val() == "" || CKEDITOR.instances.townBoard_content_area.getData() == ""){
 		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
 		return;
 	}
-	$("#townBoard_write_form").attr("action", "townboard_write_action");
-	$("#townBoard_write_form").submit();
-});
-
-
-
-/*
-답글 등록 폼 
-*/
-/*
-$(".qna_btn.reply").on("click", function(){
-	let pageno = $(this).attr("pageno");
-	let q_no = $(this).attr("q_no");
-	location.href = `qna_reply_form?pageno=${pageno}&q_no=${q_no}`;
-});
-*/
-
-/*
-답글 등록
-*/
-/*
-$(".qna_btn.reply_write").on("click", function(){
-	if($("#q_title_txt").val() == "" || CKEDITOR.instances.q_content_area.getData() == ""){
-		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
-		return;
-	}
-	$("#qna_reply_write_form").attr("action", "qna_reply_write");
-	$("#qna_reply_write_form").submit();
-});
-*/
-
-/*
-function townReplyInsert(pageno,t_ctgr_no){
-	
-	$.ajax({
-		url: "townReply_wirte_rest",
-		method: "post",
-		data: {
-			
-				},
-		dataType: "json",
-		success:function(resultObj){
-			console.log(resultObj);
-			if(resultObj.errorCode > 0){
-				let data = resultObj.data;
-				let htmlBuffer = ``;
-				data.itemList.forEach(function(townBoard, i){
-				
-				   htmlBuffer += `<div class="blog_post_thumb">`;
-	              
-                     
-				});
-				$("#townBoard_list_tbody_all" ).html(htmlBuffer);
-				
-				let paginationBuffer = ``;
-				
-				$(".pagination.pagination-sm.justify-content-center").html(paginationBuffer);
-			}else{
-				Toast.fire({ icon: 'error', title: resultObj.errorMsg });
-			}
-		}
-	});
-}
-*/
-
-/*
-답글 등록
-*/
-$(".qna_btn.reply_write").on("click", function(){
-	if($("#q_title_txt").val() == "" || CKEDITOR.instances.q_content_area.getData() == ""){
-		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
-		return;
-	}
-	$("#qna_reply_write_form").attr("action", "qna_reply_write");
-	$("#qna_reply_write_form").submit();
-});
-/*
-댓글등록
-*/
-$("#replysubmit").on("click", function(){
-	console.log('댓글 등록 클릭')
-	let pageno = $(this).attr("pageno");
-	let t_no = $(this).attr("t_no");
-	if($("#q_title_txt").val() == "" || $("#q_title_txt").val() == ""){
-		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
-		return;
-	}
-	/*
-	ToastConfirm.fire({ icon: 'warning', 
-						title: "게시글을 삭제하시겠습니까?\n 삭제 후 복구가 불가능합니다"}).then((result) => {
-						if(result.isConfirmed){
+	else{
+		ToastConfirm.fire({ icon: 'question', 
+							title: "게시글을 작성하시겠습니까?"}).then((result) => {
+								if(result.isConfirmed){
+								/*	
 							$.ajax({
 								url: "townReply_wirte_rest",
 								method: "post",
-								data: {"townReply":townReply},
+								data: form.serialize(),
 								dataType: "json",
 								success:function(resultObj){
+									console.log('성공');
 									if(resultObj.errorCode > 0){
 										Toast.fire({ icon: 'success', title: resultObj.errorMsg }).then((result) => {
-												//location.href = "townBoard_list?pageno=" + pageno;
+											console.log('페이지이동');
+												location.href = "townboard_view?t_no="+t_no+"&pageno=" + pageno;
+											});
+									}else{
+										Toast.fire({ icon: 'error', title: resultObj.errorMsg });
+									}
+								}
+							});////아작스 끝////
+							
+							   //사진 리스트 업로드
+  							 // const formData1 = new FormData($('#main_contact_form_townBoard')[0]);
+  							 const formData1 = new FormData($('#main_contact_form_townBoard')[0]);
+							  $.ajax({
+								      url:'townboard_write_action_json',
+								      type:'POST',
+								      processData:false,   //파일전송시 반드시 false
+								      contentType:false,
+								      data:formData1,
+								      success:function(jsonResult){
+								      console.log(jsonResult);
+								      window.location.href="townboard_list";
+       
+      }
+   });
+							
+						}
+							
+					});				
+	
+/////여기 자리
+/*	$(".townReply_write_form").attr("action", "townReply_wirte_rest");
+	$(".townReply_write_form").submit();	
+}	
+	
+});
+*/
+//게시글 등록
+function townBoardCreate() {
+   if (document.townBoard_write_form.t_title.value == "") {
+      alert("제목을 입력하십시요.");
+      document.townBoard_write_form.t_title.focus();
+      return false;
+   }
+   /*
+   if (document.townBoard_write_form.t_content.value == "") {
+      alert("내용을 입력하십시요.");
+      document.townBoard_write_form.t_content.focus();
+      return false;
+   }
+   */
+   //사진 리스트 업로드
+   const formData1 = new FormData($('#main_contact_form_townBoard')[0]);
+   /*
+   formData1.append('files',$('#files')[0]); //이게 맞나?
+   formData1.append('files',$('#files')[1]); 
+   formData1.append('files',$('#files')[2]); 
+   formData1.append('files',$('#files')[3]); 
+   */
+   
+   console.log(formData1);
+   
+   $.ajax({
+      url:'townboard_write_action_json',
+      type:'POST',
+      processData:false,   //파일전송시 반드시 false
+      contentType:false,
+      data:formData1,
+      success:function(jsonResult){
+      console.log(jsonResult);
+      window.location.href="townBoard_list";
+       /*사진이름받기
+       $.ajax({
+              url : 'product_write_action_json',
+              method : 'POST',
+              data: {
+                  "p_title":$("input[name='p_title']").val(),
+                  "p_price":$("input[name='p_price']").val(),
+                  "p_ctgr_no":$("input[name='p_ctgr_no']").val(),
+                  "p_desc":$("input[name='p_desc']").val(),
+                  "pi_name": jsonResult.newFileName 
+                     },
+                     dataType : 'json',
+                     success : function(jsonResult) {
+                        console.log(jsonResult.msg);
+         }
+        });
+        */
+      }
+   });
+   }
+
+
+
+
+/*
+답글 등록
+*/
+$(".qna_btn.reply_write").on("click", function(){
+	if($("#q_title_txt").val() == "" || CKEDITOR.instances.q_content_area.getData() == ""){
+		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
+		return;
+	}
+	$("#qna_reply_write_form").attr("action", "qna_reply_write");
+	$("#qna_reply_write_form").submit();
+});
+
+
+
+/*
+댓글등록
+*/
+$("#townMainReplyBtn").on("click", function(e){
+	e.preventDefault();
+	e.stopPropagation();
+	var form=$(".townReply_Main_write_form");
+	let pageno = form.find($('input[name="page_no"]')).val();
+	let t_no = form.find($('input[name="t_no"]')).val();
+
+	if($(".t_reply_title").val() == "" || $(".t_reply_content").val() == ""){
+		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
+		return;
+	}
+	else{
+		ToastConfirm.fire({ icon: 'question', 
+							title: "댓글을 작성하시겠습니까?"}).then((result) => {
+								if(result.isConfirmed){
+									
+							$.ajax({
+								url: "townReply_wirte_rest",
+								method: "post",
+								data: form.serialize(),
+								dataType: "json",
+								success:function(resultObj){
+									console.log('성공');
+									if(resultObj.errorCode > 0){
+										Toast.fire({ icon: 'success', title: resultObj.errorMsg }).then((result) => {
+											console.log('페이지이동');
+												location.href = "townboard_view?t_no="+t_no+"&pageno=" + pageno;
 											});
 									}else{
 										Toast.fire({ icon: 'error', title: resultObj.errorMsg });
@@ -266,13 +327,55 @@ $("#replysubmit").on("click", function(){
 								}
 							});
 						}
-	});
-	*/
-	$("#townReply_write_form").attr("action", "townReply_wirte_rest");
-	$("#townReply_write_form").submit();
+							
+					});				
+}	
 	
 });
 
+
+/*
+대댓글등록
+*/
+$(".btn.btn-primary.rereply").on("click", function(e){
+	e.preventDefault();
+	e.stopPropagation();
+	var form=$(".townReReply_write_form");
+	let pageno = form.find($('input[name="page_no"]')).val();
+	let t_no = form.find($('input[name="t_no"]')).val();
+
+	if($(".t_reply_title").val() == "" || $(".t_reply_content").val() == ""){
+		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
+		return;
+	}
+	else{
+		ToastConfirm.fire({ icon: 'question', 
+							title: "댓글을 작성하시겠습니까?"}).then((result) => {
+								if(result.isConfirmed){
+									
+							$.ajax({
+								url: "townReReply_wirte_rest",
+								method: "post",
+								data: form.serialize(),
+								dataType: "json",
+								success:function(resultObj){
+									console.log('성공');
+									if(resultObj.errorCode > 0){
+										Toast.fire({ icon: 'success', title: resultObj.errorMsg }).then((result) => {
+											console.log('페이지이동');
+												location.href = "townboard_view?t_no="+t_no+"&pageno=" + pageno;
+											});
+									}else{
+										Toast.fire({ icon: 'error', title: resultObj.errorMsg });
+									}
+								}
+							});
+						}
+							
+					});				
+}	
+	
+});
 
 
 /*
@@ -281,19 +384,20 @@ $("#replysubmit").on("click", function(){
 $(".townReply.delete").on("click", function(){
 	let pageno = $(this).attr("pageno");
 	let t_reply_no = $(this).attr("t_reply_no");
-	let t = $(this).attr("t_no");
+	let t_no = $(this).attr("t_no");
 	ToastConfirm.fire({ icon: 'question', 
 						title: "댓글을 삭제하시겠습니까?\n 삭제 후 복구가 불가능합니다"}).then((result) => {
 						if(result.isConfirmed){
 							$.ajax({
 								url: "townReply_delete_rest",
 								method: "post",
-								data: {"t_reply_no":t_reply_no},
+								data: {"t_reply_no":t_reply_no
+										},
 								dataType: "json",
 								success:function(resultObj){
 									if(resultObj.errorCode > 0){
 										Toast.fire({ icon: 'success', title: resultObj.errorMsg }).then((result) => {
-												location.href = "townBoard_list?t_no="+t_no+"pageno=" + pageno;
+												location.href = "townboard_view?t_no="+t_no+"&pageno=" + pageno;
 											});
 									}else{
 										Toast.fire({ icon: 'error', title: resultObj.errorMsg });
@@ -303,6 +407,23 @@ $(".townReply.delete").on("click", function(){
 						}
 	});
 });
+
+
+
+
+
+/*
+댓글 토글2
+*/
+$(document).ready(function() {
+  $(".content").hide();
+  //content 클래스를 가진 div를 표시/숨김(토글)
+  $(".heading").click(function()
+  {
+    $(this).next(".content").slideToggle(500);
+  });
+});
+
 
 
 

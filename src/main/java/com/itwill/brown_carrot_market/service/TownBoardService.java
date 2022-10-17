@@ -42,6 +42,9 @@ public interface TownBoardService {
 	//비회원 인기글 리스트 
 	List<TownBoard> selectNonMemberTownBoardListTop3();
 	
+	//회원 인기글 리스트
+	List<TownBoard> selectMemberTownBoardListTop3(Address address);
+	
 	
 	
 	//동네 게시판 게시글 한개 조회
@@ -68,9 +71,11 @@ public interface TownBoardService {
 	
 	
 	
-	Map selectTownBoardAddress(String user_id,int address_no);
+	//Map selectTownBoardAddress(String user_id,int address_no);
 	
-	int insertTownBoard(Map map);
+	int insertTownBoard(Map map) throws Exception;
+	
+	//int selectTownBoardPK();
 	
 	/***************************************************************/
 	

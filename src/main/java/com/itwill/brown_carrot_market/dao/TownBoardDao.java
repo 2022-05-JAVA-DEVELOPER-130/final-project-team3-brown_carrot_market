@@ -59,6 +59,9 @@ public interface TownBoardDao {
 	//비회원 인기글 리스트 
 	List<TownBoard> selectNonMemberTownBoardListTop3();
 	
+	//회원 인기글 리스트
+	List<TownBoard> selectMemberTownBoardListTop3(Address address);
+	
 	
 	//동네 게시판 게시글 한개 조회
 	TownBoard selectTownBoardOne(int t_no)throws Exception;
@@ -83,9 +86,12 @@ public interface TownBoardDao {
 	
 	Map selectTownBoardAddress(String user_id,int address_no);
 	
-	int insertTownBoard(Map map);
+	int insertTownBoard(Map map) throws Exception;
 
+	int selectTownBoardPK() throws Exception;
+	
 	/******************************************************/
+	
 	
 	
 }

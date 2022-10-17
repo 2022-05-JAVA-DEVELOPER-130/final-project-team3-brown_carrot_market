@@ -26,6 +26,10 @@ public class TownReplyServiceImpl implements TownReplyService{
 	}
 	
 	//대댓글 등록
+	@Override
+	public int insertTownBoardReReply(TownReply townReply) throws Exception {
+		return townReplyDao.insertTownBoardReReply(townReply);
+	}
 	
 
 	@Override
@@ -43,6 +47,8 @@ public class TownReplyServiceImpl implements TownReplyService{
 	public List<TownReply> selectTownBoardReplyList(int t_no) {
 		return townReplyDao.selectTownBoardReplyList(t_no);
 	}
+
+
 	
 	
 	

@@ -1,5 +1,6 @@
 package com.itwill.brown_carrot_market.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,9 +9,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.itwill.brown_carrot_market.dao.TownBoardDao;
+import com.itwill.brown_carrot_market.dao.TownImageDao;
 import com.itwill.brown_carrot_market.dao.UserInfoDao;
 import com.itwill.brown_carrot_market.dto.Address;
+import com.itwill.brown_carrot_market.dto.ProductImage;
 import com.itwill.brown_carrot_market.dto.TownBoard;
+import com.itwill.brown_carrot_market.dto.TownImage;
 import com.itwill.brown_carrot_market.util.PageMaker;
 import com.itwill.brown_carrot_market.util.PageMakerDto;
 
@@ -20,7 +24,13 @@ public class TownBoardServiceImpl implements TownBoardService{
 	@Qualifier("townBoardDaoImpl")
 	private TownBoardDao townBoardDao;
 	
+	@Autowired
+	@Qualifier("userDaoImpl")
 	private UserInfoDao userInfoDao;
+	
+	@Autowired
+	@Qualifier("townImageDaoImpl")
+	private TownImageDao townImageDao;
 	
 	
 	
@@ -116,6 +126,12 @@ public class TownBoardServiceImpl implements TownBoardService{
 		return townBoardDao.selectNonMemberTownBoardListTop3();
 	}
 	
+	//회원 인기글 리스트
+	@Override
+	public List<TownBoard> selectMemberTownBoardListTop3(Address address) {
+		return townBoardDao.selectMemberTownBoardListTop3(address);
+	}
+	
 	
 
 	@Override
@@ -151,16 +167,61 @@ public class TownBoardServiceImpl implements TownBoardService{
 		return townBoardDao.insertTownBoard(townBoard);
 	}
 	 */
-	
+	/*
 	@Override
 	public Map selectTownBoardAddress(String user_id, int address_no) {
 		return townBoardDao.selectTownBoardAddress(user_id, address_no);
 	}
-
+*/
 	@Override
-	public int insertTownBoard(Map map) {
-		return townBoardDao.insertTownBoard(map);
+	public int insertTownBoard(Map map) throws Exception {
+		int result = 0;
+		int t_no = townBoardDao.insertTownBoard(map);
+		System.out.println(">>>>>Service map"+map);
+		//List<String> fileNames = new ArrayList<>();
+		System.out.println(">>>service map의 t_img_name"+map.get("ImageNameList"));
+		//System.out.println(map.size());
+		
+		
+		//Product product = (Product) map;
+		
+		List<String> imageList = new ArrayList<>();
+		imageList = (List<String>) map.get("ImageNameList");
+
+		if(imageList!=null) {
+		for (int i=0; i < imageList.size(); i++) {
+			String t_img_name = imageList.get(i).toString();
+			TownImage townImage = new TownImage();
+			townImage.setT_no(t_no);
+			townImage.setT_img_name(t_img_name);
+			
+			result = townImageDao.insertTownBoardImg(townImage);
+			
+			}
+			//System.out.println(imageList.get(2).toString());
+		}	
+			/*
+			List<ProductImage> productImageList = new ArrayList();
+			((Product) productImageList).setP_no(p_no);
+			((ProductImage) productImageList).setPi_name("pi_name");
+			productImageList.add(productImage);
+			}
+		result = productImageDao.insertProductListImg(productImageList);
+		}
+		*/ 
+		return result;
+		
 	}
+
+	/*
+	@Override
+	public int selectTownBoardPK() {
+		return 0;
+	}
+	*/
+	
+
+
 
 	
 

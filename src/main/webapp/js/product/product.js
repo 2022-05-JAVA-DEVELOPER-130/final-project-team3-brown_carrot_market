@@ -80,18 +80,77 @@ function productCreate() {
    */
 
 function productSell(){
-   document.product_modify_sell_action.action = "product_modify_sell_action"
-   document.product_modify_sell_action.method='POST';
-   document.product_modify_sell_action.submit();
+	
+	if(document.chatStart.p_userId.value==document.chatStart.loginId.value){ 
+	document.product_modify_sell_action.action = "product_modify_sell_action"
+	document.product_modify_sell_action.method='POST';
+	document.product_modify_sell_action.submit();}
+	else{
+		alert("본인 상품만 상태수정 가능합니다.");
+		
+	}
 }
+
+function productUpdateAction(){
+	if (document.product_modify_form.p_title.value == "") {
+      alert("제목을 입력하십시요.");
+      document.product_modify_form.p_title.focus();
+      return false;
+   }
+   if (document.product_modify_form.p_price.value == "") {
+      alert("가격을 입력하십시요.");
+      document.product_modify_form.p_price.focus();
+      return false;
+   }
+
+   if (document.product_modify_form.p_desc.value == "") {
+      alert("내용을 입력하십시요.");
+      document.product_modify_form.p_desc.focus();
+      return false;
+   }
+ 
+   
+   const formData1 = new FormData($('#main_contact_form')[0]);
+   /*
+   formData1.append('files',$('#files')[0]); //이게 맞나?
+   formData1.append('files',$('#files')[1]); 
+   formData1.append('files',$('#files')[2]); 
+   formData1.append('files',$('#files')[3]); 
+   */
+      
+   $.ajax({
+      url:'product_modify_action_json',
+      type:'POST',
+      processData:false,   //파일전송시 반드시 false
+      contentType:false,
+      data:formData1,
+      success:function(jsonResult){
+      console.log(jsonResult);
+      window.location.href="product_list";
+   
+   /*
+   document.product_modify_form.action = "product_modify_action";
+   document.product_modify_form.method='POST';
+   document.product_modify_form.submit();
+	*/
+  		}
+   	});
+   }
+
 
 /********************채팅하기!!**************************/
 $(document).ready(function(){
-   $('#btnCreate').click(function(){
-      console.log('채팅방 생성 버튼 클릭');
-      document.chatStart.action="create_room";
-      document.chatStart.method='POST';
-      document.chatStart.submit();
-      
-   });
-   });   
+	$('#btnCreate').click(function(){
+		if(document.chatStart.p_userId.value==document.chatStart.loginId.value){
+			alert("본인 상품과는 채팅할 수 없습니다.");
+			
+			
+			
+		}else{
+		console.log('채팅방 생성 버튼 클릭');
+		document.chatStart.action="create_room";
+		document.chatStart.method='POST';
+		document.chatStart.submit();
+		}
+	});
+	});

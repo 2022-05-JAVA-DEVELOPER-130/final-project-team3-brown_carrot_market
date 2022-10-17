@@ -12,6 +12,9 @@ public interface TownReplyMapper {
 	//댓글등록
 	public int insertTownBoardReply(TownReply townReply);
 	
+	//대댓글 등록
+	public int insertTownBoardReReply(TownReply townReply);
+	
 	//댓글삭제
 	public int deleteTownBoardReply(int t_reply_no);
 	

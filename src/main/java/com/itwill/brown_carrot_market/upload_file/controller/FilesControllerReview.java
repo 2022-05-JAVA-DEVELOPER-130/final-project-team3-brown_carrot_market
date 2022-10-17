@@ -57,23 +57,25 @@ public class FilesControllerReview {
 		try {
 			List<String> fileNames = new ArrayList<>();
 			List<ReviewImage> reviewImageList = new ArrayList<>();
-			ReviewImage reviewImage = new ReviewImage();
 
 			for (MultipartFile file : files) {
 				System.out.println(file.isEmpty());
 				if (!file.isEmpty()) {
 					fileNames.add(file.getOriginalFilename());
-					
 					newFileName= storageService.save(file);
+					
+					ReviewImage reviewImage = new ReviewImage();
 					reviewImage.setReview_img_name(newFileName);
 					reviewImageList.add(reviewImage);
-					message = "Uploaded the files successfully: " + fileNames+" newFileName"+newFileName;
-					System.out.println("newFileName: "+newFileName);
+
+					message = "Uploaded the files successfully: " + fileNames+" newFileName: "+newFileName+"reviewImageList: "+reviewImageList;
+					System.out.println(message);
 				}else {
 					message="Please select a valid mediaFile..";
 				}
 			}
 			
+			System.out.println("newFileNames: "+reviewImageList);
 			result.put("message", message);
 			result.put("newFileNames", reviewImageList);
 			result.put("fileNames", fileNames);
@@ -122,14 +124,18 @@ public class FilesControllerReview {
 	}
 	
 	@PostMapping("/review/delete")
-	public ResponseEntity<Map<String,Object>> deleteFiles(@RequestParam("user_profile")String fileName) {
-		Map<String,Object> result = new HashMap();
-		
-		boolean deleteResult= storageService.delete(fileName);
-		
-		result.put("result",deleteResult);
-		
-		return ResponseEntity.status(HttpStatus.OK).body(result);
+	public ResponseEntity<Map<String,Object>> deleteFiles(@RequestParam("user_profile")List<String> fileNames) {
+		Map<String,Object> resultMap = new HashMap();
+		List<Boolean> result = new ArrayList();
+		boolean deleteResult= false;
+		if(fileNames!=null) {
+			for (String fileName : fileNames) {
+				deleteResult= storageService.delete(fileName);
+			}
+			result.add(deleteResult);
+		}
+		resultMap.put("result",result);
+		return ResponseEntity.status(HttpStatus.OK).body(resultMap);
 	}
 }
 	

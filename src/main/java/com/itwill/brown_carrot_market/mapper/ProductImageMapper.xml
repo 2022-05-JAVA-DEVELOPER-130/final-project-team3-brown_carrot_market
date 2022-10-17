@@ -44,6 +44,6 @@
 	
 	<!-- 사진 삭제 -->
 	<delete id="deleteProductImg" parameterType="int">
-		delete product_img where pi_no=#{pi_no}
+		delete product_img where p_no=#{p_no}
 	</delete>
 </mapper>

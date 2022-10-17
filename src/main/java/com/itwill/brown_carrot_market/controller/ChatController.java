@@ -94,11 +94,12 @@ public class ChatController {
 						String img = userInfoService.findUser(chatRoomListView.getYou_id()).getUser_profile();
 						ArrayList<ProductImage> productImage = (ArrayList<ProductImage>)productService.selectProductImgList(chatRoomListView.getP_no());
 						if(productImage.size()==0) {
-							chatRoomListView.setP_img("pan.jpg");
+							chatRoomListView.setP_img("close.png");
 						}else {
 							chatRoomListView.setP_img(productImage.get(0).getPi_name());
 							
 						}
+						System.out.println(chatRoomListView.getP_img());
 						chatRoomListView.setYou_image(img);
 						
 						chatRoomListView.setNot_read(chatService.chatNotRead(chatRoomListView.getC_room_no(), userId));
@@ -141,7 +142,7 @@ public class ChatController {
 			
 				ArrayList<ProductImage> productImage = (ArrayList<ProductImage>)productService.selectProductImgList(chatRoomListView.getP_no());
 				if(productImage.size()==0) {
-					chatRoomListView.setP_img("pan.jpg");
+					chatRoomListView.setP_img("close.png");
 				}else {
 					chatRoomListView.setP_img(productImage.get(0).getPi_name());
 					
@@ -156,6 +157,7 @@ public class ChatController {
 			//채팅방 생성으로 채팅사이트 이동 
 			model.addAttribute("path",2);
 			model.addAttribute("chat_room_no",chat_room_no);
+			httpSession.setAttribute("loginId", from_id);
 			return "chat_room";
 		}	
 		

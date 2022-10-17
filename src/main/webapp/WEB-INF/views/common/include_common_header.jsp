@@ -79,12 +79,12 @@
                                     <li><a href="product_list">동네상품</a>
                                         <ul class="dropdown">
                                             <li><a href="product_list">- 전체보기</a></li>
-                                            <li><a href="product-details.html">- 가전제품</a></li>
-                                            <li><a href="product-details.html">- 가구</a></li>
-                                            <li><a href="product-details.html">- 의류</a></li>
-                                            <li><a href="product-details.html">- 생활용품</a></li>
-                                            <li><a href="product-details.html">- 취미/게임/음반/도서</a></li>
-                                            <li><a href="product-details.html">- 기타</a></li>
+                                            <li><a href="product_category?category_no=1">- 가전제품</a></li>
+                                            <li><a href="product_category?category_no=2">- 가구</a></li>
+                                            <li><a href="product_category?category_no=3">- 의류</a></li>
+                                            <li><a href="product_category?category_no=4">- 생활용품</a></li>
+                                            <li><a href="product_category?category_no=5">- 취미/게임/음반/도서</a></li>
+                                            <li><a href="product_category?category_no=6">- 기타</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="townBoard_list">동네생활</a>
@@ -101,27 +101,14 @@
                                             <ul class="single-mega cn-col-4">
                                                 <li><a href="#">- 분실/실종센터</a></li>
                                                 <li><a href="#">- 동네사진전</a></li>
-                                                <li><a href="#"></a></li>
-                                                <li><a href="contact.html">Contact</a></li>
                                             </ul>
-                                            <div class="single-mega cn-col-2">
-                                                <div class="megamenu-slides owl-carousel">
-                                                    <a href="shop-grid-left-sidebar.html">
-                                                        <img src="img/bg-img/mega-slide-2.jpg" alt="">
-                                                    </a>
-                                                    <a href="shop-list-left-sidebar.html">
-                                                        <img src="img/bg-img/mega-slide-1.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                            </div>
                                         </div>
                                     </li>
                                     <li><a href="#">흙당근페이</a>
                                         <ul id="brown_carrot_pay" class="dropdown">
-                                            <li><a href="payment">충전하기</a></li>
-                                            <li><a href="#">송금하기</a></li>
+                                            <li><a href="payment">포인트 충전</a></li>
                                             <li><a href="point_list">페이내역</a></li>
-                                            <li><a href="#">환급하기</a></li>		
+                                            <li><a href="#">포인트 출금</a></li>		
                                         </ul>
                                     </li>
                                     <li><a href="faq">자주하는질문</a></li>
@@ -140,8 +127,8 @@
 							</div>
 							<!-- Form -->
 							<div class="search-form">
-								<input type="search" class="form-control" placeholder="Search">
-								<input type="submit" class="d-none" value="Send">
+								<input type="search" class="form-control" id="searchKey" placeholder="검색">
+								<input type="submit" class="d-none" value="검색">
 							</div>
 						</div>
 

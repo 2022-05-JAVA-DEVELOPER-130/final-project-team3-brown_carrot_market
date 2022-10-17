@@ -18,15 +18,36 @@ public class PaymentController {
 	@LoginCheck
 	@RequestMapping(value = "/payment")
 	public String payment(Model model, HttpServletRequest request) throws Exception{
-		String forwardPath="";
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
 		request.getSession().setAttribute("sUserId", sUserId);
 		if(sUserId==null || sUserId.equals("")) {
 			return "user_login";
 		}else {
-		
-		forwardPath="/payment";
-		return forwardPath;
+			return "/payment";
+		}
+	}
+	
+	@LoginCheck
+	@RequestMapping(value = "/payment_withdraw")
+	public String payment_withdraw(Model model, HttpServletRequest request) throws Exception{
+		String sUserId=(String)request.getSession().getAttribute("sUserId");
+		request.getSession().setAttribute("sUserId", sUserId);
+		if(sUserId==null || sUserId.equals("")) {
+			return "user_login";
+		}else {
+			return "/payment_withdraw";
+		}
+	}
+	
+	@LoginCheck
+	@RequestMapping(value = "/payment_complete")
+	public String payment_complete(Model model, HttpServletRequest request) throws Exception{
+		String sUserId=(String)request.getSession().getAttribute("sUserId");
+		request.getSession().setAttribute("sUserId", sUserId);
+		if(sUserId==null || sUserId.equals("")) {
+			return "user_login";
+		}else {
+			return "payment_complete";
 		}
 	}
 	

@@ -215,6 +215,8 @@
 								 <li class="single_comment_area">
 								 
 								<c:forEach var="townReply" items="${townReplyList}" >
+								
+								<!-- 댓글 -->
 								 <c:if test="${townReply.depth == 1}">
                                     <div class="comment-wrapper clearfix">
                                         <div class="comment-meta">
@@ -223,18 +225,49 @@
                                              -->
                                              
                                              <div class="comment-author-img">
+                                             <!-- 
                                                 <img class="img-circle" src="img/user_profile/${townReply.userInfo.user_profile}" alt="">
+                                                 -->
                                             </div>
                                         </div>
                                         <div class="comment-content">
                                             <h5 class="comment-author"><a href="#">${townReply.userInfo.user_id}</a></h5>
                                             <p>${townReply.t_reply_title }</p>
                                             <p>${townReply.t_reply_content }</p>
-                                            <a href="#" class="reply">Reply</a>
                                             <input class="townReply delete" type="button" pageno="${pageno}" t_no="${townBoard.t_no }" t_reply_no="${townReply.t_reply_no}" value="삭제하기" />
+                                            <button class="heading">댓글달기</button>
+                                            
+                                            <div  class="content">
+                                            <form class="townReReply_write_form"  method="post">
+				                                <div class="row">
+				                                    <div class="col-12 rereply">
+				                                        <div class="form-group mb-30">
+				                                            <input type="text" class="form-control" name="t_reply_title" class="t_reply_title" placeholder="댓글 제목" tabindex="1">
+				                                        </div>
+				                                    </div>
+				                                    <div class="col-12 rereply">
+				                                        <div class="form-group mb-30">
+				                                            <textarea class="form-control rereply" name="t_reply_content" class="t_reply_content" cols="30" rows="7" placeholder="내용" tabindex="2"></textarea>
+				                                        </div>
+				                                    </div>
+				                                    <input type="hidden" class="form-control" name="t_no" value="${townBoard.t_no}"/>
+                                 				    <input type="hidden" class="form-control" name="page_no" value="${pageno}" />
+                                 				    <input type="hidden" class="form-control" name="groupno" value="${townReply.t_reply_no}" />
+                                 				    <input type="hidden" class="form-control" name="step" value="${townReply.step}" />
+				                                    <input type="hidden" class="form-control" name="depth" value="2"/>
+				                                   <!--  <input type="hidden" class="form-control" name="step" value="1"/> 이렇게 하면 모든 setp이 1로 나와서 xx 증가해야함 -->
+				                                    <div class="col-12 ">
+				                                        <button  class="btn btn-primary rereply" type="submit">Submit Comment</button>
+				                                    </div>
+				                                </div>
+				                            </form>
+				                            </div>
+                                            
                                         </div>
                                     </div>
                                     </c:if>
+                                    
+                                    <!-- 대댓글  -->
                                     <c:if test="${townReply.depth != 1}">
                                     <ul class="children">
                                         <li class="single_comment_area">
@@ -248,12 +281,39 @@
 		                                            <h5 class="comment-author"><a href="#">${townReply.userInfo.user_id}</a></h5>
 		                                            <p>${townReply.t_reply_title }</p>
 		                                            <p>${townReply.t_reply_content }</p>
-		                                            <a href="#" class="reply">Reply</a>
+		                                            <input class="townReply delete" type="button" pageno="${pageno}" t_no="${townBoard.t_no }" t_reply_no="${townReply.t_reply_no}" value="삭제하기" />
+                                           <!-- 
+                                            <button class="heading">댓글달기</button>
+                                            <div  class="content">
+                                            <form class="townReply_write_form"  method="post">
+				                                <div class="row">
+				                                    <div class="col-12 rereply">
+				                                        <div class="form-group mb-30">
+				                                            <input type="text" class="form-control" name="t_reply_title" class="t_reply_title" placeholder="댓글 제목" tabindex="1">
+				                                        </div>
+				                                    </div>
+				                                    <div class="col-12 rereply">
+				                                        <div class="form-group mb-30">
+				                                            <textarea class="form-control rereply" name="t_reply_content" class="t_reply_content" cols="30" rows="7" placeholder="내용" tabindex="2"></textarea>
+				                                        </div>
+				                                    </div>
+				                                    <input type="hidden" class="form-control" name="t_no" value="${townBoard.t_no}"/>
+				                                    <input type="hidden" class="form-control" name="step" value="1"/> 이렇게 하면 모든 setp이 1로 나와서 xx 증가해야함 
+				                                    <input type="hidden" class="form-control" name="depth" value="2"/>
+				                                    <div class="col-12 ">
+				                                        <button class="btn btn-primary reply" type="submit">Submit Comment</button>
+				                                    </div>
+				                                </div>
+				                            </form>
+				                            </div>
+				                             -->
+				                            
 		                                        </div>
                                             </div>
                                         </li>
                                     </ul>
                                     </c:if>
+                                   
                                     </c:forEach> 
                                     
                                 </li>
@@ -264,24 +324,28 @@
 
                         <div class="contact_from mb-50">
                             <h5 class="mb-4">Leave a Comment</h5>
-
-                            <form id="townReply_write_form" method="post">
+                            
+							<!-- 메인 댓글달기 -->
+                            <form class="townReply_Main_write_form" method="post">
                             
                                 <div class="row">
                                    
                                     <div class="col-12">
                                         <div class="form-group mb-30">
-                                            <input type="text" class="form-control" name="t_reply_title" value="" placeholder="댓글 제목" tabindex="1">
+                                            <input type="text" class="form-control" name="t_reply_title" class="t_reply_title" placeholder="댓글 제목" tabindex="1">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group mb-30">
-                                            <textarea class="form-control" name="t_reply_content" cols="30" rows="7" placeholder="내용" tabindex="2"></textarea>
+                                            <textarea class="form-control" name="t_reply_content" class="t_reply_content" cols="30" rows="7" placeholder="내용" tabindex="2"></textarea>
                                         </div>
                                     </div>
                                     <input type="hidden" class="form-control" name="t_no" value="${townBoard.t_no}"/>
+                                    <input type="hidden" class="form-control" name="page_no" value="${pageno}" />
+                                   <!--  <input type="hidden" class="form-control" name="step" value="1"/> 이렇게 하면 모든 setp이 1로 나와서 xx 증가해야함 -->
+                                    <input type="hidden" class="form-control" name="depth" value="1"/>
                                     <div class="col-12">
-                                        <button id="replysubmit" class="btn btn-primary" type="submit">Submit Comment</button>
+                                        <button class="btn btn-primary reply"  id="townMainReplyBtn" type="submit">Submit Comment</button>
                                     </div>
                                 </div>
                             </form>
@@ -334,6 +398,10 @@
     <script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+
+
+
+
 
 	<style type="text/css">
 #toast-container > .toast {
