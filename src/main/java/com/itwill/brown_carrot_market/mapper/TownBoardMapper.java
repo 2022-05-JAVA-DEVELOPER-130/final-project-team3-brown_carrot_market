@@ -50,6 +50,9 @@ public Map selectMemberCtgrTownBoardAddress(Map map);
 //비회원 인기글 리스트 
 public List<TownBoard> selectNonMemberTownBoardListTop3();
 
+//회원 인기글 리스트
+public List<TownBoard> selectMemberTownBoardListTop3(Address address);
+
 
 //동네 게시판 게시글 한개 조회
 public TownBoard selectTownBoardOne(int t_no);

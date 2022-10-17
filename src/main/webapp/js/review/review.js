@@ -44,6 +44,52 @@ $(document).ready(function(){
 		}
 	});
 	*/
+	
+	
+	/* 이미지 upload *********************************************/
+	var dropHeight =220;
+	//$(function() {
+		
+	var $drop = $("#drop");
+	 $drop.on('click',function(e){
+		console.log(this);
+		e.preventDefault(); 
+	 });
+	
+	var uploadFiles = [];
+	
+	$("#drop").on("dragenter", function(e) { //드래그 요소가 들어왔을떄 
+		console.log('dragenter 실행!');
+		//$(this).addClass('drag-over');
+		$("#drop").addClass('drag-over');
+	}).on("dragleave", function(e) {  //드래그 요소가 나갔을때  
+		console.log('drag-over 실행!');
+		//$(this).removeClass('drag-over');
+		$("#drop").removeClass('drag-over');
+	}).on("dragover", function(e) { 
+		e.stopPropagation(); 
+		e.preventDefault();
+	}).on('drop', function(e) {  //드래그한 항목을 떨어뜨렸을때
+		console.log('drop 실행!');
+		e.preventDefault(); 
+		//$(this).removeClass('drag-over');
+		$("#drop").removeClass('drag-over');
+		var files = e.originalEvent.dataTransfer.files;  //드래그&드랍 항목 
+		for(var i = 0; i < files.length; i++) {
+			var file = files[i];   
+			var size = uploadFiles.push(file);  //업로드 목록에 추가 
+			preview(file, size - 1);  //미리보기 만들기
+			} 
+	//$(this).style("height",dropHeight+"px");
+	});
+
+    		
+	//});//END
+	
+	
+	
+	
+	
 	$(document).on('click', '#btnSubmit', function(e) {
     		console.log('click - #btnSubmit');
     		
@@ -121,6 +167,21 @@ $(document).ready(function(){
 	
     			
 });//(END)ready
+
+
+	function preview(file, idx) { 
+		var reader = new FileReader();
+		reader.onload = (function(f, idx) { 
+			return	function(e) { 
+				var div = "<div class='thumb'><div class='close' data-idx=" + idx + ">X</div><img src=" + e.target.result + " title=" + escape(f.name) + "/></div>";  
+				$("#thumbnails").append(div);  
+				}; 
+		})(file, idx); 
+		reader.readAsDataURL(file);
+		dropHeight += 220 * ($(".thumb").length%2);//사실 안되는 듯..
+	}
+
+
 
 function setPoint(id){
 	var val = $("label[for='"+id+"']").text();

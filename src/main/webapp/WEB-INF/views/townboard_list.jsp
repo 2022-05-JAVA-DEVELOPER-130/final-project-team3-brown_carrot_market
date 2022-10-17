@@ -130,7 +130,7 @@
 
                             <!-- Recent Post1 -->
                             
-                           	<c:forEach var="townBoardTop" items="${townBoardListTop}" begin="1" end="2">
+                           	<c:forEach var="townBoardTop" items="${townBoardListTop}" begin="0" end="2">
 	                            <div class="single_latest_post">
 	                            
 	                                <div class="post-thumbnail">
