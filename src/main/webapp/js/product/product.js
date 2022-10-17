@@ -108,6 +108,8 @@ function productUpdateAction(){
       document.product_modify_form.p_desc.focus();
       return false;
    }
+ 
+   
    const formData1 = new FormData($('#main_contact_form')[0]);
    /*
    formData1.append('files',$('#files')[0]); //이게 맞나?
@@ -115,6 +117,7 @@ function productUpdateAction(){
    formData1.append('files',$('#files')[2]); 
    formData1.append('files',$('#files')[3]); 
    */
+      
    $.ajax({
       url:'product_modify_action_json',
       type:'POST',
@@ -123,7 +126,7 @@ function productUpdateAction(){
       data:formData1,
       success:function(jsonResult){
       console.log(jsonResult);
-      //window.location.href="product_list";
+      window.location.href="product_list";
    
    /*
    document.product_modify_form.action = "product_modify_action";

@@ -74,11 +74,28 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public int updateProduct(Map map) throws Exception {
+		int result = 0;
+		int p_no = Integer.parseInt((String) map.get("p_no"));
+		int rowCount = productDao.updateProduct(map);
+		
+		List<String> imageList = new ArrayList<>();
+		imageList = (List<String>) map.get("ImageNameList");
+
+		if(imageList!=null) {
+		for (int i=0; i < imageList.size(); i++) {
+			String pi_name = imageList.get(i).toString();
+			ProductImage productImage = new ProductImage();
+			productImage.setP_no(p_no);
+			productImage.setPi_name(pi_name);
+			
+			result = productImageDao.insertProductImg(productImage);
+			
+			}
+			//System.out.println(imageList.get(2).toString());
+		}
 		
 		
-		
-		
-		return productDao.updateProduct(map);
+		return result;
 	}
 
 	@Override
@@ -138,6 +155,12 @@ public class ProductServiceImpl implements ProductService{
 	public int updateProductSell(int p_sell, int p_no) throws Exception {
 		// TODO Auto-generated method stub
 		return productDao.updateProductSell(p_sell, p_no);
+	}
+
+	@Override
+	public int deleteProductImg(int p_no) throws Exception {
+		// TODO Auto-generated method stub
+		return productImageDao.deleteProductImg(p_no);
 	}
 	
 	

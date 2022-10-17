@@ -119,26 +119,63 @@ public class ProductRestController {
 	
 	//게시글 수정
 	@PostMapping(value = "/product_modify_action_json")
-	public String product_modify_action_json(@RequestParam("files") MultipartFile[] files,@RequestParam Map<String, Object> map,Model model) throws Exception {
-		String forwardPath = "";
+	public Map product_modify_action_json(@RequestParam("files") MultipartFile[] files,@RequestParam Map<String, Object> map,Model model) throws Exception {
+		int code = 0;
+		String url = "product_list"; //어디로 보내야지?
+		String message="product_write 실패";
+		String newFileName= "";
+		int p_no = Integer.parseInt((String) map.get("p_no"));
+		int deleteRowCount = productService.deleteProductImg(p_no);
 		
-		
+		Map<String,Object> resultMap = new HashMap();
 		try {
-			int p_no = Integer.parseInt((String) map.get("p_no"));
+			
+			//사진업로드
+			List<String> fileNames = new ArrayList<>();
+			for (MultipartFile file : files) {
+				System.out.println(file.isEmpty());
+				if (!file.isEmpty()) {
+					newFileName= storageService.save(file);
+					//fileNames.add(file.getOriginalFilename());
+					fileNames.add(newFileName);
+					
+					System.out.println(fileNames);
+					message = "Uploaded the files successfully: " + fileNames+" newFileName"+newFileName;
+				}else {
+					message="Please select a valid mediaFile..";
+				}
+			}
+			
+			
+			
 			ProductCategory productCategory = new ProductCategory(Integer.parseInt(map.get("p_ctgr_no").toString()), "");
 			map.put("productCategory", productCategory);
+			map.put("ImageNameList", fileNames);
 			map.remove("p_ctgr_no");
 			
-			int updateRowCount = productService.updateProduct(map);
-			System.out.println(">>>modify product"+map);
+			Product resultList = new Product();
 			
-			forwardPath = "redirect:product_detail?p_no=" + p_no;
+			code = productService.updateProduct(map);
+			if(code==1) message="product_write 성공";
+			System.out.println(">>>modify product"+map);
+			url = "redirect:product_detail?p_no=" + p_no;
+			
+			resultMap.put("code", code);
+			resultMap.put("url", url);
+			resultMap.put("message", message);
+			resultMap.put("data",resultList);
+			
+			return resultMap;
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 			model.addAttribute("MSG", e.getMessage());
-			forwardPath = "product_error";
+			url = "product_error";
+			message = "Fail to upload files!";
+			resultMap.put("message", message);
+			resultMap.put("url", url);
+			
+			return resultMap;
 		}
-		return forwardPath;
 	}
 }
