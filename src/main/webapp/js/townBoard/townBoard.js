@@ -151,17 +151,127 @@ $(".townBoard_btn.write_form").on("click", function(){
 });
 
 
+
+
 /*
 게시글 등록
 */
-$(".townBoard_btn.new_write").on("click", function(){
+/*
+$(".townBoard_btn.new_write").on("click", function(e){
+	e.preventDefault();
+	e.stopPropagation();
+	var form=$("#townBoard_write_form");
+	let pageno = form.find($('input[name="page_no"]')).val();
+	let t_no = form.find($('input[name="t_no"]')).val();
+
 	if($("#t_title_txt").val() == "" || CKEDITOR.instances.townBoard_content_area.getData() == ""){
 		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
 		return;
 	}
-	$("#townBoard_write_form").attr("action", "townboard_write_action");
-	$("#townBoard_write_form").submit();
+	else{
+		ToastConfirm.fire({ icon: 'question', 
+							title: "게시글을 작성하시겠습니까?"}).then((result) => {
+								if(result.isConfirmed){
+								/*	
+							$.ajax({
+								url: "townReply_wirte_rest",
+								method: "post",
+								data: form.serialize(),
+								dataType: "json",
+								success:function(resultObj){
+									console.log('성공');
+									if(resultObj.errorCode > 0){
+										Toast.fire({ icon: 'success', title: resultObj.errorMsg }).then((result) => {
+											console.log('페이지이동');
+												location.href = "townboard_view?t_no="+t_no+"&pageno=" + pageno;
+											});
+									}else{
+										Toast.fire({ icon: 'error', title: resultObj.errorMsg });
+									}
+								}
+							});////아작스 끝////
+							
+							   //사진 리스트 업로드
+  							 // const formData1 = new FormData($('#main_contact_form_townBoard')[0]);
+  							 const formData1 = new FormData($('#main_contact_form_townBoard')[0]);
+							  $.ajax({
+								      url:'townboard_write_action_json',
+								      type:'POST',
+								      processData:false,   //파일전송시 반드시 false
+								      contentType:false,
+								      data:formData1,
+								      success:function(jsonResult){
+								      console.log(jsonResult);
+								      window.location.href="townboard_list";
+       
+      }
+   });
+							
+						}
+							
+					});				
+	
+/////여기 자리
+/*	$(".townReply_write_form").attr("action", "townReply_wirte_rest");
+	$(".townReply_write_form").submit();	
+}	
+	
 });
+*/
+//게시글 등록
+function townBoardCreate() {
+   if (document.townBoard_write_form.t_title.value == "") {
+      alert("제목을 입력하십시요.");
+      document.townBoard_write_form.t_title.focus();
+      return false;
+   }
+   /*
+   if (document.townBoard_write_form.t_content.value == "") {
+      alert("내용을 입력하십시요.");
+      document.townBoard_write_form.t_content.focus();
+      return false;
+   }
+   */
+   //사진 리스트 업로드
+   const formData1 = new FormData($('#main_contact_form_townBoard')[0]);
+   /*
+   formData1.append('files',$('#files')[0]); //이게 맞나?
+   formData1.append('files',$('#files')[1]); 
+   formData1.append('files',$('#files')[2]); 
+   formData1.append('files',$('#files')[3]); 
+   */
+   
+   console.log(formData1);
+   
+   $.ajax({
+      url:'townboard_write_action_json',
+      type:'POST',
+      processData:false,   //파일전송시 반드시 false
+      contentType:false,
+      data:formData1,
+      success:function(jsonResult){
+      console.log(jsonResult);
+      window.location.href="townBoard_list";
+       /*사진이름받기
+       $.ajax({
+              url : 'product_write_action_json',
+              method : 'POST',
+              data: {
+                  "p_title":$("input[name='p_title']").val(),
+                  "p_price":$("input[name='p_price']").val(),
+                  "p_ctgr_no":$("input[name='p_ctgr_no']").val(),
+                  "p_desc":$("input[name='p_desc']").val(),
+                  "pi_name": jsonResult.newFileName 
+                     },
+                     dataType : 'json',
+                     success : function(jsonResult) {
+                        console.log(jsonResult.msg);
+         }
+        });
+        */
+      }
+   });
+   }
 
 
 
@@ -181,7 +291,7 @@ $(".qna_btn.reply_write").on("click", function(){
 
 
 /*
-댓글등록 -- 일단 db에 들어가기는 함.. 근데 step, depth가 0으로 들어가는중.. 그리고 알람창 안나오고 삭제하는 내용으로 나온다.. 그리고 리턴 실패
+댓글등록
 */
 
 $("#townMainReplyBtn").on("click", function(e){
@@ -260,14 +370,7 @@ $(".townReply.delete").on("click", function(){
 });
 
 
-/*
-댓글 토글?
-*/
-/*
-document.querySelector('#toggle-button').addEventListener('click', function() {
-  document.querySelector('.section.collapsible').classList.toggle('collapsed');
-});
-*/
+
 
 
 /*
