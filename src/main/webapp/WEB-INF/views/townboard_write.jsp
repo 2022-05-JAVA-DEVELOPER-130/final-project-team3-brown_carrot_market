@@ -73,7 +73,8 @@
     <!-- Message Now Area -->
                 <div class="col-12">
                     <div class="contact_from mb-50">
-                        <form id="townBoard_write_form" method="post" >
+                    
+                        <form name="townBoard_write_form" method="post" enctype="multipart/form-data" id="main_contact_form_townBoard" action="townboard_write_action">
                             <div class="contact_input_area">
                                 <div id="success_fail_info"></div>
                                 <div class="row">
@@ -234,7 +235,7 @@
                                      <!-- 이미지 업로드 부분 끝-->
                                      
                                     <div class="col-12 text-center">
-                                        <input type="button" class="townBoard_btn new_write" value="게시글 올리기" />&nbsp; 
+                                        <input type="button" id="btn_townBoard_write_action" class="townBoard_btn new_write" value="게시글 올리기" onclick="townBoardCreate()"/>&nbsp; 
                                         <input class="townBoard_btn list" type="button" pageno="${pageno}" value="동네게시글목록"/>
                                		 </div>
                                 
