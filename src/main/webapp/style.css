@@ -330,7 +330,7 @@ textarea:focus,
   font-size: 12px; }
 
 .btn-primary {
-  background-color: #0f99f3; }
+  background-color: orange; }
   .btn-primary:hover, .btn-primary:focus {
     background-color: #070a57; }
 
@@ -1472,7 +1472,7 @@ textarea:focus,
         color: #ff9800;
         font-size: 12px; }
     .single-product-area .product_description .product_add_to_cart a {
-      background-color: #0f99f3;
+      background-color: orange;
       top: -30px;
       color: #ffffff;
       display: block;
@@ -1495,7 +1495,7 @@ textarea:focus,
       .single-product-area .product_description .product_add_to_cart a:hover, .single-product-area .product_description .product_add_to_cart a:focus {
         background-color: #070a57; }
     .single-product-area .product_description .product_quick_view a {
-      background-color: #141414;
+      background-color: #964b00;
       top: -30px;
       color: #ffffff;
       display: block;
@@ -1547,7 +1547,7 @@ textarea:focus,
   top: 15px;
   z-index: 40; }
   .product_badge span {
-    background: #0f99f3;
+    background: orange;
     clear: both;
     color: #ffffff;
     display: block;
@@ -1561,10 +1561,10 @@ textarea:focus,
     z-index: 2;
     padding-left: 7px; }
     .product_badge span::before {
-      border-color: #0f99f3 transparent #0f99f3 #0f99f3;
+      border-color: orange transparent orange orange;
       border-style: solid;
       border-width: 11px 6px;
-      color: #0f99f3;
+      color: orange;
       content: "";
       height: 100%;
       position: absolute;
@@ -2198,7 +2198,7 @@ textarea:focus,
     display: inline-block;
     margin-top: 4px; }
   .widget.size .widget-desc a {
-    background-color: #0f99f3;
+    background-color: orange;
     color: #ffffff;
     display: block;
     font-size: 11px;
@@ -2207,7 +2207,7 @@ textarea:focus,
     .widget.size .widget-desc a:hover, .widget.size .widget-desc a:focus, .widget.size .widget-desc a:visited {
       background-color: #070a57; }
   .widget.price .ui-slider-handle {
-    background-color: #0f99f3;
+    background-color: #fcbb7b;
     border: none;
     border-radius: 0;
     width: 12px;
@@ -2215,7 +2215,7 @@ textarea:focus,
     top: -3px;
     margin-left: -2px; }
   .widget.price .ui-slider-range.ui-corner-all.ui-widget-header {
-    background-color: #0f99f3; }
+    background-color: #fcbb7b; }
   .widget.price .ui-slider-horizontal {
     height: 8px; }
   .widget.price .range-price {

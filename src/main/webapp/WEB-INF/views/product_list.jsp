@@ -80,34 +80,35 @@
                     <div class="shop_sidebar_area">
                         <!-- Single Widget -->
                         <div class="widget catagory mb-30">
-                            <h6 class="widget-title">Product Categories</h6>
-                            <div class="widget-desc">
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                    <label class="custom-control-label" for="customCheck1">Men <span class="text-muted">(109)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                    <label class="custom-control-label" for="customCheck2">Women <span class="text-muted">(67)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck3">
-                                    <label class="custom-control-label" for="customCheck3">Kids <span class="text-muted">(89)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck4">
-                                    <label class="custom-control-label" for="customCheck4">Accessories <span class="text-muted">(425)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck5">
-                                    <label class="custom-control-label" for="customCheck5">Fashion <span class="text-muted">(73)</span></label>
-                                </div>
-                            </div>
+                            <div id = "product_category_list">
+                            <h6>Product Categories</h6>
+                            <ul>
+                              <li>
+                              
+	                              
+	                              <a href="product_category?category_no=1" style="font-weight: normal">- 가전제품</a>
+
+                              </li>
+                              <li>
+	                              <a href="product_category?category_no=2" style="font-weight: normal" >- 가구</a>
+                              </li>
+                              <li>
+	                              <a href="product_category?category_no=3" style="font-weight: normal">- 의류</a>
+                              </li>
+                              <li>
+	                              <a href="product_category?category_no=4" style="font-weight: normal">- 생활용품</a>
+                              </li>
+                              <li>
+	                              <a href="product_category?category_no=5" style="font-weight: normal">- 취미/게임/음반/도서</a>
+                              </li>
+                              <li>
+	                              <a href="product_category?category_no=6" style="font-weight: normal">- 기타</a>
+                              </li>
+                             
+                                
+                               
+                            </ul>
+                        </div>
                         </div>
 
                         <!-- Single Widget -->
@@ -234,9 +235,11 @@
                                 <a href="shop-list-left-sidebar.html" data-toggle="tooltip" data-placement="top" title="List View"><i class="icofont-listine-dots"></i></a>
                             </div>
                            </div>
+                           <!--  
                             <div class="col-12 text-right">
                         	<input type="button" class="btn btn-primary mb-1" value="내 물건 팔기" onClick="productCreateForm();"/>
                     		</div>
+                    		 -->
                         </div>
                         
 
@@ -273,7 +276,7 @@
                                     <div class="product_description">
                                         <!-- Add to cart -->
                                         <div class="product_add_to_cart">
-                                            <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
+                                            <a href="#" style="background-color:orange;"><i class="icofont-shopping-cart"></i> Add to Cart</a>
                                         </div>
 
                                         <!-- Quick View -->

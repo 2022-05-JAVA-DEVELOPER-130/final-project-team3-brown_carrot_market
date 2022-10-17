@@ -46,9 +46,9 @@ public class ProductImageDaoImpl implements ProductImageDao{
 	}
 
 	@Override
-	public int deleteProductImg(int pi_no) throws Exception {
+	public int deleteProductImg(int p_no) throws Exception {
 		System.out.println("### productImageDaoImpl : deleteProductImg 호출");
-		return productImageMapper.deleteProductImg(pi_no);
+		return productImageMapper.deleteProductImg(p_no);
 	}
 	
 	

@@ -17,5 +17,5 @@ public interface ProductImageMapper {
 	
 	public int insertProductListImg(List<ProductImage> productImageList);
 	
-	public int deleteProductImg(int pi_no);
+	public int deleteProductImg(int p_no);
 }

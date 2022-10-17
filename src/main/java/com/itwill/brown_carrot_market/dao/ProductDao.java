@@ -30,7 +30,7 @@ public interface ProductDao {
 	int  deleteByPNo(int p_no)throws Exception;
 	
 	//선택한 상품 업데이트
-	int updateProduct(Product product)throws Exception;
+	int updateProduct(Map map)throws Exception;
 	
 	//상품 조회수 증가
 	int updateProductCount(int p_no)throws Exception;
