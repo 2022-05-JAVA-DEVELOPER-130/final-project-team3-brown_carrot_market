@@ -61,5 +61,10 @@ public class ReviewDaoImpl implements ReviewDao {
 		return reviewMapper.removeReview(review_no);
 	}
 
+	@Override
+	public int updateReview(Review review) throws Exception {
+		return reviewMapper.updateReview(review);
+	}
+
 
 }

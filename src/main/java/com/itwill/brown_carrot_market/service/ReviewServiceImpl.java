@@ -88,6 +88,35 @@ public class ReviewServiceImpl implements ReviewService{
 		return reviewDao.removeReview(review_no);
 	}
 
+	@Override
+	public int removeReviewImgByNo(int review_no) throws Exception {
+		return reviewImageDao.removeReviewImgByNo(review_no);
+	}
+
+	@Override
+	public int removeReviewImgByNoList(List<String> reviewImgNoList) throws Exception {
+		return reviewImageDao.removeReviewImgByNoList(reviewImgNoList);
+	}
+
+	@Transactional
+	@Override
+	public int updateReview(Review review) throws Exception {
+		int result = 0;
+		int review_no = reviewDao.updateReview(review);
+		
+		if(review.getReviewImageList()!=null) {//review이미지가 존재하면
+			if(review.getReviewImageList().get(0).getReview_img_name()!=null) {//review이미지가 존재하면
+				List<ReviewImage> imageList = new ArrayList();
+				for (ReviewImage image : review.getReviewImageList()) {
+					image.setReview_no(review.getReview_no());
+					imageList.add(image);
+				}
+				result= reviewImageDao.insertReviewImgList(imageList);
+			}
+		}
+		return result;
+	}
+
 
 
 	

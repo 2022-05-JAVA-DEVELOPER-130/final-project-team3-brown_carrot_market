@@ -21,4 +21,10 @@ public interface ReviewService {
 	Review isExistedReviewByOrdersNoId(Review review) throws Exception;
 	
 	int removeReview(int review_no) throws Exception;
+
+	int removeReviewImgByNo(int review_no) throws Exception;
+	
+	int removeReviewImgByNoList(List<String> reviewImgNoList) throws Exception;
+	
+	int updateReview(Review review) throws Exception;
 }

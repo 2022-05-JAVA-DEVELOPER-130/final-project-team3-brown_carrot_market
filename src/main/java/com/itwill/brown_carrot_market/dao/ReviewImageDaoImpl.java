@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.itwill.brown_carrot_market.dto.ProductImage;
+import com.itwill.brown_carrot_market.dto.Review;
 import com.itwill.brown_carrot_market.dto.ReviewImage;
 import com.itwill.brown_carrot_market.mapper.ProductImageMapper;
 import com.itwill.brown_carrot_market.mapper.ReviewImageMapper;
@@ -21,5 +22,16 @@ public class ReviewImageDaoImpl implements ReviewImageDao{
 			throws Exception {
 		return reviewImageMapper.insertReviewImgList(reviewImageList);
 	}
+
+	@Override
+	public int removeReviewImgByNo(int review_img_no) throws Exception {
+		return reviewImageMapper.removeReviewImgByNo(review_img_no);
+	}
+
+	@Override
+	public int removeReviewImgByNoList(List<String> reviewImgNoList) throws Exception {
+		return reviewImageMapper.removeReviewImgByNoList(reviewImgNoList);
+	}
+
 	
 }

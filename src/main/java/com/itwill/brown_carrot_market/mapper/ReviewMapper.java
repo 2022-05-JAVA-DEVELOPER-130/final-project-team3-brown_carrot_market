@@ -27,4 +27,7 @@ public interface ReviewMapper {
 	public Review isExistedReviewByOrdersNoId(Review review);
 	
 	public int removeReview(int review_no);
+	
+	public int updateReview(Review review);
+	
 }

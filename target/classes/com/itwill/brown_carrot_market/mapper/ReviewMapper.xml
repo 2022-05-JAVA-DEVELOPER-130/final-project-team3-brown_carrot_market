@@ -12,7 +12,7 @@
  	<resultMap id="reviewResultMap" type="com.itwill.brown_carrot_market.dto.Review">
  		<result column="review_no" property="review_no"/>
  		<result column="review_desc" property="review_desc"/>
- 		<result column="review_image" property="review_image"/>
+ 		<result column="your_id" property="your_id"/>
  		<result column="review_point" property="review_point"/>
  		<association property="userInfo" javaType="com.itwill.brown_carrot_market.dto.UserInfo">
 			<result column="reviewer_id" property="user_id" />
@@ -50,8 +50,8 @@
 		<selectKey keyProperty="review_no" order="BEFORE" resultType="int">
 			select review_review_no_seq.nextval from dual
 		</selectKey>
-		insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
-    		values(#{review_no},#{review_desc},#{review_image},#{review_point}, #{orders.orders_no},#{userInfo.user_id})
+		insert into review(review_no,review_desc,your_id,review_point,orders_no,user_id)
+    		values(#{review_no},#{review_desc},#{your_id},#{review_point}, #{orders.orders_no},#{userInfo.user_id})
 	</insert>
 	
 	<select id="countReceivedReview" parameterType="String" resultType="int">
@@ -71,10 +71,10 @@
 	
 	<!-- 전체후기 : 판매자 or 구매자가 나에게 남긴 후기 -->
 	<select id="findReceivedReview" parameterType="String" resultMap="reviewResultMap">
- 		select r.review_no, r.review_desc, r.review_image, r.review_point, r.user_id reviewer_id, r.user_name reviewer_name, r.user_profile reviewer_profile,
+ 		select r.review_no, r.review_desc, r.your_id, r.review_point, r.user_id reviewer_id, r.user_name reviewer_name, r.user_profile reviewer_profile,
         oo.orders_no, oo.orders_date, oo.user_id buyer_id, oo.user_name buyer_name, oo.user_profile buyer_profile, oo.p_no,
         pp.p_title, pp.p_address_name, pp.user_id seller_id, pp.user_name seller_name, pp.user_profile seller_profile
-        from (select rs.review_no, rs.review_desc, rs.review_image, rs.review_point,rs.orders_no,
+        from (select rs.review_no, rs.review_desc, rs.your_id, rs.review_point,rs.orders_no,
                     us.user_id,us.user_name,us.user_profile
                     from review rs
                     join userinfo us
@@ -143,6 +143,12 @@
 	<delete id="removeReview" parameterType="int">
 		delete from review where review_no=#{review_no}
 	</delete>
+	
+	<update id="updateReview" parameterType="com.itwill.brown_carrot_market.dto.Review">
+		update review
+			set review_desc=#{review_desc}, your_id=#{your_id}, review_point=#{review_point}
+			where review_no=#{review_no}
+	</update>
 
 
 </mapper>

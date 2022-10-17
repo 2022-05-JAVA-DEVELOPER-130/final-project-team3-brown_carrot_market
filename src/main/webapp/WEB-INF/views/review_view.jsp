@@ -79,7 +79,6 @@
                                         <span style="width:${20 * review.review_point}%"></span>
                                     </div>
                                 </div>
-                                    <!--review_image(다른data활용예정): "${review.review_image}"-->
                                 
                                 <!--
                                 <div class="form-group">
@@ -119,7 +118,7 @@
 									</div>
 								</div>
                                 <!--<input type="button" id="btnSubmit" class="btn btn-primary" value="Submit Review" />-->
-                                <input type="button" id="btn_review_edit" class="btn btn-primary" value="수정하기" />
+                                <input type="button" id="btn_review_modify_form" class="btn btn-primary" value="수정하기" />
                                 <input type="button" id="btn_review_remove" class="btn btn-primary" value="삭제하기" />
                                 <input type="button" id="btn_backto_orderslist" class="btn btn-primary" value="뒤로가기" />
                             </form>

@@ -17,7 +17,7 @@ public class Review {
 	
 	private int review_no;
 	private String review_desc;
-	private String review_image;
+	private String your_id;
 	private double review_point;
 	private Orders orders;
 	private UserInfo userInfo;
@@ -27,12 +27,12 @@ public class Review {
 	public Review() {
 	}
 
-	public Review(int review_no, String review_desc, String review_image, double review_point, Orders orders,
+	public Review(int review_no, String review_desc, String your_id, double review_point, Orders orders,
 			UserInfo userInfo, List<ReviewImage> reviewImageList) {
 		super();
 		this.review_no = review_no;
 		this.review_desc = review_desc;
-		this.review_image = review_image;
+		this.your_id = your_id;
 		this.review_point = review_point;
 		this.orders = orders;
 		this.userInfo = userInfo;
@@ -55,12 +55,12 @@ public class Review {
 		this.review_desc = review_desc;
 	}
 
-	public String getReview_image() {
-		return review_image;
+	public String getYour_id() {
+		return your_id;
 	}
 
-	public void setReview_image(String review_image) {
-		this.review_image = review_image;
+	public void setYour_id(String your_id) {
+		this.your_id = your_id;
 	}
 
 	public double getReview_point() {
@@ -97,9 +97,10 @@ public class Review {
 
 	@Override
 	public String toString() {
-		return "Review [review_no=" + review_no + ", review_desc=" + review_desc + ", review_image=" + review_image
+		return "Review [review_no=" + review_no + ", review_desc=" + review_desc + ", your_id=" + your_id
 				+ ", review_point=" + review_point + ", orders=" + orders + ", userInfo=" + userInfo
 				+ ", reviewImageList=" + reviewImageList + "]";
 	}
+
 	
 }
