@@ -140,8 +140,8 @@
 							</div>
 							<!-- Form -->
 							<div class="search-form">
-								<input type="search" class="form-control" placeholder="Search">
-								<input type="submit" class="d-none" value="Send">
+								<input type="search" class="form-control" id="searchKey" placeholder="검색">
+								<input type="submit" class="d-none" value="검색">
 							</div>
 						</div>
 
