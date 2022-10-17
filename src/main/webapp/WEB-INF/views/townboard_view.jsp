@@ -323,7 +323,7 @@
                             <h5 class="mb-4">Leave a Comment</h5>
                             
 							<!-- 메인 댓글달기 -->
-                            <form class="townReply_write_form" method="post">
+                            <form class="townReply_Main_write_form" method="post">
                             
                                 <div class="row">
                                    
@@ -338,10 +338,11 @@
                                         </div>
                                     </div>
                                     <input type="hidden" class="form-control" name="t_no" value="${townBoard.t_no}"/>
+                                    <input type="hidden" class="form-control" name="page_no" value="${pageno}" />
                                    <!--  <input type="hidden" class="form-control" name="step" value="1"/> 이렇게 하면 모든 setp이 1로 나와서 xx 증가해야함 -->
                                     <input type="hidden" class="form-control" name="depth" value="1"/>
                                     <div class="col-12">
-                                        <button class="btn btn-primary reply" type="submit">Submit Comment</button>
+                                        <button class="btn btn-primary reply"  id="townMainReplyBtn" type="submit">Submit Comment</button>
                                     </div>
                                 </div>
                             </form>

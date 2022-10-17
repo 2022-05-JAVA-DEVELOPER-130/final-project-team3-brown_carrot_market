@@ -43,12 +43,19 @@
 	<select id="selectTownBoardAddress" parameterType="map" resultType="map">
 		select a.ADDRESS_NAME,a.ADDRESS_LAT,a.ADDRESS_LNG from ADDRESS a where a.user_id=#{user_id} and a.address_no=#{address_no}
 	</select>
-	<!-- 
-	<insert id="insertTownBoard" parameterType="map">
-		insert into town_board(t_no, t_title, t_content, t_date, t_count, t_ctgr_no,t_address_name, t_address_lat,t_address_lng,user_id)
-		values(TOWN_BOARD_T_NO_SEQ.nextval, #{t_title},#{t_content},sysdate,#{t_count},#{townBoard.townCategory.t_ctgr_no},#{address.ADDRESS_NAME},#{address.ADDRESS_LAT}, #{address.ADDRESS_LNG},#{townBoard.userInfo.user_id})
+	
+	<select id="selectTownBoardPK" resultType="int">
+		select TOWN_BOARD_T_NO_SEQ.currval from dual
+	</select>
+	
+	<insert id="insertTownBoard" parameterType="map" useGeneratedKeys="true">
+		insert into town_board values(#{TOWN_BOARD_T_NO_SEQ.nextval}, #{t_title},#{t_content},sysdate,0,#{townCategory.t_ctgr_no},#{address.address_name},#{address.address_lat}, #{address.address_lng},#{userInfo.user_id})
+		<selectKey keyProperty="t_no" order="AFTER" resultType="int">
+			select TOWN_BOARD_T_NO_SEQ.currval from dual
+		</selectKey>
 	</insert>
-	 -->
+	
+<!-- 
 	<insert id="insertTownBoard" parameterType="map" useGeneratedKeys="true">
 		<selectKey keyProperty="t_no" order="BEFORE" resultType="int">
 			select TOWN_BOARD_T_NO_SEQ.nextval from dual
@@ -56,7 +63,11 @@
 		insert into town_board values(#{t_no}, #{t_title},#{t_content},sysdate,0,#{townCategory.t_ctgr_no},#{address.address_name},#{address.address_lat}, #{address.address_lng},#{userInfo.user_id})
 	</insert>
 	
-<!-- 
+	<insert id="insertTownBoard" parameterType="map">
+		insert into town_board(t_no, t_title, t_content, t_date, t_count, t_ctgr_no,t_address_name, t_address_lat,t_address_lng,user_id)
+		values(TOWN_BOARD_T_NO_SEQ.nextval, #{t_title},#{t_content},sysdate,#{t_count},#{townBoard.townCategory.t_ctgr_no},#{address.ADDRESS_NAME},#{address.ADDRESS_LAT}, #{address.ADDRESS_LNG},#{townBoard.userInfo.user_id})
+	</insert>
+	
 	<insert id="insertProduct" parameterType="map" useGeneratedKeys="true">
 		<selectKey keyProperty="p_no" order="BEFORE" resultType="int">
 			select PRODUCT_P_NO_SEQ.nextval from dual

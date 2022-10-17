@@ -23,7 +23,7 @@ import com.itwill.brown_carrot_market.dto.ProductImage;
 @Service(value="FilesStorageServiceImplTownBoard")
 public class FilesStorageServiceImplTownBoard implements FilesStorageServiceProduct{
 	
-	@Value("${townBoard-img.dir}")
+	@Value("${townBoard_img.dir}")
 	private Path root;
 	/*
 	@Autowired

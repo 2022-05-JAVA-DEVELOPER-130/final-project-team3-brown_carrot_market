@@ -14,21 +14,57 @@
 	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
 	
 	
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.standalone.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.kr.min.js"></script>
+ <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.standalone.min.css"> -->
+<%-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> --%>
+<%-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.kr.min.js"></script> --%>
 	
 <script type="text/javascript">
+var jsonData={
+		code:null,
+		url:null,
+		msg:null,
+		your_id:null, // 상대 아이디 
+		data:null //chat_contents 
 		
+	};
+
+	$(document).ready(function(){
+		jsonData.mId=window.opener.loginId;
+		var loginId=window.opener.loginId;
+		console.log("송금아이디:"+ window.opener.loginId);
+		jsonData.your_id=window.opener.yourId;
+		jsonData.msg="송금 완료";
+		jsonData.code="3";
+		jsonData.data=[{
+					c_content_no:"",
+					c_content:`${loginId} 님이 ${product.p_price}원을 송금했습니다.`,
+					send_time:"",
+					c_read:"0",
+					user_id:"admin", //보내는 아이디 admin_promise 변경 
+					c_room_no:window.opener.c_room_no
+				}]
+		$.ajax({
+			url:'chat_message_rest',
+			data:JSON.stringify(jsonData.data[0]),
+			type:"POST",
+			async:true,
+			contentType: "application/json; charset=utf-8", //헤더의 Content-Type을 설정
+			dataType: "JSON",
+			success:function(response){
+				window.opener.socket.send(JSON.stringify(jsonData));
+				
+			}
+		})
+	 
+	})
 	
 	$(document).on('click','#btn-close',function(e){
 		window.close();
 	});
 	</script>
-<!-- 내 js -->
-<script src="js/chat/chat_appointment.js"></script>
+
 
 </head>
 <body>
