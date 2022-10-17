@@ -218,7 +218,7 @@ $(".townBoard_btn.new_write").on("click", function(e){
 	
 });
 */
-
+//게시글 등록
 function townBoardCreate() {
    if (document.townBoard_write_form.t_title.value == "") {
       alert("제목을 입력하십시요.");
@@ -251,7 +251,7 @@ function townBoardCreate() {
       data:formData1,
       success:function(jsonResult){
       console.log(jsonResult);
-      window.location.href="townboard_list";
+      window.location.href="townBoard_list";
        /*사진이름받기
        $.ajax({
               url : 'product_write_action_json',
@@ -370,14 +370,7 @@ $(".townReply.delete").on("click", function(){
 });
 
 
-/*
-댓글 토글?
-*/
-/*
-document.querySelector('#toggle-button').addEventListener('click', function() {
-  document.querySelector('.section.collapsible').classList.toggle('collapsed');
-});
-*/
+
 
 
 /*

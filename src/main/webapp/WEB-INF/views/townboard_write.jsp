@@ -132,7 +132,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                            <!--  <textarea name="t_content" class="form-control" id="t_content" cols="30" rows="10" placeholder="내용" required></textarea> -->
-                                        	<textarea name="t_content" id="townBoard_content_area" placeholder=" content"></textarea>
+                                        	<textarea name="t_content" class="form-control"  id="t_content" placeholder=" content"></textarea>
                                         	</div>
                                         </div>
                                         
