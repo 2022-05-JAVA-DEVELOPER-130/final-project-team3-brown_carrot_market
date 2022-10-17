@@ -157,10 +157,11 @@ public class TownBoardController {
 		return forwardPath;
 	}
 	
-	@RequestMapping(value = "/townboard_write_action", method = RequestMethod.GET)
-	public String townboard_write_action_get() {
-		return "redirect : townboard_list";
-	}
+	/*
+	 * @RequestMapping(value = "/townboard_write_action", method =
+	 * RequestMethod.GET) public String townboard_write_action_get() { return
+	 * "redirect : townboard_list"; }
+	 */
 
 	//새글 등록 
 	/*

@@ -151,48 +151,26 @@ $(".townBoard_btn.write_form").on("click", function(){
 });
 
 
-/*
-게시글 등록
-*/
-/*
-$(".townBoard_btn.new_write").on("click", function(){
-	if($("#t_title_txt").val() == "" || CKEDITOR.instances.townBoard_content_area.getData() == ""){
-		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
-		return;
-	}
-	$("#townBoard_write_form").attr("action", "townboard_write_action");
-	$("#townBoard_write_form").submit();
-});
-*/
-/*
-게시글 등록
-*/
-$(".townBoard_btn.new_write").on("click", function(){
-	if($("#t_title_txt").val() == "" || CKEDITOR.instances.townBoard_content_area.getData() == ""){
-		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
-		return;
-	}
-	$("#townBoard_write_form").attr("action", "townboard_write_action");
-	$("#townBoard_write_form").submit();
-});
+
 
 /*
 게시글 등록
 */
-$("#townMainReplyBtn").on("click", function(e){
+/*
+$(".townBoard_btn.new_write").on("click", function(e){
 	e.preventDefault();
 	e.stopPropagation();
-	var form=$(".townReply_Main_write_form");
+	var form=$("#townBoard_write_form");
 	let pageno = form.find($('input[name="page_no"]')).val();
 	let t_no = form.find($('input[name="t_no"]')).val();
 
-	if($(".t_reply_title").val() == "" || $(".t_reply_content").val() == ""){
+	if($("#t_title_txt").val() == "" || CKEDITOR.instances.townBoard_content_area.getData() == ""){
 		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
 		return;
 	}
 	else{
 		ToastConfirm.fire({ icon: 'question', 
-							title: "댓글을 작성하시겠습니까?"}).then((result) => {
+							title: "게시글을 작성하시겠습니까?"}).then((result) => {
 								if(result.isConfirmed){
 								/*	
 							$.ajax({
@@ -211,17 +189,20 @@ $("#townMainReplyBtn").on("click", function(e){
 										Toast.fire({ icon: 'error', title: resultObj.errorMsg });
 									}
 								}
-							});////아작스 끝*/
+							});////아작스 끝////
 							
+							   //사진 리스트 업로드
+  							 // const formData1 = new FormData($('#main_contact_form_townBoard')[0]);
+  							 const formData1 = new FormData($('#main_contact_form_townBoard')[0]);
 							  $.ajax({
-								      url:'product_write_action_json',
+								      url:'townboard_write_action_json',
 								      type:'POST',
 								      processData:false,   //파일전송시 반드시 false
 								      contentType:false,
 								      data:formData1,
 								      success:function(jsonResult){
 								      console.log(jsonResult);
-								      window.location.href="product_list";
+								      window.location.href="townboard_list";
        
       }
    });
@@ -232,10 +213,67 @@ $("#townMainReplyBtn").on("click", function(e){
 	
 /////여기 자리
 /*	$(".townReply_write_form").attr("action", "townReply_wirte_rest");
-	$(".townReply_write_form").submit();	*/
+	$(".townReply_write_form").submit();	
 }	
 	
 });
+*/
+
+function townBoardCreate() {
+   if (document.townBoard_write_form.t_title.value == "") {
+      alert("제목을 입력하십시요.");
+      document.townBoard_write_form.t_title.focus();
+      return false;
+   }
+   /*
+   if (document.townBoard_write_form.t_content.value == "") {
+      alert("내용을 입력하십시요.");
+      document.townBoard_write_form.t_content.focus();
+      return false;
+   }
+   */
+   //사진 리스트 업로드
+   const formData1 = new FormData($('#main_contact_form_townBoard')[0]);
+   /*
+   formData1.append('files',$('#files')[0]); //이게 맞나?
+   formData1.append('files',$('#files')[1]); 
+   formData1.append('files',$('#files')[2]); 
+   formData1.append('files',$('#files')[3]); 
+   */
+   
+   console.log(formData1);
+   
+   $.ajax({
+      url:'townboard_write_action_json',
+      type:'POST',
+      processData:false,   //파일전송시 반드시 false
+      contentType:false,
+      data:formData1,
+      success:function(jsonResult){
+      console.log(jsonResult);
+      window.location.href="townboard_list";
+       /*사진이름받기
+       $.ajax({
+              url : 'product_write_action_json',
+              method : 'POST',
+              data: {
+                  "p_title":$("input[name='p_title']").val(),
+                  "p_price":$("input[name='p_price']").val(),
+                  "p_ctgr_no":$("input[name='p_ctgr_no']").val(),
+                  "p_desc":$("input[name='p_desc']").val(),
+                  "pi_name": jsonResult.newFileName 
+                     },
+                     dataType : 'json',
+                     success : function(jsonResult) {
+                        console.log(jsonResult.msg);
+         }
+        });
+        */
+      }
+   });
+   }
+
+
 
 
 /*
