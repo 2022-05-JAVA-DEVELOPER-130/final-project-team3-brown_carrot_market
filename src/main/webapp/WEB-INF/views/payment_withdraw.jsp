@@ -70,64 +70,16 @@
 	<!-- Breadcumb Area -->
 
 	<div class="checkout_steps_area">
-		<a class="active" href="/brown_carrot_market/payment"><i class="icofont-check-circled"></i> 페이 충전</a> 
-			<a href="/brown_carrot_market/point_list"><i class="icofont-check-circled"></i> 페이 내역</a> 
-			<a href="/brown_carrot_market/payment_withdraw"><i class="icofont-check-circled"></i> 페이 출금</a>
+		<a href="/brown_carrot_market/payment"><i class="icofont-check-circled"></i> 페이 충전</a> 
+		<a href="/brown_carrot_market/point_list"><i class="icofont-check-circled"></i> 페이 내역</a> 
+		<a class="active" href="/brown_carrot_market/payment_withdraw"><i class="icofont-check-circled"></i> 페이 출금</a>
 	</div>
 
 	<div class="col-12">
 		<div class="checkout_pagination mt-50">
-			<button class="btn btn-primary" onclick="requestPay()">충전하기</button>
+			<button class="btn btn-primary" onclick="<%-- requestPay()--%>">출금하기</button>
 		</div>
 	</div>
-	<script>
-		var IMP = window.IMP; // 생략 가능
-		IMP.init("imp41236885"); // 예: imp00000000
-		function requestPay() {
-			// IMP.request_pay(param, callback) 결제창 호출
-			IMP.request_pay({ // param(결제에대한 정보)
-  		          pg: "inicis_html5",
-  		          pay_method: "card",
-  		          merchant_uid: "carrot_"+new Date().getTime(),
-  		          name: "노르웨이 회전 식탁",
-  		          amount: 8000,
-  		          buyer_email: "gildong@gmail.com",
-  		          buyer_name: "홍길동",
-  		          buyer_tel: "010-4242-4242",
-  		          buyer_addr: "서울특별시 강남구 신사동",
-  		          buyer_postcode: "01181",
-  		          msg:""
-			}, function(rsp) { // callback함수 
-				if (rsp.success) {
-					// 결제 성공 시 로직,
-					let merchant_uid = rsp.merchant_uid;
-					let paid_amount = rsp.paid_amount;
-
-					let data = {
-						merchant_uid : merchant_uid,
-						paid_amount : paid_amount,
-					};
-					$.ajax({
-						url : "",
-						method : "POST",
-						dataType : 'json',
-						data : data,
-						success : function(jsonResult) {
-							let msg = "결제가 완료되었습니다.\n";
-							msg += "고유ID: " + imp_uid;
-							msg += "\n상점거래ID : " + merchant_uid;
-							msg += "\n결제금액 : " + paid_amount;
-						}
-					})// end ajax	
-					//location.href=`"https://api.iamport.kr/payments/find/${merchant_uid}/?sorting=-started&_token=ccbf1726c92ab47f51b5527bbd29ea779a24bb91"`
-				} else {
-					// 결제 실패 시 로직,
-					let msg = "결제에 실패하였습니다.";
-					alert(msg);
-				}
-			});
-		};
-	</script>
 	<!-- Checkout Area End -->
 
 	<!-- Footer Area -->

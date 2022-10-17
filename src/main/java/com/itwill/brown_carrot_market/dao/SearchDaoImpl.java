@@ -22,9 +22,15 @@ public class SearchDaoImpl implements SearchDao{
 	}
 
 	@Override
-	public List<Product> selectListNotLogin(String search_keyword) {
+	public List<Product> selectListNotLogin(String search_keyword,int pageStart, int pageEnd) {
 		// TODO Auto-generated method stub
-		return searchMapper.selectListNotLogin(search_keyword);
+		return searchMapper.selectListNotLogin(search_keyword,pageStart, pageEnd);
+	}
+
+	@Override
+	public int selectListNotLoginCount(String search_keyword) {
+		// TODO Auto-generated method stub
+		return searchMapper.selectListNotLoginCount(search_keyword);
 	}
 
 }

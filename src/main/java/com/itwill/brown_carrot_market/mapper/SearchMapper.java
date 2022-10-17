@@ -12,5 +12,7 @@ public interface SearchMapper {
 	public List<Product> selectListSearch(String search_keyword, Address address);
 	
 	
-	public List<Product> selectListNotLogin(String search_keyword);
+	public List<Product> selectListNotLogin(String search_keyword,int pageStart,int pageEnd);
+	
+	public int selectListNotLoginCount(String search_keyword);
 }

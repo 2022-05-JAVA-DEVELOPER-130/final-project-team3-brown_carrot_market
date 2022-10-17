@@ -31,7 +31,8 @@ public class TransferServiceSpringBootTestApplication {
 		ConfigurableApplicationContext context=application.run(args);
 		TransferService transferService=(TransferService)context.getBean(TransferService.class);
 		
-//		transferService.transfer_transaction(2);
+		transferService.transfer_transaction(2);
+//		transferService.transfer_cancel_transaction(2);
 		
 //		System.out.println(transferService.insertTransfer_Deposit(8));
 //		System.out.println(transferService.insertTransfer_Withdraw(8));
