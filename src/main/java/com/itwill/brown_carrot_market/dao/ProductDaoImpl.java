@@ -75,9 +75,9 @@ public class ProductDaoImpl implements ProductDao{
 	}
 	
 	@Override
-	public int updateProduct(Product product)throws Exception {
+	public int updateProduct(Map map)throws Exception {
 		System.out.println("###ProductDaoImpl : updateProduct 호출");
-		return productMapper.updateProduct(product);
+		return productMapper.updateProduct(map);
 	}
 
 	@Override

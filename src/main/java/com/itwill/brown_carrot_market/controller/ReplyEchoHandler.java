@@ -104,7 +104,7 @@ public class ReplyEchoHandler {
 		Product product = productService.selectByOne(chatRoom.getP_no());
 		ArrayList<ProductImage> productImage = (ArrayList<ProductImage>)productService.selectProductImgList(chatRoom.getP_no());
 		if(productImage.size()==0) {
-			 p_img = "pan.jpg";
+			 p_img = "close.png";
 		}else {
 			 p_img = productImage.get(0).getPi_name();
 			

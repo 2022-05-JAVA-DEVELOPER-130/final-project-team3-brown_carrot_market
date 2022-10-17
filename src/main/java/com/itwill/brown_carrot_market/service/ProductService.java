@@ -31,7 +31,7 @@ public interface ProductService {
 		int  deleteByPNo(int p_no)throws Exception;
 		
 		//선택한 상품 업데이트
-		int updateProduct(Product product)throws Exception;
+		int updateProduct(Map map)throws Exception;
 		
 		//상품 판매상태 수정
 		int updateProductSell(int p_sell, int p_no)throws Exception;
@@ -43,6 +43,8 @@ public interface ProductService {
 
 		//채팅에서 사용 
 		List<ProductImage> selectProductImgList(int p_no) throws Exception;
+		
+		int deleteProductImg(int p_no)throws Exception;
 		
 		/*
 		 * insert랑 updateWishCount 추가하기
