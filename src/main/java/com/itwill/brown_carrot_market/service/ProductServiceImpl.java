@@ -73,9 +73,12 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public int updateProduct(Product product) throws Exception {
-		// TODO Auto-generated method stub
-		return productDao.updateProduct(product);
+	public int updateProduct(Map map) throws Exception {
+		
+		
+		
+		
+		return productDao.updateProduct(map);
 	}
 
 	@Override
@@ -128,6 +131,8 @@ public class ProductServiceImpl implements ProductService{
 		
 		return productImageDao.selectProductImgList(p_no);
 	}
+	
+	
 
 	@Override
 	public int updateProductSell(int p_sell, int p_no) throws Exception {

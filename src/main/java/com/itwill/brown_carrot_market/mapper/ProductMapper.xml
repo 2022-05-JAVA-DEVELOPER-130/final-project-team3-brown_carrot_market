@@ -116,12 +116,21 @@
     	update product p set p.p_count=p.p_count+1 where p.p_no=#{p_no}
     </update>
     
-    <!-- 게시글 수정 -->
+    <!-- 게시글 수정 
     <update id="updateProduct" parameterType="com.itwill.brown_carrot_market.dto.Product">
     	update product p set p.p_title=#{p_title},
                      p.p_desc=#{p_desc},
                      p.p_price=#{p_price},
                      p.p_sell=#{p_sell},
+                     p.p_ctgr_no=#{productCategory.p_ctgr_no}
+                 where p.p_no=#{p_no} 
+    </update>
+    -->
+    <!-- 게시글 수정 -->
+    <update id="updateProduct" parameterType="map">
+    	update product p set p.p_title=#{p_title},
+                     p.p_desc=#{p_desc},
+                     p.p_price=#{p_price},
                      p.p_ctgr_no=#{productCategory.p_ctgr_no}
                  where p.p_no=#{p_no} 
     </update>

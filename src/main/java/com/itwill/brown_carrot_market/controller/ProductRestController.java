@@ -114,4 +114,31 @@ public class ProductRestController {
 		}
 		
 		}
+	
+	
+	
+	//게시글 수정
+	@PostMapping(value = "/product_modify_action_json")
+	public String product_modify_action_json(@RequestParam("files") MultipartFile[] files,@RequestParam Map<String, Object> map,Model model) throws Exception {
+		String forwardPath = "";
+		
+		
+		try {
+			int p_no = Integer.parseInt((String) map.get("p_no"));
+			ProductCategory productCategory = new ProductCategory(Integer.parseInt(map.get("p_ctgr_no").toString()), "");
+			map.put("productCategory", productCategory);
+			map.remove("p_ctgr_no");
+			
+			int updateRowCount = productService.updateProduct(map);
+			System.out.println(">>>modify product"+map);
+			
+			forwardPath = "redirect:product_detail?p_no=" + p_no;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			model.addAttribute("MSG", e.getMessage());
+			forwardPath = "product_error";
+		}
+		return forwardPath;
+	}
 }
