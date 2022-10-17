@@ -86,9 +86,12 @@ public interface TownBoardDao {
 	
 	Map selectTownBoardAddress(String user_id,int address_no);
 	
-	int insertTownBoard(Map map);
+	int insertTownBoard(Map map) throws Exception;
 
+	int selectTownBoardPK() throws Exception;
+	
 	/******************************************************/
+	
 	
 	
 }
