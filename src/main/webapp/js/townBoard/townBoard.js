@@ -184,24 +184,26 @@ $(".qna_btn.reply_write").on("click", function(){
 댓글등록 -- 일단 db에 들어가기는 함.. 근데 step, depth가 0으로 들어가는중.. 그리고 알람창 안나오고 삭제하는 내용으로 나온다.. 그리고 리턴 실패
 */
 
-$(".btn.btn-primary.reply").on("click", function(){
-	console.log('댓글 등록 클릭')
-	let pageno = $(this).attr("pageno");
-	let t_no = $(this).attr("t_no");
+$("#townMainReplyBtn").on("click", function(e){
+	e.preventDefault();
+	e.stopPropagation();
+	var form=$(".townReply_Main_write_form");
+	let pageno = form.find($('input[name="page_no"]')).val();
+	let t_no = form.find($('input[name="t_no"]')).val();
+
 	if($(".t_reply_title").val() == "" || $(".t_reply_content").val() == ""){
 		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
 		return;
-	}else{
+	}
+	else{
 		ToastConfirm.fire({ icon: 'question', 
-							title: "게시글을 수정하시겠습니까?"}).then((result) => {
+							title: "댓글을 작성하시겠습니까?"}).then((result) => {
 								if(result.isConfirmed){
+									
 							$.ajax({
 								url: "townReply_wirte_rest",
 								method: "post",
-								data: {"townReply":townReply,
-										"pageno" :pageno,
-										"t_no":t_no
-										},
+								data: form.serialize(),
 								dataType: "json",
 								success:function(resultObj){
 									console.log('성공');
@@ -220,8 +222,8 @@ $(".btn.btn-primary.reply").on("click", function(){
 					});				
 	
 /////여기 자리
-	$(".townReply_write_form").attr("action", "townReply_wirte_rest");
-	$(".townReply_write_form").submit();	
+/*	$(".townReply_write_form").attr("action", "townReply_wirte_rest");
+	$(".townReply_write_form").submit();	*/
 }	
 	
 });
