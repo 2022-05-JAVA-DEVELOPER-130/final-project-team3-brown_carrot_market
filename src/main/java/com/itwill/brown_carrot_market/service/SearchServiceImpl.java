@@ -19,4 +19,10 @@ public class SearchServiceImpl implements SearchService {
 		return searchDao.selectListSearch(search_keyword, address);
 	}
 
+	@Override
+	public List<Product> selectListNotLogin(String search_keyword) {
+		// TODO Auto-generated method stub
+		return searchDao.selectListNotLogin(search_keyword);
+	}
+
 }

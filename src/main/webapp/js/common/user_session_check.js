@@ -26,6 +26,7 @@ $(document).ready(function(){
 	session_check(); 
 	
 	
+	
 });
 
 function session_check(){
@@ -227,6 +228,19 @@ function Toast(type, css, msg) {
 	 }
 
 })
+
+$(function(){
+	$("#searchKey").keypress(function(e) {
+  if (e.keyCode === 13) {
+	location.href="search_list?search_keyword="+$("#searchKey").val();
+    e.preventDefault();
+  
+  }
+});
+	
+})
+
+
 
     
 
