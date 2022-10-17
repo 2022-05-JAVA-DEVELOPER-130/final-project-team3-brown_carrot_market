@@ -197,13 +197,14 @@
 						<form class="cart clearfix my-5 d-flex flex-wrap align-items-center" method="post" name="product_modify_sell_action">
 						<div class="form-group">
                  			 <input type="hidden" name="p_no" id="p_no" value="${product.p_no}" />
-                             <select id="p_sell" name="p_sell" class="custom-select form-control w-100">
+                             <select id="p_sell" name="p_sell" class="custom-select form-control w-100" style="width:50%!important;">
                              <option selected disabled="disabled">임시</option>
                              <option value="1">-판매중</option>
                              <option value="2">-예약중</option>
                              <option value="3">-판매완료</option>
                              </select>
-                             <button type="button" id="btn_product_modify_sell_action" class="btn btn-primary mt-1 mt-md-0 ml-1 ml-md-3" onclick="productSell()">판매상태수정</button>
+                             
+                             <button type="button" id="btn_product_modify_sell_action" class="btn btn-primary mt-1 mt-md-0 ml-1 ml-md-3" onclick="productSell()" style="position: relative; top:-40px; left:140px;">판매상태수정</button>
                       	</div>
 						</form>
 						

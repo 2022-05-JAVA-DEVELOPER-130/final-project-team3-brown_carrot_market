@@ -67,12 +67,12 @@
                 <ul class="list-unstyled chat-list mt-2 mb-0" id="chatRoomList">
                 <c:forEach var="list" items="${chatList}">
                
-                <li class="clearfix">
+                <li class="clearfix" id="btnCall${list.c_room_no}" value=${list.c_room_no}>
                         <img src="img/user_profile/${list.you_image}" alt="avatar"><img src="img/product_img/${list.p_img}" style="float:right; width:45px; height:45px; border-radius: 0%">
                         <div class="about">
 							<input name="chatRoomNo" type="hidden" value=${list.c_room_no}/>
 					<!--	<button type="button" class="btn btn-default" id="btnCall${list.c_room_no}" value=${list.c_room_no}>${list.c_room_no}</button>-->
-                            <div class="name" id="btnCall${list.c_room_no}" value=${list.c_room_no}>${list.you_id}</div> 
+                            <div class="name" >${list.you_id}</div> 
                             <div class="content"> <i class="fa fa-circle offline"></i>${list.c_content}</div>                                            
                             
                         </div>

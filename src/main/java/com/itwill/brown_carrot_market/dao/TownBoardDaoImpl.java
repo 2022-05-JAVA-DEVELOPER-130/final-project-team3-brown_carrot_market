@@ -194,6 +194,13 @@ public class TownBoardDaoImpl implements TownBoardDao{
 		return aa;
 	}
 
+	@Override
+	public int selectTownBoardPK() throws Exception {
+		return townBoardMapper.selectTownBoardPK();
+	}
+	
+
+
 
 
 

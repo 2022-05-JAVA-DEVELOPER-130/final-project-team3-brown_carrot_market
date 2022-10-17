@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,8 +27,11 @@ import com.itwill.brown_carrot_market.util.PageMakerDto;
 @Controller
 public class TownBoardController {
 	@Autowired
+	@Qualifier("townBoardServiceImpl")
 	private TownBoardService townBoardService;
+	
 	@Autowired
+	@Qualifier("townReplyServiceImpl")
 	private TownReplyService townReplyService;
 	
 	
@@ -152,8 +156,14 @@ public class TownBoardController {
 		}
 		return forwardPath;
 	}
+	
+	@RequestMapping(value = "/townboard_write_action", method = RequestMethod.GET)
+	public String townboard_write_action_get() {
+		return "redirect : townboard_list";
+	}
 
 	//새글 등록 
+	/*
 	@RequestMapping(value = "/townboard_write_action")
 	public String townBoard_write_action(@RequestParam Map<String, Object> map, Model model, HttpSession session) throws Exception{
 		String forwardPath = "";
@@ -186,7 +196,7 @@ public class TownBoardController {
 			}
 		}
 		map.put("newFileName",newFileName);
-		*/
+		
 		
 		System.out.println("controller map : "+map);
 		
@@ -201,7 +211,7 @@ public class TownBoardController {
 		
 		return forwardPath;
 	}
-	
+	*/
 	
 	
 	//게시글 수정폼

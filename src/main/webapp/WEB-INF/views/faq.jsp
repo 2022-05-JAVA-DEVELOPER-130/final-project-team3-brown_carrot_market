@@ -106,7 +106,7 @@
                                 </div>
                                 <div id="bswicollapseTwo" class="collapse" aria-labelledby="bigshopWithIconAccordian2" data-parent="#bigshopAccordianIcon">
                                     <div class="card-body">
-                                        <p class="mb-0">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</p>
+                                        <p class="mb-0">[홈 화면의 > 동네 상품] 에서 [내 물건 팔기]를 클릭하고 판매글을 자유롭게 작성해주시면 돼요.<br><br>물건의 이름을 포함한 제목, 가격, 종류와 설명을 작성해보세요. 원하는 경우 사진도 여러 장 첨부할 수 있어요! <br>작성 버튼을 누르면 작성자의 동네 정보를 기반으로 같은 동네에 있는 이웃들에게 게시글이 보여져요.</p>
                                     </div>
                                 </div>
                             </div>
@@ -122,6 +122,18 @@
                                         <br>거래 방법은 크게 두 가지가 있어요. <br><br> 첫 번째, 직거래 <br> 직거래할 경우 거래 약속 시간과 장소를 정해야 해요. 채팅방에서 [약속하기] 기능을 통해 시간과 장소를 정해보세요! 약속 시간 1시간 전에 판매자와 사용자에게 알림을 보내주고 있어요.
                                         <br> 직접 만나 물건을 확인한 뒤 거래가 성사되면 현금을 전달하거나, 계좌이체 해주시면 돼요.<br> 채팅방의 [당근페이]를 이용하면 상대방에게 보다 편리하게 송금할 수 있어요.
                                         <br><br>두 번째, 택배 거래 <br> 택배 거래할 경우 보통 입금이 먼저 진행돼요. 입금이 확인되면 판매자가 택배를 보낼 거예요. <br> 다만 택배 거래의 경우 중고거래 특성상 사기 피해가 발생할 수 있으니 유의해주세요. </p>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="card">
+                                <div class="card-header" id="bigshopWithIconAccordian2">
+                                    <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#bswicollapseTwo" aria-expanded="false" aria-controls="bswicollapseTwo">
+                                        <i class="icofont-rounded-up"></i><i class="icofont-rounded-down"></i> 거래 약속 시간 전에 알림을 받고 싶어요
+                                    </button>
+                                </div>
+                                <div id="bswicollapseTwo" class="collapse" aria-labelledby="bigshopWithIconAccordian2" data-parent="#bigshopAccordianIcon">
+                                    <div class="card-body">
+                                        <p class="mb-0">거래 약속을 잘 지킬 수 있게 도와주는 거래 약속 알림 기능을 이용해보세요! <br>거래 약속 시간이 다가오면 약속 시간 1시간 전에 알림을 받을 수 있어요. <br><br>- 채팅방 위 [악수] 아이콘을 눌러 약속 시간을 설정해주세요.<br><br>우리 모두 거래 약속을 잘 지키는 따뜻한 이웃이 되어요!</p>
                                     </div>
                                 </div>
                             </div>
