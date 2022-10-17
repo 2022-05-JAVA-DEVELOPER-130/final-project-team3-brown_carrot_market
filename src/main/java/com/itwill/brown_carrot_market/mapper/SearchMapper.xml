@@ -60,6 +60,15 @@
 	</select>
 	
 	<select id="selectListNotLogin" parameterType="java.lang.String" resultMap="productResultMap">
-	select * from product p join product_img i on p.p_no=i.p_no where p_desc like '%'||#{search_keyword}||'%' or p_title like '%'||#{search_keyword}||'%'
+	
+	select sss.* from (select rownum idx,plist.*,pmg.pi_name from product_img pmg 
+right outer join (select p.*,imgno from (select max(i.pi_no)imgno,p_no from product_img i
+group by i.p_no)img 
+right outer join (select *
+from product p where p_desc like '%'||#{search_keyword}||'%' or p_title like '%'||#{search_keyword}||'%')p 
+on img.p_no=p.p_no)plist
+on pmg.pi_no=plist.imgno)sss
+where sss.idx<![CDATA[ >= ]]> #{pageStart} and sss.idx<![CDATA[ <= ]]>3 #{pageEnd}
+
 	</select>
 </mapper>
