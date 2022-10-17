@@ -227,7 +227,7 @@
                                 </li>
                                  </c:if>
                                
-                                <c:forEach var="no" begin="${searList.pageMaker.blockBegin}" end="${searchList.pageMaker.blockEnd}">
+                                <c:forEach var="no" begin="${searchList.pageMaker.blockBegin}" end="${searchList.pageMaker.blockEnd}">
 									<c:if test="${searchList.pageMaker.curPage == no}">
 										<li class="page-item active"><button class="page-link" href="#">${no}</button></li>
 									</c:if>
