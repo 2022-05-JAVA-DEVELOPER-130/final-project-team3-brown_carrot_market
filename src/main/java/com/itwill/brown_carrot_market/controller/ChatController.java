@@ -156,6 +156,7 @@ public class ChatController {
 			//채팅방 생성으로 채팅사이트 이동 
 			model.addAttribute("path",2);
 			model.addAttribute("chat_room_no",chat_room_no);
+			httpSession.setAttribute("loginId", from_id);
 			return "chat_room";
 		}	
 		
