@@ -273,7 +273,7 @@
                                     <div class="product_description">
                                         <!-- Add to cart -->
                                         <div class="product_add_to_cart">
-                                            <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
+                                            <a href="#" style="background-color:orange;"><i class="icofont-shopping-cart"></i> Add to Cart</a>
                                         </div>
 
                                         <!-- Quick View -->
