@@ -49,7 +49,7 @@
 	</select>
 	
 	<insert id="insertTownBoard" parameterType="map" useGeneratedKeys="true">
-		insert into town_board values(#{TOWN_BOARD_T_NO_SEQ.nextval}, #{t_title},#{t_content},sysdate,0,#{townCategory.t_ctgr_no},#{address.address_name},#{address.address_lat}, #{address.address_lng},#{userInfo.user_id})
+		insert into town_board values(TOWN_BOARD_T_NO_SEQ.nextval, #{t_title},#{t_content},sysdate,0,#{townCategory.t_ctgr_no},#{address.address_name},#{address.address_lat}, #{address.address_lng},#{userInfo.user_id})
 		<selectKey keyProperty="t_no" order="AFTER" resultType="int">
 			select TOWN_BOARD_T_NO_SEQ.currval from dual
 		</selectKey>

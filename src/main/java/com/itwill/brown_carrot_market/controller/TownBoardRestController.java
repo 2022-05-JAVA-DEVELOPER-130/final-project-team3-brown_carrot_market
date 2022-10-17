@@ -41,7 +41,7 @@ public class TownBoardRestController {
 	@Qualifier("townReplyServiceImpl")
 	private TownReplyService townReplyService;
 	
-	@Autowired(required = false)
+	@Autowired
 	@Qualifier(value="FilesStorageServiceImplTownBoard")
 	FilesStorageServiceTownBoard storageService;
 	
