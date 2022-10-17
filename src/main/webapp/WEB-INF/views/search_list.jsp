@@ -155,10 +155,11 @@
 
                     <div class="shop_list_product_area">
                         <div class="row">
-                        
-                        
+                        	<form>
+                        	<input type="hidden" value=${param.search_keyword} id="search_keywordhidden">
+                        	</form>
                             <!-- Single Product -->
-                            <c:forEach items="${searchList}" var="product">
+                            <c:forEach items="${searchList.itemList}" var="product">
                             <div class="col-12">
                                 <div class="single-product-area mb-30">
                                     <div class="product_image">
@@ -219,20 +220,27 @@
                     <div class="shop_pagination_area mt-30">
                         <nav aria-label="Page navigation">
                             <ul class="pagination pagination-sm justify-content-center">
+                            
+                            <c:if test="${searchList.pageMaker.prevPage > 0}">
                                 <li class="page-item">
-                                    <a class="page-link" href="#"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                                    <button class="page-link"  onclick="changeSearchList(${data.pageMaker.prevPage},'${param.search_keyword}')"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
                                 </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="page-item"><a class="page-link" href="#">...</a></li>
-                                <li class="page-item"><a class="page-link" href="#">8</a></li>
-                                <li class="page-item"><a class="page-link" href="#">9</a></li>
+                                 </c:if>
+                               
+                                <c:forEach var="no" begin="${searList.pageMaker.blockBegin}" end="${searchList.pageMaker.blockEnd}">
+									<c:if test="${searchList.pageMaker.curPage == no}">
+										<li class="page-item active"><button class="page-link" href="#">${no}</button></li>
+									</c:if>
+									<c:if test="${searchList.pageMaker.curPage != no}">
+										<li class="page-item"><button class="page-link page" onclick="changeSearchList(${no},'${param.search_keyword}')">${no}</button></li>
+									</c:if>
+                                </c:forEach>
+                               
+                               <c:if test="${searchList.pageMaker.curPage < searchList.pageMaker.totPage}">  
                                 <li class="page-item">
-                                    <a class="page-link" href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                   <button class="page-link"  onclick="changeSearchList(${data.pageMaker.nextPage},'${param.search_keyword}')"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
                                 </li>
+                                </c:if>
                             </ul>
                         </nav>
                     </div>
@@ -274,6 +282,7 @@
 	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+	<script type="text/javascript" src="js/common/search.js"></script>
 	  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
 	
 
