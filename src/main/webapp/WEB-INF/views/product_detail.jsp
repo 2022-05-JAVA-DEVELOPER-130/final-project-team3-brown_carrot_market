@@ -182,6 +182,9 @@
                                 <input type="number" class="qty-text form-control" id="qty2" step="1" min="1" max="12" name="quantity" value="1">
                             </div>
                             -->
+                            
+                            <input type="hidden" name="loginId" id="loginId" value="${sUser.user_id}" />
+                            <input type="hidden" name="p_userId" id="p_userId" value="${product.userInfo.user_id}" />
                             <input type="hidden" name="p_no" id="p_no" value="${product.p_no}" />
                             <input type="hidden" name="p_title" value="${product.p_title}" />
                             <input type="hidden" name="p_desc" value="${product.p_desc}" />
