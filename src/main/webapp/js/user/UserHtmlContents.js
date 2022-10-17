@@ -204,8 +204,15 @@ UserHtmlContents.user_received_reviewList2=function(reviewList){
                                 <img class="review-img-circle" src="img/user_profile/${review.userInfo.user_profile}" alt="">
                             </div>
                         </div>
-                        <div class="comment-content" style="padding-left:20px">
+                        <div class="comment-content submit_a_review_area " style="padding-left:20px">
                             <h5 class="comment-author"><strong>${review.userInfo.user_id}</strong></h5>
+                            <form>
+                            <div class="stars">
+                                    <input type="radio" name="star" class="star-${review.review_point}" id="star-${review.review_point}" checked>
+                                    <label class="star-${review.review_point}" for="star-${review.review_point}">${review.review_point}</label>
+                                    <span style="width:${20 * review.review_point}%"></span>
+            				</div>
+                          </form>  
                             <h6 style="display:inline;color: #747794;">${review.orders.product.p_address_name}&nbsp;&nbsp;${review.orders.orders_date}</h6>
                             <p style="color: #070a57">${review.review_desc}</p>
                             <!--<a href="#" class="reply">Reply</a>-->
