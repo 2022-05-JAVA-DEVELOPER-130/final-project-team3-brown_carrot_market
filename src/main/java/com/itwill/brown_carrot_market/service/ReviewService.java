@@ -16,7 +16,9 @@ public interface ReviewService {
 	
 	List<Review> findReceivedReviewBySeller(String user_id) throws Exception;
 	
-	public Review findReviewByRivewNo(int review_no) throws Exception;
+	Review findReviewByRivewNo(int review_no) throws Exception;
 	
-	public Review isExistedReviewByOrdersNoId(Review review) throws Exception;
+	Review isExistedReviewByOrdersNoId(Review review) throws Exception;
+	
+	int removeReview(int review_no) throws Exception;
 }

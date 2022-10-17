@@ -69,7 +69,8 @@
 	                <div class="submit_a_review_area col-12" style="border: 1px solid #d6e6fb; padding:30px;">
                         <h4>작성한 후기</h4>
                         <!-- [Start]review_write_form -->
-                        <form id="review_write_form" name="review_write_form" action="review_write_action" method="post">
+                        <form id="review_view_form" name="review_view_form" action="" method="post">
+                                 <input type="hidden" id="review_no" name="review_no" class="" value="${review.review_no}">
                                 <div class="form-group">
                                     <span>별점</span>
                                     <div class="stars">
@@ -118,8 +119,9 @@
 									</div>
 								</div>
                                 <!--<input type="button" id="btnSubmit" class="btn btn-primary" value="Submit Review" />-->
-                                <input type="button" id="btn_review_edit" class="btn btn-primary" value="Edit Review" />
-                                <input type="button" id="btn_review_remove" class="btn btn-primary" value="Delete Review" />
+                                <input type="button" id="btn_review_edit" class="btn btn-primary" value="수정하기" />
+                                <input type="button" id="btn_review_remove" class="btn btn-primary" value="삭제하기" />
+                                <input type="button" id="btn_backto_orderslist" class="btn btn-primary" value="뒤로가기" />
                             </form>
                         <!-- [END]review_write_form -->
                 	</div> 

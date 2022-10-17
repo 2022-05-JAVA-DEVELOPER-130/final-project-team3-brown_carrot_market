@@ -83,6 +83,11 @@ public class ReviewServiceImpl implements ReviewService{
 		return reviewDao.isExistedReviewByOrdersNoId(review);
 	}
 
+	@Override
+	public int removeReview(int review_no) throws Exception {
+		return reviewDao.removeReview(review_no);
+	}
+
 
 
 	

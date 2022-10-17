@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,12 +25,20 @@ import com.itwill.brown_carrot_market.dto.ReviewImage;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.ReviewService;
 import com.itwill.brown_carrot_market.service.UserInfoService;
+import com.itwill.brown_carrot_market.upload_file.service.FilesStorageServiceUser;
+
+import ch.qos.logback.core.net.SyslogOutputStream;
 
 @Controller
 public class ReviewController {
 
 	@Autowired
 	private ReviewService reviewService;
+	
+	@Autowired
+	@Qualifier(value = "FilesStorageServiceImplReview")
+	FilesStorageServiceUser storageService;
+	
 	@Autowired
 	private UserInfoService userInfoService;
 
@@ -126,5 +135,27 @@ public class ReviewController {
 		System.out.println("your_id"+your_id);
 		
 		return "review_write_form";
+	}
+
+	@RequestMapping("review_remove_action")
+	public String review_remove_action(@RequestParam int review_no, HttpServletRequest request) throws Exception {
+		System.out.println("review_remove_action >>> review_no: "+review_no);
+		
+		Review review= reviewService.findReviewByRivewNo(review_no);
+		Map<String,Object> resultMap = new HashMap();
+		List<Boolean> result = new ArrayList();
+		boolean deleteResult= false;
+		if(review.getReviewImageList()!=null) {
+			System.out.println("review.getReviewImageList(): "+review.getReviewImageList());
+			for (ReviewImage reviewImage : review.getReviewImageList()) {
+				deleteResult= storageService.delete(reviewImage.getReview_img_name());
+			}
+			result.add(deleteResult);
+		}
+		resultMap.put("result",result);
+		System.out.println("resultMap: "+resultMap);
+		int removeResult = reviewService.removeReview(review_no);
+		System.out.println("removeResult: "+removeResult);
+		return "redirect:orders_list";
 	}
 }

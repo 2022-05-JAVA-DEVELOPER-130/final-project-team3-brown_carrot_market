@@ -20,4 +20,5 @@ public interface ReviewDao {
 
 	Review isExistedReviewByOrdersNoId(Review review) throws Exception;
 	
+	int removeReview(int review_no) throws Exception;
 }

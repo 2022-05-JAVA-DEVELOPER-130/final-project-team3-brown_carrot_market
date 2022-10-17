@@ -4,7 +4,7 @@ $(document).ready(function(){
 	$('.btn_review_write').on('click',function(e){
 		console.log("orders_no: "+e.target.id);
 		console.log("seller_id: "+$("#"+e.target.id).attr("seller_id"));
-		location.replace('review_write_form?orders_no='+e.target.id+"&your_id="+$("#"+e.target.id).attr("seller_id"));
+		location.href="review_write_form?orders_no="+e.target.id+"&your_id="+$("#"+e.target.id).attr("seller_id");
 		/*
 		$("#container_contents").html(ReviewHtmlContents.review_write_form(e.target.id,$("#"+e.target.id).attr("seller_id")));
 		$(".breadcrumb").prev('h5').text('후기작성');
@@ -18,7 +18,7 @@ $(document).ready(function(){
 	/* review_view_form 보여주기****/
 	$('.btn_review_view').on('click',function(e){
 		console.log("review_no: "+$(e.target).attr('review_no'));
-		location.replace('review_view?review_no='+$(e.target).attr('review_no'));
+		location.href="review_view?review_no="+$(e.target).attr('review_no');
 		
 		/*
 		$.ajax({
@@ -140,10 +140,10 @@ $(document).ready(function(){
 					url : 'review_write_action',
 					method : 'POST',
 					data: {
-						"orders_no": orders_no,
+						"orders_no": $('#orders_no').val(),
 						"review":JSON.stringify(review),
 						"images": null,
-						"your_id": your_id
+						"your_id": $('#your_id').val()
 						},
 					success : function(jsonResult) {
 						 console.log(jsonResult.msg);
@@ -155,7 +155,6 @@ $(document).ready(function(){
 			}
     		e.preventDefault();
     	});
-    	/* (END)이미지 upload *********************************************/
 
     	//[review_write_form]drop이미지 삭제  
     	$("#thumbnails").on("click", ".close", function(e) {
@@ -164,6 +163,47 @@ $(document).ready(function(){
     		uploadFiles[idx].upload = 'disable';  //삭제된 항목은 업로드하지 않기 위해 플래그 생성
     		$target.parent().remove();  //프리뷰 삭제
     	});
+    	/* (END)이미지 upload *********************************************/
+		//[review_view]뒤로가기
+		$(document).on('click', '#btn_backto_orderslist', function(e) {
+			console.log('click - #btn_backto_orderslist');
+	
+			//history.back();
+			location.href="orders_list";
+    		e.preventDefault();
+    	});
+		
+		//[review_view]삭제하기
+		$(document).on('click', '#btn_review_remove', function(e) {
+			console.log('click - #btn_review_remove');
+			console.log("reivew_no"+$("#review_no").val());
+			
+			var result = confirm("작성하신 리뷰를 삭제하시겠습니까?");
+       		if(!result){return false;}
+			$.ajax({
+					url : 'review_remove_action',
+					method : 'POST',
+					data: {
+						"review_no":$("#review_no").val()
+						},
+					success : function(jsonResult) {
+						 console.log(jsonResult.msg);
+						 location.href='orders_list';
+				    },error:  function(jsonResult) {
+	    				console.log('error!!: review_write_action');
+					}
+				});
+    		e.preventDefault();
+    	});
+	
+		//[review_view]수정하기
+		$(document).on('click', '#btn_review_edit', function(e) {
+			console.log('click - #btn_review_edit');
+	
+    		e.preventDefault();
+    	});
+	
+	
 	
 });//(END)ready
 
