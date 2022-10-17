@@ -642,7 +642,8 @@ var c ="";
 							<div class="col-lg-4">
 						 
     							<div style="text-align:center;">
-								<img src="img/product_img/${p_img}" style="border-radius: 0%; width:50px; height:50px;">
+    							<a href="product_detail?p_no=${product.p_no}";>
+								<img src="img/product_img/${p_img}" style="border-radius: 0%; width:50px; height:50px;"></a>
 								<h6 class="m-b-0" style="margin-top:10px; margin-bottom:2px;"><b>${product.p_title}</b></h6>
 								<small><b><${p_sell}></b> 가격: ${product.p_price}원</small> 
 								<div>
@@ -654,8 +655,8 @@ var c ="";
 									
 									${c} 
 									
-									<a  href="javascript:void(0);" class="btn btn-outline-info" ><i
-										class="fa fa-handshake-o" id="btnChatAppointment"></i></a> 
+									<a  href="javascript:void(0);" class="btn btn-outline-info" id="btnChatAppointment"><i
+										class="fa fa-handshake-o" ></i></a> 
 											
 									<a href="javascript:void(0);" class="btn btn-outline-primary" id="btnChatImage">
 									<i class="fa fa-image"></i></a>
