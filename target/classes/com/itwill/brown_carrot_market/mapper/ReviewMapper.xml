@@ -127,12 +127,22 @@
 	
 	<!-- 후기 1개 보기  -->
 	<select id="findReviewByRivewNo" parameterType="int" resultMap="reviewResultMap">
-		<!-- select r.*, o.*, r.user_id reviewer, o.user_id buyer -->
+		<!--  
 		select *
 			from review r
 			left outer join review_img ri
 			on r.review_no=ri.review_no
 			where r.review_no=${review_no}
+			-->
+		select *
+        from review r
+        left outer join review_img ri
+        on r.review_no=ri.review_no
+        join orders o
+        on r.orders_no=o.orders_no
+        join product p
+        on o.p_no=p.p_no
+        where r.review_no=${review_no}
 	</select>
 
 	<select id="isExistedReviewByOrdersNoId" parameterType="com.itwill.brown_carrot_market.dto.Review" resultType="com.itwill.brown_carrot_market.dto.Review">
