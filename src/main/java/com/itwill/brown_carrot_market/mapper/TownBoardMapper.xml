@@ -385,7 +385,7 @@ select count(*) from (select sss.* from(select rownum
 	</delete>
 	
 	<!-- 게시글 한개 수정 -->
-	<update id="updateTownBoardOne" parameterType="com.itwill.brown_carrot_market.dto.TownBoard">
+	<update id="updateTownBoardOne" parameterType="map">
 		update town_board set t_title=#{t_title},t_content=#{t_content}, t_ctgr_no=#{townCategory.t_ctgr_no} where t_no=#{t_no}
 	</update>
 	

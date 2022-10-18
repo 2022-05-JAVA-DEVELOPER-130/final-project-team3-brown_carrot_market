@@ -194,7 +194,6 @@
                         <div class="status-bar mb-15">
                             <a href="#"><i class="icofont-user-male"></i> ${townBoard.userInfo.user_id }</a>
                             <a href="#"><i class="icofont-ui-clock"></i> ${townBoard.t_date }</a>
-                            <a href="#"><i class="icofont-speech-comments"></i> 3 Comments</a>
                            
                            
                         </div>
@@ -220,14 +219,12 @@
 								 <c:if test="${townReply.depth == 1}">
                                     <div class="comment-wrapper clearfix">
                                         <div class="comment-meta">
-                                        <!-- 
-                                            사진.. 다시 하기
-                                             -->
+                                     
                                              
                                              <div class="comment-author-img">
-                                             <!-- 
+                                            
                                                 <img class="img-circle" src="img/user_profile/${townReply.userInfo.user_profile}" alt="">
-                                                 -->
+                                                
                                             </div>
                                         </div>
                                         <div class="comment-content">
@@ -276,7 +273,7 @@
                                             <div class="comment-wrapper clearfix">
                                                 <div class="comment-meta">
                                                     <div class="comment-author-img">
-                                                        <img class="img-circle" src="img/partner-img/tes-2.png" alt="">
+                                                        <img class="img-circle" src="img/user_profile/${townReply.userInfo.user_profile}" alt="">
                                                     </div>
                                                 </div>
                                                 <div class="comment-content">

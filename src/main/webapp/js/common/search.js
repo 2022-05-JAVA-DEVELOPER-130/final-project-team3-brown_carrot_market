@@ -20,25 +20,25 @@ $(function(){
 })
 
 //게시글 검색
-function changeTownList(pageno){
+function changeTownList(pageno,keyword){
 	
 	$.ajax({
-		url: "townBoard_list_rest",
+		url: "searchTown_rest",
 		method: "post",
 		data: {
-			"pageno" :pageno
-			
+			"pageno" :pageno,
+			"keyword":keyword
 				},
 		dataType: "json",
 		success:function(resultObj){
 			console.log(resultObj);
-			if(resultObj.errorCode > 0){
+			
 				let data = resultObj.data;
 				let htmlBuffer = ``;
 				data.itemList.forEach(function(townBoard, i){
 				
 				   htmlBuffer += `<div class="blog_post_thumb">
-				    <input type="hidden" value=${townKeyword} id="search_keywordTown">`;
+				    <input type="hidden" value=${keyword} id="search_keywordTown">`;
 	               if(townBoard.townImageList.length != 0 ){
 						htmlBuffer += `
                             <a href="townboard_view?t_no=${townBoard.t_no}&pageno=${pageno}" t_no="${townBoard.t_no}"><img src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-post-thumb"></a>`;
@@ -66,7 +66,7 @@ function changeTownList(pageno){
 				let paginationBuffer = ``;
 				if(data.pageMaker.prevPage > 0){
 					paginationBuffer += `<li class="page-item">
-		                                    <button class="page-link" onclick="changeTownList(${data.pageMaker.prevPage});"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+		                                    <button class="page-link" onclick="changeTownList(${data.pageMaker.prevPage},'${keyword}');"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
 		                               	 </li>`;
 				}
 				for(let no = data.pageMaker.blockBegin; no <= data.pageMaker.blockEnd; no++){
@@ -74,18 +74,16 @@ function changeTownList(pageno){
 						paginationBuffer += `<li class="page-item active"><button class="page-link" href="#">${no}</button></li>`;
 					}
 					if(data.pageMaker.curPage != no){
-						paginationBuffer += `<li class="page-item"><button class="page-link" onclick="changeTownList(${no});">${no}</button></li>`;
+						paginationBuffer += `<li class="page-item"><button class="page-link" onclick="changeTownList(${no},'${keyword}');">${no}</button></li>`;
 					}
 				}
 				if(data.pageMaker.curPage < data.pageMaker.totPage){
 					paginationBuffer += `<li class="page-item">
-					                        <button class="page-link" onclick="changeTownList(${data.pageMaker.nextPage});"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+					                        <button class="page-link" onclick="changeTownList(${data.pageMaker.nextPage},'${keyword}');"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
 				                    	 </li>`;
 				}
 				$(".pagination.pagination-sm.justify-content-center").html(paginationBuffer);
-			}else{
-				Toast.fire({ icon: 'error', title: resultObj.errorMsg });
-			}
+			
 		}
 	});
 }

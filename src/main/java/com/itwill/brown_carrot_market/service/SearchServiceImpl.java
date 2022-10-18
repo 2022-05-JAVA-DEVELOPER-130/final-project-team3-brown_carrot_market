@@ -76,4 +76,23 @@ public class SearchServiceImpl implements SearchService {
 		return searchDao.searchTownBoardListNotLoginCount(search_keyword);
 	}
 
+
+
+	@Override
+	public PageMakerDto<TownBoard> searchTownBoardList(String search_keyword, Address address, int currentPage) {
+		int totalCount=searchDao.searchTownBoardListCount(search_keyword, address);
+		PageMaker pageMaker=new PageMaker(totalCount, currentPage,5,5);
+		List<TownBoard> searchList=searchDao.searchTownBoardList(search_keyword, address, pageMaker.getPageBegin(), pageMaker.getPageEnd());
+		PageMakerDto<TownBoard> pageMakerSearchList=new PageMakerDto<TownBoard>(searchList, pageMaker, totalCount);
+		return pageMakerSearchList;
+	}
+
+
+
+	@Override
+	public int searchTownBoardListCount(String search_keyword, Address address) {
+		// TODO Auto-generated method stub
+		return searchDao.searchTownBoardListCount(search_keyword, address);
+	}
+
 }

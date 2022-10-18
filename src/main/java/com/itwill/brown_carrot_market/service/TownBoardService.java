@@ -56,7 +56,11 @@ public interface TownBoardService {
 	int deleteTownBoardOne(int t_no) throws Exception;
 	
 	//동네게시판 게시글 한개 수정
-	int updateTownBoardOne(TownBoard townBoard)throws Exception;
+	int updateTownBoardOne(Map map)throws Exception;
+	
+	//게시글 수정 위한 사진 전체 삭제
+	int deleteTownBoardImgAll(int t_no)throws Exception;
+	
 	
 	//동네게시판 게시물 조회수 증가
 	int updateTownBoardCount(int t_no)throws Exception;

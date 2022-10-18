@@ -152,9 +152,9 @@ public class TownBoardDaoImpl implements TownBoardDao{
 	}
 
 	@Override
-	public int updateTownBoardOne(TownBoard townBoard) throws Exception{
+	public int updateTownBoardOne(Map map) throws Exception{
 		System.out.println(">>> townBoardDaoImpl : updateTownBoardOne()호출");
-		return townBoardMapper.updateTownBoardOne(townBoard);
+		return townBoardMapper.updateTownBoardOne(map);
 	}
 
 	@Override
