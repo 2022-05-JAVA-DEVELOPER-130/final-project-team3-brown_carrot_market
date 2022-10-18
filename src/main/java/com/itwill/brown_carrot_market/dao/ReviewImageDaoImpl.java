@@ -33,5 +33,10 @@ public class ReviewImageDaoImpl implements ReviewImageDao{
 		return reviewImageMapper.removeReviewImgByNoList(reviewImgNoList);
 	}
 
+	@Override
+	public int removeReviewImgByName(String review_img_name) throws Exception {
+		return reviewImageMapper.removeReviewImgByName(review_img_name);
+	}
+
 	
 }

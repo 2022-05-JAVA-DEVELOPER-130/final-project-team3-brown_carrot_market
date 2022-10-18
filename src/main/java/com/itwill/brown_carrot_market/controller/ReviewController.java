@@ -84,14 +84,15 @@ public class ReviewController {
 				delImgList.add(del_img[i]);
 			}
 			System.out.println("delImgList >>" +delImgList);
-			//DB 삭제
-			if(delImgList!=null) {
-				result = reviewService.removeReviewImgByNoList(delImgList);
-				System.out.println("removeReviewImgByNoList결과 >> "+result);
-				//업로드된 파일삭제
+			if(delImgList.size() !=0 || delImgList!=null) {
 				for (String delImg : delImgList) {
+					//DB 삭제
+					result += reviewService.removeReviewImgByName(delImg);
+					//업로드된 파일삭제
 					storageService.delete(delImg);
 				}
+				//result = reviewService.removeReviewImgByNoList(delImgList);
+				System.out.println("removeReviewImgByNoList결과 >> "+result);
 			}
 		}
 		//[UPDATE] your_id의 user_freshness
@@ -105,7 +106,7 @@ public class ReviewController {
 		});
 		System.out.println("point_prev >>" + point_prev);
 		
-		double updateFreshness = you.getUser_freshness()+(point_prev+review.getReview_point())/yourReviewCount;
+		double updateFreshness = you.getUser_freshness()+(-point_prev+review.getReview_point())/yourReviewCount;
 		you.setUser_freshness(updateFreshness);
 		userInfoService.updateFreshness(you);
 		

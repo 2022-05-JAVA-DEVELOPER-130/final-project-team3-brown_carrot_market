@@ -25,6 +25,7 @@ public interface ReviewService {
 	int removeReviewImgByNo(int review_no) throws Exception;
 	
 	int removeReviewImgByNoList(List<String> reviewImgNoList) throws Exception;
+	int removeReviewImgByName(String review_img_name) throws Exception;
 	
 	int updateReview(Review review) throws Exception;
 }

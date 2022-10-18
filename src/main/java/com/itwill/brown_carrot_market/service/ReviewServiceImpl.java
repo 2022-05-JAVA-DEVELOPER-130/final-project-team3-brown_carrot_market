@@ -97,6 +97,11 @@ public class ReviewServiceImpl implements ReviewService{
 	public int removeReviewImgByNoList(List<String> reviewImgNoList) throws Exception {
 		return reviewImageDao.removeReviewImgByNoList(reviewImgNoList);
 	}
+	
+	@Override
+	public int removeReviewImgByName(String review_img_name) throws Exception {
+		return reviewImageDao.removeReviewImgByName(review_img_name);
+	}
 
 	@Transactional
 	@Override
@@ -116,6 +121,8 @@ public class ReviewServiceImpl implements ReviewService{
 		}
 		return result;
 	}
+
+	
 
 
 
