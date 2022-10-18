@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.itwill.brown_carrot_market.dao.SearchDao;
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Product;
+import com.itwill.brown_carrot_market.dto.TownBoard;
 import com.itwill.brown_carrot_market.util.PageMaker;
 import com.itwill.brown_carrot_market.util.PageMakerDto;
 @Service
@@ -54,6 +55,25 @@ public class SearchServiceImpl implements SearchService {
 	public int selectListSearchCount(String search_keyword, Address address) {
 		// TODO Auto-generated method stub
 		return searchDao.selectListSearchCount(search_keyword, address);
+	}
+
+
+
+	@Override
+	public PageMakerDto<TownBoard> searchTownBoardListNotLogin(String search_keyword, int currentPage) {
+		int totalCount=searchDao.searchTownBoardListNotLoginCount(search_keyword);
+		PageMaker pageMaker=new PageMaker(totalCount,currentPage,5,5);
+		List<TownBoard> searchList=searchDao.searchTownBoardListNotLogin(search_keyword, pageMaker.getPageBegin(), pageMaker.getPageEnd());
+		PageMakerDto<TownBoard> pageMakerSearchList=new PageMakerDto<TownBoard>(searchList, pageMaker, totalCount);
+		return pageMakerSearchList;
+	}
+
+
+
+	@Override
+	public int searchTownBoardListNotLoginCount(String search_keyword) {
+		// TODO Auto-generated method stub
+		return searchDao.searchTownBoardListNotLoginCount(search_keyword);
 	}
 
 }

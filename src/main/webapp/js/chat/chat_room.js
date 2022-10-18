@@ -620,8 +620,7 @@ var c ="";
 			console.log('3.로그인id:'+loginId);
 			if(check==1){
 				console.log('세션 = 판매자 : '+loginId);
-				a='<button class="dropdown-item" type="button" id="reserveBtn"><b>예약중으로 변경</b></button>';	
-				b='<button class="dropdown-item" type="button" id="sellBtn"><b>판매중으로 변경</b></button>';	
+				
 				c=`<a href="#" class="btn btn-outline-info" style="display:none"><i class="fa fa-won" id="btnCarrot_Pay" p_no=${product.p_no} style="color:green;"></i></a>`;
 			}
 		}
@@ -736,7 +735,8 @@ $.ajax({
 	var result = confirm("상품을 예약중으로 변경하시겠습니까?");
 	if(result){
 		var reserve={
-		"product":product
+		"p_no":product.p_no,
+		"yourId":yourId
 	}
 	$.ajax({
 		url:"chat_reserve_rest",
