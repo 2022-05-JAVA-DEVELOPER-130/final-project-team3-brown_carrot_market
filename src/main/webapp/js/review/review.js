@@ -4,7 +4,7 @@ $(document).ready(function(){
 	$('.btn_review_write').on('click',function(e){
 		console.log("orders_no: "+e.target.id);
 		console.log("seller_id: "+$("#"+e.target.id).attr("seller_id"));
-		location.replace('review_write_form?orders_no='+e.target.id+"&your_id="+$("#"+e.target.id).attr("seller_id"));
+		location.href="review_write_form?orders_no="+e.target.id+"&your_id="+$("#"+e.target.id).attr("seller_id")+"&p_title="+$("#"+e.target.id).attr("p_title");
 		/*
 		$("#container_contents").html(ReviewHtmlContents.review_write_form(e.target.id,$("#"+e.target.id).attr("seller_id")));
 		$(".breadcrumb").prev('h5').text('후기작성');
@@ -18,7 +18,7 @@ $(document).ready(function(){
 	/* review_view_form 보여주기****/
 	$('.btn_review_view').on('click',function(e){
 		console.log("review_no: "+$(e.target).attr('review_no'));
-		location.replace('review_view?review_no='+$(e.target).attr('review_no'));
+		location.href="review_view?review_no="+$(e.target).attr('review_no');
 		
 		/*
 		$.ajax({
@@ -38,18 +38,6 @@ $(document).ready(function(){
 		*/
 		e.preventDefault();
 	});
-	
-	/*
-	$(".stars >*").on('click',function(e){
-		if($("input[type=radio][name='star']").is(':checked')){
-			//console.log('click');
-			var answer = $(this).attr("id");
-			var anText = $("label[for='"+answer+"']").text(); 
-			console.log(anText);
-			
-		}
-	});
-	*/
 	
 	
 	/* 이미지 upload *********************************************/
@@ -85,7 +73,6 @@ $(document).ready(function(){
 				var size = uploadFiles.push(file);  //업로드 목록에 추가 
 				preview(file, size - 1);  //미리보기 만들기
 				} 
-		//$(this).style("height",dropHeight+"px");
 		});
 	//});//END
 	
@@ -102,7 +89,8 @@ $(document).ready(function(){
 			var review = {
 				"review_point":$('#review_point').val(),
 				"review_desc":$('#review_desc').val(),
-				"review_image":$('#review_image').val()
+				"review_image":$('#review_image').val(),
+				"your_id": $('#your_id').val()
 			}
 			
     		if(formData.get("files")!=null){
@@ -120,8 +108,7 @@ $(document).ready(function(){
 										data: {
 											"orders_no": $('#orders_no').val(),
 											"review":JSON.stringify(review),
-											"images": JSON.stringify(jsonResult.newFileNames),
-											"your_id": $('#your_id').val()
+											"images": JSON.stringify(jsonResult.newFileNames)
 											},
 										success : function(jsonResult) {
 											 console.log(jsonResult.msg);
@@ -140,10 +127,9 @@ $(document).ready(function(){
 					url : 'review_write_action',
 					method : 'POST',
 					data: {
-						"orders_no": orders_no,
+						"orders_no": $('#orders_no').val(),
 						"review":JSON.stringify(review),
-						"images": null,
-						"your_id": your_id
+						"images": null
 						},
 					success : function(jsonResult) {
 						 console.log(jsonResult.msg);
@@ -155,7 +141,6 @@ $(document).ready(function(){
 			}
     		e.preventDefault();
     	});
-    	/* (END)이미지 upload *********************************************/
 
     	//[review_write_form]drop이미지 삭제  
     	$("#thumbnails").on("click", ".close", function(e) {
@@ -163,6 +148,147 @@ $(document).ready(function(){
     		var idx = $target.attr('data-idx');
     		uploadFiles[idx].upload = 'disable';  //삭제된 항목은 업로드하지 않기 위해 플래그 생성
     		$target.parent().remove();  //프리뷰 삭제
+    	});
+
+    	//[review_modify_form]기존 이미지 삭제  
+    	$("#thumbnails").on("click", ".delete", function(e) {
+    		var $target = $(e.target); 
+    		var idx = $target.attr('data-idx');
+    		var img_name = $target.attr('review_img_name');
+    		var img_no = $target.attr('review_img_no');
+    		//existingFiles[idx].upload = 'disable';  //삭제된 항목은 업로드하지 않기 위해 플래그 생성
+    		$('#review_modify_form >.form-group:first-child').prepend('<input type="hidden" class="delete_img" review_img_name="'+img_name+'">');
+    		$target.parent().remove();  //프리뷰 삭제
+    	});
+    	
+    	/* (END)이미지 upload *********************************************/
+		//[review_view]뒤로가기
+		$(document).on('click', '#btn_backto_orderslist', function(e) {
+			console.log('click - #btn_backto_orderslist');
+	
+			//history.back();
+			location.href="orders_list";
+    		e.preventDefault();
+    	});
+		
+		//[review_view]삭제하기
+		$(document).on('click', '#btn_review_remove', function(e) {
+			console.log('click - #btn_review_remove');
+			console.log("reivew_no"+$("#review_no").val());
+			
+			var result = confirm("작성하신 리뷰를 삭제하시겠습니까?");
+       		if(!result){return false;}
+			$.ajax({
+					url : 'review_remove_action',
+					method : 'POST',
+					data: {
+						"review_no":$("#review_no").val()
+						},
+					success : function(jsonResult) {
+						 console.log(jsonResult.msg);
+						 location.href='orders_list';
+				    },error:  function(jsonResult) {
+	    				console.log('error!!: review_write_action');
+					}
+				});
+    		e.preventDefault();
+    	});
+	
+		//[review_view]modify_form으로 이동
+		$(document).on('click', '#btn_review_modify_form', function(e) {
+			console.log('click - #btn_review_modify_form');
+			location.href="review_modify_form?review_no="+$("#review_no").val();
+    		
+    		e.preventDefault();
+    	});
+    	//[review_modify_form]수정
+		$(document).on('click', '#btn_review_modify_action', function(e) {
+    		console.log('click - #btn_review_modify_action');
+			
+			var formData2 = new FormData();
+    		
+    		$.each(uploadFiles, function(i, file) {
+    			if(file.upload != 'disable')  //삭제하지 않은 이미지만 업로드 항목으로 추가     
+    			formData2.append('files', file); 
+    		});
+    		
+    		if($('#review_point').val()==0){
+				$('#review_point').val($('#review_point_prev').val());
+			}
+    		
+			var review = {
+				"review_no":$('#review_no').val(),
+				"review_point":$('#review_point').val(),
+				"review_desc":$('#review_desc').val(),
+				"your_id": $('#your_id').val()
+			}
+			
+			var del_img = [];
+			$('.delete_img').each(function(i,item){
+				del_img.push($(this).attr('review_img_name'));
+			});
+			
+    		if(formData2.get("files")!=null){
+	    		$.ajax({	// review_image 업로드
+	    			url : 'review/upload',
+	    			type : 'POST',
+	    			processData : false, //파일전송시 반드시 false
+	    			contentType : false,
+	    			data : formData2,
+	    			success : function(jsonResult) {
+									console.log(jsonResult.newFileNames);
+				    				$.ajax({	// review UPDATE
+										url : 'review_modify_action',
+										method : 'POST',
+										data: {
+											"del_img":JSON.stringify(del_img),
+											"review":JSON.stringify(review),
+											"point_prev":$('#review_point_prev').val(),
+											"images": JSON.stringify(jsonResult.newFileNames)
+											},
+										success : function(jsonResult) {
+											 console.log(jsonResult.msg);
+											 location.href='review_view?review_no='+$('#review_no').val();
+									    },error:  function(jsonResult) {
+						    				console.log('error!!: review_modify_action');
+										}
+									});
+	    			},
+	    			error : function() {
+	    				console.log('error!!');
+	    			}
+	    		});
+    		}else if(formData2.get("files")==null){	//이미지가 업로드되지 않은 경우
+				$.ajax({	// review INSERT
+					url : 'review_modify_action',
+					method : 'POST',
+					data: {
+						"del_img":JSON.stringify(del_img),
+						"review":JSON.stringify(review),
+						"point_prev":$('#review_point_prev').val(),
+						"images": null
+						},
+					success : function(jsonResult) {
+						 console.log(jsonResult.msg);
+						 location.href='review_view?review_no='+$('#review_no').val();
+				    },error:  function(jsonResult) {
+	    				console.log('error!!: review_modify_action');
+					}
+				});
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+    		e.preventDefault();
     	});
 	
 });//(END)ready
@@ -184,6 +310,12 @@ function setPoint(id){
 	var val = $("label[for='"+id+"']").text();
 	console.log("별점: "+val);
 	$('#review_point').val(val);
+}
+//[review_modify_form]별점 수정
+function changeStar(){
+	console.log('changeStar실행');
+	$('.stars>span').remove();	//기존태그 삭제
+	$('.stars').append('<span></span>');
 }
 
 //작성된 review존재여부 체크하여, 버튼생성

@@ -38,16 +38,17 @@
 		values(TOWN_REPLY_T_REPLY_NO_SEQ.nextval,#{t_reply_title},#{t_reply_content},sysdate,#{townBoard.t_no},#{step},#{depth},#{userInfo.user_id},#{townBoard.t_no})
 	</insert>
 	  -->
-	
+	<!-- 댓글 등록 -->
 	<insert id="insertTownBoardReply" parameterType="com.itwill.brown_carrot_market.dto.TownReply">
 		<selectKey resultType="java.lang.Integer" keyProperty="t_reply_no" order="BEFORE">
 				SELECT TOWN_REPLY_T_REPLY_NO_SEQ.nextval FROM DUAL
 		</selectKey>
 		insert into town_reply(T_REPLY_NO, T_REPLY_TITLE, T_REPLY_CONTENT,T_REPLY_DATE ,GROUPNO,STEP,DEPTH,user_id, t_no)
-		values(#{t_reply_no},#{t_reply_title},#{t_reply_content},sysdate,#{t_reply_no},#{step},#{depth},#{userInfo.user_id},#{townBoard.t_no})
+		values(#{t_reply_no},#{t_reply_title},#{t_reply_content},sysdate,TOWN_REPLY_T_REPLY_NO_SEQ.currval,#{step},#{depth},#{userInfo.user_id},#{townBoard.t_no})
 	</insert>
 	
 	<!-- 대댓글 등록 -->
+	<!-- 
 	<insert id="insertTownBoardReReply" parameterType="com.itwill.brown_carrot_market.dto.TownReply">
 		<selectKey resultType="java.lang.Integer" keyProperty="t_reply_no" order="BEFORE">
 				SELECT TOWN_REPLY_T_REPLY_NO_SEQ.nextval FROM DUAL
@@ -55,7 +56,21 @@
 		insert into town_reply(T_REPLY_NO, T_REPLY_TITLE, T_REPLY_CONTENT,T_REPLY_DATE ,GROUPNO,STEP,DEPTH,user_id, t_no)
 		values(#{t_reply_no},#{t_reply_title},#{t_reply_content},sysdate,#{groupno},#{step}+1,#{depth},#{userInfo.user_id},#{townBoard.t_no})
 	</insert>
-	 
+	 -->
+	 <!-- 대댓글 등록 -->
+	<insert id="insertTownBoardReReply" parameterType="com.itwill.brown_carrot_market.dto.TownReply">
+		<selectKey resultType="java.lang.Integer" keyProperty="t_reply_no" order="BEFORE">
+				SELECT TOWN_REPLY_T_REPLY_NO_SEQ.nextval FROM DUAL
+		</selectKey>
+		
+		insert into town_reply(T_REPLY_NO, T_REPLY_TITLE, T_REPLY_CONTENT,T_REPLY_DATE ,GROUPNO,STEP,DEPTH,user_id, t_no)
+		values(#{t_reply_no},#{t_reply_title},#{t_reply_content},sysdate,TOWN_REPLY_T_REPLY_NO_SEQ.currval,#{step}+1,#{depth},#{userInfo.user_id},#{townBoard.t_no})
+	</insert>
+	
+	<!-- 대댓글 step 증가 -->
+	<update id="updateStep" parameterType="com.itwill.brown_carrot_market.dto.TownReply">
+		update town_reply set step = step+1 where step > #{step} and groupno=#{groupno}
+	</update>
 	
 	<!-- 댓글 삭제 -->
 	<delete id="deleteTownBoardReply" parameterType="int">
@@ -69,7 +84,13 @@
 	
 	<!-- 게시물에 해당하는 댓글 전체조회 -->
 	<select id="selectTownBoardReplyList" parameterType="com.itwill.brown_carrot_market.dto.TownReply" resultMap="townReplyResultMap">
-		select * from town_reply where t_no=#{townBoard.t_no} order by step asc ,depth asc
+		select * from town_reply where t_no=#{townBoard.t_no} order by groupno asc, step asc ,depth asc
 	</select>
+	
+	<!-- 댓글 한개 조회 -->
+	<select id="selectTownBoardReplyOne" parameterType="int" resultMap="townReplyResultMap">
+		select * from town_reply where t_reply_no=#{t_reply_no}
+	</select>
+	
 
 </mapper>

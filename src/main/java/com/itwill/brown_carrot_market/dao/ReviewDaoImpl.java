@@ -56,5 +56,15 @@ public class ReviewDaoImpl implements ReviewDao {
 		return reviewMapper.isExistedReviewByOrdersNoId(review);
 	}
 
+	@Override
+	public int removeReview(int review_no) throws Exception {
+		return reviewMapper.removeReview(review_no);
+	}
+
+	@Override
+	public int updateReview(Review review) throws Exception {
+		return reviewMapper.updateReview(review);
+	}
+
 
 }

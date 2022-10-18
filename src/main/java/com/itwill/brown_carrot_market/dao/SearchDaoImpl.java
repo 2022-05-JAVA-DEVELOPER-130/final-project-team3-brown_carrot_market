@@ -15,11 +15,7 @@ public class SearchDaoImpl implements SearchDao{
 	@Autowired
 	SearchMapper searchMapper;
 
-	@Override
-	public List<Product> selectListSearch(String search_keyword, Address address) {
-		// TODO Auto-generated method stub
-		return searchMapper.selectListSearch(search_keyword, address);
-	}
+	
 
 	@Override
 	public List<Product> selectListNotLogin(String search_keyword,int pageStart, int pageEnd) {
@@ -31,6 +27,18 @@ public class SearchDaoImpl implements SearchDao{
 	public int selectListNotLoginCount(String search_keyword) {
 		// TODO Auto-generated method stub
 		return searchMapper.selectListNotLoginCount(search_keyword);
+	}
+
+	@Override
+	public List<Product> selectListSearch(String search_keyword, Address address, int pageStart, int pageEnd) {
+		// TODO Auto-generated method stub
+		return searchMapper.selectListSearch(search_keyword, address, pageStart, pageEnd);
+	}
+
+	@Override
+	public int selectListSearchCount(String search_keyword, Address address) {
+		// TODO Auto-generated method stub
+		return searchMapper.selectListSearchCount(search_keyword, address);
 	}
 
 }

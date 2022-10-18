@@ -595,9 +595,10 @@ function chat_head(id,img,room_no,fresh,product,p_img,check){
 var c ="";
 	if(product.p_sell==1){
 		p_sell="판매중";
+			console.log('1.판매자id:'+product.userInfo.user_id);
+			console.log('1.로그인id:'+loginId);
 		if(check==1){
-			console.log('1.판매자:'+product.userInfo.user_id);
-			console.log('1.구매자:'+loginId);
+			console.log('세션 = 판매자 : '+loginId);
 			a='<button class="dropdown-item" type="button" id="reserveBtn"><b>예약중으로 변경</b></button>';
 			b='<button class="dropdown-item" type="button" id="soldOutBtn"><b>판매 완료하기</b></button>';
 			c=`<a href="#" class="btn btn-outline-info" style="display:none"><i class="fa fa-won" id="btnCarrot_Pay" p_no=${product.p_no} style="color:green"></i></a>`;
@@ -615,14 +616,15 @@ var c ="";
 		}
 		}else if(product.p_sell==3){
 		p_sell="판매완료";
+			console.log('3.판매자id:'+product.userInfo.user_id);
+			console.log('3.로그인id:'+loginId);
 			if(check==1){
-			console.log('3.판매자:'+product.userInfo.user_id);
-			console.log('3.구매자:'+loginId);
-			a='<button class="dropdown-item" type="button" id="reserveBtn"><b>예약중으로 변경</b></button>';	
-			b='<button class="dropdown-item" type="button" id="sellBtn"><b>판매중으로 변경</b></button>';	
-			c=`<a href="#" class="btn btn-outline-info" style="display:none"><i class="fa fa-won" id="btnCarrot_Pay" p_no=${product.p_no} style="color:green;"></i></a>`;
-	}
-	}
+				console.log('세션 = 판매자 : '+loginId);
+				a='<button class="dropdown-item" type="button" id="reserveBtn"><b>예약중으로 변경</b></button>';	
+				b='<button class="dropdown-item" type="button" id="sellBtn"><b>판매중으로 변경</b></button>';	
+				c=`<a href="#" class="btn btn-outline-info" style="display:none"><i class="fa fa-won" id="btnCarrot_Pay" p_no=${product.p_no} style="color:green;"></i></a>`;
+			}
+		}
 	
 	return 	`<div class="row">
 								<div class="col-lg-4">
@@ -749,7 +751,7 @@ $.ajax({
 		console.log(product);
 		$('#chatHead').html("");
 		$('#chatHead').append(chat_head(yourId,yourImg,c_room_no,yourFreshness,product,p_img,checkSeller));
-		/****************** */
+		/*********송금버튼 누를 시 오더번호 생성********
 			$.ajax({
 				url:"orders_insert_json",
 				method:"POST",
@@ -768,7 +770,7 @@ $.ajax({
 				
 				
 			});		
-		/****************** */
+		*********************/
 		}
 		
 		
