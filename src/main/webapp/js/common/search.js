@@ -27,7 +27,7 @@ function changeSearchList(pageno,keyword){
 				   htmlBuffer += `<div class="col-12">
                                 <div class="single-product-area mb-30">
                                     `;
-	               if(product.productImagesList.length != 0 ){
+	               if(product.productImagesList[0].pi_name!=null && product.productImagesList[0].pi_name!="" ){
 						htmlBuffer += `
 						 <div class="product_image">
                                         <!-- Product Image -->
