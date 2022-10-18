@@ -30,8 +30,9 @@ public class SearchRestController {
 		String sUserId = (String)session.getAttribute("sUserId");
 		Address sAddress = (Address)session.getAttribute("sAddress");
 		if(sAddress!=null) {
-			//searchList= searchService.selectListSearch(keyWord, sAddress);
+			searchList= (PageMakerDto<Product>)searchService.selectListSearch(keyword, sAddress, pageno);
 			resultMap.put("data", searchList);
+			
 			System.out.println("로그인검색목록"+searchList);
 		}else {
 			 searchList = (PageMakerDto<Product>) searchService.selectListNotLogin(keyword,pageno);
