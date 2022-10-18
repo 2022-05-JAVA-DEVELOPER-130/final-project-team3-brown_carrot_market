@@ -1018,10 +1018,16 @@ function connectWS(){
 	
 		//메세지 전송한 경우
 		if(onmsg.code=="1"){
-		if(onmsg.user_id!=loginId){
+		if(onmsg.user_id!=loginId&&onmsg.toastId=="youExist"){
 			//상대가 메세지 보낸 경우
 			console.log("상대가 보낸 경우"+onmsg.user_id)
             $('#chat_history').append(message_other(onmsg));
+		}else if(onmsg.user_id!=loginId){
+			 toastr.options.positionClass = "toast-top-right";
+	      toastr['warning'](onmsg.user_id+" : "+onmsg.c_content);
+	      
+	      /******************채팅수증가******* */
+	     getChatNum(loginId);
 		}else if(onmsg.user_id==loginId){
 			console.log("내가 보낸 경우"+onmsg.user_id)
 			//내가 보낸 경우
@@ -1411,4 +1417,26 @@ $(document).on('click','#btnCarrot_Pay',function(e){
 		
 	});
 		}
+		
+		$(function() {
+function Toast(type, css, msg) {
+        this.type = type;
+        this.css = css;
+        this.msg = msg;
+    }
+    
+     toastr.options.extendedTimeOut = 0; //1000;
+    toastr.options.timeOut = 10000;
+    toastr.options.fadeOut = 250;
+    toastr.options.fadeIn = 250;
+    toastr.options.preventDuplicates = false;
+    toastr.options.closeButton = true;
+    toastr.options.positionClass = "toast-top-right";
+    toastr.options.onclick = function() { 
+	console.log("click");
+	location.href="chat_room";
+	
+	 }
+
+})
 
