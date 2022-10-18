@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html lang="en">
 
@@ -162,11 +163,24 @@
                             <c:forEach items="${searchList.itemList}" var="product">
                             <div class="col-12">
                                 <div class="single-product-area mb-30">
+                                
                                     <div class="product_image">
                                         <!-- Product Image -->
+                                        
+                                        <c:choose>
+                                        <c:when test="${!empty product.productImagesList[0].pi_name}">
+										
+                                        
                                         <img class="normal_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
                                         <img class="hover_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
-
+										</c:when>
+										
+										<c:otherwise>
+										<img class="normal_img" style="width:300px; height:300px;" src="img/chat-img/logo_carrot.png" alt="">
+                                        <img class="hover_img" style="width:300px; height:300px;" src="img/chat-img/logo_carrot.png" alt="">
+										
+										</c:otherwise>
+										</c:choose>
                                         <!-- Product Badge -->
 <!--                                         <div class="product_badge">
                                             <span>New</span>
@@ -196,7 +210,7 @@
                                         </div> -->
 
 <!--                                         <p class="brand_name">Top</p>
- -->                                         <a href="product_detail?p_no=${product.p_no}" p_no="${product.p_no}">${product.p_title}</a>
+ -->                                         <a href="product_detail?p_no=${product.p_no}" >${product.p_title}</a>
 										<h6 class="product-price">가격: ${product.p_price}</h6>
                                         <p class="product-short-desc">${product.p_desc}</p>
                                     </div>

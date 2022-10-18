@@ -214,7 +214,7 @@
                                 
 								 <li class="single_comment_area">
 								 
-								<c:forEach var="townReply" items="${townReplyList}" >
+								<c:forEach var="townReply" items="${townReplyList}" varStatus="status">
 								
 								<!-- 댓글 -->
 								 <c:if test="${townReply.depth == 1}">
@@ -238,7 +238,7 @@
                                             <button class="heading">댓글달기</button>
                                             
                                             <div  class="content">
-                                            <form class="townReReply_write_form"  method="post">
+                                            <form class="townReReply_write_form_${status.index }"  method="post">
 				                                <div class="row">
 				                                    <div class="col-12 rereply">
 				                                        <div class="form-group mb-30">
@@ -259,7 +259,7 @@
                                  				     -->
 				                                    <input type="hidden" class="form-control" name="depth" value="2"/>
 				                                    <div class="col-12 ">
-				                                        <button  class="btn btn-primary rereply" type="submit" >Submit Comment</button>
+				                                        <button  class="btn btn-primary rereply" index="${status.index }" type="submit" >Submit Comment</button>
 				                                    </div>
 				                                </div>
 				                            </form>
@@ -344,7 +344,7 @@
                                     </div>
                                     <input type="hidden" class="form-control" name="t_no" value="${townBoard.t_no}"/>
                                     <input type="hidden" class="form-control" name="page_no" value="${pageno}" />
-                                   <!-- <input type="hidden" class="form-control" name="step" value="1"/> --> 
+                                    <input type="hidden" class="form-control" name="step" value="1"/>
                                     <input type="hidden" class="form-control" name="depth" value="1"/>
                                     <div class="col-12">
                                         <button class="btn btn-primary reply"  id="townMainReplyBtn" type="submit">Submit Comment</button>

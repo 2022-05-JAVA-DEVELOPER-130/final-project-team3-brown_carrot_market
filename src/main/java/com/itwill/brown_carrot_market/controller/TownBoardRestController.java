@@ -253,7 +253,7 @@ public class TownBoardRestController {
 	public Map<String, Object> townReReply_write_action(Integer pageno,@RequestParam Integer t_no, @ModelAttribute TownReply townReply, HttpSession session) {
 		Map<String, Object> resultMap = new HashMap<>();
 		String sUserId = (String)session.getAttribute("sUserId");
-		
+		System.out.println(">>>>>>>>>>> townreply 모든 값"+townReply);
 		try {
 			//TownReply mainReply = townReplyService.selectTownBoardReplyOne(t_reply_no);
 			townReply.setUserInfo(new UserInfo(sUserId, "", "", "", "", 0, 0, "", null));
