@@ -24,6 +24,9 @@ public interface TownWishListMapper {
 	//관심목록 한개 삭제
 	public int deleteTownWishList(int t_wl_no);
 	
+	//관심 글 존재 확인
+	public int selectTownWishExist(String user_id, int t_no);
+	
 	
 	
 	

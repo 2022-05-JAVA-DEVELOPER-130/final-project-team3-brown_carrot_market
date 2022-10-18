@@ -78,6 +78,11 @@ li{
 	margin-top: 15px;
 }
 
-
+/************ 슬라이드쇼 시작 **************/
+* { margin: 0; padding: 0; }
+body { font: 17px 'Nanum Gothic', sans-serif; }
+ul { width: 700px; }
+li { list-style: none; }
+/************ 슬라이드쇼 끝 **************/
 
 
