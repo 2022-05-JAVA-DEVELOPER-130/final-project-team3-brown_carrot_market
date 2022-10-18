@@ -291,7 +291,7 @@ function townBoardUpdateAction(){
    }
  
    
-   const formData1 = new FormData($('#main_contact_form')[0]);
+   const formData1 = new FormData($('#main_contact_form_townBoard')[0]);
    /*
    formData1.append('files',$('#files')[0]); //이게 맞나?
    formData1.append('files',$('#files')[1]); 

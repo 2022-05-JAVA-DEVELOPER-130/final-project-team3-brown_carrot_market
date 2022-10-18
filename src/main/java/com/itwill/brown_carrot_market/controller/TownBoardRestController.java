@@ -221,7 +221,7 @@ public class TownBoardRestController {
 			
 			TownBoard resultList = new TownBoard();
 			
-			code = townBoardService.insertTownBoard(map);
+			code = townBoardService.updateTownBoardOne(resultMap);
 			if(code==1) message="townBoard_update 성공";
 			
 			System.out.println(">>> townboard update "+map);
