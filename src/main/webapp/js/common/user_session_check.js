@@ -42,8 +42,19 @@ function session_check(){
 		    	$(".cart_quantity").remove();
 		    	$("#brown_carrot_pay a").attr("href", "user_login");
 		    	$("#transaction-dropdown a").attr("href", "user_login");
+		    	//공지사항
+		    	$("#notice_btn_container>.update_form").hide();	//수정
+		    	$("#notice_btn_container>.delete").hide();	//삭제
+		    	$(".notice_list_view>.write_form").hide();	//게시글작성
 		    	
 		    }else if (jsonResult.code==2) {//세션에 로그인 유저 존재
+		    	if(!jsonResult.data[0].user_id.startsWith('admin')){
+			    	//공지사항
+			    	$("#notice_btn_container>.update_form").hide();	//수정
+			    	$("#notice_btn_container>.delete").hide();	//삭제
+			    	$(".notice_list_view>.write_form").hide();	//게시글작성
+		    	}
+		    
 		    	$("#account-area").html(CommonHtmlContents.user_thumbnail_login(jsonResult.data[0]));
 				connectServer(jsonResult.data[0].user_id);
 				

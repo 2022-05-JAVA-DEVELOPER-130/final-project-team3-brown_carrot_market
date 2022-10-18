@@ -542,6 +542,8 @@
 								</c:otherwise>
 							</c:choose>
 							<!-- 프로필 이미지 -->
+							<span>${sUser.user_freshness}</span>
+							<span>${sUser.user_point}</span>
 							<p>
 								<strong>${sUser.user_id}</strong>님, 안녕하세요? 
 							</p>
@@ -591,6 +593,8 @@
 	<script src="js/default/active.js"></script>
 
 	<script type="text/javascript" src="js/user/user_my_account.js"></script>
+
+
 
 </body>
 
