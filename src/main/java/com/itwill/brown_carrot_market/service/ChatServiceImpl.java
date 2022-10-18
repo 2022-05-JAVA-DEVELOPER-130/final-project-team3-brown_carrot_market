@@ -203,8 +203,12 @@ public class ChatServiceImpl implements ChatService {
 		return chat_contentsDao.selectReadChatCount(user_id);
 	}
 	
-	
-	
+	//채팅방 p_no, to_id로 채팅중인 사람들 
+	@Override
+	public List<ChatRoomListView> chatListUsers(int p_no,String user_id) {
+		// TODO Auto-generated method stub
+		return chatRoomDao.chatListUsers(p_no,user_id);
+	}
 
 	
 	

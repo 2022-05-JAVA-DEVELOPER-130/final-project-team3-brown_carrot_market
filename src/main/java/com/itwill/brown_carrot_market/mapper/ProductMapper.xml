@@ -85,7 +85,7 @@
                         order by p.p_date desc
 	</select>
 	
-	<!-- 로그인한 회원 범위안 상품 리스트 불러오기-->
+	<!-- 로그인한 회원 범위안 상품 리스트 불러오기
 	<select id="selectListByRange" parameterType ="com.itwill.brown_carrot_market.dto.Address" resultMap="productResultMap">
 		select * from (select * from product p left outer join product_img pi on p.p_no=pi.p_no
                                        join p_category pc on p.p_ctgr_no=pc.p_ctgr_no
@@ -96,6 +96,41 @@
         between (select a.address_lng from address a where a.user_id=#{user_id} and a.address_no=#{address_no})-0.056344377*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
             AND (select a.address_lng from address a where a.user_id=#{user_id} and a.address_no=#{address_no})+0.056344377*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
             order by pp.p_date desc           
+	</select>
+	-->
+	
+	<!-- 로그인한 회원 범위 안 리스트 불러오기(페이징) -->
+	<select id="selectListByRange" parameterType="com.itwill.brown_carrot_market.dto.Address" resultMap="productResultMap">
+		select sss.* from(select rownum idx,plist.*,pmg.pi_name from product_img pmg
+          right outer join (select p.*,imgno from (select min(i.pi_no)imgno,i.p_no from product_img i group by i.p_no) img 
+              right outer join (select * from  (select p.*,pc.p_ctgr_name from product p join p_category pc on p.p_ctgr_no=pc.p_ctgr_no
+             where p.p_address_lat 
+             between (select a.address_lat from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})-0.004504505*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
+                AND (select a.address_lat from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})+0.004504505*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no}))pp
+        where pp.p_address_lng
+        between (select a.address_lng from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})-0.056344377*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
+            AND (select a.address_lng from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})+0.056344377*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
+            )p 
+            on img.p_no=p.p_no)plist
+            on pmg.pi_no=plist.imgno)sss
+            where sss.idx<![CDATA[ >= ]]> #{pageStart}and sss.idx<![CDATA[ <= ]]> #{pageEnd}
+            order by sss.p_date desc   
+	</select>
+	
+	<!-- 로그인한 회원 범위 안 리스트 카운트 -->
+	<select id="selectListLoginCount" parameterType="com.itwill.brown_carrot_market.dto.Address" resultType="int">
+	select count(*) from product_img pmg
+          right outer join (select * from (select min(i.pi_no)imgno,i.p_no from product_img i group by i.p_no) img 
+              right outer join (select * from  (select * from product p join p_category pc on p.p_ctgr_no=pc.p_ctgr_no
+             where p.p_address_lat 
+             between (select a.address_lat from address a where a.user_id=#{user_id} and a.address_no=#{address_no})-0.004504505*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
+                AND (select a.address_lat from address a where a.user_id=#{user_id} and a.address_no=#{address_no})+0.004504505*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no}))pp
+        where pp.p_address_lng
+        between (select a.address_lng from address a where a.user_id=#{user_id} and a.address_no=#{address_no})-0.056344377*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
+            AND (select a.address_lng from address a where a.user_id=#{user_id} and a.address_no=#{address_no})+0.056344377*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
+            )p 
+            on img.p_no=p.p_no)plist
+            on pmg.pi_no=plist.imgno
 	</select>
 	
 	<!-- 로그인한 회원 범위+카테고리오 상품 리스트 불러오기 -->

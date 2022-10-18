@@ -39,6 +39,10 @@
 <!-- iamport.payment.js -->
 <script type="text/javascript"
 	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<style>
+#checkout_steps_area
+color = orange;
+</style>
 </head>
 
 <body>
@@ -71,8 +75,8 @@
 
 	<div class="checkout_steps_area">
 		<a class="active" href="/brown_carrot_market/payment"><i class="icofont-check-circled"></i> 페이 충전</a> 
-			<a href="/brown_carrot_market/point_list"><i class="icofont-check-circled"></i> 페이 내역</a> 
-			<a href="/brown_carrot_market/payment_withdraw"><i class="icofont-check-circled"></i> 페이 출금</a>
+		<a href="/brown_carrot_market/point_list"><i class="icofont-check-circled"></i> 페이 내역</a> 
+		<a href="/brown_carrot_market/payment_withdraw"><i class="icofont-check-circled"></i> 페이 출금</a>
 	</div>
 
 	<div class="col-12">
