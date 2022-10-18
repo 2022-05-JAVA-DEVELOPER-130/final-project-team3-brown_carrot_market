@@ -22,4 +22,8 @@ public interface SearchMapper {
 	public List<TownBoard> searchTownBoardListNotLogin(String search_keyword,int pageStart,int pageEnd);
 	
 	public int searchTownBoardListNotLoginCount(String search_keyword);
+	
+	public List<TownBoard> searchTownBoardList(String search_keyword, Address address,int pageStart,int pageEnd );
+	
+	public int searchTownBoardListCount(String search_keyword, Address address);
 }

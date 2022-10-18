@@ -22,4 +22,8 @@ public interface SearchService {
 		public PageMakerDto<TownBoard> searchTownBoardListNotLogin(String search_keyword,int currentPage);
 		
 		public int searchTownBoardListNotLoginCount(String search_keyword);
+		
+		public PageMakerDto<TownBoard> searchTownBoardList(String search_keyword, Address address,int currentPage);
+		
+		public int searchTownBoardListCount(String search_keyword, Address address);
 }
