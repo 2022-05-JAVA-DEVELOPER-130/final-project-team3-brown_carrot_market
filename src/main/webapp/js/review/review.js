@@ -329,7 +329,7 @@ function check_isExisted_review(orders_no){
 		},
 		success : function(jsonResult) {
 			console.log("result: "+jsonResult.data);
-			//console.log("review_no: "+jsonResult.data.review_no);
+			console.log("review_no: "+jsonResult.data.review_no);
 			if(jsonResult.data!=null){
 				$('#'+orders_no).text('보러가기');
 				$('#'+orders_no).addClass('badge-secondary');
@@ -355,7 +355,7 @@ function check_isExisted_orders(p_no){
 		},
 		success : function(jsonResult) {
 			console.log("result: "+jsonResult.data);
-			check_isExisted_review(p_no);
+			check_isExisted_review(jsonResult.data);
 			/*
 			console.log("review_no: "+jsonResult.data.review_no);
 			if(jsonResult.data!=null){
