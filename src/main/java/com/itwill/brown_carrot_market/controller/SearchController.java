@@ -44,5 +44,26 @@ public String searchKeyword(@RequestParam(required = false, defaultValue = "1") 
 	}
 return "search_list";	
 }
+
+@RequestMapping(value="/townBoardSearch_list",method=RequestMethod.GET)
+public String searchTownBoard(@RequestParam(required = false, defaultValue = "1") Integer pageno,HttpServletRequest req, Model model, HttpSession session) {
+	String keyWord=req.getParameter("search_keyword");
+	Address sAddress=(Address)session.getAttribute("sAddress");
+	PageMakerDto<TownBoard> searchList=null;
+	System.out.println("검색 키워드:"+keyWord);
+	
+	if(sAddress!=null) {
+		
+	}else {
+		searchList=(PageMakerDto<TownBoard>) searchService.searchTownBoardListNotLogin(keyWord, pageno);
+		model.addAttribute("searchList",searchList);
+		model.addAttribute("pageno", pageno);
+		System.out.println("검색목록"+searchList);
+		
+	}
+	
+	return "townBoardSearch_list";
+}
+
 	
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itwill.brown_carrot_market.dto.Orders;
 import com.itwill.brown_carrot_market.dto.Review;
 import com.itwill.brown_carrot_market.dto.UserInfo;
+import com.itwill.brown_carrot_market.service.OrdersService;
 import com.itwill.brown_carrot_market.service.ReviewService;
 
 @RestController
@@ -23,6 +24,9 @@ public class ReviewRestController {
 
 	@Autowired
 	private ReviewService reviewService;
+	
+	@Autowired
+	private OrdersService ordersService;
 	
 	@RequestMapping("review_view_json")
 	public Map review_view_json(int review_no,HttpServletRequest request) throws Exception{
@@ -94,6 +98,38 @@ public class ReviewRestController {
 		resultMap.put("url", url);
 		resultMap.put("msg", msg);
 		resultMap.put("data",result);
+		return resultMap;
+	}
+	@RequestMapping("isExisted_orders_check_json")
+	public Map isExisted_orders_check_json(@RequestParam(value="p_no")String p_no,HttpServletRequest request) throws Exception{
+		
+		System.out.println("isExisted_orders_check_json-p_no: "+p_no);
+		int pNo=Integer.parseInt(p_no);
+		
+		Map resultMap=new HashMap();
+		int code=1;
+		String url="";
+		String msg="orders 없음";
+		int ordersNo = -1;
+		
+		String sUserId=(String)request.getSession().getAttribute("sUserId");
+		
+		/*
+		Review review = new Review();
+		review.setOrders(new Orders(ordersNo, null, null, null, null, null));
+		review.setUserInfo(new UserInfo(sUserId, sUserId, sUserId, url, msg, ordersNo, code, sUserId, null));
+		Review result = reviewService.isExistedReviewByOrdersNoId(review);
+		*/
+		ordersNo = ordersService.selectByOrdersCount(pNo);
+		
+		if(ordersNo!=-1) {
+			code=2;
+			msg="orders 존재";
+		}
+		resultMap.put("code", code);
+		resultMap.put("url", url);
+		resultMap.put("msg", msg);
+		resultMap.put("data",ordersNo);
 		return resultMap;
 	}
 }

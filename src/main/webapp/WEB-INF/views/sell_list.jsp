@@ -27,6 +27,8 @@
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
+	<script type="text/javascript" src="js/review/review.js"></script>
+	<script type="text/javascript" src="js/review/ReviewHtmlContents.js"></script>
 
 </head>
 
@@ -85,7 +87,7 @@
 		                                            <i class="icofont-close"></i>
 		                                        </th>-->
 		                                        <td>
-				                                    <input type="hidden" class="" name="orders_no_${status.index}" value="${product.p_no}" >
+				                                    <input type="hidden" class="" name="p_no_${status.index}" value="${product.p_no}" >
 		                                        	<c:set var="product_date" value="${product.p_date}"/>
 		                                        	${fn:substring(product_date,0,10)}
 		                                        </td>
@@ -104,17 +106,15 @@
 		                                        	</c:if>
 		                                        	<c:if test="${product.p_sell eq 2}">
 		                                        		<c:out value="예약중"></c:out>
+		                                        		
 		                                        	</c:if>
 		                                        	<c:if test="${product.p_sell eq 3}">
 		                                        		<c:out value="판매완료"></c:out>
 		                                        	</c:if>
 		                                        </td>
 		                                        <td>
-		                                            <div class="" name="check_review">
-		                                                <!--  
-		                                                <script>check_isExisted_review($('input[name=orders_no_${status.index}]').val())</script>
-		                                                <a href="#" class="badge" id="${product.p_no}" seller_id="${product.userInfo.user_id}" style="height:20px;font-size:1rem"></a>
-		                                                -->
+		                                            <div class="" name="check_orders">
+		                                            <script>check_isExisted_orders($('input[name=p_no_${status.index}]').val())</script>
 		                                            </div>
 		                                        </td>
 		                                    </tr>

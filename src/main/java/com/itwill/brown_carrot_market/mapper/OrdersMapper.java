@@ -9,14 +9,17 @@ import com.itwill.brown_carrot_market.dto.Orders;
 @Mapper
 public interface OrdersMapper {
 	
-	int insertOrders(Orders orders);
+	List<Orders> selectAllById(String user_id); 
+
+	Orders selectByNo(int orders_no);
 
 	int selectByOrdersCount(int p_no);
 	
-	Orders selectByNo(int orders_no);
+	Orders selectByP_No(int p_no);
+	
+	int insertOrders(Orders orders);
 	
 	int deleteOrders(int orders_no);
 
-	List<Orders> selectAllById(String user_id); 
 
 }

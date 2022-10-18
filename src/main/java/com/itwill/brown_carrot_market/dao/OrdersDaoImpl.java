@@ -60,4 +60,9 @@ public class OrdersDaoImpl implements OrdersDao{
 		return ordersMapper.selectByOrdersCount(p_no);
 	}
 
+	@Override
+	public Orders selectByP_No(int p_no) {
+		return ordersMapper.selectByP_No(p_no);
+	}
+
 }

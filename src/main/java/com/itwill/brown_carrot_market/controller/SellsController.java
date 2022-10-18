@@ -10,12 +10,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.brown_carrot_market.dto.Product;
+import com.itwill.brown_carrot_market.service.OrdersService;
 import com.itwill.brown_carrot_market.service.ProductService;
 
 @Controller
 public class SellsController {
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private OrdersService ordersService;
 	
 	@LoginCheck
 	@RequestMapping(value= "/sell_list")
@@ -27,6 +31,7 @@ public class SellsController {
 		}else {
 			List<Product> productList = productService.selectByUserId(sUserId);
 			model.addAttribute("productList",productList);
+
 			forwardPath="sell_list";
 			return forwardPath;
 		}		

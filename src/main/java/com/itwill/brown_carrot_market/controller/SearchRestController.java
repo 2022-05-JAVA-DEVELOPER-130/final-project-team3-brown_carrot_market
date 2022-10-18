@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Product;
+import com.itwill.brown_carrot_market.dto.TownBoard;
 import com.itwill.brown_carrot_market.service.SearchService;
 import com.itwill.brown_carrot_market.util.PageMakerDto;
 
@@ -43,6 +44,24 @@ public class SearchRestController {
 		
 		return resultMap;
 	
+	}
+	
+	
+	@RequestMapping("/searchTown_rest")
+	public Map<String,Object> searchTownList_rest(@RequestParam(required = false, defaultValue = "1") Integer pageno,@RequestParam String keyword , HttpServletRequest req,HttpSession session){
+		Map<String, Object> resultMap = new HashMap<>();
+		PageMakerDto<TownBoard> searchList=null;
+		
+		Address sAddress = (Address)session.getAttribute("sAddress");
+		if(sAddress!=null) {
+			
+		}else {
+			searchList=(PageMakerDto<TownBoard>)searchService.searchTownBoardListNotLogin(keyword, pageno);
+			resultMap.put("data", searchList);
+		}
+		
+		
+		return resultMap;
 	}
 
 }
