@@ -1,6 +1,7 @@
 /**
  * 
  */
+ var p_no=null;
  function productCreateForm() {
    
    window.location.href='product_write_form';
@@ -153,4 +154,21 @@ $(document).ready(function(){
 		document.chatStart.submit();
 		}
 	});
+	
+	
+	/******************팝업*********************/
+
+$('#btn_popup').click(function(){
+	console.log("클릭");
+	p_no=document.statePopup.p_no.value;
+	console.log(p_no);
+	window.open("change_product_state?p_no="+document.statePopup.p_no.value+"&user_id="+document.statePopup.user_id.value,"판매상태변경","width = 470, height = 600, top = 100, left = 200, location = no,  resizable=no");
+
+});	
+
+
+	
+	
+	
 	});
+	

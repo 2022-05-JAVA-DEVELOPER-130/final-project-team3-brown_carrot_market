@@ -290,6 +290,29 @@ public class ReplyEchoHandler {
 
 					return resultMap;
 				}
+				
+				@PostMapping(value = "/chatdetail_reserve_rest")
+				public Map chatDetailReserve_rest(@RequestBody Map<String, String> reserve) throws Exception  {
+					Map resultMap = new HashMap();
+					
+					int p_no = Integer.parseInt(reserve.get("p_no"));
+					Product product = productService.selectByOne(p_no);
+
+		/*			
+					product.setP_sell(2);
+					productService.updateProductSell(2, product.getP_no());
+					
+					String you_Id = reserve.get("yourId");
+					Orders orders=new Orders();
+					orders.setUserinfo(new UserInfo(you_Id, null, null, null, null, 0, 0, null, null));
+					orders.setProduct(product);
+					int result = ordersService.insertOrders(orders);
+			*/		
+					resultMap.put("product", product);	
+
+
+					return resultMap;
+				}
 				 //판매완료
 				
 				@PostMapping(value = "/chat_soldout_rest")

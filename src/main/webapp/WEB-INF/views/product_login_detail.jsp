@@ -199,8 +199,9 @@
                         	-->
                         </form>
                         
-						<form class="cart clearfix my-5 d-flex flex-wrap align-items-center" method="post" name="product_modify_sell_action">
-						<div class="form-group">
+						<form class="cart clearfix my-5 d-flex flex-wrap align-items-center" method="post" name="statePopup" id="statePopup">
+						<div class="form-group" name="statePopup" id="statePopup">
+							 <input type="hidden" name="user_id" value="${product.userInfo.user_id}" />
                  			 <input type="hidden" name="p_no" id="p_no" value="${product.p_no}" />
                              <select id="p_sell" name="p_sell" class="custom-select form-control w-100">
                              <option selected disabled="disabled">
@@ -232,10 +233,12 @@
                              </select>
                              <c:if test="${product.p_sell eq 1}">
                             <button type="button" id="btn_product_modify_sell_action" class="btn btn-primary mt-1 mt-md-0 ml-1 ml-md-3" onclick="productSell()">판매상태수정</button>
+                            <button type="button" class="btn_popup" id="btn_popup" >팝업</button>
                             </c:if>
                             
                             <c:if test="${product.p_sell eq 2}">
                             <button type="button" id="btn_product_modify_sell_action" class="btn btn-primary mt-1 mt-md-0 ml-1 ml-md-3" onclick="productSell()">판매상태수정</button>
+                            <button type="button" class="btn_popup" id="btn_popup">팝업</button>
                             </c:if>
                             
                             
