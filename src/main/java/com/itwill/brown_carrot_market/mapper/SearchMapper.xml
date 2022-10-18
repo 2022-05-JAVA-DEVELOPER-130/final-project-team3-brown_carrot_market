@@ -153,7 +153,7 @@ on pmg.pi_no=plist.imgno
 	<!-- 회원  -->
 	<select id="searchTownBoardList" parameterType="map" resultMap="townBoradResultMap">
 	select sss.* from(select rownum idx,plist.*,pmg.t_img_name from town_img pmg
-          right outer join (select * from (select max(i.t_img_no)imgno,i.t_no from town_img i group by i.t_no) img 
+          right outer join (select p.*,imgno from (select min(i.t_img_no)imgno,i.t_no from town_img i group by i.t_no) img 
               right outer join (select * from  (select * from town_board p join town_category pc on p.t_ctgr_no=pc.t_ctgr_no
              where p.t_address_lat 
              between (select a.address_lat from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})-0.004504505*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
@@ -165,20 +165,20 @@ on pmg.pi_no=plist.imgno
             )p 
             on img.t_no=p.t_no)plist
             on pmg.t_img_no=plist.imgno)sss
-            where sss.idx<![CDATA[ >= ]]> #{pageStart}and sss.idx<![CDATA[ <= ]]> #{pageEnd}
+            where sss.idx<![CDATA[ >= ]]> #{pageStart} and sss.idx<![CDATA[ <= ]]> #{pageEnd}
             order by sss.t_date desc   
 	</select>
 	
 	<select id="searchTownBoardListCount" parameterType="map" resultType="int">
 	select count(*) from town_img pmg
-          right outer join (select * from (select max(i.t_img_no)imgno,i.t_no from town_img i group by i.t_no) img 
+          right outer join (select * from (select min(i.t_img_no)imgno,i.t_no from town_img i group by i.t_no) img 
               right outer join (select * from  (select * from town_board p join town_category pc on p.t_ctgr_no=pc.t_ctgr_no
              where p.t_address_lat 
-             between (select a.address_lat from address a where a.user_id=#{address.user_id} and a.address_no=2)-0.004504505*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
-                AND (select a.address_lat from address a where a.user_id=#{address.user_id} and a.address_no=2)+0.004504505*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no}))pp
+             between (select a.address_lat from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})-0.004504505*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
+                AND (select a.address_lat from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})+0.004504505*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no}))pp
         where pp.t_address_lng
-        between (select a.address_lng from address a where a.user_id=#{address.user_id} and a.address_no=2)-0.056344377*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
-            AND (select a.address_lng from address a where a.user_id=#{address.user_id} and a.address_no=2)+0.056344377*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
+        between (select a.address_lng from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})-0.056344377*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
+            AND (select a.address_lng from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})+0.056344377*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
             and t_content like '%'||#{search_keyword}||'%' or t_title like '%'||#{search_keyword}||'%'
             )p 
             on img.t_no=p.t_no)plist

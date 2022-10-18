@@ -54,7 +54,8 @@ public class SearchRestController {
 		
 		Address sAddress = (Address)session.getAttribute("sAddress");
 		if(sAddress!=null) {
-			
+			searchList=(PageMakerDto<TownBoard>)searchService.searchTownBoardList(keyword, sAddress, pageno);
+			resultMap.put("data", searchList);
 		}else {
 			searchList=(PageMakerDto<TownBoard>)searchService.searchTownBoardListNotLogin(keyword, pageno);
 			resultMap.put("data", searchList);

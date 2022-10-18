@@ -118,7 +118,7 @@
 
                             	<c:if test="${searchList.pageMaker.prevPage > 0}">  
 	            					<li class="page-item">
-	                                    <button class="page-link" onclick="changeTownList(${data.pageMaker.prevPage});"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+	                                    <button class="page-link" onclick="changeTownList(${data.pageMaker.prevPage},'${param.search_keyword}');"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
 	                               	 </li>
                                 </c:if>
                                 <c:forEach var="no" begin="${searchList.pageMaker.blockBegin}" end="${searchList.pageMaker.blockEnd}">
@@ -126,12 +126,12 @@
 										<li class="page-item active"><button class="page-link" href="#">${no}</button></li>
 									</c:if>
 									<c:if test="${searchList.pageMaker.curPage != no}">
-										<li class="page-item"><button class="page-link page" onclick="changeTownList(${no})">${no}</button></li>
+										<li class="page-item"><button class="page-link page" onclick="changeTownList(${no},'${param.search_keyword}')">${no}</button></li>
 									</c:if>
                                 </c:forEach>
                                 <c:if test="${searchList.pageMaker.curPage < searchList.pageMaker.totPage}">  
 	                                <li class="page-item">
-				                        <button class="page-link" onclick="changeTownList(${searchList.pageMaker.nextPage})"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+				                        <button class="page-link" onclick="changeTownList(${data.pageMaker.nextPage},'${param.search_keyword}')"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
 			                    	 </li>
                                 </c:if>
 
