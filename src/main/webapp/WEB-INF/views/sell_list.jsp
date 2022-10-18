@@ -27,6 +27,8 @@
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
+	<script type="text/javascript" src="js/review/review.js"></script>
+	<script type="text/javascript" src="js/review/ReviewHtmlContents.js"></script>
 
 </head>
 
