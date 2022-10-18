@@ -15,11 +15,6 @@ public class SearchServiceImpl implements SearchService {
 	@Autowired
 	SearchDao searchDao;
 
-	@Override
-	public List<Product> selectListSearch(String search_keyword, Address address) {
-		// TODO Auto-generated method stub
-		return searchDao.selectListSearch(search_keyword, address);
-	}
 
 	
 
@@ -40,6 +35,25 @@ public class SearchServiceImpl implements SearchService {
 		PageMakerDto<Product> pageMakerSearchList=new PageMakerDto<Product>(searchList, pageMaker, totalCount);
 		
 		return pageMakerSearchList;
+	}
+
+
+
+	@Override
+	public PageMakerDto<Product> selectListSearch(String search_keyword, Address address, int currentPage) {
+		int totalCount=searchDao.selectListSearchCount(search_keyword, address);
+		PageMaker pageMaker=new PageMaker(totalCount, currentPage, 5, 5);
+		List<Product> searchList=searchDao.selectListSearch(search_keyword, address, pageMaker.getPageBegin(), pageMaker.getPageEnd());
+		PageMakerDto<Product> pageMakerSearchList=new PageMakerDto<Product>(searchList, pageMaker, totalCount);
+		return pageMakerSearchList;
+	}
+
+
+
+	@Override
+	public int selectListSearchCount(String search_keyword, Address address) {
+		// TODO Auto-generated method stub
+		return searchDao.selectListSearchCount(search_keyword, address);
 	}
 
 }

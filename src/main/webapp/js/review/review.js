@@ -4,7 +4,7 @@ $(document).ready(function(){
 	$('.btn_review_write').on('click',function(e){
 		console.log("orders_no: "+e.target.id);
 		console.log("seller_id: "+$("#"+e.target.id).attr("seller_id"));
-		location.href="review_write_form?orders_no="+e.target.id+"&your_id="+$("#"+e.target.id).attr("seller_id");
+		location.href="review_write_form?orders_no="+e.target.id+"&your_id="+$("#"+e.target.id).attr("seller_id")+"&p_title="+$("#"+e.target.id).attr("p_title");
 		/*
 		$("#container_contents").html(ReviewHtmlContents.review_write_form(e.target.id,$("#"+e.target.id).attr("seller_id")));
 		$(".breadcrumb").prev('h5').text('후기작성');
@@ -38,18 +38,6 @@ $(document).ready(function(){
 		*/
 		e.preventDefault();
 	});
-	
-	/*
-	$(".stars >*").on('click',function(e){
-		if($("input[type=radio][name='star']").is(':checked')){
-			//console.log('click');
-			var answer = $(this).attr("id");
-			var anText = $("label[for='"+answer+"']").text(); 
-			console.log(anText);
-			
-		}
-	});
-	*/
 	
 	
 	/* 이미지 upload *********************************************/

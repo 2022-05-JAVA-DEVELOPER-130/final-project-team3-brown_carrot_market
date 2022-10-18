@@ -67,12 +67,16 @@
 	        <div class="container">
 	            <div id="container_contents" class="row justify-content-between">
 	                <div class="submit_a_review_area col-12" style="border: 1px solid #d6e6fb; padding:30px;">
-                        <h4>작성한 후기</h4>
+                        <!-- <h4>작성한 후기</h4> -->
+                        <h4><strong>${review.your_id} 님에게 따뜻한 후기를 보냈어요.</strong></h4>
+                        <hr>
+                        <h6 >${review.your_id} 님과 ${review.orders.product.p_title}을 거래했어요.</h6>
+                        <br>
                         <!-- [Start]review_write_form -->
                         <form id="review_view_form" name="review_view_form" action="" method="post">
                                  <input type="hidden" id="review_no" name="review_no" class="" value="${review.review_no}">
                                 <div class="form-group">
-                                    <span>별점</span>
+                                    <span style="color:dimgray">별점</span>
                                     <div class="stars">
                                         <input type="radio" name="star" class="star-${review.review_point}" id="star-${review.review_point}" checked>
                                         <label class="star-${review.review_point}" for="star-${review.review_point}">${review.review_point}</label>
@@ -97,13 +101,13 @@
                                 </div>
                                 -->
                                 <div class="form-group">
-                                    <label for="review_desc">내용</label>
+                                    <label for="review_desc" style="color:dimgray">내용</label>
                                     <textarea class="form-control" id="review_desc" name="review_desc" rows="5" data-max-length="150" readonly>${review.review_desc}</textarea>
                                 </div>
                                 
                                 <!-- 이미지 업로드 -->
                                 <div class="form-group">
-	                                <label for="drop">첨부 사진</label>
+	                                <label for="drop" style="color:dimgray">첨부 사진</label>
 									<div id="show" class="form-control"
 										style="height: ${showHeight}px; padding: 3px">
 										<div id="thumbnails">
