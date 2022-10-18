@@ -166,7 +166,7 @@
                         <div class="widget-area search_post mb-30">
                             <h6>Search Post</h6>
                             <form action="#" method="get">
-                                <input type="search" class="form-control" placeholder="Enter Keyword...">
+                                <input type="search" class="form-control" id="townBoardSearch" placeholder="Enter Keyword...">
                                 <button type="submit" class="btn d-none">Submit</button>
                             </form>
                         </div>

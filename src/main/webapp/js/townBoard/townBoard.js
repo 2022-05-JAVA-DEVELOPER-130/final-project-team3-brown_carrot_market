@@ -468,6 +468,15 @@ const ToastConfirm =  Swal.mixin({
 	width: '400px'
  });
 
-
+$(function(){
+	$("#townBoardSearch").keypress(function(e) {
+  if (e.keyCode === 13) {
+	location.href="townBoardSearch_list?search_keyword="+$("#townBoardSearch").val();
+    e.preventDefault();
+  
+  }
+});
+	
+})
 
 
