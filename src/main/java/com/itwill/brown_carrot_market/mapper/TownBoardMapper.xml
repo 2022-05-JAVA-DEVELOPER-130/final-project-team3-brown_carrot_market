@@ -120,8 +120,9 @@
 		(select rownum idx, s.* from
 		(select ctlist.* from (select plist.*,pmg.t_img_name from town_img pmg 
 right outer join (select tb.*,imgno from 
-                    (select max(i.t_img_no)imgno,t_no from town_img i group by i.t_no)img 
-right outer join town_Board tb
+                    (select min(i.t_img_no)imgno,t_no from town_img i group by i.t_no)img 
+right outer join (select *
+from town_board p )tb
 on img.t_no=tb.t_no)plist
 on pmg.t_img_no=plist.imgno) ctlist
 join town_category tc
