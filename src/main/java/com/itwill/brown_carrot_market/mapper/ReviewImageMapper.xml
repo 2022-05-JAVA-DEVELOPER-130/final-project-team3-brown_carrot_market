@@ -18,12 +18,16 @@
 	</delete>
 	
 	<delete id="removeReviewImgByNoList" parameterType="String">
-	    DELETE FROM review_img
+	    DELETE FROM review_img 
 	    <where>
 		    <foreach collection="list" item="item" open="" close="" separator="OR">
-		        (review_img_name = #{item})
+		        (review_img_name = #{item.review_img_name})
 		    </foreach>
 	    </where>
+	</delete>
+	
+	<delete id="removeReviewImgByName" parameterType="String">
+	 DELETE FROM review_img where review_img_name = #{review_img_name}
 	</delete>
 
 </mapper>

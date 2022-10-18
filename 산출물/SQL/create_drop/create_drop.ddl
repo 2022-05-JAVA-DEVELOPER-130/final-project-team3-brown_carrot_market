@@ -275,8 +275,8 @@ CREATE SEQUENCE town_reaction_t_reac_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 CREATE TABLE review(
 		review_no                     		NUMBER(10)		 NULL ,
-		review_desc                   		VARCHAR2(100)		 NULL ,
-		review_image                  		VARCHAR2(100)		 NULL ,
+		review_desc                   		VARCHAR2(2000)		 NULL ,
+		your_id                 		    VARCHAR2(100)		 NULL ,
 		review_point                  		NUMBER(10,1)		 NULL ,
 		orders_no                     		NUMBER(10)		 NULL ,
 		user_id                       		VARCHAR2(30)		 NULL 
