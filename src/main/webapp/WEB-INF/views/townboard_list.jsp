@@ -221,7 +221,7 @@
 
                             	<c:if test="${townBoardList.pageMaker.prevPage > 0}">  
 	            					<li class="page-item">
-	                                    <button class="page-link" onclick="changeQnaList(${data.pageMaker.prevPage});"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+	                                    <button class="page-link" onclick="changeQnaList(${data.pageMaker.prevPage},'0');"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
 	                               	 </li>
                                 </c:if>
                                 <c:forEach var="no" begin="${townBoardList.pageMaker.blockBegin}" end="${townBoardList.pageMaker.blockEnd}">
@@ -229,12 +229,12 @@
 										<li class="page-item active"><button class="page-link" href="#">${no}</button></li>
 									</c:if>
 									<c:if test="${townBoardList.pageMaker.curPage != no}">
-										<li class="page-item"><button class="page-link page" onclick="changeQnaList(${no})">${no}</button></li>
+										<li class="page-item"><button class="page-link page" onclick="changeQnaList(${no},'0')">${no}</button></li>
 									</c:if>
                                 </c:forEach>
                                 <c:if test="${townBoardList.pageMaker.curPage < townBoardList.pageMaker.totPage}">  
 	                                <li class="page-item">
-				                        <button class="page-link" onclick="changeQnaList(${townBoardList.pageMaker.nextPage})"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+				                        <button class="page-link" onclick="changeQnaList(${townBoardList.pageMaker.nextPage},'0')"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
 			                    	 </li>
                                 </c:if>
 
