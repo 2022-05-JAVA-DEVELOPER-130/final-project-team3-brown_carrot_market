@@ -31,13 +31,13 @@ public String searchKeyword(@RequestParam(required = false, defaultValue = "1") 
 	PageMakerDto<Product> searchList=null;
 	System.out.println("검색 키워드:"+keyWord);
 	if(sAddress!=null) {
-		//searchList= searchService.selectListSearch(keyWord, sAddress);
+		searchList=(PageMakerDto<Product>)searchService.selectListSearch(keyWord, sAddress, pageno);
 		model.addAttribute("searchList", searchList);
+		model.addAttribute("pageno", pageno);
 		System.out.println("로그인검색목록"+searchList);
 	}else {
 		 searchList = (PageMakerDto<Product>) searchService.selectListNotLogin(keyWord,pageno);
 		
-		//searchList=searchService.selectListNotLogin(keyWord);
 		model.addAttribute("searchList",searchList);
 		model.addAttribute("pageno", pageno);
 		System.out.println("검색목록"+searchList);
