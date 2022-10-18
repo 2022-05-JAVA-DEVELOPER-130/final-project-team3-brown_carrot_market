@@ -247,7 +247,7 @@
                         	<!--  
                             <a class="add_to_wishlist" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 찜하기</a>
                             -->
-                            <a class="" href="#" id="product_modify_form" onclick="updateProduct();"><i class="fa fa-th" aria-hidden="true"></i> 수정하기</a>
+                           <a class="" href="product_modify_form?p_no=${product.p_no}" p_no="${product.p_no}" id="product_modify_form"><i class="fa fa-th" aria-hidden="true"></i> 수정하기</a>
                             <a class="share_with_friend" href="product_delete_action"><i class="fa fa-share" aria-hidden="true"></i> 삭제하기</a>
                         </div>
 
