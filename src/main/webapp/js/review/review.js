@@ -328,7 +328,7 @@ function check_isExisted_review(orders_no){
 			"orders_no": orders_no
 		},
 		success : function(jsonResult) {
-			console.log("result: "+jsonResult.data);
+			//console.log("result: "+jsonResult.data['review_no']);
 			//console.log("review_no: "+jsonResult.data.review_no);
 			if(jsonResult.data!=null){
 				$('#'+orders_no).text('보러가기');
@@ -354,8 +354,10 @@ function check_isExisted_orders(p_no){
 			"p_no": p_no
 		},
 		success : function(jsonResult) {
-			console.log("result: "+jsonResult.data);
-			check_isExisted_review(p_no);
+			console.log("result: "+JSON.stringify(jsonResult.data)+" "+jsonResult.data['orders_no']);
+			check_isExisted_review(jsonResult.data['orders_no']);
+			
+			$("."+p_no).attr("id",jsonResult.data['orders_no']);
 			/*
 			console.log("review_no: "+jsonResult.data.review_no);
 			if(jsonResult.data!=null){
