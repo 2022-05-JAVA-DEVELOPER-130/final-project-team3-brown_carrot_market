@@ -253,6 +253,7 @@
 				                                    <input type="hidden" class="form-control" name="t_no" value="${townBoard.t_no}"/>
                                  				    <input type="hidden" class="form-control" name="page_no" value="${pageno}" />
                                  				    <input type="hidden" class="form-control" name="t_reply_no" value="${townReply.t_reply_no}" />
+                                 				    <input type="hidden" class="form-control" name="groupno" value="${townReply.groupno}" />
                                  				    <!-- 
                                  				    <input type="hidden" class="form-control" name="step" value="${townReply.step}" />
                                  				     -->

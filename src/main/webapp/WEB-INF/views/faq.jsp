@@ -305,27 +305,27 @@
                             <div class="card">
                                 <div class="card-header" id="bigshopWithIconAccordian2">
                                     <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#bswicollapseTwo" aria-expanded="false" aria-controls="bswicollapseTwo">
-                                        <i class="icofont-rounded-up"></i><i class="icofont-rounded-down"></i> 어떻게 판매하나요? (판매 방법)
+                                        <i class="icofont-rounded-up"></i><i class="icofont-rounded-down"></i> 송금 수수료는 얼마인가요?
                                     </button>
                                 </div>
                                 <div id="bswicollapseTwo" class="collapse" aria-labelledby="bigshopWithIconAccordian2" data-parent="#bigshopAccordianIcon">
                                     <div class="card-body">
-                                        <p class="mb-0">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</p>
+                                    
+                                    <p class="mb-0"> 중고거래 송금 시 별도 수수료는 발생하지 않아요.
+                                        				<br><br>
+                                        				당근페이에 있는 잔액을 내 계좌로 보낼 때도 별도 수수료는 발생하지 않아요. (당근페이에 연결되어 있는 본인명의 은행 계좌로만 출금할 수 있어요.)<br>
+                                        				<br>• 헌혈증 주실 분 구해요<br>
+                                        				<br>• 이웃송금: 무료<br>
+                                        				<br>• 당근페이에 출금이체 동의된 내 계좌로 송금: 무료<br>
+                                       					<br>• 계좌송금: 월 5회 무료, 이후 건당 500원 (정책 적용일 : 22.09.08)<br><br>
+                                       					
+                                       					만일 물품 거래가 필요한 상황이라면, 중고거래 게시판을 이용해보시면 어떨까요?<br>
+														거래할 수 있도록 흙당근마켓은 중고거래 게시판 서비스를 제공하고 있어요.
+</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card">
-                                <div class="card-header" id="bigshopWithIconAccordian3">
-                                    <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#bswicollapseThree" aria-expanded="false" aria-controls="bswicollapseThree">
-                                        <i class="icofont-rounded-up"></i><i class="icofont-rounded-down"></i> 어떻게 구매하나요? (구매 방법)
-                                    </button>
-                                </div>
-                                <div id="bswicollapseThree" class="collapse" aria-labelledby="bigshopWithIconAccordian3" data-parent="#bigshopAccordianIcon">
-                                    <div class="card-body">
-                                        <p class="mb-0">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</p>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                     <!-- +++++++++++++++++++++++
@@ -434,7 +434,7 @@
                             <div class="card">
                                 <div class="card-header" id="bigshopWithIconAccordian3">
                                     <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#bswicollapseThree" aria-expanded="false" aria-controls="bswicollapseThree">
-                                        <i class="icofont-rounded-up"></i><i class="icofont-rounded-down"></i> 형편없는 물건을 판매해요 ㅋㅋㅋㅋ
+                                        <i class="icofont-rounded-up"></i><i class="icofont-rounded-down"></i> 형편없는 물건을 판매해요 
                                     </button>
                                 </div>
                                 <div id="bswicollapseThree" class="collapse" aria-labelledby="bigshopWithIconAccordian3" data-parent="#bigshopAccordianIcon">

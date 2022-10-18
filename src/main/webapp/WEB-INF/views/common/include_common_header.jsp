@@ -144,7 +144,7 @@
                                 </div>
                                 <ul id="transaction-dropdown" class="user-meta-dropdown" style="width:150px">
                                     <li><a href="orders_list">구매 내역</a></li>
-                                    <li><a href="sales_list">판매내역</a></li>
+                                    <li><a href="sell_list">판매내역</a></li>
                                 </ul>
                             </div>
 
