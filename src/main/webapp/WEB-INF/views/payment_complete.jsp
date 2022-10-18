@@ -8,7 +8,6 @@
 </head>
 <body>
 <script>
-	console.log(data);
 </script>
 </body>
 </html>

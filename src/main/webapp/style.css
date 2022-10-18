@@ -2659,7 +2659,7 @@ button.mfp-arrow {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background-color: #070a57; }
+  background-color: orange; }
   .checkout_steps_area a {
     font-size: 14px;
     text-align: center;
@@ -2684,7 +2684,8 @@ button.mfp-arrow {
     .checkout_steps_area a i {
       display: none; }
     .checkout_steps_area a.active {
-      background-color: #0f99f3;
+      background-color: #964B00
+;
       cursor: default;
       pointer-events: none; }
     .checkout_steps_area a.complated {
