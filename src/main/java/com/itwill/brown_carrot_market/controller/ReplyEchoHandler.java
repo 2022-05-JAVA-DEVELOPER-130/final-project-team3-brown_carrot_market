@@ -412,6 +412,7 @@ public class ReplyEchoHandler {
 
 			System.out.println("채팅 상대방 소켓에 메세지 전송 시도");
 			if (yourSession != null&&myChatSession!=null) {
+				jsonChat.put("toastId", "youExist");
 				jsonChat.put("c_read", 1);
 				yourSession.getBasicRemote().sendText(jsonChat.toString());
 				myChatSession.getBasicRemote().sendText(jsonChat.toString());

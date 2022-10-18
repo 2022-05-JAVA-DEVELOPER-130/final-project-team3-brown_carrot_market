@@ -2,7 +2,10 @@ $(document).ready(function(){
 	
 	/* [마이페이지]user_view *********************************/
 	$(document).on('click', '#user_account_details, #a_account_details',function(e){
-		console.log("click!! >> "+e.target);
+		//console.log("click!! >> "+e.target);
+		//console.log("click!! >> "+$(e.target).closest('ul>li').attr('class'));
+		$('.my-account-navigation > ul li').removeClass('active');
+		$(e.target).closest('li').addClass('active');
 		    $.ajax({
 				url:'user_view_json',
 				method:'POST',

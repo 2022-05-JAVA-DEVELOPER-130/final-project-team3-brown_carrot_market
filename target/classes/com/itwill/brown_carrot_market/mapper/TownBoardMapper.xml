@@ -122,7 +122,7 @@
 right outer join (select tb.*,imgno from 
                     (select min(i.t_img_no)imgno,t_no from town_img i group by i.t_no)img 
 right outer join (select *
-from town_board p )tb
+from (select p.*,pc.t_ctgr_name from town_board p join town_category pc on p.t_ctgr_no=pc.t_ctgr_no) p )tb
 on img.t_no=tb.t_no)plist
 on pmg.t_img_no=plist.imgno) ctlist
 join town_category tc
@@ -133,12 +133,15 @@ on ctlist.t_ctgr_no = tc.t_ctgr_no)s
 	
 	<!-- 비회원의 동네게시판  전체 게시물 수  계산-->
 	<select id="selectNonMemberCountTownBoard" resultType="int">
-		select count(*) from (select plist.*,pmg.t_img_name from town_img pmg 
-right outer join (select tb.*,imgno from (select max(i.t_img_no)imgno,t_no from town_img i
-group by i.t_no)img 
-right outer join town_Board tb
+		select count(*) from (select ctlist.* from (select plist.*,pmg.t_img_name from town_img pmg 
+right outer join (select tb.*,imgno from 
+                    (select min(i.t_img_no)imgno,t_no from town_img i group by i.t_no)img 
+right outer join (select *
+from (select p.*,pc.t_ctgr_name from town_board p join town_category pc on p.t_ctgr_no=pc.t_ctgr_no) p )tb
 on img.t_no=tb.t_no)plist
-on pmg.t_img_no=plist.imgno)
+on pmg.t_img_no=plist.imgno) ctlist
+join town_category tc
+on ctlist.t_ctgr_no = tc.t_ctgr_no)
 	</select>
 	
 	
@@ -159,44 +162,32 @@ on pmg.t_img_no=plist.imgno)
 	<select id="selectNonMemberCtgrTownBoardList" parameterType="int" resultMap="townBoradResultMap">
 	select ss.* from 
 		(select rownum idx, s.* from
-		(select * from town_board tb 
-	left outer join town_img ti 
-	on tb.t_no = ti.t_no
-	join town_category tc
-	on tc.t_ctgr_no = tb.t_ctgr_no
-	where tc.t_ctgr_no=#{t_ctgr_no}
-	order by tb.t_date desc)s
+		(select ctlist.* from (select plist.*,pmg.t_img_name from town_img pmg 
+right outer join (select tb.*,imgno from 
+                    (select min(i.t_img_no)imgno,t_no from town_img i group by i.t_no)img 
+right outer join (select *
+from (select p.*,pc.t_ctgr_name from town_board p join town_category pc on p.t_ctgr_no=pc.t_ctgr_no) p )tb
+on img.t_no=tb.t_no)plist
+on pmg.t_img_no=plist.imgno) ctlist
+join town_category tc
+on ctlist.t_ctgr_no = tc.t_ctgr_no where tc.t_ctgr_no=#{t_ctgr_no})s
 		)ss
 		where ss.idx <![CDATA[ >= ]]> #{pageStart} and ss.idx <![CDATA[ <= ]]> #{pageEnd}
 		
 
-
-
-select sss.* from(select rownum idx,plist.*,pmg.t_img_name from town_img pmg
-          right outer join (select p.*,imgno from (select min(i.t_img_no)imgno,i.t_no from town_img i group by i.t_no) img 
-              right outer join (select * from  (select p.*,pc.t_ctgr_name from town_board p join town_category pc on p.t_ctgr_no=pc.t_ctgr_no where pc.t_ctgr_no=#{t_ctgr_no} 
-             and p.t_address_lat 
-             between (select a.address_lat from address a where a.user_id=#{user_id} and a.address_no=#{address_no})-0.004504505*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
-                AND (select a.address_lat from address a where a.user_id=#{user_id} and a.address_no=#{address_no})+0.004504505*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})) pp
-        where pp.t_address_lng
-        between (select a.address_lng from address a where a.user_id=#{user_id} and a.address_no=#{address_no})-0.056344377*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
-            AND (select a.address_lng from address a where a.user_id=#{user_id} and a.address_no=#{address_no})+0.056344377*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
-		)p 
-            on img.t_no=p.t_no)plist
-            on pmg.t_img_no=plist.imgno)sss
-            where sss.idx<![CDATA[ >= ]]> #{pageStart}and sss.idx<![CDATA[ <= ]]> #{pageEnd}
-            order by sss.t_date desc   
 		
 	</select>
 	<!-- 비회원의 동네게시판 카테고리 조건검색 전체 게시물 수  계산-->
 	<select id="selectNonMemberCountCtgrTownBoard" parameterType="int" resultType="int">
-		select count(*) from (select * from town_board tb 
-	left outer join town_img ti 
-	on tb.t_no = ti.t_no
-	join town_category tc
-	on tc.t_ctgr_no = tb.t_ctgr_no
-	where tc.t_ctgr_no=#{t_ctgr_no}
-	order by tb.t_date desc)
+		select count(*) from (select ctlist.* from (select plist.*,pmg.t_img_name from town_img pmg 
+right outer join (select tb.*,imgno from 
+                    (select min(i.t_img_no)imgno,t_no from town_img i group by i.t_no)img 
+right outer join (select *
+from (select p.*,pc.t_ctgr_name from town_board p join town_category pc on p.t_ctgr_no=pc.t_ctgr_no) p )tb
+on img.t_no=tb.t_no)plist
+on pmg.t_img_no=plist.imgno) ctlist
+join town_category tc
+on ctlist.t_ctgr_no = tc.t_ctgr_no where tc.t_ctgr_no=#{t_ctgr_no})
 	</select>
 	
 	

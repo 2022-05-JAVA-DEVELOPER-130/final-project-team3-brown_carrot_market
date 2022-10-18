@@ -79,7 +79,7 @@
     <div class="shortcodes_area section_padding_100">
         <div class="container">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 notice_list_view">
                     <div class="shortcodes_title mb-30">
                         <h4>공지사항</h4>
                     </div>

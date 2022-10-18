@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,9 +24,11 @@ import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Product;
 import com.itwill.brown_carrot_market.dto.ProductCategory;
 import com.itwill.brown_carrot_market.dto.ProductImage;
+import com.itwill.brown_carrot_market.dto.TownBoard;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.ProductService;
 import com.itwill.brown_carrot_market.upload_file.service.FilesStorageServiceProduct;
+import com.itwill.brown_carrot_market.util.PageMakerDto;
 
 @RestController
 public class ProductRestController {
@@ -177,5 +181,40 @@ public class ProductRestController {
 			
 			return resultMap;
 		}
+	}
+	
+	@RequestMapping("/product_list_rest")
+	public Map<String,Object> product_list_rest(@RequestParam(required = false, defaultValue = "1") Integer pageno, 
+												HttpSession session, HttpServletRequest req,
+												@RequestParam Map<String, Object> map, 
+												@RequestParam(required = false, defaultValue = "0") int p_ctgr_no) throws Exception{
+		Map<String, Object> resultMap = new HashMap<>();
+		//PageMakerDto<Product> productList = null;
+		String sUserId = (String)session.getAttribute("sUserId");
+		Address sAddress = (Address)session.getAttribute("sAddress");
+		
+		System.out.println("product_list_rest컨트롤러 map :"+map);
+		
+		try {
+		//비회원
+		if(sAddress!=null) {
+		PageMakerDto<Product> productLoginList = productService.selectListByRange(sAddress, pageno);
+		resultMap.put("errorCode", 1); 
+		resultMap.put("errorMsg", "회원 일반 성공");
+		resultMap.put("data", productLoginList);
+			
+		}else {
+		PageMakerDto<Product> productList = productService.selectProductAll(pageno);
+		resultMap.put("errorCode",3); 
+		resultMap.put("errorMsg", "비회원 일반 성공");
+		resultMap.put("data", productList);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			resultMap.put("errorCode", -1);
+			resultMap.put("errorMsg", "관리자에게 문의하세요");
+		}
+		
+		return resultMap;
 	}
 }

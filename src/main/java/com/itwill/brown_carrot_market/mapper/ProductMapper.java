@@ -10,11 +10,16 @@ import com.itwill.brown_carrot_market.dto.Product;
 
 @Mapper
 public interface ProductMapper {
-	public List<Product> selectProductAll();
+	//public List<Product> selectProductAll();
+	public List<Product> selectProductAll(int pageStart,int pageEnd);
+	
+	public int selectListNotLoginCount();
+	
+	public List<Product> selectListByRange(Address address,int pageStart,int pageEnd);
+	
+	public int selectListLoginCount(Address address);
 	
 	public List<Product> selectAllByCtgr(int p_ctgr_no);
-	
-	public List<Product> selectListByRange(Address address);
 	
 	public List<Product> selectListByRangeCtgr(int p_ctgr_no, Address address);
 	

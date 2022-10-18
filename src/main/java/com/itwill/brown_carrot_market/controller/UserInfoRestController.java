@@ -245,7 +245,7 @@ public class UserInfoRestController {
 		if(code==1)
 		msg="remove_address 성공";
 		/******************************/
-		//sAddress와 일치하는 address를 삭제했다면,
+		//sAddress와 일치치하는 address를 삭제했다면,
 		Address sAddress= (Address)request.getSession().getAttribute("sAddress");
 		System.out.println("before : "+sAddress);
 		if(sAddress.getAddress_no()==address.getAddress_no()) request.getSession().setAttribute("sAddress", null);

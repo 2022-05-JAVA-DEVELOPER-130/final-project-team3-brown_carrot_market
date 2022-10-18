@@ -24,6 +24,7 @@ import com.itwill.brown_carrot_market.dto.Product;
 import com.itwill.brown_carrot_market.dto.ProductCategory;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.ProductService;
+import com.itwill.brown_carrot_market.util.PageMakerDto;
 
 @Controller
 public class ProductController {
@@ -35,20 +36,25 @@ public class ProductController {
 	
 	@RequestMapping(value={"/product_list",
 							"/product_login_list"})
-	public String product_list(Model model, HttpSession session) throws Exception {
+	public String product_list(@RequestParam(required = false, defaultValue = "1") Integer pageno,Model model,HttpServletRequest req, HttpSession session) throws Exception {
 		
 		String sUserId = (String)session.getAttribute("sUserId");
 		Address sAddress = (Address)session.getAttribute("sAddress");
-		if(sUserId != null) {
+		
+		if(sAddress != null) {
 			//로그인한 회원 주위의 상품 리스트
-			List<Product> productLoginList = productService.selectListByRange(sAddress);
+			PageMakerDto<Product> productLoginList = productService.selectListByRange(sAddress, pageno);
 			model.addAttribute("productLoginList",productLoginList);
+			model.addAttribute("pageno", pageno);
 			return "product_login_list";
 		}
 		
 		//비회원 상품리스트
-		List<Product> productList = productService.selectProductAll();
+		PageMakerDto<Product> productList = productService.selectProductAll(pageno);
+		//List<Product> productList = productService.selectProductAll();
 		model.addAttribute("productList", productList);	
+		model.addAttribute("pageno", pageno);
+		
 		return "product_list";
 	}
 	

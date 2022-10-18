@@ -43,7 +43,7 @@ function changeQnaList(pageno,t_ctgr_no){
 				let paginationBuffer = ``;
 				if(data.pageMaker.prevPage > 0){
 					paginationBuffer += `<li class="page-item">
-		                                    <button class="page-link" onclick="changeQnaList(${data.pageMaker.prevPage});"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+		                                    <button class="page-link" onclick="changeQnaList(${data.pageMaker.prevPage},'${t_ctgr_no}');"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
 		                               	 </li>`;
 				}
 				for(let no = data.pageMaker.blockBegin; no <= data.pageMaker.blockEnd; no++){
@@ -51,12 +51,12 @@ function changeQnaList(pageno,t_ctgr_no){
 						paginationBuffer += `<li class="page-item active"><button class="page-link" href="#">${no}</button></li>`;
 					}
 					if(data.pageMaker.curPage != no){
-						paginationBuffer += `<li class="page-item"><button class="page-link" onclick="changeQnaList(${no});">${no}</button></li>`;
+						paginationBuffer += `<li class="page-item"><button class="page-link" onclick="changeQnaList(${no},'${t_ctgr_no}');">${no}</button></li>`;
 					}
 				}
 				if(data.pageMaker.curPage < data.pageMaker.totPage){
 					paginationBuffer += `<li class="page-item">
-					                        <button class="page-link" onclick="changeQnaList(${data.pageMaker.nextPage});"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+					                        <button class="page-link" onclick="changeQnaList(${data.pageMaker.nextPage},'${t_ctgr_no}');"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
 				                    	 </li>`;
 				}
 				$(".pagination.pagination-sm.justify-content-center").html(paginationBuffer);
@@ -126,6 +126,7 @@ $(".townBoard_btn.update_form").on("click", function(){
 /* 
 게시글 수정 
 */ 
+/*
 $(".townBoard_btn.update").on("click", function(){ 
 	if($("#t_title_txt").val() == "" || CKEDITOR.instances.townBoard_content_area.getData() == ""){
 		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
@@ -141,6 +142,7 @@ $(".townBoard_btn.update").on("click", function(){
 							}
 					});
 });
+*/
 
 /*
 새글 등록 폼 
@@ -276,25 +278,20 @@ function townBoardCreate() {
 
 //게시글 수정
 function townBoardUpdateAction(){
-	if (document.product_modify_form.p_title.value == "") {
+	if (document.townBoard_update_form.t_title.value == "") {
       alert("제목을 입력하십시요.");
-      document.product_modify_form.p_title.focus();
-      return false;
-   }
-   if (document.product_modify_form.p_price.value == "") {
-      alert("가격을 입력하십시요.");
-      document.product_modify_form.p_price.focus();
+      document.townBoard_update_form.t_title.focus();
       return false;
    }
 
-   if (document.product_modify_form.p_desc.value == "") {
+   if (document.townBoard_update_form.t_content.value == "") {
       alert("내용을 입력하십시요.");
-      document.product_modify_form.p_desc.focus();
+      document.townBoard_update_form.t_content.focus();
       return false;
    }
  
    
-   const formData1 = new FormData($('#main_contact_form')[0]);
+   const formData1 = new FormData($('#main_contact_form_townBoard')[0]);
    /*
    formData1.append('files',$('#files')[0]); //이게 맞나?
    formData1.append('files',$('#files')[1]); 
@@ -310,7 +307,7 @@ function townBoardUpdateAction(){
       data:formData1,
       success:function(jsonResult){
       console.log(jsonResult);
-      window.location.href="product_list";
+      window.location.href="townboard_list";
    
    /*
    document.product_modify_form.action = "product_modify_action";
