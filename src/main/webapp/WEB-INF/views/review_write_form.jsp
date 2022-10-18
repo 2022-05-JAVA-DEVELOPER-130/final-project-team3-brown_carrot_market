@@ -67,7 +67,10 @@
 	        <div class="container">
 	            <div id="container_contents" class="row justify-content-between">
 	                <div class="submit_a_review_area col-12" style="border: 1px solid #d6e6fb; padding:30px;">
-                        <h4>후기작성</h4>
+                        <h4><strong>${your_id} 님과 ${p_title}를 거래했어요.</strong></h4>
+                        <hr>
+                        <h6 >${your_id} 님과 거래가 어떠셨나요?</h6>
+                        <br>
                         <!-- [Start]review_write_form -->
                         <form id="review_write_form" name="review_write_form" action="review_write_action" method="post">
                                 <div class="form-group">
