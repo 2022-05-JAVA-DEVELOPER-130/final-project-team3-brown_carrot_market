@@ -127,7 +127,7 @@ public class TownBoardController {
 		//해당 게시물의 댓글 전체 조회
 		List<TownReply> townReplyList = townReplyService.selectTownBoardReplyList(t_no);
 		model.addAttribute("townReplyList", townReplyList);
-		
+		System.out.println("townReplyList"+ townReplyList);
 		//댓글 등록
 		//townReplyService.insertTownBoardReply(townReply);
 		

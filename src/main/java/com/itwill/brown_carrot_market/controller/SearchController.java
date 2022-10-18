@@ -53,6 +53,10 @@ public String searchTownBoard(@RequestParam(required = false, defaultValue = "1"
 	System.out.println("검색 키워드:"+keyWord);
 	
 	if(sAddress!=null) {
+		searchList=(PageMakerDto<TownBoard>)searchService.searchTownBoardList(keyWord, sAddress, pageno);
+		model.addAttribute("searchList",searchList);
+		model.addAttribute("pageno", pageno);
+		System.out.println("검색목록"+searchList);
 		
 	}else {
 		searchList=(PageMakerDto<TownBoard>) searchService.searchTownBoardListNotLogin(keyWord, pageno);

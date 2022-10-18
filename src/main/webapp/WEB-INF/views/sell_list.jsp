@@ -113,8 +113,9 @@
 		                                        	</c:if>
 		                                        </td>
 		                                        <td>
-		                                            <div class="" name="check_orders">
+		                                            <%-- <div class="${product.p_no}" id=""> --%>
 		                                            <script>check_isExisted_orders($('input[name=p_no_${status.index}]').val())</script>
+		                                            <a href="#" class="badge ${product.p_no}" id="${Orders.orders_no}" seller_id="${Orders.product.userInfo.user_id}" p_title="${Orders.product.p_title}" style="height:20px;font-size:1rem"></a>
 		                                            </div>
 		                                        </td>
 		                                    </tr>

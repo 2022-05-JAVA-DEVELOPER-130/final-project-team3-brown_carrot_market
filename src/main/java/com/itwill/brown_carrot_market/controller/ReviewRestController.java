@@ -110,7 +110,6 @@ public class ReviewRestController {
 		int code=1;
 		String url="";
 		String msg="orders 없음";
-		int ordersNo = -1;
 		
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
 		
@@ -120,16 +119,16 @@ public class ReviewRestController {
 		review.setUserInfo(new UserInfo(sUserId, sUserId, sUserId, url, msg, ordersNo, code, sUserId, null));
 		Review result = reviewService.isExistedReviewByOrdersNoId(review);
 		*/
-		ordersNo = ordersService.selectByOrdersCount(pNo);
+		Orders orders = ordersService.selectByP_No(pNo);
 		
-		if(ordersNo!=-1) {
+		if(orders != null) {
 			code=2;
 			msg="orders 존재";
 		}
 		resultMap.put("code", code);
 		resultMap.put("url", url);
 		resultMap.put("msg", msg);
-		resultMap.put("data",ordersNo);
+		resultMap.put("data",orders);
 		return resultMap;
 	}
 }
