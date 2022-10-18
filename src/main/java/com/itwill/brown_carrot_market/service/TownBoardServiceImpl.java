@@ -145,11 +145,41 @@ public class TownBoardServiceImpl implements TownBoardService{
 		return townBoardDao.deleteTownBoardOne(t_no);
 	}
 
+	//게시글 수정
 	@Override
-	public int updateTownBoardOne(TownBoard townBoard) throws Exception {
+	public int updateTownBoardOne(Map map) throws Exception {
+		int result = 0;
+		int t_no = Integer.parseInt((String) map.get("t_no"));
+		int rowCount = townBoardDao.updateTownBoardOne(map);
 		
-		return townBoardDao.updateTownBoardOne(townBoard);
+		List<String> imageList = new ArrayList<>();
+		imageList = (List<String>) map.get("ImageNameList");
+
+		if(imageList!=null) {
+		for (int i=0; i < imageList.size(); i++) {
+			String t_img_name = imageList.get(i).toString();
+			TownImage townImage = new TownImage();
+			townImage.setT_no(t_no);
+			townImage.setT_img_name(t_img_name);
+			
+			result = townImageDao.insertTownBoardImg(townImage);
+			
+			}
+		}
+		
+		
+		return result;
 	}
+	
+	
+	//게시글 수정 위한 사진 전체 삭제
+	@Override
+	public int deleteTownBoardImgAll(int t_no) throws Exception {
+		return townImageDao.deleteTownBoardImgAll(t_no);
+	}
+	
+	
+	
 
 	@Override
 	public int updateTownBoardCount(int t_no) throws Exception {
@@ -212,6 +242,8 @@ public class TownBoardServiceImpl implements TownBoardService{
 		return result;
 		
 	}
+
+
 
 	/*
 	@Override

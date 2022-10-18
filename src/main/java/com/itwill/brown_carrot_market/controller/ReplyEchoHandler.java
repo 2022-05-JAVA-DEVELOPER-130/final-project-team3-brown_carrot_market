@@ -29,10 +29,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itwill.brown_carrot_market.dto.ChatContents;
 import com.itwill.brown_carrot_market.dto.ChatRoom;
 import com.itwill.brown_carrot_market.dto.ChatRoomListView;
+import com.itwill.brown_carrot_market.dto.Orders;
 import com.itwill.brown_carrot_market.dto.Product;
 import com.itwill.brown_carrot_market.dto.ProductImage;
 import com.itwill.brown_carrot_market.dto.Promise;
+import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.ChatService;
+import com.itwill.brown_carrot_market.service.OrdersService;
 import com.itwill.brown_carrot_market.service.ProductService;
 import com.itwill.brown_carrot_market.service.UserInfoService;
 
@@ -42,6 +45,9 @@ import com.itwill.brown_carrot_market.service.UserInfoService;
 public class ReplyEchoHandler {
 	@Autowired
 	private ChatService chatService;
+	
+	@Autowired
+	private OrdersService ordersService;
 	
 	@Autowired
 	private UserInfoService userService;
@@ -255,19 +261,30 @@ public class ReplyEchoHandler {
 					product.setP_sell(1);
 					productService.updateProductSell(1, product.getP_no());
 					resultMap.put("product", product);	
-
+					int o_no = ordersService.selectByP_No(product.getP_no()).getOrders_no();
+					int result = ordersService.deleteOrders(o_no);					
 
 					return resultMap;
 				}
 				//예약완료
 				
 				@PostMapping(value = "/chat_reserve_rest")
-				public Map chatReserve_rest(@RequestBody Map<String, Product> reserve) throws Exception  {
+				public Map chatReserve_rest(@RequestBody Map<String, String> reserve) throws Exception  {
 					Map resultMap = new HashMap();
-
-					Product product = reserve.get("product");
+					
+					int p_no = Integer.parseInt(reserve.get("p_no"));
+					Product product = productService.selectByOne(p_no);
+					
+					
 					product.setP_sell(2);
 					productService.updateProductSell(2, product.getP_no());
+					
+					String you_Id = reserve.get("yourId");
+					Orders orders=new Orders();
+					orders.setUserinfo(new UserInfo(you_Id, null, null, null, null, 0, 0, null, null));
+					orders.setProduct(product);
+					int result = ordersService.insertOrders(orders);
+			
 					resultMap.put("product", product);	
 
 
@@ -276,12 +293,21 @@ public class ReplyEchoHandler {
 				 //판매완료
 				
 				@PostMapping(value = "/chat_soldout_rest")
-				public Map chatSoldOut_rest(@RequestBody Map<String, Product> reserve) throws Exception  {
+				public Map chatSoldOut_rest(@RequestBody Map<String, String> reserve) throws Exception  {
 					Map resultMap = new HashMap();
 
-					Product product = reserve.get("product");
+					int p_no = Integer.parseInt(reserve.get("p_no"));
+					Product product = productService.selectByOne(p_no);
+					
 					product.setP_sell(3);
 					productService.updateProductSell(3, product.getP_no());
+					
+					String you_Id = reserve.get("yourId");
+					Orders orders=new Orders();
+					orders.setUserinfo(new UserInfo(you_Id, null, null, null, null, 0, 0, null, null));
+					orders.setProduct(product);
+					int result = ordersService.insertOrders(orders);
+					
 					resultMap.put("product", product);	
 
 

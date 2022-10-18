@@ -84,7 +84,10 @@
 	
 	<!-- 게시물에 해당하는 댓글 전체조회 -->
 	<select id="selectTownBoardReplyList" parameterType="com.itwill.brown_carrot_market.dto.TownReply" resultMap="townReplyResultMap">
-		select * from town_reply where t_no=#{townBoard.t_no} order by groupno asc, step desc ,depth asc
+		select tr.*, u.user_profile from town_reply tr
+		join userinfo u
+		on tr.user_id = u.user_id
+		where t_no=#{townBoard.t_no} order by groupno asc, step desc ,depth asc
 	</select>
 	
 	<!-- 댓글 한개 조회 -->

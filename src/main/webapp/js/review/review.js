@@ -328,7 +328,7 @@ function check_isExisted_review(orders_no){
 			"orders_no": orders_no
 		},
 		success : function(jsonResult) {
-			console.log("result: "+jsonResult.data);
+			//console.log("result: "+jsonResult.data['review_no']);
 			//console.log("review_no: "+jsonResult.data.review_no);
 			if(jsonResult.data!=null){
 				$('#'+orders_no).text('보러가기');
@@ -341,6 +341,37 @@ function check_isExisted_review(orders_no){
 				$('#'+orders_no).addClass('badge-carrot');
 				$('#'+orders_no).addClass('btn_review_write');
 			}
+		}
+	});
+}
+
+function check_isExisted_orders(p_no){
+	$.ajax({
+		url : 'isExisted_orders_check_json',
+		method : 'POST',
+		dataType : 'json',
+		data : {
+			"p_no": p_no
+		},
+		success : function(jsonResult) {
+			console.log("result: "+JSON.stringify(jsonResult.data)+" "+jsonResult.data['orders_no']);
+			check_isExisted_review(jsonResult.data['orders_no']);
+			
+			$("."+p_no).attr("id",jsonResult.data['orders_no']);
+			/*
+			console.log("review_no: "+jsonResult.data.review_no);
+			if(jsonResult.data!=null){
+				$('#'+orders_no).text('보러가기');
+				$('#'+orders_no).addClass('badge-secondary');
+				$('#'+orders_no).addClass('btn_review_view');
+				$('#'+orders_no).attr('review_no',jsonResult.data.review_no);
+				//$('#'+orders_no).attr('review',JSON.stringfy(jsonResult.data));
+			}else {
+				$('#'+orders_no).text('작성하기');
+				$('#'+orders_no).addClass('badge-carrot');
+				$('#'+orders_no).addClass('btn_review_write');
+			}
+			*/
 		}
 	});
 }
