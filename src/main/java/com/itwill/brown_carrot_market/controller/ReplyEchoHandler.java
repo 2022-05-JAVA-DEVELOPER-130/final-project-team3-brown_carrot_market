@@ -293,12 +293,21 @@ public class ReplyEchoHandler {
 				 //판매완료
 				
 				@PostMapping(value = "/chat_soldout_rest")
-				public Map chatSoldOut_rest(@RequestBody Map<String, Product> reserve) throws Exception  {
+				public Map chatSoldOut_rest(@RequestBody Map<String, String> reserve) throws Exception  {
 					Map resultMap = new HashMap();
 
-					Product product = reserve.get("product");
+					int p_no = Integer.parseInt(reserve.get("p_no"));
+					Product product = productService.selectByOne(p_no);
+					
 					product.setP_sell(3);
 					productService.updateProductSell(3, product.getP_no());
+					
+					String you_Id = reserve.get("yourId");
+					Orders orders=new Orders();
+					orders.setUserinfo(new UserInfo(you_Id, null, null, null, null, 0, 0, null, null));
+					orders.setProduct(product);
+					int result = ordersService.insertOrders(orders);
+					
 					resultMap.put("product", product);	
 
 
@@ -380,6 +389,7 @@ public class ReplyEchoHandler {
 
 			System.out.println("채팅 상대방 소켓에 메세지 전송 시도");
 			if (yourSession != null&&myChatSession!=null) {
+				jsonChat.put("toastId", "youExist");
 				jsonChat.put("c_read", 1);
 				yourSession.getBasicRemote().sendText(jsonChat.toString());
 				myChatSession.getBasicRemote().sendText(jsonChat.toString());

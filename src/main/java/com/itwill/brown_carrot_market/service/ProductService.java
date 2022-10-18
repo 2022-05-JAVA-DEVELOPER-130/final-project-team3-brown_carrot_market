@@ -6,11 +6,16 @@ import java.util.Map;
 import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Product;
 import com.itwill.brown_carrot_market.dto.ProductImage;
+import com.itwill.brown_carrot_market.util.PageMakerDto;
 
 public interface ProductService {
 	
 	//비회원 상품 전체보기
-		List<Product> selectProductAll() throws Exception;
+		//List<Product> selectProductAll() throws Exception;
+	
+		PageMakerDto<Product> selectProductAll(int currentPage) throws Exception;
+		
+		public int selectListNotLoginCount() throws Exception;
 		
 		//비회원 카테고리별 상품 리스트 불러오기
 		List<Product> selectAllByCtgr(int p_ctgr_no) throws Exception;

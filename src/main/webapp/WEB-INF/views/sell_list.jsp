@@ -28,7 +28,6 @@
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/review/review.js"></script>
-	<script type="text/javascript" src="js/review/ReviewHtmlContents.js"></script>
 
 </head>
 
@@ -113,9 +112,9 @@
 		                                        	</c:if>
 		                                        </td>
 		                                        <td>
-		                                            <%-- <div class="${product.p_no}" id=""> --%>
+		                                          	<div id="sell_list">
 		                                            <script>check_isExisted_orders($('input[name=p_no_${status.index}]').val())</script>
-		                                            <a href="#" class="badge ${product.p_no}" id="${Orders.orders_no}" seller_id="${Orders.product.userInfo.user_id}" p_title="${Orders.product.p_title}" style="height:20px;font-size:1rem"></a>
+		                                            <a href="#" class="badge ${product.p_no}" id="${Orders.orders_no}" seller_id="${Orders.product.userInfo.user_id}" p_title="${product.p_title}" style="height:20px;font-size:1rem"></a>
 		                                            </div>
 		                                        </td>
 		                                    </tr>

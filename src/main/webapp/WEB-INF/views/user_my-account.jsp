@@ -128,6 +128,8 @@
 			/****************user_view_addresses******************/
 			$(document).on('click',	'#user_view_addresses',function(e) {
 				console.log("click!! >> #user_view_addresses");
+				$('.my-account-navigation > ul li').removeClass('active');
+				$(e.target).closest('li').addClass('active');
 				
 			    $.ajax({
 					url : 'user_view_json',
@@ -426,6 +428,8 @@
 			
 			/* user_received_reviewList********************************/
 			$(document).on('click', '#user_received_reviewList', function(e) {
+				$('.my-account-navigation > ul li').removeClass('active');
+				$(e.target).closest('li').addClass('active');
 				 $.ajax({
 						url:'user_received_reviewList_json',
 						method:'POST',
@@ -442,6 +446,8 @@
 			/* user_remove_form ********************************/
 			$(document).on('click', '#user_remove_form', function(e) {
 				console.log('user_remove_form');
+				$('.my-account-navigation > ul li').removeClass('active');
+				$(e.target).closest('li').addClass('active');
 				$('#my-account-content').html(UserHtmlContents.user_remove_form(""));
 				e.preventDefault();
 			});
@@ -518,11 +524,11 @@
 							<!-- (수정필요)활성화에 따라서, active를 넣는 작업 해야함! -->
 							<li class="active"><a href="user_my_account" id="user_my_account">마이페이지</a></li>
 							<li class=""><a href="#" id="user_account_details">회원정보수정</a></li>
-							<li class="active"><a href="" id="user_view_addresses">내 동네설정</a></li>
+							<li class=""><a href="" id="user_view_addresses">내 동네설정</a></li>
 							<li class=""><a href="#" id="">흙당근 포인트 내역</a></li>
 							<li class=""><a href="#" id="user_received_reviewList">받은 거래 후기</a></li>
-							<li><a href="user_logout_action">로그아웃</a></li>
-							<li><a href="#" id="user_remove_form" style="color:#6c757d">회원탈퇴</a></li>
+							<li class=""><a href="user_logout_action">로그아웃</a></li>
+							<li class=""><a href="#" id="user_remove_form" style="color:#6c757d">회원탈퇴</a></li>
 						</ul>
 					</div>
 				</div>
@@ -542,6 +548,8 @@
 								</c:otherwise>
 							</c:choose>
 							<!-- 프로필 이미지 -->
+							<span>${sUser.user_freshness}</span>
+							<span>${sUser.user_point}</span>
 							<p>
 								<strong>${sUser.user_id}</strong>님, 안녕하세요? 
 							</p>
@@ -591,6 +599,8 @@
 	<script src="js/default/active.js"></script>
 
 	<script type="text/javascript" src="js/user/user_my_account.js"></script>
+
+
 
 </body>
 

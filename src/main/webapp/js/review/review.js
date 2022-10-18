@@ -1,7 +1,14 @@
 $(document).ready(function(){
+/*
+	$(document).on('click','.btn_review_write',function(e){
+		console.log("click "+e.target.id);
+		e.preventDefault();
+	});
+	*/
 
 	/* review_write_form 보여주기****/
-	$('.btn_review_write').on('click',function(e){
+	$(document).on('click','.btn_review_write',function(e){
+	//$('.btn_review_write').on('click',function(e){
 		console.log("orders_no: "+e.target.id);
 		console.log("seller_id: "+$("#"+e.target.id).attr("seller_id"));
 		location.href="review_write_form?orders_no="+e.target.id+"&your_id="+$("#"+e.target.id).attr("seller_id")+"&p_title="+$("#"+e.target.id).attr("p_title");
@@ -16,7 +23,8 @@ $(document).ready(function(){
 	});
 	
 	/* review_view_form 보여주기****/
-	$('.btn_review_view').on('click',function(e){
+	$(document).on('click','.btn_review_view',function(e){
+	//$('.btn_review_view').on('click',function(e){
 		console.log("review_no: "+$(e.target).attr('review_no'));
 		location.href="review_view?review_no="+$(e.target).attr('review_no');
 		
@@ -276,18 +284,6 @@ $(document).ready(function(){
 					}
 				});
 			}
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
     		e.preventDefault();
     	});
 	
@@ -318,7 +314,7 @@ function changeStar(){
 	$('.stars').append('<span></span>');
 }
 
-//작성된 review존재여부 체크하여, 버튼생성
+//[orders_list]작성된 review존재여부 체크하여, 버튼생성
 function check_isExisted_review(orders_no){
 	$.ajax({
 		url : 'isExisted_review_check_json',
@@ -344,7 +340,7 @@ function check_isExisted_review(orders_no){
 		}
 	});
 }
-
+//[sell_list]작성된 orders존재여부 체크하여
 function check_isExisted_orders(p_no){
 	$.ajax({
 		url : 'isExisted_orders_check_json',
@@ -354,10 +350,12 @@ function check_isExisted_orders(p_no){
 			"p_no": p_no
 		},
 		success : function(jsonResult) {
-			console.log("result: "+JSON.stringify(jsonResult.data)+" "+jsonResult.data['orders_no']);
+			//console.log("result: "+JSON.stringify(jsonResult.data));
+			console.log("seller_id: "+jsonResult.data.userinfo.user_id);
 			check_isExisted_review(jsonResult.data['orders_no']);
 			
 			$("."+p_no).attr("id",jsonResult.data['orders_no']);
+			$("."+p_no).attr("seller_id",jsonResult.data.userinfo.user_id);
 			/*
 			console.log("review_no: "+jsonResult.data.review_no);
 			if(jsonResult.data!=null){

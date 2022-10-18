@@ -9,7 +9,10 @@ import com.itwill.brown_carrot_market.dto.Product;
 public interface ProductDao {
 	
 	//비회원 상품 전체보기
-	List<Product> selectProductAll() throws Exception;
+	//List<Product> selectProductAll() throws Exception;
+	List<Product> selectProductAll(int pageStart, int pageEnd) throws Exception;
+	
+	int selectListNotLoginCount()throws Exception;
 	
 	//비회원 카테고리별 상품 리스트 불러오기
 	List<Product> selectAllByCtgr(int p_ctgr_no) throws Exception;

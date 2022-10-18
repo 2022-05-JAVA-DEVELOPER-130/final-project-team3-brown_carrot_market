@@ -120,6 +120,7 @@ public class ReviewRestController {
 		Review result = reviewService.isExistedReviewByOrdersNoId(review);
 		*/
 		Orders orders = ordersService.selectByP_No(pNo);
+		System.out.println("orders 존재 "+orders);
 		
 		if(orders != null) {
 			code=2;
