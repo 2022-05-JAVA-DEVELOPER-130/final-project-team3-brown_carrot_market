@@ -11,4 +11,8 @@ public interface ReviewImageMapper {
 
 	//@Insert("")
 	public int insertReviewImgList(List<ReviewImage> reviewImageList);
+	
+	public int removeReviewImgByNo(int review_img_no);
+
+	public int removeReviewImgByNoList(List<String> reviewImgNoList);
 }

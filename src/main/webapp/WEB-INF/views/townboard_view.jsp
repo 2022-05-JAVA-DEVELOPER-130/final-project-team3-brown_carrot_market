@@ -238,7 +238,7 @@
                                             <button class="heading">댓글달기</button>
                                             
                                             <div  class="content">
-                                            <form class="townReply_write_form"  method="post">
+                                            <form class="townReReply_write_form"  method="post">
 				                                <div class="row">
 				                                    <div class="col-12 rereply">
 				                                        <div class="form-group mb-30">
@@ -251,10 +251,14 @@
 				                                        </div>
 				                                    </div>
 				                                    <input type="hidden" class="form-control" name="t_no" value="${townBoard.t_no}"/>
-				                                   <!--  <input type="hidden" class="form-control" name="step" value="1"/> 이렇게 하면 모든 setp이 1로 나와서 xx 증가해야함 -->
+                                 				    <input type="hidden" class="form-control" name="page_no" value="${pageno}" />
+                                 				    <input type="hidden" class="form-control" name="t_reply_no" value="${townReply.t_reply_no}" />
+                                 				    <!-- 
+                                 				    <input type="hidden" class="form-control" name="step" value="${townReply.step}" />
+                                 				     -->
 				                                    <input type="hidden" class="form-control" name="depth" value="2"/>
 				                                    <div class="col-12 ">
-				                                        <button  class="btn btn-primary reply" type="submit">Submit Comment</button>
+				                                        <button  class="btn btn-primary rereply" type="submit" >Submit Comment</button>
 				                                    </div>
 				                                </div>
 				                            </form>
@@ -339,7 +343,7 @@
                                     </div>
                                     <input type="hidden" class="form-control" name="t_no" value="${townBoard.t_no}"/>
                                     <input type="hidden" class="form-control" name="page_no" value="${pageno}" />
-                                   <!--  <input type="hidden" class="form-control" name="step" value="1"/> 이렇게 하면 모든 setp이 1로 나와서 xx 증가해야함 -->
+                                   <!-- <input type="hidden" class="form-control" name="step" value="1"/> --> 
                                     <input type="hidden" class="form-control" name="depth" value="1"/>
                                     <div class="col-12">
                                         <button class="btn btn-primary reply"  id="townMainReplyBtn" type="submit">Submit Comment</button>

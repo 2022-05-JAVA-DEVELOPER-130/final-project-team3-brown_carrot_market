@@ -16,7 +16,15 @@ public interface ReviewService {
 	
 	List<Review> findReceivedReviewBySeller(String user_id) throws Exception;
 	
-	public Review findReviewByRivewNo(int review_no) throws Exception;
+	Review findReviewByRivewNo(int review_no) throws Exception;
 	
-	public Review isExistedReviewByOrdersNoId(Review review) throws Exception;
+	Review isExistedReviewByOrdersNoId(Review review) throws Exception;
+	
+	int removeReview(int review_no) throws Exception;
+
+	int removeReviewImgByNo(int review_no) throws Exception;
+	
+	int removeReviewImgByNoList(List<String> reviewImgNoList) throws Exception;
+	
+	int updateReview(Review review) throws Exception;
 }

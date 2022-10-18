@@ -13,6 +13,17 @@
 		</foreach>) R
 	</insert>
 	
+	<delete id="removeReviewImgByNo" parameterType="int">
+		delete from review_img where review_img_no=0;
+	</delete>
 	
+	<delete id="removeReviewImgByNoList" parameterType="String">
+	    DELETE FROM review_img
+	    <where>
+		    <foreach collection="list" item="item" open="" close="" separator="OR">
+		        (review_img_name = #{item})
+		    </foreach>
+	    </where>
+	</delete>
 
 </mapper>

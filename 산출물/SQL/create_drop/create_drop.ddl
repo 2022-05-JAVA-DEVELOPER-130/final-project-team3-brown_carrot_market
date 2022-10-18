@@ -370,6 +370,7 @@ ALTER TABLE town_reaction ADD CONSTRAINT IDX_town_reaction_FK1 FOREIGN KEY (user
 ALTER TABLE review ADD CONSTRAINT IDX_review_PK PRIMARY KEY (review_no);
 ALTER TABLE review ADD CONSTRAINT IDX_review_FK0 FOREIGN KEY (orders_no) REFERENCES orders (orders_no) on delete cascade;
 ALTER TABLE review ADD CONSTRAINT IDX_review_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
+ALTER TABLE review RENAME COLUMN review_image TO your_id;
 
 ALTER TABLE review_img ADD CONSTRAINT IDX_review_img_PK PRIMARY KEY (review_img_no);
 ALTER TABLE review_img ADD CONSTRAINT IDX_review_img_FK0 FOREIGN KEY (review_no) REFERENCES review (review_no) on delete cascade;
