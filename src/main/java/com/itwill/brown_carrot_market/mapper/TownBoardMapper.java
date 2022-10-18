@@ -61,7 +61,7 @@ public TownBoard selectTownBoardOne(int t_no);
 public int deleteTownBoardOne(int t_no);
 
 //동네게시판 게시글 한개 수정
-public int updateTownBoardOne(TownBoard townBoard);
+public int updateTownBoardOne(Map map);
 
 //동네게시판 게시물 조회수 증가
 public int updateTownBoardCount(int t_no);
