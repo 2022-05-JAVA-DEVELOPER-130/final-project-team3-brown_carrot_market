@@ -736,7 +736,8 @@ $.ajax({
 	var result = confirm("상품을 예약중으로 변경하시겠습니까?");
 	if(result){
 		var reserve={
-		"product":product
+		"p_no":product.p_no,
+		"yourId":yourId
 	}
 	$.ajax({
 		url:"chat_reserve_rest",

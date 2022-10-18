@@ -340,11 +340,12 @@ $("#townMainReplyBtn").on("click", function(e){
 $(".btn.btn-primary.rereply").on("click", function(e){
 	e.preventDefault();
 	e.stopPropagation();
-	var form=$(".townReReply_write_form");
+	index=$(e.target).attr("index");
+	var form=$(".townReReply_write_form_"+index);
 	let pageno = form.find($('input[name="page_no"]')).val();
 	let t_no = form.find($('input[name="t_no"]')).val();
 	let groupno = form.find($('input[name="groupno"]')).val();
-	alert(groupno)
+	alert(groupno);
 	if($(".t_reply_title").val() == "" || $(".t_reply_content").val() == ""){
 		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
 		return;
