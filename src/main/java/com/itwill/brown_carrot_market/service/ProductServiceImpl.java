@@ -59,11 +59,26 @@ public class ProductServiceImpl implements ProductService{
 		// TODO Auto-generated method stub
 		return productDao.selectAllByCtgr(p_ctgr_no);
 	}
-
+	/*
 	@Override
 	public List<Product> selectListByRange(Address address) throws Exception {
 		// TODO Auto-generated method stub
 		return productDao.selectListByRange(address);
+	}
+	*/
+	
+	public PageMakerDto<Product> selectListByRange(Address address,int currentPage) throws Exception{
+		int totalCount = productDao.selectListLoginCount(address);
+		PageMaker pageMaker = new PageMaker(totalCount, currentPage,5,5);
+		List<Product> loginList = productDao.selectListByRange(address, pageMaker.getPageBegin(), pageMaker.getPageEnd());
+		PageMakerDto<Product> pageMakerLoginList = new PageMakerDto<Product>(loginList, pageMaker, totalCount);
+		return pageMakerLoginList;
+	}
+	
+	@Override
+	public int selectListLoginCount(Address address) throws Exception {
+		// TODO Auto-generated method stub
+		return productDao.selectListLoginCount(address);
 	}
 
 	@Override

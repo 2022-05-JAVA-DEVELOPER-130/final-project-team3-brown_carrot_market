@@ -18,7 +18,9 @@ public interface ProductDao {
 	List<Product> selectAllByCtgr(int p_ctgr_no) throws Exception;
 	
 	//회원의 좌표값을 기준으로 범위 안의 모든 상품 불러오기
-	List<Product> selectListByRange(Address address)throws Exception;
+	List<Product> selectListByRange(Address address,int pageStart,int pageEnd)throws Exception;
+	
+	public int selectListLoginCount(Address address)throws Exception;
 	
 	//회원의 좌표값을 기준으로 범위와 선택한 카테고리 안의 모든 상품 불러오기
 	List<Product> selectListByRangeCtgr(int p_ctgr_no, Address address)throws Exception;

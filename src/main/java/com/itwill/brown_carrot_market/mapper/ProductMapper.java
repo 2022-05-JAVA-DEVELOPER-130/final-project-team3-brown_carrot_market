@@ -15,9 +15,11 @@ public interface ProductMapper {
 	
 	public int selectListNotLoginCount();
 	
-	public List<Product> selectAllByCtgr(int p_ctgr_no);
+	public List<Product> selectListByRange(Address address,int pageStart,int pageEnd);
 	
-	public List<Product> selectListByRange(Address address);
+	public int selectListLoginCount(Address address);
+	
+	public List<Product> selectAllByCtgr(int p_ctgr_no);
 	
 	public List<Product> selectListByRangeCtgr(int p_ctgr_no, Address address);
 	
