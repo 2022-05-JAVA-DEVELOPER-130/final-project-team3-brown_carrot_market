@@ -25,6 +25,7 @@ import com.itwill.brown_carrot_market.dto.Orders;
 import com.itwill.brown_carrot_market.dto.Review;
 import com.itwill.brown_carrot_market.dto.ReviewImage;
 import com.itwill.brown_carrot_market.dto.UserInfo;
+import com.itwill.brown_carrot_market.service.OrdersService;
 import com.itwill.brown_carrot_market.service.ReviewService;
 import com.itwill.brown_carrot_market.service.UserInfoService;
 import com.itwill.brown_carrot_market.upload_file.service.FilesStorageServiceUser;
@@ -43,7 +44,10 @@ public class ReviewController {
 	
 	@Autowired
 	private UserInfoService userInfoService;
-
+/*
+	@Autowired
+	private OrdersService ordersService;
+*/
 	public ReviewController() {
 		System.out.println(">> ReviewController()생성");
 	}
@@ -186,12 +190,19 @@ public class ReviewController {
 		return "review_view";
 	}
 	@RequestMapping("review_write_form")
-	public String review_write_form(int orders_no,String your_id, Model model, HttpServletRequest request) throws Exception {
+	public String review_write_form(int orders_no,String your_id, String p_title,Model model, HttpServletRequest request) throws Exception {
 		System.out.println("review_write_form >>> " );
 		
 		model.addAttribute("orders_no",orders_no);
 		System.out.println("orders_no"+orders_no);
-		
+	
+		model.addAttribute("p_title",p_title);
+		System.out.println("p_title"+p_title);
+		/*
+		Orders orders = ordersService.selectByNo(orders_no);
+		model.addAttribute("orders",orders);
+		System.out.println("orders"+orders);
+		*/
 		model.addAttribute("your_id",your_id);
 		System.out.println("your_id"+your_id);
 		
