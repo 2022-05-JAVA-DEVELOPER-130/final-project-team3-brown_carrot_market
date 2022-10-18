@@ -1,5 +1,9 @@
 function ReviewHtmlContents(){
 }
+
+
+
+
 /*
 	[기준]구매목록: 구매자(buyer)가 작성하는 review -> orders.user_id = review.user_id
 						=> 상대방id(your_id) = product.user_id (seller)

@@ -55,7 +55,7 @@
                         <li class="breadcrumb-item"><a href="main">Home</a></li>
                         <li class="breadcrumb-item">거래내역</li>
                         <li class="breadcrumb-item"><a href="orders_list">구매내역</a></li>
-                        <li class="breadcrumb-item active">후기작성</li>
+                        <li class="breadcrumb-item active">후기수정</li>
                     </ol>
                 </div>
             </div>
@@ -67,72 +67,82 @@
 	        <div class="container">
 	            <div id="container_contents" class="row justify-content-between">
 	                <div class="submit_a_review_area col-12" style="border: 1px solid #d6e6fb; padding:30px;">
-                        <h4>후기작성</h4>
+                        <h4>후기 수정</h4>
                         <!-- [Start]review_write_form -->
-                        <form id="review_write_form" name="review_write_form" action="review_write_action" method="post">
+                        <form id="review_modify_form" name="review_modify_form" action="review_modify_action" method="post">
                                 <div class="form-group">
-                                    <span>별점주기</span>
-                                    <input type="hidden" id="orders_no" name="orders_no" class="" value="${orders_no}">
-                                    <input type="hidden" id="your_id" name="your_id" class="" value="${your_id}">
+                                    <input type="hidden" id="orders_no" name="orders_no" class="" value="${review.orders.orders_no}">
+                                    <input type="hidden" id="your_id" name="your_id" class="" value="${review.your_id}">
+                                    <input type="hidden" id="review_no" name="review_no" class="" value="${review.review_no}">
                                     <input type="hidden" id="review_point" name="review_point" class="" value="">
-                                    <!-- <input type="hidden" id="review_image" name="review_image" class="" value="test"> -->
+                                    <input type="hidden" id="review_point_prev" name="review_point_prev" class="" value="${review.review_point}">
+                                    <span>별점주기</span>
                                     <div class="stars">
-                                        <input type="radio" name="star" class="star-0_5" id="star-0_5" onclick='setPoint(this.id);'>
+                                       <script type="text/javascript">
+                                       setPoint('#star-'+${review.review_point});
+                                       $(".stars>span").css("width","20*"+${review.review_point}+"%");
+                                       </script>
+                                        <input type="radio" name="star" class="star-0_5" id="star-0_5" onclick='changeStar();changeStar();setPoint(this.id);'>
                                         <label class="star-0_5" for="star-0_5">0.5</label>
-                                        <input type="radio" name="star" class="star-1" id="star-1" onclick='setPoint(this.id);'>
+                                        <input type="radio" name="star" class="star-1" id="star-1" onclick='changeStar();setPoint(this.id);'>
                                         <label class="star-1" for="star-1">1</label>
-                                        <input type="radio" name="star" class="star-1_5" id="star-1_5" onclick='setPoint(this.id);'>
+                                        <input type="radio" name="star" class="star-1_5" id="star-1_5" onclick='changeStar();setPoint(this.id);'>
                                         <label class="star-1_5" for="star-1_5">1.5</label>
-                                        <input type="radio" name="star" class="star-2" id="star-2" onclick='setPoint(this.id);'>
+                                        <input type="radio" name="star" class="star-2" id="star-2" onclick='changeStar();setPoint(this.id);'>
                                         <label class="star-2" for="star-2">2</label>
-                                        <input type="radio" name="star" class="star-2_5" id="star-2_5" onclick='setPoint(this.id);'>
+                                        <input type="radio" name="star" class="star-2_5" id="star-2_5" onclick='changeStar();setPoint(this.id);'>
                                         <label class="star-2_5" for="star-2_5">2.5</label>
-                                        <input type="radio" name="star" class="star-3" id="star-3" onclick='setPoint(this.id);'>
+                                        <input type="radio" name="star" class="star-3" id="star-3" onclick='changeStar();setPoint(this.id);'>
                                         <label class="star-3" for="star-3">3</label>
-                                        <input type="radio" name="star" class="star-3_5" id="star-3_5" onclick='setPoint(this.id);'>
+                                        <input type="radio" name="star" class="star-3_5" id="star-3_5" onclick='changeStar();setPoint(this.id);'>
                                         <label class="star-3_5" for="star-3_5">3.5</label>
-                                        <input type="radio" name="star" class="star-4" id="star-4" onclick='setPoint(this.id);'>
+                                        <input type="radio" name="star" class="star-4" id="star-4" onclick='changeStar();setPoint(this.id);'>
                                         <label class="star-4" for="star-4">4</label>
-                                        <input type="radio" name="star" class="star-4_5" id="star-4_5" onclick='setPoint(this.id);'>
+                                        <input type="radio" name="star" class="star-4_5" id="star-4_5" onclick='changeStar();setPoint(this.id);'>
                                         <label class="star-4_5" for="star-4_5">4.5</label>
-                                        <input type="radio" name="star" class="star-5" id="star-5" onclick='setPoint(this.id);'>
+                                        <input type="radio" name="star" class="star-5" id="star-5" onclick='changeStar();setPoint(this.id);'>
                                         <label class="star-5" for="star-5">5</label>
-                                        <span></span>
+                                        <span style="width:${20 * review.review_point}%"></span>
                                     </div>
                                 </div>
                                 
-                                <!--
-                                <div class="form-group">
-                                    <label for="name">Nickname</label>
-                                    <input type="email" class="form-control" id="name" placeholder="Nazrul">
-                                </div>
-                                <div class="form-group">
-                                    <label for="options">Reason for your rating</label>
-                                    <select class="form-control small right py-0 w-100" id="options">
-                                        <option>Quality</option>
-                                        <option>Value</option>
-                                        <option>Design</option>
-                                        <option>Price</option>
-                                        <option>Others</option>
-                                    </select>
-                                </div>
-                                -->
                                 <div class="form-group">
                                     <label for="review_desc">내용</label>
-                                    <textarea class="form-control" id="review_desc" name="review_desc" rows="5" data-max-length="150"></textarea>
+                                    <textarea class="form-control" id="review_desc" name="review_desc" rows="5" data-max-length="150">${review.review_desc}</textarea>
                                 </div>
                                 
                                 <!-- 이미지 업로드 -->
                                 <div class="form-group">
-	                                <label for="drop">사진 첨부 <span style="color:dimgray;font-size:10px"> (하단에 drag & drop 해주세요)</span></label>
+	                                <label for="drop">첨부 사진 <span style="color:dimgray;font-size:10px"> (하단에 drag & drop 해주세요)</span></label>
 									<div id="drop" class="form-control"
 										style="height: 220px; padding: 3px">
+										<c:if test="${review.reviewImageList.size() != 0}">
+											<script type="text/javascript">
+											var existingFiles = [];
+											</script>
 										
-										<div id="thumbnails" ></div>
+											<div id="thumbnails">
+											<c:forEach items="${review.reviewImageList}" var="reviewImage" varStatus="status">
+												<input type="hidden" class="existing_img" img-idx="${status.index}" review_img_name="${reviewImage.review_img_name}">
+												<div class="thumb">
+													<div class="delete" data-idx="${status.index}" review_img_no="${reviewImage.review_img_no}" review_img_name="${reviewImage.review_img_name}">X</div>
+													<img class="" src="img/review_img/${reviewImage.review_img_name}" onerror="this.src='img/user_profile/newCarrot.jpg'">
+												</div>
+											</c:forEach>
+											</div>
+												<script type="text/javascript">
+													$(".existing_img").each(function(){
+														existingFiles.push($(this).attr("review_img_name"));
+													});
+													console.log(existingFiles);
+												</script>
+										</c:if>
+										 
 									</div>
 								</div>
-                                <input type="button" id="btnSubmit" class="btn btn-primary" value="Submit Review" />
-                                
+                                <input type="button" id="btn_review_modify_action" class="btn btn-primary" value="수정하기" />
+                                <input type="button" id="btn_backto_review_view" class="btn btn-primary" onclick="javascript:history.back();" value="뒤로가기" />
+                                <input type="button" id="btn_backto_orderslist" class="btn btn-primary" value="구매목록" />
                             </form>
                         <!-- [END]review_write_form -->
                 	</div> 

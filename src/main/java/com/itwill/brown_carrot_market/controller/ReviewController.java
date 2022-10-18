@@ -1,6 +1,8 @@
 package com.itwill.brown_carrot_market.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,12 +27,20 @@ import com.itwill.brown_carrot_market.dto.ReviewImage;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.ReviewService;
 import com.itwill.brown_carrot_market.service.UserInfoService;
+import com.itwill.brown_carrot_market.upload_file.service.FilesStorageServiceUser;
+
+import ch.qos.logback.core.net.SyslogOutputStream;
 
 @Controller
 public class ReviewController {
 
 	@Autowired
 	private ReviewService reviewService;
+	
+	@Autowired
+	@Qualifier(value = "FilesStorageServiceImplReview")
+	FilesStorageServiceUser storageService;
+	
 	@Autowired
 	private UserInfoService userInfoService;
 
@@ -42,12 +53,71 @@ public class ReviewController {
 		return "review_write_form";
 	}
 */
+	
+	@RequestMapping("review_modify_action")
+	public String review_modify_action(@RequestParam Map<String, Object> map, HttpServletRequest request) throws Exception {
+		System.out.println("review_modify_action >>> map: "+map);
+
+		String json = map.get("review").toString();
+		ObjectMapper mapper = new ObjectMapper();
+		Review review = mapper.readValue(json, new TypeReference<Review>() {});
+		System.out.println("review >>" + review);
+		
+		//[INSERT] review_img
+		json = map.get("images").toString();
+		if (json != null && json != "") { // image가 업로드 된 경우에만
+			List<ReviewImage> reviewImages = mapper.readValue(json, new TypeReference<ArrayList<ReviewImage>>() {
+			});
+			review.setReviewImageList(reviewImages);
+		}
+		
+		//[UPDATE] review
+		int result= reviewService.updateReview(review);
+		System.out.println("reviewService.updateReview>> result: "+result);
+		
+		//[DELETE] review_img
+		json = map.get("del_img").toString();
+		if (json != null && json != "") {// 삭제할image가 있는 경우에만
+			String[] del_img = mapper.readValue(json, new TypeReference<String[]>() {});
+			List<String> delImgList = new ArrayList();
+			for (int i = 0; i < del_img.length; i++) {
+				delImgList.add(del_img[i]);
+			}
+			System.out.println("delImgList >>" +delImgList);
+			if(delImgList.size() !=0 || delImgList!=null) {
+				for (String delImg : delImgList) {
+					//DB 삭제
+					result += reviewService.removeReviewImgByName(delImg);
+					//업로드된 파일삭제
+					storageService.delete(delImg);
+				}
+				//result = reviewService.removeReviewImgByNoList(delImgList);
+				System.out.println("removeReviewImgByNoList결과 >> "+result);
+			}
+		}
+		//[UPDATE] your_id의 user_freshness
+		UserInfo you =  userInfoService.findUser(review.getYour_id());
+		// your_id가 받은 review갯수
+		double yourReviewCount = reviewService.countReceivedReview(review.getYour_id());
+		System.out.println("your_id의 기존Freshness: " + you.getUser_freshness() + ", 리뷰갯수: " + yourReviewCount);
+		
+		json = map.get("point_prev").toString();
+		int point_prev = mapper.readValue(json, new TypeReference<Integer>() {
+		});
+		System.out.println("point_prev >>" + point_prev);
+		
+		double updateFreshness = you.getUser_freshness()+(-point_prev+review.getReview_point())/yourReviewCount;
+		you.setUser_freshness(updateFreshness);
+		userInfoService.updateFreshness(you);
+		
+		return "redirect:orders_list";
+	}
+	
+	
 	@PostMapping("/review_write_action")
 	public String review_write_action(@RequestParam Map<String, Object> map, HttpServletRequest request)
 			throws Exception {
-
-		// System.out.println("****review_write_action-review: "+review);
-		System.out.println("****review_write_action-images: " + map);
+		System.out.println("****review_write_action - map: " + map);
 
 		String json = map.get("review").toString();
 		ObjectMapper mapper = new ObjectMapper();
@@ -72,15 +142,15 @@ public class ReviewController {
 		UserInfo sUser = (UserInfo) request.getSession().getAttribute("sUser");
 		review.setUserInfo(sUser);
 
-		int result = reviewService.createReview(review);
-		if (result > 0) {// review INSERT성공시 -> 상대방user_freshness UPDATE
-			String your_id = map.get("your_id").toString();
-			System.out.println("user_freshness UPDATE: your_id >>" + your_id);
-
-			UserInfo you = userInfoService.findUser(your_id);
+		//if (result > 0) {// review INSERT성공시 -> 상대방user_freshness UPDATE
+			//String your_id = map.get("your_id").toString();
+			//System.out.println("user_freshness UPDATE: your_id >>" + your_id);
+			//review.setYour_id(your_id);
+			int result = reviewService.createReview(review);
+			UserInfo you = userInfoService.findUser(review.getYour_id());
 
 			// your_id가 받은 review갯수
-			double yourReviewCount = reviewService.countReceivedReview(your_id);
+			double yourReviewCount = reviewService.countReceivedReview(review.getYour_id());
 			System.out.println("your_id의 기존Freshness: " + you.getUser_freshness() + ", 리뷰갯수: " + yourReviewCount);
 			// your_id의 freshness
 			// you.getUser_freshness();
@@ -94,7 +164,7 @@ public class ReviewController {
 			// your_id의 매너온도 UPDATE
 			int updateResult = userInfoService.updateFreshness(you);
 			System.out.println("your_id의 updateFreshness: " + updateFreshness + ", result: " + updateResult);
-		}
+		//}
 
 		return "redirect:orders_list";
 	}
@@ -127,4 +197,44 @@ public class ReviewController {
 		
 		return "review_write_form";
 	}
+
+	@RequestMapping("review_modify_form")
+	public String review_write_form(@RequestParam int review_no, Model model,HttpServletRequest request) throws Exception {
+		System.out.println("review_modify_form >>> review_no :" + review_no);
+		
+		Review review = reviewService.findReviewByRivewNo(review_no);
+		model.addAttribute("review",review);
+		System.out.println("result :" + review);
+		
+		int showHeight = 220;
+		if(review.getReviewImageList().size()>0) {
+			showHeight= 220 *(review.getReviewImageList().size()/2+1);
+		}
+		model.addAttribute("showHeight",showHeight);
+		
+		return "review_modify_form";
+	}
+
+	@RequestMapping("review_remove_action")
+	public String review_remove_action(@RequestParam int review_no, HttpServletRequest request) throws Exception {
+		System.out.println("review_remove_action >>> review_no: "+review_no);
+		
+		Review review= reviewService.findReviewByRivewNo(review_no);
+		Map<String,Object> resultMap = new HashMap();
+		List<Boolean> result = new ArrayList();
+		boolean deleteResult= false;
+		if(review.getReviewImageList()!=null) {
+			System.out.println("review.getReviewImageList(): "+review.getReviewImageList());
+			for (ReviewImage reviewImage : review.getReviewImageList()) {
+				deleteResult= storageService.delete(reviewImage.getReview_img_name());
+			}
+			result.add(deleteResult);
+		}
+		resultMap.put("result",result);
+		System.out.println("resultMap: "+resultMap);
+		int removeResult = reviewService.removeReview(review_no);
+		System.out.println("removeResult: "+removeResult);
+		return "redirect:orders_list";
+	}
+
 }

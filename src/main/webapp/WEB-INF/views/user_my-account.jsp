@@ -21,11 +21,9 @@
 
 <!-- Style CSS -->
 <link rel="stylesheet" href="style.css">
-
 <link rel="stylesheet" href="css/user.css">
 
 <!-- javaScript -->
-
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 

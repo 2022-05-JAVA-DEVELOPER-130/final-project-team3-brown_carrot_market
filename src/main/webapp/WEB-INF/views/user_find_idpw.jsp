@@ -111,7 +111,7 @@
 										<label class="" for="user_id">아이디</label>
 										<input class="form-control" id="user_id" name="user_id" value="" placeholder="">
 									</div>
-									<div class="form-group">
+									<div class="form-group add_progress">
 										<label class="" for="user_email2">이메일주소</label>
 										<input type="email" class="form-control" id="user_email2" name="user_email" value="" placeholder="">
 									</div>
