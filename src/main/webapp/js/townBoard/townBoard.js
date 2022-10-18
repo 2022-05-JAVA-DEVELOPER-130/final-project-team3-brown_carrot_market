@@ -343,7 +343,8 @@ $(".btn.btn-primary.rereply").on("click", function(e){
 	var form=$(".townReReply_write_form");
 	let pageno = form.find($('input[name="page_no"]')).val();
 	let t_no = form.find($('input[name="t_no"]')).val();
-
+	let groupno = form.find($('input[name="groupno"]')).val();
+	alert(groupno)
 	if($(".t_reply_title").val() == "" || $(".t_reply_content").val() == ""){
 		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
 		return;
@@ -359,7 +360,7 @@ $(".btn.btn-primary.rereply").on("click", function(e){
 								data: form.serialize(),
 								dataType: "json",
 								success:function(resultObj){
-									console.log('성공');
+									console.log();
 									if(resultObj.errorCode > 0){
 										Toast.fire({ icon: 'success', title: resultObj.errorMsg }).then((result) => {
 											console.log('페이지이동');

@@ -250,7 +250,7 @@ public class TownBoardRestController {
 	
 	//대댓글등록
 	@PostMapping(value="/townReReply_wirte_rest",produces = "application/json;charset=UTF-8")
-	public Map<String, Object> townReReply_write_action(Integer pageno,Integer t_reply_no ,@RequestParam Integer t_no, @ModelAttribute TownReply townReply, HttpSession session) {
+	public Map<String, Object> townReReply_write_action(Integer pageno,@RequestParam Integer t_no, @ModelAttribute TownReply townReply, HttpSession session) {
 		Map<String, Object> resultMap = new HashMap<>();
 		String sUserId = (String)session.getAttribute("sUserId");
 		
@@ -258,8 +258,8 @@ public class TownBoardRestController {
 			//TownReply mainReply = townReplyService.selectTownBoardReplyOne(t_reply_no);
 			townReply.setUserInfo(new UserInfo(sUserId, "", "", "", "", 0, 0, "", null));
 			townReply.setTownBoard(new TownBoard(t_no, "", "", "", 0, null, "", 0, 0, null, null, null));
+			townReply.setGroupno(townReply.getGroupno());
 			/*
-			townReply.setGroupno(mainReply.getGroupno());
 			townReply.setStep(mainReply.getStep());
 			//townReplyService.updateStep(townReply);
 			townReply.setDepth(mainReply.getDepth());

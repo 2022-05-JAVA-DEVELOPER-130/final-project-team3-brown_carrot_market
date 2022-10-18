@@ -53,16 +53,25 @@ public class ProductController {
 	}
 	
 	
-	@RequestMapping(value = "/product_detail", params = "p_no")
-	public String guest_view(@RequestParam int p_no,Model model) throws Exception {
+	@RequestMapping(value = {"/product_detail", "/product_login_detail"}, params = "p_no")
+	public String product_view(@RequestParam int p_no,Model model,HttpSession session) throws Exception {
+		String sUserId = (String)session.getAttribute("sUserId");
+		//String forwardPath ="";
 		
 		Product product = productService.selectByOne(p_no);
 		System.out.println(product);
 		model.addAttribute("product", product);
+		
+		if(sUserId == null || sUserId.equals("")) {
+			return "product_detail";
+		}else if(sUserId.equals(product.getUserInfo().getUser_id())) {
+			return "product_login_detail";
+		}else {
+			return "product_detail";
+			
+		}
 		//List<Product> productList = productService.selectByUserId(user_id);
 		//model.addAttribute("productList",productList);
-		
-		return "product_detail";
 	}
 	
 	@RequestMapping("/product_write_form")
