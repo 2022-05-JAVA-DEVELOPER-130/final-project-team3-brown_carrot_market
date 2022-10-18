@@ -600,18 +600,19 @@ var c ="";
 		if(check==1){
 			console.log('세션 = 판매자 : '+loginId);
 			a='<button class="dropdown-item" type="button" id="reserveBtn"><b>예약중으로 변경</b></button>';
-		
+			b='<button class="dropdown-item" type="button" id="soldOutBtn"><b>판매완료로 변경</b></button>';
 			c=`<a href="#" class="btn btn-outline-info" style="display:none"><i class="fa fa-won" id="btnCarrot_Pay" p_no=${product.p_no} style="color:green"></i></a>`;
 		}
 	}else if(product.p_sell==2){
 		p_sell="예약중";
 		if(check==0){
 			console.log('2.세션 = 구매자 : '+loginId);
+			
 			c=`<a href="#" class="btn btn-outline-info" style="border-color:green"><i class="fa fa-won" id="btnCarrot_Pay" p_no=${product.p_no} style="color:green"></i></a>`;
 		}else if(check==1){	
 			console.log('2.세션 = 판매자 : '+loginId);
-			
-			b='<button class="dropdown-item" type="button" id="sellBtn"><b>판매중으로 변경</b></button>';
+			a='<button class="dropdown-item" type="button" id="sellBtn"><b>판매중으로 변경</b></button>';
+			b='<button class="dropdown-item" type="button" id="soldOutBtn"><b>판매완료로 변경</b></button>';
 			c=`<a href="#" class="btn btn-outline-info" style="display:none"><i class="fa fa-won" id="btnCarrot_Pay" p_no=${product.p_no} style="color:green"></i></a>`;
 		}
 		}else if(product.p_sell==3){
@@ -790,7 +791,8 @@ $.ajax({
 	var result = confirm("상품을 판매완료로 변경하시겠습니까?");
 	if(result){
 		var reserve={
-		"product":product
+		"p_no":product.p_no,
+		"yourId":yourId
 	}
 $.ajax({
 		
@@ -1016,10 +1018,16 @@ function connectWS(){
 	
 		//메세지 전송한 경우
 		if(onmsg.code=="1"){
-		if(onmsg.user_id!=loginId){
+		if(onmsg.user_id!=loginId&&onmsg.toastId=="youExist"){
 			//상대가 메세지 보낸 경우
 			console.log("상대가 보낸 경우"+onmsg.user_id)
             $('#chat_history').append(message_other(onmsg));
+		}else if(onmsg.user_id!=loginId){
+			 toastr.options.positionClass = "toast-top-right";
+	      toastr['warning'](onmsg.user_id+" : "+onmsg.c_content);
+	      
+	      /******************채팅수증가******* */
+	     getChatNum(loginId);
 		}else if(onmsg.user_id==loginId){
 			console.log("내가 보낸 경우"+onmsg.user_id)
 			//내가 보낸 경우
@@ -1409,4 +1417,26 @@ $(document).on('click','#btnCarrot_Pay',function(e){
 		
 	});
 		}
+		
+		$(function() {
+function Toast(type, css, msg) {
+        this.type = type;
+        this.css = css;
+        this.msg = msg;
+    }
+    
+     toastr.options.extendedTimeOut = 0; //1000;
+    toastr.options.timeOut = 10000;
+    toastr.options.fadeOut = 250;
+    toastr.options.fadeIn = 250;
+    toastr.options.preventDuplicates = false;
+    toastr.options.closeButton = true;
+    toastr.options.positionClass = "toast-top-right";
+    toastr.options.onclick = function() { 
+	console.log("click");
+	location.href="chat_room";
+	
+	 }
+
+})
 

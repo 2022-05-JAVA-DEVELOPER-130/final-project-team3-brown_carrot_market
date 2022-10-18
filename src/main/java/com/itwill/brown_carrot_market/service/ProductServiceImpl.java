@@ -15,6 +15,8 @@ import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Product;
 import com.itwill.brown_carrot_market.dto.ProductImage;
 import com.itwill.brown_carrot_market.dto.ReviewImage;
+import com.itwill.brown_carrot_market.util.PageMaker;
+import com.itwill.brown_carrot_market.util.PageMakerDto;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -29,12 +31,28 @@ public class ProductServiceImpl implements ProductService{
 	public ProductServiceImpl() throws Exception{
 		System.out.println("### productServiceImpl : 기본생성자 호출");
 	}
-
+	/*
 	@Override
 	public List<Product> selectProductAll() throws Exception {
 		// TODO Auto-generated method stub
 		return productDao.selectProductAll();
 	}
+	*/
+	@Override
+	public PageMakerDto<Product> selectProductAll(int currentPage) throws Exception {
+		int totalCount = productDao.selectListNotLoginCount();
+		PageMaker pageMaker = new PageMaker(totalCount, currentPage,5,5);
+		List<Product> pageList = productDao.selectProductAll(pageMaker.getPageBegin(), pageMaker.getPageEnd());
+		PageMakerDto<Product> pageMakerProductList = new PageMakerDto<Product>(pageList,pageMaker, totalCount);
+		return pageMakerProductList;
+	}
+	
+	@Override
+	public int selectListNotLoginCount() throws Exception {
+		// TODO Auto-generated method stub
+		return productDao.selectListNotLoginCount();
+	}
+	
 
 	@Override
 	public List<Product> selectAllByCtgr(int p_ctgr_no) throws Exception {

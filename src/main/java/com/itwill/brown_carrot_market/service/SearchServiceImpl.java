@@ -82,7 +82,7 @@ public class SearchServiceImpl implements SearchService {
 	public PageMakerDto<TownBoard> searchTownBoardList(String search_keyword, Address address, int currentPage) {
 		int totalCount=searchDao.searchTownBoardListCount(search_keyword, address);
 		PageMaker pageMaker=new PageMaker(totalCount, currentPage,5,5);
-		List<TownBoard> searchList=searchDao.searchTownBoardList(search_keyword, address, currentPage, totalCount);
+		List<TownBoard> searchList=searchDao.searchTownBoardList(search_keyword, address, pageMaker.getPageBegin(), pageMaker.getPageEnd());
 		PageMakerDto<TownBoard> pageMakerSearchList=new PageMakerDto<TownBoard>(searchList, pageMaker, totalCount);
 		return pageMakerSearchList;
 	}

@@ -182,6 +182,76 @@ public class TownBoardRestController {
 			
 			}
 	
+	//게시글 수정
+	@PostMapping(value = "/townboard_update_action_json")
+	public Map townboard_update_action_json(@RequestParam("files") MultipartFile[] files,@RequestParam Map<String, Object> map,Model model) throws Exception {
+		int code = 0;
+		String url = "townBoard_list"; //어디로 보내야지?
+		String message="townboard_update 실패";
+		String newFileName= "";
+		int t_no = Integer.parseInt((String) map.get("t_no"));
+		int deleteRowCount = townBoardService.deleteTownBoardImgAll(t_no);
+		
+		Map<String,Object> resultMap = new HashMap();
+		try {
+			
+			//사진업로드
+			List<String> fileNames = new ArrayList<>();
+			for (MultipartFile file : files) {
+				System.out.println(file.isEmpty());
+				if (!file.isEmpty()) {
+					newFileName= storageService.save(file);
+					//fileNames.add(file.getOriginalFilename());
+					fileNames.add(newFileName);
+					
+					System.out.println(fileNames);
+					message = "Uploaded the files successfully: " + fileNames+" newFileName"+newFileName;
+				}else {
+					message="Please select a valid mediaFile..";
+				}
+			}
+			
+			
+			
+			
+			TownCategory townCategory = new TownCategory(Integer.parseInt(map.get("t_ctgr_no").toString()), "");
+			map.put("townCategory", townCategory);
+			map.put("ImageNameList", fileNames);
+			map.remove("t_ctgr_no");
+			
+			TownBoard resultList = new TownBoard();
+			
+			code = townBoardService.insertTownBoard(map);
+			if(code==1) message="townBoard_update 성공";
+			
+			System.out.println(">>> townboard update "+map);
+			url = "redirect:townboard_view_view?t_no"+t_no;
+			
+			resultMap.put("code", code);
+			resultMap.put("url", url);
+			resultMap.put("message", message);
+			resultMap.put("data",resultList);
+			
+			
+			return resultMap;
+			
+			} catch (Exception e) {
+				e.printStackTrace();
+				model.addAttribute("MSG", e.getMessage());
+				url = "townboard_list";
+				message = "Fail to upload files!";
+				resultMap.put("message", message);
+				resultMap.put("url", url);
+				
+				return resultMap;
+		}
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	
