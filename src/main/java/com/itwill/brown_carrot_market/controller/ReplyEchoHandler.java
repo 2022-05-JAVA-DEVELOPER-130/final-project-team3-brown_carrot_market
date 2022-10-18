@@ -298,7 +298,7 @@ public class ReplyEchoHandler {
 					int p_no = Integer.parseInt(reserve.get("p_no"));
 					Product product = productService.selectByOne(p_no);
 
-		/*			
+					
 					product.setP_sell(2);
 					productService.updateProductSell(2, product.getP_no());
 					
@@ -307,7 +307,7 @@ public class ReplyEchoHandler {
 					orders.setUserinfo(new UserInfo(you_Id, null, null, null, null, 0, 0, null, null));
 					orders.setProduct(product);
 					int result = ordersService.insertOrders(orders);
-			*/		
+					
 					resultMap.put("product", product);	
 
 
@@ -321,6 +321,29 @@ public class ReplyEchoHandler {
 
 					int p_no = Integer.parseInt(reserve.get("p_no"));
 					Product product = productService.selectByOne(p_no);
+					
+					product.setP_sell(3);
+					productService.updateProductSell(3, product.getP_no());
+					
+					String you_Id = reserve.get("yourId");
+					Orders orders=new Orders();
+					orders.setUserinfo(new UserInfo(you_Id, null, null, null, null, 0, 0, null, null));
+					orders.setProduct(product);
+					int result = ordersService.insertOrders(orders);
+					
+					resultMap.put("product", product);	
+
+
+					return resultMap;
+				}
+				
+				@PostMapping(value = "/chatdetail_soldout_rest")
+				public Map chatDetailSoldout_rest(@RequestBody Map<String, String> reserve) throws Exception  {
+					Map resultMap = new HashMap();
+					
+					int p_no = Integer.parseInt(reserve.get("p_no"));
+					Product product = productService.selectByOne(p_no);
+
 					
 					product.setP_sell(3);
 					productService.updateProductSell(3, product.getP_no());
