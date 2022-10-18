@@ -622,7 +622,7 @@ var c ="";
 			if(check==1){
 				console.log('세션 = 판매자 : '+loginId);
 				
-				c=`<a href="#" class="btn btn-outline-info" style="display:none"><i class="fa fa-won" id="btnCarrot_Pay" p_no=${product.p_no} style="color:green;"></i></a>`;
+				c=`<a href="#" class="btn btn-outline-info" style="border-color:green"><i class="fa fa-won" id="btnCarrot_Pay_Cancel" p_no=${product.p_no} style="color:green;"></i></a>`;
 			}
 		}
 	
@@ -1334,8 +1334,21 @@ $(document).on('click','#btnCarrot_Pay',function(e){
 	e.preventDefault;
 })
 
+$(document).on('click','#btnCarrot_Pay_Cancel',function(e){
+	console.log($(e.target).attr("p_no"));
+	popupCarrotPay_Cancel($(e.target).attr("p_no"));
+	e.preventDefault;
+})
+
   function popupCarrotPay(p_no){
 	 var url = "transfer_page?p_no="+p_no;
+            var name = "당근 페이";
+            var option = "width = 470, height = 650, top = 100, left = 200, location = no,  resizable=no";
+            window.open(url, name, option);
+}
+
+  function popupCarrotPay_Cancel(p_no){
+	 var url = "transfer_cancel_page?p_no="+p_no;
             var name = "당근 페이";
             var option = "width = 470, height = 650, top = 100, left = 200, location = no,  resizable=no";
             window.open(url, name, option);
