@@ -146,8 +146,9 @@ function changeProductList(pageno){
 		},
 		dataType:"json",
 		success:function(resultObj){
-			let data = resultObj.data;
+			console.log(resultObj);
 			
+			let data = resultObj.data;
 				let htmlBuffer = ``;
                         	
 				data.itemList.forEach(function(product, i){
@@ -203,18 +204,18 @@ function changeProductList(pageno){
 	               
 					htmlBuffer += `
 	                        <div class="product_description">
-                                <!--         Add to cart
+                                        
                                         <div class="product_add_to_cart">
                                             <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
                                         </div>
 
-                                        Quick View
+                                      
                                         <div class="product_quick_view">
                                             <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                                        </div> -->
+                                        </div> 
 
-<!--                                         <p class="brand_name">Top</p>
- -->                                         <a href="product_detail?p_no=${product.p_no}" p_no="${product.p_no}">${product.p_title}</a>
+                                       <p class="brand_name">Top</p>
+                                       <a href="product_detail?p_no=${product.p_no}" p_no="${product.p_no}">${product.p_title}</a>
 										<h6 class="product-price">가격: ${product.p_price}</h6>
                                         <p class="product-short-desc">${product.p_desc}</p>
                                     </div>
