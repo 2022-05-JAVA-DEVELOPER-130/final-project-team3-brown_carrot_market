@@ -30,13 +30,28 @@ public class ProductDaoImpl implements ProductDao{
 		this.productMapper = productMapper;
 	}
 	
-
+	/*
 	@Override
 	public List<Product> selectProductAll() throws Exception{
 		System.out.println("### ProductDaoImpl : selectProductAll 호출");
 		
 		return productMapper.selectProductAll();
 	}
+	*/
+	
+	@Override
+	public List<Product> selectProductAll(int pageStart,int pageEnd) throws Exception{
+		System.out.println("### ProductDaoImpl : selectProductAll 호출");
+		
+		return productMapper.selectProductAll(pageStart, pageEnd);
+	}
+	
+	@Override
+	public int selectListNotLoginCount() {
+		// TODO Auto-generated method stub
+		return productMapper.selectListNotLoginCount();
+	}
+	
 
 	@Override
 	public List<Product> selectAllByCtgr(int p_ctgr_no) throws Exception {

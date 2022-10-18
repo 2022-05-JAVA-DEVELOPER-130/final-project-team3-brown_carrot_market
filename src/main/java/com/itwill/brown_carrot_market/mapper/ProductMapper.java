@@ -10,7 +10,10 @@ import com.itwill.brown_carrot_market.dto.Product;
 
 @Mapper
 public interface ProductMapper {
-	public List<Product> selectProductAll();
+	//public List<Product> selectProductAll();
+	public List<Product> selectProductAll(int pageStart,int pageEnd);
+	
+	public int selectListNotLoginCount();
 	
 	public List<Product> selectAllByCtgr(int p_ctgr_no);
 	
