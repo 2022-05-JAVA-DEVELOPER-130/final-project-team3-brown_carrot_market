@@ -214,9 +214,19 @@
 		                                        		<c:out value="판매완료"></c:out>
 		                                        	</c:if>
                              </option>
-                             <option value="1">-판매중</option>
-                             <option value="2">-예약중</option>
-                             <option value="3">-판매완료</option>
+                          <c:if test="${product.p_sell eq 1}">
+                             <option value="2">예약중으로 변경</option>
+		                                        		
+		                  </c:if>
+		                  <c:if test="${product.p_sell eq 2}">
+                              <option value="1">판매중으로 변경</option>
+		                                        		
+		                  </c:if>
+		                  <c:if test="${product.p_sell eq 3}">
+		                                        		
+		                  </c:if>
+		                  
+                             
                              </select>
                              <button type="button" id="btn_product_modify_sell_action" class="btn btn-primary mt-1 mt-md-0 ml-1 ml-md-3" onclick="productSell()">판매상태수정</button>
                       	</div>

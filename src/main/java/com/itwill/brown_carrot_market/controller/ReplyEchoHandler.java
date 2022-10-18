@@ -261,7 +261,8 @@ public class ReplyEchoHandler {
 					product.setP_sell(1);
 					productService.updateProductSell(1, product.getP_no());
 					resultMap.put("product", product);	
-
+					int o_no = ordersService.selectByP_No(product.getP_no()).getOrders_no();
+					int result = ordersService.deleteOrders(o_no);					
 
 					return resultMap;
 				}
@@ -270,9 +271,11 @@ public class ReplyEchoHandler {
 				@PostMapping(value = "/chat_reserve_rest")
 				public Map chatReserve_rest(@RequestBody Map<String, String> reserve) throws Exception  {
 					Map resultMap = new HashMap();
-
+					
 					int p_no = Integer.parseInt(reserve.get("p_no"));
 					Product product = productService.selectByOne(p_no);
+					
+					
 					product.setP_sell(2);
 					productService.updateProductSell(2, product.getP_no());
 					
@@ -281,7 +284,7 @@ public class ReplyEchoHandler {
 					orders.setUserinfo(new UserInfo(you_Id, null, null, null, null, 0, 0, null, null));
 					orders.setProduct(product);
 					int result = ordersService.insertOrders(orders);
-					
+			
 					resultMap.put("product", product);	
 
 

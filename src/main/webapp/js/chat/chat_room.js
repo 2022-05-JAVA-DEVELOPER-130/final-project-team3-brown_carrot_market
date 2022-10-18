@@ -600,7 +600,7 @@ var c ="";
 		if(check==1){
 			console.log('세션 = 판매자 : '+loginId);
 			a='<button class="dropdown-item" type="button" id="reserveBtn"><b>예약중으로 변경</b></button>';
-			b='<button class="dropdown-item" type="button" id="soldOutBtn"><b>판매 완료하기</b></button>';
+		
 			c=`<a href="#" class="btn btn-outline-info" style="display:none"><i class="fa fa-won" id="btnCarrot_Pay" p_no=${product.p_no} style="color:green"></i></a>`;
 		}
 	}else if(product.p_sell==2){
@@ -610,7 +610,7 @@ var c ="";
 			c=`<a href="#" class="btn btn-outline-info" style="border-color:green"><i class="fa fa-won" id="btnCarrot_Pay" p_no=${product.p_no} style="color:green"></i></a>`;
 		}else if(check==1){	
 			console.log('2.세션 = 판매자 : '+loginId);
-			a='<button class="dropdown-item" type="button" id="soldOutBtn"><b>판매 완료하기</b></button>';
+			
 			b='<button class="dropdown-item" type="button" id="sellBtn"><b>판매중으로 변경</b></button>';
 			c=`<a href="#" class="btn btn-outline-info" style="display:none"><i class="fa fa-won" id="btnCarrot_Pay" p_no=${product.p_no} style="color:green"></i></a>`;
 		}

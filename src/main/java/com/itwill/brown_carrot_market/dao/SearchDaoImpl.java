@@ -56,4 +56,16 @@ public class SearchDaoImpl implements SearchDao{
 		return searchMapper.searchTownBoardListNotLoginCount(search_keyword);
 	}
 
+	@Override
+	public List<TownBoard> searchTownBoardList(String search_keyword, Address address, int pageStart, int pageEnd) {
+		// TODO Auto-generated method stub
+		return searchMapper.searchTownBoardList(search_keyword, address, pageStart, pageEnd);
+	}
+
+	@Override
+	public int searchTownBoardListCount(String search_keyword, Address address) {
+		// TODO Auto-generated method stub
+		return searchMapper.searchTownBoardListCount(search_keyword, address);
+	}
+
 }
