@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <%@taglib prefix="s"  uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html lang="en">
 
@@ -81,9 +82,21 @@
                            
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <a class="gallery_img" href="img/product_img/${product.productImagesList[0].pi_name}" title="First Slide">
-                                        <img class="d-block w-100" src="img/product_img/${product.productImagesList[0].pi_name}" alt="First slide">
-                                    </a>
+                                
+	                                <c:set var = "image_name" value = "${product.productImagesList[0].pi_name}"/>
+	                                <c:choose>
+										<c:when test="${fn:startsWith(image_name, 'http')}">
+		                                    <a class="gallery_img" href="${product.productImagesList[0].pi_name}" title="First Slide">
+		                                        <img class="d-block w-100" src="${product.productImagesList[0].pi_name}" alt="First slide">
+		                                    </a>
+	                                       </c:when>
+										<c:otherwise>
+		                                    <a class="gallery_img" href="img/product_img/${product.productImagesList[0].pi_name}" title="First Slide">
+		                                        <img class="d-block w-100" src="img/product_img/${product.productImagesList[0].pi_name}" alt="First slide">
+		                                    </a>
+										</c:otherwise>
+									</c:choose>	
+                                
                                     <!-- Product Badge -->
                                     <div class="product_badge">
                                         <span class="badge-new">New</span>
