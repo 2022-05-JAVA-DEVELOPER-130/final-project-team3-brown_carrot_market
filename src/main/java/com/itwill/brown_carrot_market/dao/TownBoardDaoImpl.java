@@ -178,10 +178,17 @@ public class TownBoardDaoImpl implements TownBoardDao{
 	}
 	 */
 	@Override
-	public int insertTownBoard(Map map) {
+	public int insertTownBoard(Map map) throws Exception{
+		System.out.println(">>> townBoardDaoImpl : insertTownBoard(Map map)호출");
 		townBoardMapper.insertTownBoard(map);
-		return 1;
+		return selectTownBoardPK();
 	}
+	
+	@Override
+	public int selectTownBoardPK() throws Exception {
+		return townBoardMapper.selectTownBoardPK();
+	}
+	
 
 	@Override
 	public Map selectTownBoardAddress(String user_id, int address_no) {
@@ -194,11 +201,7 @@ public class TownBoardDaoImpl implements TownBoardDao{
 		return aa;
 	}
 
-	@Override
-	public int selectTownBoardPK() throws Exception {
-		return townBoardMapper.selectTownBoardPK();
-	}
-	
+
 
 
 
