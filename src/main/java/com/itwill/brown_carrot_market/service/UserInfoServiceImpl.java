@@ -133,6 +133,11 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public int updatePwById(UserInfo userInfo) throws Exception {
 		return userDao.updatePwById(userInfo);
 	}
+
+	@Override
+	public List<Address> findAddressesById(UserInfo userInfo) throws Exception {
+		return userDao.findAddressesById(userInfo);
+	}
 	
 	/*
 	 * 회원수정
@@ -252,16 +257,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 			return false;
 		}
 	}
-
-
-
-
-
-
-
-
-
-
 
 
 }

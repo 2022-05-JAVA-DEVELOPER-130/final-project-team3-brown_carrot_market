@@ -19,11 +19,20 @@ public interface ProductMapper {
 	
 	public int selectListLoginCount(Address address);
 	
-	public List<Product> selectAllByCtgr(int p_ctgr_no);
+	//카테고리 조건 추가
 	
-	public List<Product> selectListByRangeCtgr(int p_ctgr_no, Address address);
+	public List<Product> selectAllByCtgr(int p_ctgr_no,int pageStart, int pageEnd);
+	
+	public int selectNonMemberCountCtgrProduct(int p_ctgr_no);
+	
+	public List<Product> selectListByRangeCtgr(int p_ctgr_no, String user_id, int address_no,int pageStart, int pageEnd);
+	
+	public int selectMemberCtgrCountProduct(int p_ctgr_no,String user_id,int address_no);
+	
 	
 	public List<Product> selectByUserId(String user_id);
+	
+	public List<Product> selectByUserIdPSell(String user_id, int p_sell);
 	
 	public Product selectByOne(int p_no);
 	public int selectProductPK();

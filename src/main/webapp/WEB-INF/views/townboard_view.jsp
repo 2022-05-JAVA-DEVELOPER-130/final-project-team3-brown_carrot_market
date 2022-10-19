@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>	
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>	
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!doctype html>
 <html lang="en">
@@ -16,6 +16,17 @@
 
     <!-- Title  -->
     <title>Bigshop | Responsive E-commerce Template</title>
+    
+    <!-- 슬라이드쇼 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      $('.slider').bxSlider();
+    });
+  </script>
+    
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -130,17 +141,17 @@
 
                             <!-- Recent Post1 -->
                             
-                           	<c:forEach var="townBoard" items="${townBoardList.itemList}" begin="0" end="2">
+                           	<c:forEach var="townBoardTop" items="${townBoardListTop}" begin="0" end="2">
 	                            <div class="single_latest_post">
 	                            
 	                                <div class="post-thumbnail">
-	                                <c:if test="${townBoard.townImageList.size() != 0}">
-	                                    <img src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-post-thumb">
+	                                <c:if test="${townBoardTop.townImageList.size() != 0}">
+	                                    <img src="img/townBoard-img/${townBoardTop.townImageList[0].t_img_name}" alt="blog-post-thumb">
 	                                	</c:if>
 	                                </div>
 	                                <div class="post-content">
-	                                    <a href="#">${townBoard.t_title }</a>
-	                                    <p>${townBoard.t_count }</p>
+	                                    <a href="#">${townBoardTop.t_title }</a>
+	                                    <p>${townBoardTop.t_count }</p>
 	                                </div>
 	                            </div>
                             </c:forEach>
@@ -161,12 +172,11 @@
                         
                         
                     </div>
-                    
                     <!-- Search Post -->
                         <div class="widget-area search_post mb-30">
                             <h6>Search Post</h6>
                             <form action="#" method="get">
-                                <input type="search" class="form-control" placeholder="Enter Keyword...">
+                                <input id="townBoardSearch" type="search" class="form-control" placeholder="Enter Keyword...">
                                 <button type="submit" class="btn d-none">Submit</button>
                             </form>
                         </div>
@@ -178,15 +188,28 @@
                 
                 <div class="col-12 col-lg-8">
                 
-                
-                
-                    <!-- Blog Details Area -->
+                <!-- Blog Details Area -->
                     <div id = "townBoard_list_tbody_all">
-                    <div class="blog-details-area mb-50" id="townBoard_list_tbody">                        
+                    <div class="blog-details-area mb-50" id="townBoard_list_tbody">   
+                
+                <!-- 슬라이드쇼 시작 -->
+                <div>
+                 <ul class="bxslider">
+		       <c:forEach var="townImage" items="${townImageList}" begin="0"  step="1"> 
+		
+		      	<li><img src="img/townBoard-img/${townImage.t_img_name}" alt="blog-img"  ></li>
+		 	   </c:forEach> 
+      </ul>
+  </div>
+				 <!-- 슬라이드쇼 끝 -->               
+                
+                                         
                         <!-- Image -->
+                        <!-- 
                         <c:if test="${townBoard.townImageList.size() != 0}">
                         	<img class="mb-30" src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-img">
                         </c:if>
+                         -->
                         <!-- Blog Title -->
                         <h3 class="mb-30">${townBoard.t_title}</h3>
                         
@@ -202,8 +225,9 @@
                         <p class = "">${townBoard.t_content}</p>
                     </div>
 					
-					<input class="townBoard_i delete" type="button" pageno="${pageno}" t_no="${townBoard.t_no}" value="삭제하기" />
 					<input class="townBoard_btn update_form" type="button" pageno="${pageno}" t_no="${townBoard.t_no}" value="수정하기" />
+					<input class="townBoard_btn delete" type="button" pageno="${pageno}" t_no="${townBoard.t_no}" value="삭제하기" />
+					<%-- <input class="townBoard_btn wishlist_add" type="button" pageno="${pageno}" t_no="${townBoard.t_no}" value="관심등록" /> --%>
 					
                     <div class="comments-area">
                         <div class="comment_area mb-50 clearfix">
@@ -239,7 +263,7 @@
 				                                <div class="row">
 				                                    <div class="col-12 rereply">
 				                                        <div class="form-group mb-30">
-				                                            <input type="text" class="form-control" name="t_reply_title" class="t_reply_title" placeholder="댓글 제목" tabindex="1">
+				                                            <input type="text" name="t_reply_title" class="t_reply_title" placeholder="댓글 제목" tabindex="1">
 				                                        </div>
 				                                    </div>
 				                                    <div class="col-12 rereply">
@@ -281,31 +305,7 @@
 		                                            <p>${townReply.t_reply_title }</p>
 		                                            <p>${townReply.t_reply_content }</p>
 		                                            <input class="townReply delete" type="button" pageno="${pageno}" t_no="${townBoard.t_no }" t_reply_no="${townReply.t_reply_no}" value="삭제하기" />
-                                           <!-- 
-                                            <button class="heading">댓글달기</button>
-                                            <div  class="content">
-                                            <form class="townReply_write_form"  method="post">
-				                                <div class="row">
-				                                    <div class="col-12 rereply">
-				                                        <div class="form-group mb-30">
-				                                            <input type="text" class="form-control" name="t_reply_title" class="t_reply_title" placeholder="댓글 제목" tabindex="1">
-				                                        </div>
-				                                    </div>
-				                                    <div class="col-12 rereply">
-				                                        <div class="form-group mb-30">
-				                                            <textarea class="form-control rereply" name="t_reply_content" class="t_reply_content" cols="30" rows="7" placeholder="내용" tabindex="2"></textarea>
-				                                        </div>
-				                                    </div>
-				                                    <input type="hidden" class="form-control" name="t_no" value="${townBoard.t_no}"/>
-				                                    <input type="hidden" class="form-control" name="step" value="1"/> 이렇게 하면 모든 setp이 1로 나와서 xx 증가해야함 
-				                                    <input type="hidden" class="form-control" name="depth" value="2"/>
-				                                    <div class="col-12 ">
-				                                        <button class="btn btn-primary reply" type="submit">Submit Comment</button>
-				                                    </div>
-				                                </div>
-				                            </form>
-				                            </div>
-				                             -->
+                                           
 				                            
 		                                        </div>
                                             </div>
@@ -322,7 +322,7 @@
                         </div>
 
                         <div class="contact_from mb-50">
-                            <h5 class="mb-4">Leave a Comment</h5>
+                            <h5 class="mb-4">댓글</h5>
                             
 							<!-- 메인 댓글달기 -->
                             <form class="townReply_Main_write_form" method="post">
@@ -331,7 +331,7 @@
                                    
                                     <div class="col-12">
                                         <div class="form-group mb-30">
-                                            <input type="text" class="form-control" name="t_reply_title" class="t_reply_title" placeholder="댓글 제목" tabindex="1">
+                                            <input type="text" name="t_reply_title" class="t_reply_title" placeholder="댓글 제목" tabindex="1">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -393,7 +393,9 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
     
-    <script src="js/townBoard/townBoard.js"></script>
+  
+	<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+	  <script src="js/townBoard/townBoard.js"></script>
     <script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>

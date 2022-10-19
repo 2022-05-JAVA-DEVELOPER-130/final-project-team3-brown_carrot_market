@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib prefix = "c"  uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="en">
 
@@ -316,7 +317,7 @@
 			
 			
 			/* View_user_profile********************************/
-			$(document).on('click', '.img-circle', function(e) {
+			$(document).on('click', '.img-circle, .img-edit', function(e) {
 				 $.ajax({
 						url:'user_view_json',
 						method:'POST',
@@ -535,27 +536,40 @@
 				<div class="col-12 col-lg-9">
 		<!-- START!! ************************************************ -->
 					<div id="my-account-content" class="my-account-content mb-50" style="margin-bottom: 20px">
-						<div class="shortcodes_content mb-100" style="margin-bottom: 0px">
-	                        <div class="col-12 col-lg-9">
-	                        <!-- 더나은 방법을 찾고싶다! -->
-	                        <c:set var="string" value="${sUser.user_profile}"/>
-							<c:choose>
-								<c:when test="${fn:startsWith(string,'http://')}">
-		                            <img class="img-circle" src="${sUser.user_profile}" onerror="this.src='img/user_profile/newCarrot.jpg'">
-								</c:when>
-								<c:otherwise>
-		                            <img class="img-circle" src="img/user_profile/${sUser.user_profile}" onerror="this.src='img/user_profile/newCarrot.jpg'">
-								</c:otherwise>
-							</c:choose>
-							<!-- 프로필 이미지 -->
-							<span>${sUser.user_freshness}</span>
-							<span>${sUser.user_point}</span>
-							<p>
-								<strong>${sUser.user_id}</strong>님, 안녕하세요? 
-							</p>
+						<div class="shortcodes_content mb-100" style="margin-bottom:0px">
+	                        <div class="col-12 col-lg-9" style="text-align:center;max-width:100%">
+		                        <!-- 더나은 방법을 찾고싶다! -->
+		                        <div class="circle" style="display:inline-block;height:120px">
+		                        	<div class="" style="position:relative">
+			                        <c:set var="string" value="${sUser.user_profile}"/>
+									<c:choose>
+										<c:when test="${fn:startsWith(string,'http://')}">
+				                            <img class="img-circle" src="${sUser.user_profile}" onerror="this.src='img/user_profile/newCarrot.jpg'">
+										</c:when>
+										<c:otherwise>
+				                            <img class="img-circle" src="img/user_profile/${sUser.user_profile}" onerror="this.src='img/user_profile/newCarrot.jpg'" >
+										</c:otherwise>
+									</c:choose>
+										<div class="img-edit" style="position:absolute;padding-top:77px;padding-left:77px">
+										<i class="icofont-edit" style="font-size:20px;color:#747794"></i>
+										<!-- <span style="background-color: #f8f8ff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><i class="icofont-ui-edit" ></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> -->
+										</div>
+									</div>
+									<!-- 프로필 이미지 -->
+								</div>
+								<br>
+								<div>
+									<p class="my-user">
+										<span style="color:#212529"><strong >${sUser.user_id}</strong> 님, 안녕하세요?</span><br>
+										<i class="icofont-ui-rating" style="font-size:10pt;color:orange"></i><span>${sUser.user_freshness}</span>&nbsp;&nbsp;
+										<i class="icofont-money-bag" style="font-size:10pt;color:orange"></i><span><fmt:formatNumber value="${sUser.user_point}" type="number"/></span>
+									</p>
+									<p>
+									</p>
+								</div>
 	                        </div>
 						</div>
-	                    <div class="shortcodes_content mb-100" style="margin-bottom: 20px">
+	                    <div class="shortcodes_content mb-100" style="margin-bottom: 20px;border:1px solid #d6e6fb">
 	                        <form class="invi_form">
 	                            <div class="form-group">
 	                                <label for="invi_email">흙당근마켓에 친구를 초대해보세요!</label>
@@ -563,7 +577,9 @@
 	                                <small id="emailHelp" class="form-text text-muted">초대받은 친구가 회원가입시, 500point를 드립니다!.</small>
 	                            </div>
 	                        </form>
-	                        <button type="submit" class="btn btn-primary" id="btn_invi">Submit</button>
+	                        <div style="text-align:right">
+	                        	<button type="submit" class="btn btn-primary" id="btn_invi">Submit</button>
+	                        </div>
 						</div>
                     </div>
 		<!-- END!! ************************************************** -->

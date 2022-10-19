@@ -23,6 +23,7 @@ import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.Product;
 import com.itwill.brown_carrot_market.dto.ProductCategory;
 import com.itwill.brown_carrot_market.dto.UserInfo;
+import com.itwill.brown_carrot_market.service.OrdersService;
 import com.itwill.brown_carrot_market.service.ProductService;
 import com.itwill.brown_carrot_market.util.PageMakerDto;
 
@@ -30,6 +31,8 @@ import com.itwill.brown_carrot_market.util.PageMakerDto;
 public class ProductController {
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private OrdersService ordersService;
 	public ProductController() {
 		System.out.println("### ProductController() 기본생성자");
 	}
@@ -62,6 +65,7 @@ public class ProductController {
 	@RequestMapping(value = {"/product_detail", "/product_login_detail"}, params = "p_no")
 	public String product_view(@RequestParam int p_no,Model model,HttpSession session) throws Exception {
 		String sUserId = (String)session.getAttribute("sUserId");
+		Address sAddress = (Address)session.getAttribute("sAddress");
 		//String forwardPath ="";
 		
 		Product product = productService.selectByOne(p_no);
@@ -71,6 +75,7 @@ public class ProductController {
 		if(sUserId == null || sUserId.equals("")) {
 			return "product_detail";
 		}else if(sUserId.equals(product.getUserInfo().getUser_id())) {
+			model.addAttribute("address",sAddress);
 			return "product_login_detail";
 		}else {
 			return "product_detail";
@@ -221,7 +226,7 @@ public class ProductController {
 		return "redirect : product_list";
 	}
 	
-	/*상품삭제
+	//상품삭제
 	@RequestMapping(value = "/product_delete_action", method = RequestMethod.POST)
 	public String product_delete_action(@RequestParam int p_no,HttpSession session) throws Exception {
 		String sUserId = (String)session.getAttribute("sUserId");
@@ -230,15 +235,29 @@ public class ProductController {
 		
 		return "redirect : product_list";
 	}
-	*/
+	
 	
 	//상품 판매상태
 	@RequestMapping(value = "/product_modify_sell_action")
-	public String product_modify_sell_action(int p_sell,@RequestParam(value = "p_no", required = false, defaultValue = "")int p_no) {
+	public String product_modify_sell_action(@RequestParam(value = "p_sell", required = false, defaultValue = "")int p_sell,@RequestParam(value = "p_no", required = false, defaultValue = "")int p_no,@RequestParam(value = "user_id", required = false, defaultValue = "")String user_id) {
 		String forwardPath = "";
 		try {
-			int updateRowCount = productService.updateProductSell(p_sell, p_no);
-			forwardPath = "redirect:product_list";
+			System.out.println("---------------------------------");
+			System.out.println(p_sell);
+			System.out.println(p_no);
+			System.out.println(user_id);
+			if(p_sell==1) {
+				Product product = productService.selectByOne(p_no);
+				int o_no = ordersService.selectByP_No(product.getP_no()).getOrders_no();
+				int result = ordersService.deleteOrders(o_no);	
+				int updateRowCount = productService.updateProductSell(p_sell, p_no);
+				forwardPath = "redirect:product_list";
+				
+			}else {
+				int updateRowCount = productService.updateProductSell(p_sell, p_no);
+				
+				
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			forwardPath = "product_list";

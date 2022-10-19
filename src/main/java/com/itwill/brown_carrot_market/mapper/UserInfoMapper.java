@@ -65,6 +65,8 @@ public interface UserInfoMapper {
 	public int findPwByIdEmail(UserInfo userInfo);
 	//비밀번호 업데이트
 	public int updatePwById(UserInfo userInfo);
+	//회원의 address
+	public List<Address> findAddressesById(UserInfo userInfo);
 	
 	//@Select("")
 	public int existedInvitation(Invitation invitation);

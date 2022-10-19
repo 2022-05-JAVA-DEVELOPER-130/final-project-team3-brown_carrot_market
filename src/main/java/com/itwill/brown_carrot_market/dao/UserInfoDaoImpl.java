@@ -126,6 +126,11 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	}
 
 	@Override
+	public List<Address> findAddressesById(UserInfo userInfo) throws Exception {
+		return userMapper.findAddressesById(userInfo);
+	}
+
+	@Override
 	public boolean existedInvitation(Invitation invitation) throws Exception {
 		System.out.println("#### UserDaoImpl : existedInvitation 호출  ");
 		int count = userMapper.existedInvitation(invitation);
@@ -149,5 +154,6 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		}
 
 	}
+
 
 }

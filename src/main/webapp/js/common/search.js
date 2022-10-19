@@ -111,12 +111,23 @@ function changeSearchList(pageno,keyword){
                                 <div class="single-product-area mb-30">
                                     `;
 	               if(product.productImagesList[0].pi_name!=null && product.productImagesList[0].pi_name!="" ){
+						//이미지 종류에 따라
+						if(product.productImagesList[0].pi_name.startsWith('http')){
+							htmlBuffer += `
+							 <div class="product_image">
+	                                        <!-- Product Image -->
+	                                        <img class="normal_img" style="width:300px; height:300px;" src="${product.productImagesList[0].pi_name}" alt="">
+	                                        <img class="hover_img" style="width:300px; height:300px;" src="${product.productImagesList[0].pi_name}" alt="">
+	                                    `;
+                        }else{
+							htmlBuffer += `
+							 <div class="product_image">
+	                                        <!-- Product Image -->
+	                                        <img class="normal_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
+	                                        <img class="hover_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
+	                                    `;
+						}
 						htmlBuffer += `
-						 <div class="product_image">
-                                        <!-- Product Image -->
-                                        <img class="normal_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
-                                        <img class="hover_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
-
                                         <!-- Product Badge -->
 <!--                                         <div class="product_badge">
                                             <span>New</span>

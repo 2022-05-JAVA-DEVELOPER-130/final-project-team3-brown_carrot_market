@@ -60,12 +60,15 @@
 		                                      
 		                                    </tr>
 										</c:forEach> 
-										<button type="button" id="changeReserve">예약중 변경</button>
-										 
+
 										
 	                                </tbody>
 	                            </table>		
 	                                            </div>
+	                                            <br>
+	                                            <br>
+	                                  <button type="button" id="changeReserve">예약중 변경</button>
+									  <button type="button" id="changeSoldOut">판매완료 변경</button>
 	                    </div>	
 	<br>
 	
@@ -81,12 +84,13 @@
 	
 	<style type="text/css">
 	
-	#chatAppFinalSubmit{
+	#changeReserve{
 	position: fixed;
+	
     left: 0;
     bottom: 0;
-    margin: 0 auto;
-    width: 100%;
+    margin-left: 30px;
+    width: 40%;
     height: 44px;
     display: block;
     /* text-align: center; */
@@ -102,7 +106,35 @@
     padding: 0 24px;
 	}
 	
-	#chatAppFinalSubmit:hover{
+	#changeReserve:hover{
+	color:orange;
+	 background-color:white;
+	 border-color:orange;
+	 border: 2px solid ;
+	}
+	#changeSoldOut{
+	position: fixed;
+    right: 0;
+    bottom: 0;
+    margin-right: 30px;
+    
+    width: 40%;
+    height: 44px;
+    display: block;
+    /* text-align: center; */
+    /* position: relative; */
+    border-radius: 8px;
+    background-color: orange;
+    border-color: orange;
+    cursor: pointer;
+    color: white;
+    border: 1px solid;
+    font-weight: 700;
+    font-size: 14pt;
+    padding: 0 24px;
+	}
+	
+	#changeSoldOut:hover{
 	color:orange;
 	 background-color:white;
 	 border-color:orange;
@@ -120,16 +152,7 @@ border:1px solid orange;
     color: #7f3808;
 
     }
-	
-	#map{
-	border-radius: 8px;
-    display: block;
-    margin: 0 auto;
-    border: 3px solid orange;
-	
-	}
-	
-	label{
+    label{
 	    font-size: 15px;
     font-weight: normal;
     margin-left: 40px;
@@ -141,72 +164,7 @@ border:1px solid orange;
     /* margin: 0 auto; */
 	}
 	
-	input[type="time" i]{
-		    border-color: orange;
-    background-color: white;
-    border: 2px solid orange;
-    border-radius: 8px;
-    padding: 4px 6px;
-    display: block;
-    margin: 0 auto;
-		
-	}
-	#searchChatAppSpot{
-	 border-color: orange;
-    background-color: white;
-    border: 2px solid orange;
-    border-radius: 8px;
-    padding: 4px 6px;
-    width:90%;
-    height:20px;
- 
-	}
-	
-	#datePicker{
-	 border-color: orange;
-    background-color: white;
-    border: 2px solid orange;
-    border-radius: 8px;
-    padding: 4px 6px;
-    display: block;
-    margin: 0 auto;
-	}
-	
-	.textSpot{
-	width: 40%;
-    float: left;
-    margin-left: 27%;
-	}
-	
-	.btnSpot{
-	float:left;
-	/*margin-left: 30px;*/
-	}
-	
-	#btnChatAppSpot{
-	left: 0;
-    bottom: 0;
-    margin: 0 auto;
-    width: 100%;
-    height: 33px;
-    display: inline-block;
-    border-radius: 20px;
-    background-color: orange;
-    border-color: orange;
-    cursor: pointer;
-    color: white;
-    border: 1px solid;
-    font-weight: 700;
-    font-size: 10pt;
-    padding: 0 14px;
-	}
-	
-	#btnChatAppSpot:hover{
-	color:orange;
-	 background-color:white;
-	 border-color:orange;
-	 border: 2px solid ;
-	}
+
 
 	
 </body>

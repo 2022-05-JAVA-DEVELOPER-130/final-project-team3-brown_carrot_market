@@ -3,9 +3,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <%@taglib prefix="s"  uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html lang="en">
-
+ 
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
@@ -14,23 +15,19 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Brwon Carrot Market</title>
+    <title>Brown Carrot Market</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="style.css">
-	<!-- javaScript -->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script type="text/javascript" src="js/common/user_session_check.js"></script>
-	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
-	<script type="text/javascript" src="js/product/product.js"></script>
+	
 	
 	<!-- toast -->
-	<link href="[//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css)" rel="stylesheet" />
-	<link rel="stylesheet" type="text/css" href="[https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css](https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css)"/>
-	<script type="text/javascript" src="[https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js](https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js)"></script>
+	<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+	
 	
 </head>
 
@@ -80,60 +77,63 @@
                             <!-- Carousel Inner -->
                            
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <a class="gallery_img" href="img/product_img/${product.productImagesList[0].pi_name}" title="First Slide">
-                                        <img class="d-block w-100" src="img/product_img/${product.productImagesList[0].pi_name}" alt="First slide">
-                                    </a>
+								<c:set var = "image_name" value = "${product.productImagesList[0].pi_name}"/>
+	                                <c:choose>
+										<c:when test="${fn:startsWith(image_name, 'http')}">
+		                                    <a class="gallery_img" href="${product.productImagesList[0].pi_name}" title="First Slide">
+		                                        <img class="d-block w-100" src="${product.productImagesList[0].pi_name}" alt="First slide">
+		                                    </a>
+	                                       </c:when>
+										<c:otherwise>
+		                                    <a class="gallery_img" href="img/product_img/${product.productImagesList[0].pi_name}" title="First Slide">
+		                                        <img class="d-block w-100" src="img/product_img/${product.productImagesList[0].pi_name}" alt="First slide">
+		                                    </a>
+										</c:otherwise>
+									</c:choose>	
                                     <!-- Product Badge -->
                                     <div class="product_badge">
-                                        <span class="badge-new">New</span>
+                                        <%-- <span class="badge-new">New</span> --%>
                                     </div>
-                                </div>
-                              
-                             
-                                <div class="carousel-item">
-                                    <a class="gallery_img" href="img/product-img/pd-big-thumb-2.png" title="Second Slide">
-                                        <img class="d-block w-100" src="img/product-img/pd-big-thumb-2.png" alt="Second slide">
-                                    </a>
-                                    <!-- Product Badge -->
-                                    <div class="product_badge">
-                                        <span class="badge-new">Sale</span>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <a class="gallery_img" href="img/product-img/pd-big-thumb-3.png" title="Third Slide">
-                                        <img class="d-block w-100" src="img/product-img/pd-big-thumb-3.png" alt="Third slide">
-                                    </a>
-                                    <!-- Product Badge -->
-                                    <div class="product_badge">
-                                        <span class="badge-new">-20%</span>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <a class="gallery_img" href="img/product-img/pd-big-thumb-4.png" title="Fourth Slide">
-                                        <img class="d-block w-100" src="img/product-img/pd-big-thumb-4.png" alt="Fourth slide">
-                                    </a>
-                                    <!-- Product Badge -->
-                                    <div class="product_badge">
-                                        <span class="badge-new">Hot</span>
-                                    </div>
-                                </div>
+	                                </div>
+	                                <c:forEach items="${product.productImagesList}" var="productImages" varStatus="status" begin="1">
+	                                <div class="carousel-item">
+	                                
+		                                <c:set var = "image_name" value = "${productImages.pi_name}"/>
+		                                <c:choose>
+											<c:when test="${fn:startsWith(image_name, 'http')}">
+			                                    <a class="gallery_img" href="${image_name}" title="First Slide">
+			                                        <img class="d-block w-100" src="${image_name}" alt="First slide">
+			                                    </a>
+		                                       </c:when>
+											<c:otherwise>
+			                                    <a class="gallery_img" href="img/product_img/${image_name}" title="First Slide">
+			                                        <img class="d-block w-100" src="img/product_img/${image_name}" alt="First slide">
+			                                    </a>
+											</c:otherwise>
+										</c:choose>	
+	                                
+	                                    <!-- Product Badge -->
+	                                    <div class="product_badge">
+	                                        <%-- <span class="badge-new">New</span> --%>
+	                                    </div>
+	                                </div>
+                             		</c:forEach>
                             </div>
 						
                             <!-- Carosel Indicators -->
                             <ol class="carousel-indicators">
                        
-                                <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(img/product_img/${product.productImagesList[i].pi_name});">
-                                </li>
-                              
-                                
-                               
-                                <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(img/product_img/${product.productImagesList[i+1].pi_name});">
-                                </li>
-                                <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(img/product-img/pd-big-thumb-3.png);">
-                                </li>
-                                <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(img/product-img/pd-big-thumb-4.png);">
-                                </li>
+                                <c:forEach items="${product.productImagesList}" var="productImages" varStatus="status">
+                              		<c:set var = "image_name" value = "${productImages.pi_name}"/>
+	                                <c:choose>
+										<c:when test="${fn:startsWith(image_name, 'http')}">
+	     		                        	<li data-target="#product_details_slider" data-slide-to="${status.index}+1" style="background-image: url(${productImages.pi_name});"></li>
+	                                    </c:when>
+										<c:otherwise>
+	     		                        	<li data-target="#product_details_slider" data-slide-to="${status.index}+1" style="background-image: url(img/product_img/${productImages.pi_name});"></li>
+										</c:otherwise>
+									</c:choose>	
+                               </c:forEach>
                               
                             </ol>
                         </div>
@@ -201,44 +201,45 @@
                         
 						<form class="cart clearfix my-5 d-flex flex-wrap align-items-center" method="post" name="statePopup" id="statePopup">
 						<div class="form-group" name="statePopup" id="statePopup">
+							 
+							 
 							 <input type="hidden" name="user_id" value="${product.userInfo.user_id}" />
                  			 <input type="hidden" name="p_no" id="p_no" value="${product.p_no}" />
-                             <select id="p_sell" name="p_sell" class="custom-select form-control w-100">
-                             <option selected disabled="disabled">
+                            
                              	<c:if test="${product.p_sell eq 1}">
 		                                        		<c:out value="판매중"></c:out>
-		                                        	</c:if>
-		                                        	<c:if test="${product.p_sell eq 2}">
+		                        </c:if>
+		                        
+		                        
+		                        <c:if test="${product.p_sell eq 2}">
+		                     <select id="p_sell" name="p_sell" class="custom-select form-control w-100">
+                             <option selected disabled="disabled">
 		                                        		<c:out value="예약중"></c:out>
-		                                        	</c:if>
-		                                        	<c:if test="${product.p_sell eq 3}">
+		                                      <option value="1">판매중으로 변경</option>
+                            				  <option value="3">판매완료로 변경</option>
+		                     </option>
+		                     </select>
+		                     </c:if>
+		                                        	
+		                                        	
+		                     <c:if test="${product.p_sell eq 3}">
 		                                        		<c:out value="판매완료"></c:out>
-		                                        	</c:if>
-                             </option>
-                          <c:if test="${product.p_sell eq 1}">
-                             <option value="2">예약중으로 변경</option>
-                             <option value="3">판매완료로 변경</option>
-		                                        		
-		                  </c:if>
-		                  <c:if test="${product.p_sell eq 2}">
-                             <option value="1">판매중으로 변경</option>
-                             <option value="3">판매완료로 변경</option>
-		                                        		
-		                  </c:if>
-		                  <c:if test="${product.p_sell eq 3}">
-            		
-		                  </c:if>
+		                     </c:if>
+                             
+ 
+
+
 		                  
                              
-                             </select>
+                             
                              <c:if test="${product.p_sell eq 1}">
-                            <button type="button" id="btn_product_modify_sell_action" class="btn btn-primary mt-1 mt-md-0 ml-1 ml-md-3" onclick="productSell()">판매상태수정</button>
-                            <button type="button" class="btn_popup" id="btn_popup" >팝업</button>
+                            <!--  <button type="button" id="btn_product_modify_sell_action" class="btn btn-primary mt-1 mt-md-0 ml-1 ml-md-3" onclick="productSell()">판매상태수정</button>-->
+                            <button type="button" class="btn btn_popup btn-primary mt-1 mt-md-0 ml-1 ml-md-3" id="btn_popup" >판매상태 수정</button>
                             </c:if>
                             
                             <c:if test="${product.p_sell eq 2}">
                             <button type="button" id="btn_product_modify_sell_action" class="btn btn-primary mt-1 mt-md-0 ml-1 ml-md-3" onclick="productSell()">판매상태수정</button>
-                            <button type="button" class="btn_popup" id="btn_popup">팝업</button>
+                            
                             </c:if>
                             
                             
@@ -809,6 +810,14 @@
     <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
+    
+    <!-- javaScript -->
+<%-- 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+ --%>	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
+	<script type="text/javascript" src="js/product/product.js"></script>
+	 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
+	
 	
 <style type="text/css">
 #toast-container > .toast {
@@ -831,6 +840,12 @@ content: "\f27a";
 }
 #toast-container > .toast-success:before {
 content: "\f2b5";
+}
+
+.toast-top-full-width {
+  top: 0;
+  right: 0;
+  width: 100%;
 }
 	
 </body>
