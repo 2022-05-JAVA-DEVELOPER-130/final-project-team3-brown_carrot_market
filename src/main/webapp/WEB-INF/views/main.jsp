@@ -1150,6 +1150,12 @@
  
 } 
 
+.toast-top-full-width {
+  top: 0;
+  right: 0;
+  width: 100%;
+}
+
 </body>
 
 </html>
