@@ -71,7 +71,7 @@
     <!-- tabs -->
     <ul class="nav nav-tabs" role="tablist" id="product-details-tab">
          <li class="nav-item">
-             <a href="#" class="nav-link active" data-toggle="tab" role="tab">전체 내역</a>
+             <a href="#" class="nav-link active" onclick="sellStatus(0)" data-toggle="tab" role="tab">전체 내역</a>
           </li>
           <li class="nav-item">
              <a href="#" class="nav-link" onclick="sellStatus(1)" data-toggle="tab" role="tab">판매중</a>
