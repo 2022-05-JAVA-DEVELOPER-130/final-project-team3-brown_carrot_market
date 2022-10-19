@@ -138,8 +138,6 @@
                        
                                 <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(img/product_img/${product.productImagesList[i].pi_name});">
                                 </li>
-                              
-                                
                                
                                 <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(img/product_img/${product.productImagesList[i+1].pi_name});">
                                 </li>
