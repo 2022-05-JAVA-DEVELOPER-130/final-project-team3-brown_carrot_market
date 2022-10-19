@@ -18,10 +18,12 @@ import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.ProductCategory;
 import com.itwill.brown_carrot_market.dto.TownBoard;
 import com.itwill.brown_carrot_market.dto.TownCategory;
+import com.itwill.brown_carrot_market.dto.TownImage;
 import com.itwill.brown_carrot_market.dto.TownReply;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.TownBoardService;
 import com.itwill.brown_carrot_market.service.TownReplyService;
+import com.itwill.brown_carrot_market.upload_file.service.FilesStorageServiceTownBoard;
 import com.itwill.brown_carrot_market.util.PageMakerDto;
 
 @Controller
@@ -33,6 +35,8 @@ public class TownBoardController {
 	@Autowired
 	@Qualifier("townReplyServiceImpl")
 	private TownReplyService townReplyService;
+	
+	
 	
 	
 	//우리동네 게시판 전체 조회 카테고리까지
@@ -130,6 +134,10 @@ public class TownBoardController {
 		System.out.println("townReplyList"+ townReplyList);
 		//댓글 등록
 		//townReplyService.insertTownBoardReply(townReply);
+		
+		//해당 게시물의 사진 전체 조회
+		List<TownImage> townImageList = townBoard.getTownImageList();
+		model.addAttribute("townImageList", townImageList);
 		
 		
 		}catch (Exception e) {

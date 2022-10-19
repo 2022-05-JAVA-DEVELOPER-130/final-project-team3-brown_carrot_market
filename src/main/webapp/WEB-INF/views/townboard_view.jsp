@@ -196,19 +196,11 @@
                 <!-- 슬라이드쇼 시작 -->
                 <div>
                  <ul class="bxslider">
-       <c:forEach var="i" begin="0" end="1" step="1"> 
-
-      <li><img src="img/townBoard-img/${townBoard.townImageList[i].t_img_name}" alt="blog-img"  ></li>
- 	 </c:forEach> 
-      
-      <!--   <li><img src="img/townBoard-img/${townBoard.townImageList[1].t_img_name}" alt="blog-img" ></li>
-      <li><img src="img/townBoard-img/${townBoard.townImageList[2].t_img_name}" alt="blog-img" ></li>
-      <li><img src="img/townBoard-img/${townBoard.townImageList[3].t_img_name}" alt="blog-img" ></li>
-      <li><img src="img/townBoard-img/${townBoard.townImageList[4].t_img_name}" alt="blog-img" ></li> -->
-      
-      <!-- <li><img src="http://img1.daumcdn.net/thumb/R1920x0/?fname=http%3A%2F%2Fcfile10.uf.tistory.com%2Fimage%2F99C7223A5BEE75FB303A8E" alt="" title="이미지2"></li>
-      <li><img src="http://img1.daumcdn.net/thumb/R1920x0/?fname=http%3A%2F%2Fcfile7.uf.tistory.com%2Fimage%2F9982093A5BEE75FC259992" alt="" title="이미지3"></li> -->
-  </ul>
+		       <c:forEach var="townImage" items="${townImageList}" begin="0"  step="1"> 
+		
+		      	<li><img src="img/townBoard-img/${townImage.t_img_name}" alt="blog-img"  ></li>
+		 	   </c:forEach> 
+      </ul>
   </div>
 				 <!-- 슬라이드쇼 끝 -->               
                 
@@ -234,8 +226,8 @@
                         <p class = "">${townBoard.t_content}</p>
                     </div>
 					
-					<input class="townBoard_btn delete" type="button" pageno="${pageno}" t_no="${townBoard.t_no}" value="삭제하기" />
 					<input class="townBoard_btn update_form" type="button" pageno="${pageno}" t_no="${townBoard.t_no}" value="수정하기" />
+					<input class="townBoard_btn delete" type="button" pageno="${pageno}" t_no="${townBoard.t_no}" value="삭제하기" />
 					<%-- <input class="townBoard_btn wishlist_add" type="button" pageno="${pageno}" t_no="${townBoard.t_no}" value="관심등록" /> --%>
 					
                     <div class="comments-area">
@@ -314,31 +306,7 @@
 		                                            <p>${townReply.t_reply_title }</p>
 		                                            <p>${townReply.t_reply_content }</p>
 		                                            <input class="townReply delete" type="button" pageno="${pageno}" t_no="${townBoard.t_no }" t_reply_no="${townReply.t_reply_no}" value="삭제하기" />
-                                           <!-- 
-                                            <button class="heading">댓글달기</button>
-                                            <div  class="content">
-                                            <form class="townReply_write_form"  method="post">
-				                                <div class="row">
-				                                    <div class="col-12 rereply">
-				                                        <div class="form-group mb-30">
-				                                            <input type="text" class="form-control" name="t_reply_title" class="t_reply_title" placeholder="댓글 제목" tabindex="1">
-				                                        </div>
-				                                    </div>
-				                                    <div class="col-12 rereply">
-				                                        <div class="form-group mb-30">
-				                                            <textarea class="form-control rereply" name="t_reply_content" class="t_reply_content" cols="30" rows="7" placeholder="내용" tabindex="2"></textarea>
-				                                        </div>
-				                                    </div>
-				                                    <input type="hidden" class="form-control" name="t_no" value="${townBoard.t_no}"/>
-				                                    <input type="hidden" class="form-control" name="step" value="1"/> 이렇게 하면 모든 setp이 1로 나와서 xx 증가해야함 
-				                                    <input type="hidden" class="form-control" name="depth" value="2"/>
-				                                    <div class="col-12 ">
-				                                        <button class="btn btn-primary reply" type="submit">Submit Comment</button>
-				                                    </div>
-				                                </div>
-				                            </form>
-				                            </div>
-				                             -->
+                                           
 				                            
 		                                        </div>
                                             </div>
@@ -426,11 +394,12 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
     
-    <script src="js/townBoard/townBoard.js"></script>
+  
+	<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+	  <script src="js/townBoard/townBoard.js"></script>
     <script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
-	<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 
 
 

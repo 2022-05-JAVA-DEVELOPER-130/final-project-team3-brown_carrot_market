@@ -83,13 +83,157 @@ li{
 .townReply.delete{
 	margin-top: 15px;
 }
+.bxslider img{
+	width: 650px;
+	height: 650px;
+	 margin-left:원본 이미지 가로 사이즈의 반만큼 이동; 
+}
+
 /***************** 버튼 *******************/
 .townBoard_btn{
+	background-color: orange;
+	border-radius: 8px;
+	padding: 10px;
+	color: white;
+	border-style: none;
+	margin-right: 10px;
+	margin-bottom:20px;
+	font-size: 15px;
+	width: 200px;
+	font-weight: 700;
 	
+	
+	-webkit-transition-duration: 500ms;
+    -o-transition-duration: 500ms;
+    transition-duration: 500ms;
+    padding: 0 24px;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    border-color: transparent;
+    border-radius: 8px;
+    font-weight: 700;
+    height: 44px;
+    line-height: 42px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+	
+}
+.townBoard_btn:hover{
+	background-color: #343a40;
+}
+
+.townBoard_btn.delete{
+	background-color: #9FC93C;
+}
+.townBoard_btn.delete:hover{
+	background-color: #343a40;
 }
 
 
+.comment-content input{
+	background-color: orange;
+	border-radius: 8px;
+	padding: 10px;
+	color: white;
+	border-style: none;
+	margin-right: 10px;
+	margin-bottom:20px;
+	font-size: 12px;
+	font-weight: 700;
+	
+	
+	    -webkit-transition-duration: 500ms;
+    -o-transition-duration: 500ms;
+    transition-duration: 500ms;
+    padding: 0 24px;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    border-color: transparent;
+    border-radius: 8px;
+    font-weight: 700;
+    height: 44px;
+    line-height: 42px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+
+.heading{ /*댓글달기 버튼 */
+	background-color: orange;
+	border-radius: 8px;
+	padding: 10px;
+	color: white;
+	border-style: none;
+	margin-right: 10px;
+	margin-bottom:20px;
+	font-size: 15px;
+	width: 100px;
+	font-weight: 700;
+	
+	  -webkit-transition-duration: 500ms;
+    -o-transition-duration: 500ms;
+    transition-duration: 500ms;
+    padding: 0 24px;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    border-color: transparent;
+    border-radius: 8px;
+    font-weight: 700;
+    height: 44px;
+    line-height: 42px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+	
+	
+}
+townReply.delete{/* 댓글삭제 버튼 */
+	background-color: #9FC93C;
+	border-radius: 8px;
+	padding: 10px;
+	color: white;
+	border-style: none;
+	margin-right: 10px;
+	margin-bottom:20px;
+	font-size: 12px;
+	width: 200px;
+	font-weight: 700;
+	
+	  -webkit-transition-duration: 500ms;
+    -o-transition-duration: 500ms;
+    transition-duration: 500ms;
+    padding: 0 24px;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    border-color: transparent;
+    border-radius: 8px;
+    font-weight: 700;
+    height: 44px;
+    line-height: 42px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+	
+	
+}
+
 /***************** 버튼 끝 *******************/
+
+/*
+.status-bar mb-15 a{
+	font-size: 50px;
+}
+*/
+
+.comments-area{
+	margin-top: 80px;
+}
 
 
 

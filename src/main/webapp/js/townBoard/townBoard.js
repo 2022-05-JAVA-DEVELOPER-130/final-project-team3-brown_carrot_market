@@ -512,7 +512,7 @@ const ToastConfirm =  Swal.mixin({
 	showConfirmButton: true, 
 	confirmButtonColor: '#3085d6',
 	showDenyButton: true,
-	denyButtonText: 'Cancle',
+	denyButtonText: 'Cancel',
 	width: '400px'
  });
 
@@ -536,7 +536,8 @@ $(document).ready(function () {
         mode: 'horizontal', // 슬라이드 모드 ('fade', 'horizontal', 'vertical' 이 있음)
         autoControls: true, // 시작 및 중지버튼 보여짐
         pager: true, // 페이지 표시 보여짐
-        captions: true, // 이미지 위에 텍스트를 넣을 수 있음
+        captions: true,
+        slideWidth: 650, // 이미지 위에 텍스트를 넣을 수 있음
     });
 });
 ////////////// 슬라이드쇼 끝 ///////////////
