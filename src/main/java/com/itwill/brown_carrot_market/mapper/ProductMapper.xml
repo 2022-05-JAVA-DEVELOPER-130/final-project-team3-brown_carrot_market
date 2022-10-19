@@ -150,7 +150,7 @@
             on img.p_no=p.p_no)plist
             on pmg.pi_no=plist.imgno)sss
             order by sss.p_date desc)f)fff
-            where fff.idx1<![CDATA[ >= ]]> #{pageStart}and fff.idx1<![CDATA[ <= ]]> #{pageEnd}
+            where fff.idx1<![CDATA[ >= ]]> #{pageStart} and fff.idx1<![CDATA[ <= ]]> #{pageEnd}
               
 	</select>
 	
@@ -227,6 +227,7 @@
 	<select id="selectByOne" parameterType="int" resultMap="productResultMap">
 		select * from product p left outer join product_img pi on p.p_no=pi.p_no
                         join p_category pc on p.p_ctgr_no=pc.p_ctgr_no 
+                         join userinfo u on u.user_id=p.user_id 
                         where p.p_no=#{p_no}
 	</select>
 	
@@ -236,6 +237,16 @@
                     left outer join product_img pi on p.p_no=pi.p_no
                     join p_category pc on p.p_ctgr_no=pc.p_ctgr_no
                     where p.user_id=#{user_id}
+                    order by p.p_date desc
+    </select>
+    
+    <!-- p_sell and user_id list -->
+    
+    <select id="selectByUserIdPSell" parameterType="com.itwill.brown_carrot_market.dto.Product" resultMap="productResultMap">
+	select * from product p  
+                    left outer join product_img pi on p.p_no=pi.p_no
+                    join p_category pc on p.p_ctgr_no=pc.p_ctgr_no
+                    where p.user_id=#{user_id} and p.p_sell=#{p_sell}
                     order by p.p_date desc
     </select>
     

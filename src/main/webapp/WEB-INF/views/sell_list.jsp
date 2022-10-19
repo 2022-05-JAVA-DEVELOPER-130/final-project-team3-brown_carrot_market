@@ -28,7 +28,12 @@
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/review/review.js"></script>
+	<script type="text/javascript" src="js/sells/sell_list.js"></script>
 
+
+	<!-- 탭 기능 자바스크립트 -->
+	
+	
 </head>
 
 <body>
@@ -58,7 +63,30 @@
             </div>
         </div>
     </div>
-    <!-- Breadcumb Area -->
+    <!-- Tab ready -->
+    <div class="container">
+    <div class="row">
+    <div class="col-12">
+    <div class="product_details_tab section_padding_100_0 clearfix">
+    <!-- tabs -->
+    <ul class="nav nav-tabs" role="tablist" id="product-details-tab">
+         <li class="nav-item">
+             <a href="#" class="nav-link active" data-toggle="tab" role="tab">전체 내역</a>
+          </li>
+          <li class="nav-item">
+             <a href="#" class="nav-link" onclick="sellStatus(1)" data-toggle="tab" role="tab">판매중</a>
+          </li>
+          <li class="nav-item">
+             <a href="#" class="nav-link" onclick="sellStatus(2)" data-toggle="tab" role="tab">예약중</a>
+          </li>
+          <li class="nav-item">
+             <a href="#" class="nav-link" onclick="sellStatus(3)" data-toggle="tab" role="tab">거래 완료</a>
+          </li>
+    </ul>
+    <!-- tab content -->
+    <div class="tab-content">
+    <div role="tabpanel" class="tab-pane fade show active" id="all">
+    <div class="description_area">
     <!-- Cart Area -->
 	    <div class="cart_area section_padding_100_70 clearfix">
 	        <div class="container">
@@ -66,10 +94,13 @@
 	                <div class="col-12">
 	                    <div class="cart-table">
 	                        <div class="table-responsive">
+	                           
+	                           
+	                           
 	                            <table class="table table-bordered mb-30">
 	                                <thead>
 	                                    <tr>
-	                                        <!--<th scope="col"><i class="icofont-ui-delete"></i></th>-->
+	                                       
 	                                        <th scope="col">판매일자</th>
 	                                        <th scope="col">상품 이미지</th>
 	                                        <th scope="col">상품 이름</th>
@@ -78,13 +109,12 @@
 	                                        <th scope="col">후   기</th>
 	                                    </tr>
 	                                </thead>
-	                                <tbody>
+	                <!-- 시작? --> 
+	                                <tbody id="sell_list_start">
 	                                
 									    <c:forEach items="${productList}" var="product" varStatus="status">
 		                                    <tr>
-		                                        <!--<th scope="row">
-		                                            <i class="icofont-close"></i>
-		                                        </th>-->
+		                                       
 		                                        <td>
 				                                    <input type="hidden" class="" name="p_no_${status.index}" value="${product.p_no}" >
 		                                        	<c:set var="product_date" value="${product.p_date}"/>
@@ -130,16 +160,28 @@
 		                                            </div>
 		                                        </td>
 		                                    </tr>
-										</c:forEach>  
-										
+										</c:forEach> 
+										 
 	                                </tbody>
 	                            </table>
+									</div>	
 	                        </div>
+	                        <!-- 끝? -->
+	                        
+	                        
 	                    </div>
 	                </div>
 	            </div>
 	        </div>
 	    </div>
+	    </div>
+	    </div>
+	    </div>
+	    </div>
+	    </div>
+	    </div>
+	 
+	    
     <!-- Cart Area End -->
 
     <!-- Footer Area -->
