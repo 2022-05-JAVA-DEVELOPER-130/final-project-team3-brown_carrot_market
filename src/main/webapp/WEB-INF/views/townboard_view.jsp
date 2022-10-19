@@ -141,17 +141,17 @@
 
                             <!-- Recent Post1 -->
                             
-                           	<c:forEach var="townBoard" items="${townBoardList.itemList}" begin="0" end="2">
+                           	<c:forEach var="townBoardTop" items="${townBoardListTop}" begin="0" end="2">
 	                            <div class="single_latest_post">
 	                            
 	                                <div class="post-thumbnail">
-	                                <c:if test="${townBoard.townImageList.size() != 0}">
-	                                    <img src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-post-thumb">
+	                                <c:if test="${townBoardTop.townImageList.size() != 0}">
+	                                    <img src="img/townBoard-img/${townBoardTop.townImageList[0].t_img_name}" alt="blog-post-thumb">
 	                                	</c:if>
 	                                </div>
 	                                <div class="post-content">
-	                                    <a href="#">${townBoard.t_title }</a>
-	                                    <p>${townBoard.t_count }</p>
+	                                    <a href="#">${townBoardTop.t_title }</a>
+	                                    <p>${townBoardTop.t_count }</p>
 	                                </div>
 	                            </div>
                             </c:forEach>
@@ -172,12 +172,11 @@
                         
                         
                     </div>
-                    
                     <!-- Search Post -->
                         <div class="widget-area search_post mb-30">
                             <h6>Search Post</h6>
                             <form action="#" method="get">
-                                <input type="search" class="form-control" placeholder="Enter Keyword...">
+                                <input id="townBoardSearch" type="search" class="form-control" placeholder="Enter Keyword...">
                                 <button type="submit" class="btn d-none">Submit</button>
                             </form>
                         </div>
@@ -264,7 +263,7 @@
 				                                <div class="row">
 				                                    <div class="col-12 rereply">
 				                                        <div class="form-group mb-30">
-				                                            <input type="text" class="form-control" name="t_reply_title" class="t_reply_title" placeholder="댓글 제목" tabindex="1">
+				                                            <input type="text" name="t_reply_title" class="t_reply_title" placeholder="댓글 제목" tabindex="1">
 				                                        </div>
 				                                    </div>
 				                                    <div class="col-12 rereply">
@@ -323,7 +322,7 @@
                         </div>
 
                         <div class="contact_from mb-50">
-                            <h5 class="mb-4">Leave a Comment</h5>
+                            <h5 class="mb-4">댓글</h5>
                             
 							<!-- 메인 댓글달기 -->
                             <form class="townReply_Main_write_form" method="post">
@@ -332,7 +331,7 @@
                                    
                                     <div class="col-12">
                                         <div class="form-group mb-30">
-                                            <input type="text" class="form-control" name="t_reply_title" class="t_reply_title" placeholder="댓글 제목" tabindex="1">
+                                            <input type="text" name="t_reply_title" class="t_reply_title" placeholder="댓글 제목" tabindex="1">
                                         </div>
                                     </div>
                                     <div class="col-12">
