@@ -350,6 +350,12 @@ public class ReplyEchoHandler {
 					
 					int p_no = Integer.parseInt(reserve.get("p_no"));
 					Product product = productService.selectByOne(p_no);
+					if(ordersService.selectByOrdersCount(p_no)>0) {
+						
+						product.setP_sell(3);
+						productService.updateProductSell(3, product.getP_no());
+						
+					}else {
 
 					
 					product.setP_sell(3);
@@ -360,7 +366,7 @@ public class ReplyEchoHandler {
 					orders.setUserinfo(new UserInfo(you_Id, null, null, null, null, 0, 0, null, null));
 					orders.setProduct(product);
 					int result = ordersService.insertOrders(orders);
-					
+					}
 					resultMap.put("product", product);	
 
 
