@@ -292,9 +292,8 @@ where tb.t_address_lat
 		
 	</select>
 	 -->
-	<!-- 동네 게시판 글 전체 조회(좌표값에 따라 검색 + 카테고리로 검색) 페이징 처리-->
-	<select id="selectTownBoardCtgrListCoordinate" parameterType="map" resultMap="townBoradResultMap" >
-		<!-- 
+	 
+	 <!-- 
 		select ss.* from 
 		(select rownum idx, s.* from
 		(select * from (select * from(select * from town_board tb left outer join town_img ti on tb.t_no = ti.t_no
@@ -309,6 +308,8 @@ where tb.t_address_lat
 		)ss
 		where ss.idx <![CDATA[ >= ]]> #{pageStart} and ss.idx <![CDATA[ <= ]]> #{pageEnd}
 		 -->
+	<!-- 동네 게시판 글 전체 조회(좌표값에 따라 검색 + 카테고리로 검색) 페이징 처리-->
+	<select id="selectTownBoardCtgrListCoordinate" parameterType="map" resultMap="townBoradResultMap" >
 		select fffa.* from(
 select rownum idx1, f.* from (select sss.* from(select rownum idx ,plist.*,pmg.t_img_name from town_img pmg
                     right outer join (select p.*,imgno from (select min(i.t_img_no)imgno,i.t_no from town_img i group by i.t_no) img 
