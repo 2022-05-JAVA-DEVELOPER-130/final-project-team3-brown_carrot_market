@@ -1104,7 +1104,9 @@ textarea:focus,
       top: 0;
       left: 0;
       z-index: -1;
-      background-color: #070a57;
+      /*메인 슬라이드 배경색*/
+      /*
+      'background-color: #070a57;*/
       opacity: 0.5; }
     .welSlideTwo .single_slide p,
     .welSlideTwo .single_slide h2 {
