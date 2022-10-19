@@ -32,6 +32,9 @@ public interface ProductDao {
 	//회원이 올린 게시글 리스트 불러오기
 	List<Product> selectByUserId(String user_id)throws Exception;
 	
+	//회원이 올린 게시글 리스트 +p_sell
+	public List<Product> selectByUserIdPSell(String user_id, int p_sell)throws Exception;
+	
 	//선택한 상품 하나 불러오기
 	Product selectByOne(int p_no)throws Exception;
 	

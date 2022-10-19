@@ -32,6 +32,8 @@ public interface ProductMapper {
 	
 	public List<Product> selectByUserId(String user_id);
 	
+	public List<Product> selectByUserIdPSell(String user_id, int p_sell);
+	
 	public Product selectByOne(int p_no);
 	public int selectProductPK();
 	
