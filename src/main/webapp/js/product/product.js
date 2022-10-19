@@ -128,31 +128,42 @@ function productUpdateAction(){
    	});
    }
 /**********페이징************/
-function changeProductList(pageno){
+function changeProductList(pageno,p_ctgr_no){
 	$.ajax({
 		url:"product_list_rest",
 		method:"post",
 		data:{
 			"pageno":pageno,
+			"p_ctgr_no":p_ctgr_no
 		},
 		dataType:"json",
 		success:function(resultObj){
 			console.log(resultObj);
-			
-			let data = resultObj.data;
+				let data = resultObj.data;
 				let htmlBuffer = ``;
-                        	
 				data.itemList.forEach(function(product, i){
 				
 				  htmlBuffer += `<div class="col-12">
                                 <div class="single-product-area mb-30">
                                     `;
 	               if(product.productImagesList[0].pi_name!=null && product.productImagesList[0].pi_name!="" ){
+						//이미지 종류에 따라
+						if(product.productImagesList[0].pi_name.startsWith('http')){
+							htmlBuffer += `
+							 <div class="product_image">
+	                                        <!-- Product Image -->
+	                                        <img class="normal_img" style="width:300px; height:300px;" src="${product.productImagesList[0].pi_name}" alt="">
+	                                        <img class="hover_img" style="width:300px; height:300px;" src="${product.productImagesList[0].pi_name}" alt="">
+	                                    `;
+                        }else{
+							htmlBuffer += `
+							 <div class="product_image">
+	                                        <!-- Product Image -->
+	                                        <img class="normal_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
+	                                        <img class="hover_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
+	                                    `;
+						}
 						htmlBuffer += `
-						 <div class="product_image">
-                                        <!-- Product Image -->
-                                        <img class="normal_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
-                                        <img class="hover_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
 
                                         <!-- Product Badge -->
 <!--                                         <div class="product_badge">
@@ -221,7 +232,7 @@ function changeProductList(pageno){
 				let paginationBuffer = ``;
 				if(data.pageMaker.prevPage > 0){
 					paginationBuffer += `<li class="page-item">
-		                                    <button class="page-link" onclick="changeProductList(${data.pageMaker.prevPage})"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+		                                    <button class="page-link" onclick="changeProductList(${data.pageMaker.prevPage},'${p_ctgr_no}')"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
 		                               	 </li>`;
 				}
 				for(let no = data.pageMaker.blockBegin; no <= data.pageMaker.blockEnd; no++){
@@ -229,12 +240,12 @@ function changeProductList(pageno){
 						paginationBuffer += `<li class="page-item active"><button class="page-link" href="#">${no}</button></li>`;
 					}
 					if(data.pageMaker.curPage != no){
-						paginationBuffer += `<li class="page-item"><button class="page-link" onclick="changeProductList(${no});">${no}</button></li>`;
+						paginationBuffer += `<li class="page-item"><button class="page-link" onclick="changeProductList(${no},'${p_ctgr_no}');">${no}</button></li>`;
 					}
 				}
 				if(data.pageMaker.curPage < data.pageMaker.totPage){
 					paginationBuffer += `<li class="page-item">
-					                        <button class="page-link" onclick="changeProductList(${data.pageMaker.nextPage});"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+					                        <button class="page-link" onclick="changeProductList(${data.pageMaker.nextPage},'${p_ctgr_no}');"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
 				                    	 </li>`;
 				}
 				$(".pagination.pagination-sm.justify-content-center").html(paginationBuffer);	

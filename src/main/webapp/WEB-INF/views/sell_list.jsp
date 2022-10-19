@@ -91,7 +91,19 @@
 		                                        	${fn:substring(product_date,0,10)}
 		                                        </td>
 		                                        <td>
-		                                            <img src="img/product_img/${product.productImagesList[0].pi_name}" onerror="this.src='img/user_profile/newCarrot.jpg'">
+		                                        	
+		                                        	<c:set var = "image_name" value = "${product.productImagesList[0].pi_name}"/>
+			                                        <c:choose>
+														<c:when test="${fn:startsWith(image_name, 'http')}">
+				                                            <img src="${product.productImagesList[0].pi_name}" >
+				                                        </c:when>
+														<c:otherwise>
+				                                            <img src="img/product_img/${product.productImagesList[0].pi_name}" onerror="this.src='img/user_profile/newCarrot.jpg'">
+														</c:otherwise>
+													</c:choose>
+		                                        
+		                                        
+		                                        
 		                                        </td>
 		                                        <td>
 		                                            <a href="product_detail?p_no=${product.p_no}">${product.p_title}</a>
