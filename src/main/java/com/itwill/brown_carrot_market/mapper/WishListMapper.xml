@@ -25,7 +25,13 @@
 			<result column="P_ADDRESS_NAME" property="p_address_name"/>
 			<result column="P_ADDRESS_LAT"  property="p_address_lat"/>
 			<result column="P_ADDRESS_LNG  " property="p_address_lng"/>
+			<collection property="productImagesList" javaType="java.util.List" ofType="com.itwill.brown_carrot_market.dto.ProductImage">
+			<result column="PI_NO" property="pi_no"/>
+			<result column="PI_NAME" property="pi_name"/>
+			<result column="P_NO" property="p_no"/>
+		</collection>
 		</association>
+		
 	</resultMap>
 	
 	<!-- 유저가 관심글한 목록 전체 불러오기 -->
@@ -57,5 +63,16 @@
 	<delete id="deleteWishList" parameterType="int">
 		delete from wishlist w where w.wishlist_no=#{wishlist_no}
 	</delete>
+	
+	<!-- 관심글 삭제 -->
+	<delete id="deleteWishPD" parameterType="map">
+		delete from wishlist where p_no=#{p_no} and user_id=#{user_id}
+	</delete>
+	
+	<!-- 관심글 여부 -->
+	<select id="checkWish" parameterType="map" resultType="int">
+	
+	select count(*) from wishlist where p_no=#{p_no} and user_id=#{user_id}
+	</select>
 		
 </mapper>

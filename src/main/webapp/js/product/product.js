@@ -255,8 +255,35 @@ function productSell(){
 }
 
 
+function checkWish(){
+		$.ajax({
+		url:'checkWish',
+		method:'POST',
+		data:{
+			"p_no":$("#p_no").val()
+		},
+		dataType:"json",
+		success:function(result){
+			console.log("찜하기 여부 :"+ result.data);
+			if(result.data=="1"){
+				$("#addWishListBtn").html(`<i class="fa fa-heart" aria-hidden="true" style="color:red;"></i>`);
+			}else{
+				$("#addWishListBtn").html(`<i class="fa fa-heart" aria-hidden="true" style="color:gray;"></i>`);
+			}
+		}
+		
+		
+	});
+}
+
 /********************채팅하기!!**************************/
 $(document).ready(function(){
+	
+checkWish();
+	
+	
+	
+	
 	$('#btnCreate').click(function(){
 		if(document.chatStart.p_userId.value==document.chatStart.loginId.value){
 			alert("본인 상품과는 채팅할 수 없습니다.");
@@ -284,8 +311,70 @@ $('#btn_popup').click(function(){
 
 
 
+
+$('#addWishListBtn').click(function(e){
+	
+	e.preventDefault();
+	e.stopPropagation();
+	
+	
+	
+	
+	
+	$.ajax({
+		url:'checkWish',
+		method:'POST',
+		data:{
+			"p_no":$("#p_no").val()
+		},
+		dataType:"json",
+		success:function(result){
+			console.log("찜하기 여부 :"+ result.data);
+			if(result.data=="1"){
+				console.log("이미 찜했음 -- > 찜하기 해제 ");
+				
+				$.ajax({
+					url:"wishDeletePD",
+					method:"POST",
+					data:{
+						"p_no":$("#p_no").val()
+					},
+					dataType:"json",
+					success:function(result){
+						toastr.options.positionClass = 'toast-top-full-width' ;
+	                    toastr['info']("관심 해제");
+	                    $("#addWishListBtn").html(`<i class="fa fa-heart" aria-hidden="true" style="color:gray;"></i>`);
+					}
+				});
+				
+			}else{
+				console.log("새롭게 찜하기");
+				
+				$.ajax({
+					url:"wishInsert",
+					method:"POST",
+					data:{
+						"p_no":$("#p_no").val()
+					},
+					dataType:"json",
+					success:function(result){
+						toastr.options.positionClass = 'toast-top-full-width' ;
+	                    toastr['info']("관심 추가");
+	                    $("#addWishListBtn").html(`<i class="fa fa-heart" aria-hidden="true" style="color:red;"></i>`);
+					}
+				});
+				
+			}
+		}
+		
+		
+	});
+});
 	
 	
 	
 	});
+
+
+
 	

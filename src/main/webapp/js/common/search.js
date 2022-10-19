@@ -114,8 +114,8 @@ function changeSearchList(pageno,keyword){
 						htmlBuffer += `
 						 <div class="product_image">
                                         <!-- Product Image -->
-                                        <img class="normal_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
-                                        <img class="hover_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
+                                        <img class="normal_img" style="width:300px; height:300px;" src="${product.productImagesList[0].pi_name}" alt="">
+                                        <img class="hover_img" style="width:300px; height:300px;" src="${product.productImagesList[0].pi_name}" alt="">
 
                                         <!-- Product Badge -->
 <!--                                         <div class="product_badge">

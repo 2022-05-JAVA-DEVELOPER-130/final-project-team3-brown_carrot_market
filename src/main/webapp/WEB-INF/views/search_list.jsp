@@ -167,7 +167,7 @@
                                     <div class="product_image">
                                         <!-- Product Image -->
                                         
-                                        <c:choose>
+                                    <c:choose>
                                         <c:when test="${!empty product.productImagesList[0].pi_name}">
 
 											<c:set var = "image_name" value = "${product.productImagesList[0].pi_name}"/>
