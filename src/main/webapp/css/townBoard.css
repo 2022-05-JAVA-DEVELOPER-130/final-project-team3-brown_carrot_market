@@ -221,28 +221,90 @@ li{
     border-radius: 0 0 6px 6px;
 }
 
-.shop_pagination_area .page-item.active .page-link {
+.shop_pagination_area .page-item.active .page-link { /* 페이징 버튼 색 변경 */
     background-color: orange;
     color: #ffffff;
 }
-.footer_area {
-    position: relative;
-    z-index: 1;
+.footer_area { /* 푸터 색 변경 */
+   /* position: relative;
+    z-index: 1;*/
     background-color: #FBF8EF;
 }
-
-
-
 /***************** 버튼 끝 *******************/
+/***************** 우리동네 게시글 쓰기폼 *******************/
+.contact_from mb-50{
+	width: 500px;
+	margin-bottom: 50px;
+}
+
+.form-group span input{
+	background-color: orange;
+	border-radius: 8px;
+	padding: 10px;
+	color: white;
+	border-style: none;
+	margin-top:10px;
+	margin-right: 10px;
+	margin-bottom:20px;
+	font-size: 12px;
+	width: 100px;
+	font-weight: 700;
+}
+#t_content{
+	margin-top: 10px;
+	margin-bottom:30px;
+	height: 300px;
+	resize: none;
+}
+
+#btn_townBoard_write_action, .townBoard_btn.list{
+	margin-bottom: 30px;
+}
+
+.town_pic_upload {
+    width: 100px;
+    background: white;
+    border: 2px solid orange;
+    border-radius: 8px;
+    font-weight: 800;
+    color: orange;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    justify-content: center;
+    padding: 8px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.town_pic_upload:hover{
+	background: orange;
+	color: white;
+}
+
+#img_choose {
+    display: none;
+}
+/*
+#img_choose>#file_upload_button{
+	display: none;
+}
+*/
+
 
 /*
 .status-bar mb-15 a{
 	font-size: 50px;
 }
 */
+/***************** 우리동네 게시글 쓰기폼 끝 *******************/
 
-.comments-area{
-	margin-top: 80px;
+#main_contact_form_townBoard{
+	margin-top:50px;
+	margin-left: 150px;
+	margin-right: 150px;
+	height: 500px;
 	
 	
 }
