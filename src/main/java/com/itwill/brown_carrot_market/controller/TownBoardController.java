@@ -121,6 +121,7 @@ public class TownBoardController {
 	public String townBoard_view(@RequestParam int t_no,@RequestParam int pageno, Model model,HttpSession session, @ModelAttribute TownReply townReply) throws Exception{
 		String forwardPath = "";
 		String sUserId = (String)session.getAttribute("sUserId");
+		Address sAddress = (Address)session.getAttribute("sAddress");
 		
 		try {
 		TownBoard townBoard = townBoardService.selectTownBoardOne(t_no);
@@ -138,6 +139,22 @@ public class TownBoardController {
 		//해당 게시물의 사진 전체 조회
 		List<TownImage> townImageList = townBoard.getTownImageList();
 		model.addAttribute("townImageList", townImageList);
+		
+		if(sUserId != null) {
+			//회원 인기글 리스트
+			List<TownBoard> townBoardListTop = townBoardService.selectMemberTownBoardListTop3(sAddress);
+			model.addAttribute("townBoardListTop", townBoardListTop);
+			System.out.println("townBoard_list컨트롤러 - townBoardListTop: "+townBoardListTop);
+			
+		}else {
+			/*
+			 비회원 인기글 리스트
+			 */
+			List<TownBoard> townBoardListTop = townBoardService.selectNonMemberTownBoardListTop3();
+			model.addAttribute("townBoardListTop", townBoardListTop);
+			System.out.println("townBoard_list컨트롤러 - townBoardListTop: "+townBoardListTop);
+		}
+		
 		
 		
 		}catch (Exception e) {

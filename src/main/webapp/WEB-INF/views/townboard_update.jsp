@@ -122,13 +122,25 @@
                                     <div>
                                     
                                     <div class="col-xl-3">
-	                           			 <img id="product" src='img/townBoard-img/${townBoard.townImageList[0].t_img_name}' alt="" t_img_name='${townBoard.townImageList[0].t_img_name}' style="width:100px; height:100px; border:1px solid #ddd;
-                                    						position:relative;" ><br>
-                                    <span>${townBoard.townImageList[0].t_img_name}<input type="file" name="files"></span>
+	                           			 
+                                    
 	                       			 </div>
-									<span>사진2: <input type="file" name="files"></span>
-									<span>사진3: <input type="file" name="files"></span>
-									<span>사진4: <input type="file" name="files"></span>
+									<label for = "img_choose">
+                                    	<div class = "town_pic_upload">사진1 </div>
+                                    </label>
+                                    <input type="file" name="files" id="img_choose"></span>
+                                    <label for = "img_choose">
+                                    	<div class = "town_pic_upload">사진2 </div>
+                                    </label>
+                                    <input type="file" name="files" id="img_choose"></span>
+                                    <label for = "img_choose">
+                                    	<div class = "town_pic_upload">사진3 </div>
+                                    </label>
+                                    <input type="file" name="files" id="img_choose"></span>
+                                    <label for = "img_choose">
+                                    	<div class = "town_pic_upload">사진4 </div>
+                                    </label>
+                                    <input type="file" name="files" id="img_choose"></span>
 									
 									</div>
 									<!-- 사진 넣기 임시 끝-->

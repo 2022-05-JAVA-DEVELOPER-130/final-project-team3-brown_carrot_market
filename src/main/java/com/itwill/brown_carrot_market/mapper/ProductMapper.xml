@@ -227,6 +227,7 @@
 	<select id="selectByOne" parameterType="int" resultMap="productResultMap">
 		select * from product p left outer join product_img pi on p.p_no=pi.p_no
                         join p_category pc on p.p_ctgr_no=pc.p_ctgr_no 
+                         join userinfo u on u.user_id=p.user_id 
                         where p.p_no=#{p_no}
 	</select>
 	
