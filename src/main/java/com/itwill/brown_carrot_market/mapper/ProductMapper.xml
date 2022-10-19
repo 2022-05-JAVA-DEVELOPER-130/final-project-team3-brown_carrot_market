@@ -108,7 +108,7 @@
 	</select>
 	
 	<!-- 비회원 카테고리 검색 카운트 -->
-	<select id="selectNonMemberCountCtgrTownBoard" parameterType="int" resultType="int">
+	<select id="selectNonMemberCountCtgrProduct" parameterType="int" resultType="int">
 		select count(*) from (select ctlist.* from (select plist.*,pmg.pi_name from product_img pmg 
 		right outer join (select pb.*,imgno from 
                     (select min(i.pi_no)imgno,p_no from product_img i group by i.p_no)img 
@@ -171,7 +171,7 @@
            
 	</select>
 	
-	<!-- 로그인한 회원 범위+카테고리오 상품 리스트 불러오기 -->
+	<!-- 로그인한 회원 범위+카테고리로 상품 리스트 불러오기 
 	<select id="selectListByRangeCtgr" parameterType="map" resultMap="productResultMap">
 		select * from (select * from (select * from product p left outer join product_img pi on p.p_no=pi.p_no
                                        join p_category pc on p.p_ctgr_no=pc.p_ctgr_no where p.p_ctgr_no=#{p_ctgr_no}) pa
@@ -183,6 +183,44 @@
             AND (select a.address_lng from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})+0.056344377*(select a.address_range from address a where a.user_id=#{address.user_id} and a.address_no=#{address.address_no})
              order by pp.p_date desc
 	
+	</select>
+	-->
+	
+	<!-- 로그인한 회원 범위+카테고리로 상품 리스트 불러오기 -->
+	<select id="selectListByRangeCtgr" parameterType="map" resultMap="productResultMap">
+		select fff.* from(
+			select rownum idx1, f.* from (select sss.* from(select rownum idx ,plist.*,pmg.pi_name from product_img pmg
+                    right outer join (select p.*,imgno from (select min(i.pi_no)imgno,i.p_no from product_img i group by i.p_no) img 
+                    right outer join (select * from  (select p.*,pc.p_ctgr_name from product p join p_category pc on p.p_ctgr_no=pc.p_ctgr_no where pc.p_ctgr_no=#{p_ctgr_no} 
+                    and p.p_address_lat 
+                    between (select a.address_lat from address a where a.user_id=#{user_id} and a.address_no=#{address_no})-0.004504505*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
+                    AND (select a.address_lat from address a where a.user_id=#{user_id} and a.address_no=#{address_no})+0.004504505*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})) pp
+                    where pp.p_address_lng
+                    between (select a.address_lng from address a where a.user_id=#{user_id} and a.address_no=#{address_no})-0.056344377*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
+                        AND (select a.address_lng from address a where a.user_id=#{user_id} and a.address_no=#{address_no})+0.056344377*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
+                    )p 
+                    on img.p_no=p.p_no)plist
+                    on pmg.pi_no=plist.imgno)sss
+                    order by p_date desc) f) fff
+	 where fff.idx1 <![CDATA[ >= ]]> #{pageStart} and fff.idx1 <![CDATA[ <= ]]> #{pageEnd}
+	 </select>
+	
+	<!-- 로그인한 회원 범위+카테고리로 상품 리스트 불러오기 카운트 -->
+	<select id="selectMemberCtgrCountProduct" parameterType="map" resultType="int">
+	select count(*) from (select sss.* from(select rownum idx ,plist.*,pmg.pi_name from product_img pmg
+                    right outer join (select p.*,imgno from (select min(i.pi_no)imgno,i.p_no from product_img i group by i.p_no) img 
+                    right outer join (select * from  (select p.*,pc.p_ctgr_name from product p join p_category pc on p.p_ctgr_no=pc.p_ctgr_no where pc.p_ctgr_no=#{p_ctgr_no} 
+                    and p.p_address_lat 
+                    between (select a.address_lat from address a where a.user_id=#{user_id} and a.address_no=#{address_no})-0.004504505*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
+                    AND (select a.address_lat from address a where a.user_id=#{user_id} and a.address_no=#{address_no})+0.004504505*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})) pp
+                    where pp.p_address_lng
+                    between (select a.address_lng from address a where a.user_id=#{user_id} and a.address_no=#{address_no})-0.056344377*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
+                        AND (select a.address_lng from address a where a.user_id=#{user_id} and a.address_no=#{address_no})+0.056344377*(select a.address_range from address a where a.user_id=#{user_id} and a.address_no=#{address_no})
+                    )p 
+                    on img.p_no=p.p_no)plist
+                    on pmg.pi_no=plist.imgno)sss
+							where 1=1
+							order by sss.p_date desc)
 	</select>
 	
 	<!-- 선택한 상품 하나 보여주기 -->
