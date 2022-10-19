@@ -70,8 +70,15 @@
                 <li class="clearfix" id="btnCall${list.c_room_no}" value=${list.c_room_no}>
                         <img src="img/user_profile/${list.you_image}" alt="avatar">
                         
-                        <img src="img/product_img/${list.p_img}" style="float:right; width:45px; height:45px; border-radius: 0%">
-                        
+                        <c:set var = "image_name" value = "${list.p_img}"/>
+                        <c:choose>
+							<c:when test="${fn:startsWith(image_name, 'http')}">
+                                 <img src="${list.p_img}" style="float:right; width:45px; height:45px; border-radius: 0%">
+                            </c:when>
+							<c:otherwise>
+                                 <img src="img/product_img/${list.p_img}" style="float:right; width:45px; height:45px; border-radius: 0%">
+							</c:otherwise>
+						</c:choose>
                         
                         <div class="about">
 							<input name="chatRoomNo" type="hidden" value=${list.c_room_no}/>
