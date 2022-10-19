@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fn"  uri = "http://java.sun.com/jsp/jstl/functions"%>
 <!doctype html>
 <html lang="en">
 
@@ -186,8 +187,18 @@
                                 <div class="single-product-area mb-30">
                                     <div class="product_image">
                                         <!-- Product Image -->
-                                        <img class="normal_img" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
-                                        <img class="hover_img" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
+                                        
+                                        <c:set var = "image_name" value = "${product.productImagesList[0].pi_name}"/>
+                                        <c:choose>
+											<c:when test="${fn:startsWith(image_name, 'http')}">
+		                                        <img class="normal_img" src="${product.productImagesList[0].pi_name}" alt="">
+		                                        <img class="hover_img" src="${product.productImagesList[0].pi_name}" alt="">
+	                                        </c:when>
+											<c:otherwise>
+		                                        <img class="normal_img_test" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
+		                                        <img class="hover_img" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
+											</c:otherwise>
+										</c:choose>
 
                                         <!-- Product Badge -->
                                         <div class="product_badge">

@@ -78,13 +78,33 @@
 	
 	
 
-	<!-- 비회원 카테고리별 상품리스트 불러오기 -->
+	<!-- 비회원 카테고리별 상품리스트 불러오기 
 	<select id="selectAllByCtgr" parameterType="int" resultMap="productResultMap"> 
 		select * from product p left outer join product_img pi on p.p_no=pi.p_no
                         join p_category pc on p.p_ctgr_no=pc.p_ctgr_no
                         where p.p_ctgr_no=#{p_ctgr_no}
                         order by p.p_date desc
 	</select>
+	-->
+	<select id="selectAllByCtgr" parameterType="int" resultMap="productResultMap">
+		select ss.* from 
+						(select rownum idx, s.* from
+						(select ctlist.* from (select plist.*,pmg.pi_name from product_img pmg 
+		right outer join (select p.*,imgno from 
+                    (select min(i.pi_no)imgno,t_no from product_img i group by i.p_no)img 
+		right outer join (select *
+		from (select p.*,pc.p_ctgr_name from product p join p_category pc on p.p_ctgr_no=pc.p_ctgr_no) p )tb
+		on img.p_no=p.p_no)plist
+		on pmg.pi_no=plist.imgno) ctlist
+		join p_category pc
+		on ctlist.p_ctgr_no = pc.p_ctgr_no where pc.p_ctgr_no=#{p_ctgr_no})s
+		)ss
+		where ss.idx <![CDATA[ >= ]]> #{pageStart} and ss.idx <![CDATA[ <= ]]> #{pageEnd}
+		
+
+		
+	</select>
+	
 	
 	<!-- 로그인한 회원 범위안 상품 리스트 불러오기
 	<select id="selectListByRange" parameterType ="com.itwill.brown_carrot_market.dto.Address" resultMap="productResultMap">
