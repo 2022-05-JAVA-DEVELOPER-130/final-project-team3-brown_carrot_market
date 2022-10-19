@@ -17,9 +17,10 @@
 					htmlBuffer += `<tr>`;
 					htmlBuffer += `<td>`;
 					//htmlBuffer += ``+substring(${product_date},0,10);+``
+					var date = 	data[i].p_date.substring(0,10);		   
 					htmlBuffer += `<input type="hidden" class="" name="p_no_${status.index}" value="${data[i].p_no}" >
-								   ${data[i].p_date}
-								   </td>`;
+								   `+date+
+								   `</td>`;   
 				if(data[i].productImagesList[0].pi_name!=null && data[i].productImagesList[0].pi_name!="" ){
 					if(data[i].productImagesList[0].pi_name.startsWith('http')){
 					htmlBuffer += `<td>`;
