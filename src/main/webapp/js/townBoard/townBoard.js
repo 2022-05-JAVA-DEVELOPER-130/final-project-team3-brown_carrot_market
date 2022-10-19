@@ -71,7 +71,7 @@ function changeQnaList(pageno,t_ctgr_no){
 /*
 게시글 삭제 
 */
-$(".townBoard_i.delete").on("click", function(){
+$(".townBoard_btn.delete").on("click", function(){
 	let pageno = $(this).attr("pageno");
 	let t_no = $(this).attr("t_no");
 	ToastConfirm.fire({ icon: 'question', 
@@ -347,7 +347,7 @@ $("#townMainReplyBtn").on("click", function(e){
 	let pageno = form.find($('input[name="page_no"]')).val();
 	let t_no = form.find($('input[name="t_no"]')).val();
 
-	if($(".t_reply_title").val() == "" || $(".t_reply_content").val() == ""){
+	if($(".form-group.t_reply_title").val() == "" || $(".t_reply_content").val() == ""){
 		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
 		return;
 	}
@@ -392,8 +392,7 @@ $(".btn.btn-primary.rereply").on("click", function(e){
 	let pageno = form.find($('input[name="page_no"]')).val();
 	let t_no = form.find($('input[name="t_no"]')).val();
 	let groupno = form.find($('input[name="groupno"]')).val();
-	alert(groupno);
-	if($(".t_reply_title").val() == "" || $(".t_reply_content").val() == ""){
+	if($(".form-group.t_reply_title").val() == "" || $(".t_reply_content").val() == ""){
 		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
 		return;
 	}
@@ -512,7 +511,7 @@ const ToastConfirm =  Swal.mixin({
 	showConfirmButton: true, 
 	confirmButtonColor: '#3085d6',
 	showDenyButton: true,
-	denyButtonText: 'Cancle',
+	denyButtonText: 'Cancel',
 	width: '400px'
  });
 
@@ -536,7 +535,8 @@ $(document).ready(function () {
         mode: 'horizontal', // 슬라이드 모드 ('fade', 'horizontal', 'vertical' 이 있음)
         autoControls: true, // 시작 및 중지버튼 보여짐
         pager: true, // 페이지 표시 보여짐
-        captions: true, // 이미지 위에 텍스트를 넣을 수 있음
+        captions: true,
+        slideWidth: 650, // 이미지 위에 텍스트를 넣을 수 있음
     });
 });
 ////////////// 슬라이드쇼 끝 ///////////////

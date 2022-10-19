@@ -65,6 +65,7 @@ public class ProductController {
 	@RequestMapping(value = {"/product_detail", "/product_login_detail"}, params = "p_no")
 	public String product_view(@RequestParam int p_no,Model model,HttpSession session) throws Exception {
 		String sUserId = (String)session.getAttribute("sUserId");
+		Address sAddress = (Address)session.getAttribute("sAddress");
 		//String forwardPath ="";
 		
 		Product product = productService.selectByOne(p_no);
@@ -74,6 +75,7 @@ public class ProductController {
 		if(sUserId == null || sUserId.equals("")) {
 			return "product_detail";
 		}else if(sUserId.equals(product.getUserInfo().getUser_id())) {
+			model.addAttribute("address",sAddress);
 			return "product_login_detail";
 		}else {
 			return "product_detail";

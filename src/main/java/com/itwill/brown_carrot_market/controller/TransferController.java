@@ -75,7 +75,7 @@ public class TransferController {
 	public String transfer_complete(int p_no,Model model, HttpServletRequest request) throws Exception {
 		String sUserId = (String) request.getSession().getAttribute("sUserId");
 		Product product = productService.selectByOne(p_no);
-		productService.updateProductSell(3, p_no);
+		//productService.updateProductSell(3, p_no);
 		
 		model.addAttribute("product", product);
 		return "/transfer_complete";

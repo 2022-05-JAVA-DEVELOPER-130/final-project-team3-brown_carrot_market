@@ -134,7 +134,7 @@
 
                             <!-- Wishlist -->
                             <div id="wishlist-area" class="wishlist-area" >
-                                <a href="wishlist.html" class="wishlist-btn"><i class="icofont-heart"></i></a>
+                                <a href="wishList" class="wishlist-btn"><i class="icofont-heart"></i></a>
                             </div>
                             
                             <!-- transaction list -->

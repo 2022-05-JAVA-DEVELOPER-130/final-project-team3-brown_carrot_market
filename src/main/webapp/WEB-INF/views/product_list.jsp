@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fn"  uri = "http://java.sun.com/jsp/jstl/functions"%>
 <!doctype html>
 <html lang="en">
 
@@ -12,7 +13,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Brwon Carrot Market</title>
+    <title>Brown Carrot Market</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -85,24 +86,28 @@
                             <ul>
                               <li>
                               
-	                              
-	                              <a href="product_category?category_no=1" style="font-weight: normal">- 가전제품</a>
-
+	                              <input type="hidden" class="productCtgrNo" name="p_ctgr_no1" value=1>
+	                              <a href="#" onclick="changeProductList(1,1)" style="font-weight: normal">- 가전제품</a>
                               </li>
                               <li>
-	                              <a href="product_category?category_no=2" style="font-weight: normal" >- 가구</a>
+                              		<input type="hidden" class="productCtgrNo" name="p_ctgr_no2" value=1>
+	                              <a href="#" onclick="changeProductList(1,2)" style="font-weight: normal" >- 가구</a>
                               </li>
                               <li>
-	                              <a href="product_category?category_no=3" style="font-weight: normal">- 의류</a>
+                              	  <input type="hidden" class="productCtgrNo" name="p_ctgr_no3" value=1>
+	                              <a href="#" onclick="changeProductList(1,3)" style="font-weight: normal">- 의류</a>
                               </li>
                               <li>
-	                              <a href="product_category?category_no=4" style="font-weight: normal">- 생활용품</a>
+                              	  <input type="hidden" class="productCtgrNo" name="p_ctgr_no4" value=1>
+	                              <a href="#" onclick="changeProductList(1,4)" style="font-weight: normal">- 생활용품</a>
                               </li>
                               <li>
-	                              <a href="product_category?category_no=5" style="font-weight: normal">- 취미/게임/음반/도서</a>
+                              	  <input type="hidden" class="productCtgrNo" name="p_ctgr_no5" value=1>
+	                              <a href="#" onclick="changeProductList(1,5)" style="font-weight: normal">- 취미/게임/음반/도서</a>
                               </li>
                               <li>
-	                              <a href="product_category?category_no=6" style="font-weight: normal">- 기타</a>
+                              	  <input type="hidden" class="productCtgrNo" name="p_ctgr_no6" value=1>
+	                              <a href="#" onclick="changeProductList(1,6)" style="font-weight: normal">- 기타</a>
                               </li>
                              
                                 
@@ -186,8 +191,18 @@
                                 <div class="single-product-area mb-30">
                                     <div class="product_image">
                                         <!-- Product Image -->
-                                        <img class="normal_img" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
-                                        <img class="hover_img" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
+                                        
+                                        <c:set var = "image_name" value = "${product.productImagesList[0].pi_name}"/>
+                                        <c:choose>
+											<c:when test="${fn:startsWith(image_name, 'http')}">
+		                                        <img class="normal_img" src="${product.productImagesList[0].pi_name}" alt="">
+		                                        <img class="hover_img" src="${product.productImagesList[0].pi_name}" alt="">
+	                                        </c:when>
+											<c:otherwise>
+		                                        <img class="normal_img_test" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
+		                                        <img class="hover_img" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
+											</c:otherwise>
+										</c:choose>
 
                                         <!-- Product Badge -->
                                         <div class="product_badge">
@@ -241,7 +256,7 @@
                                
                             	<c:if test="${productList.pageMaker.prevPage > 0}">  
 	            					<li class="page-item">
-	                                    <button class="page-link" onclick="changeProductList(${data.pageMaker.prevPage});"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+	                                    <button class="page-link" onclick="changeProductList(${data.pageMaker.prevPage},'0');"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
 	                               	 </li>
                                 </c:if>
                                 
@@ -250,13 +265,13 @@
 										<li class="page-item active"><button class="page-link" href="#">${no}</button></li>
 									</c:if>
 									<c:if test="${productList.pageMaker.curPage != no}">
-										<li class="page-item"><button class="page-link page" onclick="changeProductList(${no})">${no}</button></li>
+										<li class="page-item"><button class="page-link page" onclick="changeProductList(${no},'0')">${no}</button></li>
 									</c:if>
                                 </c:forEach>
                                 
                                 <c:if test="${productList.pageMaker.curPage < productList.pageMaker.totPage}">  
 	                                <li class="page-item">
-				                        <button class="page-link" onclick="changeProductList(${productList.pageMaker.nextPage})"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+				                        <button class="page-link" onclick="changeProductList(${productList.pageMaker.nextPage},'0')"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
 			                    	 </li>
                                 </c:if>
                             	
