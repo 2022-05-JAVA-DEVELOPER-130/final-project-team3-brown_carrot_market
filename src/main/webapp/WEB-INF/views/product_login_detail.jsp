@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <%@taglib prefix="s"  uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html lang="en">
  
@@ -14,7 +15,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Brwon Carrot Market</title>
+    <title>Brown Carrot Market</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -76,60 +77,63 @@
                             <!-- Carousel Inner -->
                            
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <a class="gallery_img" href="img/product_img/${product.productImagesList[0].pi_name}" title="First Slide">
-                                        <img class="d-block w-100" src="img/product_img/${product.productImagesList[0].pi_name}" alt="First slide">
-                                    </a>
+								<c:set var = "image_name" value = "${product.productImagesList[0].pi_name}"/>
+	                                <c:choose>
+										<c:when test="${fn:startsWith(image_name, 'http')}">
+		                                    <a class="gallery_img" href="${product.productImagesList[0].pi_name}" title="First Slide">
+		                                        <img class="d-block w-100" src="${product.productImagesList[0].pi_name}" alt="First slide">
+		                                    </a>
+	                                       </c:when>
+										<c:otherwise>
+		                                    <a class="gallery_img" href="img/product_img/${product.productImagesList[0].pi_name}" title="First Slide">
+		                                        <img class="d-block w-100" src="img/product_img/${product.productImagesList[0].pi_name}" alt="First slide">
+		                                    </a>
+										</c:otherwise>
+									</c:choose>	
                                     <!-- Product Badge -->
                                     <div class="product_badge">
-                                        <span class="badge-new">New</span>
+                                        <%-- <span class="badge-new">New</span> --%>
                                     </div>
-                                </div>
-                              
-                             
-                                <div class="carousel-item">
-                                    <a class="gallery_img" href="img/product-img/pd-big-thumb-2.png" title="Second Slide">
-                                        <img class="d-block w-100" src="img/product-img/pd-big-thumb-2.png" alt="Second slide">
-                                    </a>
-                                    <!-- Product Badge -->
-                                    <div class="product_badge">
-                                        <span class="badge-new">Sale</span>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <a class="gallery_img" href="img/product-img/pd-big-thumb-3.png" title="Third Slide">
-                                        <img class="d-block w-100" src="img/product-img/pd-big-thumb-3.png" alt="Third slide">
-                                    </a>
-                                    <!-- Product Badge -->
-                                    <div class="product_badge">
-                                        <span class="badge-new">-20%</span>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <a class="gallery_img" href="img/product-img/pd-big-thumb-4.png" title="Fourth Slide">
-                                        <img class="d-block w-100" src="img/product-img/pd-big-thumb-4.png" alt="Fourth slide">
-                                    </a>
-                                    <!-- Product Badge -->
-                                    <div class="product_badge">
-                                        <span class="badge-new">Hot</span>
-                                    </div>
-                                </div>
+	                                </div>
+	                                <c:forEach items="${product.productImagesList}" var="productImages" varStatus="status" begin="1">
+	                                <div class="carousel-item">
+	                                
+		                                <c:set var = "image_name" value = "${productImages.pi_name}"/>
+		                                <c:choose>
+											<c:when test="${fn:startsWith(image_name, 'http')}">
+			                                    <a class="gallery_img" href="${image_name}" title="First Slide">
+			                                        <img class="d-block w-100" src="${image_name}" alt="First slide">
+			                                    </a>
+		                                       </c:when>
+											<c:otherwise>
+			                                    <a class="gallery_img" href="img/product_img/${image_name}" title="First Slide">
+			                                        <img class="d-block w-100" src="img/product_img/${image_name}" alt="First slide">
+			                                    </a>
+											</c:otherwise>
+										</c:choose>	
+	                                
+	                                    <!-- Product Badge -->
+	                                    <div class="product_badge">
+	                                        <%-- <span class="badge-new">New</span> --%>
+	                                    </div>
+	                                </div>
+                             		</c:forEach>
                             </div>
 						
                             <!-- Carosel Indicators -->
                             <ol class="carousel-indicators">
                        
-                                <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(img/product_img/${product.productImagesList[i].pi_name});">
-                                </li>
-                              
-                                
-                               
-                                <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(img/product_img/${product.productImagesList[i+1].pi_name});">
-                                </li>
-                                <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(img/product-img/pd-big-thumb-3.png);">
-                                </li>
-                                <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(img/product-img/pd-big-thumb-4.png);">
-                                </li>
+                                <c:forEach items="${product.productImagesList}" var="productImages" varStatus="status">
+                              		<c:set var = "image_name" value = "${productImages.pi_name}"/>
+	                                <c:choose>
+										<c:when test="${fn:startsWith(image_name, 'http')}">
+	     		                        	<li data-target="#product_details_slider" data-slide-to="${status.index}+1" style="background-image: url(${productImages.pi_name});"></li>
+	                                    </c:when>
+										<c:otherwise>
+	     		                        	<li data-target="#product_details_slider" data-slide-to="${status.index}+1" style="background-image: url(img/product_img/${productImages.pi_name});"></li>
+										</c:otherwise>
+									</c:choose>	
+                               </c:forEach>
                               
                             </ol>
                         </div>

@@ -121,7 +121,6 @@
 		                                        	${fn:substring(product_date,0,10)}
 		                                        </td>
 		                                        <td>
-		                                        	
 		                                        	<c:set var = "image_name" value = "${product.productImagesList[0].pi_name}"/>
 			                                        <c:choose>
 														<c:when test="${fn:startsWith(image_name, 'http')}">
@@ -131,9 +130,6 @@
 				                                            <img src="img/product_img/${product.productImagesList[0].pi_name}" onerror="this.src='img/user_profile/newCarrot.jpg'">
 														</c:otherwise>
 													</c:choose>
-		                                        
-		                                        
-		                                        
 		                                        </td>
 		                                        <td>
 		                                            <a href="product_detail?p_no=${product.p_no}">${product.p_title}</a>
@@ -156,7 +152,7 @@
 		                                        <td>
 		                                          	<div id="sell_list">
 		                                            <script>check_isExisted_orders($('input[name=p_no_${status.index}]').val())</script>
-		                                            <a href="#" class="badge ${product.p_no}" id="${Orders.orders_no}" seller_id="${Orders.product.userInfo.user_id}" p_title="${product.p_title}" style="height:20px;font-size:1rem"></a>
+		                                            <a href="#" class="badge ${product.p_no}" id="" seller_id="" p_title="${product.p_title}" style="height:20px;font-size:1rem"></a>
 		                                            </div>
 		                                        </td>
 		                                    </tr>

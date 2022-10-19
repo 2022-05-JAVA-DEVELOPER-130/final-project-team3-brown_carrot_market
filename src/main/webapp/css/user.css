@@ -51,15 +51,15 @@
 	background-color: orange;
 }
 */
-.btn-carrot, .btn{
+.btn-carrot{
 	color: white;
 	background-color: orange;
 }
-.btn-carrot, .btn:hover {
+.btn-carrot:hover {
 	color: darkgray;
 }
 
-.badge-carrot, .btn {
+.badge-carrot {
     color: #fff;
     background-color: orange;
 }
