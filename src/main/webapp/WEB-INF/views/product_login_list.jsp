@@ -304,24 +304,24 @@
                         <nav aria-label="Page navigation">
                             <ul class="pagination pagination-sm justify-content-center">
                                
-                               <c:if test="${productList.pageMaker.prevPage > 0}">  
+                               <c:if test="${productLoginList.pageMaker.prevPage > 0}">  
 	            					<li class="page-item">
 	                                    <button class="page-link" onclick="changeProductList(${data.pageMaker.prevPage},'0');"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
 	                               	 </li>
                                 </c:if>
                                 
-                                <c:forEach var="no" begin="${productList.pageMaker.blockBegin}" end="${productList.pageMaker.blockEnd}">
-									<c:if test="${productList.pageMaker.curPage == no}">
+                                <c:forEach var="no" begin="${productLoginList.pageMaker.blockBegin}" end="${productLoginList.pageMaker.blockEnd}">
+									<c:if test="${productLoginList.pageMaker.curPage == no}">
 										<li class="page-item active"><button class="page-link" href="#">${no}</button></li>
 									</c:if>
-									<c:if test="${productList.pageMaker.curPage != no}">
+									<c:if test="${productLoginList.pageMaker.curPage != no}">
 										<li class="page-item"><button class="page-link page" onclick="changeProductList(${no},'0')">${no}</button></li>
 									</c:if>
                                 </c:forEach>
                                 
-                                <c:if test="${productList.pageMaker.curPage < productList.pageMaker.totPage}">  
+                                <c:if test="${productLoginList.pageMaker.curPage < productLoginList.pageMaker.totPage}">  
 	                                <li class="page-item">
-				                        <button class="page-link" onclick="changeProductList(${productList.pageMaker.nextPage},'0')"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+				                        <button class="page-link" onclick="changeProductList(${productLoginList.pageMaker.nextPage},'0')"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
 			                    	 </li>
                                 </c:if>
                             
