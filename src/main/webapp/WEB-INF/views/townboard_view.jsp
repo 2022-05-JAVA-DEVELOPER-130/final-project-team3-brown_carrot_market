@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>	
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>	
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!doctype html>
 <html lang="en">
@@ -196,13 +196,15 @@
                 <!-- 슬라이드쇼 시작 -->
                 <div>
                  <ul class="bxslider">
-      <%-- <c:forEach var="townBoard" items="${townImageList}" varStatus="status"> --%>
-      <li><img src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-img" ></li>
-      <li><img src="img/townBoard-img/${townBoard.townImageList[1].t_img_name}" alt="blog-img" ></li>
+       <c:forEach var="i" begin="0" end="${fn:length(townImageList)}" step="1"> 
+       
+      <li><img src="img/townBoard-img/${townBoard.townImageList[i].t_img_name}" alt="blog-img"  ></li>
+ 	 </c:forEach> 
+      
+      <!--   <li><img src="img/townBoard-img/${townBoard.townImageList[1].t_img_name}" alt="blog-img" ></li>
       <li><img src="img/townBoard-img/${townBoard.townImageList[2].t_img_name}" alt="blog-img" ></li>
       <li><img src="img/townBoard-img/${townBoard.townImageList[3].t_img_name}" alt="blog-img" ></li>
-      <li><img src="img/townBoard-img/${townBoard.townImageList[4].t_img_name}" alt="blog-img" ></li>
-   <%--  </c:forEach> --%>
+      <li><img src="img/townBoard-img/${townBoard.townImageList[4].t_img_name}" alt="blog-img" ></li> -->
       
       <!-- <li><img src="http://img1.daumcdn.net/thumb/R1920x0/?fname=http%3A%2F%2Fcfile10.uf.tistory.com%2Fimage%2F99C7223A5BEE75FB303A8E" alt="" title="이미지2"></li>
       <li><img src="http://img1.daumcdn.net/thumb/R1920x0/?fname=http%3A%2F%2Fcfile7.uf.tistory.com%2Fimage%2F9982093A5BEE75FC259992" alt="" title="이미지3"></li> -->
@@ -234,7 +236,7 @@
 					
 					<input class="townBoard_i delete" type="button" pageno="${pageno}" t_no="${townBoard.t_no}" value="삭제하기" />
 					<input class="townBoard_btn update_form" type="button" pageno="${pageno}" t_no="${townBoard.t_no}" value="수정하기" />
-					<input class="townBoard_btn wishlist_add" type="button" pageno="${pageno}" t_no="${townBoard.t_no}" value="관심등록" />
+					<%-- <input class="townBoard_btn wishlist_add" type="button" pageno="${pageno}" t_no="${townBoard.t_no}" value="관심등록" /> --%>
 					
                     <div class="comments-area">
                         <div class="comment_area mb-50 clearfix">
