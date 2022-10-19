@@ -1,5 +1,6 @@
 package com.itwill.brown_carrot_market.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.itwill.brown_carrot_market.dto.ChatRoom;
@@ -34,5 +35,7 @@ public interface ChatRoomDao {
 	 public int chatRoomDeleteCheck(int c_room_no);
 
 	 public ChatRoom chatRoomSelectFTP(String from_id, String to_id, Integer p_no);
+
+	 public List<ChatRoomListView> chatListUsers(int p_no, String user_id);
 
 }

@@ -1,5 +1,6 @@
 package com.itwill.brown_carrot_market.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.itwill.brown_carrot_market.dto.ChatContents;
@@ -61,4 +62,6 @@ public interface ChatService {
 	public int chatRoomDelete(String user_id, int c_room_no);
 
 	public int chatRoomSearch(String from_id, String to_id, Integer p_no);
+
+	public List<ChatRoomListView> chatListUsers(int p_no, String user_id);
 }

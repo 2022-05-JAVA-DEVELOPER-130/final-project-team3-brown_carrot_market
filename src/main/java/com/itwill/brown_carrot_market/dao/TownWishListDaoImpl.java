@@ -55,6 +55,13 @@ public class TownWishListDaoImpl implements TownWishListDao{
 		System.out.println(">>> townWishListDaoImpl : deleteTownWishList() 호출");
 		return townWishListMapper.deleteTownWishList(t_wl_no);
 	}
+
+	//관심 글 존재 확인
+	@Override
+	public int selectTownWishExist(String user_id, int t_no) throws Exception {
+		System.out.println(">>> townWishListDaoImpl : selectTownWishExist(String user_id, int t_no) 호출");
+		return townWishListMapper.selectTownWishExist(user_id, t_no);
+	}
 	
 
 }

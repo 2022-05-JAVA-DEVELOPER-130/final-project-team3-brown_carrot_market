@@ -136,7 +136,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                            <!--  <textarea name="t_content" class="form-control" id="t_content" cols="30" rows="10" placeholder="내용" required></textarea> -->
-                                        	<textarea name="t_content" id="t_content" placeholder=" content" value = "${townBoard.t_content }"></textarea>
+                                        	<textarea name="t_content" class="form-control" id="t_content"  cols="30" rows="10"  >${townBoard.t_content }</textarea>
                                         	</div>
                                         </div>
                                         
