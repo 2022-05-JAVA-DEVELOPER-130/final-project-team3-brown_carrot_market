@@ -46,6 +46,12 @@ public class TownWishListServiceImpl implements TownWishListService{
 	public int deleteTownWishList(int t_wl_no) throws Exception {
 		return townWishListDao.deleteTownWishList(t_wl_no);
 	}
+
+	//관심 글 존재 확인
+	@Override
+	public int selectTownWishExist(String user_id, int t_no) throws Exception {
+		return townWishListDao.selectTownWishExist(user_id, t_no);
+	}
 	
 	
 	

@@ -1,6 +1,7 @@
 /**
  * 
  */
+ var p_no=null;
  function productCreateForm() {
    
    window.location.href='product_write_form';
@@ -79,17 +80,7 @@ function productCreate() {
 }
    */
 
-function productSell(){
-	
-	if(document.chatStart.p_userId.value==document.chatStart.loginId.value){ 
-	document.product_modify_sell_action.action = "product_modify_sell_action"
-	document.product_modify_sell_action.method='POST';
-	document.product_modify_sell_action.submit();}
-	else{
-		alert("본인 상품만 상태수정 가능합니다.");
-		
-	}
-}
+
 
 function productUpdateAction(){
 	if (document.product_modify_form.p_title.value == "") {
@@ -251,6 +242,17 @@ function changeProductList(pageno){
 		
 	});
 }
+function productSell(){
+	
+	if(document.chatStart.p_userId.value==document.chatStart.loginId.value){ 
+	document.statePopup.action = "product_modify_sell_action";
+	document.statePopup.method='POST';
+	document.statePopup.submit();}
+	else{
+		alert("본인 상품만 상태수정 가능합니다.");
+		
+	}
+}
 
 
 /********************채팅하기!!**************************/
@@ -268,4 +270,22 @@ $(document).ready(function(){
 		document.chatStart.submit();
 		}
 	});
+	
+	
+	/******************팝업*********************/
+
+$('#btn_popup').click(function(){
+	console.log("클릭");
+	p_no=document.statePopup.p_no.value;
+	console.log(p_no);
+	window.open("change_product_state?p_no="+document.statePopup.p_no.value+"&user_id="+document.statePopup.user_id.value,"판매상태변경","width = 470, height = 600, top = 100, left = 200, location = no,  resizable=no");
+
+});	
+
+
+
+	
+	
+	
 	});
+	

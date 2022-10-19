@@ -27,27 +27,27 @@ public class TransferDaoImpl implements TransferDao{
 	}
 
 	@Override
-	public int insertTransfer_Deposit(int p_no) throws Exception {
-		System.out.println("#### TransferDaoImpl : insertTransfer_Deposit(Transfer transfer) 호출  ");
-		return transferMapper.insertTransfer_Deposit(p_no);
+	public int insert_Transfer_Deposit(int p_no) throws Exception {
+		System.out.println("#### TransferDaoImpl : insertTransfer_Deposit(int p_no) 호출  ");
+		return transferMapper.insert_Transfer_Deposit(p_no);
 	}
 
 	@Override
-	public int insertTransfer_Withdraw(int p_no) throws Exception {
-		System.out.println("#### TransferDaoImpl : insertTransfer_Withdraw(Transfer transfer) 호출  ");
-		return transferMapper.insertTransfer_Withdraw(p_no);
+	public int insert_Transfer_Withdraw(int p_no) throws Exception {
+		System.out.println("#### TransferDaoImpl : insertTransfer_Withdraw(int p_no) 호출  ");
+		return transferMapper.insert_Transfer_Withdraw(p_no);
 	}
 
 	@Override
-	public int insertTransfer_Deposit_Cancle(int p_no) throws Exception {
-		System.out.println("#### TransferDaoImpl : insertTransfer_Deposit_Cancle(Transfer transfer) 호출  ");
-		return transferMapper.insertTransfer_Deposit_Cancle(p_no);
+	public int insert_Transfer_Cancel_Deposit(int p_no) throws Exception {
+		System.out.println("#### TransferDaoImpl : insertTransfer_Cancel_Deposit(int p_no) 호출  ");
+		return transferMapper.insert_Transfer_Cancel_Deposit(p_no);
 	}
 
 	@Override
-	public int insertTransfer_Withdraw_Cancle(int p_no) throws Exception {
-		System.out.println("#### TransferDaoImpl : insertTransfer_Withdraw_Cancle(Transfer transfer) 호출  ");
-		return transferMapper.insertTransfer_Withdraw_Cancle(p_no);
+	public int insert_Transfer_Cancel_Withdraw(int p_no) throws Exception {
+		System.out.println("#### TransferDaoImpl : insertTransfer_Cancel_Withdraw(int p_no) 호출  ");
+		return transferMapper.insert_Transfer_Cancel_Withdraw(p_no);
 	}
 
 	@Override

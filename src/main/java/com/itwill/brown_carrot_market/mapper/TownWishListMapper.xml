@@ -56,6 +56,10 @@
 		delete town_wishlist where t_wl_no=#{t_wl_no}
 	</delete>
 	
+	<!-- 관심 목록 존재 확인 -->
+	<select id="selectTownWishExist" parameterType="com.itwill.brown_carrot_market.dto.TownWishList" resultType="int">
+		select count(*) from town_wishlist where  user_id = #{userinfo.user_id} and t_no = #{townBoard.t_no}
+	</select>
 	
 
 </mapper>

@@ -1,5 +1,6 @@
 package com.itwill.brown_carrot_market.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,12 @@ public class ChatRoomDaoImpl implements ChatRoomDao {
 	@Override
 	public int chatNotRead(int c_room_no,String user_id) {
 		return chatRoomMapper.chatNotRead(c_room_no, user_id);
+	}
+	
+	//채팅방 p_no, to_id로 채팅중인 사람들 
+	@Override
+	public List<ChatRoomListView> chatListUsers(int p_no,String user_id) {
+		return chatRoomMapper.chatListUsers(p_no, user_id);
 	}
 
 	
