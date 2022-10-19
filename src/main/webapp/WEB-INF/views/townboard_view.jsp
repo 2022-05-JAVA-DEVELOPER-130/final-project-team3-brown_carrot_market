@@ -16,6 +16,17 @@
 
     <!-- Title  -->
     <title>Bigshop | Responsive E-commerce Template</title>
+    
+    <!-- 슬라이드쇼 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      $('.slider').bxSlider();
+    });
+  </script>
+    
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -178,15 +189,34 @@
                 
                 <div class="col-12 col-lg-8">
                 
-                
-                
-                    <!-- Blog Details Area -->
+                <!-- Blog Details Area -->
                     <div id = "townBoard_list_tbody_all">
-                    <div class="blog-details-area mb-50" id="townBoard_list_tbody">                        
+                    <div class="blog-details-area mb-50" id="townBoard_list_tbody">   
+                
+                <!-- 슬라이드쇼 시작 -->
+                <div>
+                 <ul class="bxslider">
+      <%-- <c:forEach var="townBoard" items="${townImageList}" varStatus="status"> --%>
+      <li><img src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-img" ></li>
+      <li><img src="img/townBoard-img/${townBoard.townImageList[1].t_img_name}" alt="blog-img" ></li>
+      <li><img src="img/townBoard-img/${townBoard.townImageList[2].t_img_name}" alt="blog-img" ></li>
+      <li><img src="img/townBoard-img/${townBoard.townImageList[3].t_img_name}" alt="blog-img" ></li>
+      <li><img src="img/townBoard-img/${townBoard.townImageList[4].t_img_name}" alt="blog-img" ></li>
+   <%--  </c:forEach> --%>
+      
+      <!-- <li><img src="http://img1.daumcdn.net/thumb/R1920x0/?fname=http%3A%2F%2Fcfile10.uf.tistory.com%2Fimage%2F99C7223A5BEE75FB303A8E" alt="" title="이미지2"></li>
+      <li><img src="http://img1.daumcdn.net/thumb/R1920x0/?fname=http%3A%2F%2Fcfile7.uf.tistory.com%2Fimage%2F9982093A5BEE75FC259992" alt="" title="이미지3"></li> -->
+  </ul>
+  </div>
+				 <!-- 슬라이드쇼 끝 -->               
+                
+                                         
                         <!-- Image -->
+                        <!-- 
                         <c:if test="${townBoard.townImageList.size() != 0}">
                         	<img class="mb-30" src="img/townBoard-img/${townBoard.townImageList[0].t_img_name}" alt="blog-img">
                         </c:if>
+                         -->
                         <!-- Blog Title -->
                         <h3 class="mb-30">${townBoard.t_title}</h3>
                         
@@ -204,6 +234,7 @@
 					
 					<input class="townBoard_i delete" type="button" pageno="${pageno}" t_no="${townBoard.t_no}" value="삭제하기" />
 					<input class="townBoard_btn update_form" type="button" pageno="${pageno}" t_no="${townBoard.t_no}" value="수정하기" />
+					<input class="townBoard_btn wishlist_add" type="button" pageno="${pageno}" t_no="${townBoard.t_no}" value="관심등록" />
 					
                     <div class="comments-area">
                         <div class="comment_area mb-50 clearfix">
@@ -397,6 +428,7 @@
     <script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+	<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 
 
 

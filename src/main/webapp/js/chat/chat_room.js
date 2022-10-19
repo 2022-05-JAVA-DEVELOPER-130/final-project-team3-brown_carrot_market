@@ -1094,7 +1094,7 @@ function connectWS(){
 		         chat_read=`<i class="fa fa-check"></i>`;
 	            }
 	            console.log(item.c_content_no);
-				$(`#${item.c_content_no}`).text(chat_read);
+				$(`#${item.c_content_no}`).html(chat_read);
 				
 		
 			};
