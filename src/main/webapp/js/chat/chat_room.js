@@ -258,11 +258,12 @@ $.ajax({
 			$('#chat_history').append(message_you(item));
 				}
 			};
-			$('#chat_history').show();
+
+			console.log("여기?");
 			$('#chatHead').show();
-			
+			$('#chat_history').show();
+			$('#plist').show();
 		}
-		
 	});
 	
 	}
