@@ -43,7 +43,7 @@ function changeQnaList(pageno,t_ctgr_no){
 				let paginationBuffer = ``;
 				if(data.pageMaker.prevPage > 0){
 					paginationBuffer += `<li class="page-item">
-		                                    <button class="page-link" onclick="changeQnaList(${data.pageMaker.prevPage});"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+		                                    <button class="page-link" onclick="changeQnaList(${data.pageMaker.prevPage},'${t_ctgr_no}');"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
 		                               	 </li>`;
 				}
 				for(let no = data.pageMaker.blockBegin; no <= data.pageMaker.blockEnd; no++){
@@ -51,12 +51,12 @@ function changeQnaList(pageno,t_ctgr_no){
 						paginationBuffer += `<li class="page-item active"><button class="page-link" href="#">${no}</button></li>`;
 					}
 					if(data.pageMaker.curPage != no){
-						paginationBuffer += `<li class="page-item"><button class="page-link" onclick="changeQnaList(${no});">${no}</button></li>`;
+						paginationBuffer += `<li class="page-item"><button class="page-link" onclick="changeQnaList(${no},'${t_ctgr_no}');">${no}</button></li>`;
 					}
 				}
 				if(data.pageMaker.curPage < data.pageMaker.totPage){
 					paginationBuffer += `<li class="page-item">
-					                        <button class="page-link" onclick="changeQnaList(${data.pageMaker.nextPage});"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+					                        <button class="page-link" onclick="changeQnaList(${data.pageMaker.nextPage},'${t_ctgr_no}');"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
 				                    	 </li>`;
 				}
 				$(".pagination.pagination-sm.justify-content-center").html(paginationBuffer);
@@ -126,6 +126,7 @@ $(".townBoard_btn.update_form").on("click", function(){
 /* 
 게시글 수정 
 */ 
+/*
 $(".townBoard_btn.update").on("click", function(){ 
 	if($("#t_title_txt").val() == "" || CKEDITOR.instances.townBoard_content_area.getData() == ""){
 		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
@@ -141,6 +142,7 @@ $(".townBoard_btn.update").on("click", function(){
 							}
 					});
 });
+*/
 
 /*
 새글 등록 폼 
@@ -274,6 +276,51 @@ function townBoardCreate() {
    }
 
 
+//게시글 수정
+function townBoardUpdateAction(){
+	if (document.townBoard_update_form.t_title.value == "") {
+      alert("제목을 입력하십시요.");
+      document.townBoard_update_form.t_title.focus();
+      return false;
+   }
+
+   if (document.townBoard_update_form.t_content.value == "") {
+      alert("내용을 입력하십시요.");
+      document.townBoard_update_form.t_content.focus();
+      return false;
+   }
+ 
+   
+   const formData1 = new FormData($('#main_contact_form_townBoard')[0]);
+   /*
+   formData1.append('files',$('#files')[0]); //이게 맞나?
+   formData1.append('files',$('#files')[1]); 
+   formData1.append('files',$('#files')[2]); 
+   formData1.append('files',$('#files')[3]); 
+   */
+      
+   $.ajax({
+      url:'townboard_update_action_json',
+      type:'POST',
+      processData:false,   //파일전송시 반드시 false
+      contentType:false,
+      data:formData1,
+      success:function(jsonResult){
+      console.log(jsonResult);
+      window.location.href="townBoard_list";
+   
+   /*
+   document.product_modify_form.action = "product_modify_action";
+   document.product_modify_form.method='POST';
+   document.product_modify_form.submit();
+	*/
+  		}
+   	});
+   }
+
+
+
+
 
 
 /*
@@ -293,7 +340,6 @@ $(".qna_btn.reply_write").on("click", function(){
 /*
 댓글등록
 */
-
 $("#townMainReplyBtn").on("click", function(e){
 	e.preventDefault();
 	e.stopPropagation();
@@ -330,10 +376,52 @@ $("#townMainReplyBtn").on("click", function(e){
 						}
 							
 					});				
+}	
 	
-/////여기 자리
-/*	$(".townReply_write_form").attr("action", "townReply_wirte_rest");
-	$(".townReply_write_form").submit();	*/
+});
+
+
+/*
+대댓글등록
+*/
+$(".btn.btn-primary.rereply").on("click", function(e){
+	e.preventDefault();
+	e.stopPropagation();
+	index=$(e.target).attr("index");
+	var form=$(".townReReply_write_form_"+index);
+	let pageno = form.find($('input[name="page_no"]')).val();
+	let t_no = form.find($('input[name="t_no"]')).val();
+	let groupno = form.find($('input[name="groupno"]')).val();
+	alert(groupno);
+	if($(".t_reply_title").val() == "" || $(".t_reply_content").val() == ""){
+		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
+		return;
+	}
+	else{
+		ToastConfirm.fire({ icon: 'question', 
+							title: "댓글을 작성하시겠습니까?"}).then((result) => {
+								if(result.isConfirmed){
+									
+							$.ajax({
+								url: "townReReply_wirte_rest",
+								method: "post",
+								data: form.serialize(),
+								dataType: "json",
+								success:function(resultObj){
+									console.log();
+									if(resultObj.errorCode > 0){
+										Toast.fire({ icon: 'success', title: resultObj.errorMsg }).then((result) => {
+											console.log('페이지이동');
+												location.href = "townboard_view?t_no="+t_no+"&pageno=" + pageno;
+											});
+									}else{
+										Toast.fire({ icon: 'error', title: resultObj.errorMsg });
+									}
+								}
+							});
+						}
+							
+					});				
 }	
 	
 });
@@ -370,15 +458,14 @@ $(".townReply.delete").on("click", function(){
 });
 
 
-
-
-
+/*
+index=$(e.target).attr("index");
+*/
 /*
 댓글 토글2
 */
 $(document).ready(function() {
   $(".content").hide();
-  //content 클래스를 가진 div를 표시/숨김(토글)
   $(".heading").click(function()
   {
     $(this).next(".content").slideToggle(500);
@@ -429,6 +516,28 @@ const ToastConfirm =  Swal.mixin({
 	width: '400px'
  });
 
+$(function(){
+	$("#townBoardSearch").keypress(function(e) {
+  if (e.keyCode === 13) {
+	location.href="townBoardSearch_list?search_keyword="+$("#townBoardSearch").val();
+    e.preventDefault();
+  
+  }
+});
+	
+})
 
-
+////////////// 슬라이드쇼 시작 ///////////////
+$(document).ready(function () {
+    $('.bxslider').bxSlider({
+        auto: true, // 자동으로 애니메이션 시작
+        speed: 500,  // 애니메이션 속도
+        pause: 5000,  // 애니메이션 유지 시간 (1000은 1초)
+        mode: 'horizontal', // 슬라이드 모드 ('fade', 'horizontal', 'vertical' 이 있음)
+        autoControls: true, // 시작 및 중지버튼 보여짐
+        pager: true, // 페이지 표시 보여짐
+        captions: true, // 이미지 위에 텍스트를 넣을 수 있음
+    });
+});
+////////////// 슬라이드쇼 끝 ///////////////
 

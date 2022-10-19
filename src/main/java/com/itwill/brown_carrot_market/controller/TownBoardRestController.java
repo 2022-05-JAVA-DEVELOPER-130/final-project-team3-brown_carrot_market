@@ -182,6 +182,76 @@ public class TownBoardRestController {
 			
 			}
 	
+	//게시글 수정
+	@PostMapping(value = "/townboard_update_action_json")
+	public Map townboard_update_action_json(@RequestParam("files") MultipartFile[] files,@RequestParam Map<String, Object> map,Model model) throws Exception {
+		int code = 0;
+		String url = "townBoard_list"; //어디로 보내야지?
+		String message="townboard_update 실패";
+		String newFileName= "";
+		int t_no = Integer.parseInt((String) map.get("t_no"));
+		int deleteRowCount = townBoardService.deleteTownBoardImgAll(t_no);
+		
+		Map<String,Object> resultMap = new HashMap();
+		try {
+			
+			//사진업로드
+			List<String> fileNames = new ArrayList<>();
+			for (MultipartFile file : files) {
+				System.out.println(file.isEmpty());
+				if (!file.isEmpty()) {
+					newFileName= storageService.save(file);
+					//fileNames.add(file.getOriginalFilename());
+					fileNames.add(newFileName);
+					
+					System.out.println(fileNames);
+					message = "Uploaded the files successfully: " + fileNames+" newFileName"+newFileName;
+				}else {
+					message="Please select a valid mediaFile..";
+				}
+			}
+			
+			
+			
+			
+			TownCategory townCategory = new TownCategory(Integer.parseInt(map.get("t_ctgr_no").toString()), "");
+			map.put("townCategory", townCategory);
+			map.put("ImageNameList", fileNames);
+			map.remove("t_ctgr_no");
+			
+			TownBoard resultList = new TownBoard();
+			
+			code = townBoardService.updateTownBoardOne(map);
+			if(code==1) message="townBoard_update 성공";
+			
+			System.out.println(">>> townboard update "+map);
+			url = "redirect:townboard_view_view?t_no"+t_no;
+			
+			resultMap.put("code", code);
+			resultMap.put("url", url);
+			resultMap.put("message", message);
+			resultMap.put("data",resultList);
+			
+			
+			return resultMap;
+			
+			} catch (Exception e) {
+				e.printStackTrace();
+				model.addAttribute("MSG", e.getMessage());
+				url = "townboard_list";
+				message = "Fail to upload files!";
+				resultMap.put("message", message);
+				resultMap.put("url", url);
+				
+				return resultMap;
+		}
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -229,15 +299,51 @@ public class TownBoardRestController {
 			townReply.setTownBoard(new TownBoard(t_no, "", "", "", 0, null, "", 0, 0, null, null, null));
 			System.out.println(">>> rest controller: insertTownBoardReply(townReply)호출");
 			int result = townReplyService.insertTownBoardReply(townReply);
-			/////흠 여기서 뭐라고 써줘야하지.. 리턴말고..ㅜ
 			
-			if (result == 1) {
+			if (result == 1 ) {
 				resultMap.put("errorCode", 1);
 				resultMap.put("errorMsg", "댓글을 등록하였습니다");
 				
 			} else {
 				resultMap.put("errorCode", -2);
 				resultMap.put("errorMsg", "댓글이 등록되지 않았습니다");
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			resultMap.put("errorCode", -3);
+			resultMap.put("errorMsg", "관리자에게 문의하세요");
+		}
+		
+		return resultMap;
+	}
+	
+	
+	//대댓글등록
+	@PostMapping(value="/townReReply_wirte_rest",produces = "application/json;charset=UTF-8")
+	public Map<String, Object> townReReply_write_action(Integer pageno,@RequestParam Integer t_no, @ModelAttribute TownReply townReply, HttpSession session) {
+		Map<String, Object> resultMap = new HashMap<>();
+		String sUserId = (String)session.getAttribute("sUserId");
+		System.out.println(">>>>>>>>>>> townreply 모든 값"+townReply);
+		try {
+			//TownReply mainReply = townReplyService.selectTownBoardReplyOne(t_reply_no);
+			townReply.setUserInfo(new UserInfo(sUserId, "", "", "", "", 0, 0, "", null));
+			townReply.setTownBoard(new TownBoard(t_no, "", "", "", 0, null, "", 0, 0, null, null, null));
+			townReply.setGroupno(townReply.getGroupno());
+			/*
+			townReply.setStep(mainReply.getStep());
+			//townReplyService.updateStep(townReply);
+			townReply.setDepth(mainReply.getDepth());
+			*/
+			System.out.println(">>> rest controller: insertTownBoardReply(townReply)호출");
+			int result = townReplyService.insertTownBoardReReply(townReply);
+			
+			if (result == 1 ) {
+				resultMap.put("errorCode", 1);
+				resultMap.put("errorMsg", "대댓글을 등록하였습니다");
+				
+			} else {
+				resultMap.put("errorCode", -2);
+				resultMap.put("errorMsg", "대댓글이 등록되지 않았습니다");
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

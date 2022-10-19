@@ -127,7 +127,7 @@ public class TownBoardController {
 		//해당 게시물의 댓글 전체 조회
 		List<TownReply> townReplyList = townReplyService.selectTownBoardReplyList(t_no);
 		model.addAttribute("townReplyList", townReplyList);
-		
+		System.out.println("townReplyList"+ townReplyList);
 		//댓글 등록
 		//townReplyService.insertTownBoardReply(townReply);
 		
@@ -220,6 +220,7 @@ public class TownBoardController {
 	public String townboard_update_form(@RequestParam Integer pageno,@RequestParam Integer t_no, Model model, HttpSession session) throws Exception{
 		String sUserId = (String)session.getAttribute("sUserId");
 		String forwardPath = "";
+		
 		//비회원일때
 		if(sUserId == null) {
 			forwardPath = "user_login";
@@ -241,10 +242,11 @@ public class TownBoardController {
 	//게시글 수정
 	@RequestMapping("/townboard_update_action")
 	public String townboard_update_action( @ModelAttribute TownBoard townBoard, HttpSession session) throws Exception{
-		
-		int updateTownboard = townBoardService.updateTownBoardOne(townBoard);
-	
 		/*
+		
+		//int updateTownboard = townBoardService.updateTownBoardOne(townBoard);
+	
+	
 		
 		
 		
@@ -257,10 +259,10 @@ public class TownBoardController {
 		model.addAttribute("townBoard", townBoard);
 		
 		"redirect:townboard_view?t_no="+townBoard.getT_no()+"&pageno="+pageno;
-		*/
+		
+		 */
 		return "redirect:townBoard_list";
 	}
-	
 	
 	
 	

@@ -23,6 +23,11 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/user.css">
 
+	<!-- chat toast -->
+	<link href="[//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css)" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="[https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css](https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css)"/>
+	<script type="text/javascript" src="[https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js](https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js)"></script>
+
     <!-- javaScript -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
@@ -103,7 +108,7 @@
 		                                        <td>
 		                                            <div class="" name="check_review">
 		                                                <script>check_isExisted_review($('input[name=orders_no_${status.index}]').val())</script>
-		                                                <a href="#" class="badge" id="${Orders.orders_no}" seller_id="${Orders.product.userInfo.user_id}" style="height:20px;font-size:1rem"></a>
+		                                                <a href="#" class="badge" id="${Orders.orders_no}" seller_id="${Orders.product.userInfo.user_id}" p_title="${Orders.product.p_title}" style="height:20px;font-size:1rem"></a>
 		                                            </div>
 		                                        </td>
 		                                    </tr>
@@ -139,6 +144,27 @@
     <script src="js/jquery.nice-select.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
+
+	<!-- chat toast -->
+	<style type="text/css">
+		#toast-container > .toast {
+		background-image: none !important;
+		}
+		#toast-container > .toast:before {
+		position: relative;
+		font-family: FontAwesome;
+		font-size: 24px;
+		line-height: 18px;
+		float: left;
+		color: #FFF;
+		padding-right: 0.5em;
+		margin: auto 0.5em auto -1.5em;
+		}
+		#toast-container > .toast-warning:before {
+		content: "\f27a";
+		
+		}
+	</style>
 
 </body>
 

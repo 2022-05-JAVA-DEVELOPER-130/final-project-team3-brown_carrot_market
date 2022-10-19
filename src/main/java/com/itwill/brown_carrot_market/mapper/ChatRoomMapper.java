@@ -1,5 +1,6 @@
 package com.itwill.brown_carrot_market.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
@@ -67,5 +68,9 @@ public interface ChatRoomMapper {
 	// 채팅방 안읽은 메시지 수
 	@Select("select count(*) from chat_contents where c_room_no=#{c_room_no} and c_read=0 and user_id!=#{user_id}")
 	public int chatNotRead(int c_room_no,String user_id);
+	
+	//채팅방 p_no, 판매자아이디로 채팅중인 사람들
+	@Select("select c_room_no,p_no,from_id as you_id from chat_room where p_no=#{p_no} and to_id=#{user_id}")
+	public List<ChatRoomListView> chatListUsers(Integer p_no,String user_id);
 	
 }

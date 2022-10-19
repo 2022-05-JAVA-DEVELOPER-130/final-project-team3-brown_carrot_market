@@ -73,7 +73,7 @@
     <!-- Message Now Area -->
                 <div class="col-12">
                     <div class="contact_from mb-50">
-                        <form id="townBoard_update_form" method="post" >
+                        <form name="townBoard_update_form" method="post" enctype="multipart/form-data" id="main_contact_form_townBoard" action="townboard_update_action">
                         <input type="hidden" name="t_no" value="${townBoard.t_no}" />
                             <div class="contact_input_area">
                                 <div id="success_fail_info"></div>
@@ -118,25 +118,25 @@
                                     </div>
                                      -->
                                     
-                                    <!-- 사진 넣기 임시 
+                                    <!-- 사진 넣기 임시 -->
                                     <div>
-                                    <ul style="display : flex">
-                                    <li>
-                                    <label style="display:inline-block;">
-                                    <span>사진1: <input type="file" name="files"></span>
+                                    
+                                    <div class="col-xl-3">
+	                           			 <img id="product" src='img/townBoard-img/${townBoard.townImageList[0].t_img_name}' alt="" t_img_name='${townBoard.townImageList[0].t_img_name}' style="width:100px; height:100px; border:1px solid #ddd;
+                                    						position:relative;" ><br>
+                                    <span>${townBoard.townImageList[0].t_img_name}<input type="file" name="files"></span>
+	                       			 </div>
 									<span>사진2: <input type="file" name="files"></span>
 									<span>사진3: <input type="file" name="files"></span>
 									<span>사진4: <input type="file" name="files"></span>
-									</label>
-									</li> 
-									</ul>
+									
 									</div>
-									사진 넣기 임시 끝-->
+									<!-- 사진 넣기 임시 끝-->
 									
                                     <div class="col-md-12">
                                         <div class="form-group">
                                            <!--  <textarea name="t_content" class="form-control" id="t_content" cols="30" rows="10" placeholder="내용" required></textarea> -->
-                                        	<textarea name="t_content" id="townBoard_content_area" placeholder=" content" value = "${townBoard.t_content }"></textarea>
+                                        	<textarea name="t_content" class="form-control" id="t_content"  cols="30" rows="10"  >${townBoard.t_content }</textarea>
                                         	</div>
                                         </div>
                                         
@@ -144,6 +144,7 @@
                                     </div>
                                     
                                     <!-- 이미지 업로드 부분 시작-->
+                                    <!-- 
                                    <div class="img_box">
                                    <ul class="imgul" style="display : flex;">
                                     <li>
@@ -233,10 +234,11 @@
                                     </ul>
                                     </div>
                                     <input type="hidden" name="pageno" value="${pageno}" />
+                                     -->
                                      <!-- 이미지 업로드 부분 끝-->
                                      
                                     <div class="col-12 text-center">
-                                        <input type="button" class="townBoard_btn update" value="수정하기" />&nbsp; 
+                                        <input type="button" id="btn_townBoard_update_action" class="townBoard_btn update" value="수정하기"  onclick="townBoardUpdateAction()"/>&nbsp; 
                                         <input class="townBoard_btn list" type="button" pageno="${pageno}" value="동네게시글목록"/>
                                		 </div>
                                 
@@ -281,7 +283,7 @@
 	<script type="text/javascript" src="js/townBoard/townBoard.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	
-	<style type="text/css">
+<style type="text/css">
 #toast-container > .toast {
     background-image: none !important;
 }

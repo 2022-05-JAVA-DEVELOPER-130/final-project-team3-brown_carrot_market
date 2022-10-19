@@ -67,4 +67,9 @@
 	background-color: red;
 	cursor: pointer;
 }
+.thumb>.delete {
+	position: absolute;
+	background-color: red;
+	cursor: pointer;
+}
 /* loading ****/

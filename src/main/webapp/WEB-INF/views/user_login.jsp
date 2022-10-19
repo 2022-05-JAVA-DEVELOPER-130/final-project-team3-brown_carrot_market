@@ -192,19 +192,16 @@
 			$("customChe").attr("checked", true);
 		}
 		/* id저장 체크시 */
-		$("#customChe")
-				.on(
-						"click",
-						function() {
-							var _this = this;
-							var isRemember;
-							if ($(_this).is(":checked")) {
-								isRemember = confirm("이 PC에 로그인 정보를 저장하시겠습니까? PC방등의 공공장소에서는 개인정보가 유출될 수 있으니 주의해주십시오.");
-								if (!isRemember) {
-									$(_this).attr("checked", false);
-								}
-							}
-						});
+		$("#customChe").on("click",function() {
+			var _this = this;
+			var isRemember;
+			if ($(_this).is(":checked")) {
+				isRemember = confirm("이 PC에 로그인 정보를 저장하시겠습니까? PC방등의 공공장소에서는 개인정보가 유출될 수 있으니 주의해주십시오.");
+				if (!isRemember) {
+					$(_this).attr("checked", false);
+				}
+			}
+		});
 		/* 로그인 버튼 클릭시 -> login_action에 기술*/
 		/* 로그인 정보 저장 */
 		function saveLogin(id) {
@@ -237,8 +234,7 @@
 		}
 		/*****************************************/
 
-		 validator2=
-			 $('#user_login_form').validate();
+		validator2 = $('#user_login_form').validate();
 		/* user_login_action ************************************/
 		$(document).on("click", "#btn_user_login_action", function(e) {
 			   // 로그인 정보 저장 
@@ -279,7 +275,6 @@
 		});
 
 		validator=$('#user_write_form').validate();
-		
 		/****************user_write_action******************/
 		$(document).on('click', '#btn_user_write_action', function(e) {
 			console.log('click!! - #btn_user_write_action');
@@ -304,11 +299,13 @@
 						//console.log(">>>>>>> 포인트적립!!:"+jsonResult.msg);
 						$('#user_write_form')[0].reset();
 						$('#msg3').html(jsonResult.msg);
+						$("#login_user_id").focus();
 						alert('500point가 적립되었습니다.');
 					} else if (jsonResult.code == 3) {
 						//console.log(">>>>>>> 포인트적립!!:"+jsonResult.msg);
 						$('#user_write_form')[0].reset();
 						$('#msg3').html(jsonResult.msg);
+						$("#login_user_id").focus();
 						alert('회원가입 성공. 존재하지않는 추천코드입니다.');
 					}
 					console.log(jsonResult);

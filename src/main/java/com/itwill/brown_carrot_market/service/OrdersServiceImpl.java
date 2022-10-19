@@ -43,5 +43,10 @@ public class OrdersServiceImpl implements OrdersService{
 	public int selectByOrdersCount(int p_no) throws Exception {
 		return ordersDao.selectByOrdersCount(p_no);
 	}
+
+	@Override
+	public Orders selectByP_No(int p_no) throws Exception {
+		return ordersDao.selectByP_No(p_no);
+	}
 	
 }

@@ -595,34 +595,36 @@ function chat_head(id,img,room_no,fresh,product,p_img,check){
 var c ="";
 	if(product.p_sell==1){
 		p_sell="판매중";
+			console.log('1.판매자id:'+product.userInfo.user_id);
+			console.log('1.로그인id:'+loginId);
 		if(check==1){
-			console.log('1.판매자:'+product.userInfo.user_id);
-			console.log('1.구매자:'+loginId);
+			console.log('세션 = 판매자 : '+loginId);
 			a='<button class="dropdown-item" type="button" id="reserveBtn"><b>예약중으로 변경</b></button>';
-			b='<button class="dropdown-item" type="button" id="soldOutBtn"><b>판매 완료하기</b></button>';
+			b='<button class="dropdown-item" type="button" id="soldOutBtn"><b>판매완료로 변경</b></button>';
 			c=`<a href="#" class="btn btn-outline-info" style="display:none"><i class="fa fa-won" id="btnCarrot_Pay" p_no=${product.p_no} style="color:green"></i></a>`;
 		}
 	}else if(product.p_sell==2){
 		p_sell="예약중";
 		if(check==0){
 			console.log('2.세션 = 구매자 : '+loginId);
+			
 			c=`<a href="#" class="btn btn-outline-info" style="border-color:green"><i class="fa fa-won" id="btnCarrot_Pay" p_no=${product.p_no} style="color:green"></i></a>`;
 		}else if(check==1){	
 			console.log('2.세션 = 판매자 : '+loginId);
-			a='<button class="dropdown-item" type="button" id="soldOutBtn"><b>판매 완료하기</b></button>';
-			b='<button class="dropdown-item" type="button" id="sellBtn"><b>판매중으로 변경</b></button>';
+			a='<button class="dropdown-item" type="button" id="sellBtn"><b>판매중으로 변경</b></button>';
+			b='<button class="dropdown-item" type="button" id="soldOutBtn"><b>판매완료로 변경</b></button>';
 			c=`<a href="#" class="btn btn-outline-info" style="display:none"><i class="fa fa-won" id="btnCarrot_Pay" p_no=${product.p_no} style="color:green"></i></a>`;
 		}
 		}else if(product.p_sell==3){
 		p_sell="판매완료";
+			console.log('3.판매자id:'+product.userInfo.user_id);
+			console.log('3.로그인id:'+loginId);
 			if(check==1){
-			console.log('3.판매자:'+product.userInfo.user_id);
-			console.log('3.구매자:'+loginId);
-			a='<button class="dropdown-item" type="button" id="reserveBtn"><b>예약중으로 변경</b></button>';	
-			b='<button class="dropdown-item" type="button" id="sellBtn"><b>판매중으로 변경</b></button>';	
-			c=`<a href="#" class="btn btn-outline-info" style="display:none"><i class="fa fa-won" id="btnCarrot_Pay" p_no=${product.p_no} style="color:green;"></i></a>`;
-	}
-	}
+				console.log('세션 = 판매자 : '+loginId);
+				
+				c=`<a href="#" class="btn btn-outline-info" style="border-color:green"><i class="fa fa-won" id="btnCarrot_Pay_Cancel" p_no=${product.p_no} style="color:green;"></i></a>`;
+			}
+		}
 	
 	return 	`<div class="row">
 								<div class="col-lg-4">
@@ -734,7 +736,8 @@ $.ajax({
 	var result = confirm("상품을 예약중으로 변경하시겠습니까?");
 	if(result){
 		var reserve={
-		"product":product
+		"p_no":product.p_no,
+		"yourId":yourId
 	}
 	$.ajax({
 		url:"chat_reserve_rest",
@@ -749,7 +752,7 @@ $.ajax({
 		console.log(product);
 		$('#chatHead').html("");
 		$('#chatHead').append(chat_head(yourId,yourImg,c_room_no,yourFreshness,product,p_img,checkSeller));
-		/****************** */
+		/*********송금버튼 누를 시 오더번호 생성********
 			$.ajax({
 				url:"orders_insert_json",
 				method:"POST",
@@ -768,7 +771,7 @@ $.ajax({
 				
 				
 			});		
-		/****************** */
+		*********************/
 		}
 		
 		
@@ -788,7 +791,8 @@ $.ajax({
 	var result = confirm("상품을 판매완료로 변경하시겠습니까?");
 	if(result){
 		var reserve={
-		"product":product
+		"p_no":product.p_no,
+		"yourId":yourId
 	}
 $.ajax({
 		
@@ -1014,10 +1018,16 @@ function connectWS(){
 	
 		//메세지 전송한 경우
 		if(onmsg.code=="1"){
-		if(onmsg.user_id!=loginId){
+		if(onmsg.user_id!=loginId&&onmsg.toastId=="youExist"){
 			//상대가 메세지 보낸 경우
 			console.log("상대가 보낸 경우"+onmsg.user_id)
             $('#chat_history').append(message_other(onmsg));
+		}else if(onmsg.user_id!=loginId){
+			 toastr.options.positionClass = "toast-top-right";
+	      toastr['warning'](onmsg.user_id+" : "+onmsg.c_content);
+	      
+	      /******************채팅수증가******* */
+	     getChatNum(loginId);
 		}else if(onmsg.user_id==loginId){
 			console.log("내가 보낸 경우"+onmsg.user_id)
 			//내가 보낸 경우
@@ -1084,7 +1094,7 @@ function connectWS(){
 		         chat_read=`<i class="fa fa-check"></i>`;
 	            }
 	            console.log(item.c_content_no);
-				$(`#${item.c_content_no}`).text(chat_read);
+				$(`#${item.c_content_no}`).html(chat_read);
 				
 		
 			};
@@ -1324,8 +1334,21 @@ $(document).on('click','#btnCarrot_Pay',function(e){
 	e.preventDefault;
 })
 
+$(document).on('click','#btnCarrot_Pay_Cancel',function(e){
+	console.log($(e.target).attr("p_no"));
+	popupCarrotPay_Cancel($(e.target).attr("p_no"));
+	e.preventDefault;
+})
+
   function popupCarrotPay(p_no){
 	 var url = "transfer_page?p_no="+p_no;
+            var name = "당근 페이";
+            var option = "width = 470, height = 650, top = 100, left = 200, location = no,  resizable=no";
+            window.open(url, name, option);
+}
+
+  function popupCarrotPay_Cancel(p_no){
+	 var url = "transfer_cancel_page?p_no="+p_no;
             var name = "당근 페이";
             var option = "width = 470, height = 650, top = 100, left = 200, location = no,  resizable=no";
             window.open(url, name, option);
@@ -1407,4 +1430,26 @@ $(document).on('click','#btnCarrot_Pay',function(e){
 		
 	});
 		}
+		
+		$(function() {
+function Toast(type, css, msg) {
+        this.type = type;
+        this.css = css;
+        this.msg = msg;
+    }
+    
+     toastr.options.extendedTimeOut = 0; //1000;
+    toastr.options.timeOut = 10000;
+    toastr.options.fadeOut = 250;
+    toastr.options.fadeIn = 250;
+    toastr.options.preventDuplicates = false;
+    toastr.options.closeButton = true;
+    toastr.options.positionClass = "toast-top-right";
+    toastr.options.onclick = function() { 
+	console.log("click");
+	location.href="chat_room";
+	
+	 }
+
+})
 

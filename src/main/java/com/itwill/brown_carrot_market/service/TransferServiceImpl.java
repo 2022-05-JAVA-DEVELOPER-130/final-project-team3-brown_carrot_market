@@ -19,21 +19,21 @@ public class TransferServiceImpl implements TransferService {
 	@Autowired
 	@Qualifier("transferDaoImpl")
 	private TransferDao transferDao;
-	
+
 	public boolean transfer_transaction(int p_no) throws Exception {
 		boolean result = false;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
-		String insertSqlA = "insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval, 0, (-1*(select p_price from product where p_no = ?)), sysdate-5, (select user_id from orders where p_no =?), (select orders_no from orders where p_no = ?), ?,(select user_point from userinfo where user_id=(select user_id from orders where p_no = ?))-(select p_price from product where p_no = ?))";
-		String insertSqlB = "insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval, (select p_price from product where p_no = ?), 0, sysdate-5, (select user_id from product where p_no =?), (select orders_no from orders where p_no = ?), ?, (select user_point from userinfo where user_id=(select user_id from product where p_no = ?))+(select p_price from product where p_no = ?))";
-		String updateSqlA = "update userinfo set user_point =user_point-(select p_price from product where p_no = ?) where user_id= (select user_id from orders where p_no =?)";
-		String updateSqlB = "update userinfo set user_point =user_point+(select p_price from product where p_no = ?) where user_id= (select user_id from product where p_no = ?)";
-		String selectSqlA = "select u.user_point from userinfo u join orders o on u.user_id = o.user_id where o.p_no=?";
-		String selectSqlB = "select u.user_point from userinfo u join product p on u.user_id = p.user_id where p.p_no = ?";
+		String insert_Buyer = "insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval, 0, (-1*(select p_price from product where p_no = ?)), sysdate-5, (select user_id from orders where p_no =?), (select orders_no from orders where p_no = ?), ?,(select user_point from userinfo where user_id=(select user_id from orders where p_no = ?))-(select p_price from product where p_no = ?))";
+		String insert_Seller = "insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval, (select p_price from product where p_no = ?), 0, sysdate-5, (select user_id from product where p_no =?), (select orders_no from orders where p_no = ?), ?, (select user_point from userinfo where user_id=(select user_id from product where p_no = ?))+(select p_price from product where p_no = ?))";
+		String update_Buyer = "update userinfo set user_point =user_point-(select p_price from product where p_no = ?) where user_id= (select user_id from orders where p_no =?)";
+		String update_Seller = "update userinfo set user_point =user_point+(select p_price from product where p_no = ?) where user_id= (select user_id from product where p_no = ?)";
+		String select_Buyer = "select u.user_point from userinfo u join orders o on u.user_id = o.user_id where o.p_no=?";
+		String select_Seller = "select u.user_point from userinfo u join product p on u.user_id = p.user_id where p.p_no = ?";
 		try {
-			con = DriverManager.getConnection("jdbc:oracle:thin:@182.237.126.19:1521:XE", "F2205JDEVELOPER#TEAM3", "F2205JDEVELOPER#TEAM3"
-											  );
+			con = DriverManager.getConnection("jdbc:oracle:thin:@182.237.126.19:1521:XE", "F2205JDEVELOPER#TEAM3",
+					"F2205JDEVELOPER#TEAM3");
 			/*
 			 * 1. con.setAutoCommit(false);
 			 */
@@ -41,7 +41,7 @@ public class TransferServiceImpl implements TransferService {
 			/*
 			 * transaction start(dml statement)
 			 */
-			pstmt = con.prepareStatement(insertSqlA);
+			pstmt = con.prepareStatement(insert_Buyer);
 			pstmt.setInt(1, p_no);
 			pstmt.setInt(2, p_no);
 			pstmt.setInt(3, p_no);
@@ -49,10 +49,10 @@ public class TransferServiceImpl implements TransferService {
 			pstmt.setInt(5, p_no);
 			pstmt.setInt(6, p_no);
 			int rowCount = pstmt.executeUpdate();
-			System.out.println("1.구매자 insert");
+			System.out.println("1.구매 금액 출금(구매자) insert");
 			pstmt.close();
-			
-			pstmt = con.prepareStatement(insertSqlB);
+
+			pstmt = con.prepareStatement(insert_Seller);
 			pstmt.setInt(1, p_no);
 			pstmt.setInt(2, p_no);
 			pstmt.setInt(3, p_no);
@@ -60,24 +60,24 @@ public class TransferServiceImpl implements TransferService {
 			pstmt.setInt(5, p_no);
 			pstmt.setInt(6, p_no);
 			rowCount = pstmt.executeUpdate();
-			System.out.println("2.판매자 insert");
+			System.out.println("2.판매 금액 입금(판매자) insert");
 			pstmt.close();
-			
-			pstmt = con.prepareStatement(updateSqlA);
+
+			pstmt = con.prepareStatement(update_Buyer);
 			pstmt.setInt(1, p_no);
 			pstmt.setInt(2, p_no);
 			rowCount = pstmt.executeUpdate();
-			System.out.println("3.구매자 포인트 잔액 감소 : " + rowCount);
+			System.out.println("3.구매자 포인트 잔액 감소(출금) : " + rowCount);
 			pstmt.close();
-			
-			pstmt = con.prepareStatement(updateSqlB);
+
+			pstmt = con.prepareStatement(update_Seller);
 			pstmt.setInt(1, p_no);
 			pstmt.setInt(2, p_no);
 			rowCount = pstmt.executeUpdate();
-			System.out.println("4.판매자 포인트 잔액 증가 : " + rowCount);
+			System.out.println("4.판매자 포인트 잔액 증가(입금) : " + rowCount);
 			pstmt.close();
-			
-			pstmt = con.prepareStatement(selectSqlA);
+
+			pstmt = con.prepareStatement(select_Buyer);
 			pstmt.setInt(1, p_no);
 			ResultSet rs = pstmt.executeQuery();
 
@@ -88,7 +88,7 @@ public class TransferServiceImpl implements TransferService {
 					 * transaction end [rollback]
 					 */
 					con.rollback();
-					System.out.println("5-1.구매자 포인트 잔액 " + t_balance + " 음수--> Rollback!");
+					System.out.println("5-1.구매자 포인트 잔액 : " + t_balance + " 음수 일 경우 > Rollback!");
 					pstmt.close();
 					result = true;
 				} else {
@@ -96,13 +96,13 @@ public class TransferServiceImpl implements TransferService {
 					 * transaction end [commit]
 					 */
 					con.commit();
-					System.out.println("5-1.구매자 포인트 잔액 " + t_balance + " 양수--> Commit!");
+					System.out.println("5-1.구매자 포인트 잔액 : " + t_balance + " 양수 일 경우 > Commit!");
 					pstmt.close();
 				}
 			} else {
 				throw new Exception("unknown error!!");
 			}
-			pstmt = con.prepareStatement(selectSqlB);
+			pstmt = con.prepareStatement(select_Seller);
 			pstmt.setInt(1, p_no);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -112,7 +112,7 @@ public class TransferServiceImpl implements TransferService {
 					 * transaction end [rollback]
 					 */
 					con.rollback();
-					System.out.println("5-2.판매자 포인트 잔액 " + t_balance + " 음수 --> Rollback!");
+					System.out.println("5-2.판매자 포인트 잔액 : " + t_balance + " 음수 일 경우 > Rollback!");
 					con.close();
 					result = true;
 				} else {
@@ -120,7 +120,7 @@ public class TransferServiceImpl implements TransferService {
 					 * transaction end [commit]
 					 */
 					con.commit();
-					System.out.println("5-2.판매자 포인트 잔액 " + t_balance + " 양수 --> Commit!");
+					System.out.println("5-2.판매자 포인트 잔액 : " + t_balance + " 양수 일 경우 > Commit!");
 					con.close();
 				}
 			} else {
@@ -142,24 +142,132 @@ public class TransferServiceImpl implements TransferService {
 			}
 		}
 		return result;
-
 	}
 
-	public int insertTransfer_Deposit(int p_no) throws Exception {
-		return transferDao.insertTransfer_Deposit(p_no);
+	public boolean transfer_cancel_transaction(int p_no) throws Exception {
+		boolean result = false;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		String insert_Cancel_Buyer = "insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval, (select p_price from product where p_no = ?), 0, sysdate, (select user_id from orders where p_no =?), (select orders_no from orders where p_no = ?), ?,(select user_point from userinfo where user_id=(select user_id from orders where p_no = ?))+(select p_price from product where p_no = ?))";
+		String insert_Cancel_Seller = "insert into transfer values(TRANSFER_TRANSFER_NO_SEQ.nextval, 0, (-1*(select p_price from product where p_no = ?)), sysdate, (select user_id from product where p_no =?), (select orders_no from orders where p_no = ?), ?, (select user_point from userinfo where user_id=(select user_id from product where p_no = ?))-(select p_price from product where p_no = ?))";
+		String update_Cancel_Buyer = "update userinfo set user_point =user_point+(select p_price from product where p_no = ?) where user_id= (select user_id from orders where p_no =?)";
+		String update_Cancel_Seller = "update userinfo set user_point =user_point-(select p_price from product where p_no = ?) where user_id= (select user_id from product where p_no = ?)";
+		String select_Cancel_Buyer = "select u.user_point from userinfo u join orders o on u.user_id = o.user_id where o.p_no=?";
+		String select_Cancel_Seller = "select u.user_point from userinfo u join product p on u.user_id = p.user_id where p.p_no = ?";
+		try {
+			con = DriverManager.getConnection("jdbc:oracle:thin:@182.237.126.19:1521:XE", "F2205JDEVELOPER#TEAM3",
+					"F2205JDEVELOPER#TEAM3");
+			/*
+			 * 1. con.setAutoCommit(false);
+			 */
+			con.setAutoCommit(false);
+			/*
+			 * transaction start(dml statement)
+			 */
+			pstmt = con.prepareStatement(insert_Cancel_Seller);
+			pstmt.setInt(1, p_no);
+			pstmt.setInt(2, p_no);
+			pstmt.setInt(3, p_no);
+			pstmt.setInt(4, p_no);
+			pstmt.setInt(5, p_no);
+			pstmt.setInt(6, p_no);
+			int rowCount = pstmt.executeUpdate();
+			System.out.println("1.판매 금액 출금(판매자) insert");
+			pstmt.close();
+			
+			pstmt = con.prepareStatement(insert_Cancel_Buyer);
+			pstmt.setInt(1, p_no);
+			pstmt.setInt(2, p_no);
+			pstmt.setInt(3, p_no);
+			pstmt.setInt(4, p_no);
+			pstmt.setInt(5, p_no);
+			pstmt.setInt(6, p_no);
+			rowCount = pstmt.executeUpdate();
+			System.out.println("2.구매 금액 입금(구매자) insert");
+			pstmt.close();
+			
+			pstmt = con.prepareStatement(update_Cancel_Seller);
+			pstmt.setInt(1, p_no);
+			pstmt.setInt(2, p_no);
+			rowCount = pstmt.executeUpdate();
+			System.out.println("3.판매자 포인트 잔액 감소(출금) : " + rowCount);
+			pstmt.close();
+			
+			pstmt = con.prepareStatement(update_Cancel_Buyer);
+			pstmt.setInt(1, p_no);
+			pstmt.setInt(2, p_no);
+			rowCount = pstmt.executeUpdate();
+			System.out.println("4.구매자 포인트 잔액 증가(입금) : " + rowCount);
+			pstmt.close();
+			
+			pstmt = con.prepareStatement(select_Cancel_Seller);
+			pstmt.setInt(1, p_no);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				int t_balance = rs.getInt(1);
+				if (t_balance < 0) {
+					/*
+					 * transaction end [rollback]
+					 */
+					con.rollback();
+					System.out.println("5-1.판매자 포인트 잔액 : " + t_balance + " 음수 일 경우 > Rollback!");
+					pstmt.close();
+					result = true;
+				} else {
+					/*
+					 * transaction end [commit]
+					 */
+					con.commit();
+					System.out.println("5-1.판매자 포인트 잔액 : " + t_balance + " 양수 일 경우 > Commit!");
+					pstmt.close();
+				}
+			} else {
+				throw new Exception("unknown error!!");
+			}
+			pstmt = con.prepareStatement(select_Cancel_Buyer);
+			pstmt.setInt(1, p_no);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				int t_balance = rs.getInt(1);
+				if (t_balance < 0) {
+					/*
+					 * transaction end [rollback]
+					 */
+					con.rollback();
+					System.out.println("5-2.구매자 포인트 잔액 : " + t_balance + " 음수 일 경우 > Rollback!");
+					con.close();
+					result = true;
+				} else {
+					/*
+					 * transaction end [commit]
+					 */
+					con.commit();
+					System.out.println("5-2.구매자 포인트 잔액 : " + t_balance + " 양수 일 경우 > Commit!");
+					con.close();
+				}
+			} else {
+				throw new Exception("unknown error!!");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			try {
+				/*
+				 * transaction end [rollback]
+				 */
+				con.rollback();
+				System.out.println("Rollback(Exception)!");
+				con.close();
+			} catch (SQLException e1) {
+				
+				e1.printStackTrace();
+				con.close();
+			}
+		}
+		return result;
 	}
 
-	public int insertTransfer_Withdraw(int p_no) throws Exception {
-		return transferDao.insertTransfer_Withdraw(p_no);
-	}
-
-	public int insertTransfer_Withdraw_Cancle(int p_no) throws Exception {
-		return transferDao.insertTransfer_Withdraw_Cancle(p_no);
-	}
-
-	public int insertTransfer_Deposit_Cancle(int p_no) throws Exception {
-		return transferDao.insertTransfer_Deposit_Cancle(p_no);
-	}
 
 	public List<Transfer> selectById(String user_id) throws Exception {
 		return transferDao.selectById(user_id);
@@ -170,32 +278,3 @@ public class TransferServiceImpl implements TransferService {
 	}
 
 }
-
-/*
- * @Service public class TransferServiceImpl implements TransferService{
- * 
- * @Autowired
- * 
- * @Qualifier("transferDaoImpl") private TransferDao transferDao;
- * 
- * public TransferServiceImpl() {
- * System.out.println("#### TransferServiceImpl() : 디폴트생성자 호출  "); }
- * 
- * @Override public int insertTransfer_Deposit(int p_no) throws Exception {
- * return transferDao.insertTransfer_Deposit(p_no); }
- * 
- * @Override public int insertTransfer_Withdraw(int p_no) throws Exception {
- * return transferDao.insertTransfer_Withdraw(p_no); }
- * 
- * @Override public int insertTransfer_Withdraw_Cancle(int p_no) throws
- * Exception { return transferDao.insertTransfer_Withdraw_Cancle(p_no); }
- * 
- * @Override public int insertTransfer_Deposit_Cancle(int p_no) throws Exception
- * { return transferDao.insertTransfer_Deposit_Cancle(p_no); }
- * 
- * @Override public List<Transfer> selectById(String user_id) throws Exception {
- * return transferDao.selectById(user_id); }
- * 
- * 
- * }
- */

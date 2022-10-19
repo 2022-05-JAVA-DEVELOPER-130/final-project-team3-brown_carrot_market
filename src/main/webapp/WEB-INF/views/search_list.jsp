@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html lang="en">
 
@@ -155,17 +156,31 @@
 
                     <div class="shop_list_product_area">
                         <div class="row">
-                        
-                        
+                        	<form>
+                        	<input type="hidden" value=${param.search_keyword} id="search_keywordhidden">
+                        	</form>
                             <!-- Single Product -->
-                            <c:forEach items="${searchList}" var="product">
+                            <c:forEach items="${searchList.itemList}" var="product">
                             <div class="col-12">
                                 <div class="single-product-area mb-30">
+                                
                                     <div class="product_image">
                                         <!-- Product Image -->
+                                        
+                                        <c:choose>
+                                        <c:when test="${!empty product.productImagesList[0].pi_name}">
+										
+                                        
                                         <img class="normal_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
                                         <img class="hover_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
-
+										</c:when>
+										
+										<c:otherwise>
+										<img class="normal_img" style="width:300px; height:300px;" src="img/chat-img/logo_carrot.png" alt="">
+                                        <img class="hover_img" style="width:300px; height:300px;" src="img/chat-img/logo_carrot.png" alt="">
+										
+										</c:otherwise>
+										</c:choose>
                                         <!-- Product Badge -->
 <!--                                         <div class="product_badge">
                                             <span>New</span>
@@ -195,7 +210,7 @@
                                         </div> -->
 
 <!--                                         <p class="brand_name">Top</p>
- -->                                         <a href="product_detail?p_no=${product.p_no}" p_no="${product.p_no}">${product.p_title}</a>
+ -->                                         <a href="product_detail?p_no=${product.p_no}" >${product.p_title}</a>
 										<h6 class="product-price">가격: ${product.p_price}</h6>
                                         <p class="product-short-desc">${product.p_desc}</p>
                                     </div>
@@ -219,20 +234,27 @@
                     <div class="shop_pagination_area mt-30">
                         <nav aria-label="Page navigation">
                             <ul class="pagination pagination-sm justify-content-center">
+                            
+                            <c:if test="${searchList.pageMaker.prevPage > 0}">
                                 <li class="page-item">
-                                    <a class="page-link" href="#"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                                    <button class="page-link"  onclick="changeSearchList(${data.pageMaker.prevPage},'${param.search_keyword}')"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
                                 </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="page-item"><a class="page-link" href="#">...</a></li>
-                                <li class="page-item"><a class="page-link" href="#">8</a></li>
-                                <li class="page-item"><a class="page-link" href="#">9</a></li>
+                                 </c:if>
+                               
+                                <c:forEach var="no" begin="${searchList.pageMaker.blockBegin}" end="${searchList.pageMaker.blockEnd}">
+									<c:if test="${searchList.pageMaker.curPage == no}">
+										<li class="page-item active"><button class="page-link" href="#">${no}</button></li>
+									</c:if>
+									<c:if test="${searchList.pageMaker.curPage != no}">
+										<li class="page-item"><button class="page-link page" onclick="changeSearchList(${no},'${param.search_keyword}')">${no}</button></li>
+									</c:if>
+                                </c:forEach>
+                               
+                               <c:if test="${searchList.pageMaker.curPage < searchList.pageMaker.totPage}">  
                                 <li class="page-item">
-                                    <a class="page-link" href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                   <button class="page-link"  onclick="changeSearchList(${data.pageMaker.nextPage},'${param.search_keyword}')"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
                                 </li>
+                                </c:if>
                             </ul>
                         </nav>
                     </div>
@@ -274,8 +296,36 @@
 	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+	<script type="text/javascript" src="js/common/search.js"></script>
 	  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
 	
+	
+	
+	
+	<style type="text/css">
+#toast-container > .toast {
+background-image: none !important;
+}
+
+#toast-container > .toast:before {
+position: relative;
+font-family: FontAwesome;
+font-size: 24px;
+line-height: 18px;
+float: left;
+color: #FFF;
+padding-right: 0.5em;
+margin: auto 0.5em auto -1.5em;
+}
+#toast-container > .toast-warning:before {
+content: "\f27a";
+
+}
+
+#toast-container > .toast-success:before {
+     content: "\f2b5"; 
+ 
+} 
 
 </body>
 

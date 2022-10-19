@@ -109,7 +109,7 @@
                                
                             </ul>
                         </div>
-                        </div>
+                      
 
                         <!-- Single Widget -->
                         <div class="widget price mb-30">
@@ -125,72 +125,15 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Single Widget -->
-                        <div class="widget color mb-30">
-                            <h6 class="widget-title">Filter by Color</h6>
-                            <div class="widget-desc">
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck6">
-                                    <label class="custom-control-label black" for="customCheck6">Black <span class="text-muted">(9)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck7">
-                                    <label class="custom-control-label pink" for="customCheck7">Pink <span class="text-muted">(6)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck8">
-                                    <label class="custom-control-label red" for="customCheck8">Red <span class="text-muted">(8)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck9">
-                                    <label class="custom-control-label purple" for="customCheck9">Purple <span class="text-muted">(4)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck10">
-                                    <label class="custom-control-label orange" for="customCheck10">Orange <span class="text-muted">(7)</span></label>
-                                </div>
-                            </div>
                         </div>
 
                         <!-- Single Widget -->
-                        <div class="widget brands mb-30">
-                            <h6 class="widget-title">Filter by brands</h6>
-                            <div class="widget-desc">
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck11">
-                                    <label class="custom-control-label" for="customCheck11">Zara <span class="text-muted">(213)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck12">
-                                    <label class="custom-control-label" for="customCheck12">Gucci <span class="text-muted">(65)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck13">
-                                    <label class="custom-control-label" for="customCheck13">Addidas <span class="text-muted">(70)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck14">
-                                    <label class="custom-control-label" for="customCheck14">Nike <span class="text-muted">(104)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck15">
-                                    <label class="custom-control-label" for="customCheck15">Denim <span class="text-muted">(71)</span></label>
-                                </div>
-                            </div>
-                        </div>
+                        
 
                         <!-- Single Widget -->
+                       
+
+                        <!-- Single Widget 
                         <div class="widget rating mb-30">
                             <h6 class="widget-title">Average Rating</h6>
                             <div class="widget-desc">
@@ -207,25 +150,14 @@
                                 </ul>
                             </div>
                         </div>
-
+						-->
                         <!-- Single Widget -->
-                        <div class="widget size mb-30">
-                            <h6 class="widget-title">Filter by Size</h6>
-                            <div class="widget-desc">
-                                <ul>
-                                    <li><a href="#">XS</a></li>
-                                    <li><a href="#">S</a></li>
-                                    <li><a href="#">M</a></li>
-                                    <li><a href="#">L</a></li>
-                                    <li><a href="#">XL</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
-
+			</div>
                 <div class="col-12 col-md-8 col-xl-9">
-                    <!-- Shop Top Sidebar -->
+                    <!-- Shop Top Sidebar 
                     <div class="shop_top_sidebar_area d-flex flex-wrap align-items-center justify-content-between">
                         <div class="view_area d-flex">
                             <div class="grid_view">
@@ -235,20 +167,21 @@
                                 <a href="shop-list-left-sidebar.html" data-toggle="tooltip" data-placement="top" title="List View"><i class="icofont-listine-dots"></i></a>
                             </div>
                            </div>
+                           -->
                            <!--  
                             <div class="col-12 text-right">
                         	<input type="button" class="btn btn-primary mb-1" value="내 물건 팔기" onClick="productCreateForm();"/>
                     		</div>
                     		 -->
-                        </div>
                         
-
+                        
+					</div>
                     <div class="shop_list_product_area">
                         <div class="row">
                             
                             <!-- Single Product -->
 						
-						<c:forEach items="${productList}" var="product">
+						<c:forEach items="${productList.itemList}" var="product">
                             <div class="col-12">
                                 <div class="single-product-area mb-30">
                                     <div class="product_image">
@@ -292,28 +225,42 @@
                                     </div>
                                 </div>
                             </div>
-						 </c:forEach> 
+                              
+						 </c:forEach>
+						 </div>
+						 </div>
+						  
 					
-                           
+                 <div class="row">
+                <div class="col-12 col-lg-8 ml-lg-auto">
 
                     <!-- Shop Pagination Area -->
                     <div class="shop_pagination_area mt-30">
                         <nav aria-label="Page navigation">
                             <ul class="pagination pagination-sm justify-content-center">
-                                <li class="page-item">
-                                    <a class="page-link" href="#"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="page-item"><a class="page-link" href="#">...</a></li>
-                                <li class="page-item"><a class="page-link" href="#">8</a></li>
-                                <li class="page-item"><a class="page-link" href="#">9</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                                </li>
+                               
+                            	<c:if test="${productList.pageMaker.prevPage > 0}">  
+	            					<li class="page-item">
+	                                    <button class="page-link" onclick="changeProductList(${data.pageMaker.prevPage});"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+	                               	 </li>
+                                </c:if>
+                                
+                                <c:forEach var="no" begin="${productList.pageMaker.blockBegin}" end="${productList.pageMaker.blockEnd}">
+									<c:if test="${productList.pageMaker.curPage == no}">
+										<li class="page-item active"><button class="page-link" href="#">${no}</button></li>
+									</c:if>
+									<c:if test="${productList.pageMaker.curPage != no}">
+										<li class="page-item"><button class="page-link page" onclick="changeProductList(${no})">${no}</button></li>
+									</c:if>
+                                </c:forEach>
+                                
+                                <c:if test="${productList.pageMaker.curPage < productList.pageMaker.totPage}">  
+	                                <li class="page-item">
+				                        <button class="page-link" onclick="changeProductList(${productList.pageMaker.nextPage})"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+			                    	 </li>
+                                </c:if>
+                            	
+                            	
                             </ul>
                         </nav>
                     </div>
@@ -321,7 +268,7 @@
                 </div>
             </div>
         </div>
-    </section>
+ 			   </section>
     <!-- Shop List Area -->
 
     <!-- Footer Area -->
