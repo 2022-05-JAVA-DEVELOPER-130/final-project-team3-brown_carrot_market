@@ -46,10 +46,11 @@
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
-                    <h5>Wishlist</h5>
+                    <h5>관심 목록</h5>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active">Wishlist</li>
+                    <li>관심 있는 물건만 따로 모아보세요!</li>
+                       <!--  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active">Wishlist</li> -->
                     </ol>
                 </div>
             </div>

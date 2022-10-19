@@ -42,6 +42,7 @@ function session_check(){
 		    	$(".cart_quantity").remove();
 		    	$("#brown_carrot_pay a").attr("href", "user_login");
 		    	$("#transaction-dropdown a").attr("href", "user_login");
+		    	$("#wishlist-area a").attr("href", "user_login");
 		    	//공지사항
 		    	$("#notice_btn_container>.update_form").hide();	//수정
 		    	$("#notice_btn_container>.delete").hide();	//삭제

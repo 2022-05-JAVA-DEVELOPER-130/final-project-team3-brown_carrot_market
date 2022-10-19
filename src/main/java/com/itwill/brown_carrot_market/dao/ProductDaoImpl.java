@@ -158,6 +158,12 @@ public class ProductDaoImpl implements ProductDao{
 		// TODO Auto-generated method stub
 		return productMapper.selectProductPK();
 	}
+
+	@Override
+	public List<Product> selectByUserIdPSell(String user_id, int p_sell) throws Exception {
+		// TODO Auto-generated method stub
+		return productMapper.selectByUserIdPSell(user_id, p_sell);
+	}
 	
 	
 	

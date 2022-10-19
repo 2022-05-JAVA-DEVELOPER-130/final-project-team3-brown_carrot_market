@@ -217,6 +217,11 @@ public class ProductServiceImpl implements ProductService{
 		// TODO Auto-generated method stub
 		return productImageDao.deleteProductImg(p_no);
 	}
+	@Override
+	public List<Product> selectByUserIdPSell(String user_id, int p_sell) throws Exception {
+		// TODO Auto-generated method stub
+		return productDao.selectByUserIdPSell(user_id, p_sell);
+	}
 	
 	
 	
