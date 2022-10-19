@@ -57,7 +57,7 @@
             </div>
 
             <!-- Single Slide -->
-            <div class="single_slide home-3 bg-img" style="background-image: url(img/bg-img/back2-2.jpg);">
+            <div class="single_slide home-3 bg-img" style="background-image: url(img/bg-img/back2-3.jpg);">
                 <div class="container h-100">
                     <div class="row h-100 align-items-center">
                         <div class="col-12">
