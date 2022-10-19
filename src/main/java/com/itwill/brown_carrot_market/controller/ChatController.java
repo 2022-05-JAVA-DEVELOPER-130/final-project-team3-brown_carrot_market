@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwill.brown_carrot_market.dto.ChatContents;
+import com.itwill.brown_carrot_market.dto.ChatRoom;
 import com.itwill.brown_carrot_market.dto.ChatRoomListView;
 import com.itwill.brown_carrot_market.dto.ProductImage;
 import com.itwill.brown_carrot_market.dto.UserInfo;
@@ -281,7 +282,32 @@ public class ChatController {
         return jsonObject.toString();
     }
 	 */
-	
+	@RequestMapping(value="/change_product_state", method=RequestMethod.GET)
+	public String change_product_state(HttpSession httpSession,Model model,@RequestParam(value = "p_no")int p_no,@RequestParam(value = "user_id")String user_id) throws Exception {
+		System.out.println("--------------------------------------------");
+		System.out.println(p_no);
+		System.out.println(user_id);
+
+		List<ChatRoomListView> userList =chatService.chatListUsers(p_no, user_id);
+		System.out.println(userList);
+		for (ChatRoomListView chatRoomListView : userList) {
+			
+		
+			String img = userInfoService.findUser(chatRoomListView.getYou_id()).getUser_profile();
+			double fresh = 	userInfoService.findUser(chatRoomListView.getYou_id()).getUser_freshness();
+			chatRoomListView.setYou_image(img);
+			chatRoomListView.setYou_fresh(fresh);
+			
+			
+
+	}
+		
+		model.addAttribute("userList",userList);
+		model.addAttribute("p_no",p_no);
+		model.addAttribute("user_id",user_id);
+		
+	return "change_product_state";
+	}
 	
 	
 	

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -184,11 +185,11 @@ public class ProductRestController {
 	
 	@RequestMapping("/product_list_rest")
 	public Map<String,Object> product_list_rest(@RequestParam(required = false, defaultValue = "1") Integer pageno, 
-												HttpSession session, 
+												HttpSession session, HttpServletRequest req,
 												@RequestParam Map<String, Object> map, 
 												@RequestParam(required = false, defaultValue = "0") int p_ctgr_no) throws Exception{
 		Map<String, Object> resultMap = new HashMap<>();
-		PageMakerDto<Product> productList = null;
+		//PageMakerDto<Product> productList = null;
 		String sUserId = (String)session.getAttribute("sUserId");
 		Address sAddress = (Address)session.getAttribute("sAddress");
 		
@@ -196,11 +197,18 @@ public class ProductRestController {
 		
 		try {
 		//비회원
-		productList = productService.selectProductAll(pageno);
+		if(sAddress!=null) {
+		PageMakerDto<Product> productLoginList = productService.selectListByRange(sAddress, pageno);
+		resultMap.put("errorCode", 1); 
+		resultMap.put("errorMsg", "회원 일반 성공");
+		resultMap.put("data", productLoginList);
+			
+		}else {
+		PageMakerDto<Product> productList = productService.selectProductAll(pageno);
 		resultMap.put("errorCode",3); 
 		resultMap.put("errorMsg", "비회원 일반 성공");
 		resultMap.put("data", productList);
-		
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 			resultMap.put("errorCode", -1);

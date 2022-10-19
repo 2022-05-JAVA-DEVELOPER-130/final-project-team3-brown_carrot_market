@@ -51,18 +51,23 @@ public class ProductDaoImpl implements ProductDao{
 		// TODO Auto-generated method stub
 		return productMapper.selectListNotLoginCount();
 	}
+
+	@Override
+	public List<Product> selectListByRange(Address address,int pageStart,int pageEnd) throws Exception {
+		System.out.println("###ProductDaoImpl : selectListByRange 호출");
+		return productMapper.selectListByRange(address,pageStart,pageEnd);
+	}
 	
+	@Override
+	public int selectListLoginCount(Address address)throws Exception{
+		
+		return productMapper.selectListLoginCount(address);
+	}
 
 	@Override
 	public List<Product> selectAllByCtgr(int p_ctgr_no) throws Exception {
 		System.out.println("### ProductDaoImpl : selectAllByCtgr 호출");
 		return productMapper.selectAllByCtgr(p_ctgr_no);
-	}
-
-	@Override
-	public List<Product> selectListByRange(Address address) throws Exception {
-		System.out.println("###ProductDaoImpl : selectListByRange 호출");
-		return productMapper.selectListByRange(address);
 	}
 
 	@Override
