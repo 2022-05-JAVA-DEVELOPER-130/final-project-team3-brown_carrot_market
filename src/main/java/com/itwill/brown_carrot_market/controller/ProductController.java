@@ -39,24 +39,45 @@ public class ProductController {
 	
 	@RequestMapping(value={"/product_list",
 							"/product_login_list"})
-	public String product_list(@RequestParam(required = false, defaultValue = "1") Integer pageno,Model model,HttpServletRequest req, HttpSession session) throws Exception {
+	public String product_list(@RequestParam(required = false, defaultValue = "1") Integer pageno,
+								Model model,
+								HttpServletRequest req, 
+								HttpSession session, @RequestParam Map<String, Object> map, 
+								@RequestParam(required = false, defaultValue = "0") int p_ctgr_no) throws Exception {
 		
 		String sUserId = (String)session.getAttribute("sUserId");
 		Address sAddress = (Address)session.getAttribute("sAddress");
 		
 		if(sAddress != null) {
 			//로그인한 회원 주위의 상품 리스트
+			if(p_ctgr_no ==0) {
 			PageMakerDto<Product> productLoginList = productService.selectListByRange(sAddress, pageno);
 			model.addAttribute("productLoginList",productLoginList);
 			model.addAttribute("pageno", pageno);
+			}else {
+				map.put("user_id", sUserId);
+				map.put("address", sAddress);
+				
+				PageMakerDto<Product> productLoginList = productService.selectListByRangeCtgr(map, p_ctgr_no, pageno);
+				model.addAttribute("productLoginList",productLoginList);
+				model.addAttribute("pageno",pageno);
+				
+			}
 			return "product_login_list";
 		}
 		
+		if(p_ctgr_no ==0) {
 		//비회원 상품리스트
 		PageMakerDto<Product> productList = productService.selectProductAll(pageno);
 		//List<Product> productList = productService.selectProductAll();
 		model.addAttribute("productList", productList);	
 		model.addAttribute("pageno", pageno);
+		}else {
+			PageMakerDto<Product> productList = productService.selectAllByCtgr(p_ctgr_no, pageno);
+			model.addAttribute("productList", productList);	
+			model.addAttribute("pageno", pageno);
+			
+		}
 		
 		return "product_list";
 	}
