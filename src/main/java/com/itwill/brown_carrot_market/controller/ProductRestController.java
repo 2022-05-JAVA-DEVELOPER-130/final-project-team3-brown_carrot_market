@@ -196,18 +196,37 @@ public class ProductRestController {
 		System.out.println("product_list_rest컨트롤러 map :"+map);
 		
 		try {
-		//비회원
 		if(sAddress!=null) {
-		PageMakerDto<Product> productLoginList = productService.selectListByRange(sAddress, pageno);
-		resultMap.put("errorCode", 1); 
-		resultMap.put("errorMsg", "회원 일반 성공");
-		resultMap.put("data", productLoginList);
+			PageMakerDto<Product> productLoginList = null;
+			if(p_ctgr_no==0) {
+				productLoginList = productService.selectListByRange(sAddress, pageno);
+				resultMap.put("errorCode", 1); 
+				resultMap.put("errorMsg", "회원 일반 성공");
+				resultMap.put("data", productLoginList);
+			}else {
+				map.put("user_id", sUserId);
+				map.put("address_no", sAddress.getAddress_no());
+				map.put("address", sAddress);
+				productLoginList = productService.selectListByRangeCtgr(map, p_ctgr_no, pageno);
+				resultMap.put("errorCode", 2); 
+				resultMap.put("errorMsg", "회원 카테고리 성공");
+				resultMap.put("data", productLoginList);
+			}
 			
 		}else {
-		PageMakerDto<Product> productList = productService.selectProductAll(pageno);
-		resultMap.put("errorCode",3); 
-		resultMap.put("errorMsg", "비회원 일반 성공");
-		resultMap.put("data", productList);
+		//비회원
+		PageMakerDto<Product> productList = null;
+			if(p_ctgr_no==0) {
+				productList = productService.selectProductAll(pageno);
+				resultMap.put("errorCode",3); 
+				resultMap.put("errorMsg", "비회원 일반 성공");
+				resultMap.put("data", productList);
+			}else {
+				productList = productService.selectAllByCtgr(p_ctgr_no, pageno);
+				resultMap.put("errorCode",3); 
+				resultMap.put("errorMsg", "비회원 카테고리 성공");
+				resultMap.put("data", productList);
+				}
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

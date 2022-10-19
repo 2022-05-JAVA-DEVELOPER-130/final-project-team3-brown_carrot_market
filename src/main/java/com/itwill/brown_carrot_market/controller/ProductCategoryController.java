@@ -21,7 +21,7 @@ public class ProductCategoryController {
 	public ProductCategoryController() {
 		System.out.println("### ProductCategoryController() 기본생성자");
 	}
-	
+	/*
 	@RequestMapping(value = "/product_category", params = "category_no")
 	public String guest_view(@RequestParam int p_ctgr_no,Model model,HttpSession session) throws Exception {
 		System.out.println("들어오긴하니?");
@@ -39,6 +39,7 @@ public class ProductCategoryController {
 		model.addAttribute("productList", productList);	
 		return "product_list";
 	}
+	*/
 	
 	
 	

@@ -65,17 +65,29 @@ public class ProductDaoImpl implements ProductDao{
 	}
 
 	@Override
-	public List<Product> selectAllByCtgr(int p_ctgr_no) throws Exception {
+	public List<Product> selectAllByCtgr(int p_ctgr_no,int pageStart, int pageEnd) throws Exception {
 		System.out.println("### ProductDaoImpl : selectAllByCtgr 호출");
-		return productMapper.selectAllByCtgr(p_ctgr_no);
+		return productMapper.selectAllByCtgr(p_ctgr_no,pageStart,pageEnd);
+	}
+	
+	@Override
+	public int selectNonMemberCountCtgrProduct(int p_ctgr_no)throws Exception{
+		
+		return productMapper.selectNonMemberCountCtgrProduct(p_ctgr_no);
 	}
 
 	@Override
-	public List<Product> selectListByRangeCtgr(int p_ctgr_no, Address address) throws Exception {
+	public List<Product> selectListByRangeCtgr(Map map,int p_ctgr_no,int pageStart, int pageEnd) throws Exception {
 		System.out.println("###ProductDaoImpl : selectListByRangeCtgr 호출");
-		return productMapper.selectListByRangeCtgr(p_ctgr_no, address);
+		return productMapper.selectListByRangeCtgr(p_ctgr_no, (String)map.get("user_id"),(Integer)map.get("address_no"), pageStart, pageEnd);
 	}
-
+	
+	@Override
+	public int selectMemberCtgrCountProduct(Map map,int p_ctgr_no)throws Exception{
+		
+		return productMapper.selectMemberCtgrCountProduct(p_ctgr_no, (String)map.get("user_id"),(Integer)map.get("address_no"));
+	}
+	
 	@Override
 	public List<Product> selectByUserId(String user_id) throws Exception {
 		System.out.println("###ProductDaoImpl : selectByUserId 호출");
