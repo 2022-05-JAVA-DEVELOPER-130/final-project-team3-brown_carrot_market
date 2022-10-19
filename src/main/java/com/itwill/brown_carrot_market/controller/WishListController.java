@@ -30,7 +30,6 @@ public class WishListController {
 		System.out.println(wishList);
 		model.addAttribute("wishList", wishList);
 		
-		System.out.println(wishList);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

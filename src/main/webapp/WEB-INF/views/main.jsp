@@ -57,7 +57,7 @@
             </div>
 
             <!-- Single Slide -->
-            <div class="single_slide home-3 bg-img" style="background-image: url(img/bg-img/back2.jpg);">
+            <div class="single_slide home-3 bg-img" style="background-image: url(img/bg-img/back2-2.jpg);">
                 <div class="container h-100">
                     <div class="row h-100 align-items-center">
                         <div class="col-12">
@@ -72,33 +72,13 @@
             </div>
 
             <!-- Single Slide -->
-            <div class="single_slide home-3 bg-img" style="background-image: url(img/bg-img/back3.jpg);">
-                <div class="container h-100">
-                    <div class="row h-100 align-items-center">
-                        <div class="col-12">
-                            <div class="welcome_slide_text text-center">
-                                <p data-animation="fadeInUp" data-delay="100ms">Todays Deals <i class="ico-heart"></i></p>
-                                <h2 data-animation="fadeInUp" data-delay="300ms">Sunglass 20% OFF</h2>
-                                <a href="#" class="btn btn-primary" data-animation="fadeInUp" data-delay="500ms">Check Collection</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="single_slide home-3 bg-img" style="background-image: url(img/bg-img/bbb.jpg);">
+                
             </div>
 
             <!-- Single Slide -->
             <div class="single_slide home-3 bg-img" style="background-image: url(img/bg-img/16.jpg);">
-                <div class="container h-100">
-                    <div class="row h-100 align-items-center">
-                        <div class="col-12">
-                            <div class="welcome_slide_text text-center">
-                                <p data-animation="fadeInUp" data-delay="100ms">Todays Deals</p>
-                                <h2 data-animation="fadeInUp" data-delay="300ms">Woden Chair</h2>
-                                <a href="#" class="btn btn-primary" data-animation="fadeInUp" data-delay="500ms">Buy Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
             </div>
         </div>
     </section>
@@ -441,81 +421,6 @@
     <!-- Best Selling Products -->
 
     <!-- Offer Area -->
-    <section class="offer_area section_padding_0_100">
-        <div class="container">
-            <div class="row">
-                <!-- Beach Offer -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="beach_offer_area mb-4 mb-md-0">
-                        <img src="img/product-img/beach.png" alt="beach-offer">
-                        <div class="beach_offer_info">
-                            <p>Upto 70% OFF</p>
-                            <h3>Beach Item</h3>
-                            <a href="#" class="btn btn-primary btn-sm mt-15">SHOP NOW</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-6 col-lg-4">
-                    <!-- Apparels Offer -->
-                    <div class="apparels_offer_area">
-                        <img src="img/product-img/apparels.jpg" alt="Beach-Offer">
-                        <div class="apparels_offer_info d-flex align-items-center">
-                            <div class="apparels-offer-content">
-                                <h4>Apparel &amp; <br><span>Garments</span></h4>
-                                <a href="#" class="btn">Buy Now <i class="icofont-rounded-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Deals of the Week -->
-                    <div class="weekly_deals_area mt-30">
-                        <img src="img/product-img/weekly-offer.jpg" alt="weekly-deals">
-                        <div class="weekly_deals_info">
-                            <h4>Deals of the Week</h4>
-                            <div class="deals_timer">
-                                <ul data-countdown="2021/02/14 14:21:38">
-                                    <!-- Please use event time this format: YYYY/MM/DD hh:mm:ss -->
-                                    <li><span class="days">00</span>days</li>
-                                    <li><span class="hours">00</span>hours</li>
-                                    <li class="d-block blank-timer"></li>
-                                    <li><span class="minutes">00</span>min</li>
-                                    <li><span class="seconds">00</span>sec</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-4">
-                    <div class="row">
-                        <div class="col-12 col-sm-6 col-lg-12">
-                            <!-- Elect Offer -->
-                            <div class="elect_offer_area mt-30 mt-lg-0">
-                                <img src="img/product-img/elect.jpg" alt="Elect-Offer">
-                                <div class="elect_offer_info d-flex align-items-center">
-                                    <div class="elect-offer-content">
-                                        <h4>Electronics</h4>
-                                        <a href="#" class="btn">Buy Now <i class="icofont-rounded-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-lg-12">
-                            <!-- Backpack Offer -->
-                            <div class="backpack_offer_area mt-30">
-                                <img src="img/product-img/backpack.jpg" alt="Backpack-Offer">
-                                <div class="backpack_offer_info">
-                                    <h4>Backpacks</h4>
-                                    <a href="#" class="btn">Buy Now <i class="icofont-rounded-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <!-- Offer Area End -->
 
     <!-- On Sale Products -->
@@ -524,7 +429,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-heading mb-50">
-                        <h5>On Sale Products</h5>
+                        <h5>인기 판매글</h5>
                     </div>
                 </div>
             </div>
@@ -863,68 +768,9 @@
     <!-- On Sale Products -->
 
     <!-- Special Featured Area -->
-    <section class="special_feature_area pt-5">
-        <div class="container">
-            <div class="row">
-                <!-- Single Feature Area -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single_feature_area mb-5 d-flex align-items-center">
-                        <div class="feature_icon">
-                            <i class="icofont-ship"></i>
-                            <span><i class="icofont-check-alt"></i></span>
-                        </div>
-                        <div class="feature_content">
-                            <h6>Free Shipping</h6>
-                            <p>For orders above $100</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Feature Area -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single_feature_area mb-5 d-flex align-items-center">
-                        <div class="feature_icon">
-                            <i class="icofont-box"></i>
-                            <span><i class="icofont-check-alt"></i></span>
-                        </div>
-                        <div class="feature_content">
-                            <h6>Happy Returns</h6>
-                            <p>7 Days free Returns</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Feature Area -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single_feature_area mb-5 d-flex align-items-center">
-                        <div class="feature_icon">
-                            <i class="icofont-money"></i>
-                            <span><i class="icofont-check-alt"></i></span>
-                        </div>
-                        <div class="feature_content">
-                            <h6>100% Money Back</h6>
-                            <p>If product is damaged</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Feature Area -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single_feature_area mb-5 d-flex align-items-center">
-                        <div class="feature_icon">
-                            <i class="icofont-live-support"></i>
-                            <span><i class="icofont-check-alt"></i></span>
-                        </div>
-                        <div class="feature_content">
-                            <h6>Dedicated Support</h6>
-                            <p>We provide support 24/7</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Special Featured Area -->
+     
+   
+  <!-- Special Featured Area -->
 
     <!-- Footer Area -->
    		<!-- include_common_bottom.jsp start-->
