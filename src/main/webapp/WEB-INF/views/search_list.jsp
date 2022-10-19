@@ -169,10 +169,21 @@
                                         
                                         <c:choose>
                                         <c:when test="${!empty product.productImagesList[0].pi_name}">
-										
+
+											<c:set var = "image_name" value = "${product.productImagesList[0].pi_name}"/>
+                                        	<c:choose>
+												<c:when test="${fn:startsWith(image_name, 'http')}">
+			                                        <img class="normal_img" src="${product.productImagesList[0].pi_name}" alt="">
+			                                        <img class="hover_img" src="${product.productImagesList[0].pi_name}" alt="">
+		                                        </c:when>
+												<c:otherwise>
+			                                        <img class="normal_img_test" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
+			                                        <img class="hover_img" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
+												</c:otherwise>
+											</c:choose>										
                                         
-                                        <img class="normal_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
-                                        <img class="hover_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
+                                        <%-- <img class="normal_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
+                                        <img class="hover_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt=""> --%>
 										</c:when>
 										
 										<c:otherwise>

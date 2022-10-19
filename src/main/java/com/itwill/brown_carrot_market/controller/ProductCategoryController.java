@@ -23,19 +23,19 @@ public class ProductCategoryController {
 	}
 	
 	@RequestMapping(value = "/product_category", params = "category_no")
-	public String guest_view(@RequestParam int category_no,Model model,HttpSession session) throws Exception {
+	public String guest_view(@RequestParam int p_ctgr_no,Model model,HttpSession session) throws Exception {
 		System.out.println("들어오긴하니?");
 		String sUserId = (String)session.getAttribute("sUserId");
 		Address sAddress = (Address)session.getAttribute("sAddress");
 		if(sUserId != null) {
 			//로그인한 회원 주위의 상품 리스트
-			List<Product> productLoginList = productService.selectListByRangeCtgr(category_no, sAddress);
+			List<Product> productLoginList = productService.selectListByRangeCtgr(p_ctgr_no, sAddress);
 			model.addAttribute("productLoginList",productLoginList);
 			return "product_login_list";
 		}
 		
 		//비회원 상품리스트
-		List<Product> productList = productService.selectAllByCtgr(category_no);
+		List<Product> productList = productService.selectAllByCtgr(p_ctgr_no);
 		model.addAttribute("productList", productList);	
 		return "product_list";
 	}
