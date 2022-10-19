@@ -350,25 +350,26 @@ function check_isExisted_orders(p_no){
 			"p_no": p_no
 		},
 		success : function(jsonResult) {
-			//console.log("result: "+JSON.stringify(jsonResult.data));
-			console.log("seller_id: "+jsonResult.data.userinfo.user_id);
+			console.log("result: "+JSON.stringify(jsonResult.data));
+			//console.log("seller_id: "+jsonResult.data.userinfo.user_id);
+			if(jsonResult.data!=null){
 			check_isExisted_review(jsonResult.data['orders_no']);
 			
 			$("."+p_no).attr("id",jsonResult.data['orders_no']);
 			$("."+p_no).attr("seller_id",jsonResult.data.userinfo.user_id);
+			}else {
+
+			}
 			/*
 			console.log("review_no: "+jsonResult.data.review_no);
-			if(jsonResult.data!=null){
 				$('#'+orders_no).text('보러가기');
 				$('#'+orders_no).addClass('badge-secondary');
 				$('#'+orders_no).addClass('btn_review_view');
 				$('#'+orders_no).attr('review_no',jsonResult.data.review_no);
 				//$('#'+orders_no).attr('review',JSON.stringfy(jsonResult.data));
-			}else {
 				$('#'+orders_no).text('작성하기');
 				$('#'+orders_no).addClass('badge-carrot');
 				$('#'+orders_no).addClass('btn_review_write');
-			}
 			*/
 		}
 	});

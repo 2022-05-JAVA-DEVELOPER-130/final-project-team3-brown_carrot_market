@@ -13,6 +13,10 @@ public interface TransferDao {
 	
 	int insert_Transfer_Cancel_Withdraw(int p_no) throws Exception;
 	
+	int insert_Point_Deposit(int payment_amount, String user_id) throws Exception;
+	
+	int update_Point_By_Id(String user_id) throws Exception;
+	
 	List<Transfer> selectById(String user_id) throws Exception;
 	
 	List<Transfer> selectByP_Id(String user_id) throws Exception;

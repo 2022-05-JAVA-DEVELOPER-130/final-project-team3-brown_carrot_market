@@ -192,8 +192,24 @@ public class UserInfoRestController {
 		List<UserInfo> resultList=new ArrayList<UserInfo>();
 
 		System.out.println("RestController-user_update_address_range_json() 호출");
+		UserInfo sUser = (UserInfo)request.getSession().getAttribute("sUser");
 		/***********수정 필요***********/
 		code = userService.updateAddressRange(address);
+		
+		List<Address> addresses=
+		userService.findAddressesById(sUser);
+		
+		for (Address address2 : addresses) {
+			if(address2.getAddress_no()!=address.getAddress_no()) {
+				System.out.println("다른주소 range 0으로 "+address2);
+				address2.setAddress_range(0);
+				userService.updateAddressRange(address2);
+			}else {
+				request.getSession().setAttribute("sUser", address2);
+				System.out.println("sAddress: "+address2);
+			}
+		}
+		
 		if(code==1) msg="update_address 성공"; //request.getSession().setAttribute("sAddress", address);
 		//System.out.println("sAddress :"+address);
 		/******************************/

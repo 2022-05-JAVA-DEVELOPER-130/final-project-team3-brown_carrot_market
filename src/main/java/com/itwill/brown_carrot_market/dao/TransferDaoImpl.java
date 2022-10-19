@@ -45,6 +45,11 @@ public class TransferDaoImpl implements TransferDao{
 	}
 
 	@Override
+	public int insert_Point_Deposit(int payment_amount, String user_id) throws Exception {
+		return transferMapper.insert_Point_Deposit(payment_amount, user_id);
+	}
+
+	@Override
 	public int insert_Transfer_Cancel_Withdraw(int p_no) throws Exception {
 		System.out.println("#### TransferDaoImpl : insertTransfer_Cancel_Withdraw(int p_no) 호출  ");
 		return transferMapper.insert_Transfer_Cancel_Withdraw(p_no);
@@ -60,6 +65,12 @@ public class TransferDaoImpl implements TransferDao{
 	public List<Transfer> selectByP_Id(String user_id) throws Exception {
 		return transferMapper.selectByP_Id(user_id);
 	}
+
+	@Override
+	public int update_Point_By_Id(String user_id) throws Exception{
+		return transferMapper.update_Point_By_ID(user_id);
+	}
+
 	
 	
 }
