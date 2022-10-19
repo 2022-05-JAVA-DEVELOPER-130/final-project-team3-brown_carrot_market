@@ -587,7 +587,6 @@ function message_admin_promise(chat_content){
 									<a href="javascript:void(popupMap(${chat_content.c_app_lat},${chat_content.c_app_lng}))" style="font-size:6px;" class="chat_spot_map" >${chat_content.c_appspot}</a></div>
 								</li>`
 }
-
 //상단헤드
 function chat_head(id,img,room_no,fresh,product,p_img,check){
 	var a ="";
@@ -625,6 +624,11 @@ var c ="";
 				c=`<a href="#" class="btn btn-outline-info" style="border-color:green"><i class="fa fa-won" id="btnCarrot_Pay_Cancel" p_no=${product.p_no} style="color:green;"></i></a>`;
 			}
 		}
+		if(p_img.startsWith('http')){
+			p_img= p_img;
+		}else{
+			p_img= 'img/product_img/'+p_img;
+		}
 	
 	return 	`<div class="row">
 								<div class="col-lg-4">
@@ -645,7 +649,7 @@ var c ="";
 						 
     							<div style="text-align:center;">
     							<a href="product_detail?p_no=${product.p_no}";>
-								<img src="img/product_img/${p_img}" style="border-radius: 0%; width:50px; height:50px;"></a>
+								<img src="${p_img}" style="border-radius: 0%; width:50px; height:50px;"></a>
 								<h6 class="m-b-0" style="margin-top:10px; margin-bottom:2px;"><b>${product.p_title}</b></h6>
 								<small><b><${p_sell}></b> 가격: ${product.p_price}원</small> 
 								<div>
