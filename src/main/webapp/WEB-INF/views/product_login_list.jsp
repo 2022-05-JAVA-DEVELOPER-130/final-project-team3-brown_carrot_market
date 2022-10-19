@@ -85,23 +85,28 @@
                               <li>
                               
 	                              
-	                              <a href="product_category?category_no=1" style="font-weight: normal">- 가전제품</a>
-
+	                             <input type="hidden" class="productCtgrNo" name="p_ctgr_no1" value=1>
+	                              <a href="#" onclick="changeProductList(1,1)" style="font-weight: normal">- 가전제품</a>
                               </li>
                               <li>
-	                              <a href="product_category?category_no=2" style="font-weight: normal" >- 가구</a>
+                              		<input type="hidden" class="productCtgrNo" name="p_ctgr_no2" value=1>
+	                              <a href="#" onclick="changeProductList(1,2)" style="font-weight: normal" >- 가구</a>
                               </li>
                               <li>
-	                              <a href="product_category?category_no=3" style="font-weight: normal">- 의류</a>
+                              	  <input type="hidden" class="productCtgrNo" name="p_ctgr_no3" value=1>
+	                              <a href="#" onclick="changeProductList(1,3)" style="font-weight: normal">- 의류</a>
                               </li>
                               <li>
-	                              <a href="product_category?category_no=4" style="font-weight: normal">- 생활용품</a>
+                              	  <input type="hidden" class="productCtgrNo" name="p_ctgr_no4" value=1>
+	                              <a href="#" onclick="changeProductList(1,4)" style="font-weight: normal">- 생활용품</a>
                               </li>
                               <li>
-	                              <a href="product_category?category_no=5" style="font-weight: normal">- 취미/게임/음반/도서</a>
+                              	  <input type="hidden" class="productCtgrNo" name="p_ctgr_no5" value=1>
+	                              <a href="#" onclick="changeProductList(1,5)" style="font-weight: normal">- 취미/게임/음반/도서</a>
                               </li>
                               <li>
-	                              <a href="product_category?category_no=6" style="font-weight: normal">- 기타</a>
+                              	  <input type="hidden" class="productCtgrNo" name="p_ctgr_no6" value=1>
+	                              <a href="#" onclick="changeProductList(1,6)" style="font-weight: normal">- 기타</a>
                               </li>
                              
                                 
@@ -299,24 +304,24 @@
                         <nav aria-label="Page navigation">
                             <ul class="pagination pagination-sm justify-content-center">
                                
-                               <c:if test="${productLoginList.pageMaker.prevPage > 0}">  
+                               <c:if test="${productList.pageMaker.prevPage > 0}">  
 	            					<li class="page-item">
-	                                    <button class="page-link" onclick="changeProductList(${data.pageMaker.prevPage});"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+	                                    <button class="page-link" onclick="changeProductList(${data.pageMaker.prevPage},'0');"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
 	                               	 </li>
                                 </c:if>
                                 
-                                <c:forEach var="no" begin="${productLoginList.pageMaker.blockBegin}" end="${productLoginList.pageMaker.blockEnd}">
-									<c:if test="${productLoginList.pageMaker.curPage == no}">
+                                <c:forEach var="no" begin="${productList.pageMaker.blockBegin}" end="${productList.pageMaker.blockEnd}">
+									<c:if test="${productList.pageMaker.curPage == no}">
 										<li class="page-item active"><button class="page-link" href="#">${no}</button></li>
 									</c:if>
-									<c:if test="${productLoginList.pageMaker.curPage != no}">
-										<li class="page-item"><button class="page-link page" onclick="changeProductList(${no})">${no}</button></li>
+									<c:if test="${productList.pageMaker.curPage != no}">
+										<li class="page-item"><button class="page-link page" onclick="changeProductList(${no},'0')">${no}</button></li>
 									</c:if>
                                 </c:forEach>
                                 
-                                <c:if test="${productLoginList.pageMaker.curPage < productList.pageMaker.totPage}">  
+                                <c:if test="${productList.pageMaker.curPage < productList.pageMaker.totPage}">  
 	                                <li class="page-item">
-				                        <button class="page-link" onclick="changeProductList(${productList.pageMaker.nextPage})"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+				                        <button class="page-link" onclick="changeProductList(${productList.pageMaker.nextPage},'0')"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
 			                    	 </li>
                                 </c:if>
                             
