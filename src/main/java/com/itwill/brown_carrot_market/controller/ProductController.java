@@ -226,7 +226,7 @@ public class ProductController {
 		return "redirect : product_list";
 	}
 	
-	/*상품삭제
+	//상품삭제
 	@RequestMapping(value = "/product_delete_action", method = RequestMethod.POST)
 	public String product_delete_action(@RequestParam int p_no,HttpSession session) throws Exception {
 		String sUserId = (String)session.getAttribute("sUserId");
@@ -235,7 +235,7 @@ public class ProductController {
 		
 		return "redirect : product_list";
 	}
-	*/
+	
 	
 	//상품 판매상태
 	@RequestMapping(value = "/product_modify_sell_action")

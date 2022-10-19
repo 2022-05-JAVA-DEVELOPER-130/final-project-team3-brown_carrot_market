@@ -80,7 +80,7 @@
                 <div class="col-12 col-md-4 col-xl-3">
                     <div class="shop_sidebar_area">
                         <!-- Single Widget -->
-                        <div class="widget catagory mb-30">
+                        <div class="widget-area catagory_section mb-30">
                             <div id = "product_category_list">
                             <h6>Product Categories</h6>
                             <ul>
@@ -114,23 +114,11 @@
                                
                             </ul>
                         </div>
+                        </div>
                       
 
                         <!-- Single Widget -->
-                        <div class="widget price mb-30">
-                            <h6 class="widget-title">Filter by Price</h6>
-                            <div class="widget-desc">
-                                <div class="slider-range">
-                                    <div data-min="0" data-max="1350" data-unit="$" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="0" data-value-max="1350" data-label-result="Price:">
-                                        <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
-                                        <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                        <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                    </div>
-                                    <div class="range-price">Price: 0 - 1350</div>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
+                      
 
                         <!-- Single Widget -->
                         
@@ -139,48 +127,36 @@
                        
 
                         <!-- Single Widget 
-                        <div class="widget rating mb-30">
-                            <h6 class="widget-title">Average Rating</h6>
-                            <div class="widget-desc">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <span class="text-muted">(103)</span></a></li>
-
-                                    <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <span class="text-muted">(78)</span></a></li>
-
-                                    <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <span class="text-muted">(47)</span></a></li>
-
-                                    <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <span class="text-muted">(9)</span></a></li>
-
-                                    <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <span class="text-muted">(3)</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-						-->
+                       
                         <!-- Single Widget -->
                        
                     </div>
                 </div>
-			</div>
+			
                 <div class="col-12 col-md-8 col-xl-9">
-                    <!-- Shop Top Sidebar 
+                    <!-- Shop Top Sidebar--> 
                     <div class="shop_top_sidebar_area d-flex flex-wrap align-items-center justify-content-between">
                         <div class="view_area d-flex">
+                            <!--  
                             <div class="grid_view">
                                 <a href="shop-grid-left-sidebar.html" data-toggle="tooltip" data-placement="top" title="Grid View"><i class="icofont-layout"></i></a>
                             </div>
                             <div class="list_view ml-3">
                                 <a href="shop-list-left-sidebar.html" data-toggle="tooltip" data-placement="top" title="List View"><i class="icofont-listine-dots"></i></a>
                             </div>
+                            -->
                            </div>
-                           -->
-                           <!--  
+                        
+                            
                             <div class="col-12 text-right">
+                            <!--  
                         	<input type="button" class="btn btn-primary mb-1" value="내 물건 팔기" onClick="productCreateForm();"/>
+                    		-->
                     		</div>
-                    		 -->
+                    	</div>	 
                         
                         
-					</div>
+					
                     <div class="shop_list_product_area">
                         <div class="row">
                             
@@ -191,19 +167,27 @@
                                 <div class="single-product-area mb-30">
                                     <div class="product_image">
                                         <!-- Product Image -->
-                                        
+                                        <c:choose>
+                                        <c:when test="${!empty product.productImagesList[0].pi_name}">
                                         <c:set var = "image_name" value = "${product.productImagesList[0].pi_name}"/>
                                         <c:choose>
 											<c:when test="${fn:startsWith(image_name, 'http')}">
-		                                        <img class="normal_img" src="${product.productImagesList[0].pi_name}" alt="">
+		                                        <img class="normal_img" src="${product.productImagesList[0].pi_name}"  alt="">
 		                                        <img class="hover_img" src="${product.productImagesList[0].pi_name}" alt="">
 	                                        </c:when>
 											<c:otherwise>
-		                                        <img class="normal_img_test" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
+		                                        <img class="normal_img_test" src="img/product_img/${product.productImagesList[0].pi_name}"  alt="">
 		                                        <img class="hover_img" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
 											</c:otherwise>
 										</c:choose>
-
+										</c:when>
+										
+										<c:otherwise>
+										<img class="normal_img" style="width:300px; height:300px;" src="img/chat-img/logo_carrot.png" alt="">
+                                        <img class="hover_img" style="width:300px; height:300px;" src="img/chat-img/logo_carrot.png" alt="">
+										
+										</c:otherwise>
+										</c:choose>
                                         <!-- Product Badge -->
                                         <div class="product_badge">
                                             <span>New</span>
@@ -245,9 +229,10 @@
 						 </div>
 						 </div>
 						  
-					
+					<!--  
                  <div class="row">
                 <div class="col-12 col-lg-8 ml-lg-auto">
+					-->
 
                     <!-- Shop Pagination Area -->
                     <div class="shop_pagination_area mt-30">
@@ -283,7 +268,9 @@
                 </div>
             </div>
         </div>
- 			   </section>
+        
+        
+ 	</section>
     <!-- Shop List Area -->
 
     <!-- Footer Area -->
