@@ -234,7 +234,7 @@ $.ajax({
 						
 					$('#chat_history').append(message_admin(item));
 				}
-					else if(item.user_id=="adminP"&&promiseData.c_app_lat!=null){
+					else if(item.user_id=="adminP"&&c_app_lat!=null){
 						$('#chat_history').append( `<li class="clearfix">
 
                            <div class="message admin-message" margin:auto>${item.c_content}
