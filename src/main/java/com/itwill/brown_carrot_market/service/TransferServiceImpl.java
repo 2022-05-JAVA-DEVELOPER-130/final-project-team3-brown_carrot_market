@@ -268,11 +268,21 @@ public class TransferServiceImpl implements TransferService {
 		return result;
 	}
 
+	@Override
+	public int insert_Point_Deposit(int payment_amount, String user_id) throws Exception {
+		return transferDao.insert_Point_Deposit(payment_amount, user_id);
+	}
 
+	@Override
+	public int update_Point_By_Id(String user_id) throws Exception{
+		return transferDao.update_Point_By_Id(user_id);
+	}
+	@Override
 	public List<Transfer> selectById(String user_id) throws Exception {
 		return transferDao.selectById(user_id);
 	}
 
+	@Override
 	public List<Transfer> selectByP_Id(String user_id) throws Exception {
 		return transferDao.selectByP_Id(user_id);
 	}

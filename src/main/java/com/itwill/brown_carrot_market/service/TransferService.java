@@ -9,7 +9,10 @@ public interface TransferService {
 	boolean transfer_transaction(int p_no) throws Exception;
 	
 	boolean transfer_cancel_transaction(int p_no) throws Exception;
+	
+	int insert_Point_Deposit(int payment_amount, String user_id) throws Exception;
 
+	int update_Point_By_Id(String user_id) throws Exception;
 	/*
 	 * int insert_Transfer_Deposit(int p_no) throws Exception;
 	 * 
