@@ -1,4 +1,10 @@
-
+.catagory_section a, .achive_section a {
+    display: inline;
+    font-size: 14px;
+    height: auto;
+    padding: 5px 0;
+    width: 100%;
+}
 #townBoard_list_tbody_all .blog_post_content{
 	margin-bottom: 50px;
 }
@@ -77,6 +83,15 @@ li{
 .townReply.delete{
 	margin-top: 15px;
 }
+/***************** 버튼 *******************/
+.townBoard_btn{
+	
+}
+
+
+/***************** 버튼 끝 *******************/
+
+
 
 /************ 슬라이드쇼 시작 **************/
 * { margin: 0; padding: 0; }

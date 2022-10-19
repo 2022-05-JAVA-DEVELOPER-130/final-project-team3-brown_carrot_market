@@ -196,8 +196,8 @@
                 <!-- 슬라이드쇼 시작 -->
                 <div>
                  <ul class="bxslider">
-       <c:forEach var="i" begin="0" end="${fn:length(townImageList)}" step="1"> 
-       
+       <c:forEach var="i" begin="0" end="1" step="1"> 
+
       <li><img src="img/townBoard-img/${townBoard.townImageList[i].t_img_name}" alt="blog-img"  ></li>
  	 </c:forEach> 
       
@@ -234,7 +234,7 @@
                         <p class = "">${townBoard.t_content}</p>
                     </div>
 					
-					<input class="townBoard_i delete" type="button" pageno="${pageno}" t_no="${townBoard.t_no}" value="삭제하기" />
+					<input class="townBoard_btn delete" type="button" pageno="${pageno}" t_no="${townBoard.t_no}" value="삭제하기" />
 					<input class="townBoard_btn update_form" type="button" pageno="${pageno}" t_no="${townBoard.t_no}" value="수정하기" />
 					<%-- <input class="townBoard_btn wishlist_add" type="button" pageno="${pageno}" t_no="${townBoard.t_no}" value="관심등록" /> --%>
 					

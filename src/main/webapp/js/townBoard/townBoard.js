@@ -71,7 +71,7 @@ function changeQnaList(pageno,t_ctgr_no){
 /*
 게시글 삭제 
 */
-$(".townBoard_i.delete").on("click", function(){
+$(".townBoard_btn.delete").on("click", function(){
 	let pageno = $(this).attr("pageno");
 	let t_no = $(this).attr("t_no");
 	ToastConfirm.fire({ icon: 'question', 
