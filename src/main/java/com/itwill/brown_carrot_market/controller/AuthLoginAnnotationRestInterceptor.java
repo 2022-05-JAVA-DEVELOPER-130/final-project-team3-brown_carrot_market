@@ -5,8 +5,11 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -21,10 +24,9 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 	
 	- afterCompletion() : 모든 처리가 끝난 후 호출
  */
-
-public class AuthLoginAnnotationRestInterceptor extends HandlerInterceptorAdapter {
+//@Component
+public class AuthLoginAnnotationRestInterceptor implements HandlerInterceptor {
 	public AuthLoginAnnotationRestInterceptor() {
-		System.out.println("### AuthLoginAnnotationInterceptor()생성자");
 	}
 
 	// preHandle() : 컨트롤러보다 먼저 수행되는 메서드
@@ -33,7 +35,6 @@ public class AuthLoginAnnotationRestInterceptor extends HandlerInterceptorAdapte
 			HttpServletResponse response, 
 			Object handler)
 			throws Exception {
-		System.out.println("### AuthLoginAnnotationInterceptor.preHandle()메써드");
 		/*
 		[ 핸들러 메소드(HandlerMethod)란? ]
 			HandlerMethod는 @RequestMapping이 붙은 메소드의 정보를 추상화한 객체이다. 
@@ -44,7 +45,7 @@ public class AuthLoginAnnotationRestInterceptor extends HandlerInterceptorAdapte
 				- @RequestMapping이 붙은 메소드 파라미터 메타정보
 				- @RequestMapping이 붙은 메소드 어노테이션 메타정보
 				- @RequestMapping이 붙은 메소드 리턴 값 메타정보
- 
+ 
 			디스패처 서블릿은 애플리케이션이 실행될 때 모든 컨트롤러 빈의 메소드를 살펴서 
 			매핑 후보가 되는 메소드들을 추출한 뒤, 이를 HandlerMethod 형태로 저장해둔다. 
 			그리고 실제 요청이 들어오면 저장해 둔 목록에서 요청 조건에 맞는 
@@ -77,14 +78,12 @@ public class AuthLoginAnnotationRestInterceptor extends HandlerInterceptorAdapte
 		   즉 인증이 필요 없는 요청
 		***************************/
 		if (loginCheck == null) {
-			System.out.println("### AuthLoginAnnotationInterceptor.preHandle()메써드 @LoginCheck 없는경우");
 			return true;
 		}
 		/***************************
 		4. HandlerMethod객체에 @LoginCheck어노테이션 이있는 경우, 
 		   세션이 있는지 체크
 		***************************/
-		System.out.println("### AuthLoginAnnotationInterceptor.preHandle()메써드 @LoginCheck있 는경우");
 		//session 객체를 가져옴
 		HttpSession session = request.getSession();
 		//login처리를 담당하는 사용자 정보를 담고 있는 객체를 가져옴
@@ -97,7 +96,7 @@ public class AuthLoginAnnotationRestInterceptor extends HandlerInterceptorAdapte
 			
 			sb.append("{");
 			sb.append("\"code\":2,");
-			sb.append("\"url\":\"user_main\",");
+			sb.append("\"url\":\"main\",");
 			sb.append("\"msg\":\"로그인하세요\",");
 			sb.append("\"data\":[]");
 			sb.append("}");
@@ -115,13 +114,13 @@ public class AuthLoginAnnotationRestInterceptor extends HandlerInterceptorAdapte
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		// TODO Auto-generated method stub
-		super.postHandle(request, response, handler, modelAndView);
+		
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 		// TODO Auto-generated method stub
-		super.afterCompletion(request, response, handler, ex);
+		
 	}
 }

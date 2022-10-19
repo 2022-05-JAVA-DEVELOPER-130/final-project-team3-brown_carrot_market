@@ -59,6 +59,15 @@
 			 where user_email=#{user_email} and user_id=#{user_id}
 	</select>
 	
+	<!-- [update Address Range] -->
+	<select id="findAddressesById" parameterType="com.itwill.brown_carrot_market.dto.UserInfo" resultType="com.itwill.brown_carrot_market.dto.Address">
+		 select *
+			 from address
+			 where user_id=#{user_id}
+	</select>
+	
+	
+	
 	<update id="updatePwById" parameterType="com.itwill.brown_carrot_market.dto.UserInfo" >
 	 	update userinfo set user_pw=#{user_pw}
 			where  user_id=#{user_id}

@@ -54,6 +54,8 @@ public interface UserInfoDao {
 	//비밀번호 업데이트
 	int updatePwById(UserInfo userInfo) throws Exception;
 	
+	List<Address> findAddressesById(UserInfo userInfo) throws Exception;
+	
 	/*
 	 * 모든사용자 정보를 데이타베이스에서 찾아서 List<User> 콜렉션 에 저장하여 반환
 	 */

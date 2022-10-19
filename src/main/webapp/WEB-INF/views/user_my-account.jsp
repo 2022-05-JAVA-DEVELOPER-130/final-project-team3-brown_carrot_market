@@ -536,10 +536,10 @@
 				<div class="col-12 col-lg-9">
 		<!-- START!! ************************************************ -->
 					<div id="my-account-content" class="my-account-content mb-50" style="margin-bottom: 20px">
-						<div class="shortcodes_content mb-100" style="margin-bottom: 0px">
-	                        <div class="col-12 col-lg-9" style="display:inline-block">
+						<div class="shortcodes_content mb-100" style="margin-bottom:0px">
+	                        <div class="col-12 col-lg-9" style="text-align:center;max-width:100%">
 		                        <!-- 더나은 방법을 찾고싶다! -->
-		                        <div class="circle" style="height: 120px">
+		                        <div class="circle" style="display:inline-block;height:120px">
 		                        	<div class="" style="position:relative">
 			                        <c:set var="string" value="${sUser.user_profile}"/>
 									<c:choose>
@@ -550,34 +550,26 @@
 				                            <img class="img-circle" src="img/user_profile/${sUser.user_profile}" onerror="this.src='img/user_profile/newCarrot.jpg'" >
 										</c:otherwise>
 									</c:choose>
-										<div class="img-edit" style="position:absolute;padding-top:80px;padding-left:75px">
-										<i class="icofont-edit" style="font-size:20px"></i>
+										<div class="img-edit" style="position:absolute;padding-top:77px;padding-left:77px">
+										<i class="icofont-edit" style="font-size:20px;color:#747794"></i>
 										<!-- <span style="background-color: #f8f8ff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><i class="icofont-ui-edit" ></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> -->
 										</div>
 									</div>
 									<!-- 프로필 이미지 -->
-									<div style="padding-top:80px">&nbsp;&nbsp;
-										<i class="icofont-ui-rating" style="font-size:8pt;color:dimgray"></i><span>${sUser.user_freshness}</span>&nbsp;&nbsp;
-										<i class="icofont-money-bag" style="font-size:8pt;color:dimgray"></i><span><fmt:formatNumber value="${sUser.user_point}" type="number"/></span>
-									</div>
-									<%-- 
-									<div class="img-circle my-circle" style="margin-right:50px"><span style="font-size:20pt">${sUser.user_freshness}</span></div>
-									<div class="img-circle my-circle" >
-										<span style="position:relative">
-											<i class="icofont-money-bag" style="font-size:30pt;color:lightgray"></i>
-											<span style="font-size:20pt;position:absolute"><fmt:formatNumber value="${sUser.user_point}" type="number"/></span>	
-										</span>
-									</div>
-									 --%>
 								</div>
+								<br>
 								<div>
 									<p class="my-user">
-										<strong>${sUser.user_id}</strong>님, 안녕하세요? 
+										<span style="color:#212529"><strong >${sUser.user_id}</strong> 님, 안녕하세요?</span><br>
+										<i class="icofont-ui-rating" style="font-size:10pt;color:orange"></i><span>${sUser.user_freshness}</span>&nbsp;&nbsp;
+										<i class="icofont-money-bag" style="font-size:10pt;color:orange"></i><span><fmt:formatNumber value="${sUser.user_point}" type="number"/></span>
+									</p>
+									<p>
 									</p>
 								</div>
 	                        </div>
 						</div>
-	                    <div class="shortcodes_content mb-100" style="margin-bottom: 20px">
+	                    <div class="shortcodes_content mb-100" style="margin-bottom: 20px;border:1px solid #d6e6fb">
 	                        <form class="invi_form">
 	                            <div class="form-group">
 	                                <label for="invi_email">흙당근마켓에 친구를 초대해보세요!</label>
@@ -585,7 +577,9 @@
 	                                <small id="emailHelp" class="form-text text-muted">초대받은 친구가 회원가입시, 500point를 드립니다!.</small>
 	                            </div>
 	                        </form>
-	                        <button type="submit" class="btn btn-primary" id="btn_invi">Submit</button>
+	                        <div style="text-align:right">
+	                        	<button type="submit" class="btn btn-primary" id="btn_invi">Submit</button>
+	                        </div>
 						</div>
                     </div>
 		<!-- END!! ************************************************** -->
