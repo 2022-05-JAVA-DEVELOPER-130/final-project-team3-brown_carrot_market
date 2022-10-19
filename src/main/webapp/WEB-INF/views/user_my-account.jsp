@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib prefix = "c"  uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="en">
 
@@ -316,7 +317,7 @@
 			
 			
 			/* View_user_profile********************************/
-			$(document).on('click', '.img-circle', function(e) {
+			$(document).on('click', '.img-circle, .img-edit', function(e) {
 				 $.ajax({
 						url:'user_view_json',
 						method:'POST',
@@ -536,23 +537,44 @@
 		<!-- START!! ************************************************ -->
 					<div id="my-account-content" class="my-account-content mb-50" style="margin-bottom: 20px">
 						<div class="shortcodes_content mb-100" style="margin-bottom: 0px">
-	                        <div class="col-12 col-lg-9">
-	                        <!-- 더나은 방법을 찾고싶다! -->
-	                        <c:set var="string" value="${sUser.user_profile}"/>
-							<c:choose>
-								<c:when test="${fn:startsWith(string,'http://')}">
-		                            <img class="img-circle" src="${sUser.user_profile}" onerror="this.src='img/user_profile/newCarrot.jpg'">
-								</c:when>
-								<c:otherwise>
-		                            <img class="img-circle" src="img/user_profile/${sUser.user_profile}" onerror="this.src='img/user_profile/newCarrot.jpg'">
-								</c:otherwise>
-							</c:choose>
-							<!-- 프로필 이미지 -->
-							<span>${sUser.user_freshness}</span>
-							<span>${sUser.user_point}</span>
-							<p>
-								<strong>${sUser.user_id}</strong>님, 안녕하세요? 
-							</p>
+	                        <div class="col-12 col-lg-9" style="display:inline-block">
+		                        <!-- 더나은 방법을 찾고싶다! -->
+		                        <div class="circle" style="height: 120px">
+		                        	<div class="" style="position:relative">
+			                        <c:set var="string" value="${sUser.user_profile}"/>
+									<c:choose>
+										<c:when test="${fn:startsWith(string,'http://')}">
+				                            <img class="img-circle" src="${sUser.user_profile}" onerror="this.src='img/user_profile/newCarrot.jpg'">
+										</c:when>
+										<c:otherwise>
+				                            <img class="img-circle" src="img/user_profile/${sUser.user_profile}" onerror="this.src='img/user_profile/newCarrot.jpg'" >
+										</c:otherwise>
+									</c:choose>
+										<div class="img-edit" style="position:absolute;padding-top:80px;padding-left:75px">
+										<i class="icofont-edit" style="font-size:20px"></i>
+										<!-- <span style="background-color: #f8f8ff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><i class="icofont-ui-edit" ></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> -->
+										</div>
+									</div>
+									<!-- 프로필 이미지 -->
+									<div style="padding-top:80px">&nbsp;&nbsp;
+										<i class="icofont-ui-rating" style="font-size:8pt;color:dimgray"></i><span>${sUser.user_freshness}</span>&nbsp;&nbsp;
+										<i class="icofont-money-bag" style="font-size:8pt;color:dimgray"></i><span><fmt:formatNumber value="${sUser.user_point}" type="number"/></span>
+									</div>
+									<%-- 
+									<div class="img-circle my-circle" style="margin-right:50px"><span style="font-size:20pt">${sUser.user_freshness}</span></div>
+									<div class="img-circle my-circle" >
+										<span style="position:relative">
+											<i class="icofont-money-bag" style="font-size:30pt;color:lightgray"></i>
+											<span style="font-size:20pt;position:absolute"><fmt:formatNumber value="${sUser.user_point}" type="number"/></span>	
+										</span>
+									</div>
+									 --%>
+								</div>
+								<div>
+									<p class="my-user">
+										<strong>${sUser.user_id}</strong>님, 안녕하세요? 
+									</p>
+								</div>
 	                        </div>
 						</div>
 	                    <div class="shortcodes_content mb-100" style="margin-bottom: 20px">
