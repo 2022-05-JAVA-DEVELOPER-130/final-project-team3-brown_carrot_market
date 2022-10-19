@@ -14,4 +14,8 @@ public interface WishListService {
 	int insertWishList(WishList wishList);
 	
 	int deleteWishList(int wishlist_no);
+	
+	int checkWish(int p_no,String user_id);
+	
+	public int deleteWishPD(int p_no,String user_id);
 }

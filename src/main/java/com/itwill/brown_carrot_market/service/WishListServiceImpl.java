@@ -42,4 +42,16 @@ public class WishListServiceImpl implements WishListService {
 		return wishListDao.deleteWishList(wishlist_no);
 	}
 
+	@Override
+	public int checkWish(int p_no, String user_id) {
+		// TODO Auto-generated method stub
+		return wishListDao.checkWish(p_no, user_id);
+	}
+
+	@Override
+	public int deleteWishPD(int p_no, String user_id) {
+		// TODO Auto-generated method stub
+		return wishListDao.deleteWishPD(p_no, user_id);
+	}
+
 }

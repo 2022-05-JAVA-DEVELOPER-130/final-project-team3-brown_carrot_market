@@ -56,6 +56,18 @@ public class WishListDaoImpl implements WishListDao{
 		System.out.println("### wishListDaoImpl : deleteWishList 호출");
 		return wishListMapper.deleteWishList(wishlist_no);
 	}
+
+	@Override
+	public int checkWish(int p_no, String user_id) {
+		// TODO Auto-generated method stub
+		return wishListMapper.checkWish(p_no, user_id);
+	}
+
+	@Override
+	public int deleteWishPD(int p_no, String user_id) {
+		// TODO Auto-generated method stub
+		return wishListMapper.deleteWishPD(p_no, user_id);
+	}
 	
 	
 	

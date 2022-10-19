@@ -27,6 +27,7 @@ public class WishListController {
 		String sUserId = (String)session.getAttribute("sUserId");
 		try {
 		List<WishList> wishList=wishListService.selectWishListAll(sUserId);
+		System.out.println(wishList);
 		model.addAttribute("wishList", wishList);
 		}catch (Exception e) {
 			e.printStackTrace();

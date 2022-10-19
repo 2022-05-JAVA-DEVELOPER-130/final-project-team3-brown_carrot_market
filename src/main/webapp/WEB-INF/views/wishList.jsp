@@ -86,14 +86,16 @@
                                         </th>
                                         <td>
                                         
-                                          <c:choose>
+                                         
+                                         
+                                         <c:choose>
                                         <c:when test="${!empty wish.product.productImagesList[0].pi_name}">
                                             <img src="img/product_img/${wish.product.productImagesList[0].pi_name}" alt="Product">
                                            </c:when>
                                            <c:otherwise>                                                                                       
                                             <img src="img/chat-img/logo_carrot.png" alt="Product">
                                            </c:otherwise>
-                                           </c:choose> 
+                                           </c:choose>  
                                             
                                             
                                             
@@ -105,13 +107,13 @@
                                         <td>
                                             <div class="quantity">
                                             <c:choose>
-                                            <c:when test="${wish.product.p_sell}=='1'">
+                                            <c:when test="${wish.product.p_sell eq 1}">
                                             판매중
                                             </c:when>
-                                            <c:when test="${wish.product.p_sell}==2">
+                                            <c:when test="${wish.product.p_sell eq 2}">
                                             예약중
                                             </c:when>
-                                            <c:when test="${wish.product.p_sell}==2">
+                                            <c:when test="${wish.product.p_sell eq 3}" >
                                             판매완료
                                             </c:when>
                                             
@@ -132,7 +134,7 @@
 
                     <div class="cart-footer text-right">
                         <div class="back-to-shop">
-                            <a href="#" class="btn btn-primary">Add All Item</a>
+                           <!--  <a href="#" class="btn btn-primary">Add All Item</a> -->
                         </div>
                     </div>
                 </div>
