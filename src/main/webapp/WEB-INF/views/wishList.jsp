@@ -72,17 +72,18 @@
                                         <th scope="col">제목</th>
                                         <th scope="col">가격</th>
                                         <th scope="col">상태</th>
-                                        <th scope="col"></th>
+                                     <!--    <th scope="col"></th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
                                    
                                   <c:forEach items="${wishList}" var="wish">
                                  
-                                 
+                                    
                                     <tr>
                                         <th scope="row">
-                                            <i class="icofont-close"></i>
+<%--                                         	<input type="hidden" id="wishDelete=${wish.wishlist_no}" value="${wish.wishlist_no}">
+ --%>                                            <a id="wishDeleteA=${wish.wishlist_no}" ><i class="icofont-close"></i></a>
                                         </th>
                                         <td>
                                         
@@ -122,7 +123,7 @@
 <!--                                                 <input type="number" class="qty-text" id="qty6" step="1" min="1" max="99" name="quantity" value="1">
  -->                                            </div>
                                         </td>
-                                        <td><a href="#" class="btn btn-primary btn-sm">Add to Cart</a></td>
+                                      <!--   <td><a href="#" class="btn btn-primary btn-sm">Add to Cart</a></td> -->
                                     </tr>
                                     
                                     </c:forEach>
@@ -170,6 +171,7 @@
 	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+	<script type="text/javascript" src="js/product/wishList.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
 	
 

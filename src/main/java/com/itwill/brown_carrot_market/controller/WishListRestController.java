@@ -35,8 +35,23 @@ public class WishListRestController {
 		return resultMap;
 	}
 	
+	@RequestMapping("/wishDelete")
+	public Map<String,Object> wishDelete(@RequestParam int w_no,HttpSession session){
+		Map<String, Object> resultMap = new HashMap<>();
+		String user_id=(String)session.getAttribute("sUserId");
+		int result=0;
+		try {
+			result=wishListService.deleteWishList(w_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		resultMap.put("data",result);
+		return resultMap;
+	}
+	
+	
 	@RequestMapping("/wishDeletePD")
-	public Map<String,Object> wishDelete(@RequestParam int p_no,HttpSession session){
+	public Map<String,Object> wishDeletePd(@RequestParam int p_no,HttpSession session){
 		Map<String, Object> resultMap = new HashMap<>();
 		String user_id=(String)session.getAttribute("sUserId");
 		
