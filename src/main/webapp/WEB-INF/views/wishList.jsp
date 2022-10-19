@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-       <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html lang="en">
@@ -89,14 +89,22 @@
                                         
                                          
                                          
-                                         <c:choose>
-                                        <c:when test="${!empty wish.product.productImagesList[0].pi_name}">
-                                            <img src="img/product_img/${wish.product.productImagesList[0].pi_name}" alt="Product">
-                                           </c:when>
-                                           <c:otherwise>                                                                                       
-                                            <img src="img/chat-img/logo_carrot.png" alt="Product">
-                                           </c:otherwise>
-                                           </c:choose>  
+                                        <c:choose>
+	                                        <c:when test="${!empty wish.product.productImagesList[0].pi_name}">
+		                                        <c:set var = "image_name" value = "${wish.product.productImagesList[0].pi_name}"/>
+	                                        	<c:choose>
+		                                        <c:when test="${fn:startsWith(image_name, 'http')}">
+		                                        	<img src="${wish.product.productImagesList[0].pi_name}" alt="Product_http_image">
+			                                    </c:when>
+		                                        <c:otherwise>                                                                                       
+	                                        	<img src="img/product_img/${wish.product.productImagesList[0].pi_name}" alt="Product">
+		                                        </c:otherwise>
+	                                        </c:choose>  
+	                                        </c:when>
+	                                        <c:otherwise>                                                                                       
+	                                        	<img src="img/chat-img/logo_carrot.png" alt="Product_nothing">
+	                                        </c:otherwise>
+                                        </c:choose>  
                                             
                                             
                                             

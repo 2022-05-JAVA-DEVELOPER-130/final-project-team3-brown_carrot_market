@@ -29,6 +29,7 @@ public class WishListController {
 		List<WishList> wishList=wishListService.selectWishListAll(sUserId);
 		System.out.println(wishList);
 		model.addAttribute("wishList", wishList);
+		
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
