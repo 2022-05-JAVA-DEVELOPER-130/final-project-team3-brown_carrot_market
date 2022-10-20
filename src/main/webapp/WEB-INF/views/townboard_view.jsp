@@ -203,7 +203,8 @@
                 <div>
                  <ul class="bxslider">
 		       <c:forEach var="townImage" items="${townImageList}" begin="0"  step="1"> 
-		
+                 <c:if test="${townBoard.townImageList.size() != 0}">
+		 	   </c:if>
 		      	<li><img src="img/townBoard-img/${townImage.t_img_name}" alt="blog-img"  ></li>
 		 	   </c:forEach> 
       </ul>
