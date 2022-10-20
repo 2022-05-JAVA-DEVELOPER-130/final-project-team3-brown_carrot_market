@@ -22,7 +22,55 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/product.css">
 	
-
+	<!-- javascript -->
+	<script type="text/javascript">
+    function readURL(input) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+	      document.getElementById('preview').src = e.target.result;
+	    };
+	    reader.readAsDataURL(input.files[0]);
+	  } else {
+	    document.getElementById('preview').src = "";
+	  }
+	}
+    function readURL1(input) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+	      document.getElementById('preview1').src = e.target.result;
+	    };
+	    reader.readAsDataURL(input.files[0]);
+	  } else {
+	    document.getElementById('preview1').src = "";
+	  }
+	}
+    function readURL2(input) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+	      document.getElementById('preview2').src = e.target.result;
+	    };
+	    reader.readAsDataURL(input.files[0]);
+	  } else {
+	    document.getElementById('preview2').src = "";
+	  }
+	}
+    function readURL3(input) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+	      document.getElementById('preview3').src = e.target.result;
+	    };
+	    reader.readAsDataURL(input.files[0]);
+	  } else {
+	    document.getElementById('preview3').src = "";
+	  }
+	}
+    </script>   
+	
+	
 	
 	<!-- toast -->
  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
@@ -103,17 +151,90 @@
                                         </div>
                                     </div>
                                     <!-- 사진 넣기 임시 -->
-                                    <div>
                                     
-                                    <div class="col-xl-3">
-	                           
-	                       			 </div>
-                        			
+                        			<!--  
 									<span>사진1: <input type="file" name="files"></span> 
                                     <span>사진2: <input type="file" name="files"></span> 
                                     <span>사진3: <input type="file" name="files"></span> 
                                     <span>사진4: <input type="file" name="files"></span> 
+									-->
+									<div class="form-group" style="margin-left: 50px">
+                                   	
+                                   	<c:choose>
+                                   	<c:when test="${!empty product.productImagesList[0].pi_name}">
+                                   	<c:set var = "image_name" value = "${product.productImagesList[0].pi_name}"/>
+	                                <c:choose>
+									<c:when test="${fn:startsWith(image_name, 'http')}">
+                                   	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img id ="preview" src="${product.productImagesList[0].pi_name}" style="width:50px; height:50px;"/>
+                                    </c:when>
+									<c:otherwise>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img id ="preview" src="img/product_img/${product.productImagesList[0].pi_name}" style="width:50px; height:50px;"/>
+                                    </c:otherwise>
+									</c:choose>	
+									</c:when>
+									<c:otherwise>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img id ="preview" src="img/chat-img/logo_carrot.png" style="width:50px; height:50px;"/>
+									</c:otherwise>
+                                    </c:choose>
 									
+									<span><input type="file" onchange="readURL(this);" name="files" style="width: 80px"></span> 
+                                   	
+                                   	<c:choose>
+                                   	<c:when test="${!empty product.productImagesList[1].pi_name}">
+                                   	<c:set var = "image_name" value = "${product.productImagesList[1].pi_name}"/>
+	                                <c:choose>
+									<c:when test="${fn:startsWith(image_name, 'http')}">
+                                   	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img id ="preview1" src="${product.productImagesList[1].pi_name}" style="width:50px; height:50px;"/>
+                                    </c:when>
+									<c:otherwise>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img id ="preview1" src="img/product_img/${product.productImagesList[1].pi_name}" style="width:50px; height:50px;"/>
+                                    </c:otherwise>
+									</c:choose>	
+									</c:when>
+									<c:otherwise>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img id ="preview1" src="img/chat-img/logo_carrot.png" style="width:50px; height:50px;"/>
+									</c:otherwise>
+                                    </c:choose>
+                                    
+                                    <span><input type="file" name="files" onchange="readURL1(this);" style="width: 80px"></span> 
+                                   	
+                                   	<c:choose>
+                                   	<c:when test="${!empty product.productImagesList[2].pi_name}">
+                                   	<c:set var = "image_name" value = "${product.productImagesList[2].pi_name}"/>
+	                                <c:choose>
+									<c:when test="${fn:startsWith(image_name, 'http')}">
+                                   	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img id ="preview2" src="${product.productImagesList[2].pi_name}" style="width:50px; height:50px;"/>
+                                    </c:when>
+									<c:otherwise>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img id ="preview2" src="img/product_img/${product.productImagesList[2].pi_name}" style="width:50px; height:50px;"/>
+                                    </c:otherwise>
+									</c:choose>	
+									</c:when>
+									<c:otherwise>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img id ="preview2" src="img/chat-img/logo_carrot.png" style="width:50px; height:50px;"/>
+									</c:otherwise>
+                                    </c:choose>
+                                    
+                                    <span><input type="file" name="files" onchange="readURL2(this);" style="width: 80px"></span> 
+                                   	
+                                   	<c:choose>
+                                   	<c:when test="${!empty product.productImagesList[3].pi_name}">
+                                   	<c:set var = "image_name" value = "${product.productImagesList[3].pi_name}"/>
+	                                <c:choose>
+									<c:when test="${fn:startsWith(image_name, 'http')}">
+                                   	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img id ="preview3" src="${product.productImagesList[3].pi_name}" style="width:50px; height:50px;"/>
+                                    </c:when>
+									<c:otherwise>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img id ="preview3" src="img/product_img/${product.productImagesList[3].pi_name}" style="width:50px; height:50px;"/>
+                                    </c:otherwise>
+									</c:choose>	
+									</c:when>
+									<c:otherwise>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img id ="preview3" src="img/chat-img/logo_carrot.png" style="width:50px; height:50px;"/>
+									</c:otherwise>
+                                    </c:choose>
+									
+                                    <span><input type="file" name="files" onchange="readURL3(this);" style="width: 80px"></span> 
 									
 									</div>
 									<!-- 사진 넣기 임시 끝-->
@@ -285,3 +406,5 @@ content: "\f2b5";
 </body>
 
 </html>
+
+
