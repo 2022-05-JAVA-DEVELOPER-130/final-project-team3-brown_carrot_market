@@ -64,7 +64,7 @@
                     <h5>Contact</h5>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="main">흙당근마켓</a></li>
-                        <li class="breadcrumb-item"><a href="townBoard_list">동네 게시판</a></li>
+                        <li class="breadcrumb-item"><a href="townBoard_list">우리동네 게시판</a></li>
                         <li class="breadcrumb-item active">게시글 작성</li>
                     </ol>
                 </div>

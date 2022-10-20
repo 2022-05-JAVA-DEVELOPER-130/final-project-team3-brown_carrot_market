@@ -10,6 +10,27 @@
 function productList() {
    window.location.href='product_list';
 }
+
+$('#deleteProductBtn').click(function(e){
+	
+	e.preventDefault();
+	e.stopPropagation();
+	
+	$.ajax({
+		url:'deleteProduct',
+		method:'POST',
+		data:{
+			"p_no":$("#p_no").val()
+		},
+		dataType:"json",
+		success:function(result){
+			console.log("삭제 여부 :"+ result.data);
+			}
+	});
+});
+
+
+
 function productCreate() {
    if (document.product_write_form.p_title.value == "") {
       alert("제목을 입력하십시요.");
@@ -179,14 +200,10 @@ function changeProductList(pageno,p_ctgr_no){
                                         </div> 
 
                                         <!-- Wishlist -->
-                                        <div class="product_wishlist">
-                                            <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                                        </div>
+                                        
 
                                         <!-- Compare -->
-                                        <div class="product_compare">
-                                            <a href="compare.html"><i class="icofont-exchange"></i></a>
-                                        </div>
+                                        
                                     </div>`					}
                                     else{
 	                               htmlBuffer += ` <div class="product_image">
@@ -196,7 +213,7 @@ function changeProductList(pageno,p_ctgr_no){
 
                                         <!-- Product Badge -->
                                         `;
-                                             if(product.p_sell == 1){
+                                            if(product.p_sell == 1){
 											htmlBuffer += `<div class="product_badge">
                                             				<span>
 															판매중
@@ -219,14 +236,10 @@ function changeProductList(pageno,p_ctgr_no){
                                             
 
                                         <!-- Wishlist -->
-                                        <div class="product_wishlist">
-                                            <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                                        </div>
+                                        
 
                                         <!-- Compare -->
-                                        <div class="product_compare">
-                                            <a href="compare.html"><i class="icofont-exchange"></i></a>
-                                        </div>
+                                        
                                     </div>`
 	
 									}
@@ -234,18 +247,30 @@ function changeProductList(pageno,p_ctgr_no){
 					htmlBuffer += `
 	                        <div class="product_description">
                                         
-                                        <div class="product_add_to_cart">
-                                            <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
-                                        </div>
+                                       
 
-                                      
-                                        <div class="product_quick_view">
-                                            <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                                        </div> 
-
-                                       <p class="brand_name">Top</p>
+                                       <p class="brand_name">`;
+                          
+                          if(product.productCategory.p_ctgr_no == 1){
+							htmlBuffer += `가전제품`;
+							}else if(product.productCategory.p_ctgr_no == 2){
+							htmlBuffer += `가구`;	
+							}else if(product.productCategory.p_ctgr_no == 3){
+							htmlBuffer += `의류`;	
+												                     
+							}else if(product.productCategory.p_ctgr_no == 4){
+							htmlBuffer += `생활용품`;	
+												                     
+							}else if(product.productCategory.p_ctgr_no == 5){
+							htmlBuffer += `취미/게임/음반/도서`;	
+							}else if(product.productCategory.p_ctgr_no == 6){
+							htmlBuffer += `기타`;	
+						}                     
+                                       
+                                       
+                         htmlBuffer += `</p>
                                        <a href="product_detail?p_no=${product.p_no}" p_no="${product.p_no}">${product.p_title}</a>
-										<h6 class="product-price">가격: ${product.p_price}</h6>
+										<h6 class="product-price">가격: ${product.p_price} 원</h6>
 										<p class="product-short-desc">${product.p_address_name}</p>
                                         <p class="product-short-desc">${product.p_desc}</p>
                                     </div>
