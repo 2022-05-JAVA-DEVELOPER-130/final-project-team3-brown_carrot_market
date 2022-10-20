@@ -1295,6 +1295,14 @@ function chatRoomListNew(list){
 	if(list.c_content.startsWith("@@image!#")){
 		list_content="사진 전송";
 	}
+	
+		if(list.p_img.startsWith('http')){
+			list.p_img= list.p_img;
+		}else{
+			list.p_img= 'img/product_img/'+list.p_img;
+		}
+	
+	
 	return `        <li class="clearfix">
                         <img src='img/user_profile/${list.you_image}' alt="avatar"><img src="img/product_img/${list.p_img}" style="float:right; width:45px; height:45px; border-radius: 0%">
                        
