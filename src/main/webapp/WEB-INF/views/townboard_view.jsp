@@ -260,7 +260,7 @@
                                             </div>
                                         </div>
                                         <div class="comment-content">
-                                            <h5 class="comment-author"><a href="#">${townReply.userInfo.user_id}</a></h5>
+                                            <h5 class="comment-author" id="viewReplyWriterId_${status.index}">${townReply.userInfo.user_id}</h5>
                                             <p>${townReply.t_reply_title }</p>
                                             <p>${townReply.t_reply_content }</p>
                                             <input class="townReply delete" type="button" pageno="${pageno}" t_no="${townBoard.t_no }" t_reply_no="${townReply.t_reply_no}" value="삭제하기" />
@@ -309,7 +309,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="comment-content">
-		                                            <h5 class="comment-author"><a href="#">${townReply.userInfo.user_id}</a></h5>
+		                                            <h5 class="comment-author" id="viewReReplyWriterId_${status.index }">${townReply.userInfo.user_id}</h5>
 		                                            <p>${townReply.t_reply_title }</p>
 		                                            <p>${townReply.t_reply_content }</p>
 		                                            <input class="townReply delete" type="button" pageno="${pageno}" t_no="${townBoard.t_no }" t_reply_no="${townReply.t_reply_no}" value="삭제하기" />
