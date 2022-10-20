@@ -22,6 +22,7 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/product.css">
 	
 	<!-- toast -->
 	<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
@@ -255,8 +256,8 @@
                         	<!--  
                             <a class="add_to_wishlist" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 찜하기</a>
                             -->
-                           <a class="" href="product_modify_form?p_no=${product.p_no}" p_no="${product.p_no}" id="product_modify_form"><i class="fa fa-th" aria-hidden="true"></i> 수정하기</a>
-                            <a class="share_with_friend" href="product_delete_action"><i class="fa fa-share" aria-hidden="true"></i> 삭제하기</a>
+                           <a class="" href="product_modify_form?p_no=${product.p_no}" p_no="${product.p_no}" id="product_modify_form"><i class="fa fa-pencil" aria-hidden="true"></i> 수정하기</a>
+                            <a class="share_with_friend" href="product_delete_action"><i class="fa fa-close" aria-hidden="true"></i> 삭제하기</a>
                         </div>
 
                         <!-- Size Guide -->
@@ -315,19 +316,27 @@
 										</c:otherwise>
 										</c:choose>
                                 <!-- Product Badge -->
-                                <div class="product_badge">
-                                    <span>
-                                     <c:if test="${product.p_sell eq 1}">
+                                <c:if test="${product.p_sell eq 1}">
+                                        				<div class="product_badge">
+                                            			<span>
 		                                        		<c:out value="판매중"></c:out>
+                                            			</span>
+                                            			</div>
 		                                        	</c:if>
 		                                        	<c:if test="${product.p_sell eq 2}">
+		                                        		<div class="product_badge1">
+                                            			<span>
 		                                        		<c:out value="예약중"></c:out>
+                                            			</span>
+                                            			</div>
 		                                        	</c:if>
 		                                        	<c:if test="${product.p_sell eq 3}">
+		                                        		<div class="product_badge2">
+                                            			<span>
 		                                        		<c:out value="판매완료"></c:out>
+                                            			</span>
+                                            			</div>
 		                                        	</c:if>
-                                    </span>
-                                </div>
 
                                 <!-- Wishlist -->
                                

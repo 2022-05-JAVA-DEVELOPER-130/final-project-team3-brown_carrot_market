@@ -32,6 +32,7 @@
 </head>
 
 <body>
+  
     <!-- Preloader -->
     <div id="preloader">
         <div class="spinner-grow" role="status">
@@ -793,6 +794,9 @@
 	 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
 
 <style type="text/css">
+
+
+
 #toast-container > .toast {
     background-image: none !important;
 }

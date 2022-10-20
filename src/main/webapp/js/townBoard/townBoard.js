@@ -457,18 +457,20 @@ $(".townReply.delete").on("click", function(){
 });
 
 
-/*
-index=$(e.target).attr("index");
-*/
+
 /*
 댓글 토글2
 */
+/** 게시글의 수정버튼, 삭제버튼 **/
 $(document).ready(function() {
   $(".content").hide();
   var loginId=sessionStorage.getItem('sUserId');
   var writeId=$('#viewWriterId').text();
+  index=$(this).attr("index");
+  var replyWriteId=$('#viewReplyWriterId_'+index).text();
+  var rereplyWriteId=$('#viewReReplyWriterId_'+index).text();
   
-
+/* 게시글 삭제 수정버튼 */
   if(loginId==writeId){
   console.log("같은 작성자")
 	$('.townBoard_btn.update_form').show();
@@ -480,18 +482,78 @@ $(document).ready(function() {
 	$('.townBoard_btn.delete').hide();
 }
 
-	
 
- 
+/* 댓글의 삭제버튼 */
+  if(loginId==replyWriteId){
+  console.log("같은 작성자")
+	$('.townReply.delete.reply').show();
+	
+}else if(loginId!=replyWriteId){
+	console.log("다른 작성자")
+	$('.townReply.delete.reply').hide();
+}
+
+/* 대댓글의 삭제버튼 */
+  if(loginId==rereplyWriteId){
+  console.log("같은 작성자")
+	$('.townReply.delete.rereply').show();
+	
+}else if(loginId!=rereplyWriteId){
+	console.log("다른 작성자")
+	$('.townReply.delete.rereply').hide();
+}
+
+
 
   $(".heading").click(function()
   {
     $(this).next(".content").slideToggle(500);
   });
 });
+/**************** */
+
+
+/*
+$(document).ready(function() {
+  var loginId=sessionStorage.getItem('sUserId');
+  index=$(this).attr("index");
+  var replyWriteId=$('#viewReplyWriterId_'+index).text();
+
+
+/* 댓글의 삭제버튼 
+  if(loginId==replyWriteId){
+  console.log("같은 작성자")
+	$('.townReply.delete').show();
+	
+}else{
+	console.log("다른 작성자")
+	$('.townReply.delete').hide();
+}
 
 
 
+});
+
+$(document).ready(function() {
+  var loginId=sessionStorage.getItem('sUserId');
+  index=$(this).attr("index");
+  var rereplyWriteId=$('#viewReReplyWriterId_'+index).text();
+
+
+/* 대댓글의 삭제버튼 
+  if(loginId==rereplyWriteId){
+  console.log("같은 작성자")
+	$('.townReply.delete').show();
+	
+}else{
+	console.log("다른 작성자")
+	$('.children>.townReply.delete').hide();
+}
+
+
+
+});
+*/
 
 /*
 ckeditor
