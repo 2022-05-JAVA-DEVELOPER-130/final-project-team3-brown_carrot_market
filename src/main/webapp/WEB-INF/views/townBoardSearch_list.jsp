@@ -115,9 +115,9 @@
                     
                     <!-- Search Post -->
                         <div class="widget-area search_post mb-30">
-                            <h6>Search Post</h6>
+                            <h6>게시글 검색</h6>
                             <form action="#" method="get">
-                                <input type="search" class="form-control" id="townBoardSearch" placeholder="Enter Keyword...">
+                                <input type="search" class="form-control" id="townBoardSearch" placeholder="검색">
                                 <button type="submit" class="btn d-none">Submit</button>
                             </form>
                         </div>

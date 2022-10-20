@@ -856,6 +856,7 @@ on o.ORDERS_NO=t.ORDERS_NO;
 
 -- [notice]
 --일반글
+desc notice;
 insert into notice values(NOTICE_NOTICE_NO_SEQ.nextval, '흙당근마켓 이벤트', '오픈기념 10% 자동 할인 이벤트', sysdate,0,0);
 insert into notice values(NOTICE_NOTICE_NO_SEQ.nextval, '포인트 10%추가 지급 이벤트', '오픈기념 10% 자동 할인 이벤트', sysdate,0,0);
 insert into notice values(NOTICE_NOTICE_NO_SEQ.nextval, '흙당근마켓 홈페이지 서버점검 안내', '오픈기념 10% 자동 할인 이벤트', sysdate,0,0);

@@ -60,6 +60,7 @@
 	from product p) p 
 	on img.p_no=p.p_no)plist
 	on pmg.pi_no=plist.imgno)sss
+	where p_sell = 1 or p_sell=2
 	order by p_date desc)f) fff
 	where fff.idx1<![CDATA[ >= ]]> #{pageStart} and fff.idx1<![CDATA[ <= ]]> #{pageEnd}
 	
@@ -75,6 +76,7 @@
 	from product p)p 
 	on img.p_no=p.p_no)plist
 	on pmg.pi_no=plist.imgno
+	where p_sell = 1 or p_sell=2
 	</select>
 	
 	
@@ -103,6 +105,7 @@
 		join p_category pc
 		on ctlist.p_ctgr_no = pc.p_ctgr_no where pc.p_ctgr_no=#{p_ctgr_no})s
 		)ss
+		where p_sell = 1 or p_sell=2
 		order by p_date desc)f)fff
 		where fff.idx1 <![CDATA[ >= ]]> #{pageStart} and fff.idx1 <![CDATA[ <= ]]> #{pageEnd}
 	</select>
@@ -118,6 +121,7 @@
 		on pmg.pi_no=plist.imgno) ctlist
 		join p_category pc
 		on ctlist.p_ctgr_no = pc.p_ctgr_no where pc.p_ctgr_no=#{p_ctgr_no})
+	    where p_sell = 1 or p_sell=2
 	</select>
 	
 	<!-- 로그인한 회원 범위안 상품 리스트 불러오기
@@ -149,6 +153,7 @@
             )p 
             on img.p_no=p.p_no)plist
             on pmg.pi_no=plist.imgno)sss
+            where p_sell = 1 or p_sell=2
             order by sss.p_date desc)f)fff
             where fff.idx1<![CDATA[ >= ]]> #{pageStart} and fff.idx1<![CDATA[ <= ]]> #{pageEnd}
               
@@ -168,6 +173,7 @@
             )p 
             on img.p_no=p.p_no)plist
             on pmg.pi_no=plist.imgno
+            where p_sell = 1 or p_sell=2
            
 	</select>
 	
@@ -201,6 +207,7 @@
                     )p 
                     on img.p_no=p.p_no)plist
                     on pmg.pi_no=plist.imgno)sss
+                    where p_sell = 1 or p_sell=2
                     order by p_date desc) f) fff
 	 where fff.idx1 <![CDATA[ >= ]]> #{pageStart} and fff.idx1 <![CDATA[ <= ]]> #{pageEnd}
 	 </select>
@@ -220,6 +227,7 @@
                     on img.p_no=p.p_no)plist
                     on pmg.pi_no=plist.imgno)sss
 							where 1=1
+							and p_sell = 1 or p_sell=2
 							order by sss.p_date desc)
 	</select>
 	
