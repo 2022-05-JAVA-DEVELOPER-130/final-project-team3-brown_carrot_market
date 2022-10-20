@@ -69,8 +69,11 @@ public class ProductController {
 		//String forwardPath ="";
 		
 		Product product = productService.selectByOne(p_no);
+		List<Product> userProductList = productService.selectByUserId(product.getUserInfo().getUser_id()); 
 		System.out.println(product);
 		model.addAttribute("product", product);
+		model.addAttribute("userProductList", userProductList);
+		
 		
 		if(sUserId == null || sUserId.equals("")) {
 			return "product_detail";
