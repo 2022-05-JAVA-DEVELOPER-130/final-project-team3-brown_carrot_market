@@ -68,9 +68,12 @@ public class ProductController {
 		Address sAddress = (Address)session.getAttribute("sAddress");
 		//String forwardPath ="";
 		Product product = productService.selectByOne(p_no);
-		String user_id = product.getUserInfo().getUser_id();
 		System.out.println(product);
+		
+		String user_id = product.getUserInfo().getUser_id();
 		List<Product> userProductList = productService.selectByUserId(user_id); 
+		System.out.println("userProductList :" + userProductList);
+		
 		model.addAttribute("product", product);
 		model.addAttribute("userProductList", userProductList);
 		
@@ -78,7 +81,7 @@ public class ProductController {
 		if(sUserId == null || sUserId.equals("")) {
 			System.out.println("user_id:"+user_id);
 			return "product_detail";
-		}else if(sUserId.equals(user_id)) {
+		}else if(sUserId.equals(product.getUserInfo().getUser_id())) {
 			model.addAttribute("address",sAddress);
 			return "product_login_detail";
 		}else {
