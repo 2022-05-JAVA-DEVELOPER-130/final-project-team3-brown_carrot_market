@@ -84,16 +84,7 @@ color = orange;
 			<a href="/brown_carrot_market/payment_withdraw"><i class="icofont-check-circled"></i> 페이 출금</a>
 		</div>
 	</div>
-	<div>
-		<select id="point_select" name="point_select">
-			<option value="1">10000</option>
-			<option value="2">50000</option>
-			<option value="3">100000</option>
-			<option value="4">직접입력</option>
-		</select>
-
-		<input type="text" id="point_select_input" name="point_select_input"/>
-	</div>
+	
 	    <!-- Shortcodes Area -->
     <div class="shortcodes_area section_padding_100">
         <div class="container">
@@ -105,9 +96,17 @@ color = orange;
                     ++++++++++ -->
                     <div class="shortcodes_content mb-100">
                         <blockquote class="bigshop-blockquote mb-0 bl-10">
-                            <h3>Bigshop is smart &amp; elegant e-commerce HTML5 Template. It's suitable for all e-commerce business platform.</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nulla eveniet, harum numquam laboriosam hic totam. Perferendis doloremque, sit neque! Aut aliquam, at temporibus a, harum facere delectus et. Sapiente, laboriosam esse asperiores. Quas eius mollitia inventore odio ad ipsa, magnam quod.</p>
-                            <button class="btn btn-primary" onclick="requestPay()">충전하기</button>
+                            <h3>흙당근페이 포인트 충전</h3>
+                            <br>
+                            	<div>충전 할 포인트 : </div>
+								<select id="point_select" name="point_select">
+									<option value="1">10000</option>
+									<option value="2">50000</option>
+									<option value="3">100000</option>
+									<option value="4">직접입력</option>
+								</select>
+								<input type="text" id="point_select_input" name="point_select_input"/>
+                            	<button class="btn btn-primary" onclick="requestPay()">충전하기</button>
                         </blockquote>
                     </div>
                     <!-- +++++++++
@@ -138,7 +137,6 @@ color = orange;
 		
 		var IMP = window.IMP; // 생략 가능
 		IMP.init("imp41236885"); // 예: imp00000000
-		var selectValue = document.getElementById('#point_select option:selected').text();
 		function requestPay() {
 			// IMP.request_pay(param, callback) 결제창 호출
 			IMP.request_pay({ // param(결제에대한 정보)

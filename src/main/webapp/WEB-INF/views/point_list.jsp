@@ -95,21 +95,21 @@
 	                                        <td>${transfer.transfer_withdraw}</td>
 	                                        <td>${transfer.t_balance}</td>
 	                                        <td>
-	                                        	<c:choose>	
-	                                        		<c:when test="${transfer.orders.orders_no > 0}">
-		                                        		<c:choose>
-		                                        			<c:when test="${transfer.transfer_deposit == 0}">
-		                                        				송금
-		                                        			</c:when>
-		                                        			<c:otherwise>
-																입금	                                        				
-		                                        			</c:otherwise>
-		                                        		</c:choose>
-		                                      	  </c:when>
-		                                        <c:otherwise>
-													포인트 충전                                        				
-	                                        	</c:otherwise>
-	                                        	</c:choose>
+	                                        	<c:choose>
+ 	                                        		<c:when test="${transfer.orders.orders_no > 0}">
+	 	                                        		<c:choose>
+	 	                                        			<c:when test="${transfer.transfer_deposit == 0}">
+	 	                                        				송금
+	 	                                        			</c:when>
+	 	                                        			<c:otherwise>
+	 															입금	                                        				
+	 	                                        			</c:otherwise>
+	 	                                        		</c:choose>
+ 	                                        		</c:when>
+	 	                                        	<c:otherwise>
+	 														포인트 충전                                        				
+	 	                                        	</c:otherwise>
+ 	                                        	</c:choose>
 	                                        </td>
 	                                    </tr>
                                    </c:forEach> 
