@@ -259,6 +259,10 @@ insert into address values(address_address_no_seq.nextval, '서울시 용산구 
 insert into address values(address_address_no_seq.nextval, '서울특별시 강남구 역삼동',37.50082663,127.0366527,10,'carrot');
 insert into address values(address_address_no_seq.nextval, '서울특별시 강남구 논현동',37.50724256,127.0340772,0,'carrot');
 
+insert into address values(address_address_no_seq.nextval, '서울시 강남구 신사동',37.52699406049722,127.02839571994011,10,'rabbit');
+insert into address values(address_address_no_seq.nextval, '서울시 강남구 대치동',37.49630607650809,127.07079061117966,0,'rabbit');
+
+
 /* [p_category] ******************/
 insert into p_category(p_ctgr_no, p_ctgr_name) values(p_category_p_ctgr_no_SEQ.nextval, '가전제품');
 insert into p_category(p_ctgr_no, p_ctgr_name) values(p_category_p_ctgr_no_SEQ.nextval, '가구/인테리어');
