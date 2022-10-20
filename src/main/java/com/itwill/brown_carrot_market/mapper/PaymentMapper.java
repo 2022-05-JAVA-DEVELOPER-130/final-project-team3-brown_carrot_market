@@ -8,7 +8,9 @@ import com.itwill.brown_carrot_market.dto.Payment;
 @Mapper
 public interface PaymentMapper {
 	
-	int insertPayment(Payment payment);
+	int insertPayment_Deposit(Payment payment);
+	
+	int insertPayment_Withdraw(Payment payment);
 	
 	List<Payment> selectPaymentById(String user_id);
 }

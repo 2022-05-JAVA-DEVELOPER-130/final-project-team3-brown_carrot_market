@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>송금취소</title>
+<title></title>
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
@@ -23,17 +23,17 @@
 <script type="text/javascript">
 		
 	
-	$(document).on('click','#TransferCancel_Submit',function(e){
-		var action = confirm("정말 송금 하시겠습니까?");
+	/* $(document).on('click','#TransferSubmit',function(e){
+		var action = confirm("정말 송금하시겠습니까?");
 		if(action){
-			location.href="transfer_cancel_action?p_no="+${product.p_no}
+			location.href="transfer_action?p_no="+${product.p_no}
 		}else {
 			alert("송금을 취소하셨습니다.");
 		}
 		
-	});
+	}); */
 	
-	$(document).on('click','#TransferCancel_Cancel',function(e){
+	$(document).on('click','#btn-close',function(e){
 		window.close();
 	});
 	</script>
@@ -44,20 +44,20 @@
 <body>
    <img src="img/core-img/logo.png" alt="logo">
 <hr>
-<br><br><br><br>
-	<h1></h1>
+<br>
 	<div>
-	<h1>송금 취소</h1>
-		<h3 class="orderid mb-0"> 구매자 ${"?"}님이 송금하신 ${product.p_price} 포인트를 송금 취소처리 합니다.</h3>
+		<h1>포인트 충전 성공</h1>
+		<h3>포인트 충전을 성공하였습니다.</h3>
 		<br>
 		<hr>
-		<br>
+		<br><br>
+		<h4>충전 포인트 : <label>${payment_amount} 포인트</label></h4>
+		<br><br>
+		<h4>현재 포인트 잔액 : <label>${userInfo.user_point} 포인트</label></h4>
 	</div>
-	<%-- <div>
-		<label>상 품 명</label>
-			${product.p_title}
+	<div>
 	</div>
-	<br>
+<%-- 	<br>
   	<br>
 	<div>
 		<label>판매자 ID</label> 
@@ -66,7 +66,7 @@
   	<br>
   	<br>
 	<div>
-		<label>상품 가격</label> 
+		<label>구매 상품 금액</label> 
 			${product.p_price}
 	</div> --%>
 <br>
@@ -80,32 +80,12 @@
 	<br>
 	<br>
 		<div>
-			<button type="button" id="TransferCancel_Submit">송금취소</button>
-			<button type="button" id="TransferCancel_Cancel">닫기</button>
+			<button type="button" id="btn-close">팝업 닫기</button>
 		</div>
 	<style type="text/css">
 	
-	#TransferCancel_Submit{
-	position: fixed;
-    left: 0;
-    bottom: 0;
-    margin: 1 auto;
-    width: 45%;
-    height: 44px;
-    display:block;
-    /* text-align: center; */
-    /* position: relative; */
-    border-radius: 8px;
-    background-color: orange;
-    border-color: orange;
-    cursor: pointer;
-    color: white;
-    border: 1px solid;
-    font-weight: 700;
-    font-size: 14pt;
-    padding: 0 px;
-	}
-	#TransferCancel_Cancel{
+	
+	#btn-close{
 	position: fixed;
     right: 0;
     bottom: 0;
@@ -118,7 +98,7 @@
     border-radius: 8px;
     background-color: orange;
     border-color: orange;
-    cursor: pointer; 
+    cursor: pointer;
     color: white;
     border: 1px solid;
     font-weight: 700;
@@ -126,13 +106,8 @@
     padding: 0 px;
 	}
 	
-	#TransferCancel_Submit:hover{
-	color:orange;
-	 background-color:white;
-	 border-color:orange;
-	 border: 2px solid ;
 	}
-	#TransferCancel_Cancel:hover{
+	#btn-close:hover{
 	color:orange;
 	 background-color:white;
 	 border-color:orange;
@@ -168,9 +143,8 @@
 	}
 	
 	label{
-	    font-size: 15px;
+	font-size: 15px;
     font-weight: normal;
-    margin-left: 40px;
     color: #7f3808;
     text-decoration: underline;
     text-decoration-color: orange;
@@ -247,105 +221,3 @@
 	}
 </body>
 </html>
-<%-- <!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<style>
-#pop {
-	position: absolute;
-	z-index: 1;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	display: none;
-}
-#pop>article {
-	width: 700px;
-	height: 400px;
-	position: relative;
-	z-index: 2;
-	background: white;
-	box-shadow: 3px 3px 5px black;
-	margin: auto;
-	cursor: pointer;
-	text-align: center;
-}
-.black {
-	background: rgba(0, 0, 0, 0.6);
-} */
-#chatAppFinalSubmit{
-	position: fixed;
-    left: 0;
-    bottom: 0;
-    margin: 0 auto;
-    width: 100%;
-    height: 44px;
-    display: block;
-    /* text-align: center; */
-    /* position: relative; */
-    border-radius: 8px;
-    background-color: orange;
-    border-color: orange;
-    cursor: pointer;
-    color: white;
-    border: 1px solid;
-    font-weight: 700;
-    font-size: 14pt;
-    padding: 0 24px;
-	}
-	
-	#chatAppFinalSubmit:hover{
-	color:orange;
-	 background-color:white;
-	 border-color:orange;
-	 border: 2px solid ;
-	}
-	
-	hr{
-color:orange;
-border:1px solid orange;
- }
-</style>
-	<script>
-	$(document).ready(function() {
-		$("#list>button:first-of-type").click(function() {
-			$("#pop").fadeIn();
-			$("#pop").addClass("black");
-		});
-	});
-	$(document).ready(function() {
-		$("#list>button:last-of-type").click(function() {
-			location.href="main";
-		});
-	});
-	</script>
-	<script type="text/javascript">
-	function moveComplate() {
-	  location.href="transfer_complate";
-	  self.close();
-	}
-	</script>
-	<script type="text/javascript">
-	function moveClose() {
-	  location.href="transfer_page";
-	  self.close();
-	}
-	</script>
-</head>
-<body>
- <div id="pop">
-			<article>
-				<h1>결제</h1>
-				<input type="button" value="송금" onclick="moveComplate();" />
-				<input type="button" value="취소" onclick="moveClose();" />
-			</article>
-		</div>
-	<section id="list">
-		<button>송금</button>
-		<button>메인으로</button>
-	</section>
-</body>
-</html> --%>
