@@ -162,7 +162,7 @@ public class ProductRestController {
 			code = productService.updateProduct(map);
 			if(code==1) message="product_write 성공";
 			System.out.println(">>>modify product"+map);
-			url = "redirect:product_detail?p_no=" + p_no;
+			url = "product_detail?p_no=" + p_no;
 			
 			resultMap.put("code", code);
 			resultMap.put("url", url);

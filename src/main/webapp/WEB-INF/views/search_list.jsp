@@ -120,10 +120,11 @@
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
-                    <h5>Shop List</h5>
+                    <h5>상품 검색 목록</h5>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active">Shop List</li>
+                    <li>" ${param.search_keyword} " 으로 검색된 결과</li>
+                       <!--  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active">Shop List</li> -->
                     </ol>
                 </div>
             </div>

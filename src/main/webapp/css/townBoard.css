@@ -236,7 +236,7 @@ li{
 	width: 500px;
 	margin-bottom: 50px;
 }
-
+/*
 .form-group span input{
 	background-color: orange;
 	border-radius: 8px;
@@ -250,6 +250,7 @@ li{
 	width: 100px;
 	font-weight: 700;
 }
+*/
 #t_content{
 	margin-top: 10px;
 	margin-bottom:30px;
@@ -261,7 +262,12 @@ li{
 	margin-bottom: 30px;
 }
 
-.town_pic_upload {
+.form-group span{
+	margin-left: 30px;
+}
+
+/*
+ .town_pic_upload {
     width: 100px;
     background: white;
     border: 2px solid orange;
@@ -285,7 +291,7 @@ li{
 
 #img_choose {
     display: none;
-}
+} */
 /*
 #img_choose>#file_upload_button{
 	display: none;
