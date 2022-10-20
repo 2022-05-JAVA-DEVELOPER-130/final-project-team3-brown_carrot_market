@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="">
@@ -19,8 +19,194 @@
 <!-- Style CSS -->
 <link rel="stylesheet" href="style.css">
 
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!-- <script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+<!-- toaster -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+
+</head>
+
+<body>
+	<!-- Preloader -->
+	<div id="preloader">
+		<div class="spinner-grow" role="status">
+			<span class="sr-only">Loading...</span>
+		</div>
+	</div>
+
+	<!-- Header Area -->
+	<!-- include_common_bottom.jsp start-->
+	<jsp:include page="common/include_common_header.jsp" />
+	<!-- include_common_bottom.jsp end-->
+	<!-- Header Area End -->
+
+	<!-- Breadcumb Area -->
+	<div class="breadcumb_area">
+		<div class="container h-100">
+			<div class="row h-100 align-items-center">
+				<div class="col-12">
+					<h5>로그인 &amp; 회원가입</h5>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="main">메인</a></li>
+						<li class="breadcrumb-item active">로그인 &amp; 회원가입</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Breadcumb Area -->
+
+	<!-- START!! **************************************************************** -->
+	<!-- Login Area -->
+	<div class="bigshop_reg_log_area section_padding_100_50">
+		<div class="container">
+			<div class="row">
+				<!-- LOGIN ***************************** -->
+				<div class="col-12 col-md-6">
+					<div class="login_form mb-50">
+						<h5 class="mb-3">로그인</h5>
+						<font color="red" id="msg1">${msg1}</font> <font color="red"
+							id="msg2">${msg2}</font>
+
+						<form id="user_login_form" action="user_login_action"
+							method="post">
+							<div class="form-group">
+								<!-- <input type="email" class="form-control" id="username" placeholder="Email or Username"> -->
+								<input class="form-control" id="login_user_id" name="user_id"
+									value="${loginUser.user_id}" placeholder="아이디">
+							</div>
+							<div class="form-group">
+								<input type="password" class="form-control" id="login_user_pw"
+									name="user_pw" value="${loginUser.user_pw}" placeholder="비밀번호">
+							</div>
+							<div class="form-check">
+								<!-- 이것은 어떻게 구현하는 것인가.....  -->
+								<div class="custom-control custom-checkbox mb-3 pl-1">
+									<input type="checkbox" class="custom-control-input"
+										id="customChe"> <label class="custom-control-label"
+										for="customChe">아이디 저장</label>
+								</div>
+							</div>
+							<!-- <button type="submit" class="btn btn-primary btn-sm btn_user_login_action" >Login</button> -->
+							<!-- <input id="btn_user_login_action" type="button" value="로그인"> &nbsp; -->
+							<input type="button" id="btn_user_login_action"
+								style="width: 222px; height: 54px; font-size: 1rem;"
+								class="btn btn-primary btn-sm" value="로그인">
+						</form>
+						<!-- Forget Password -->
+						<div class="forget_pass mt-15">
+							<i class="icofont-lock"></i> <a href="user_find_idpw" id="findIdPw">아이디 / 비밀번호 찾기</a>
+						</div>
+						<hr>
+						<br>
+						<div>
+							<!-- <a id="kakao-login-btn" href="javascript:loginWithKakao()"> width="222"-->
+							<a id="kakao-login-btn" href="javascript:loginWithKakao()"> <img
+								src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
+								width="222" alt="카카오 로그인 버튼" />
+							</a>
+							<p id="token-result"></p>
+						</div>
+					</div>
+				</div>
+
+				<!-- REGISTER ***************************** -->
+
+				<div class="col-12 col-md-6">
+					<div class="login_form mb-50">
+						<h5 class="mb-3">회원가입</h5>
+						<font color="red" id="msg3"></font>
+
+						<form id="user_write_form" action="my-account.html" method="post">
+							<div class="form-group">
+								<input type="text" class="form-control" id="user_id"
+									name="user_id" value="${fuser.user_id}" placeholder="아이디">
+							</div>
+							<div class="form-group">
+								<input type="password" class="form-control" id="user_pw"
+									name="user_pw" value="${fuser.user_pw}" placeholder="비밀번호">
+							</div>
+							<div class="form-group">
+								<input type="password" class="form-control" id="user_pw2"
+									name="user_pw2" value="${fuser.user_pw}" placeholder="비밀번호 확인">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" id="user_name"
+									name="user_name" value="${fuser.user_name}" placeholder="이름">
+							</div>
+							<div class="form-group">
+								<input type="email" class="form-control" id="user_email"
+									name="user_email" value="${fuser.user_email}"
+									placeholder="이메일주소">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control phone_number"
+									id="user_phone" name="user_phone" value="${fuser.user_phone}"
+									placeholder="핸드폰번호">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" id="address_name"
+									name="address_name" value=""
+									placeholder="위치접근을 '허용'해주세요. 나중에 입력가능" readonly>
+							</div>
+							<div class="form-group">
+								<input type="hidden" class="form-control" id="address_lat"
+									name="address_lat" value="0.0" placeholder="위도">
+							</div>
+							<div class="form-group">
+								<input type="hidden" class="form-control" id="address_lng"
+									name="address_lng" value="0.0" placeholder="경도">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" id="invi_email"
+									name="invi_email" value="" placeholder="초대코드">
+							</div>
+							<!-- <input type="button" id="btn_user_write_action"
+								class="btn btn-primary btn-sm" value="회원가입"> -->
+							<input type="button" id="btn_user_write_action"
+								style="width: 222px; height: 54px; font-size: 1rem;"
+								class="btn btn-primary btn-sm" value="회원가입">
+						</form>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+	<!-- Login Area End -->
+	<!-- END!! **************************************************************** -->
+
+	<!-- Footer Area -->
+	<!-- include_common_bottom.jsp start-->
+	<jsp:include page="common/include_common_footer.jsp" />
+	<!-- include_common_bottom.jsp end-->
+	<!-- Footer Area -->
+
+
+
+
+
+	<!-- jQuery (Necessary for All JavaScript Plugins) -->
+	<script src="js/jquery.min.js"></script>
+<!-- 	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script> -->
+	<script src="js/jquery.easing.min.js"></script>
+	<script src="js/default/classy-nav.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/default/scrollup.js"></script>
+	<script src="js/waypoints.min.js"></script>
+	<script src="js/jquery.countdown.min.js"></script>
+	<script src="js/jquery.counterup.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<!-- <script src="js/jarallax.min.js"></script>
+	<script src="js/jarallax-video.min.js"></script> -->
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/jquery.nice-select.min.js"></script>
+	<script src="js/wow.min.js"></script>
+	<script src="js/default/active.js"></script>
+
+
 <!-- 회원가입 Validate -->
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
@@ -34,9 +220,13 @@
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js"
 	integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL"
 	crossorigin="anonymous"></script>
+	
+<!-- toastr -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 <script type="text/javascript">
 	$(function() {
+		toastr.options.positionClass = "toast-top-right";
 		/* validator객체변수선언 */
 		var validator = null;
 		var validator2 = validator;
@@ -253,10 +443,16 @@
 					success : function(jsonResult) {
 						if (jsonResult.code == 0) {
 							console.log(jsonResult);
-							$('#msg1').html(jsonResult.msg);
+							//$('#msg1').html(jsonResult.msg);
+							
+							//toastr.options.positionClass = "toast-top-right";
+						      toastr['warning'](jsonResult.msg);
+							
 						} else if (jsonResult.code == 1) {
-							console.log(jsonResult);
-							$('#msg2').html(jsonResult.msg);
+							//console.log(jsonResult);
+							//toastr.options.positionClass = "toast-top-right";
+						      toastr['warning'](jsonResult.msg);
+							//$('#msg2').html(jsonResult.msg);
 						} else if (jsonResult.code == 2) {
 							var referrer = document.referrer;
 
@@ -289,24 +485,29 @@
 					if (jsonResult.code == 1) {
 						//회원가입 부분 clear
 						$('#user_write_form')[0].reset();
-						$('#msg1').html("회원가입성공! 로그인해보세요!");
+						
+				      	toastr['success']("회원가입성공! 로그인해보세요!");
+						//$('#msg1').html("회원가입성공! 로그인해보세요!");
 						$("#login_user_id").focus();
 						//console.log(">>>>>>> 성공!!:"+jsonResult.msg);
 					} else if (jsonResult.code == 0) {
 						//console.log(">>>>>>> 아이디중복!!:"+jsonResult.msg);
-						$('#msg3').html(jsonResult.msg);
+						//$('#msg3').html(jsonResult.msg);
+						toastr['error'](jsonResult.msg);
 					} else if (jsonResult.code == 2) {
 						//console.log(">>>>>>> 포인트적립!!:"+jsonResult.msg);
 						$('#user_write_form')[0].reset();
-						$('#msg3').html(jsonResult.msg);
+						//$('#msg3').html(jsonResult.msg);
+						toastr.success(jsonResult.msg+' 500point가 적립되었습니다.');
 						$("#login_user_id").focus();
-						alert('500point가 적립되었습니다.');
+						//alert('500point가 적립되었습니다.');
 					} else if (jsonResult.code == 3) {
 						//console.log(">>>>>>> 포인트적립!!:"+jsonResult.msg);
 						$('#user_write_form')[0].reset();
-						$('#msg3').html(jsonResult.msg);
 						$("#login_user_id").focus();
-						alert('회원가입 성공. 존재하지않는 추천코드입니다.');
+						toastr.success('회원가입 성공. 존재하지않는 추천코드입니다.');
+						//$('#msg3').html(jsonResult.msg);
+						//alert('회원가입 성공. 존재하지않는 추천코드입니다.');
 					}
 					console.log(jsonResult);
 				}
@@ -324,187 +525,9 @@
 	});
 	/*************************************************/
 </script>
-</head>
-
-<body>
-	<!-- Preloader -->
-	<div id="preloader">
-		<div class="spinner-grow" role="status">
-			<span class="sr-only">Loading...</span>
-		</div>
-	</div>
-
-	<!-- Header Area -->
-	<!-- include_common_bottom.jsp start-->
-	<jsp:include page="common/include_common_header.jsp" />
-	<!-- include_common_bottom.jsp end-->
-	<!-- Header Area End -->
-
-	<!-- Breadcumb Area -->
-	<div class="breadcumb_area">
-		<div class="container h-100">
-			<div class="row h-100 align-items-center">
-				<div class="col-12">
-					<h5>로그인 &amp; 회원가입</h5>
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="main">Home</a></li>
-						<li class="breadcrumb-item active">로그인 &amp; 회원가입</li>
-					</ol>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Breadcumb Area -->
-
-	<!-- START!! **************************************************************** -->
-	<!-- Login Area -->
-	<div class="bigshop_reg_log_area section_padding_100_50">
-		<div class="container">
-			<div class="row">
-				<!-- LOGIN ***************************** -->
-				<div class="col-12 col-md-6">
-					<div class="login_form mb-50">
-						<h5 class="mb-3">로그인</h5>
-						<font color="red" id="msg1">${msg1}</font> <font color="red"
-							id="msg2">${msg2}</font>
-
-						<form id="user_login_form" action="user_login_action"
-							method="post">
-							<div class="form-group">
-								<!-- <input type="email" class="form-control" id="username" placeholder="Email or Username"> -->
-								<input class="form-control" id="login_user_id" name="user_id"
-									value="${loginUser.user_id}" placeholder="아이디">
-							</div>
-							<div class="form-group">
-								<input type="password" class="form-control" id="login_user_pw"
-									name="user_pw" value="${loginUser.user_pw}" placeholder="비밀번호">
-							</div>
-							<div class="form-check">
-								<!-- 이것은 어떻게 구현하는 것인가.....  -->
-								<div class="custom-control custom-checkbox mb-3 pl-1">
-									<input type="checkbox" class="custom-control-input"
-										id="customChe"> <label class="custom-control-label"
-										for="customChe">아이디 저장</label>
-								</div>
-							</div>
-							<!-- <button type="submit" class="btn btn-primary btn-sm btn_user_login_action" >Login</button> -->
-							<!-- <input id="btn_user_login_action" type="button" value="로그인"> &nbsp; -->
-							<input type="button" id="btn_user_login_action"
-								style="width: 222px; height: 54px; font-size: 1rem;"
-								class="btn btn-primary btn-sm" value="로그인">
-						</form>
-						<!-- Forget Password -->
-						<div class="forget_pass mt-15">
-							<i class="icofont-lock"></i> <a href="user_find_idpw" id="findIdPw">아이디 / 비밀번호 찾기</a>
-						</div>
-						<hr>
-						<br>
-						<div>
-							<!-- <a id="kakao-login-btn" href="javascript:loginWithKakao()"> width="222"-->
-							<a id="kakao-login-btn" href="javascript:loginWithKakao()"> <img
-								src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
-								width="222" alt="카카오 로그인 버튼" />
-							</a>
-							<p id="token-result"></p>
-						</div>
-					</div>
-				</div>
-
-				<!-- REGISTER ***************************** -->
-
-				<div class="col-12 col-md-6">
-					<div class="login_form mb-50">
-						<h5 class="mb-3">회원가입</h5>
-						<font color="red" id="msg3"></font>
-
-						<form id="user_write_form" action="my-account.html" method="post">
-							<div class="form-group">
-								<input type="text" class="form-control" id="user_id"
-									name="user_id" value="${fuser.user_id}" placeholder="아이디">
-							</div>
-							<div class="form-group">
-								<input type="password" class="form-control" id="user_pw"
-									name="user_pw" value="${fuser.user_pw}" placeholder="비밀번호">
-							</div>
-							<div class="form-group">
-								<input type="password" class="form-control" id="user_pw2"
-									name="user_pw2" value="${fuser.user_pw}" placeholder="비밀번호 확인">
-							</div>
-							<div class="form-group">
-								<input type="text" class="form-control" id="user_name"
-									name="user_name" value="${fuser.user_name}" placeholder="이름">
-							</div>
-							<div class="form-group">
-								<input type="email" class="form-control" id="user_email"
-									name="user_email" value="${fuser.user_email}"
-									placeholder="이메일주소">
-							</div>
-							<div class="form-group">
-								<input type="text" class="form-control phone_number"
-									id="user_phone" name="user_phone" value="${fuser.user_phone}"
-									placeholder="핸드폰번호">
-							</div>
-							<div class="form-group">
-								<input type="text" class="form-control" id="address_name"
-									name="address_name" value=""
-									placeholder="위치접근을 '허용'해주세요. 나중에 입력가능" readonly>
-							</div>
-							<div class="form-group">
-								<input type="hidden" class="form-control" id="address_lat"
-									name="address_lat" value="0.0" placeholder="위도">
-							</div>
-							<div class="form-group">
-								<input type="hidden" class="form-control" id="address_lng"
-									name="address_lng" value="0.0" placeholder="경도">
-							</div>
-							<div class="form-group">
-								<input type="text" class="form-control" id="invi_email"
-									name="invi_email" value="" placeholder="초대코드">
-							</div>
-							<!-- <input type="button" id="btn_user_write_action"
-								class="btn btn-primary btn-sm" value="회원가입"> -->
-							<input type="button" id="btn_user_write_action"
-								style="width: 222px; height: 54px; font-size: 1rem;"
-								class="btn btn-primary btn-sm" value="회원가입">
-						</form>
-					</div>
-				</div>
-
-
-			</div>
-		</div>
-	</div>
-	<!-- Login Area End -->
-	<!-- END!! **************************************************************** -->
-
-	<!-- Footer Area -->
-	<!-- include_common_bottom.jsp start-->
-	<jsp:include page="common/include_common_footer.jsp" />
-	<!-- include_common_bottom.jsp end-->
-	<!-- Footer Area -->
 
 
 
-
-
-	<!-- jQuery (Necessary for All JavaScript Plugins) -->
-	<!-- <script src="js/jquery.min.js"></script> -->
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.easing.min.js"></script>
-	<script src="js/default/classy-nav.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/default/scrollup.js"></script>
-	<script src="js/waypoints.min.js"></script>
-	<script src="js/jquery.countdown.min.js"></script>
-	<script src="js/jquery.counterup.min.js"></script>
-	<script src="js/jquery-ui.min.js"></script>
-	<script src="js/jarallax.min.js"></script>
-	<script src="js/jarallax-video.min.js"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/jquery.nice-select.min.js"></script>
-	<script src="js/wow.min.js"></script>
-	<script src="js/default/active.js"></script>
 
 	<script>
 		Kakao.init('a7c7231db91ae56cfc5e3c6ea06f73c6'); // 사용하려는 앱의 JavaScript 키 입력

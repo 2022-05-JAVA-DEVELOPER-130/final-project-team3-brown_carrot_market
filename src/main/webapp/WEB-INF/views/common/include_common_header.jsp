@@ -76,7 +76,7 @@
                             <div class="classynav">
                                 <ul>
                                     <!-- <li><a href="#">Home</a></li> -->
-                                    <li><a href="product_list">동네상품</a>
+                                    <li><a href="product_list">동네물건</a>
                                         <ul class="dropdown">
                                             <li><a href="product_list">- 전체보기</a></li>
                                             <li><a href="product_category?category_no=1">- 가전제품</a></li>
