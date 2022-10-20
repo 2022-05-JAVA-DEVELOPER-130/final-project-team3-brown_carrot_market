@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fn"  uri = "http://java.sun.com/jsp/jstl/functions"%>
 <!doctype html>
 <html lang="en">
 
@@ -19,22 +20,15 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="style.css">
-    
+    <link rel="stylesheet" href="css/product.css">
     <link rel="stylesheet" href="css/user.css">
     
-    <!-- javaScript -->
-    <script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
-	<script type="text/javascript" src="js/common/user_session_check.js"></script>
-	<script type="text/javascript" src="js/product/product.js"></script>
+   
 	
 	<!-- toast -->
-	<link href="[//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css)" rel="stylesheet" />
-	<link rel="stylesheet" type="text/css" href="[https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css](https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css)"/>
-	<script type="text/javascript" src="[https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js](https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js)"></script>
-		
-		
+ <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+   
 </head>
 
 <body>
@@ -85,23 +79,28 @@
                               <li>
                               
 	                              
-	                              <a href="product_category?category_no=1" style="font-weight: normal">- 가전제품</a>
-
+	                             <input type="hidden" class="productCtgrNo" name="p_ctgr_no1" value=1>
+	                              <a href="#" onclick="changeProductList(1,1)" style="font-weight: normal">- 가전제품</a>
                               </li>
                               <li>
-	                              <a href="product_category?category_no=2" style="font-weight: normal" >- 가구</a>
+                              		<input type="hidden" class="productCtgrNo" name="p_ctgr_no2" value=1>
+	                              <a href="#" onclick="changeProductList(1,2)" style="font-weight: normal" >- 가구</a>
                               </li>
                               <li>
-	                              <a href="product_category?category_no=3" style="font-weight: normal">- 의류</a>
+                              	  <input type="hidden" class="productCtgrNo" name="p_ctgr_no3" value=1>
+	                              <a href="#" onclick="changeProductList(1,3)" style="font-weight: normal">- 의류</a>
                               </li>
                               <li>
-	                              <a href="product_category?category_no=4" style="font-weight: normal">- 생활용품</a>
+                              	  <input type="hidden" class="productCtgrNo" name="p_ctgr_no4" value=1>
+	                              <a href="#" onclick="changeProductList(1,4)" style="font-weight: normal">- 생활용품</a>
                               </li>
                               <li>
-	                              <a href="product_category?category_no=5" style="font-weight: normal">- 취미/게임/음반/도서</a>
+                              	  <input type="hidden" class="productCtgrNo" name="p_ctgr_no5" value=1>
+	                              <a href="#" onclick="changeProductList(1,5)" style="font-weight: normal">- 취미/게임/음반/도서</a>
                               </li>
                               <li>
-	                              <a href="product_category?category_no=6" style="font-weight: normal">- 기타</a>
+                              	  <input type="hidden" class="productCtgrNo" name="p_ctgr_no6" value=1>
+	                              <a href="#" onclick="changeProductList(1,6)" style="font-weight: normal">- 기타</a>
                               </li>
                              
                                 
@@ -111,115 +110,20 @@
                     </div>
 
                         <!-- Single Widget -->
-                        <div class="widget price mb-30">
-                            <h6 class="widget-title">Filter by Price</h6>
-                            <div class="widget-desc">
-                                <div class="slider-range">
-                                    <div data-min="0" data-max="1350" data-unit="$" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="0" data-value-max="1350" data-label-result="Price:">
-                                        <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
-                                        <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                        <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                    </div>
-                                    <div class="range-price">Price: 0 - 1350</div>
-                                </div>
-                            </div>
-                        </div>
+                        
+
 
                         <!-- Single Widget -->
-                        <div class="widget color mb-30">
-                            <h6 class="widget-title">Filter by Color</h6>
-                            <div class="widget-desc">
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck6">
-                                    <label class="custom-control-label black" for="customCheck6">Black <span class="text-muted">(9)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck7">
-                                    <label class="custom-control-label pink" for="customCheck7">Pink <span class="text-muted">(6)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck8">
-                                    <label class="custom-control-label red" for="customCheck8">Red <span class="text-muted">(8)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck9">
-                                    <label class="custom-control-label purple" for="customCheck9">Purple <span class="text-muted">(4)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck10">
-                                    <label class="custom-control-label orange" for="customCheck10">Orange <span class="text-muted">(7)</span></label>
-                                </div>
-                            </div>
-                        </div>
+                        
 
                         <!-- Single Widget -->
-                        <div class="widget brands mb-30">
-                            <h6 class="widget-title">Filter by brands</h6>
-                            <div class="widget-desc">
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck11">
-                                    <label class="custom-control-label" for="customCheck11">Zara <span class="text-muted">(213)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck12">
-                                    <label class="custom-control-label" for="customCheck12">Gucci <span class="text-muted">(65)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck13">
-                                    <label class="custom-control-label" for="customCheck13">Addidas <span class="text-muted">(70)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck14">
-                                    <label class="custom-control-label" for="customCheck14">Nike <span class="text-muted">(104)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck15">
-                                    <label class="custom-control-label" for="customCheck15">Denim <span class="text-muted">(71)</span></label>
-                                </div>
-                            </div>
-                        </div>
+                        
 
                         <!-- Single Widget -->
-                        <div class="widget rating mb-30">
-                            <h6 class="widget-title">Average Rating</h6>
-                            <div class="widget-desc">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <span class="text-muted">(103)</span></a></li>
-
-                                    <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <span class="text-muted">(78)</span></a></li>
-
-                                    <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <span class="text-muted">(47)</span></a></li>
-
-                                    <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <span class="text-muted">(9)</span></a></li>
-
-                                    <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <span class="text-muted">(3)</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        
 
                         <!-- Single Widget -->
-                        <div class="widget size mb-30">
-                            <h6 class="widget-title">Filter by Size</h6>
-                            <div class="widget-desc">
-                                <ul>
-                                    <li><a href="#">XS</a></li>
-                                    <li><a href="#">S</a></li>
-                                    <li><a href="#">M</a></li>
-                                    <li><a href="#">L</a></li>
-                                    <li><a href="#">XL</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
 
@@ -227,12 +131,14 @@
                     <!-- Shop Top Sidebar -->
                     <div class="shop_top_sidebar_area d-flex flex-wrap align-items-center justify-content-between">
                         <div class="view_area d-flex">
+                            <!--  
                             <div class="grid_view">
                                 <a href="shop-grid-left-sidebar.html" data-toggle="tooltip" data-placement="top" title="Grid View"><i class="icofont-layout"></i></a>
                             </div>
                             <div class="list_view ml-3">
                                 <a href="shop-list-left-sidebar.html" data-toggle="tooltip" data-placement="top" title="List View"><i class="icofont-listine-dots"></i></a>
                             </div>
+                            -->
                         </div>
                         <div class="col-12 text-right">
                         <input type="button" class="btn btn-primary mb-1" value="내 물건 팔기" onClick="productCreateForm();"/>
@@ -244,18 +150,54 @@
                             
                             <!-- Single Product -->
 						
-						<c:forEach items="${productLoginList}" var="product">
+						<c:forEach items="${productLoginList.itemList}" var="product">
                             <div class="col-12">
                                 <div class="single-product-area mb-30">
                                     <div class="product_image">
                                         <!-- Product Image -->
-                                        <img class="normal_img" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
-                                        <img class="hover_img" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
-
+                                    <c:choose>
+                                    <c:when test="${!empty product.productImagesList[0].pi_name}">   
+                                   <c:set var = "image_name" value = "${product.productImagesList[0].pi_name}"/>
+                                   <c:choose>
+									<c:when test="${fn:startsWith(image_name, 'http')}">
+                                        <img class="normal_img" src="${product.productImagesList[0].pi_name}"  alt="">
+                                        <img class="hover_img" src="${product.productImagesList[0].pi_name}"  alt="">
+									 </c:when>
+									<c:otherwise>
+										 <img class="normal_img_test" src="img/product_img/${product.productImagesList[0].pi_name}"  alt="">
+		                                 <img class="hover_img" src="img/product_img/${product.productImagesList[0].pi_name}"  alt="">
+                                        </c:otherwise>
+										</c:choose>
+										</c:when>
+										
+										<c:otherwise>
+										<img class="normal_img" style="width:300px; height:300px;" src="img/chat-img/logo_carrot.png" alt="">
+                                        <img class="hover_img" style="width:300px; height:300px;" src="img/chat-img/logo_carrot.png" alt="">
+										
+										</c:otherwise>
+										</c:choose>
                                         <!-- Product Badge -->
-                                        <div class="product_badge">
-                                            <span>New</span>
-                                        </div>
+                                        <c:if test="${product.p_sell eq 1}">
+                                        				<div class="product_badge">
+                                            			<span>
+		                                        		<c:out value="판매중"></c:out>
+                                            			</span>
+                                            			</div>
+		                                        	</c:if>
+		                                        	<c:if test="${product.p_sell eq 2}">
+		                                        		<div class="product_badge1">
+                                            			<span>
+		                                        		<c:out value="예약중"></c:out>
+                                            			</span>
+                                            			</div>
+		                                        	</c:if>
+		                                        	<c:if test="${product.p_sell eq 3}">
+		                                        		<div class="product_badge2">
+                                            			<span>
+		                                        		<c:out value="판매완료"></c:out>
+                                            			</span>
+                                            			</div>
+		                                        	</c:if>
 
                                         <!-- Wishlist -->
                                         <div class="product_wishlist">
@@ -271,24 +213,22 @@
                                     <!-- Product Description -->
                                     <div class="product_description">
                                         <!-- Add to cart -->
-                                        <div class="product_add_to_cart">
-                                            <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
-                                        </div>
+                                        
 
                                         <!-- Quick View -->
-                                        <div class="product_quick_view">
-                                            <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                                        </div>
-
+                                        
                                         <p class="brand_name">Top</p>
                                          <a href="product_detail?p_no=${product.p_no}" p_no="${product.p_no}">${product.p_title}</a>
                                         <h6 class="product-price">가격: ${product.p_price}</h6>
 
+                                        <p class="product-short-desc">${product.p_address_name}</p>
                                         <p class="product-short-desc">${product.p_desc}</p>
                                     </div>
                                 </div>
                             </div>
 						 </c:forEach> 
+						 </div>
+						 </div>
 					
                            
 
@@ -296,20 +236,28 @@
                     <div class="shop_pagination_area mt-30">
                         <nav aria-label="Page navigation">
                             <ul class="pagination pagination-sm justify-content-center">
-                                <li class="page-item">
-                                    <a class="page-link" href="#"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="page-item"><a class="page-link" href="#">...</a></li>
-                                <li class="page-item"><a class="page-link" href="#">8</a></li>
-                                <li class="page-item"><a class="page-link" href="#">9</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                                </li>
+                               
+                               <c:if test="${productLoginList.pageMaker.prevPage > 0}">  
+	            					<li class="page-item">
+	                                    <button class="page-link" onclick="changeProductList(${data.pageMaker.prevPage},'0');"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+	                               	 </li>
+                                </c:if>
+                                
+                                <c:forEach var="no" begin="${productLoginList.pageMaker.blockBegin}" end="${productLoginList.pageMaker.blockEnd}">
+									<c:if test="${productLoginList.pageMaker.curPage == no}">
+										<li class="page-item active"><button class="page-link" href="#">${no}</button></li>
+									</c:if>
+									<c:if test="${productLoginList.pageMaker.curPage != no}">
+										<li class="page-item"><button class="page-link page" onclick="changeProductList(${no},'0')">${no}</button></li>
+									</c:if>
+                                </c:forEach>
+                                
+                                <c:if test="${productLoginList.pageMaker.curPage < productLoginList.pageMaker.totPage}">  
+	                                <li class="page-item">
+				                        <button class="page-link" onclick="changeProductList(${productLoginList.pageMaker.nextPage},'0')"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+			                    	 </li>
+                                </c:if>
+                            
                             </ul>
                         </nav>
                     </div>
@@ -344,6 +292,16 @@
     <script src="js/jquery.nice-select.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
+    
+     <!-- javaScript -->
+   <!--  <script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+    <script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
+	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+	<script type="text/javascript" src="js/product/product.js"></script>
+	
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
+	
 
 <style type="text/css">
 #toast-container > .toast {

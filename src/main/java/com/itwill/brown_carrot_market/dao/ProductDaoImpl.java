@@ -51,26 +51,43 @@ public class ProductDaoImpl implements ProductDao{
 		// TODO Auto-generated method stub
 		return productMapper.selectListNotLoginCount();
 	}
-	
 
 	@Override
-	public List<Product> selectAllByCtgr(int p_ctgr_no) throws Exception {
-		System.out.println("### ProductDaoImpl : selectAllByCtgr 호출");
-		return productMapper.selectAllByCtgr(p_ctgr_no);
-	}
-
-	@Override
-	public List<Product> selectListByRange(Address address) throws Exception {
+	public List<Product> selectListByRange(Address address,int pageStart,int pageEnd) throws Exception {
 		System.out.println("###ProductDaoImpl : selectListByRange 호출");
-		return productMapper.selectListByRange(address);
+		return productMapper.selectListByRange(address,pageStart,pageEnd);
+	}
+	
+	@Override
+	public int selectListLoginCount(Address address)throws Exception{
+		
+		return productMapper.selectListLoginCount(address);
 	}
 
 	@Override
-	public List<Product> selectListByRangeCtgr(int p_ctgr_no, Address address) throws Exception {
-		System.out.println("###ProductDaoImpl : selectListByRangeCtgr 호출");
-		return productMapper.selectListByRangeCtgr(p_ctgr_no, address);
+	public List<Product> selectAllByCtgr(int p_ctgr_no,int pageStart, int pageEnd) throws Exception {
+		System.out.println("### ProductDaoImpl : selectAllByCtgr 호출");
+		return productMapper.selectAllByCtgr(p_ctgr_no,pageStart,pageEnd);
+	}
+	
+	@Override
+	public int selectNonMemberCountCtgrProduct(int p_ctgr_no)throws Exception{
+		
+		return productMapper.selectNonMemberCountCtgrProduct(p_ctgr_no);
 	}
 
+	@Override
+	public List<Product> selectListByRangeCtgr(Map map,int p_ctgr_no,int pageStart, int pageEnd) throws Exception {
+		System.out.println("###ProductDaoImpl : selectListByRangeCtgr 호출");
+		return productMapper.selectListByRangeCtgr(p_ctgr_no, (String)map.get("user_id"),(Integer)map.get("address_no"), pageStart, pageEnd);
+	}
+	
+	@Override
+	public int selectMemberCtgrCountProduct(Map map,int p_ctgr_no)throws Exception{
+		
+		return productMapper.selectMemberCtgrCountProduct(p_ctgr_no, (String)map.get("user_id"),(Integer)map.get("address_no"));
+	}
+	
 	@Override
 	public List<Product> selectByUserId(String user_id) throws Exception {
 		System.out.println("###ProductDaoImpl : selectByUserId 호출");
@@ -140,6 +157,12 @@ public class ProductDaoImpl implements ProductDao{
 	public int selectProductPK() throws Exception {
 		// TODO Auto-generated method stub
 		return productMapper.selectProductPK();
+	}
+
+	@Override
+	public List<Product> selectByUserIdPSell(String user_id, int p_sell) throws Exception {
+		// TODO Auto-generated method stub
+		return productMapper.selectByUserIdPSell(user_id, p_sell);
 	}
 	
 	

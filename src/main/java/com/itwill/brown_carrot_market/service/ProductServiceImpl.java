@@ -55,22 +55,59 @@ public class ProductServiceImpl implements ProductService{
 	
 
 	@Override
-	public List<Product> selectAllByCtgr(int p_ctgr_no) throws Exception {
+	public PageMakerDto<Product> selectAllByCtgr(int p_ctgr_no, int currentPage) throws Exception {
 		// TODO Auto-generated method stub
-		return productDao.selectAllByCtgr(p_ctgr_no);
+		int totProductnonMemberCtgrCount = productDao.selectNonMemberCountCtgrProduct(p_ctgr_no);
+		PageMaker pageMaker = new PageMaker(totProductnonMemberCtgrCount,currentPage,5,5);
+		List<Product> productList = productDao.selectAllByCtgr(p_ctgr_no, pageMaker.getPageBegin(), pageMaker.getPageEnd());
+		PageMakerDto<Product> pageMakerProductList = new PageMakerDto<Product>(productList, pageMaker, totProductnonMemberCtgrCount);
+		
+		return pageMakerProductList;
 	}
-
+	
+	@Override
+	public int selectNonMemberCountCtgrProduct(int p_ctgr_no) throws Exception {
+		return productDao.selectNonMemberCountCtgrProduct(p_ctgr_no);
+	}
+	
+	/*
 	@Override
 	public List<Product> selectListByRange(Address address) throws Exception {
 		// TODO Auto-generated method stub
 		return productDao.selectListByRange(address);
 	}
+	*/
+	
+	public PageMakerDto<Product> selectListByRange(Address address,int currentPage) throws Exception{
+		int totalCount = productDao.selectListLoginCount(address);
+		PageMaker pageMaker = new PageMaker(totalCount, currentPage,5,5);
+		List<Product> loginList = productDao.selectListByRange(address, pageMaker.getPageBegin(), pageMaker.getPageEnd());
+		PageMakerDto<Product> pageMakerLoginList = new PageMakerDto<Product>(loginList, pageMaker, totalCount);
+		return pageMakerLoginList;
+	}
+	
+	@Override
+	public int selectListLoginCount(Address address) throws Exception {
+		// TODO Auto-generated method stub
+		return productDao.selectListLoginCount(address);
+	}
 
 	@Override
-	public List<Product> selectListByRangeCtgr(int p_ctgr_no, Address address) throws Exception {
+	public PageMakerDto<Product> selectListByRangeCtgr(Map map,int p_ctgr_no, int currentPage) throws Exception {
 		// TODO Auto-generated method stub
-		return productDao.selectListByRangeCtgr(p_ctgr_no, address);
+		int totProductCtgrCount = productDao.selectMemberCtgrCountProduct(map, p_ctgr_no);
+		PageMaker pageMaker = new PageMaker(totProductCtgrCount,currentPage,5,5);
+		List<Product> loginList = productDao.selectListByRangeCtgr(map, p_ctgr_no,pageMaker.getPageBegin(), pageMaker.getPageEnd());
+		PageMakerDto<Product> pageMakerLoginList = new PageMakerDto<Product>(loginList, pageMaker, totProductCtgrCount);
+		return pageMakerLoginList;
 	}
+	
+	@Override
+	public int selectMemberCtgrCountProduct(Map map,int p_ctgr_no) throws Exception {
+		
+		return productDao.selectMemberCtgrCountProduct(map,p_ctgr_no);
+	}
+	
 
 	@Override
 	public List<Product> selectByUserId(String user_id) throws Exception {
@@ -179,6 +216,11 @@ public class ProductServiceImpl implements ProductService{
 	public int deleteProductImg(int p_no) throws Exception {
 		// TODO Auto-generated method stub
 		return productImageDao.deleteProductImg(p_no);
+	}
+	@Override
+	public List<Product> selectByUserIdPSell(String user_id, int p_sell) throws Exception {
+		// TODO Auto-generated method stub
+		return productDao.selectByUserIdPSell(user_id, p_sell);
 	}
 	
 	

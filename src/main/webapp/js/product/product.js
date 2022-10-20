@@ -1,6 +1,7 @@
 /**
  * 
  */
+ var p_no=null;
  function productCreateForm() {
    
    window.location.href='product_write_form';
@@ -79,17 +80,7 @@ function productCreate() {
 }
    */
 
-function productSell(){
-	
-	if(document.chatStart.p_userId.value==document.chatStart.loginId.value){ 
-	document.product_modify_sell_action.action = "product_modify_sell_action"
-	document.product_modify_sell_action.method='POST';
-	document.product_modify_sell_action.submit();}
-	else{
-		alert("본인 상품만 상태수정 가능합니다.");
-		
-	}
-}
+
 
 function productUpdateAction(){
 	if (document.product_modify_form.p_title.value == "") {
@@ -137,36 +128,55 @@ function productUpdateAction(){
    	});
    }
 /**********페이징************/
-function changeProductList(pageno){
+function changeProductList(pageno,p_ctgr_no){
 	$.ajax({
 		url:"product_list_rest",
 		method:"post",
 		data:{
 			"pageno":pageno,
+			"p_ctgr_no":p_ctgr_no
 		},
 		dataType:"json",
 		success:function(resultObj){
-			console.log(resultObj);
-			
-			let data = resultObj.data;
+			console.log(resultObj.data);
+				let data = resultObj.data;
 				let htmlBuffer = ``;
-                        	
 				data.itemList.forEach(function(product, i){
 				
 				  htmlBuffer += `<div class="col-12">
                                 <div class="single-product-area mb-30">
                                     `;
 	               if(product.productImagesList[0].pi_name!=null && product.productImagesList[0].pi_name!="" ){
+						//이미지 종류에 따라
+						if(product.productImagesList[0].pi_name.startsWith('http')){
+							htmlBuffer += `
+							 <div class="product_image">
+	                                        <!-- Product Image -->
+	                                        <img class="normal_img" style="width:300px; height:300px;" src="${product.productImagesList[0].pi_name}" alt="">
+	                                        <img class="hover_img" style="width:300px; height:300px;" src="${product.productImagesList[0].pi_name}" alt="">
+	                                    `;
+                        }else{
+							htmlBuffer += `
+							 <div class="product_image">
+	                                        <!-- Product Image -->
+	                                        <img class="normal_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
+	                                        <img class="hover_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
+	                                    `;
+						}
 						htmlBuffer += `
-						 <div class="product_image">
-                                        <!-- Product Image -->
-                                        <img class="normal_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
-                                        <img class="hover_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
 
                                         <!-- Product Badge -->
-<!--                                         <div class="product_badge">
-                                            <span>New</span>
-                                        </div> -->
+                                       <div class="product_badge">
+                                            <span>`;
+                       if(product.p_sell == 1){
+						htmlBuffer += `판매중`;
+						}else if(product.p_sell == 2){
+						htmlBuffer += `예약중`;	
+						}else if(product.p_sell == 3){
+						htmlBuffer += `판매완료`;	
+						}                     
+                        htmlBuffer += ` </span>
+                                        </div> 
 
                                         <!-- Wishlist -->
                                         <div class="product_wishlist">
@@ -185,9 +195,28 @@ function changeProductList(pageno){
                                         <img class="hover_img" style="width:300px; height:300px;" src="img/chat-img/logo_carrot.png" alt="">
 
                                         <!-- Product Badge -->
-<!--                                         <div class="product_badge">
-                                            <span>New</span>
-                                        </div> -->
+                                        `;
+                                             if(product.p_sell == 1){
+											htmlBuffer += `<div class="product_badge">
+                                            				<span>
+															판매중
+															</span>
+															</div>`;
+											}else if(product.p_sell == 2){
+											htmlBuffer += `<div class="product_badge1">
+                                            				<span>
+															예약중
+															</div>
+                                            				</span>`;	
+											}else if(product.p_sell == 3){
+											htmlBuffer += `<div class="product_badge2">
+                                            				<span>
+															판매완료
+                                            				</span>
+                                            				</div>`;	
+												}                     
+						                        htmlBuffer += `
+                                            
 
                                         <!-- Wishlist -->
                                         <div class="product_wishlist">
@@ -217,6 +246,7 @@ function changeProductList(pageno){
                                        <p class="brand_name">Top</p>
                                        <a href="product_detail?p_no=${product.p_no}" p_no="${product.p_no}">${product.p_title}</a>
 										<h6 class="product-price">가격: ${product.p_price}</h6>
+										<p class="product-short-desc">${product.p_address_name}</p>
                                         <p class="product-short-desc">${product.p_desc}</p>
                                     </div>
                                 </div>
@@ -230,7 +260,7 @@ function changeProductList(pageno){
 				let paginationBuffer = ``;
 				if(data.pageMaker.prevPage > 0){
 					paginationBuffer += `<li class="page-item">
-		                                    <button class="page-link" onclick="changeProductList(${data.pageMaker.prevPage})"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+		                                    <button class="page-link" onclick="changeProductList(${data.pageMaker.prevPage},'${p_ctgr_no}')"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
 		                               	 </li>`;
 				}
 				for(let no = data.pageMaker.blockBegin; no <= data.pageMaker.blockEnd; no++){
@@ -238,12 +268,12 @@ function changeProductList(pageno){
 						paginationBuffer += `<li class="page-item active"><button class="page-link" href="#">${no}</button></li>`;
 					}
 					if(data.pageMaker.curPage != no){
-						paginationBuffer += `<li class="page-item"><button class="page-link" onclick="changeProductList(${no});">${no}</button></li>`;
+						paginationBuffer += `<li class="page-item"><button class="page-link" onclick="changeProductList(${no},'${p_ctgr_no}');">${no}</button></li>`;
 					}
 				}
 				if(data.pageMaker.curPage < data.pageMaker.totPage){
 					paginationBuffer += `<li class="page-item">
-					                        <button class="page-link" onclick="changeProductList(${data.pageMaker.nextPage});"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+					                        <button class="page-link" onclick="changeProductList(${data.pageMaker.nextPage},'${p_ctgr_no}');"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
 				                    	 </li>`;
 				}
 				$(".pagination.pagination-sm.justify-content-center").html(paginationBuffer);	
@@ -251,10 +281,48 @@ function changeProductList(pageno){
 		
 	});
 }
+function productSell(){
+	
+	if(document.chatStart.p_userId.value==document.chatStart.loginId.value){ 
+	document.statePopup.action = "product_modify_sell_action";
+	document.statePopup.method='POST';
+	document.statePopup.submit();}
+	else{
+		alert("본인 상품만 상태수정 가능합니다.");
+		
+	}
+}
 
+
+function checkWish(){
+		$.ajax({
+		url:'checkWish',
+		method:'POST',
+		data:{
+			"p_no":$("#p_no").val()
+		},
+		dataType:"json",
+		success:function(result){
+			console.log("찜하기 여부 :"+ result.data);
+			if(result.data=="1"){
+				$("#addWishListBtn").html(`<i class="fa fa-heart" aria-hidden="true" style="color:red;"></i>`);
+			}else{
+				$("#addWishListBtn").html(`<i class="fa fa-heart" aria-hidden="true" style="color:gray;"></i>`);
+			}
+		}
+		
+		
+	});
+}
 
 /********************채팅하기!!**************************/
 $(document).ready(function(){
+	
+checkWish();
+	
+	
+	
+	
 	$('#btnCreate').click(function(){
 		if(document.chatStart.p_userId.value==document.chatStart.loginId.value){
 			alert("본인 상품과는 채팅할 수 없습니다.");
@@ -268,4 +336,84 @@ $(document).ready(function(){
 		document.chatStart.submit();
 		}
 	});
+	
+	
+	/******************팝업*********************/
+
+$('#btn_popup').click(function(){
+	console.log("클릭");
+	p_no=document.statePopup.p_no.value;
+	console.log(p_no);
+	window.open("change_product_state?p_no="+document.statePopup.p_no.value+"&user_id="+document.statePopup.user_id.value,"판매상태변경","width = 470, height = 600, top = 100, left = 200, location = no,  resizable=no");
+
+});	
+
+
+
+
+$('#addWishListBtn').click(function(e){
+	
+	e.preventDefault();
+	e.stopPropagation();
+	
+	
+	
+	
+	
+	$.ajax({
+		url:'checkWish',
+		method:'POST',
+		data:{
+			"p_no":$("#p_no").val()
+		},
+		dataType:"json",
+		success:function(result){
+			console.log("찜하기 여부 :"+ result.data);
+			if(result.data=="1"){
+				console.log("이미 찜했음 -- > 찜하기 해제 ");
+				
+				$.ajax({
+					url:"wishDeletePD",
+					method:"POST",
+					data:{
+						"p_no":$("#p_no").val()
+					},
+					dataType:"json",
+					success:function(result){
+						toastr.options.positionClass = 'toast-top-full-width' ;
+	                    toastr['info']("관심 해제");
+	                    $("#addWishListBtn").html(`<i class="fa fa-heart" aria-hidden="true" style="color:gray;"></i>`);
+					}
+				});
+				
+			}else{
+				console.log("새롭게 찜하기");
+				
+				$.ajax({
+					url:"wishInsert",
+					method:"POST",
+					data:{
+						"p_no":$("#p_no").val()
+					},
+					dataType:"json",
+					success:function(result){
+						toastr.options.positionClass = 'toast-top-full-width' ;
+	                    toastr['info']("관심 추가");
+	                    $("#addWishListBtn").html(`<i class="fa fa-heart" aria-hidden="true" style="color:red;"></i>`);
+					}
+				});
+				
+			}
+		}
+		
+		
 	});
+});
+	
+	
+	
+	});
+
+
+
+	

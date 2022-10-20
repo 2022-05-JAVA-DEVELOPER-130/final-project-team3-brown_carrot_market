@@ -8,18 +8,26 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.brown_carrot_market.dto.Payment;
+import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.PaymentService;
+import com.itwill.brown_carrot_market.service.TransferService;
+import com.itwill.brown_carrot_market.service.UserInfoService;
+
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 
 
 @Controller
 public class PaymentController {
-//	@Autowired
-//	private PaymentService paymentService;
+	@Autowired
+	private TransferService transferService;
+	@Autowired
+	private UserInfoService userInfoService;
+	
 	@LoginCheck
 	@RequestMapping(value = "/payment")
-	public String payment(Model model, HttpServletRequest request) throws Exception{
+	public String payment(Model model, UserInfo userInfo,HttpServletRequest request) throws Exception{
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
-		request.getSession().setAttribute("sUserId", sUserId);
+		userInfoService.findUser("sUser");
 		if(sUserId==null || sUserId.equals("")) {
 			return "user_login";
 		}else {
@@ -27,27 +35,45 @@ public class PaymentController {
 		}
 	}
 	
+//	@LoginCheck
+//	@RequestMapping(value = "/payment_deposit")
+//	public String payment_deposit(Model model, HttpServletRequest request) throws Exception{
+//		String sUserId=(String)request.getSession().getAttribute("sUserId");
+//		request.getSession().setAttribute("sUserId", sUserId);
+//		if(sUserId==null || sUserId.equals("")) {
+//			return "user_login";
+//		}else {
+//			return "/payment_deposit";
+//		}
+//	}
+	
 	@LoginCheck
-	@RequestMapping(value = "/payment_withdraw")
-	public String payment_withdraw(Model model, HttpServletRequest request) throws Exception{
+	@RequestMapping(value = "/payment_complete")
+	public String payment_complete(int payment_amount,Model model, HttpServletRequest request) throws Exception{
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
+		UserInfo sUser=(UserInfo)request.getSession().getAttribute("sUser");
 		request.getSession().setAttribute("sUserId", sUserId);
 		if(sUserId==null || sUserId.equals("")) {
 			return "user_login";
 		}else {
-			return "/payment_withdraw";
+			model.addAttribute("payment_amount",payment_amount);
+			transferService.insert_Point_Deposit(payment_amount, sUserId);
+			transferService.update_Point_By_Id(sUserId);
+			UserInfo userInfo = userInfoService.findUser(sUserId);
+			model.addAttribute("userInfo",userInfo);
+			return "payment_complete";
 		}
 	}
 	
 	@LoginCheck
-	@RequestMapping(value = "/payment_complete")
-	public String payment_complete(Model model, HttpServletRequest request) throws Exception{
+	@RequestMapping(value = "/payment_fail")
+	public String payment_fail(Model model, HttpServletRequest request) throws Exception{
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
 		request.getSession().setAttribute("sUserId", sUserId);
 		if(sUserId==null || sUserId.equals("")) {
 			return "user_login";
 		}else {
-			return "payment_complete";
+			return "payment_fail";
 		}
 	}
 	

@@ -43,7 +43,7 @@ function changeQnaList(pageno,t_ctgr_no){
 				let paginationBuffer = ``;
 				if(data.pageMaker.prevPage > 0){
 					paginationBuffer += `<li class="page-item">
-		                                    <button class="page-link" onclick="changeQnaList(${data.pageMaker.prevPage});"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+		                                    <button class="page-link" onclick="changeQnaList(${data.pageMaker.prevPage},'${t_ctgr_no}');"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
 		                               	 </li>`;
 				}
 				for(let no = data.pageMaker.blockBegin; no <= data.pageMaker.blockEnd; no++){
@@ -51,12 +51,12 @@ function changeQnaList(pageno,t_ctgr_no){
 						paginationBuffer += `<li class="page-item active"><button class="page-link" href="#">${no}</button></li>`;
 					}
 					if(data.pageMaker.curPage != no){
-						paginationBuffer += `<li class="page-item"><button class="page-link" onclick="changeQnaList(${no});">${no}</button></li>`;
+						paginationBuffer += `<li class="page-item"><button class="page-link" onclick="changeQnaList(${no},'${t_ctgr_no}');">${no}</button></li>`;
 					}
 				}
 				if(data.pageMaker.curPage < data.pageMaker.totPage){
 					paginationBuffer += `<li class="page-item">
-					                        <button class="page-link" onclick="changeQnaList(${data.pageMaker.nextPage});"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+					                        <button class="page-link" onclick="changeQnaList(${data.pageMaker.nextPage},'${t_ctgr_no}');"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
 				                    	 </li>`;
 				}
 				$(".pagination.pagination-sm.justify-content-center").html(paginationBuffer);
@@ -71,7 +71,7 @@ function changeQnaList(pageno,t_ctgr_no){
 /*
 게시글 삭제 
 */
-$(".townBoard_i.delete").on("click", function(){
+$(".townBoard_btn.delete").on("click", function(){
 	let pageno = $(this).attr("pageno");
 	let t_no = $(this).attr("t_no");
 	ToastConfirm.fire({ icon: 'question', 
@@ -126,6 +126,7 @@ $(".townBoard_btn.update_form").on("click", function(){
 /* 
 게시글 수정 
 */ 
+/*
 $(".townBoard_btn.update").on("click", function(){ 
 	if($("#t_title_txt").val() == "" || CKEDITOR.instances.townBoard_content_area.getData() == ""){
 		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
@@ -141,6 +142,7 @@ $(".townBoard_btn.update").on("click", function(){
 							}
 					});
 });
+*/
 
 /*
 새글 등록 폼 
@@ -276,25 +278,20 @@ function townBoardCreate() {
 
 //게시글 수정
 function townBoardUpdateAction(){
-	if (document.product_modify_form.p_title.value == "") {
+	if (document.townBoard_update_form.t_title.value == "") {
       alert("제목을 입력하십시요.");
-      document.product_modify_form.p_title.focus();
-      return false;
-   }
-   if (document.product_modify_form.p_price.value == "") {
-      alert("가격을 입력하십시요.");
-      document.product_modify_form.p_price.focus();
+      document.townBoard_update_form.t_title.focus();
       return false;
    }
 
-   if (document.product_modify_form.p_desc.value == "") {
+   if (document.townBoard_update_form.t_content.value == "") {
       alert("내용을 입력하십시요.");
-      document.product_modify_form.p_desc.focus();
+      document.townBoard_update_form.t_content.focus();
       return false;
    }
  
    
-   const formData1 = new FormData($('#main_contact_form')[0]);
+   const formData1 = new FormData($('#main_contact_form_townBoard')[0]);
    /*
    formData1.append('files',$('#files')[0]); //이게 맞나?
    formData1.append('files',$('#files')[1]); 
@@ -310,7 +307,7 @@ function townBoardUpdateAction(){
       data:formData1,
       success:function(jsonResult){
       console.log(jsonResult);
-      window.location.href="product_list";
+      window.location.href="townBoard_list";
    
    /*
    document.product_modify_form.action = "product_modify_action";
@@ -350,7 +347,7 @@ $("#townMainReplyBtn").on("click", function(e){
 	let pageno = form.find($('input[name="page_no"]')).val();
 	let t_no = form.find($('input[name="t_no"]')).val();
 
-	if($(".t_reply_title").val() == "" || $(".t_reply_content").val() == ""){
+	if($(".form-group.t_reply_title").val() == "" || $(".t_reply_content").val() == ""){
 		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
 		return;
 	}
@@ -395,8 +392,7 @@ $(".btn.btn-primary.rereply").on("click", function(e){
 	let pageno = form.find($('input[name="page_no"]')).val();
 	let t_no = form.find($('input[name="t_no"]')).val();
 	let groupno = form.find($('input[name="groupno"]')).val();
-	alert(groupno);
-	if($(".t_reply_title").val() == "" || $(".t_reply_content").val() == ""){
+	if($(".form-group.t_reply_title").val() == "" || $(".t_reply_content").val() == ""){
 		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
 		return;
 	}
@@ -462,21 +458,102 @@ $(".townReply.delete").on("click", function(){
 
 
 
-
-
 /*
 댓글 토글2
 */
+/** 게시글의 수정버튼, 삭제버튼 **/
 $(document).ready(function() {
   $(".content").hide();
+  var loginId=sessionStorage.getItem('sUserId');
+  var writeId=$('#viewWriterId').text();
+  index=$(this).attr("index");
+  var replyWriteId=$('#viewReplyWriterId_'+index).text();
+  var rereplyWriteId=$('#viewReReplyWriterId_'+index).text();
+  
+/* 게시글 삭제 수정버튼 */
+  if(loginId==writeId){
+  console.log("같은 작성자")
+	$('.townBoard_btn.update_form').show();
+	$('.townBoard_btn.delete').show();
+	
+}else{
+	console.log("다른 작성자")
+	$('.townBoard_btn.update_form').hide();
+	$('.townBoard_btn.delete').hide();
+}
+
+
+/* 댓글의 삭제버튼 */
+  if(loginId==replyWriteId){
+  console.log("같은 작성자")
+	$('.townReply.delete.reply').show();
+	
+}else if(loginId!=replyWriteId){
+	console.log("다른 작성자")
+	$('.townReply.delete.reply').hide();
+}
+
+/* 대댓글의 삭제버튼 */
+  if(loginId==rereplyWriteId){
+  console.log("같은 작성자")
+	$('.townReply.delete.rereply').show();
+	
+}else if(loginId!=rereplyWriteId){
+	console.log("다른 작성자")
+	$('.townReply.delete.rereply').hide();
+}
+
+
+
   $(".heading").click(function()
   {
     $(this).next(".content").slideToggle(500);
   });
 });
+/**************** */
+
+
+/*
+$(document).ready(function() {
+  var loginId=sessionStorage.getItem('sUserId');
+  index=$(this).attr("index");
+  var replyWriteId=$('#viewReplyWriterId_'+index).text();
+
+
+/* 댓글의 삭제버튼 
+  if(loginId==replyWriteId){
+  console.log("같은 작성자")
+	$('.townReply.delete').show();
+	
+}else{
+	console.log("다른 작성자")
+	$('.townReply.delete').hide();
+}
 
 
 
+});
+
+$(document).ready(function() {
+  var loginId=sessionStorage.getItem('sUserId');
+  index=$(this).attr("index");
+  var rereplyWriteId=$('#viewReReplyWriterId_'+index).text();
+
+
+/* 대댓글의 삭제버튼 
+  if(loginId==rereplyWriteId){
+  console.log("같은 작성자")
+	$('.townReply.delete').show();
+	
+}else{
+	console.log("다른 작성자")
+	$('.children>.townReply.delete').hide();
+}
+
+
+
+});
+*/
 
 /*
 ckeditor
@@ -515,7 +592,7 @@ const ToastConfirm =  Swal.mixin({
 	showConfirmButton: true, 
 	confirmButtonColor: '#3085d6',
 	showDenyButton: true,
-	denyButtonText: 'Cancle',
+	denyButtonText: 'Cancel',
 	width: '400px'
  });
 
@@ -530,4 +607,18 @@ $(function(){
 	
 })
 
+////////////// 슬라이드쇼 시작 ///////////////
+$(document).ready(function () {
+    $('.bxslider').bxSlider({
+        auto: true, // 자동으로 애니메이션 시작
+        speed: 500,  // 애니메이션 속도
+        pause: 5000,  // 애니메이션 유지 시간 (1000은 1초)
+        mode: 'horizontal', // 슬라이드 모드 ('fade', 'horizontal', 'vertical' 이 있음)
+        autoControls: true, // 시작 및 중지버튼 보여짐
+        pager: true, // 페이지 표시 보여짐
+        captions: true,
+        slideWidth: 650, // 이미지 위에 텍스트를 넣을 수 있음
+    });
+});
+////////////// 슬라이드쇼 끝 ///////////////
 

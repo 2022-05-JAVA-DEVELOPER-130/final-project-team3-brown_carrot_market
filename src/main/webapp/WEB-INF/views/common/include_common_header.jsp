@@ -88,27 +88,21 @@
                                         </ul>
                                     </li>
                                     <li><a href="townBoard_list">동네생활</a>
-                                        <div class="megamenu">
-                                            <ul class="single-mega cn-col-4">
-                                                <li><a href="townBoard_list">- 전체보기</a></li>
-                                                <li><a href="single-blog.html">- 동네소식</a></li>
-                                                <li><a href="single-blog.html">- 같이해요</a></li>
-                                                <li><a href="single-blog.html">- 동네질문</a></li>
-                                                <li><a href="single-blog.html">- 동네맛집</a></li>
-                                                <li><a href="single-blog.html">- 취미생활</a></li>
-                                                <li><a href="single-blog.html">- 일상</a></li>
-                                            </ul>
-                                            <ul class="single-mega cn-col-4">
-                                                <li><a href="#">- 분실/실종센터</a></li>
-                                                <li><a href="#">- 동네사진전</a></li>
-                                            </ul>
-                                        </div>
+                                    	<ul id="townBoard_list"  class="dropdown">
+                                            <li><a href="townBoard_list">- 전체보기</a></li>
+                                            <li><a href="single-blog.html">- 동네소식</a></li>
+                                            <li><a href="single-blog.html">- 같이해요</a></li>
+                                            <li><a href="single-blog.html">- 동네질문</a></li>
+                                            <li><a href="single-blog.html">- 동네맛집</a></li>
+                                            <li><a href="single-blog.html">- 취미생활</a></li>
+                                            <li><a href="single-blog.html">- 일상</a></li>
+                                        </ul>
                                     </li>
                                     <li><a href="#">흙당근페이</a>
                                         <ul id="brown_carrot_pay" class="dropdown">
                                             <li><a href="payment">포인트 충전</a></li>
-                                            <li><a href="point_list">페이내역</a></li>
                                             <li><a href="#">포인트 출금</a></li>		
+                                            <li><a href="point_list">페이내역</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="faq">자주하는질문</a></li>
@@ -134,7 +128,7 @@
 
                             <!-- Wishlist -->
                             <div id="wishlist-area" class="wishlist-area" >
-                                <a href="wishlist.html" class="wishlist-btn"><i class="icofont-heart"></i></a>
+                                <a href="wishList" class="wishlist-btn"><i class="icofont-heart"></i></a>
                             </div>
                             
                             <!-- transaction list -->
@@ -143,14 +137,14 @@
                                     <i class="icofont-bag"></i>
                                 </div>
                                 <ul id="transaction-dropdown" class="user-meta-dropdown" style="width:150px">
-                                    <li><a href="orders_list">구매 내역</a></li>
+                                    <li><a href="orders_list">구매내역</a></li>
                                     <li><a href="sell_list">판매내역</a></li>
                                 </ul>
                             </div>
 
                             <!-- Chat -->
                             <div id="chat-area" class="cart-area chat-area" >
-                                <a href="chat_room" class="cart--btn" style="display:block;"><i class="icofont-chat"></i> <span class="cart_quantity">1</span></a>
+                                <a href="chat_room" class="cart--btn" style="display:block;background-color:#fbf8ef"><i class="icofont-chat"></i> <span style="background-color:orange;" class="cart_quantity">1</span></a>
 
                                 <!-- Cart Dropdown Content -->
                                 <!--  
@@ -206,15 +200,13 @@
 <!-- [nav] Account Start!!!!! **************************************** -->
                             <!-- Account -->
                             <div id="account-area" class="account-area">
-                                <div class="user-thumbnail">
-                                    <img src="img/user_profile/admin.png" alt="img/bg-img/user.jpg">
-                                </div>
-                                <ul class="user-meta-dropdown">
-                                    <li class="user-title"><span>Hello,</span> Lim Sarah</li>
-                                    <li><a href="my-account.html">My Account</a></li>
-                                   
-                                    <li><a href="login.html"><i class="icofont-logout"></i> 로그아웃</a></li>
-                                </ul>
+                                <div class="user_account user-thumbnail">
+				    			<i class="fa fa-user-circle"></i>
+	                            </div>
+	                            <ul class="user-meta-dropdown">
+	                                <li><a href="user_login"><i class="icofont-ui-user"></i> 회원가입</a></li>
+	                                <li><a href="user_login"><i class="icofont-login"></i> 로그인</a></li>
+	                            </ul>
                             </div>
 <!-- [nav] Account END!!!!! **************************************** -->
                         </div>

@@ -23,5 +23,8 @@ public interface TownWishListService {
 	//관심목록 한개 삭제
 	int deleteTownWishList(int t_wl_no)throws Exception;
 	
+	//관심 글 존재 확인
+	int selectTownWishExist(String user_id, int t_no)throws Exception;
+	
 	
 }

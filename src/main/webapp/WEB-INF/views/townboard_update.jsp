@@ -13,23 +13,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <!-- include_common_top -->
-    <!-- include_common_top -->
+     <!-- Title  -->
+    <title>우리동네 게시글 수정폼</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+    
+    
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/townBoard.css">
+    <link rel="stylesheet" href="css/user.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
-	
-	<!-- javaScript -->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
-	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
-	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 	
 	<!-- toast -->
  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
+   
+	
+	
+	
 	
 	
 	
@@ -73,7 +76,7 @@
     <!-- Message Now Area -->
                 <div class="col-12">
                     <div class="contact_from mb-50">
-                        <form id="townBoard_update_form" method="post" enctype="multipart/form-data" id="main_contact_form_townBoard" action="townboard_update_action">
+                        <form name="townBoard_update_form" method="post" enctype="multipart/form-data" id="main_contact_form_townBoard" action="townboard_update_action">
                         <input type="hidden" name="t_no" value="${townBoard.t_no}" />
                             <div class="contact_input_area">
                                 <div id="success_fail_info"></div>
@@ -121,10 +124,26 @@
                                     <!-- 사진 넣기 임시 -->
                                     <div>
                                     
-                                    <span>사진1: <input type="file" name="files"></span>
-									<span>사진2: <input type="file" name="files"></span>
-									<span>사진3: <input type="file" name="files"></span>
-									<span>사진4: <input type="file" name="files"></span>
+                                    <div class="col-xl-3">
+	                           			 
+                                    
+	                       			 </div>
+									<label for = "img_choose">
+                                    	<div class = "town_pic_upload">사진1 </div>
+                                    </label>
+                                    <input type="file" name="files" id="img_choose"></span>
+                                    <label for = "img_choose">
+                                    	<div class = "town_pic_upload">사진2 </div>
+                                    </label>
+                                    <input type="file" name="files" id="img_choose"></span>
+                                    <label for = "img_choose">
+                                    	<div class = "town_pic_upload">사진3 </div>
+                                    </label>
+                                    <input type="file" name="files" id="img_choose"></span>
+                                    <label for = "img_choose">
+                                    	<div class = "town_pic_upload">사진4 </div>
+                                    </label>
+                                    <input type="file" name="files" id="img_choose"></span>
 									
 									</div>
 									<!-- 사진 넣기 임시 끝-->
@@ -132,7 +151,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                            <!--  <textarea name="t_content" class="form-control" id="t_content" cols="30" rows="10" placeholder="내용" required></textarea> -->
-                                        	<textarea name="t_content" id="t_content" placeholder=" content" value = "${townBoard.t_content }"></textarea>
+                                        	<textarea name="t_content" class="form-control" id="t_content"  cols="30" rows="10"  >${townBoard.t_content }</textarea>
                                         	</div>
                                         </div>
                                         
@@ -234,7 +253,7 @@
                                      <!-- 이미지 업로드 부분 끝-->
                                      
                                     <div class="col-12 text-center">
-                                        <input type="button" class="townBoard_btn update" value="수정하기"  onclick=""/>&nbsp; 
+                                        <input type="button" id="btn_townBoard_update_action" class="townBoard_btn update" value="수정하기"  onclick="townBoardUpdateAction()"/>&nbsp; 
                                         <input class="townBoard_btn list" type="button" pageno="${pageno}" value="동네게시글목록"/>
                                		 </div>
                                 
@@ -275,10 +294,18 @@
     <script src="js/townBoard/townBoard.js"></script>
     
     <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
 	<script type="text/javascript" src="js/townBoard/townBoard.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	
+	<!-- javaScript -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
+	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
+	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+	
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
+
 <style type="text/css">
 #toast-container > .toast {
     background-image: none !important;
@@ -297,7 +324,13 @@
     #toast-container > .toast-warning:before {
      content: "\f27a"; 
  
-}
+} 
+
+ #toast-container > .toast-success:before {
+     content: "\f2b5"; 
+ 
+} 
+
 	
 	
 </body>

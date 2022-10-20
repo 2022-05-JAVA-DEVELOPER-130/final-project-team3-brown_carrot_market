@@ -28,33 +28,45 @@ public class WishListDaoImpl implements WishListDao{
 	}
 
 	@Override
-	public List<WishList> selectWishListAll(String user_id) throws Exception {
+	public List<WishList> selectWishListAll(String user_id)  {
 		System.out.println("### wishListDaoImpl : selectWishListAll 호출");
 		return wishListMapper.selectWishListAll(user_id);
 	}
 
 	@Override
-	public WishList selectWishListOne(int wishlist_no) throws Exception {
+	public WishList selectWishListOne(int wishlist_no) {
 		System.out.println("### wishListDaoImpl : selectWishListOne 호출");
 		return wishListMapper.selectWishListOne(wishlist_no);
 	}
 
 	@Override
-	public int selectWishListCount(String user_id) throws Exception {
+	public int selectWishListCount(String user_id) {
 		System.out.println("### wishListDaoImpl : selectWishListCount 호출");
 		return wishListMapper.selectWishListCount(user_id);
 	}
 
 	@Override
-	public int insertWishList(WishList wishList) throws Exception {
+	public int insertWishList(WishList wishList)  {
 		System.out.println("### wishListDaoImpl : insertWishList 호출");
 		return wishListMapper.insertWishList(wishList);
 	}
 
 	@Override
-	public int deleteWishList(int wishlist_no) throws Exception {
+	public int deleteWishList(int wishlist_no) {
 		System.out.println("### wishListDaoImpl : deleteWishList 호출");
 		return wishListMapper.deleteWishList(wishlist_no);
+	}
+
+	@Override
+	public int checkWish(int p_no, String user_id) {
+		// TODO Auto-generated method stub
+		return wishListMapper.checkWish(p_no, user_id);
+	}
+
+	@Override
+	public int deleteWishPD(int p_no, String user_id) {
+		// TODO Auto-generated method stub
+		return wishListMapper.deleteWishPD(p_no, user_id);
 	}
 	
 	

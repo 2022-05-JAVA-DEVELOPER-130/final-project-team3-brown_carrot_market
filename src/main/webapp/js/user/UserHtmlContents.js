@@ -59,9 +59,7 @@ UserHtmlContents.user_view_addresses=function(addressList){
 	return `<p>지역은 최소 1개 이상 최대 2개까지 설정할 수 있어요.</p>
                         <div class="row">
                             <div class="col-12 col-lg-6 mb-5 mb-lg-0">
-                                <i class="icofont-spinner icofont-spin"></i>
                                 <!--<input type='radio' name='rd_address_no' class='rd_adress1' value="${addressList[0].address_no}" style='margin-bottom:16px'>-->
-                                <!--<h6 class="mb-3" style='display:inline'>Address (1)</h6>-->
                                 
                                 <address>
                                 <input type="hidden" name="address_no" value="${addressList[0].address_no}">
@@ -93,14 +91,13 @@ UserHtmlContents.user_view_addresses=function(addressList){
                                 <!--<a href="#" id="btn_address_second" class="btn btn-primary btn-sm update">주소 수정</a>-->
                             
                             </div>
-                            <button type="button" class="btn btn-primary mb-1 btn-sm">저장</button>
+                            <!--<button type="button" class="btn btn-primary mb-1 btn-sm">저장</button>-->
                         </div>`;
 }
 UserHtmlContents.user_view_addresses_one=function(addressList){
 	return `<p>지역은 최소 1개 이상 최대 2개까지 설정할 수 있어요.</p>
                         <div class="row">
                             <div class="col-12 col-lg-6 mb-5 mb-lg-0">
-                            	<i class="icofont-spinner icofont-spin"></i>
                                 <address>
                                 <input type="hidden" name="address_no" value="${addressList[0].address_no}">
                                 <input type="hidden" name="address_lat" value="${addressList[0].address_lat}">
@@ -116,7 +113,6 @@ UserHtmlContents.user_view_addresses_one=function(addressList){
                             </div>
                             <div class="col-12 col-lg-6">
                                 <!--<input type='radio' name='rd_address_no' class='rd_adress2' value="" disabled style='margin-bottom:16px'>-->
-                                <!--<h6 class="mb-3">Address (2)</h6>-->
                                 <address>
                                 <input type="hidden" name="address_lat" value="">
                                 <input type="hidden" name="address_lng" value="">
@@ -132,7 +128,6 @@ UserHtmlContents.user_view_addresses_zero=function(addressList){
 	return `<p>지역은 최소 1개 이상 최대 2개까지 설정할 수 있어요.</p>
                         <div class="row">
                             <div class="col-12 col-lg-6 mb-5 mb-lg-0">
-                                <!--<h6 class="mb-3">Address (1)</h6>-->
                                 <address>
                                	<input type="hidden" name="address_lat" value="">
                                 <input type="hidden" name="address_lng" value="">
@@ -142,39 +137,26 @@ UserHtmlContents.user_view_addresses_zero=function(addressList){
                                 </address>
                                 <!--<a href="#" id="btn_address_new1" class="btn btn-primary btn-sm insert">주소 입력</a>-->
                             </div>
-                            <!--
-                        	<div class="col-12 col-lg-6">
-                                <h6 class="mb-3">Address (2)</h6>
-                                <address>
-                                <input type="hidden" name="address_lat" value="">
-                                <input type="hidden" name="address_lng" value="">
-                                <input type="hidden" name="address_name" value="">
-                                
-                                <input type="button" id="btn_address_new2" class="btn btn-outline-secondary mb-1 insert" name="" value="주소추가 +" style='border-color:#6c757d'>
-                                </address>
-                                <a href="#" id="btn_address_new2" class="btn btn-primary btn-sm insert">주소 입력</a>
-                            </div>
-                            -->
                         </div>`;
 }
 
 UserHtmlContents.user_profile_edit=function(sUser){
 	return `<h5 class="mb-3">프로필 수정</h5>
-                    	<profile>
-      	               <div class="mb-100" style="margin-bottom: 0px">
-	                        <div class="col-xl-3">
-	                            <img id="user_profile" class="img-circle" src='img/user_profile/${sUser.user_profile}' alt="" user_profile='${sUser.user_profile}' style="width:200px; height:200px; margin:0 auto 0 200px" >
+                   <profile>
+      	               <div class="mb-100" style="margin-bottom: 0px;height:200px;text-align:center">
+	                        <div class="" style="display:inline-block">
+	                            <img id="user_profile" class="img-circle" src='img/user_profile/${sUser.user_profile}' alt="" user_profile='${sUser.user_profile}' style="width:200px; height:200px" >
 	                        </div>
                         	<form id="image_form"  name="image_form" enctype="multipart/form-data" style="margin:0 auto 0 200px">
 	                        	<input type="hidden" name="user_id" id="user_id" value="${sUser.user_id}"><br>
 	                        	<input type="file" name="files" id="chooseF" hidden><br>
-		                        <input type="submit" id="btn_submit" class="btn btn-outline-primary mb-1 edit_profile" value="사진 선택">
-		                        <input type="button" class="btn btn-outline-primary mb-1 remove_profile" value="사진 삭제">
 							</form> 
                         </div>
-						<div class="shortcodes_content mb-100" style="margin-bottom: 0px">
+						<div class="shortcodes_content mb-100" style="margin-bottom: 0px;text-align:right">
+		                        <input type="submit" id="btn_submit" class="btn-carrot btn mb-1 edit_profile" value="사진 선택">
+		                        <input type="button" class="btn-carrot btn mb-1 remove_profile" value="사진 삭제">
 						</div>
-						</profile>`;
+					</profile>`;
 }
 
 UserHtmlContents.user_remove_form=function(msg){

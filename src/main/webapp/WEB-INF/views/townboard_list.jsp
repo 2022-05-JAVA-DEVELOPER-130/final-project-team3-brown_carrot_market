@@ -26,9 +26,10 @@
     <link rel="stylesheet" href="css/townBoard.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
 	<!-- toast -->
- 	<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+ <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
-	<!-- javaScript -->
+   
+
 	
 </head>
 
@@ -77,44 +78,44 @@
                               <li>
                               
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no1" value=1>
-	                              <a href="#" onclick="changeQnaList(1,1)">동네생활 <span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,1)">동네생활 <span class="text-muted"></span></a>
 
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no2" value=2>
-	                              <a href="#" onclick="changeQnaList(1,2)">같이해요<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,2)">같이해요<span class="text-muted"></span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no3" value=3>
-	                              <a href="#" onclick="changeQnaList(1,3)">동네질문<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,3)">동네질문<span class="text-muted"></span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no4" value=4>
-	                              <a href="#" onclick="changeQnaList(1,4)">동네맛집<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,4)">동네맛집<span class="text-muted"></span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no5" value=5>
-	                              <a href="#" onclick="changeQnaList(1,5)">취미생활<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,5)">취미생활<span class="text-muted"></span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no6" value=6>
-	                              <a href="#" onclick="changeQnaList(1,6)">일상<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,6)">일상<span class="text-muted"></span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no7" value=7>
-	                              <a href="#" onclick="changeQnaList(1,7)">분실/실종센터<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,7)">분실/실종센터<span class="text-muted"></span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no8" value=8>
-	                              <a href="#" onclick="changeQnaList(1,8)">동네사건사고<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,8)">동네사건사고<span class="text-muted"></span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no9" value=9>
-	                              <a href="#" onclick="changeQnaList(1,9)">해주세요<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,9)">해주세요<span class="text-muted"></span></a>
                               </li>
                               <li>
 	                              <input type="hidden" class="townBoardCtgrNo" name="t_ctgr_no10" value=10>
-	                              <a href="#" onclick="changeQnaList(1,10)"s>동네사진전<span class="text-muted">(21)</span></a>
+	                              <a href="#" onclick="changeQnaList(1,10)"s>동네사진전<span class="text-muted"></span></a>
                               </li>
                                 
                                
@@ -197,7 +198,7 @@
                             </div>
                             <a href="townboard_view?t_no=${townBoard.t_no}&pageno=${townBoardList.pageMaker.curPage}" t_no="${townBoard.t_no}" pageno="${pageno}" class="blog_title">${townBoard.t_title}</a>
                             <p>${townBoard.t_content}</p>
-                            <a href="single-blog.html">Continue Reading <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-location-arrow" aria-hidden="true"></i> ${townBoard.t_address_name }</a>
                         </div>
                    </c:forEach>
                     </div>
@@ -221,7 +222,7 @@
 
                             	<c:if test="${townBoardList.pageMaker.prevPage > 0}">  
 	            					<li class="page-item">
-	                                    <button class="page-link" onclick="changeQnaList(${data.pageMaker.prevPage});"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+	                                    <button class="page-link" onclick="changeQnaList(${data.pageMaker.prevPage},'0');"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
 	                               	 </li>
                                 </c:if>
                                 <c:forEach var="no" begin="${townBoardList.pageMaker.blockBegin}" end="${townBoardList.pageMaker.blockEnd}">
@@ -229,12 +230,12 @@
 										<li class="page-item active"><button class="page-link" href="#">${no}</button></li>
 									</c:if>
 									<c:if test="${townBoardList.pageMaker.curPage != no}">
-										<li class="page-item"><button class="page-link page" onclick="changeQnaList(${no})">${no}</button></li>
+										<li class="page-item"><button class="page-link page" onclick="changeQnaList(${no},'0')">${no}</button></li>
 									</c:if>
                                 </c:forEach>
                                 <c:if test="${townBoardList.pageMaker.curPage < townBoardList.pageMaker.totPage}">  
 	                                <li class="page-item">
-				                        <button class="page-link" onclick="changeQnaList(${townBoardList.pageMaker.nextPage})"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+				                        <button class="page-link" onclick="changeQnaList(${townBoardList.pageMaker.nextPage},'0')"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
 			                    	 </li>
                                 </c:if>
 
@@ -247,7 +248,6 @@
                     
                 </div>
             </div>
-            //페이징 끝
             
         </div>
     </section>
@@ -310,6 +310,11 @@ margin: auto 0.5em auto -1.5em;
 content: "\f27a";
 
 }
+
+#toast-container > .toast-success:before {
+     content: "\f2b5"; 
+ 
+} 
 	
 </body>
 

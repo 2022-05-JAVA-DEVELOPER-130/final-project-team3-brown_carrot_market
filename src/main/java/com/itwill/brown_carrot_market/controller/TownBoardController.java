@@ -18,10 +18,12 @@ import com.itwill.brown_carrot_market.dto.Address;
 import com.itwill.brown_carrot_market.dto.ProductCategory;
 import com.itwill.brown_carrot_market.dto.TownBoard;
 import com.itwill.brown_carrot_market.dto.TownCategory;
+import com.itwill.brown_carrot_market.dto.TownImage;
 import com.itwill.brown_carrot_market.dto.TownReply;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.TownBoardService;
 import com.itwill.brown_carrot_market.service.TownReplyService;
+import com.itwill.brown_carrot_market.upload_file.service.FilesStorageServiceTownBoard;
 import com.itwill.brown_carrot_market.util.PageMakerDto;
 
 @Controller
@@ -33,6 +35,8 @@ public class TownBoardController {
 	@Autowired
 	@Qualifier("townReplyServiceImpl")
 	private TownReplyService townReplyService;
+	
+	
 	
 	
 	//우리동네 게시판 전체 조회 카테고리까지
@@ -117,6 +121,7 @@ public class TownBoardController {
 	public String townBoard_view(@RequestParam int t_no,@RequestParam int pageno, Model model,HttpSession session, @ModelAttribute TownReply townReply) throws Exception{
 		String forwardPath = "";
 		String sUserId = (String)session.getAttribute("sUserId");
+		Address sAddress = (Address)session.getAttribute("sAddress");
 		
 		try {
 		TownBoard townBoard = townBoardService.selectTownBoardOne(t_no);
@@ -130,6 +135,26 @@ public class TownBoardController {
 		System.out.println("townReplyList"+ townReplyList);
 		//댓글 등록
 		//townReplyService.insertTownBoardReply(townReply);
+		
+		//해당 게시물의 사진 전체 조회
+		List<TownImage> townImageList = townBoard.getTownImageList();
+		model.addAttribute("townImageList", townImageList);
+		
+		if(sUserId != null) {
+			//회원 인기글 리스트
+			List<TownBoard> townBoardListTop = townBoardService.selectMemberTownBoardListTop3(sAddress);
+			model.addAttribute("townBoardListTop", townBoardListTop);
+			System.out.println("townBoard_list컨트롤러 - townBoardListTop: "+townBoardListTop);
+			
+		}else {
+			/*
+			 비회원 인기글 리스트
+			 */
+			List<TownBoard> townBoardListTop = townBoardService.selectNonMemberTownBoardListTop3();
+			model.addAttribute("townBoardListTop", townBoardListTop);
+			System.out.println("townBoard_list컨트롤러 - townBoardListTop: "+townBoardListTop);
+		}
+		
 		
 		
 		}catch (Exception e) {

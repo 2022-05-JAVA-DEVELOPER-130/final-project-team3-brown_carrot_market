@@ -21,20 +21,18 @@
    <link rel="stylesheet" href="css/chat_toast.css">
 
 	<!-- javaScript -->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
-	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
-	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+
 	
 	<!-- toast -->
  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
+   
 
 	
 </head>
 
 <body>
+  
     <!-- Preloader -->
     <div id="preloader">
         <div class="spinner-grow" role="status">
@@ -52,63 +50,23 @@
     <section class="welcome_area">
         <div class="welSlideTwo owl-carousel">
             <!-- Single Slide -->
-            <div class="single_slide home-3 bg-img" style="background-image: url(img/bg-img/9.jpg);">
-                <div class="container h-100">
-                    <div class="row h-100 align-items-center">
-                        <div class="col-12">
-                            <div class="welcome_slide_text text-center">
-                                <p data-animation="fadeInUp" data-delay="100ms">Shoes Collection</p>
-                                <h2 data-animation="fadeInUp" data-delay="300ms">Fancy Shoes</h2>
-                                <a href="#" class="btn btn-primary" data-animation="fadeInUp" data-delay="500ms">Buy Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="single_slide home-3 bg-img" style="background-image: url(img/bg-img/back1.jpg);">
+                
             </div>
 
             <!-- Single Slide -->
-            <div class="single_slide home-3 bg-img" style="background-image: url(img/bg-img/13.jpg);">
-                <div class="container h-100">
-                    <div class="row h-100 align-items-center">
-                        <div class="col-12">
-                            <div class="welcome_slide_text text-center">
-                                <p data-animation="fadeInUp" data-delay="100ms">Latest Trends</p>
-                                <h2 data-animation="fadeInUp" data-delay="300ms">Tree pot</h2>
-                                <a href="#" class="btn btn-primary" data-animation="fadeInUp" data-delay="500ms">Shop Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="single_slide home-3 bg-img" style="background-image: url(img/bg-img/back2-3.jpg);">
+
             </div>
 
             <!-- Single Slide -->
-            <div class="single_slide home-3 bg-img" style="background-image: url(img/bg-img/14.jpg);">
-                <div class="container h-100">
-                    <div class="row h-100 align-items-center">
-                        <div class="col-12">
-                            <div class="welcome_slide_text text-center">
-                                <p data-animation="fadeInUp" data-delay="100ms">Todays Deals <i class="ico-heart"></i></p>
-                                <h2 data-animation="fadeInUp" data-delay="300ms">Sunglass 20% OFF</h2>
-                                <a href="#" class="btn btn-primary" data-animation="fadeInUp" data-delay="500ms">Check Collection</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="single_slide home-3 bg-img" style="background-image: url(img/bg-img/bbb.jpg);">
+                
             </div>
 
             <!-- Single Slide -->
-            <div class="single_slide home-3 bg-img" style="background-image: url(img/bg-img/15.jpg);">
-                <div class="container h-100">
-                    <div class="row h-100 align-items-center">
-                        <div class="col-12">
-                            <div class="welcome_slide_text text-center">
-                                <p data-animation="fadeInUp" data-delay="100ms">Todays Deals</p>
-                                <h2 data-animation="fadeInUp" data-delay="300ms">Woden Chair</h2>
-                                <a href="#" class="btn btn-primary" data-animation="fadeInUp" data-delay="500ms">Buy Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="single_slide home-3 bg-img" style="background-image: url(img/bg-img/16.jpg);">
+               
             </div>
         </div>
     </section>
@@ -131,66 +89,62 @@
                         <!-- Single Slide -->
                         <div class="single_catagory_slide">
                             <a href="#">
-                                <img src="img/product-img/best-1.png" alt="">
+                                <img src="img/product-img/category1-4.png" alt="">
                             </a>
-                            <p>Sports Bra</p>
+                            <p>가전제품</p>
+                        </div>
+
+                        <!-- Single Slide -->
+                        
+                        <div class="single_catagory_slide">
+                            <a href="#">
+                                <img src="img/product-img/category2.png" alt="">
+                            </a>
+                            <p>가구</p>
                         </div>
 
                         <!-- Single Slide -->
                         <div class="single_catagory_slide">
                             <a href="#">
-                                <img src="img/product-img/best-2.png" alt="">
+                                <img src="img/product-img/category3.png" alt="">
                             </a>
-                            <p>Sunglasses</p>
+                            <p>의류</p>
                         </div>
 
                         <!-- Single Slide -->
                         <div class="single_catagory_slide">
                             <a href="#">
-                                <img src="img/product-img/best-3.png" alt="">
+                                <img src="img/product-img/category4.png" alt="">
                             </a>
-                            <p>Watch</p>
+                            <p>생활용품</p>
                         </div>
 
                         <!-- Single Slide -->
                         <div class="single_catagory_slide">
                             <a href="#">
-                                <img src="img/product-img/top-2.png" alt="">
+                                <img src="img/product-img/category5.png" alt="">
                             </a>
-                            <p>Hat</p>
+                            <p>취미/게임/음반</p>
                         </div>
 
                         <!-- Single Slide -->
                         <div class="single_catagory_slide">
                             <a href="#">
-                                <img src="img/product-img/onsale-4.png" alt="">
+                                <img src="img/product-img/category6.png" alt="">
                             </a>
-                            <p>Bottle</p>
+                            <p>도서</p>
                         </div>
-
-                        <!-- Single Slide -->
                         <div class="single_catagory_slide">
                             <a href="#">
-                                <img src="img/product-img/onsale-5.png" alt="">
+                                <img src="img/product-img/category7.png" alt="">
                             </a>
-                            <p>Shoes</p>
+                            <p>기타</p>
                         </div>
 
-                        <!-- Single Slide -->
-                        <div class="single_catagory_slide">
-                            <a href="#">
-                                <img src="img/product-img/onsale-1.png" alt="">
-                            </a>
-                            <p>Speaker</p>
-                        </div>
+                     
+                        
 
-                        <!-- Single Slide -->
-                        <div class="single_catagory_slide">
-                            <a href="#">
-                                <img src="img/product-img/onsale-2.png" alt="">
-                            </a>
-                            <p>Lamp</p>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -276,7 +230,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-heading mb-50">
-                        <h5>Best Selling Products</h5>
+                        <h5>인기 게시글</h5>
                     </div>
                 </div>
             </div>
@@ -287,7 +241,7 @@
                     <div class="single-product-area mb-30">
                         <div class="product_image">
                             <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/1.jpg" alt="">
+                            <img class="normal_img" src="img/product_img/toy1.jpg" alt="" style="width:250px; height:250px;">
 
                             <!-- Product Badge -->
                             <div class="product_badge">
@@ -317,8 +271,8 @@
                                 <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
                             </div>
 
-                            <a href="#">Boutique Silk Dress</a>
-                            <h6 class="product-price">$69.99</h6>
+                            <a href="#">은비깨비가 css대장이에요! </a>
+                            <h6 class="product-price">1035</h6>
                         </div>
                     </div>
                 </div>
@@ -328,7 +282,7 @@
                     <div class="single-product-area mb-30">
                         <div class="product_image">
                             <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/2.jpg" alt="">
+                            <img class="normal_img" src="img/product_img/desk.jpg" alt="" style="width:250px; height:250px;">
 
                             <!-- Product Badge -->
                             <div class="product_badge">
@@ -369,7 +323,7 @@
                     <div class="single-product-area mb-30">
                         <div class="product_image">
                             <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/17.jpg" alt="">
+                            <img class="normal_img" src="img/product_img/chair.jpg" alt="" style="width:250px; height:250px;">
 
                             <!-- Product Badge -->
                             <div class="product_badge">
@@ -410,7 +364,7 @@
                     <div class="single-product-area mb-30">
                         <div class="product_image">
                             <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/4.jpg" alt="">
+                            <img class="normal_img" src="img/product_img/toy2.jpg" alt="" style="width:250px; height:250px;">
 
                             <!-- Product Badge -->
                             <div class="product_badge">
@@ -446,250 +400,15 @@
                     </div>
                 </div>
 
-                <!-- Single Product -->
-                <div class="col-9 col-sm-6 col-md-4 col-lg-3">
-                    <div class="single-product-area mb-30">
-                        <div class="product_image">
-                            <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/5.jpg" alt="">
+                
 
-                            <!-- Product Badge -->
-                            <div class="product_badge">
-                                <span>Top</span>
-                            </div>
-
-                            <!-- Wishlist -->
-                            <div class="product_wishlist">
-                                <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                            </div>
-
-                            <!-- Compare -->
-                            <div class="product_compare">
-                                <a href="compare.html"><i class="icofont-exchange"></i></a>
-                            </div>
-                        </div>
-
-                        <!-- Product Description -->
-                        <div class="product_description">
-                            <!-- Add to cart -->
-                            <div class="product_add_to_cart">
-                                <a href="#"><i class="icofont-cart"></i> Add to Cart</a>
-                            </div>
-
-                            <!-- Quick View -->
-                            <div class="product_quick_view">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                            </div>
-
-                            <a href="#">Boutique Silk Dress</a>
-                            <h6 class="product-price">$69.99</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Product -->
-                <div class="col-9 col-sm-6 col-md-4 col-lg-3">
-                    <div class="single-product-area mb-30">
-                        <div class="product_image">
-                            <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/6.jpg" alt="">
-
-                            <!-- Product Badge -->
-                            <div class="product_badge">
-                                <span>Top</span>
-                            </div>
-
-                            <!-- Wishlist -->
-                            <div class="product_wishlist">
-                                <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                            </div>
-
-                            <!-- Compare -->
-                            <div class="product_compare">
-                                <a href="compare.html"><i class="icofont-exchange"></i></a>
-                            </div>
-                        </div>
-
-                        <!-- Product Description -->
-                        <div class="product_description">
-                            <!-- Add to cart -->
-                            <div class="product_add_to_cart">
-                                <a href="#"><i class="icofont-cart"></i> Add to Cart</a>
-                            </div>
-
-                            <!-- Quick View -->
-                            <div class="product_quick_view">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                            </div>
-
-                            <a href="#">Flower Textured Dress</a>
-                            <h6 class="product-price">$39.99 <span>$49.99</span></h6>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Product -->
-                <div class="col-9 col-sm-6 col-md-4 col-lg-3">
-                    <div class="single-product-area mb-30">
-                        <div class="product_image">
-                            <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/7.jpg" alt="">
-
-                            <!-- Product Badge -->
-                            <div class="product_badge">
-                                <span>Top</span>
-                            </div>
-
-                            <!-- Wishlist -->
-                            <div class="product_wishlist">
-                                <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                            </div>
-
-                            <!-- Compare -->
-                            <div class="product_compare">
-                                <a href="compare.html"><i class="icofont-exchange"></i></a>
-                            </div>
-                        </div>
-
-                        <!-- Product Description -->
-                        <div class="product_description">
-                            <!-- Add to cart -->
-                            <div class="product_add_to_cart">
-                                <a href="#"><i class="icofont-cart"></i> Add to Cart</a>
-                            </div>
-
-                            <!-- Quick View -->
-                            <div class="product_quick_view">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                            </div>
-
-                            <a href="#">Ballerina Dress</a>
-                            <h6 class="product-price">$89.99 <span>$107.99</span></h6>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Product -->
-                <div class="col-9 col-sm-6 col-md-4 col-lg-3">
-                    <div class="single-product-area mb-30">
-                        <div class="product_image">
-                            <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/8.jpg" alt="">
-
-                            <!-- Product Badge -->
-                            <div class="product_badge">
-                                <span>Top</span>
-                            </div>
-
-                            <!-- Wishlist -->
-                            <div class="product_wishlist">
-                                <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                            </div>
-
-                            <!-- Compare -->
-                            <div class="product_compare">
-                                <a href="compare.html"><i class="icofont-exchange"></i></a>
-                            </div>
-                        </div>
-
-                        <!-- Product Description -->
-                        <div class="product_description">
-                            <!-- Add to cart -->
-                            <div class="product_add_to_cart">
-                                <a href="#"><i class="icofont-cart"></i> Add to Cart</a>
-                            </div>
-
-                            <!-- Quick View -->
-                            <div class="product_quick_view">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                            </div>
-
-                            <a href="#">Gracia Plaid Dress</a>
-                            <h6 class="product-price">$139.99</h6>
-                        </div>
-                    </div>
-                </div>
+ 
             </div>
         </div>
     </section>
     <!-- Best Selling Products -->
 
     <!-- Offer Area -->
-    <section class="offer_area section_padding_0_100">
-        <div class="container">
-            <div class="row">
-                <!-- Beach Offer -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="beach_offer_area mb-4 mb-md-0">
-                        <img src="img/product-img/beach.png" alt="beach-offer">
-                        <div class="beach_offer_info">
-                            <p>Upto 70% OFF</p>
-                            <h3>Beach Item</h3>
-                            <a href="#" class="btn btn-primary btn-sm mt-15">SHOP NOW</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-6 col-lg-4">
-                    <!-- Apparels Offer -->
-                    <div class="apparels_offer_area">
-                        <img src="img/product-img/apparels.jpg" alt="Beach-Offer">
-                        <div class="apparels_offer_info d-flex align-items-center">
-                            <div class="apparels-offer-content">
-                                <h4>Apparel &amp; <br><span>Garments</span></h4>
-                                <a href="#" class="btn">Buy Now <i class="icofont-rounded-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Deals of the Week -->
-                    <div class="weekly_deals_area mt-30">
-                        <img src="img/product-img/weekly-offer.jpg" alt="weekly-deals">
-                        <div class="weekly_deals_info">
-                            <h4>Deals of the Week</h4>
-                            <div class="deals_timer">
-                                <ul data-countdown="2021/02/14 14:21:38">
-                                    <!-- Please use event time this format: YYYY/MM/DD hh:mm:ss -->
-                                    <li><span class="days">00</span>days</li>
-                                    <li><span class="hours">00</span>hours</li>
-                                    <li class="d-block blank-timer"></li>
-                                    <li><span class="minutes">00</span>min</li>
-                                    <li><span class="seconds">00</span>sec</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-4">
-                    <div class="row">
-                        <div class="col-12 col-sm-6 col-lg-12">
-                            <!-- Elect Offer -->
-                            <div class="elect_offer_area mt-30 mt-lg-0">
-                                <img src="img/product-img/elect.jpg" alt="Elect-Offer">
-                                <div class="elect_offer_info d-flex align-items-center">
-                                    <div class="elect-offer-content">
-                                        <h4>Electronics</h4>
-                                        <a href="#" class="btn">Buy Now <i class="icofont-rounded-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-lg-12">
-                            <!-- Backpack Offer -->
-                            <div class="backpack_offer_area mt-30">
-                                <img src="img/product-img/backpack.jpg" alt="Backpack-Offer">
-                                <div class="backpack_offer_info">
-                                    <h4>Backpacks</h4>
-                                    <a href="#" class="btn">Buy Now <i class="icofont-rounded-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <!-- Offer Area End -->
 
     <!-- On Sale Products -->
@@ -698,7 +417,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-heading mb-50">
-                        <h5>On Sale Products</h5>
+                        <h5>인기 판매글</h5>
                     </div>
                 </div>
             </div>
@@ -1037,68 +756,9 @@
     <!-- On Sale Products -->
 
     <!-- Special Featured Area -->
-    <section class="special_feature_area pt-5">
-        <div class="container">
-            <div class="row">
-                <!-- Single Feature Area -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single_feature_area mb-5 d-flex align-items-center">
-                        <div class="feature_icon">
-                            <i class="icofont-ship"></i>
-                            <span><i class="icofont-check-alt"></i></span>
-                        </div>
-                        <div class="feature_content">
-                            <h6>Free Shipping</h6>
-                            <p>For orders above $100</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Feature Area -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single_feature_area mb-5 d-flex align-items-center">
-                        <div class="feature_icon">
-                            <i class="icofont-box"></i>
-                            <span><i class="icofont-check-alt"></i></span>
-                        </div>
-                        <div class="feature_content">
-                            <h6>Happy Returns</h6>
-                            <p>7 Days free Returns</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Feature Area -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single_feature_area mb-5 d-flex align-items-center">
-                        <div class="feature_icon">
-                            <i class="icofont-money"></i>
-                            <span><i class="icofont-check-alt"></i></span>
-                        </div>
-                        <div class="feature_content">
-                            <h6>100% Money Back</h6>
-                            <p>If product is damaged</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Feature Area -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single_feature_area mb-5 d-flex align-items-center">
-                        <div class="feature_icon">
-                            <i class="icofont-live-support"></i>
-                            <span><i class="icofont-check-alt"></i></span>
-                        </div>
-                        <div class="feature_content">
-                            <h6>Dedicated Support</h6>
-                            <p>We provide support 24/7</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Special Featured Area -->
+     
+   
+  <!-- Special Featured Area -->
 
     <!-- Footer Area -->
    		<!-- include_common_bottom.jsp start-->
@@ -1124,8 +784,19 @@
     <script src="js/jquery.nice-select.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
+    
+    
+    	<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
+	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
+	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+	
+	 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
 
 <style type="text/css">
+
+
+
 #toast-container > .toast {
     background-image: none !important;
 }
@@ -1149,6 +820,8 @@
      content: "\f2b5"; 
  
 } 
+
+
 
 </body>
 

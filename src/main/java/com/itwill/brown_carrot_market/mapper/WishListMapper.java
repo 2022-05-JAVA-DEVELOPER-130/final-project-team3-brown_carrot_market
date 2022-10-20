@@ -19,5 +19,9 @@ public interface WishListMapper {
 	
 	public int deleteWishList(int wishlist_no);
 	
+	public int checkWish(int p_no,String user_id);
+	
+	public int deleteWishPD(int p_no,String user_id);
+	
 	
 }

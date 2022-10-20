@@ -22,13 +22,26 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/user.css">
+    
+    <!-- toast -->
+ <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+   
 
-    <!-- javaScript -->
+     <!-- javaScript -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/review/review.js"></script>
+	<script type="text/javascript" src="js/sells/sell_list.js"></script>
+	
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
+  
 
+
+	<!-- 탭 기능 자바스크립트 -->
+	
+	
 </head>
 
 <body>
@@ -58,7 +71,30 @@
             </div>
         </div>
     </div>
-    <!-- Breadcumb Area -->
+    <!-- Tab ready -->
+    <div class="container">
+    <div class="row">
+    <div class="col-12">
+    <div class="product_details_tab section_padding_100_0 clearfix">
+    <!-- tabs -->
+    <ul class="nav nav-tabs" role="tablist" id="product-details-tab">
+         <li class="nav-item">
+             <a href="#" class="nav-link active" onclick="sellStatus(0)" data-toggle="tab" role="tab">전체 내역</a>
+          </li>
+          <li class="nav-item">
+             <a href="#" class="nav-link" onclick="sellStatus(1)" data-toggle="tab" role="tab">판매중</a>
+          </li>
+          <li class="nav-item">
+             <a href="#" class="nav-link" onclick="sellStatus(2)" data-toggle="tab" role="tab">예약중</a>
+          </li>
+          <li class="nav-item">
+             <a href="#" class="nav-link" onclick="sellStatus(3)" data-toggle="tab" role="tab">거래 완료</a>
+          </li>
+    </ul>
+    <!-- tab content -->
+    <div class="tab-content">
+    <div role="tabpanel" class="tab-pane fade show active" id="all">
+    <div class="description_area">
     <!-- Cart Area -->
 	    <div class="cart_area section_padding_100_70 clearfix">
 	        <div class="container">
@@ -66,10 +102,13 @@
 	                <div class="col-12">
 	                    <div class="cart-table">
 	                        <div class="table-responsive">
+	                           
+	                           
+	                           
 	                            <table class="table table-bordered mb-30">
 	                                <thead>
 	                                    <tr>
-	                                        <!--<th scope="col"><i class="icofont-ui-delete"></i></th>-->
+	                                       
 	                                        <th scope="col">판매일자</th>
 	                                        <th scope="col">상품 이미지</th>
 	                                        <th scope="col">상품 이름</th>
@@ -78,20 +117,27 @@
 	                                        <th scope="col">후   기</th>
 	                                    </tr>
 	                                </thead>
-	                                <tbody>
+	                <!-- 시작? --> 
+	                                <tbody id="sell_list_start">
 	                                
 									    <c:forEach items="${productList}" var="product" varStatus="status">
 		                                    <tr>
-		                                        <!--<th scope="row">
-		                                            <i class="icofont-close"></i>
-		                                        </th>-->
+		                                       
 		                                        <td>
 				                                    <input type="hidden" class="" name="p_no_${status.index}" value="${product.p_no}" >
 		                                        	<c:set var="product_date" value="${product.p_date}"/>
 		                                        	${fn:substring(product_date,0,10)}
 		                                        </td>
 		                                        <td>
-		                                            <img src="img/product_img/${product.productImagesList[0].pi_name}" onerror="this.src='img/user_profile/newCarrot.jpg'">
+		                                        	<c:set var = "image_name" value = "${product.productImagesList[0].pi_name}"/>
+			                                        <c:choose>
+														<c:when test="${fn:startsWith(image_name, 'http')}">
+				                                            <img src="${product.productImagesList[0].pi_name}" >
+				                                        </c:when>
+														<c:otherwise>
+				                                            <img src="img/product_img/${product.productImagesList[0].pi_name}" onerror="this.src='img/user_profile/newCarrot.jpg'">
+														</c:otherwise>
+													</c:choose>
 		                                        </td>
 		                                        <td>
 		                                            <a href="product_detail?p_no=${product.p_no}">${product.p_title}</a>
@@ -114,20 +160,32 @@
 		                                        <td>
 		                                          	<div id="sell_list">
 		                                            <script>check_isExisted_orders($('input[name=p_no_${status.index}]').val())</script>
-		                                            <a href="#" class="badge ${product.p_no}" id="${Orders.orders_no}" seller_id="${Orders.product.userInfo.user_id}" p_title="${product.p_title}" style="height:20px;font-size:1rem"></a>
+		                                            <a href="#" class="badge ${product.p_no}" id="" seller_id="" p_title="${product.p_title}" style="height:20px;font-size:1rem"></a>
 		                                            </div>
 		                                        </td>
 		                                    </tr>
-										</c:forEach>  
-										
+										</c:forEach> 
+										 
 	                                </tbody>
 	                            </table>
+									</div>	
 	                        </div>
+	                        <!-- 끝? -->
+	                        
+	                        
 	                    </div>
 	                </div>
 	            </div>
 	        </div>
 	    </div>
+	    </div>
+	    </div>
+	    </div>
+	    </div>
+	    </div>
+	    </div>
+	 
+	    
     <!-- Cart Area End -->
 
     <!-- Footer Area -->
@@ -150,6 +208,32 @@
     <script src="js/jquery.nice-select.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
+    
+   
+<style type="text/css">
+#toast-container > .toast {
+    background-image: none !important;
+}
+
+ #toast-container > .toast:before {
+    position: relative;
+    font-family: FontAwesome;
+    font-size: 24px;
+    line-height: 18px;
+    float: left;
+    color: #FFF;
+    padding-right: 0.5em;
+    margin: auto 0.5em auto -1.5em;
+}       
+    #toast-container > .toast-warning:before {
+     content: "\f27a"; 
+ 
+} 
+
+ #toast-container > .toast-success:before {
+     content: "\f2b5"; 
+ 
+} 
 
 </body>
 

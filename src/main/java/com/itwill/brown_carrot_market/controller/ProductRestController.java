@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -184,23 +185,49 @@ public class ProductRestController {
 	
 	@RequestMapping("/product_list_rest")
 	public Map<String,Object> product_list_rest(@RequestParam(required = false, defaultValue = "1") Integer pageno, 
-												HttpSession session, 
+												HttpSession session, HttpServletRequest req,
 												@RequestParam Map<String, Object> map, 
 												@RequestParam(required = false, defaultValue = "0") int p_ctgr_no) throws Exception{
 		Map<String, Object> resultMap = new HashMap<>();
-		PageMakerDto<Product> productList = null;
+		//PageMakerDto<Product> productList = null;
 		String sUserId = (String)session.getAttribute("sUserId");
 		Address sAddress = (Address)session.getAttribute("sAddress");
 		
 		System.out.println("product_list_rest컨트롤러 map :"+map);
 		
 		try {
+		if(sAddress!=null) {
+			PageMakerDto<Product> productLoginList = null;
+			if(p_ctgr_no==0) {
+				productLoginList = productService.selectListByRange(sAddress, pageno);
+				resultMap.put("errorCode", 1); 
+				resultMap.put("errorMsg", "회원 일반 성공");
+				resultMap.put("data", productLoginList);
+			}else {
+				map.put("user_id", sUserId);
+				map.put("address_no", sAddress.getAddress_no());
+				map.put("address", sAddress);
+				productLoginList = productService.selectListByRangeCtgr(map, p_ctgr_no, pageno);
+				resultMap.put("errorCode", 2); 
+				resultMap.put("errorMsg", "회원 카테고리 성공");
+				resultMap.put("data", productLoginList);
+			}
+			
+		}else {
 		//비회원
-		productList = productService.selectProductAll(pageno);
-		resultMap.put("errorCode",3); 
-		resultMap.put("errorMsg", "비회원 일반 성공");
-		resultMap.put("data", productList);
-		
+		PageMakerDto<Product> productList = null;
+			if(p_ctgr_no==0) {
+				productList = productService.selectProductAll(pageno);
+				resultMap.put("errorCode",3); 
+				resultMap.put("errorMsg", "비회원 일반 성공");
+				resultMap.put("data", productList);
+			}else {
+				productList = productService.selectAllByCtgr(p_ctgr_no, pageno);
+				resultMap.put("errorCode",3); 
+				resultMap.put("errorMsg", "비회원 카테고리 성공");
+				resultMap.put("data", productList);
+				}
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 			resultMap.put("errorCode", -1);
