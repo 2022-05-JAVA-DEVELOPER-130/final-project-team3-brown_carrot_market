@@ -68,6 +68,7 @@ public class ProductController {
 		Address sAddress = (Address)session.getAttribute("sAddress");
 		//String forwardPath ="";
 		Product product = productService.selectByOne(p_no);
+		productService.updateProductCount(p_no);
 		System.out.println(product);
 		
 		String user_id = product.getUserInfo().getUser_id();
