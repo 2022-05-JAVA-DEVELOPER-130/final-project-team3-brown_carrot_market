@@ -15,7 +15,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>동네 게시글 보기</title>
+    <title>우리동네 게시글 보기</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -72,8 +72,8 @@
                 <div class="col-12">
                     <h5>게시글 상세보기</h5>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active">Blog Details</li>
+                        <li class="breadcrumb-item"><a href="index.html">흙당근마켓</a></li>
+                        <li class="breadcrumb-item active">우리동네 게시글 상세보기</li>
                     </ol>
                 </div>
             </div>
@@ -181,9 +181,9 @@
                     </div>
                     <!-- Search Post -->
                         <div class="widget-area search_post mb-30">
-                            <h6>Search Post</h6>
+                            <h6>게시글 검색</h6>
                             <form action="#" method="get">
-                                <input id="townBoardSearch" type="search" class="form-control" placeholder="Enter Keyword...">
+                                <input id="townBoardSearch" type="search" class="form-control" placeholder="검색">
                                 <button type="submit" class="btn d-none">Submit</button>
                             </form>
                         </div>
@@ -203,7 +203,8 @@
                 <div>
                  <ul class="bxslider">
 		       <c:forEach var="townImage" items="${townImageList}" begin="0"  step="1"> 
-		
+                 <c:if test="${townBoard.townImageList.size() != 0}">
+		 	   </c:if>
 		      	<li><img src="img/townBoard-img/${townImage.t_img_name}" alt="blog-img"  ></li>
 		 	   </c:forEach> 
       </ul>
@@ -352,7 +353,7 @@
                                     <input type="hidden" class="form-control" name="step" value="1"/>
                                     <input type="hidden" class="form-control" name="depth" value="1"/>
                                     <div class="col-12">
-                                        <button class="btn btn-primary reply"  id="townMainReplyBtn" type="submit">Submit Comment</button>
+                                        <button class="btn btn-primary reply"  id="townMainReplyBtn" type="submit">댓글 등록</button>
                                     </div>
                                 </div>
                             </form>
