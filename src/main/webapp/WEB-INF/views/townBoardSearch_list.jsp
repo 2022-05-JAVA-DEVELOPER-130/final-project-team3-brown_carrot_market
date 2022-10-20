@@ -7,7 +7,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>동네생활 검색</title>
+ 	<!-- Title  -->
+	<title>동네생활 검색</title>
+
+	<!-- Favicon  -->
+    <link rel="icon" href="img/core-img/favicon.ico">
 
 <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/townBoard.css">

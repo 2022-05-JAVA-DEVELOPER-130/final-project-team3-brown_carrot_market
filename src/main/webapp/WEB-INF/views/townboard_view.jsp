@@ -15,7 +15,10 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Bigshop | Responsive E-commerce Template</title>
+    <title>동네 게시글 보기</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="img/core-img/favicon.ico">
     
     <!-- 슬라이드쇼 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
@@ -221,6 +224,7 @@
                         <div class="status-bar mb-15">
                             <a href="#" id="viewWriterId"><i class="icofont-user-male"></i>${townBoard.userInfo.user_id }</a>
                             <a href="#"><i class="icofont-ui-clock"></i> ${townBoard.t_date }</a>
+                            <a href="#"><i class="fa fa-location-arrow"></i> ${townBoard.t_address_name }</a>
                            
                            
                         </div>
@@ -256,7 +260,7 @@
                                             </div>
                                         </div>
                                         <div class="comment-content">
-                                            <h5 class="comment-author"><a href="#">${townReply.userInfo.user_id}</a></h5>
+                                            <h5 class="comment-author" id="viewReplyWriterId_${status.index}">${townReply.userInfo.user_id}</h5>
                                             <p>${townReply.t_reply_title }</p>
                                             <p>${townReply.t_reply_content }</p>
                                             <input class="townReply delete" type="button" pageno="${pageno}" t_no="${townBoard.t_no }" t_reply_no="${townReply.t_reply_no}" value="삭제하기" />
@@ -305,7 +309,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="comment-content">
-		                                            <h5 class="comment-author"><a href="#">${townReply.userInfo.user_id}</a></h5>
+		                                            <h5 class="comment-author" id="viewReReplyWriterId_${status.index }">${townReply.userInfo.user_id}</h5>
 		                                            <p>${townReply.t_reply_title }</p>
 		                                            <p>${townReply.t_reply_content }</p>
 		                                            <input class="townReply delete" type="button" pageno="${pageno}" t_no="${townBoard.t_no }" t_reply_no="${townReply.t_reply_no}" value="삭제하기" />
