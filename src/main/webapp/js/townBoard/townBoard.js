@@ -466,6 +466,7 @@ $(document).ready(function() {
   $(".content").hide();
   var loginId=sessionStorage.getItem('sUserId');
   var writeId=$('#viewWriterId').text();
+  console.log($(this));
   index=$(this).attr("index");
   console.log(index);
   var replyWriteId=$('#viewReplyWriterId_'+index).text();
