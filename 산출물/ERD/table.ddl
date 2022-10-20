@@ -244,8 +244,10 @@ END;
 
 CREATE TABLE chat_room(
 		c_room_no                     		NUMBER(10)		 NULL ,
-		from_id                       		VARCHAR2(10)		 NULL ,
+		from_id                       		VARCHAR2(20)		 NULL ,
 		to_id                         		VARCHAR2(20)		 NULL ,
+		from_id_in                     		NUMBER(10)		 NULL ,
+		to_id_in                            NUMBER(10)		 NULL ,
 		p_no                          		NUMBER(20)		 NULL 
 );
 
