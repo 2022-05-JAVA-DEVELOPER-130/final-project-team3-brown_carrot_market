@@ -79,7 +79,7 @@ color = orange;
 	<!-- Breadcumb Area -->
 	<div class="col-12">
 		<div class="checkout_steps_area">
-			<a class="active" href="/brown_carrot_market/payment"><i class="icofont-check-circled"></i> 페이 충전</a> 
+			<a class="active" href="/brown_carrot_market/payment_deposit"><i class="icofont-check-circled"></i> 페이 충전</a> 
 			<a href="/brown_carrot_market/point_list"><i class="icofont-check-circled"></i> 페이 내역</a> 
 			<a href="/brown_carrot_market/payment_withdraw"><i class="icofont-check-circled"></i> 페이 출금</a>
 		</div>
@@ -164,14 +164,14 @@ color = orange;
 						}
 					});// end ajax	
 					*/
-					var url = "/brown_carrot_market/payment_complete?payment_amount="+payment_amount;
+					var url = "/brown_carrot_market/payment_deposit_complete?payment_amount="+payment_amount;
 					var name = "당근 페이 포인트 충전";
 					var option = "width = 470, height = 650, top = 100, left = 200, location = yes,  resizable=no";
 					window.open(url, name, option);
 					
 				} else {
 					// 결제 실패 시 로직,
-					var url = "/brown_carrot_market/payment_fail";
+					var url = "/brown_carrot_market/payment_deposit_fail";
 					var name = "당근 페이 포인트 충전";
 					var option = "width = 470, height = 650, left = 500, location = yes,  resizable=no";
 					window.open(url, name, option);

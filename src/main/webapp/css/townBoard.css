@@ -261,6 +261,11 @@ li{
 #btn_townBoard_write_action, .townBoard_btn.list{
 	margin-bottom: 30px;
 }
+
+.form-group span{
+	margin-left: 30px;
+}
+
 /*
  .town_pic_upload {
     width: 100px;

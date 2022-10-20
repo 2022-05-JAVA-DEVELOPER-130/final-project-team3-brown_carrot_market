@@ -276,7 +276,7 @@
 				                                <div class="row">
 				                                    <div class="col-12 rereply">
 				                                        <div class="form-group mb-30">
-				                                            <input type="text" name="t_reply_title" class="t_reply_title" placeholder="댓글 제목" tabindex="1">
+				                                            <input type="text" name="t_reply_title" class="t_reply_title" placeholder="대댓글 제목" tabindex="1">
 				                                        </div>
 				                                    </div>
 				                                    <div class="col-12 rereply">
@@ -293,7 +293,7 @@
                                  				     -->
 				                                    <input type="hidden" class="form-control" name="depth" value="2"/>
 				                                    <div class="col-12 ">
-				                                        <button  class="btn btn-primary rereply" type="submit" >Submit Comment</button>
+				                                        <button  class="btn btn-primary rereply" type="submit" >등록</button>
 				                                    </div>
 				                                </div>
 				                            </form>

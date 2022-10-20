@@ -62,7 +62,7 @@
     
     <!-- Checkout Steps Area -->
     <div class="checkout_steps_area">
-		<a href="/brown_carrot_market/payment"><i class="icofont-check-circled"></i> 페이 충전</a> 
+		<a href="/brown_carrot_market/payment_deposit"><i class="icofont-check-circled"></i> 페이 충전</a> 
 		<a class="active" href="/brown_carrot_market/point_list"><i class="icofont-check-circled"></i> 페이 내역</a> 
 		<a href="/brown_carrot_market/payment_withdraw"><i class="icofont-check-circled"></i> 페이 출금</a>
 	</div>
@@ -92,22 +92,25 @@
 	                                    <tr>
 	                                        <td>${transfer.transfer_date}</td>
 	                                        <td>${transfer.transfer_deposit}</td>
-	                                        <td>${-transfer.transfer_withdraw}</td>
+	                                        <td>${transfer.transfer_withdraw}</td>
 	                                        <td>${transfer.t_balance}</td>
 	                                        <td>
-	                                        <c:choose>
-	                                        	<c:when test="${transfer.orders.orders_no > 0}">
-	                                        	<c:choose>
-	                                        		<c:when test="${transfer.transfer_deposit == 0}">
-	                                        			송금
-	                                        		</c:when>
-	                                        		<c:otherwise>
-														입금	                                        				
-	                                        		</c:otherwise>
-	                                        	</c:choose>
-	                                        	</c:when>
-	                                        	<c:otherwise>
-														포인트 충전                                        				
+	                                        	<c:choose>	
+	                                        		<c:when test="${transfer.orders.orders_no > 0}">
+		                                        		<c:choose>
+		                                        			<c:when test="${transfer.transfer_deposit == 0}">
+		                                        				송금
+		                                        			</c:when>
+		                                        			<c:otherwise>
+																입금	                                        				
+		                                        			</c:otherwise>
+		                                        		</c:choose>
+		                                        		<c:otherwise>
+		                                        			포인트 출금
+		                                        		</c:otherwise>
+		                                      	  </c:when>
+		                                        <c:otherwise>
+													포인트 충전                                        				
 	                                        	</c:otherwise>
 	                                        	</c:choose>
 	                                        </td>

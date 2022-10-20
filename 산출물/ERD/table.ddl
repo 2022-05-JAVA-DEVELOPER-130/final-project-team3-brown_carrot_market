@@ -1,3 +1,4 @@
+
 DROP TABLE review_img CASCADE CONSTRAINTS;
 DROP TABLE promise CASCADE CONSTRAINTS;
 DROP TABLE review CASCADE CONSTRAINTS;
@@ -42,16 +43,6 @@ DROP SEQUENCE p_category_p_ctgr_no_SEQ;
 
 CREATE SEQUENCE p_category_p_ctgr_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-CREATE TRIGGER p_category_p_ctgr_no_TRG
-BEFORE INSERT ON p_category
-FOR EACH ROW
-BEGIN
-IF :NEW.p_ctgr_no IS NOT NULL THEN
-  SELECT p_category_p_ctgr_no_SEQ.NEXTVAL INTO :NEW.p_ctgr_no FROM DUAL;
-END IF;
-END;
-
-
 CREATE TABLE product(
 		p_no                          		NUMBER(20)		 NULL ,
 		p_title                       		VARCHAR2(500)		 NULL ,
@@ -71,15 +62,6 @@ CREATE TABLE product(
 DROP SEQUENCE product_p_no_SEQ;
 
 CREATE SEQUENCE product_p_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
-CREATE TRIGGER product_p_no_TRG
-BEFORE INSERT ON product
-FOR EACH ROW
-BEGIN
-IF :NEW.p_no IS NOT NULL THEN
-  SELECT product_p_no_SEQ.NEXTVAL INTO :NEW.p_no FROM DUAL;
-END IF;
-END;
 
 
 CREATE TABLE payment(
@@ -102,15 +84,6 @@ DROP SEQUENCE orders_orders_no_SEQ;
 
 CREATE SEQUENCE orders_orders_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-CREATE TRIGGER orders_orders_no_TRG
-BEFORE INSERT ON orders
-FOR EACH ROW
-BEGIN
-IF :NEW.orders_no IS NOT NULL THEN
-  SELECT orders_orders_no_SEQ.NEXTVAL INTO :NEW.orders_no FROM DUAL;
-END IF;
-END;
-
 
 CREATE TABLE transfer(
 		transfer_no                   		NUMBER(10)		 NULL ,
@@ -126,16 +99,6 @@ DROP SEQUENCE transfer_transfer_no_SEQ;
 
 CREATE SEQUENCE transfer_transfer_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-CREATE TRIGGER transfer_transfer_no_TRG
-BEFORE INSERT ON transfer
-FOR EACH ROW
-BEGIN
-IF :NEW.transfer_no IS NOT NULL THEN
-  SELECT transfer_transfer_no_SEQ.NEXTVAL INTO :NEW.transfer_no FROM DUAL;
-END IF;
-END;
-
-
 CREATE TABLE product_img(
 		pi_no                         		NUMBER(10)		 NULL ,
 		pi_name                       		VARCHAR2(50)		 NULL ,
@@ -146,16 +109,6 @@ DROP SEQUENCE product_img_pi_no_SEQ;
 
 CREATE SEQUENCE product_img_pi_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-CREATE TRIGGER product_img_pi_no_TRG
-BEFORE INSERT ON product_img
-FOR EACH ROW
-BEGIN
-IF :NEW.pi_no IS NOT NULL THEN
-  SELECT product_img_pi_no_SEQ.NEXTVAL INTO :NEW.pi_no FROM DUAL;
-END IF;
-END;
-
-
 CREATE TABLE wishlist(
 		wishlist_no                   		NUMBER(10)		 NULL ,
 		p_no                          		NUMBER(20)		 NULL ,
@@ -165,15 +118,6 @@ CREATE TABLE wishlist(
 DROP SEQUENCE wishlist_wishlist_no_SEQ;
 
 CREATE SEQUENCE wishlist_wishlist_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
-CREATE TRIGGER wishlist_wishlist_no_TRG
-BEFORE INSERT ON wishlist
-FOR EACH ROW
-BEGIN
-IF :NEW.wishlist_no IS NOT NULL THEN
-  SELECT wishlist_wishlist_no_SEQ.NEXTVAL INTO :NEW.wishlist_no FROM DUAL;
-END IF;
-END;
 
 
 CREATE TABLE address(
@@ -189,16 +133,6 @@ DROP SEQUENCE address_address_no_SEQ;
 
 CREATE SEQUENCE address_address_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-CREATE TRIGGER address_address_no_TRG
-BEFORE INSERT ON address
-FOR EACH ROW
-BEGIN
-IF :NEW.address_no IS NOT NULL THEN
-  SELECT address_address_no_SEQ.NEXTVAL INTO :NEW.address_no FROM DUAL;
-END IF;
-END;
-
-
 CREATE TABLE invitation(
 		invi_no                       		NUMBER(10)		 NULL ,
 		invi_email                    		VARCHAR2(100)		 NULL ,
@@ -208,15 +142,6 @@ CREATE TABLE invitation(
 DROP SEQUENCE invitation_invi_no_SEQ;
 
 CREATE SEQUENCE invitation_invi_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
-CREATE TRIGGER invitation_invi_no_TRG
-BEFORE INSERT ON invitation
-FOR EACH ROW
-BEGIN
-IF :NEW.invi_no IS NOT NULL THEN
-  SELECT invitation_invi_no_SEQ.NEXTVAL INTO :NEW.invi_no FROM DUAL;
-END IF;
-END;
 
 
 CREATE TABLE notice(
@@ -232,15 +157,6 @@ DROP SEQUENCE notice_notice_no_SEQ;
 
 CREATE SEQUENCE notice_notice_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-CREATE TRIGGER notice_notice_no_TRG
-BEFORE INSERT ON notice
-FOR EACH ROW
-BEGIN
-IF :NEW.notice_no IS NOT NULL THEN
-  SELECT notice_notice_no_SEQ.NEXTVAL INTO :NEW.notice_no FROM DUAL;
-END IF;
-END;
-
 
 CREATE TABLE chat_room(
 		c_room_no                     		NUMBER(10)		 NULL ,
@@ -255,16 +171,6 @@ DROP SEQUENCE chat_room_c_room_no_SEQ;
 
 CREATE SEQUENCE chat_room_c_room_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-CREATE TRIGGER chat_room_c_room_no_TRG
-BEFORE INSERT ON chat_room
-FOR EACH ROW
-BEGIN
-IF :NEW.c_room_no IS NOT NULL THEN
-  SELECT chat_room_c_room_no_SEQ.NEXTVAL INTO :NEW.c_room_no FROM DUAL;
-END IF;
-END;
-
-
 CREATE TABLE chat_contents(
 		c_content_no                  		NUMBER(10)		 NULL ,
 		c_content                     		VARCHAR2(100)		 NULL ,
@@ -278,16 +184,6 @@ DROP SEQUENCE chat_contents_c_content_no_SEQ;
 
 CREATE SEQUENCE chat_contents_c_content_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-CREATE TRIGGER chat_contents_c_content_no_TRG
-BEFORE INSERT ON chat_contents
-FOR EACH ROW
-BEGIN
-IF :NEW.c_content_no IS NOT NULL THEN
-  SELECT chat_contents_c_content_no_SEQ.NEXTVAL INTO :NEW.c_content_no FROM DUAL;
-END IF;
-END;
-
-
 CREATE TABLE town_category(
 		t_ctgr_no                     		NUMBER(10)		 NULL ,
 		t_ctgr_name                   		VARCHAR2(100)		 NULL 
@@ -297,14 +193,6 @@ DROP SEQUENCE town_category_t_ctgr_no_SEQ;
 
 CREATE SEQUENCE town_category_t_ctgr_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-CREATE TRIGGER town_category_t_ctgr_no_TRG
-BEFORE INSERT ON town_category
-FOR EACH ROW
-BEGIN
-IF :NEW.t_ctgr_no IS NOT NULL THEN
-  SELECT town_category_t_ctgr_no_SEQ.NEXTVAL INTO :NEW.t_ctgr_no FROM DUAL;
-END IF;
-END;
 
 
 CREATE TABLE town_board(
@@ -324,16 +212,6 @@ DROP SEQUENCE town_board_t_no_SEQ;
 
 CREATE SEQUENCE town_board_t_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-CREATE TRIGGER town_board_t_no_TRG
-BEFORE INSERT ON town_board
-FOR EACH ROW
-BEGIN
-IF :NEW.t_no IS NOT NULL THEN
-  SELECT town_board_t_no_SEQ.NEXTVAL INTO :NEW.t_no FROM DUAL;
-END IF;
-END;
-
-
 CREATE TABLE town_wishlist(
 		t_wl_no                       		NUMBER(10)		 NULL ,
 		user_id                       		VARCHAR2(10)		 NULL ,
@@ -344,16 +222,6 @@ DROP SEQUENCE town_wishlist_t_wl_no_SEQ;
 
 CREATE SEQUENCE town_wishlist_t_wl_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-CREATE TRIGGER town_wishlist_t_wl_no_TRG
-BEFORE INSERT ON town_wishlist
-FOR EACH ROW
-BEGIN
-IF :NEW.t_wl_no IS NOT NULL THEN
-  SELECT town_wishlist_t_wl_no_SEQ.NEXTVAL INTO :NEW.t_wl_no FROM DUAL;
-END IF;
-END;
-
-
 CREATE TABLE town_img(
 		t_img_no                      		NUMBER(10)		 NULL ,
 		t_img_name                    		VARCHAR2(100)		 NULL ,
@@ -363,16 +231,6 @@ CREATE TABLE town_img(
 DROP SEQUENCE town_img_t_img_no_SEQ;
 
 CREATE SEQUENCE town_img_t_img_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
-CREATE TRIGGER town_img_t_img_no_TRG
-BEFORE INSERT ON town_img
-FOR EACH ROW
-BEGIN
-IF :NEW.t_img_no IS NOT NULL THEN
-  SELECT town_img_t_img_no_SEQ.NEXTVAL INTO :NEW.t_img_no FROM DUAL;
-END IF;
-END;
-
 
 CREATE TABLE town_reply(
 		t_reply_no                    		NUMBER(10)		 NULL ,
@@ -390,16 +248,6 @@ DROP SEQUENCE town_reply_t_reply_no_SEQ;
 
 CREATE SEQUENCE town_reply_t_reply_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-CREATE TRIGGER town_reply_t_reply_no_TRG
-BEFORE INSERT ON town_reply
-FOR EACH ROW
-BEGIN
-IF :NEW.t_reply_no IS NOT NULL THEN
-  SELECT town_reply_t_reply_no_SEQ.NEXTVAL INTO :NEW.t_reply_no FROM DUAL;
-END IF;
-END;
-
-
 CREATE TABLE town_reaction(
 		t_reac_no                     		NUMBER(10)		 NULL ,
 		t_reac_type                   		NUMBER(10)		 NULL ,
@@ -410,16 +258,6 @@ CREATE TABLE town_reaction(
 DROP SEQUENCE town_reaction_t_reac_no_SEQ;
 
 CREATE SEQUENCE town_reaction_t_reac_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
-CREATE TRIGGER town_reaction_t_reac_no_TRG
-BEFORE INSERT ON town_reaction
-FOR EACH ROW
-BEGIN
-IF :NEW.t_reac_no IS NOT NULL THEN
-  SELECT town_reaction_t_reac_no_SEQ.NEXTVAL INTO :NEW.t_reac_no FROM DUAL;
-END IF;
-END;
-
 
 CREATE TABLE review(
 		review_no                     		NUMBER(10)		 NULL ,
@@ -433,15 +271,6 @@ CREATE TABLE review(
 DROP SEQUENCE review_review_no_SEQ;
 
 CREATE SEQUENCE review_review_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
-CREATE TRIGGER review_review_no_TRG
-BEFORE INSERT ON review
-FOR EACH ROW
-BEGIN
-IF :NEW.review_no IS NOT NULL THEN
-  SELECT review_review_no_SEQ.NEXTVAL INTO :NEW.review_no FROM DUAL;
-END IF;
-END;
 
 
 CREATE TABLE promise(
@@ -462,16 +291,6 @@ CREATE TABLE review_img(
 DROP SEQUENCE review_img_review_img_no_SEQ;
 
 CREATE SEQUENCE review_img_review_img_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
-CREATE TRIGGER review_img_review_img_no_TRG
-BEFORE INSERT ON review_img
-FOR EACH ROW
-BEGIN
-IF :NEW.review_img_no IS NOT NULL THEN
-  SELECT review_img_review_img_no_SEQ.NEXTVAL INTO :NEW.review_img_no FROM DUAL;
-END IF;
-END;
-
 
 
 ALTER TABLE userinfo ADD CONSTRAINT IDX_userinfo_PK PRIMARY KEY (user_id);

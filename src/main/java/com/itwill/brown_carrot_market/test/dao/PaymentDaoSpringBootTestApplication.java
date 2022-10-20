@@ -19,7 +19,8 @@ public class PaymentDaoSpringBootTestApplication {
 	application.setWebApplicationType(WebApplicationType.NONE);
 	ConfigurableApplicationContext context=application.run(args);
 	PaymentDao paymentDao=(PaymentDao)context.getBean(PaymentDao.class);
-	System.out.println(paymentDao.insertPayment(new Payment("test-code2", "test-card", 50000, null, new UserInfo("carrot8", null, null, null,null,0,0,null,null))));
+//	System.out.println(paymentDao.insertPayment_Deposit(new Payment("test-code2", "test-card", 50000, null, new UserInfo("carrot8", null, null, null,null,0,0,null,null))));
+//	System.out.print(paymentDao.insertPayment_Withdraw(new Payment("test-code2", "test-card", 50000, null, new UserInfo("carrot8", null, null, null,null,0,0,null,null))));
 //	System.out.println(paymentDao.selectPaymentById("carrot8"));
 	}
 }

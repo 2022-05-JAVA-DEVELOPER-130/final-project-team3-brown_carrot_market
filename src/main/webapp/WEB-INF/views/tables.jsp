@@ -61,10 +61,10 @@
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
-                    <h5>Board</h5>
+                    <h5>공지사항</h5>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Board</li>
+                        <li class="breadcrumb-item"><a href="#">흙당근마켓</a></li>
+                        <li class="breadcrumb-item active">공지사항</li>
                     </ol>
                 </div>
             </div>
