@@ -168,12 +168,12 @@
                             <span class="text-muted">(8 Reviews)</span>
                         </div>
                         -->
-                        <h4 class="price mb-4">가격 : ${product.p_price} 원 </h4>
+                        <h4 align="right"  ><i class="fa fa-money"></i>가격 : ${product.p_price} 원 </h4>
                         
                         <!-- Overview -->
        
                          <div class="short_overview mb-4">
-                         	<p>조회수  ${product.p_count}</p>
+                         	<p align="right"><i class="icofont-eye-alt"></i>조회수  ${product.p_count}</p>
                          </div>
 
                         <!-- Color Option -->
@@ -183,7 +183,7 @@
                        
 
                         <!-- Add to Cart Form -->
-                        <form class="cart clearfix my-5 d-flex flex-wrap align-items-center" method="post" name="chatStart">
+                        <form  method="post" name="chatStart">
                             <!--  
                             <div class="quantity">
                                 <input type="number" class="qty-text form-control" id="qty2" step="1" min="1" max="12" name="quantity" value="1">
@@ -207,57 +207,36 @@
 						<div class="form-group" name="statePopup" id="statePopup">
 							 <input type="hidden" name="user_id" value="${product.userInfo.user_id}" />
                  			 <input type="hidden" name="p_no" id="p_no" value="${product.p_no}" />
+                             	
                              	<c:if test="${product.p_sell eq 1}">
-		                                        		<c:out value="판매중"></c:out>
+		                            <c:out value="판매중"></c:out>
 		                        </c:if>
 		                        
-		                        
 		                        <c:if test="${product.p_sell eq 2}">
-		                     <select id="p_sell" name="p_sell" class="custom-select form-control w-100">
-                             <!--  
-                             <option selected disabled="disabled">
-		                     -->
+		                     	<select style="position: relative; left: 160px" id="p_sell" name="p_sell" class="custom-select form-control w-100">
 		                          <c:out value="예약중"></c:out>
-		                           <option value="1">판매중으로 변경</option>
-                            		<option value="3">판매완료로 변경</option>
-                            <!--  		
-		                     </option>
-		                      -->
-		                     </select>
-		                     </c:if>
-		                                        	
-		                                        	
+		                         <option value="1">판매중으로 변경</option>
+                            	 <option value="3">판매완료로 변경</option>
+		                     	</select>
+		                     	</c:if>
+        	
 		                     <c:if test="${product.p_sell eq 3}">
 		                            <c:out value="판매완료"></c:out>
 		                     </c:if>
                              
- 
-
-
-		                  
-                             
-                             
                              <c:if test="${product.p_sell eq 1}">
-                            <!--  <button type="button" id="btn_product_modify_sell_action" class="btn btn-primary mt-1 mt-md-0 ml-1 ml-md-3" onclick="productSell()">판매상태수정</button>-->
-                            <button type="button" class="btn btn_popup btn-primary mt-1 mt-md-0 ml-1 ml-md-3" id="btn_popup" >판매상태 수정</button>
+                            <button type="button" style="position: relative; left: 280px" class="btn btn_popup btn-primary mt-1 mt-md-0 ml-1 ml-md-3" id="btn_popup" >판매상태 수정</button>
                             </c:if>
-                            
                             <c:if test="${product.p_sell eq 2}">
-                            <button type="button" id="btn_product_modify_sell_action" class="btn btn-primary mt-1 mt-md-0 ml-1 ml-md-3" onclick="productSell()">판매상태수정</button>
-                            
+                            <button type="button" style="position: relative; left: 330px" id="btn_product_modify_sell_action" class="btn btn-primary mt-1 mt-md-0 ml-1 ml-md-3" onclick="productSell()">판매상태수정</button>
                             </c:if>
-                            
-                            
                       	</div>
 						</form>
 						
                         <!-- Others Info -->
-                        <div class="others_info_area mb-3 d-flex flex-wrap">
-                        	<!--  
-                            <a class="add_to_wishlist" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 찜하기</a>
-                            -->
+                        <div class="others_info_area mb-3 d-flex flex-wrap" >
                            <a class="" href="product_modify_form?p_no=${product.p_no}" p_no="${product.p_no}" id="product_modify_form"><i class="fa fa-pencil" aria-hidden="true"></i> 수정하기</a>
-                            <a class="share_with_friend" href="product_delete_action"><i class="fa fa-close" aria-hidden="true"></i> 삭제하기</a>
+                           <a class="delete_action" href="#" onclick="productDelete()"><i class="fa fa-close" aria-hidden="true"></i> 삭제하기</a>
                         </div>
 
                         <!-- Size Guide -->

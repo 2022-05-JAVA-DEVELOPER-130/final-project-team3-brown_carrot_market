@@ -199,15 +199,16 @@
                                             			</div>
 		                                        	</c:if>
 
-                                        <!-- Wishlist -->
+                                        <!-- Wishlist 
                                         <div class="product_wishlist">
                                             <a href="wishlist.html"><i class="icofont-heart"></i></a>
                                         </div>
 
-                                        <!-- Compare -->
+                                        <!-- Compare 
                                         <div class="product_compare">
                                             <a href="compare.html"><i class="icofont-exchange"></i></a>
                                         </div>
+                                        -->
                                     </div>
 
                                     <!-- Product Description -->
@@ -217,9 +218,28 @@
 
                                         <!-- Quick View -->
                                         
-                                        <p class="brand_name">Top</p>
+                                        <p class="brand_name">
+                                        <c:if test="${product.productCategory.p_ctgr_no eq 1}">
+                                        <c:out value="가전제품"></c:out>
+                                        </c:if>
+                                        <c:if test="${product.productCategory.p_ctgr_no eq 2}">
+                                        <c:out value="가구"></c:out>
+                                        </c:if>
+                                        <c:if test="${product.productCategory.p_ctgr_no eq 3}">
+                                        <c:out value="의류"></c:out>
+                                        </c:if>
+                                        <c:if test="${product.productCategory.p_ctgr_no eq 4}">
+                                        <c:out value="생활용품"></c:out>
+                                        </c:if>
+                                        <c:if test="${product.productCategory.p_ctgr_no eq 5}">
+                                        <c:out value="취미/게임/음반/도서"></c:out>
+                                        </c:if>
+                                        <c:if test="${product.productCategory.p_ctgr_no eq 6}">
+                                        <c:out value="기타"></c:out>
+                                        </c:if>
+                                        </p>
                                          <a href="product_detail?p_no=${product.p_no}" p_no="${product.p_no}">${product.p_title}</a>
-                                        <h6 class="product-price">가격: ${product.p_price}</h6>
+                                        <h6 class="product-price">가격: ${product.p_price} 원</h6>
 
                                         <p class="product-short-desc">${product.p_address_name}</p>
                                         <p class="product-short-desc">${product.p_desc}</p>
