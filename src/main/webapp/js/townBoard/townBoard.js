@@ -465,6 +465,25 @@ index=$(e.target).attr("index");
 */
 $(document).ready(function() {
   $(".content").hide();
+  var loginId=sessionStorage.getItem('sUserId');
+  var writeId=$('#viewWriterId').text();
+  
+
+  if(loginId==writeId){
+  console.log("같은 작성자")
+	$('.townBoard_btn.update_form').show();
+	$('.townBoard_btn.delete').show();
+	
+}else{
+	console.log("다른 작성자")
+	$('.townBoard_btn.update_form').hide();
+	$('.townBoard_btn.delete').hide();
+}
+
+	
+
+ 
+
   $(".heading").click(function()
   {
     $(this).next(".content").slideToggle(500);
