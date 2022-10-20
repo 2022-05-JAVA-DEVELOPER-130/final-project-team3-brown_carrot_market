@@ -10,6 +10,27 @@
 function productList() {
    window.location.href='product_list';
 }
+
+$('#deleteProductBtn').click(function(e){
+	
+	e.preventDefault();
+	e.stopPropagation();
+	
+	$.ajax({
+		url:'deleteProduct',
+		method:'POST',
+		data:{
+			"p_no":$("#p_no").val()
+		},
+		dataType:"json",
+		success:function(result){
+			console.log("삭제 여부 :"+ result.data);
+			}
+	});
+});
+
+
+
 function productCreate() {
    if (document.product_write_form.p_title.value == "") {
       alert("제목을 입력하십시요.");
