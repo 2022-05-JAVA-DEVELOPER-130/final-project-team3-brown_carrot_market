@@ -92,7 +92,7 @@
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <select id="p_ctgr_no" name="p_ctgr_no" class="custom-select form-control w-100">
-                                                <option selected disabled="disabled">${product.productCategory.p_ctgr_name}</option>
+                                                <option value="${product.productCategory.p_ctgr_no}">현재 카테고리 : ${product.productCategory.p_ctgr_name}</option>
                                                 <option value="1">-가전제품</option>
                                                 <option value="2">-가구</option>
                                                 <option value="3">-의류</option>
@@ -103,17 +103,16 @@
                                         </div>
                                     </div>
                                     <!-- 사진 넣기 임시 -->
-                                    <div class="form-group">
+                                    <div>
                                     
                                     <div class="col-xl-3">
-	                           			 <img id="product" src='img/product_img/${product.productImagesList[0].pi_name}' alt="" pi_name='${product.productImagesList[0].pi_name}' style="width:100px; height:100px; border:1px solid #ddd;
-                                    						position:relative;" ><br>
-                                    <span>${product.productImagesList[0].pi_name}<input type="file" name="files"></span>
+	                           
 	                       			 </div>
                         			
-									<span>사진2: <input type="file" name="files"></span>
-									<span>사진3: <input type="file" name="files"></span>
-									<span>사진4: <input type="file" name="files"></span>
+									<span>사진1: <input type="file" name="files"></span> 
+                                    <span>사진2: <input type="file" name="files"></span> 
+                                    <span>사진3: <input type="file" name="files"></span> 
+                                    <span>사진4: <input type="file" name="files"></span> 
 									
 									
 									</div>

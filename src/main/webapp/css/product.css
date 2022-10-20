@@ -89,4 +89,31 @@ li{
       top: 0;
       width: 15px;
       z-index: 1; }
-      
+
+/*************쓰기폼***************/ 
+.contact_from mb-50{
+	width: 500px;
+	margin-bottom: 50px;
+}
+
+
+#t_content{
+	margin-top: 10px;
+	margin-bottom:30px;
+	height: 300px;
+	resize: none;
+}
+
+#btn_townBoard_write_action, .townBoard_btn.list{
+	margin-bottom: 30px;
+}
+
+
+
+
+#category_list ul{
+	width: 100px;
+}
+/*************쓰기폼끝**************/
+
+

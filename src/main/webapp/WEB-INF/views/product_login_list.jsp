@@ -240,9 +240,9 @@
                                         </p>
                                          <a href="product_detail?p_no=${product.p_no}" p_no="${product.p_no}">${product.p_title}</a>
                                         <h6 class="product-price">가격: ${product.p_price} 원</h6>
-
                                         <p class="product-short-desc">${product.p_address_name}</p>
                                         <p class="product-short-desc">${product.p_desc}</p>
+										
                                     </div>
                                 </div>
                             </div>

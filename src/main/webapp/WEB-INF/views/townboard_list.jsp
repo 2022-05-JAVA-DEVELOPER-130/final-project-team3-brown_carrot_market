@@ -16,7 +16,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>동네생활</title>
+    <title>우리동네생활</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -51,10 +51,10 @@
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
-                    <h5>Blog</h5>
+                    <h5>우리동네 게시물 리스트</h5>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active">Blog</li>
+                        <li class="breadcrumb-item"><a href="index.html">흙당근마켓</a></li>
+                        <li class="breadcrumb-item active">전체보기</li>
                     </ol>
                 </div>
             </div>

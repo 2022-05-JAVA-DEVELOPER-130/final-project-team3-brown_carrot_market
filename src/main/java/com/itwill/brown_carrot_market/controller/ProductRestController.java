@@ -236,4 +236,18 @@ public class ProductRestController {
 		
 		return resultMap;
 	}
+	
+	@RequestMapping("/deleteProduct")
+	public Map<String,Object> deleteProduct(@RequestParam int p_no,HttpSession session)throws Exception{
+		Map<String, Object> resultMap = new HashMap<>();
+		int result =0;
+		
+		result=productService.deleteByPNo(p_no);
+		
+		resultMap.put("data", result);
+		
+		return resultMap;
+	}
+	
+	
 }
