@@ -46,14 +46,14 @@
 <hr>
 <br>
 	<div>
-		<h1>포인트 충전 성공</h1>
-		<h3>포인트 충전을 성공하였습니다.</h3>
+		<h1>포인트 출금 성공</h1>
+		<h3>포인트 출금을 성공하였습니다.</h3>
 		<br>
 		<hr>
 		<br><br>
-		<h4>포인트 잔액 : <label>${userInfo.user_point} 포인트</label></h4>
+		<h4>포인트 입금 계좌 : ${account} </h4>
 		<br><br>
-		<h4>포인트 충전금액 : <label>${payment_amount} 포인트</label></h4>
+		<h4>출금 포인트 : ${amount} 포인트</h4>
 	</div>
 	<div>
 	</div>

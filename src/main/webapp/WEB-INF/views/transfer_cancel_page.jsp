@@ -80,8 +80,8 @@
 	<br>
 	<br>
 		<div>
-			<button type="button" id="TransferCancel_Submit">송금하기</button>
-			<button type="button" id="TransferCancel_Cancel">취소</button>
+			<button type="button" id="TransferCancel_Submit">송금취소</button>
+			<button type="button" id="TransferCancel_Cancel">닫기</button>
 		</div>
 	<style type="text/css">
 	

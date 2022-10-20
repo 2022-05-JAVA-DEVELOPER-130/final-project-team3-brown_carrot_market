@@ -44,10 +44,6 @@ public class TransferDaoImpl implements TransferDao{
 		return transferMapper.insert_Transfer_Cancel_Deposit(p_no);
 	}
 
-	@Override
-	public int insert_Point_Deposit(int payment_amount, String user_id) throws Exception {
-		return transferMapper.insert_Point_Deposit(payment_amount, user_id);
-	}
 
 	@Override
 	public int insert_Transfer_Cancel_Withdraw(int p_no) throws Exception {
@@ -55,6 +51,16 @@ public class TransferDaoImpl implements TransferDao{
 		return transferMapper.insert_Transfer_Cancel_Withdraw(p_no);
 	}
 
+	@Override
+	public int insert_Point_Deposit(int payment_amount, String user_id) throws Exception {
+		return transferMapper.insert_Point_Deposit(payment_amount, user_id);
+	}
+
+	@Override
+	public int insert_Point_Withdraw(int amount, String user_id) throws Exception {
+		return transferMapper.insert_Point_Withdraw(amount, user_id);
+	}
+	
 	@Override
 	public List<Transfer> selectById(String user_id) throws Exception {
 		System.out.println("#### TransferDaoImpl : selectById(String user_id) 호출  ");
@@ -67,10 +73,15 @@ public class TransferDaoImpl implements TransferDao{
 	}
 
 	@Override
-	public int update_Point_By_Id(String user_id) throws Exception{
-		return transferMapper.update_Point_By_ID(user_id);
+	public int update_Point_By_Id_Deposit(String user_id) throws Exception{
+		return transferMapper.update_Point_By_Id_Deposit(user_id);
 	}
 
-	
+	@Override
+	public int update_Point_By_Id_Withdraw(String user_id) throws Exception{
+		return transferMapper.update_Point_By_Id_Withdraw(user_id);
+	}
+
+
 	
 }
