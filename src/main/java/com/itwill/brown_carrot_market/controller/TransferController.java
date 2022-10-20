@@ -25,8 +25,6 @@ public class TransferController {
 	private ProductService productService;
 	@Autowired
 	private UserInfoService userInfoService;
-	@Autowired
-	private OrdersService ordersSrvice;
 	
 	@LoginCheck
 	@RequestMapping(value = "/point_list")
