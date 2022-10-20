@@ -3,15 +3,17 @@
 <mapper namespace="com.itwill.brown_carrot_market.mapper.OrdersMapper">
 	<resultMap id="ordersResultMap" type="com.itwill.brown_carrot_market.dto.Orders">
 		<result column="orders_no" property="orders_no" />
+		<result column="orders_date" property="orders_date" />
 		<result column="user_id" property="userinfo.user_id" />
 			<association property="transfer" javaType="com.itwill.brown_carrot_market.dto.Transfer">
 				<result column="transfer_no" property="transfer_no" />
-		<result column="transfer_deposit" property="transfer_deposit" />
-		<result column="transfer_withdraw" property="transfer_withdraw" />
-		<result column="transfer_date" property="transfer_date"/>
-		<result column="user_id" property="user_id"/>
+				<result column="transfer_deposit" property="transfer_deposit" />
+				<result column="transfer_withdraw" property="transfer_withdraw" />
+				<result column="transfer_date" property="transfer_date"/>
+				<result column="user_id" property="user_id"/>
 			<association property="orders" javaType="com.itwill.brown_carrot_market.dto.Orders">
 				<result column="orders_no" property="orders_no"/>
+				<result column="orders_date" property="orders_date" />
 				<result column="user_id" property="userinfo.user_id"/>
 					<association property="product" javaType="com.itwill.brown_carrot_market.dto.Product">
 						<result property="p_no" column="p_no" />
@@ -59,7 +61,7 @@
 	</resultMap>
 	
 	<select id="selectAllById" resultMap="ordersResultMap">
-		select o.*,s.*, s.user_id seller_id from orders o
+		select o.*,s.*, o.orders_date, s.user_id seller_id, o.orders_date from orders o
 			join (select pi.pi_no, pi.pi_name, p.p_no, p.p_title, p.p_date, p.p_price, p.p_sell,p.user_id from product p left outer join product_img pi on p.p_no=pi.p_no)s on o.p_no = s.p_no where o.user_id=#{user_id} order by s.pi_no desc
 		<!-- select * from (select * from orders o join (select pi.pi_no, pi.pi_name, p.p_no, p.p_title, p.p_date, p.p_price, p.p_sell from product p join product_img pi on p.p_no=pi.p_no)s on o.p_no = s.p_no where user_id='carrot8' order by s.pi_no desc) where rownum=1 -->	
 	</select>

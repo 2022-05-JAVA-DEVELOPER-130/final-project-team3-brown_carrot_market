@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <%@taglib prefix="s"  uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html lang="en">
  
@@ -14,14 +15,13 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Brwon Carrot Market</title>
+    <title>Brown Carrot Market</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="style.css">
-	
 	
 	<!-- toast -->
 	<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
@@ -76,60 +76,67 @@
                             <!-- Carousel Inner -->
                            
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <a class="gallery_img" href="img/product_img/${product.productImagesList[0].pi_name}" title="First Slide">
-                                        <img class="d-block w-100" src="img/product_img/${product.productImagesList[0].pi_name}" alt="First slide">
-                                    </a>
+                            
+                            <div class="carousel-item active">
+                            
+								<c:set var = "image_name" value = "${product.productImagesList[0].pi_name}"/>
+	                                <c:choose>
+										<c:when test="${fn:startsWith(image_name, 'http')}">
+		                                    <a class="gallery_img" href="${product.productImagesList[0].pi_name}" title="First Slide">
+		                                        <img class="d-block w-100" src="${product.productImagesList[0].pi_name}" alt="First slide">
+		                                    </a>
+	                                       </c:when>
+										<c:otherwise>
+		                                    <a class="gallery_img" href="img/product_img/${product.productImagesList[0].pi_name}" title="First Slide">
+		                                        <img class="d-block w-100" src="img/product_img/${product.productImagesList[0].pi_name}" alt="First slide">
+		                                    </a>
+										</c:otherwise>
+									</c:choose>	
+                                    
                                     <!-- Product Badge -->
                                     <div class="product_badge">
-                                        <span class="badge-new">New</span>
+                                        <%-- <span class="badge-new">New</span> --%>
                                     </div>
-                                </div>
-                              
-                             
-                                <div class="carousel-item">
-                                    <a class="gallery_img" href="img/product-img/pd-big-thumb-2.png" title="Second Slide">
-                                        <img class="d-block w-100" src="img/product-img/pd-big-thumb-2.png" alt="Second slide">
-                                    </a>
-                                    <!-- Product Badge -->
-                                    <div class="product_badge">
-                                        <span class="badge-new">Sale</span>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <a class="gallery_img" href="img/product-img/pd-big-thumb-3.png" title="Third Slide">
-                                        <img class="d-block w-100" src="img/product-img/pd-big-thumb-3.png" alt="Third slide">
-                                    </a>
-                                    <!-- Product Badge -->
-                                    <div class="product_badge">
-                                        <span class="badge-new">-20%</span>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <a class="gallery_img" href="img/product-img/pd-big-thumb-4.png" title="Fourth Slide">
-                                        <img class="d-block w-100" src="img/product-img/pd-big-thumb-4.png" alt="Fourth slide">
-                                    </a>
-                                    <!-- Product Badge -->
-                                    <div class="product_badge">
-                                        <span class="badge-new">Hot</span>
-                                    </div>
-                                </div>
-                            </div>
+	                                </div>
+	                                <c:forEach items="${product.productImagesList}" var="productImages" varStatus="status" begin="1">
+	                                <div class="carousel-item">
+	                                
+		                                <c:set var = "image_name" value = "${productImages.pi_name}"/>
+		                                <c:choose>
+											<c:when test="${fn:startsWith(image_name, 'http')}">
+			                                    <a class="gallery_img" href="${image_name}" title="First Slide">
+			                                        <img class="d-block w-100" src="${image_name}" alt="First slide">
+			                                    </a>
+		                                       </c:when>
+											<c:otherwise>
+			                                    <a class="gallery_img" href="img/product_img/${image_name}" title="First Slide">
+			                                        <img class="d-block w-100" src="img/product_img/${image_name}" alt="First slide">
+			                                    </a>
+											</c:otherwise>
+										</c:choose>	
+	                                
+	                                    <!-- Product Badge -->
+	                                    <div class="product_badge">
+	                                        <%-- <span class="badge-new">New</span> --%>
+	                                    </div>
+	                                </div>
+                             		</c:forEach>
+                         </div>
 						
                             <!-- Carosel Indicators -->
                             <ol class="carousel-indicators">
                        
-                                <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(img/product_img/${product.productImagesList[i].pi_name});">
-                                </li>
-                              
-                                
-                               
-                                <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(img/product_img/${product.productImagesList[i+1].pi_name});">
-                                </li>
-                                <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(img/product-img/pd-big-thumb-3.png);">
-                                </li>
-                                <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(img/product-img/pd-big-thumb-4.png);">
-                                </li>
+                                <c:forEach items="${product.productImagesList}" var="productImages" varStatus="status">
+                              		<c:set var = "image_name" value = "${productImages.pi_name}"/>
+	                                <c:choose>
+										<c:when test="${fn:startsWith(image_name, 'http')}">
+	     		                        	<li data-target="#product_details_slider" data-slide-to="${status.index}+1" style="background-image: url(${productImages.pi_name});"></li>
+	                                    </c:when>
+										<c:otherwise>
+	     		                        	<li data-target="#product_details_slider" data-slide-to="${status.index}+1" style="background-image: url(img/product_img/${productImages.pi_name});"></li>
+										</c:otherwise>
+									</c:choose>	
+                               </c:forEach>
                               
                             </ol>
                         </div>
@@ -138,15 +145,18 @@
 
                 <!-- Single Product Description -->
                 <div class="col-12 col-lg-6">
-                    <div class="single_product_desc">
-                        <h4 class="title mb-2">내 게시글</h4>
+                    <div class="single_product_desc"><div style="display:inline;">
+                        <img style="max-width: 8%;
+   						 border-radius: 400px;"alt="" src="img/user_profile/${product.userInfo.user_profile}"> 내 게시글</div><div style="display: inline-block;
+   						 width: 70%;"> <p style="margin-left: 85%;"> ${product.userInfo.user_freshness} &nbsp;<i style="color:orange;"class="fa fa-thermometer"></i></p></div>
                         <!--  
                         <h4 class="title mb-2">판매자 : ${product.userInfo.user_id}</h4>
                         -->
-                        <h4 class="title mb-2">매너온도 : ${product.userInfo.user_freshness}</h4>
                         <hr>
+             
                         <h3 class="title mb-2">${product.p_title}</h3>
-                        <p>${product.productCategory.p_ctgr_name}</p>
+                        <p style="font-size:10px;">${product.productCategory.p_ctgr_name}</p>
+                        <hr>
                         <!--  
                         <div class="single_product_ratings mb-2">
                             <i class="fa fa-star" aria-hidden="true"></i>
@@ -160,12 +170,9 @@
                         <h4 class="price mb-4">가격 : ${product.p_price} 원 </h4>
                         
                         <!-- Overview -->
-                        <div class="short_overview mb-4">
-                            <h5>설명</h5>
-                            <h6>${product.p_desc}</h6>
-                        </div>
+       
                          <div class="short_overview mb-4">
-                         	<p>관심  ${product.p_wish} 조회수  ${product.p_count}</p>
+                         	<p>조회수  ${product.p_count}</p>
                          </div>
 
                         <!-- Color Option -->
@@ -197,11 +204,8 @@
                         
 						<form class="cart clearfix my-5 d-flex flex-wrap align-items-center" method="post" name="statePopup" id="statePopup">
 						<div class="form-group" name="statePopup" id="statePopup">
-							 
-							 
 							 <input type="hidden" name="user_id" value="${product.userInfo.user_id}" />
                  			 <input type="hidden" name="p_no" id="p_no" value="${product.p_no}" />
-                            
                              	<c:if test="${product.p_sell eq 1}">
 		                                        		<c:out value="판매중"></c:out>
 		                        </c:if>
@@ -209,17 +213,21 @@
 		                        
 		                        <c:if test="${product.p_sell eq 2}">
 		                     <select id="p_sell" name="p_sell" class="custom-select form-control w-100">
+                             <!--  
                              <option selected disabled="disabled">
-		                                        		<c:out value="예약중"></c:out>
-		                                      <option value="1">판매중으로 변경</option>
-                            				  <option value="3">판매완료로 변경</option>
+		                     -->
+		                          <c:out value="예약중"></c:out>
+		                           <option value="1">판매중으로 변경</option>
+                            		<option value="3">판매완료로 변경</option>
+                            <!--  		
 		                     </option>
+		                      -->
 		                     </select>
 		                     </c:if>
 		                                        	
 		                                        	
 		                     <c:if test="${product.p_sell eq 3}">
-		                                        		<c:out value="판매완료"></c:out>
+		                            <c:out value="판매완료"></c:out>
 		                     </c:if>
                              
  
@@ -252,535 +260,115 @@
                         </div>
 
                         <!-- Size Guide -->
-                      
-
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                <!--  
-                    <div class="product_details_tab section_padding_100_0 clearfix">
-                    -->
-                        <!-- Tabs 
-                        <ul class="nav nav-tabs" role="tablist" id="product-details-tab">
-                            <li class="nav-item">
-                                <a href="#description" class="nav-link active" data-toggle="tab" role="tab">Description</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#reviews" class="nav-link" data-toggle="tab" role="tab">Reviews <span class="text-muted">(3)</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#addi-info" class="nav-link" data-toggle="tab" role="tab">Additional Information</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#refund" class="nav-link" data-toggle="tab" role="tab">Return &amp; Cancellation</a>
-                            </li>
-                        </ul>
-                        -->
-                        <!-- Tab Content 
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane fade show active" id="description">
-                                <div class="description_area">
-                                    <h5>Description</h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur nulla similique deserunt nemo ea eum expedita, et repellat repudiandae unde quia molestias deleniti incidunt, ad cupiditate. Corporis ipsam minus officiis neque magni harum accusantium nobis labore veritatis, consectetur ab rerum.</p>
-
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex cum dolore, adipisci vitae quidem. Quaerat tenetur explicabo tempore beatae dolor. Quo ipsa labore, itaque ea ratione. Ratione labore quae corporis.</p>
-
-                                    <div class="embed-responsive embed-responsive-16by9 mb-3">
-                                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/tjvOOKx7Ytw?ecver=1" allowfullscreen></iframe>
-                                    </div>
-
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic facere quos repudiandae ratione maiores accusantium suscipit, quod fugiat. Fugit quod laborum quidem, quos adipisci harum aspernatur, repudiandae, beatae expedita rerum ipsam dicta molestias et quis sapiente maiores amet laudantium minus nostrum. Nobis amet veritatis autem illo neque voluptas culpa vero iusto distinctio perspiciatis.</p>
-
-                                    <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima animi ab, quis atque, sed nulla veniam quisquam amet perspiciatis, aliquam dolore tempora, consequuntur beatae quae dolor rem repellendus! Vitae architecto sequi quo eaque iusto impedit suscipit non maxime sint totam, nesciunt necessitatibus iste nulla ab, veritatis assumenda.</p>
-                                </div>
-                            </div>
-
-                            <div role="tabpanel" class="tab-pane fade" id="reviews">
-                                <div class="reviews_area">
-                                    <ul>
-                                        <li>
-                                            <div class="single_user_review mb-15">
-                                                <div class="review-rating">
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <span>for Quality</span>
-                                                </div>
-                                                <div class="review-details">
-                                                    <p>by <a href="#">Designing World</a> on <span>12 Sep 2019</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="single_user_review mb-15">
-                                                <div class="review-rating">
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <span>for Design</span>
-                                                </div>
-                                                <div class="review-details">
-                                                    <p>by <a href="#">Designing World</a> on <span>12 Sep 2019</span></p>
-                                                </div>
-                                            </div>
-                                            <div class="single_user_review">
-                                                <div class="review-rating">
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <span>for Value</span>
-                                                </div>
-                                                <div class="review-details">
-                                                    <p>by <a href="#">Designing World</a> on <span>12 Sep 2019</span></p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="submit_a_review_area mt-50">
-                                    <h4>Submit A Review</h4>
-                                    <form action="#" method="post">
-                                        <div class="form-group">
-                                            <span>Your Ratings</span>
-                                            <div class="stars">
-                                                <input type="radio" name="star" class="star-1" id="star-1">
-                                                <label class="star-1" for="star-1">1</label>
-                                                <input type="radio" name="star" class="star-2" id="star-2">
-                                                <label class="star-2" for="star-2">2</label>
-                                                <input type="radio" name="star" class="star-3" id="star-3">
-                                                <label class="star-3" for="star-3">3</label>
-                                                <input type="radio" name="star" class="star-4" id="star-4">
-                                                <label class="star-4" for="star-4">4</label>
-                                                <input type="radio" name="star" class="star-5" id="star-5">
-                                                <label class="star-5" for="star-5">5</label>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="name">Nickname</label>
-                                            <input type="email" class="form-control" id="name" placeholder="Nazrul">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="options">Reason for your rating</label>
-                                            <select class="form-control small right py-0 w-100" id="options">
-                                                <option>Quality</option>
-                                                <option>Value</option>
-                                                <option>Design</option>
-                                                <option>Price</option>
-                                                <option>Others</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="comments">Comments</label>
-                                            <textarea class="form-control" id="comments" rows="5" data-max-length="150"></textarea>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Submit Review</button>
-                                    </form>
-                                </div>
-                            </div>
-
-                            <div role="tabpanel" class="tab-pane fade" id="addi-info">
-                                <div class="additional_info_area">
-                                    <h5>Additional Info</h5>
-                                    <p>What should I do if I receive a damaged parcel?
-                                        <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit impedit similique qui, itaque delectus labore.</span></p>
-                                    <p>I have received my order but the wrong item was delivered to me.
-                                        <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis quam voluptatum beatae harum tempore, ab?</span></p>
-                                    <p>Product Receipt and Acceptance Confirmation Process
-                                        <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum ducimus, temporibus soluta impedit minus rerum?</span></p>
-                                    <p class="mb-0">How do I cancel my order?
-                                        <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum eius eum, minima!</span></p>
-                                </div>
-                            </div>
-
-                            <div role="tabpanel" class="tab-pane fade" id="refund">
-                                <div class="refund_area">
-                                    <h6>Return Policy</h6>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa quidem, eos eius laboriosam voluptates totam mollitia repellat rem voluptate obcaecati quas fuga similique impedit cupiditate vitae repudiandae. Rem, tenetur placeat!</p>
-
-                                    <h6>Return Criteria</h6>
-                                    <ul class="mb-30 ml-30">
-                                        <li><i class="icofont-check"></i> Package broken</li>
-                                        <li><i class="icofont-check"></i> Physical damage in the product</li>
-                                        <li><i class="icofont-check"></i> Software/hardware problem</li>
-                                        <li><i class="icofont-check"></i> Accessories missing or damaged etc.</li>
-                                    </ul>
-
-                                    <h6>Q. What should I do if I receive a damaged parcel?</h6>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit impedit similique qui, itaque delectus labore.</p>
-
-                                    <h6>Q. I have received my order but the wrong item was delivered to me.</h6>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis quam voluptatum beatae harum tempore, ab?</p>
-
-                                    <h6>Q. Product Receipt and Acceptance Confirmation Process</h6>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum ducimus, temporibus soluta impedit minus rerum?</p>
-
-                                    <h6>Q. How do I cancel my order?</h6>
-                                    <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum eius eum, minima!</p>
-                                </div>
-                            </div>
+                      </div>
+                      <div class="single_product_desc"><br><p>${product.p_desc}</p><br></div>
+					</div>
+					</div>
+					</div>
+        
+                
                             
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-                            -->
     </section>
     <!-- Single Product Details Area End -->
-
-    <!-- Related Products Area -->
-    <section class="you_may_like_area section_padding_0_100 clearfix">
+<section class="you_may_like_area section_padding_0_100 clearfix">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="section_heading new_arrivals">
-                        <h5>You May Also Like</h5>
+                    <div class="section_heading new_arrivals" style="background-color: #FFA500">
+                        <h5>이웃의 상품</h5>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-            
+                </div>
+                <div class="row">
+                
                 <div class="col-12">
-                    <div class="you_make_like_slider owl-carousel">
-                        <!-- Single Product -->
+                <div class="you_make_like_slider owl-carousel">
+                
+                <c:forEach items="${userProductList}" var="product">
+                <!-- Single Product -->
                         <div class="single-product-area">
                             <div class="product_image">
                                 <!-- Product Image -->
+                                <!-- 
                                 <img class="normal_img" src="img/product-img/new-1-back.png" alt="">
                                 <img class="hover_img" src="img/product-img/new-1.png" alt="">
-
+								-->
+								<c:choose>
+                                        <c:when test="${!empty product.productImagesList[0].pi_name}">
+                                        <c:set var = "image_name" value = "${product.productImagesList[0].pi_name}"/>
+                                        <c:choose>
+											<c:when test="${fn:startsWith(image_name, 'http')}">
+		                                        <img class="normal_img" style="width:300px; height:300px;" src="${product.productImagesList[0].pi_name}"  alt="">
+		                                        <img class="hover_img" style="width:300px; height:300px;" src="${product.productImagesList[0].pi_name}" alt="">
+	                                        </c:when>
+											<c:otherwise>
+		                                        <img class="normal_img_test" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}"  alt="">
+		                                        <img class="hover_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
+											</c:otherwise>
+										</c:choose>
+										</c:when>
+										
+										<c:otherwise>
+										<img class="normal_img" style="width:300px; height:300px;" src="img/chat-img/logo_carrot.png" alt="">
+                                        <img class="hover_img" style="width:300px; height:300px;" src="img/chat-img/logo_carrot.png" alt="">
+										
+										</c:otherwise>
+										</c:choose>
                                 <!-- Product Badge -->
                                 <div class="product_badge">
-                                    <span>New</span>
+                                    <span>
+                                     <c:if test="${product.p_sell eq 1}">
+		                                        		<c:out value="판매중"></c:out>
+		                                        	</c:if>
+		                                        	<c:if test="${product.p_sell eq 2}">
+		                                        		<c:out value="예약중"></c:out>
+		                                        	</c:if>
+		                                        	<c:if test="${product.p_sell eq 3}">
+		                                        		<c:out value="판매완료"></c:out>
+		                                        	</c:if>
+                                    </span>
                                 </div>
 
                                 <!-- Wishlist -->
-                                <div class="product_wishlist">
-                                    <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                                </div>
+                               
 
                                 <!-- Compare -->
-                                <div class="product_compare">
-                                    <a href="compare.html"><i class="icofont-exchange"></i></a>
-                                </div>
+                                
                             </div>
 
                             <!-- Product Description -->
                             <div class="product_description">
                                 <!-- Add to cart -->
-                                <div class="product_add_to_cart">
-                                    <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
-                                </div>
+                                
 
                                 <!-- Quick View -->
-                                <div class="product_quick_view">
-                                    <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                                </div>
+                                
 
-                                <p class="brand_name">Top</p>
-                                <a href="#">Boutique Silk Dress</a>
-                                <h6 class="product-price">$48.99</h6>
+                                <p class="brand_name">
+                                <c:if test="${product.p_sell eq 1}">
+		                                        		<c:out value="판매중"></c:out>
+		                                        	</c:if>
+		                                        	<c:if test="${product.p_sell eq 2}">
+		                                        		<c:out value="예약중"></c:out>
+		                                        	</c:if>
+		                                        	<c:if test="${product.p_sell eq 3}">
+		                                        		<c:out value="판매완료"></c:out>
+		                                        	</c:if>
+                                </p>
+                                <a href="product_detail?p_no=${product.p_no}" p_no="${product.p_no}">${product.p_title}</a>
+                                <h6 class="product-price">${product.p_price} 원</h6>
                             </div>
                         </div>
-                        
-
-                        <!-- Single Product -->
-                        <div class="single-product-area">
-                            <div class="product_image">
-                                <!-- Product Image -->
-                                <img class="normal_img" src="img/product-img/new-6.png" alt="">
-                                <img class="hover_img" src="img/product-img/new-6-back.png" alt="">
-
-                                <!-- Product Badge -->
-                                <div class="product_badge">
-                                    <span>New</span>
-                                </div>
-
-                                <!-- Wishlist -->
-                                <div class="product_wishlist">
-                                    <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                                </div>
-
-                                <!-- Compare -->
-                                <div class="product_compare">
-                                    <a href="compare.html"><i class="icofont-exchange"></i></a>
-                                </div>
-                            </div>
-
-                            <!-- Product Description -->
-                            <div class="product_description">
-                                <!-- Add to cart -->
-                                <div class="product_add_to_cart">
-                                    <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
-                                </div>
-
-                                <!-- Quick View -->
-                                <div class="product_quick_view">
-                                    <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                                </div>
-
-                                <p class="brand_name">Lim</p>
-                                <a href="#">Gracia Plaid Dress</a>
-                                <h6 class="product-price">$17.63</h6>
-                            </div>
-                        </div>
-
-                        <!-- Single Product -->
-                        <div class="single-product-area">
-                            <div class="product_image">
-                                <!-- Product Image -->
-                                <img class="normal_img" src="img/product-img/new-2.png" alt="">
-                                <img class="hover_img" src="img/product-img/new-2-back.png" alt="">
-
-                                <!-- Product Badge -->
-                                <div class="product_badge">
-                                    <span>New</span>
-                                </div>
-
-                                <!-- Wishlist -->
-                                <div class="product_wishlist">
-                                    <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                                </div>
-
-                                <!-- Compare -->
-                                <div class="product_compare">
-                                    <a href="compare.html"><i class="icofont-exchange"></i></a>
-                                </div>
-                            </div>
-
-                            <!-- Product Description -->
-                            <div class="product_description">
-                                <!-- Add to cart -->
-                                <div class="product_add_to_cart">
-                                    <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
-                                </div>
-
-                                <!-- Quick View -->
-                                <div class="product_quick_view">
-                                    <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                                </div>
-
-                                <p class="brand_name">Sarah</p>
-                                <a href="#">Flower Textured Dress</a>
-                                <h6 class="product-price">$24 <span>$49</span></h6>
-                            </div>
-                        </div>
-
-                        <!-- Single Product -->
-                        <div class="single-product-area">
-                            <div class="product_image">
-                                <!-- Product Image -->
-                                <img class="normal_img" src="img/product-img/new-4.png" alt="">
-                                <img class="hover_img" src="img/product-img/new-4-back.png" alt="">
-
-                                <!-- Product Badge -->
-                                <div class="product_badge">
-                                    <span>New</span>
-                                </div>
-
-                                <!-- Wishlist -->
-                                <div class="product_wishlist">
-                                    <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                                </div>
-
-                                <!-- Compare -->
-                                <div class="product_compare">
-                                    <a href="compare.html"><i class="icofont-exchange"></i></a>
-                                </div>
-                            </div>
-
-                            <!-- Product Description -->
-                            <div class="product_description">
-                                <!-- Add to cart -->
-                                <div class="product_add_to_cart">
-                                    <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
-                                </div>
-
-                                <!-- Quick View -->
-                                <div class="product_quick_view">
-                                    <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                                </div>
-
-                                <p class="brand_name">Lim</p>
-                                <a href="#">Gracia Plaid Dress</a>
-                                <h6 class="product-price">$78.24</h6>
-                            </div>
-                        </div>
-
-                        <!-- Single Product -->
-                        <div class="single-product-area">
-                            <div class="product_image">
-                                <!-- Product Image -->
-                                <img class="normal_img" src="img/product-img/new-1-back.png" alt="">
-                                <img class="hover_img" src="img/product-img/new-1.png" alt="">
-
-                                <!-- Product Badge -->
-                                <div class="product_badge">
-                                    <span>New</span>
-                                </div>
-
-                                <!-- Wishlist -->
-                                <div class="product_wishlist">
-                                    <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                                </div>
-
-                                <!-- Compare -->
-                                <div class="product_compare">
-                                    <a href="compare.html"><i class="icofont-exchange"></i></a>
-                                </div>
-                            </div>
-
-                            <!-- Product Description -->
-                            <div class="product_description">
-                                <!-- Add to cart -->
-                                <div class="product_add_to_cart">
-                                    <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
-                                </div>
-
-                                <!-- Quick View -->
-                                <div class="product_quick_view">
-                                    <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                                </div>
-
-                                <p class="brand_name">Top</p>
-                                <a href="#">Boutique Silk Dress</a>
-                                <h6 class="product-price">$48.99</h6>
-                            </div>
-                        </div>
-
-                        <!-- Single Product -->
-                        <div class="single-product-area">
-                            <div class="product_image">
-                                <!-- Product Image -->
-                                <img class="normal_img" src="img/product-img/new-6.png" alt="">
-                                <img class="hover_img" src="img/product-img/new-6-back.png" alt="">
-
-                                <!-- Product Badge -->
-                                <div class="product_badge">
-                                    <span>New</span>
-                                </div>
-
-                                <!-- Wishlist -->
-                                <div class="product_wishlist">
-                                    <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                                </div>
-
-                                <!-- Compare -->
-                                <div class="product_compare">
-                                    <a href="compare.html"><i class="icofont-exchange"></i></a>
-                                </div>
-                            </div>
-
-                            <!-- Product Description -->
-                            <div class="product_description">
-                                <!-- Add to cart -->
-                                <div class="product_add_to_cart">
-                                    <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
-                                </div>
-
-                                <!-- Quick View -->
-                                <div class="product_quick_view">
-                                    <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                                </div>
-
-                                <p class="brand_name">Lim</p>
-                                <a href="#">Gracia Plaid Dress</a>
-                                <h6 class="product-price">$17.63</h6>
-                            </div>
-                        </div>
-
-                        <!-- Single Product -->
-                        <div class="single-product-area">
-                            <div class="product_image">
-                                <!-- Product Image -->
-                                <img class="normal_img" src="img/product-img/new-2.png" alt="">
-                                <img class="hover_img" src="img/product-img/new-2-back.png" alt="">
-
-                                <!-- Product Badge -->
-                                <div class="product_badge">
-                                    <span>New</span>
-                                </div>
-
-                                <!-- Wishlist -->
-                                <div class="product_wishlist">
-                                    <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                                </div>
-
-                                <!-- Compare -->
-                                <div class="product_compare">
-                                    <a href="compare.html"><i class="icofont-exchange"></i></a>
-                                </div>
-                            </div>
-
-                            <!-- Product Description -->
-                            <div class="product_description">
-                                <!-- Add to cart -->
-                                <div class="product_add_to_cart">
-                                    <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
-                                </div>
-
-                                <!-- Quick View -->
-                                <div class="product_quick_view">
-                                    <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                                </div>
-
-                                <p class="brand_name">Sarah</p>
-                                <a href="#">Flower Textured Dress</a>
-                                <h6 class="product-price">$24 <span>$49</span></h6>
-                            </div>
-                        </div>
-
-                        <!-- Single Product -->
-                        <div class="single-product-area">
-                            <div class="product_image">
-                                <!-- Product Image -->
-                                <img class="normal_img" src="img/product-img/new-4.png" alt="">
-                                <img class="hover_img" src="img/product-img/new-4-back.png" alt="">
-
-                                <!-- Product Badge -->
-                                <div class="product_badge">
-                                    <span>New</span>
-                                </div>
-
-                                <!-- Wishlist -->
-                                <div class="product_wishlist">
-                                    <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                                </div>
-
-                                <!-- Compare -->
-                                <div class="product_compare">
-                                    <a href="compare.html"><i class="icofont-exchange"></i></a>
-                                </div>
-                            </div>
-
-                            <!-- Product Description -->
-                            <div class="product_description">
-                                <!-- Add to cart -->
-                                <div class="product_add_to_cart">
-                                    <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
-                                </div>
-
-                                <!-- Quick View -->
-                                <div class="product_quick_view">
-                                    <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                                </div>
-
-                                <p class="brand_name">Lim</p>
-                                <a href="#">Gracia Plaid Dress</a>
-                                <h6 class="product-price">$78.24</h6>
-                            </div>
-                        </div>
-                    </div>
+               
+                </c:forEach>
+                         
+                   </div>
                 </div>
             </div>
         </div>
     </section>
+    <!-- Related Products Area -->
+   
     <!-- Related Products Area -->
 
     <!-- Footer Area -->
