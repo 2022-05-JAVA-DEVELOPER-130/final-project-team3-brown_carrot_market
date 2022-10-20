@@ -265,6 +265,11 @@ content: "\f27a";
      content: "\f2b5"; 
  
 } 
+
+.shop_pagination_area .page-item.active .page-link { /* 페이징 버튼 색 변경 */
+    background-color: orange;
+    color: #ffffff;
+}
 	
 </body>
 </html>
