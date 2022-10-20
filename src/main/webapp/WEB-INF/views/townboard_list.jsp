@@ -26,9 +26,10 @@
     <link rel="stylesheet" href="css/townBoard.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
 	<!-- toast -->
- 	<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+ <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
-	<!-- javaScript -->
+   
+
 	
 </head>
 
@@ -309,6 +310,11 @@ margin: auto 0.5em auto -1.5em;
 content: "\f27a";
 
 }
+
+#toast-container > .toast-success:before {
+     content: "\f2b5"; 
+ 
+} 
 	
 </body>
 

@@ -20,17 +20,13 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
 	
-	<!-- javaScript -->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
-	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
-	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+
 	
-	<!-- toast -->
+<!-- toast -->
  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
-	
+   
+
 	
 	
 	
@@ -287,11 +283,19 @@
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
     <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
 	<script type="text/javascript" src="js/townBoard/townBoard.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	
-	<style type="text/css">
+		<!-- javaScript -->
+	<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
+	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
+	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+	
+	 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
+
+<style type="text/css">
 #toast-container > .toast {
     background-image: none !important;
 }
@@ -309,7 +313,12 @@
     #toast-container > .toast-warning:before {
      content: "\f27a"; 
  
-}
+} 
+
+ #toast-container > .toast-success:before {
+     content: "\f2b5"; 
+ 
+} 
 	
 	
 </body>
