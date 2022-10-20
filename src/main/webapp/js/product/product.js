@@ -166,9 +166,17 @@ function changeProductList(pageno,p_ctgr_no){
 						htmlBuffer += `
 
                                         <!-- Product Badge -->
-<!--                                         <div class="product_badge">
-                                            <span>New</span>
-                                        </div> -->
+                                       <div class="product_badge">
+                                            <span>`;
+                       if(product.p_sell == 1){
+						htmlBuffer += `판매중`;
+						}else if(product.p_sell == 2){
+						htmlBuffer += `예약중`;	
+						}else if(product.p_sell == 3){
+						htmlBuffer += `판매완료`;	
+						}                     
+                        htmlBuffer += ` </span>
+                                        </div> 
 
                                         <!-- Wishlist -->
                                         <div class="product_wishlist">
@@ -187,9 +195,28 @@ function changeProductList(pageno,p_ctgr_no){
                                         <img class="hover_img" style="width:300px; height:300px;" src="img/chat-img/logo_carrot.png" alt="">
 
                                         <!-- Product Badge -->
-<!--                                         <div class="product_badge">
-                                            <span>New</span>
-                                        </div> -->
+                                        `;
+                                             if(product.p_sell == 1){
+											htmlBuffer += `<div class="product_badge">
+                                            				<span>
+															판매중
+															</span>
+															</div>`;
+											}else if(product.p_sell == 2){
+											htmlBuffer += `<div class="product_badge1">
+                                            				<span>
+															예약중
+															</div>
+                                            				</span>`;	
+											}else if(product.p_sell == 3){
+											htmlBuffer += `<div class="product_badge2">
+                                            				<span>
+															판매완료
+                                            				</span>
+                                            				</div>`;	
+												}                     
+						                        htmlBuffer += `
+                                            
 
                                         <!-- Wishlist -->
                                         <div class="product_wishlist">
@@ -219,6 +246,7 @@ function changeProductList(pageno,p_ctgr_no){
                                        <p class="brand_name">Top</p>
                                        <a href="product_detail?p_no=${product.p_no}" p_no="${product.p_no}">${product.p_title}</a>
 										<h6 class="product-price">가격: ${product.p_price}</h6>
+										<p class="product-short-desc">${product.p_address_name}</p>
                                         <p class="product-short-desc">${product.p_desc}</p>
                                     </div>
                                 </div>

@@ -22,6 +22,8 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/product.css">
+  
 	
 	<!-- toast -->
 	<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
@@ -224,7 +226,7 @@
                         <!-- Add to Cart Form -->
                         <form class="cart clearfix my-5 d-flex flex-wrap align-items-center" method="post" name="chatStart">
                            
-                            
+                             
                             <input type="hidden" name="loginId" id="loginId" value="${sUser.user_id}" />
                             <input type="hidden" name="p_userId" id="p_userId" value="${product.userInfo.user_id}" />
                             <input type="hidden" name="p_no" id="p_no" value="${product.p_no}" />
@@ -270,6 +272,7 @@
                
     </section>
     <!-- Single Product Details Area End -->
+ 
 <section class="you_may_like_area section_padding_0_100 clearfix">
         <div class="container">
             <div class="row">
@@ -289,10 +292,7 @@
                         <div class="single-product-area">
                             <div class="product_image">
                                 <!-- Product Image -->
-                                <!-- 
-                                <img class="normal_img" src="img/product-img/new-1-back.png" alt="">
-                                <img class="hover_img" src="img/product-img/new-1.png" alt="">
-								-->
+                                
 								<c:choose>
                                         <c:when test="${!empty product.productImagesList[0].pi_name}">
                                         <c:set var = "image_name" value = "${product.productImagesList[0].pi_name}"/>
@@ -315,19 +315,27 @@
 										</c:otherwise>
 										</c:choose>
                                 <!-- Product Badge -->
-                                <div class="product_badge">
-                                    <span>
-                                     <c:if test="${product.p_sell eq 1}">
+                                <c:if test="${product.p_sell eq 1}">
+                                        				<div class="product_badge">
+                                            			<span>
 		                                        		<c:out value="판매중"></c:out>
+                                            			</span>
+                                            			</div>
 		                                        	</c:if>
 		                                        	<c:if test="${product.p_sell eq 2}">
+		                                        		<div class="product_badge1">
+                                            			<span>
 		                                        		<c:out value="예약중"></c:out>
+                                            			</span>
+                                            			</div>
 		                                        	</c:if>
 		                                        	<c:if test="${product.p_sell eq 3}">
+		                                        		<div class="product_badge2">
+                                            			<span>
 		                                        		<c:out value="판매완료"></c:out>
+                                            			</span>
+                                            			</div>
 		                                        	</c:if>
-                                    </span>
-                                </div>
 
                                 <!-- Wishlist -->
                                
@@ -367,6 +375,7 @@
             </div>
         </div>
     </section>
+  
     <!-- Related Products Area -->
     
     <!-- Related Products Area -->

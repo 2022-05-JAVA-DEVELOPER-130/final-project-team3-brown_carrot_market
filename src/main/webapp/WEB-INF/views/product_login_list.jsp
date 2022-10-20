@@ -177,9 +177,27 @@
 										</c:otherwise>
 										</c:choose>
                                         <!-- Product Badge -->
-                                        <div class="product_badge">
-                                            <span>New</span>
-                                        </div>
+                                        <c:if test="${product.p_sell eq 1}">
+                                        				<div class="product_badge">
+                                            			<span>
+		                                        		<c:out value="판매중"></c:out>
+                                            			</span>
+                                            			</div>
+		                                        	</c:if>
+		                                        	<c:if test="${product.p_sell eq 2}">
+		                                        		<div class="product_badge1">
+                                            			<span>
+		                                        		<c:out value="예약중"></c:out>
+                                            			</span>
+                                            			</div>
+		                                        	</c:if>
+		                                        	<c:if test="${product.p_sell eq 3}">
+		                                        		<div class="product_badge2">
+                                            			<span>
+		                                        		<c:out value="판매완료"></c:out>
+                                            			</span>
+                                            			</div>
+		                                        	</c:if>
 
                                         <!-- Wishlist -->
                                         <div class="product_wishlist">
@@ -195,19 +213,15 @@
                                     <!-- Product Description -->
                                     <div class="product_description">
                                         <!-- Add to cart -->
-                                        <div class="product_add_to_cart">
-                                            <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
-                                        </div>
+                                        
 
                                         <!-- Quick View -->
-                                        <div class="product_quick_view">
-                                            <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                                        </div>
-
+                                        
                                         <p class="brand_name">Top</p>
                                          <a href="product_detail?p_no=${product.p_no}" p_no="${product.p_no}">${product.p_title}</a>
                                         <h6 class="product-price">가격: ${product.p_price}</h6>
 
+                                        <p class="product-short-desc">${product.p_address_name}</p>
                                         <p class="product-short-desc">${product.p_desc}</p>
                                     </div>
                                 </div>

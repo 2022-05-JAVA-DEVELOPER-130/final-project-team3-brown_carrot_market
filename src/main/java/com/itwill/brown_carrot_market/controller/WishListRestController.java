@@ -26,7 +26,11 @@ public class WishListRestController {
 		String user_id=(String)session.getAttribute("sUserId");
 		int result=0;
 		try {
+			if(user_id == null || user_id.equals("")) {
+				System.out.println("로그인 안돼서 작동안해용");
+			}else {
 			result=wishListService.checkWish(p_no, user_id);
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
