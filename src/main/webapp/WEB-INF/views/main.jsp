@@ -814,6 +814,19 @@ body{
  font-family: 'Noto',serif;
 }
 
+/*
+.shop_by_catagory_slides.owl-carousel.single_catagory_slide a img{
+ object-fit: contain;
+width: 30px;
+}
+*/
+.single_catagory_slide a img{
+ object-fit: contain;
+width: 30px;
+}
+
+
+
 #toast-container > .toast {
     background-image: none !important;
 }
