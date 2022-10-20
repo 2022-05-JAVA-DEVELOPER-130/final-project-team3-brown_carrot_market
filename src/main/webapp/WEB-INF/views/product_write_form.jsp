@@ -260,7 +260,7 @@
                                     </div>
                                      이미지 업로드 부분 끝-->
                                     <div class="col-12 text-center">
-                                        <input type="button" id="btn_product_write_action" class="btn btn-primary w-40" value="물건 올리기" onclick="productCreate()">&nbsp; 
+                                        <input type="button" id="btn_product_write_action" class="btn btn-primary w-40" style="margin-bottom: 30px" value="물건 올리기" onclick="productCreate()">&nbsp; 
                                         <input type="button" class="btn btn-primary w-40" style="margin-bottom: 30px" value="동네물건목록" onclick="productList()">
                                 </div>
                             </div>
