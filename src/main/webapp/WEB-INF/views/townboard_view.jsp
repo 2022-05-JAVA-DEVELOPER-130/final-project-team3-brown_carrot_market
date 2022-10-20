@@ -181,9 +181,9 @@
                     </div>
                     <!-- Search Post -->
                         <div class="widget-area search_post mb-30">
-                            <h6>Search Post</h6>
+                            <h6>게시글 검색</h6>
                             <form action="#" method="get">
-                                <input id="townBoardSearch" type="search" class="form-control" placeholder="Enter Keyword...">
+                                <input id="townBoardSearch" type="search" class="form-control" placeholder="검색">
                                 <button type="submit" class="btn d-none">Submit</button>
                             </form>
                         </div>
@@ -353,7 +353,7 @@
                                     <input type="hidden" class="form-control" name="step" value="1"/>
                                     <input type="hidden" class="form-control" name="depth" value="1"/>
                                     <div class="col-12">
-                                        <button class="btn btn-primary reply"  id="townMainReplyBtn" type="submit">Submit Comment</button>
+                                        <button class="btn btn-primary reply"  id="townMainReplyBtn" type="submit">댓글 등록</button>
                                     </div>
                                 </div>
                             </form>
