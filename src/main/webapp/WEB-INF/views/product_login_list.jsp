@@ -20,7 +20,7 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="style.css">
-    
+    <link rel="stylesheet" href="css/product.css">
     <link rel="stylesheet" href="css/user.css">
     
    

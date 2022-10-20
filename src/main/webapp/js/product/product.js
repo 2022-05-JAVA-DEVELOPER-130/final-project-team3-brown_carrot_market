@@ -138,7 +138,7 @@ function changeProductList(pageno,p_ctgr_no){
 		},
 		dataType:"json",
 		success:function(resultObj){
-			console.log(resultObj);
+			console.log(resultObj.data);
 				let data = resultObj.data;
 				let htmlBuffer = ``;
 				data.itemList.forEach(function(product, i){
