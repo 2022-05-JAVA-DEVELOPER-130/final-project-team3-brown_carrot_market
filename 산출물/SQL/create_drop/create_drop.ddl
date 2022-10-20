@@ -333,7 +333,7 @@ ALTER TABLE product_img ADD CONSTRAINT IDX_product_img_PK PRIMARY KEY (pi_no);
 ALTER TABLE product_img ADD CONSTRAINT IDX_product_img_FK0 FOREIGN KEY (p_no) REFERENCES product (p_no) on delete cascade;
 
 ALTER TABLE wishlist ADD CONSTRAINT IDX_wishlist_PK PRIMARY KEY (wishlist_no);
-ALTER TABLE wishlist ADD CONSTRAINT IDX_wishlist_FK0 FOREIGN KEY (p_no) REFERENCES product (p_no);
+ALTER TABLE wishlist ADD CONSTRAINT IDX_wishlist_FK0 FOREIGN KEY (p_no) REFERENCES product (p_no) on delete cascade;
 ALTER TABLE wishlist ADD CONSTRAINT IDX_wishlist_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
 
 ALTER TABLE address ADD CONSTRAINT IDX_address_PK PRIMARY KEY (address_no);
