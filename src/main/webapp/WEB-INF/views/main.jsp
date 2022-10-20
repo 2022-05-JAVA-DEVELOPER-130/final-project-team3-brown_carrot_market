@@ -795,24 +795,7 @@
 
 <style type="text/css">
 
-@font-face {
 
-  font-family: 'Noto'; 
-
-
-  src: url("./css/font/NotoSansKR-Medium.otf"); /* 가는글씨체 웹폰트주소 지정*/
-}
-@font-face {
-
-  font-family: 'Noto';
-
-  src: url("./css/font/NotoSansKR-Bold.otf"); /* 굵은글씨체 웹폰트주소 지정*/
-  font-weight: bold;
-
-}
-body{
- font-family: 'Noto',serif;
-}
 
 #toast-container > .toast {
     background-image: none !important;
