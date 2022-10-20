@@ -105,9 +105,6 @@
 																입금	                                        				
 		                                        			</c:otherwise>
 		                                        		</c:choose>
-		                                        		<c:otherwise>
-		                                        			포인트 출금
-		                                        		</c:otherwise>
 		                                      	  </c:when>
 		                                        <c:otherwise>
 													포인트 충전                                        				

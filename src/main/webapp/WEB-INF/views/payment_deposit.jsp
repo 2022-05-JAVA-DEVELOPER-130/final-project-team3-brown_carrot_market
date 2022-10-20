@@ -94,15 +94,31 @@ color = orange;
 
 		<input type="text" id="point_select_input" name="point_select_input"/>
 	</div>
-	<script>
+	    <!-- Shortcodes Area -->
+    <div class="shortcodes_area section_padding_100">
+        <div class="container">
+            <!-- Shortcodes Content -->
+            <div class="row">
+                <div class="col-12">
+                    <!-- +++++++++
+                    Blockquote One
+                    ++++++++++ -->
+                    <div class="shortcodes_content mb-100">
+                        <blockquote class="bigshop-blockquote mb-0 bl-10">
+                            <h3>Bigshop is smart &amp; elegant e-commerce HTML5 Template. It's suitable for all e-commerce business platform.</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nulla eveniet, harum numquam laboriosam hic totam. Perferendis doloremque, sit neque! Aut aliquam, at temporibus a, harum facere delectus et. Sapiente, laboriosam esse asperiores. Quas eius mollitia inventore odio ad ipsa, magnam quod.</p>
+                            <button class="btn btn-primary" onclick="requestPay()">충전하기</button>
+                        </blockquote>
+                    </div>
+                    <!-- +++++++++
+                    Blockquote One
+                    ++++++++++ -->
 
-	</script>
-	<div class="col-12">
-		<div class="checkout_pagination mt-50">
-			<button class="btn btn-primary" onclick="requestPay()">충전하기</button>
-		</div>
-	</div>
-
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Shortcodes Area End -->
 	<script>
 		$(function point_select(){
 		      //직접입력 인풋박스 기존에는 숨어있다가
@@ -231,7 +247,8 @@ color = orange;
      content: "\f2b5"; 
  
 } 
-	
+.bl-10 {
+  border-left: 10px solid orange; }
 
 </body>
 
