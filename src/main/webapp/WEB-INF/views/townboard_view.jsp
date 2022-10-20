@@ -246,6 +246,9 @@
                                 
 								 <li class="single_comment_area">
 								 
+								 <c:set var="replyLength" value="${townReplyList}"/>
+								 <input type="hidden" id="ReplyNumber" value="${fn:length(replyLength)}">
+								 
 								<c:forEach var="townReply" items="${townReplyList}" varStatus="status">
 								
 								<!-- 댓글 -->
@@ -264,7 +267,8 @@
                                             <h5 class="comment-author" id="viewReplyWriterId_${status.index}">${townReply.userInfo.user_id}</h5>
                                             <p>${townReply.t_reply_title }</p>
                                             <p>${townReply.t_reply_content }</p>
-                                            <input class="townReply delete reply" type="button" pageno="${pageno}" t_no="${townBoard.t_no }" t_reply_no="${townReply.t_reply_no}" value="삭제하기" />
+                                            
+                                            <input class="townReply delete reply" id="townReplyDeletebtn_${status.index}" type="button" pageno="${pageno}" t_no="${townBoard.t_no }" t_reply_no="${townReply.t_reply_no}" value="삭제하기" />
                                             <button class="heading">댓글달기</button>
                                             
                                             <div  class="content">
@@ -289,7 +293,7 @@
                                  				     -->
 				                                    <input type="hidden" class="form-control" name="depth" value="2"/>
 				                                    <div class="col-12 ">
-				                                        <button  class="btn btn-primary rereply" index="${status.index }" type="submit" >Submit Comment</button>
+				                                        <button  class="btn btn-primary rereply" type="submit" >Submit Comment</button>
 				                                    </div>
 				                                </div>
 				                            </form>
@@ -310,10 +314,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="comment-content">
-		                                            <h5 class="comment-author" id="viewReReplyWriterId_${status.index }">${townReply.userInfo.user_id}</h5>
+		                                            <h5 class="comment-author" id="viewReReplyWriterId_${status.index}">${townReply.userInfo.user_id}</h5>
 		                                            <p>${townReply.t_reply_title }</p>
 		                                            <p>${townReply.t_reply_content }</p>
-		                                            <input class="townReply delete rereply" type="button" pageno="${pageno}" t_no="${townBoard.t_no }" t_reply_no="${townReply.t_reply_no}" value="삭제하기" />
+		                                            <input class="townReply delete rereply" id="reReplyDeleteBtn_${status.index}" type="button" pageno="${pageno}" t_no="${townBoard.t_no }" t_reply_no="${townReply.t_reply_no}" value="삭제하기" />
                                            
 				                            
 		                                        </div>
