@@ -274,7 +274,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="section_heading new_arrivals">
+                    <div class="section_heading new_arrivals" style="background-color: #FFA500">
                         <h5>이웃의 상품</h5>
                     </div>
                 </div>
@@ -316,31 +316,33 @@
 										</c:choose>
                                 <!-- Product Badge -->
                                 <div class="product_badge">
-                                    <span>New</span>
+                                    <span>
+                                     <c:if test="${product.p_sell eq 1}">
+		                                        		<c:out value="판매중"></c:out>
+		                                        	</c:if>
+		                                        	<c:if test="${product.p_sell eq 2}">
+		                                        		<c:out value="예약중"></c:out>
+		                                        	</c:if>
+		                                        	<c:if test="${product.p_sell eq 3}">
+		                                        		<c:out value="판매완료"></c:out>
+		                                        	</c:if>
+                                    </span>
                                 </div>
 
                                 <!-- Wishlist -->
-                                <div class="product_wishlist">
-                                    <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                                </div>
+                               
 
                                 <!-- Compare -->
-                                <div class="product_compare">
-                                    <a href="compare.html"><i class="icofont-exchange"></i></a>
-                                </div>
+                                
                             </div>
 
                             <!-- Product Description -->
                             <div class="product_description">
                                 <!-- Add to cart -->
-                                <div class="product_add_to_cart">
-                                    <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
-                                </div>
+                                
 
                                 <!-- Quick View -->
-                                <div class="product_quick_view">
-                                    <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                                </div>
+                                
 
                                 <p class="brand_name">
                                 <c:if test="${product.p_sell eq 1}">
