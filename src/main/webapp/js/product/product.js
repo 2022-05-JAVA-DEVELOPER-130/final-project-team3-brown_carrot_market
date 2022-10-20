@@ -196,7 +196,7 @@ function changeProductList(pageno,p_ctgr_no){
 
                                         <!-- Product Badge -->
                                         `;
-                                             if(product.p_sell == 1){
+                                            if(product.p_sell == 1){
 											htmlBuffer += `<div class="product_badge">
                                             				<span>
 															판매중
@@ -243,9 +243,28 @@ function changeProductList(pageno,p_ctgr_no){
                                             <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
                                         </div> 
 
-                                       <p class="brand_name">Top</p>
+                                       <p class="brand_name">`;
+                          
+                          if(product.productCategory.p_ctgr_no == 1){
+							htmlBuffer += `가전제품`;
+							}else if(product.productCategory.p_ctgr_no == 2){
+							htmlBuffer += `가구`;	
+							}else if(product.productCategory.p_ctgr_no == 3){
+							htmlBuffer += `의류`;	
+												                     
+							}else if(product.productCategory.p_ctgr_no == 4){
+							htmlBuffer += `생활용품`;	
+												                     
+							}else if(product.productCategory.p_ctgr_no == 5){
+							htmlBuffer += `취미/게임/음반/도서`;	
+							}else if(product.productCategory.p_ctgr_no == 6){
+							htmlBuffer += `기타`;	
+						}                     
+                                       
+                                       
+                         htmlBuffer += `</p>
                                        <a href="product_detail?p_no=${product.p_no}" p_no="${product.p_no}">${product.p_title}</a>
-										<h6 class="product-price">가격: ${product.p_price}</h6>
+										<h6 class="product-price">가격: ${product.p_price} 원</h6>
 										<p class="product-short-desc">${product.p_address_name}</p>
                                         <p class="product-short-desc">${product.p_desc}</p>
                                     </div>
