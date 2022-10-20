@@ -124,6 +124,7 @@ function productUpdateAction(){
  
    
    const formData1 = new FormData($('#main_contact_form')[0]);
+   var p_no = formData1.p_no;
    /*
    formData1.append('files',$('#files')[0]); //이게 맞나?
    formData1.append('files',$('#files')[1]); 
@@ -139,7 +140,7 @@ function productUpdateAction(){
       data:formData1,
       success:function(jsonResult){
       console.log(jsonResult);
-      window.location.href="product_list";
+      window.location.href=jsonResult.url;
    
    /*
    document.product_modify_form.action = "product_modify_action";
