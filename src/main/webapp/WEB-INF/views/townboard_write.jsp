@@ -122,7 +122,7 @@
                                     
                                     <!-- 사진 넣기 임시 -->
                                     <div class="form-group">
-                                    
+                                    <!-- 
                                     <label for = "img_choose">
                                     	<div class = "town_pic_upload">사진1 </div>
                                     </label>
@@ -139,7 +139,12 @@
                                     	<div class = "town_pic_upload">사진4 </div>
                                     </label>
                                     <input type="file" name="files" id="img_choose"></span>
+									 -->
 									
+									<span>사진1: <input type="file" name="files"></span> 
+                                    <span>사진2: <input type="file" name="files"></span> 
+                                    <span>사진3: <input type="file" name="files"></span> 
+                                    <span>사진4: <input type="file" name="files"></span> 
 									
 									</div>
 									<!-- 사진 넣기 임시 끝-->
