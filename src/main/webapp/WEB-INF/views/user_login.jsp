@@ -535,7 +535,7 @@
 		function loginWithKakao() {
 			Kakao.Auth
 					.authorize({
-						redirectUri : 'http://localhost/brown_carrot_market/user_kakaologin',
+						redirectUri : 'http://119.207.178.43/brown_carrot_market/user_kakaologin',
 						prompts : 'login'
 					});
 		}

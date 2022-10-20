@@ -403,6 +403,7 @@ $(".btn.btn-primary.rereply").on("click", function(e){
 	let pageno = form.find($('input[name="page_no"]')).val();
 	let t_no =form.find($('input[name="t_no"]')).val();
 	let groupno = form.find($('input[name="groupno"]')).val();
+	console.log('t_no'+t_no)
 	
 	if($(".form-group.t_reply_title").val() == "" || $(".t_reply_content").val() == ""){
 		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
@@ -412,7 +413,7 @@ $(".btn.btn-primary.rereply").on("click", function(e){
 		ToastConfirm.fire({ icon: 'question', 
 							title: "댓글을 작성하시겠습니까?"}).then((result) => {
 								if(result.isConfirmed){
-									console.log('t_no'+t_no)
+									console.log()
 							$.ajax({
 								url: "townReReply_wirte_rest",
 								method: "post",
