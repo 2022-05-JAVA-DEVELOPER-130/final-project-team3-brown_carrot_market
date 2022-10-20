@@ -71,14 +71,7 @@
                         <img src="img/user_profile/${list.you_image}" alt="avatar">
                         
                         <c:set var = "image_name" value = "${list.p_img}"/>
-                        <c:choose>
-							<c:when test="${fn:startsWith(image_name, 'http')}">
-                                 <img src="${list.p_img}" style="float:right; width:45px; height:45px; border-radius: 0%">
-                            </c:when>
-							<c:otherwise>
-                                 <img src="img/product_img/${list.p_img}" style="float:right; width:45px; height:45px; border-radius: 0%">
-							</c:otherwise>
-						</c:choose>
+                      
                         
                         <div class="about">
 							<input name="chatRoomNo" type="hidden" value=${list.c_room_no}/>
@@ -87,6 +80,17 @@
                             <div class="content"> <i class="fa fa-circle offline"></i>${list.c_content}</div>                                            
                             
                         </div>
+                          <c:choose>
+							<c:when test="${fn:startsWith(image_name, 'http')}">
+                                 <img class="chatPimg" src="${list.p_img}" style="float:right; width:45px; height:45px; border-radius: 0%">
+                            </c:when>
+							<c:otherwise>
+                                 <img class="chatPimg" src="img/product_img/${list.p_img}" style=" border-radius: 5px;
+    margin: 0 auto;
+    margin-top: 10px;
+   ">
+							</c:otherwise>
+						</c:choose>
                  </li>
                 </c:forEach>
               
@@ -386,7 +390,7 @@ color:#070a57;
 }
 
 .chat .chat-history .my-message {
-    background: #efefef
+    background: #fdf2d0
 }
 
 .chat .chat-history .my-message:after {
@@ -398,7 +402,7 @@ color:#070a57;
     width: 0;
     position: absolute;
     pointer-events: none;
-    border-bottom-color: #efefef;
+    border-bottom-color: #fdf2d0;
     border-width: 10px;
     margin-left: -10px
 }
@@ -601,6 +605,12 @@ color:#070a57;
      content: "\f2b5"; 
  
 } 
+
+.people-list .chat-list li .name {
+    font-size: 15px;
+    font-weight: 700;
+}
+
 
 
     

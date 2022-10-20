@@ -166,7 +166,7 @@ function timerFunc(dateTime,id,spot){
 
 function connectServer(loginId){
 	console.log("connectWS 실행 : "+loginId)
-	var url="ws://localhost:80/brown_carrot_market/replyEcho?"+loginId;
+	var url="ws://192.168.15.12:80/brown_carrot_market/replyEcho?"+loginId;
 	var ws=new WebSocket(url);
 	socket=ws;
 	
