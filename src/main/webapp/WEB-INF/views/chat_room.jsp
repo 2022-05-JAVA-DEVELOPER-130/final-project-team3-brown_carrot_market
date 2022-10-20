@@ -82,13 +82,10 @@
                         </div>
                           <c:choose>
 							<c:when test="${fn:startsWith(image_name, 'http')}">
-                                 <img class="chatPimg" src="${list.p_img}" style="float:right; width:45px; height:45px; border-radius: 0%">
+                                 <img class="chatPimg" src="${list.p_img}" style="border-radius: 5px; margin: 0 auto; margin-top: 10px;">
                             </c:when>
 							<c:otherwise>
-                                 <img class="chatPimg" src="img/product_img/${list.p_img}" style=" border-radius: 5px;
-    margin: 0 auto;
-    margin-top: 10px;
-   ">
+                                 <img class="chatPimg" src="img/product_img/${list.p_img}" style="border-radius: 5px; margin: 0 auto; margin-top: 10px;">
 							</c:otherwise>
 						</c:choose>
                  </li>
