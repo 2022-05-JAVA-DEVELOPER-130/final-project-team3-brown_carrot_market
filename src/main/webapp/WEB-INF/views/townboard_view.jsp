@@ -219,7 +219,7 @@
                         
                         <!-- Bar Area -->
                         <div class="status-bar mb-15">
-                            <a href="#"><i class="icofont-user-male"></i> ${townBoard.userInfo.user_id }</a>
+                            <a href="#" id="viewWriterId"><i class="icofont-user-male"></i>${townBoard.userInfo.user_id }</a>
                             <a href="#"><i class="icofont-ui-clock"></i> ${townBoard.t_date }</a>
                            
                            
