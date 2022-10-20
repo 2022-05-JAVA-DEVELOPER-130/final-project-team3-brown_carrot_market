@@ -400,7 +400,7 @@ $(".btn.btn-primary.rereply").on("click", function(e){
 		ToastConfirm.fire({ icon: 'question', 
 							title: "댓글을 작성하시겠습니까?"}).then((result) => {
 								if(result.isConfirmed){
-									
+									console.log('t_no'+t_no)
 							$.ajax({
 								url: "townReReply_wirte_rest",
 								method: "post",
