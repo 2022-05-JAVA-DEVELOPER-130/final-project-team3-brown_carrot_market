@@ -177,9 +177,27 @@
 										</c:otherwise>
 										</c:choose>
                                         <!-- Product Badge -->
-                                        <div class="product_badge">
-                                            <span>New</span>
-                                        </div>
+                                        <c:if test="${product.p_sell eq 1}">
+                                        				<div class="product_badge">
+                                            			<span>
+		                                        		<c:out value="판매중"></c:out>
+                                            			</span>
+                                            			</div>
+		                                        	</c:if>
+		                                        	<c:if test="${product.p_sell eq 2}">
+		                                        		<div class="product_badge1">
+                                            			<span>
+		                                        		<c:out value="예약중"></c:out>
+                                            			</span>
+                                            			</div>
+		                                        	</c:if>
+		                                        	<c:if test="${product.p_sell eq 3}">
+		                                        		<div class="product_badge2">
+                                            			<span>
+		                                        		<c:out value="판매완료"></c:out>
+                                            			</span>
+                                            			</div>
+		                                        	</c:if>
 
                                         <!-- Wishlist -->
                                         <div class="product_wishlist">
