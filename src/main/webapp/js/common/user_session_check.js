@@ -58,6 +58,7 @@ function session_check(){
 		    
 		    	$("#account-area").html(CommonHtmlContents.user_thumbnail_login(jsonResult.data[0]));
 				connectServer(jsonResult.data[0].user_id);
+				sessionStorage.setItem("sUserId",jsonResult.data[0].user_id);
 				
 			//약속 목록 가져오기	
 	        $.ajax({
@@ -165,7 +166,7 @@ function timerFunc(dateTime,id,spot){
 
 function connectServer(loginId){
 	console.log("connectWS 실행 : "+loginId)
-	var url="ws://localhost:80/brown_carrot_market/replyEcho?"+loginId;
+	var url="ws://192.168.15.12:80/brown_carrot_market/replyEcho?"+loginId;
 	var ws=new WebSocket(url);
 	socket=ws;
 	

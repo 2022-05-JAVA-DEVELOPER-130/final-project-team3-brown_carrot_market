@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,10 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Bigshop | Responsive E-commerce Template</title>
+    <title>우리동네 게시글 보기</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="img/core-img/favicon.ico">
     
     <!-- 슬라이드쇼 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
@@ -69,8 +72,8 @@
                 <div class="col-12">
                     <h5>게시글 상세보기</h5>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active">Blog Details</li>
+                        <li class="breadcrumb-item"><a href="index.html">흙당근마켓</a></li>
+                        <li class="breadcrumb-item active">우리동네 게시글 상세보기</li>
                     </ol>
                 </div>
             </div>
@@ -178,9 +181,9 @@
                     </div>
                     <!-- Search Post -->
                         <div class="widget-area search_post mb-30">
-                            <h6>Search Post</h6>
+                            <h6>게시글 검색</h6>
                             <form action="#" method="get">
-                                <input id="townBoardSearch" type="search" class="form-control" placeholder="Enter Keyword...">
+                                <input id="townBoardSearch" type="search" class="form-control" placeholder="검색">
                                 <button type="submit" class="btn d-none">Submit</button>
                             </form>
                         </div>
@@ -200,7 +203,8 @@
                 <div>
                  <ul class="bxslider">
 		       <c:forEach var="townImage" items="${townImageList}" begin="0"  step="1"> 
-		
+                 <c:if test="${townBoard.townImageList.size() != 0}">
+		 	   </c:if>
 		      	<li><img src="img/townBoard-img/${townImage.t_img_name}" alt="blog-img"  ></li>
 		 	   </c:forEach> 
       </ul>
@@ -219,8 +223,9 @@
                         
                         <!-- Bar Area -->
                         <div class="status-bar mb-15">
-                            <a href="#"><i class="icofont-user-male"></i> ${townBoard.userInfo.user_id }</a>
+                            <a href="#" id="viewWriterId"><i class="icofont-user-male"></i>${townBoard.userInfo.user_id }</a>
                             <a href="#"><i class="icofont-ui-clock"></i> ${townBoard.t_date }</a>
+                            <a href="#"><i class="fa fa-location-arrow"></i> ${townBoard.t_address_name }</a>
                            
                            
                         </div>
@@ -241,6 +246,9 @@
                                 
 								 <li class="single_comment_area">
 								 
+								 <c:set var="replyLength" value="${townReplyList}"/>
+								 <input type="hidden" id="ReplyNumber" value="${fn:length(replyLength)}">
+								 
 								<c:forEach var="townReply" items="${townReplyList}" varStatus="status">
 								
 								<!-- 댓글 -->
@@ -256,10 +264,11 @@
                                             </div>
                                         </div>
                                         <div class="comment-content">
-                                            <h5 class="comment-author"><a href="#">${townReply.userInfo.user_id}</a></h5>
+                                            <h5 class="comment-author" id="viewReplyWriterId_${status.index}">${townReply.userInfo.user_id}</h5>
                                             <p>${townReply.t_reply_title }</p>
                                             <p>${townReply.t_reply_content }</p>
-                                            <input class="townReply delete" type="button" pageno="${pageno}" t_no="${townBoard.t_no }" t_reply_no="${townReply.t_reply_no}" value="삭제하기" />
+                                            
+                                            <input class="townReply delete reply" id="townReplyDeletebtn_${status.index}" type="button" pageno="${pageno}" t_no="${townBoard.t_no }" t_reply_no="${townReply.t_reply_no}" value="삭제하기" />
                                             <button class="heading">댓글달기</button>
                                             
                                             <div  class="content">
@@ -267,7 +276,7 @@
 				                                <div class="row">
 				                                    <div class="col-12 rereply">
 				                                        <div class="form-group mb-30">
-				                                            <input type="text" name="t_reply_title" class="t_reply_title" placeholder="댓글 제목" tabindex="1">
+				                                            <input type="text" name="t_reply_title" class="t_reply_title" placeholder="대댓글 제목" tabindex="1">
 				                                        </div>
 				                                    </div>
 				                                    <div class="col-12 rereply">
@@ -275,7 +284,7 @@
 				                                            <textarea class="form-control rereply" name="t_reply_content" class="t_reply_content" cols="30" rows="7" placeholder="내용" tabindex="2"></textarea>
 				                                        </div>
 				                                    </div>
-				                                    <input type="hidden" class="form-control" name="t_no" value="${townBoard.t_no}"/>
+				                                    <input type="hidden" class="form-control" name="t_no" value="${townReply.townBoard.t_no}"/>
                                  				    <input type="hidden" class="form-control" name="page_no" value="${pageno}" />
                                  				    <input type="hidden" class="form-control" name="t_reply_no" value="${townReply.t_reply_no}" />
                                  				    <input type="hidden" class="form-control" name="groupno" value="${townReply.groupno}" />
@@ -284,7 +293,7 @@
                                  				     -->
 				                                    <input type="hidden" class="form-control" name="depth" value="2"/>
 				                                    <div class="col-12 ">
-				                                        <button  class="btn btn-primary rereply" index="${status.index }" type="submit" >Submit Comment</button>
+				                                        <button  class="btn btn-primary rereply" type="submit" >등록</button>
 				                                    </div>
 				                                </div>
 				                            </form>
@@ -305,10 +314,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="comment-content">
-		                                            <h5 class="comment-author"><a href="#">${townReply.userInfo.user_id}</a></h5>
+		                                            <h5 class="comment-author" id="viewReReplyWriterId_${status.index}">${townReply.userInfo.user_id}</h5>
 		                                            <p>${townReply.t_reply_title }</p>
 		                                            <p>${townReply.t_reply_content }</p>
-		                                            <input class="townReply delete" type="button" pageno="${pageno}" t_no="${townBoard.t_no }" t_reply_no="${townReply.t_reply_no}" value="삭제하기" />
+		                                            <input class="townReply delete rereply" id="reReplyDeleteBtn_${status.index}" type="button" pageno="${pageno}" t_no="${townBoard.t_no }" t_reply_no="${townReply.t_reply_no}" value="삭제하기" />
                                            
 				                            
 		                                        </div>
@@ -348,7 +357,7 @@
                                     <input type="hidden" class="form-control" name="step" value="1"/>
                                     <input type="hidden" class="form-control" name="depth" value="1"/>
                                     <div class="col-12">
-                                        <button class="btn btn-primary reply"  id="townMainReplyBtn" type="submit">Submit Comment</button>
+                                        <button class="btn btn-primary reply"  id="townMainReplyBtn" type="submit">댓글 등록</button>
                                     </div>
                                 </div>
                             </form>

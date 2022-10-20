@@ -10,6 +10,28 @@
 function productList() {
    window.location.href='product_list';
 }
+
+$('#deleteProductBtn').click(function(e){
+	
+	e.preventDefault();
+	e.stopPropagation();
+	
+	$.ajax({
+		url:'deleteProduct',
+		method:'POST',
+		data:{
+			"p_no":$("#p_no").val()
+		},
+		dataType:"json",
+		success:function(result){
+			console.log("삭제 여부 :"+ result.data);
+			window.location.href="product_list";
+			}
+	});
+});
+
+
+
 function productCreate() {
    if (document.product_write_form.p_title.value == "") {
       alert("제목을 입력하십시요.");
@@ -44,7 +66,7 @@ function productCreate() {
       data:formData1,
       success:function(jsonResult){
       console.log(jsonResult);
-      window.location.href="product_list";
+      window.location.href=jsonResult.url;
        /*사진이름받기
        $.ajax({
               url : 'product_write_action_json',
@@ -102,6 +124,7 @@ function productUpdateAction(){
  
    
    const formData1 = new FormData($('#main_contact_form')[0]);
+   var p_no = formData1.p_no;
    /*
    formData1.append('files',$('#files')[0]); //이게 맞나?
    formData1.append('files',$('#files')[1]); 
@@ -117,7 +140,7 @@ function productUpdateAction(){
       data:formData1,
       success:function(jsonResult){
       console.log(jsonResult);
-      window.location.href="product_list";
+      window.location.href=jsonResult.url;
    
    /*
    document.product_modify_form.action = "product_modify_action";
@@ -138,7 +161,7 @@ function changeProductList(pageno,p_ctgr_no){
 		},
 		dataType:"json",
 		success:function(resultObj){
-			console.log(resultObj);
+			console.log(resultObj.data);
 				let data = resultObj.data;
 				let htmlBuffer = ``;
 				data.itemList.forEach(function(product, i){
@@ -166,19 +189,23 @@ function changeProductList(pageno,p_ctgr_no){
 						htmlBuffer += `
 
                                         <!-- Product Badge -->
-<!--                                         <div class="product_badge">
-                                            <span>New</span>
-                                        </div> -->
+                                       <div class="product_badge">
+                                            <span>`;
+                       if(product.p_sell == 1){
+						htmlBuffer += `판매중`;
+						}else if(product.p_sell == 2){
+						htmlBuffer += `예약중`;	
+						}else if(product.p_sell == 3){
+						htmlBuffer += `판매완료`;	
+						}                     
+                        htmlBuffer += ` </span>
+                                        </div> 
 
                                         <!-- Wishlist -->
-                                        <div class="product_wishlist">
-                                            <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                                        </div>
+                                        
 
                                         <!-- Compare -->
-                                        <div class="product_compare">
-                                            <a href="compare.html"><i class="icofont-exchange"></i></a>
-                                        </div>
+                                        
                                     </div>`					}
                                     else{
 	                               htmlBuffer += ` <div class="product_image">
@@ -187,19 +214,34 @@ function changeProductList(pageno,p_ctgr_no){
                                         <img class="hover_img" style="width:300px; height:300px;" src="img/chat-img/logo_carrot.png" alt="">
 
                                         <!-- Product Badge -->
-<!--                                         <div class="product_badge">
-                                            <span>New</span>
-                                        </div> -->
+                                        `;
+                                            if(product.p_sell == 1){
+											htmlBuffer += `<div class="product_badge">
+                                            				<span>
+															판매중
+															</span>
+															</div>`;
+											}else if(product.p_sell == 2){
+											htmlBuffer += `<div class="product_badge1">
+                                            				<span>
+															예약중
+															</div>
+                                            				</span>`;	
+											}else if(product.p_sell == 3){
+											htmlBuffer += `<div class="product_badge2">
+                                            				<span>
+															판매완료
+                                            				</span>
+                                            				</div>`;	
+												}                     
+						                        htmlBuffer += `
+                                            
 
                                         <!-- Wishlist -->
-                                        <div class="product_wishlist">
-                                            <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                                        </div>
+                                        
 
                                         <!-- Compare -->
-                                        <div class="product_compare">
-                                            <a href="compare.html"><i class="icofont-exchange"></i></a>
-                                        </div>
+                                        
                                     </div>`
 	
 									}
@@ -207,18 +249,31 @@ function changeProductList(pageno,p_ctgr_no){
 					htmlBuffer += `
 	                        <div class="product_description">
                                         
-                                        <div class="product_add_to_cart">
-                                            <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
-                                        </div>
+                                       
 
-                                      
-                                        <div class="product_quick_view">
-                                            <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                                        </div> 
-
-                                       <p class="brand_name">Top</p>
+                                       <p class="brand_name">`;
+                          
+                          if(product.productCategory.p_ctgr_no == 1){
+							htmlBuffer += `가전제품`;
+							}else if(product.productCategory.p_ctgr_no == 2){
+							htmlBuffer += `가구`;	
+							}else if(product.productCategory.p_ctgr_no == 3){
+							htmlBuffer += `의류`;	
+												                     
+							}else if(product.productCategory.p_ctgr_no == 4){
+							htmlBuffer += `생활용품`;	
+												                     
+							}else if(product.productCategory.p_ctgr_no == 5){
+							htmlBuffer += `취미/게임/음반/도서`;	
+							}else if(product.productCategory.p_ctgr_no == 6){
+							htmlBuffer += `기타`;	
+						}                     
+                                       
+                                       
+                         htmlBuffer += `</p>
                                        <a href="product_detail?p_no=${product.p_no}" p_no="${product.p_no}">${product.p_title}</a>
-										<h6 class="product-price">가격: ${product.p_price}</h6>
+										<h6 class="product-price">가격: ${product.p_price} 원</h6>
+										<p class="product-short-desc">${product.p_address_name}</p>
                                         <p class="product-short-desc">${product.p_desc}</p>
                                     </div>
                                 </div>

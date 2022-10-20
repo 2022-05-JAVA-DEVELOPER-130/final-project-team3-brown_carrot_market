@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,6 +38,7 @@ public class ProductController {
 		System.out.println("### ProductController() 기본생성자");
 	}
 	
+	//@CrossOrigin(origins = "http://192.168.15.12")
 	@RequestMapping(value={"/product_list",
 							"/product_login_list"})
 	public String product_list(@RequestParam(required = false, defaultValue = "1") Integer pageno,Model model,HttpServletRequest req, HttpSession session) throws Exception {
@@ -67,15 +69,20 @@ public class ProductController {
 		String sUserId = (String)session.getAttribute("sUserId");
 		Address sAddress = (Address)session.getAttribute("sAddress");
 		//String forwardPath ="";
-		
 		Product product = productService.selectByOne(p_no);
-		List<Product> userProductList = productService.selectByUserId(product.getUserInfo().getUser_id()); 
+		productService.updateProductCount(p_no);
 		System.out.println(product);
+		
+		String user_id = product.getUserInfo().getUser_id();
+		List<Product> userProductList = productService.selectByUserId(user_id); 
+		System.out.println("userProductList :" + userProductList);
+		
 		model.addAttribute("product", product);
 		model.addAttribute("userProductList", userProductList);
 		
 		
 		if(sUserId == null || sUserId.equals("")) {
+			System.out.println("user_id:"+user_id);
 			return "product_detail";
 		}else if(sUserId.equals(product.getUserInfo().getUser_id())) {
 			model.addAttribute("address",sAddress);

@@ -32,6 +32,7 @@
 </head>
 
 <body>
+  
     <!-- Preloader -->
     <div id="preloader">
         <div class="spinner-grow" role="status">
@@ -55,17 +56,7 @@
 
             <!-- Single Slide -->
             <div class="single_slide home-3 bg-img" style="background-image: url(img/bg-img/back2-3.jpg);">
-                <div class="container h-100">
-                    <div class="row h-100 align-items-center">
-                        <div class="col-12">
-                            <div class="welcome_slide_text text-center">
-                                <p data-animation="fadeInUp" data-delay="100ms">Latest Trends</p>
-                                <h2 data-animation="fadeInUp" data-delay="300ms">Tree pot</h2>
-                                <a href="#" class="btn btn-primary" data-animation="fadeInUp" data-delay="500ms">Shop Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
 
             <!-- Single Slide -->
@@ -250,7 +241,7 @@
                     <div class="single-product-area mb-30">
                         <div class="product_image">
                             <!-- Product Image -->
-                            <img class="normal_img" src="img/product_img/toy1.jpg" alt="" style="width:250px; height:250px;">
+                            <img class="normal_img" src="img/townBoard-img/itwill.png" alt="" style="width:250px; height:250px;">
 
                             <!-- Product Badge -->
                             <div class="product_badge">
@@ -280,8 +271,8 @@
                                 <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
                             </div>
 
-                            <a href="#">은비깨비가 css대장이에요! </a>
-                            <h6 class="product-price">1035</h6>
+                            <a href="#">국내 최고의 IT 교육기관!</a>
+                            <h6 class="product-price"><i class="fa fa-heart" style="color:red"></i> 1035</h6>
                         </div>
                     </div>
                 </div>
@@ -321,8 +312,8 @@
                                 <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
                             </div>
 
-                            <a href="#">Flower Textured Dress</a>
-                            <h6 class="product-price">$39.99 <span>$49.99</span></h6>
+                            <a href="#">공부가 쉬워지는 책상 후기</a>
+                            <h6 class="product-price"><i class="fa fa-heart" style="color:red"></i> 777</h6>
                         </div>
                     </div>
                 </div>
@@ -332,7 +323,7 @@
                     <div class="single-product-area mb-30">
                         <div class="product_image">
                             <!-- Product Image -->
-                            <img class="normal_img" src="img/product_img/chair.jpg" alt="" style="width:250px; height:250px;">
+                            <img class="normal_img" src="https://dnvefa72aowie.cloudfront.net/origin/article/202210/fe5e484165cdc074972885e8af33205f5da157a8f96ce6f26313a71a7dd91b40.webp?q=95&s=1440x1440&t=inside	" alt="" style="width:250px; height:250px;">
 
                             <!-- Product Badge -->
                             <div class="product_badge">
@@ -362,8 +353,8 @@
                                 <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
                             </div>
 
-                            <a href="#">Ballerina Dress</a>
-                            <h6 class="product-price">$89.99 <span>$107.99</span></h6>
+                            <a href="#">자취 10일차..이상한 소리가..</a>
+                            <h6 class="product-price"><i class="fa fa-heart" style="color:red"></i> 534</h6>
                         </div>
                     </div>
                 </div>
@@ -403,8 +394,8 @@
                                 <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
                             </div>
 
-                            <a href="#">Gracia Plaid Dress</a>
-                            <h6 class="product-price">$139.99</h6>
+                            <a href="#">유아용 장난감 만들기!</a>
+                            <h6 class="product-price"><i class="fa fa-heart" style="color:red"></i> 327</h6>
                         </div>
                     </div>
                 </div>
@@ -437,11 +428,11 @@
                     <div class="single-product-area mb-30">
                         <div class="product_image">
                             <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/21.jpg" alt="">
+                            <img class="normal_img" src="img/product_img/carrot_dog.jpg"  alt="" style="width:250px; height:250px;">
 
                             <!-- Product Badge -->
                             <div class="product_badge">
-                                <span>Sale</span>
+                                <span>Hot</span>
                             </div>
 
                             <!-- Wishlist -->
@@ -467,8 +458,8 @@
                                 <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
                             </div>
 
-                            <a href="#">Boutique Silk Dress</a>
-                            <h6 class="product-price">$69.99</h6>
+                            <a href="#">귀여운 당근 옷</a>
+                            <h6 class="product-price">30000원</h6>
                         </div>
                     </div>
                 </div>
@@ -478,11 +469,11 @@
                     <div class="single-product-area mb-30">
                         <div class="product_image">
                             <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/20.jpg" alt="">
+                            <img class="normal_img" src="https://dnvefa72aowie.cloudfront.net/origin/article/202210/f1713907c812125c26dbab59aa2f6edb2ed8286e3cea6499d4afc97d1a85476c.webp?q=95&s=1440x1440&t=inside	" alt="" style="width:250px; height:250px;">
 
                             <!-- Product Badge -->
                             <div class="product_badge">
-                                <span>Sale</span>
+                                <span>Hot</span>
                             </div>
 
                             <!-- Wishlist -->
@@ -508,8 +499,8 @@
                                 <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
                             </div>
 
-                            <a href="#">Flower Textured Dress</a>
-                            <h6 class="product-price">$39.99 <span>$49.99</span></h6>
+                            <a href="#">깔끔한 선반</a>
+                            <h6 class="product-price">24000원</h6>
                         </div>
                     </div>
                 </div>
@@ -519,11 +510,11 @@
                     <div class="single-product-area mb-30">
                         <div class="product_image">
                             <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/23.jpg" alt="">
+                            <img class="normal_img" src="https://dnvefa72aowie.cloudfront.net/origin/article/202210/e60f0fcd585d832b853baf1dc0506265626dbfb86c03e7b67b21a9fefe96311a.webp?q=95&s=1440x1440&t=inside" alt="" style="width:250px; height:250px;" >
 
                             <!-- Product Badge -->
                             <div class="product_badge">
-                                <span>Sale</span>
+                                <span>Hot</span>
                             </div>
 
                             <!-- Wishlist -->
@@ -549,8 +540,8 @@
                                 <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
                             </div>
 
-                            <a href="#">Ballerina Dress</a>
-                            <h6 class="product-price">$89.99 <span>$107.99</span></h6>
+                            <a href="#">짭쪼름한 스팸</a>
+                            <h6 class="product-price">50000원</h6>
                         </div>
                     </div>
                 </div>
@@ -560,7 +551,7 @@
                     <div class="single-product-area mb-30">
                         <div class="product_image">
                             <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/12.jpg" alt="">
+                            <img class="normal_img" src="https://dnvefa72aowie.cloudfront.net/origin/article/202210/32951CDDBA366994F0912D781CA3E876B65DED7932A66AACA4BE45F0AD8CC703.jpg?q=95&s=1440x1440&t=inside" alt="" style="width:250px; height:250px;">
 
                             <!-- Product Badge -->
                             <div class="product_badge">
@@ -590,8 +581,8 @@
                                 <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
                             </div>
 
-                            <a href="#">Gracia Plaid Dress</a>
-                            <h6 class="product-price">$139.99</h6>
+                            <a href="#">유아용 의자</a>
+                            <h6 class="product-price">10000원</h6>
                         </div>
                     </div>
                 </div>
@@ -601,11 +592,11 @@
                     <div class="single-product-area mb-30">
                         <div class="product_image">
                             <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/13.jpg" alt="">
+                            <img class="normal_img" src="https://dnvefa72aowie.cloudfront.net/origin/article/202210/EEAB35A1D3FCEE10A7BDF42B9EFE17F719BA690775E58E9CB3FD471E18E0305D.jpg?q=95&s=1440x1440&t=inside	" alt="" style="width:250px; height:250px;">
 
                             <!-- Product Badge -->
                             <div class="product_badge">
-                                <span>Sale</span>
+                                <span>Hot</span>
                             </div>
 
                             <!-- Wishlist -->
@@ -631,8 +622,8 @@
                                 <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
                             </div>
 
-                            <a href="#">Boutique Silk Dress</a>
-                            <h6 class="product-price">$69.99</h6>
+                            <a href="#">고화질 TV</a>
+                            <h6 class="product-price">200000원</h6>
                         </div>
                     </div>
                 </div>
@@ -642,11 +633,11 @@
                     <div class="single-product-area mb-30">
                         <div class="product_image">
                             <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/14.jpg" alt="">
+                            <img class="normal_img" src="https://dnvefa72aowie.cloudfront.net/origin/article/202210/0b9e32b9f93deb86ebc99e98b6c25f71df040b4f622319a71f6175b3f8cabeed.webp?q=95&s=1440x1440&t=inside	" alt="" style="width:250px; height:250px;">
 
                             <!-- Product Badge -->
                             <div class="product_badge">
-                                <span>Sale</span>
+                                <span>Hot</span>
                             </div>
 
                             <!-- Wishlist -->
@@ -672,8 +663,8 @@
                                 <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
                             </div>
 
-                            <a href="#">Flower Textured Dress</a>
-                            <h6 class="product-price">$39.99 <span>$49.99</span></h6>
+                            <a href="#">공기청정기</a>
+                            <h6 class="product-price">5000원</span></h6>
                         </div>
                     </div>
                 </div>
@@ -683,11 +674,11 @@
                     <div class="single-product-area mb-30">
                         <div class="product_image">
                             <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/15.jpg" alt="">
+                            <img class="normal_img" src="https://dnvefa72aowie.cloudfront.net/origin/article/202210/3ec753adf35060dbe15bcb45a77447e424c90c54cb4d243615e51ad363a3ef03.webp?q=95&s=1440x1440&t=inside	" alt="" style="width:250px; height:250px;">
 
                             <!-- Product Badge -->
                             <div class="product_badge">
-                                <span>Sale</span>
+                                <span>Hot</span>
                             </div>
 
                             <!-- Wishlist -->
@@ -713,8 +704,8 @@
                                 <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
                             </div>
 
-                            <a href="#">Ballerina Dress</a>
-                            <h6 class="product-price">$89.99 <span>$107.99</span></h6>
+                            <a href="#">만능 공구세트</a>
+                            <h6 class="product-price">10000원</h6>
                         </div>
                     </div>
                 </div>
@@ -724,11 +715,11 @@
                     <div class="single-product-area mb-30">
                         <div class="product_image">
                             <!-- Product Image -->
-                            <img class="normal_img" src="img/product-img/16.jpg" alt="">
+                            <img class="normal_img" src="https://dnvefa72aowie.cloudfront.net/origin/article/202210/0c91ef5192b2680c69edd11945116c3c1af12c13b854428c73ada5c5233995de.webp?q=95&s=1440x1440&t=inside	"alt="" style="width:250px; height:250px;">
 
                             <!-- Product Badge -->
                             <div class="product_badge">
-                                <span>Sale</span>
+                                <span>Hot</span>
                             </div>
 
                             <!-- Wishlist -->
@@ -754,8 +745,8 @@
                                 <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
                             </div>
 
-                            <a href="#">Gracia Plaid Dress</a>
-                            <h6 class="product-price">$139.99</h6>
+                            <a href="#">내앵장고</a>
+                            <h6 class="product-price">400000원</h6>
                         </div>
                     </div>
                 </div>
@@ -803,6 +794,29 @@
 	 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
 
 <style type="text/css">
+
+@font-face {
+
+  font-family: 'Noto'; 
+
+
+  src: url("./css/font/NotoSansKR-Medium.otf"); /* 가는글씨체 웹폰트주소 지정*/
+}
+@font-face {
+
+  font-family: 'Noto';
+
+  src: url("./css/font/NotoSansKR-Bold.otf"); /* 굵은글씨체 웹폰트주소 지정*/
+  font-weight: bold;
+
+}
+body{
+ font-family: 'Noto',serif;
+}
+
+
+
+
 #toast-container > .toast {
     background-image: none !important;
 }

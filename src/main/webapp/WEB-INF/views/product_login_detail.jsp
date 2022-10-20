@@ -15,13 +15,14 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Brown Carrot Market</title>
+    <title>물건 상세</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/product.css">
 	
 	<!-- toast -->
 	<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
@@ -53,11 +54,11 @@
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
-                    <h5>Product Details</h5>
+                    <h5>물건 상세</h5>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
-                        <li class="breadcrumb-item active">Product Details</li>
+                        <li class="breadcrumb-item"><a href="index.html">흙당근마켓</a></li>
+                        <li class="breadcrumb-item"><a href="#">동네물건</a></li>
+                        <li class="breadcrumb-item active">물건 상세</li>
                     </ol>
                 </div>
             </div>
@@ -167,12 +168,12 @@
                             <span class="text-muted">(8 Reviews)</span>
                         </div>
                         -->
-                        <h4 class="price mb-4">가격 : ${product.p_price} 원 </h4>
+                        <h4 align="right"  ><i class="fa fa-money"></i>가격 : ${product.p_price} 원 </h4>
                         
                         <!-- Overview -->
        
                          <div class="short_overview mb-4">
-                         	<p>조회수  ${product.p_count}</p>
+                         	<p align="right"><i class="icofont-eye-alt"></i>조회수  ${product.p_count}</p>
                          </div>
 
                         <!-- Color Option -->
@@ -182,7 +183,7 @@
                        
 
                         <!-- Add to Cart Form -->
-                        <form class="cart clearfix my-5 d-flex flex-wrap align-items-center" method="post" name="chatStart">
+                        <form  method="post" name="chatStart">
                             <!--  
                             <div class="quantity">
                                 <input type="number" class="qty-text form-control" id="qty2" step="1" min="1" max="12" name="quantity" value="1">
@@ -206,57 +207,36 @@
 						<div class="form-group" name="statePopup" id="statePopup">
 							 <input type="hidden" name="user_id" value="${product.userInfo.user_id}" />
                  			 <input type="hidden" name="p_no" id="p_no" value="${product.p_no}" />
+                             	
                              	<c:if test="${product.p_sell eq 1}">
-		                                        		<c:out value="판매중"></c:out>
+		                            <c:out value="판매중"></c:out>
 		                        </c:if>
 		                        
-		                        
 		                        <c:if test="${product.p_sell eq 2}">
-		                     <select id="p_sell" name="p_sell" class="custom-select form-control w-100">
-                             <!--  
-                             <option selected disabled="disabled">
-		                     -->
+		                     	<select style="position: relative; left: 160px" id="p_sell" name="p_sell" class="custom-select form-control w-100">
 		                          <c:out value="예약중"></c:out>
-		                           <option value="1">판매중으로 변경</option>
-                            		<option value="3">판매완료로 변경</option>
-                            <!--  		
-		                     </option>
-		                      -->
-		                     </select>
-		                     </c:if>
-		                                        	
-		                                        	
+		                         <option value="1">판매중으로 변경</option>
+                            	 <option value="3">판매완료로 변경</option>
+		                     	</select>
+		                     	</c:if>
+        	
 		                     <c:if test="${product.p_sell eq 3}">
 		                            <c:out value="판매완료"></c:out>
 		                     </c:if>
                              
- 
-
-
-		                  
-                             
-                             
                              <c:if test="${product.p_sell eq 1}">
-                            <!--  <button type="button" id="btn_product_modify_sell_action" class="btn btn-primary mt-1 mt-md-0 ml-1 ml-md-3" onclick="productSell()">판매상태수정</button>-->
-                            <button type="button" class="btn btn_popup btn-primary mt-1 mt-md-0 ml-1 ml-md-3" id="btn_popup" >판매상태 수정</button>
+                            <button type="button" style="position: relative; left: 280px" class="btn btn_popup btn-primary mt-1 mt-md-0 ml-1 ml-md-3" id="btn_popup" >판매상태 수정</button>
                             </c:if>
-                            
                             <c:if test="${product.p_sell eq 2}">
-                            <button type="button" id="btn_product_modify_sell_action" class="btn btn-primary mt-1 mt-md-0 ml-1 ml-md-3" onclick="productSell()">판매상태수정</button>
-                            
+                            <button type="button" style="position: relative; left: 330px" id="btn_product_modify_sell_action" class="btn btn-primary mt-1 mt-md-0 ml-1 ml-md-3" onclick="productSell()">판매상태수정</button>
                             </c:if>
-                            
-                            
                       	</div>
 						</form>
 						
                         <!-- Others Info -->
-                        <div class="others_info_area mb-3 d-flex flex-wrap">
-                        	<!--  
-                            <a class="add_to_wishlist" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 찜하기</a>
-                            -->
-                           <a class="" href="product_modify_form?p_no=${product.p_no}" p_no="${product.p_no}" id="product_modify_form"><i class="fa fa-th" aria-hidden="true"></i> 수정하기</a>
-                            <a class="share_with_friend" href="product_delete_action"><i class="fa fa-share" aria-hidden="true"></i> 삭제하기</a>
+                        <div class="others_info_area mb-3 d-flex flex-wrap" >
+                           <a class="" style="position: relative; left: 350px; display: inline-block;" href="product_modify_form?p_no=${product.p_no}" p_no="${product.p_no}" id="product_modify_form"><i class="fa fa-pencil" aria-hidden="true"></i> 수정하기</a>
+                           <a class="product_delete_action" style="position: relative; left: 350px; display: inline-block;" href="#" id="deleteProductBtn"><i class="fa fa-close" aria-hidden="true"></i> 삭제하기</a>
                         </div>
 
                         <!-- Size Guide -->
@@ -315,19 +295,27 @@
 										</c:otherwise>
 										</c:choose>
                                 <!-- Product Badge -->
-                                <div class="product_badge">
-                                    <span>
-                                     <c:if test="${product.p_sell eq 1}">
+                                <c:if test="${product.p_sell eq 1}">
+                                        				<div class="product_badge">
+                                            			<span>
 		                                        		<c:out value="판매중"></c:out>
+                                            			</span>
+                                            			</div>
 		                                        	</c:if>
 		                                        	<c:if test="${product.p_sell eq 2}">
+		                                        		<div class="product_badge1">
+                                            			<span>
 		                                        		<c:out value="예약중"></c:out>
+                                            			</span>
+                                            			</div>
 		                                        	</c:if>
 		                                        	<c:if test="${product.p_sell eq 3}">
+		                                        		<div class="product_badge2">
+                                            			<span>
 		                                        		<c:out value="판매완료"></c:out>
+                                            			</span>
+                                            			</div>
 		                                        	</c:if>
-                                    </span>
-                                </div>
 
                                 <!-- Wishlist -->
                                

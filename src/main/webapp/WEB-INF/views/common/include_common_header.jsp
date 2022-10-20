@@ -76,7 +76,7 @@
                             <div class="classynav">
                                 <ul>
                                     <!-- <li><a href="#">Home</a></li> -->
-                                    <li><a href="product_list">동네상품</a>
+                                    <li><a href="product_list">동네물건</a>
                                         <ul class="dropdown">
                                             <li><a href="product_list">- 전체보기</a></li>
                                             <li><a href="product_category?category_no=1">- 가전제품</a></li>
@@ -100,9 +100,9 @@
                                     </li>
                                     <li><a href="#">흙당근페이</a>
                                         <ul id="brown_carrot_pay" class="dropdown">
-                                            <li><a href="payment">포인트 충전</a></li>
-                                            <li><a href="#">포인트 출금</a></li>		
+                                            <li><a href="payment_deposit">포인트 충전</a></li>
                                             <li><a href="point_list">페이내역</a></li>
+                                            <li><a href="payment_withdraw">포인트 출금</a></li>		
                                         </ul>
                                     </li>
                                     <li><a href="faq">자주하는질문</a></li>
@@ -144,7 +144,7 @@
 
                             <!-- Chat -->
                             <div id="chat-area" class="cart-area chat-area" >
-                                <a href="chat_room" class="cart--btn" style="display:block;"><i class="icofont-chat"></i> <span class="cart_quantity">1</span></a>
+                                <a href="chat_room" class="cart--btn" style="display:block;background-color:#fbf8ef"><i class="icofont-chat"></i> <span style="background-color:orange;" class="cart_quantity">1</span></a>
 
                                 <!-- Cart Dropdown Content -->
                                 <!--  

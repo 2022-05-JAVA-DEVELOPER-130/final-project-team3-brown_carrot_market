@@ -26,9 +26,15 @@ public class PaymentDaoImpl implements PaymentDao{
 	}
 
 	@Override
-	public int insertPayment(Payment payment) throws Exception {
+	public int insertPayment_Deposit(Payment payment) throws Exception {
 		System.out.println("#### PaymentDaoImpl : insertPayment(Payment payment) 호출  ");
-		return paymentMapper.insertPayment(payment);
+		return paymentMapper.insertPayment_Deposit(payment);
+	}
+
+	@Override
+	public int insertPayment_Withdraw(Payment payment) throws Exception {
+		System.out.println("#### PaymentDaoImpl : insertPayment_Withdraw(Payment payment) 호출  ");
+		return paymentMapper.insertPayment_Deposit(payment);
 	}
 
 	@Override

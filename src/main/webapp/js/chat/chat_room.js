@@ -101,7 +101,7 @@ function session_check(){
 
 function connectServer(loginId){
 	console.log("connectWS 실행 : "+loginId)
-	var url="ws://localhost:80/brown_carrot_market/replyEcho?"+loginId;
+	var url="ws://192.168.15.12:80/brown_carrot_market/replyEcho?"+loginId;
 	var ws=new WebSocket(url);
 	socket=ws;
 	
@@ -169,6 +169,7 @@ $(document).ready(function(){
 	 console.log(path);
 	 console.log(myId);
 	 if(path==2){
+			
 			$('#chatHead').hide();
 			$('#plist').hide();
 			$('#chat_history').hide();			
@@ -259,10 +260,18 @@ $.ajax({
 				}
 			};
 
-			console.log("여기?");
+			$(function(){
+				$("#chat").css({
+				"margin-left": "0px",
+ 			   	"border-left": "none"
+					
+					
+				});
+				
+			});
 			$('#chatHead').show();
 			$('#chat_history').show();
-			$('#plist').show();
+			
 		}
 	});
 	
@@ -639,8 +648,11 @@ var c ="";
 										alt="avatar" style="float:left;">
 									</a>
 									<div class="chat-about">
-										<h6 class="m-b-0" style="margin-bottom:1px">${id}</h6>
-										
+										<h6 class="m-b-0" style="margin-bottom:1px;font-weight: 700;">${id}</h6>
+										<i class="fa fa-thermometer" style="
+    														color: orange;
+    															width: 15px;
+																			"></i>
 										<small>${fresh}</small>
 									</div>
 								</div>
@@ -650,11 +662,11 @@ var c ="";
 						 
     							<div style="text-align:center;">
     							<a href="product_detail?p_no=${product.p_no}";>
-								<img src="${p_img}" style="border-radius: 0%; width:50px; height:50px;"></a>
-								<h6 class="m-b-0" style="margin-top:10px; margin-bottom:2px;"><b>${product.p_title}</b></h6>
-								<small><b><${p_sell}></b> 가격: ${product.p_price}원</small> 
+								<img src="${p_img}" style="border-radius: 5px; width:70px; "></a>
+								<h6 class="m-b-0" style="margin-top:10px; margin-bottom:2px; font-size: 13px;"><b>${product.p_title}</b> <b><${p_sell}></b></h6>
+								<small>${product.p_price}원</small> 
 								<div>
-								<small>주소: ${product.p_address_name}</small></div>
+								<small style="font-size: 70%; color: gray;"><i class="fa fa-location-arrow"></i> ${product.p_address_name}</small></div>
 								 </div>	
 								 </div>
 								
@@ -980,7 +992,7 @@ function message_sendDB(jsonData){
 
 function connectWS(){
 	console.log("connectWS 실행 : "+loginId)
-	var url="ws://localhost:80/brown_carrot_market/replyEcho?"+loginId+"&"+c_room_no;
+	var url="ws://192.168.15.12:80/brown_carrot_market/replyEcho?"+loginId+"&"+c_room_no;
 	var ws=new WebSocket(url);
 	socket=ws;
 	

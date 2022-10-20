@@ -12,10 +12,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-    <!-- include_common_top -->
-    <!-- include_common_top -->
+	
+	 <!-- Title  -->
+    <title>우리동네 게시글 쓰기 폼</title>
+    
+    <!-- Favicon  -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+	
+  
+    
+    <!-- Style CSS -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/user.css">
     <link rel="stylesheet" href="css/townBoard.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
@@ -42,10 +50,8 @@
         </div>
     </div>
 
-    <!-- Header Area -->
-     <!-- include_common_bottom.jsp start-->
-	<jsp:include page="common/include_common_header.jsp"/>
-	<!-- include_common_bottom.jsp end-->
+   <!-- Header Area -->
+			<jsp:include page="common/include_common_header.jsp"/>
     <!-- Header Area End -->
     
     
@@ -57,7 +63,7 @@
                     <h5>Contact</h5>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="main">흙당근마켓</a></li>
-                        <li class="breadcrumb-item"><a href="townBoard_list">동네 게시판</a></li>
+                        <li class="breadcrumb-item"><a href="townBoard_list">우리동네 게시판</a></li>
                         <li class="breadcrumb-item active">게시글 작성</li>
                     </ol>
                 </div>
@@ -116,7 +122,7 @@
                                     
                                     <!-- 사진 넣기 임시 -->
                                     <div class="form-group">
-                                    
+                                    <!-- 
                                     <label for = "img_choose">
                                     	<div class = "town_pic_upload">사진1 </div>
                                     </label>
@@ -133,7 +139,12 @@
                                     	<div class = "town_pic_upload">사진4 </div>
                                     </label>
                                     <input type="file" name="files" id="img_choose"></span>
+									 -->
 									
+									<span>사진1: <input type="file" name="files"></span> 
+                                    <span>사진2: <input type="file" name="files"></span> 
+                                    <span>사진3: <input type="file" name="files"></span> 
+                                    <span>사진4: <input type="file" name="files"></span> 
 									
 									</div>
 									<!-- 사진 넣기 임시 끝-->
@@ -288,7 +299,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	
 		<!-- javaScript -->
-	<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>

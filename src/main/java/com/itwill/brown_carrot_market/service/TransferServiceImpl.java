@@ -128,6 +128,7 @@ public class TransferServiceImpl implements TransferService {
 			}
 		} catch (Exception e) {
 			System.out.println(e);
+			e.printStackTrace();
 			try {
 				/*
 				 * transaction end [rollback]
@@ -272,11 +273,21 @@ public class TransferServiceImpl implements TransferService {
 	public int insert_Point_Deposit(int payment_amount, String user_id) throws Exception {
 		return transferDao.insert_Point_Deposit(payment_amount, user_id);
 	}
+	@Override
+	public int insert_Point_Withdraw(int amount, String user_id) throws Exception {
+		return transferDao.insert_Point_Withdraw(amount, user_id);
+	}
 
 	@Override
-	public int update_Point_By_Id(String user_id) throws Exception{
-		return transferDao.update_Point_By_Id(user_id);
+	public int update_Point_By_Id_Deposit(String user_id) throws Exception{
+		return transferDao.update_Point_By_Id_Deposit(user_id);
 	}
+	
+	@Override
+	public int update_Point_By_Id_Withdraw(String user_id) throws Exception{
+		return transferDao.update_Point_By_Id_Withdraw(user_id);
+	}
+	
 	@Override
 	public List<Transfer> selectById(String user_id) throws Exception {
 		return transferDao.selectById(user_id);
