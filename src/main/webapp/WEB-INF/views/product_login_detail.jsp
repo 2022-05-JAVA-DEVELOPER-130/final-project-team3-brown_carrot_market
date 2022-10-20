@@ -15,7 +15,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Brown Carrot Market</title>
+    <title>물건 상세</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -54,11 +54,11 @@
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
-                    <h5>Product Details</h5>
+                    <h5>물건 상세</h5>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
-                        <li class="breadcrumb-item active">Product Details</li>
+                        <li class="breadcrumb-item"><a href="index.html">흙당근마켓</a></li>
+                        <li class="breadcrumb-item"><a href="#">동네물건</a></li>
+                        <li class="breadcrumb-item active">물건 상세</li>
                     </ol>
                 </div>
             </div>
