@@ -25,6 +25,7 @@ $('#deleteProductBtn').click(function(e){
 		dataType:"json",
 		success:function(result){
 			console.log("삭제 여부 :"+ result.data);
+			window.location.href="product_list";
 			}
 	});
 });
