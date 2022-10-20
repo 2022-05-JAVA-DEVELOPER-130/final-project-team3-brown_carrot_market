@@ -236,7 +236,7 @@
                         <!-- Others Info -->
                         <div class="others_info_area mb-3 d-flex flex-wrap" >
                            <a class="" href="product_modify_form?p_no=${product.p_no}" p_no="${product.p_no}" id="product_modify_form"><i class="fa fa-pencil" aria-hidden="true"></i> 수정하기</a>
-                           <a class="delete_action" href="#" onclick="productDelete()"><i class="fa fa-close" aria-hidden="true"></i> 삭제하기</a>
+                           <a class="product_delete_action" href="#" id="deleteProductBtn"><i class="fa fa-close" aria-hidden="true"></i> 삭제하기</a>
                         </div>
 
                         <!-- Size Guide -->
