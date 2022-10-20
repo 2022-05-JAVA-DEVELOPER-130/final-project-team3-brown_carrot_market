@@ -58,6 +58,7 @@ function session_check(){
 		    
 		    	$("#account-area").html(CommonHtmlContents.user_thumbnail_login(jsonResult.data[0]));
 				connectServer(jsonResult.data[0].user_id);
+				sessionStorage.setItem("sUserId",jsonResult.data[0].user_id);
 				
 			//약속 목록 가져오기	
 	        $.ajax({
