@@ -1359,16 +1359,20 @@ textarea:focus,
 .single_catagory_slide {
   position: relative;
   z-index: 1;
-  text-align: center; }
+  text-align: center;
+   }
   .single_catagory_slide a {
     display: block;
-    margin: 0 auto 15px; }
+    margin: 0 auto 15px; 
+    }
     .single_catagory_slide a img {
       -webkit-transition-duration: 500ms;
       -o-transition-duration: 500ms;
       transition-duration: 500ms;
+      
       border-radius: 50%;
-      border: 2px solid #d6e6fb; }
+      border: 2px solid #d6e6fb;}
+
   .single_catagory_slide p {
     -webkit-transition-duration: 500ms;
     -o-transition-duration: 500ms;

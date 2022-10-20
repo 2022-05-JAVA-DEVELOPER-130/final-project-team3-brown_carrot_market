@@ -4,7 +4,7 @@
 <%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 <meta charset="UTF-8">
@@ -25,8 +25,142 @@
 <link rel="stylesheet" href="css/user.css">
 
 <!-- javaScript -->
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!-- <script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+
+<!-- toaster -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+
+</head>
+
+<body>
+	<!-- Preloader -->
+	<div id="preloader">
+		<div class="spinner-grow" role="status">
+			<span class="sr-only">Loading...</span>
+		</div>
+	</div>
+
+	<!-- Header Area -->
+   		<!-- include_common_bottom.jsp start-->
+		<jsp:include page="common/include_common_header.jsp"/>
+		<!-- include_common_bottom.jsp end-->
+	<!-- Header Area End -->
+
+	<!-- Breadcumb Area -->
+	<div class="breadcumb_area">
+		<div class="container h-100">
+			<div class="row h-100 align-items-center">
+				<div class="col-12">
+					<h5>마이페이지</h5>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="main">메인</a></li>
+						<li class="breadcrumb-item active">마이페이지</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Breadcumb Area -->
+
+	<!-- My Account Area -->
+	<section class="my-account-area section_padding_100_50">
+		<div id="container" class="container">
+			<div class="row">
+				<div class="col-12 col-lg-3">
+					<div class="my-account-navigation mb-50">
+						<ul>
+							<!-- (수정필요)활성화에 따라서, active를 넣는 작업 해야함! -->
+							<li class="active"><a href="user_my_account" id="user_my_account">마이페이지</a></li>
+							<li class=""><a href="#" id="user_account_details">회원정보수정</a></li>
+							<li class=""><a href="" id="user_view_addresses">내 동네설정</a></li>
+							<li class=""><a href="#" id="">흙당근 포인트 내역</a></li>
+							<li class=""><a href="#" id="user_received_reviewList">받은 거래 후기</a></li>
+							<li class=""><a href="user_logout_action">로그아웃</a></li>
+							<li class=""><a href="#" id="user_remove_form" style="color:#6c757d">회원탈퇴</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-12 col-lg-9">
+		<!-- START!! ************************************************ -->
+					<div id="my-account-content" class="my-account-content mb-50" style="margin-bottom: 20px">
+						<div class="shortcodes_content mb-100" style="margin-bottom:0px">
+	                        <div class="col-12 col-lg-9" style="text-align:center;max-width:100%">
+		                        <!-- 더나은 방법을 찾고싶다! -->
+		                        <div class="circle" style="display:inline-block;height:120px">
+		                        	<div class="" style="position:relative">
+			                        <c:set var="string" value="${sUser.user_profile}"/>
+									<c:choose>
+										<c:when test="${fn:startsWith(string,'http://')}">
+				                            <img class="img-circle" src="${sUser.user_profile}" onerror="this.src='img/user_profile/newCarrot.jpg'">
+										</c:when>
+										<c:otherwise>
+				                            <img class="img-circle" src="img/user_profile/${sUser.user_profile}" onerror="this.src='img/user_profile/newCarrot.jpg'" >
+										</c:otherwise>
+									</c:choose>
+										<div class="img-edit" style="position:absolute;padding-top:77px;padding-left:77px">
+										<i class="icofont-edit" style="font-size:20px;color:#747794"></i>
+										<!-- <span style="background-color: #f8f8ff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><i class="icofont-ui-edit" ></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> -->
+										</div>
+									</div>
+									<!-- 프로필 이미지 -->
+								</div>
+								<br>
+								<div>
+									<p class="my-user">
+										<span style="color:#212529"><strong >${sUser.user_id}</strong> 님, 안녕하세요?</span><br>
+										<i class="icofont-ui-rating" style="font-size:10pt;color:orange"></i><span>${sUser.user_freshness}</span>&nbsp;&nbsp;
+										<i class="icofont-money-bag" style="font-size:10pt;color:orange"></i><span><fmt:formatNumber value="${sUser.user_point}" type="number"/></span>
+									</p>
+									<p>
+									</p>
+								</div>
+	                        </div>
+						</div>
+	                    <div class="shortcodes_content mb-100" style="margin-bottom: 20px;border:1px solid #d6e6fb">
+	                        <form class="invi_form">
+	                            <div class="form-group">
+	                                <label for="invi_email">흙당근마켓에 친구를 초대해보세요!</label>
+	                                <input type="email" class="form-control" id="invi_email" name="invi_email" aria-describedby="emailHelp" placeholder="Enter email">
+	                                <small id="emailHelp" class="form-text text-muted">초대받은 친구가 회원가입시, 500point를 드립니다!.</small>
+	                            </div>
+	                        </form>
+	                        <div style="text-align:right">
+	                        	<button type="submit" class="btn btn-primary" id="btn_invi">Submit</button>
+	                        </div>
+						</div>
+                    </div>
+		<!-- END!! ************************************************** -->
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- My Account Area -->
+
+	<!-- Footer Area -->
+		<!-- include_common_bottom.jsp start-->
+		<jsp:include page="common/include_common_footer.jsp"/>
+		<!-- include_common_bottom.jsp end-->
+	<!-- Footer Area -->
+
+	<!-- jQuery (Necessary for All JavaScript Plugins) -->
+	<script src="js/jquery.min.js"></script>
+	<!-- <script src="js/popper.min.js"></script> -->
+	<!-- <script src="js/bootstrap.min.js"></script> -->
+	<script src="js/jquery.easing.min.js"></script>
+	<script src="js/default/classy-nav.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/default/scrollup.js"></script>
+	<script src="js/waypoints.min.js"></script>
+	<script src="js/jquery.countdown.min.js"></script>
+	<script src="js/jquery.counterup.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<!-- <script src="js/jarallax.min.js"></script>
+	<script src="js/jarallax-video.min.js"></script> -->
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/jquery.nice-select.min.js"></script>
+	<script src="js/wow.min.js"></script>
+	<script src="js/default/active.js"></script>
 
 <!-- 회원정보수정 Validate -->
 <script type="text/javascript"
@@ -36,6 +170,12 @@
 <script type="text/javascript" src="js/common/user_session_check.js"></script>
 <script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 <script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
+
+<script type="text/javascript" src="js/user/user_my_account.js"></script>
+
+<!-- toastr -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 <script type="text/javascript">
 		$(function() {
 			/* [회원정보수정]user_modify_form ******************************************/
@@ -95,12 +235,14 @@
 					//if(validator.form()){
 					if($("#user_pw_new").val() != ""){
 						if ($("#user_pw_new2").val() == "") {
-							alert("비밀번호확인을 입력하십시요.");
+							//alert("비밀번호확인을 입력하십시요.");
+							toastr['error']("비밀번호확인을 입력하십시요.");
 							$("#user_pw_new").focus();
 							return false;
 						}
 						if ($("#user_pw_new").val() != $("#user_pw_new2").val()) {
-							alert("비밀번호와 비밀번호확인은 일치하여야합니다.");
+							//alert("비밀번호와 비밀번호확인은 일치하여야합니다.");
+							toastr['error']("비밀번호와 비밀번호확인은 일치하여야합니다.");
 							$("#user_pw_new").focus();
 							$("#user_pw_new").select();
 							return false;
@@ -287,7 +429,7 @@
 												dataType : 'json',
 												success : function(jsonResult) {
 													    console.log(jsonResult);
-													    if(jsonResult.code==0) alert("동일한 주소는 1개만 등록가능합니다.");
+													    if(jsonResult.code==0) toastr['error']("동일한 주소는 1개만 등록가능합니다.");
 													    $( "#user_view_addresses" ).trigger( "click" );
 												    }
 											});
@@ -458,11 +600,13 @@
 				console.log('btn_user_remove');
 				console.log($('#user_pw').val());
 				if(!$('#user_pw').val()){
-					alert('비밀번호 입력해주세요');
+					//alert('비밀번호 입력해주세요');
+					toastr['error']('비밀번호 입력해주세요');
 					return false;
 				}
 				if(!$('#chk_remove').is(':checked')){
-					alert('checkbox를 체크해주세요');
+					//alert('checkbox를 체크해주세요');
+					toastr['error']('checkbox를 체크해주세요');
 					return false;
 				} 
 				 $.ajax({
@@ -482,139 +626,6 @@
 			
 		});//END
 </script>
-
-</head>
-
-<body>
-	<!-- Preloader -->
-	<div id="preloader">
-		<div class="spinner-grow" role="status">
-			<span class="sr-only">Loading...</span>
-		</div>
-	</div>
-
-	<!-- Header Area -->
-   		<!-- include_common_bottom.jsp start-->
-		<jsp:include page="common/include_common_header.jsp"/>
-		<!-- include_common_bottom.jsp end-->
-	<!-- Header Area End -->
-
-	<!-- Breadcumb Area -->
-	<div class="breadcumb_area">
-		<div class="container h-100">
-			<div class="row h-100 align-items-center">
-				<div class="col-12">
-					<h5>My Account</h5>
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-						<li class="breadcrumb-item active">My Account</li>
-					</ol>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Breadcumb Area -->
-
-	<!-- My Account Area -->
-	<section class="my-account-area section_padding_100_50">
-		<div id="container" class="container">
-			<div class="row">
-				<div class="col-12 col-lg-3">
-					<div class="my-account-navigation mb-50">
-						<ul>
-							<!-- (수정필요)활성화에 따라서, active를 넣는 작업 해야함! -->
-							<li class="active"><a href="user_my_account" id="user_my_account">마이페이지</a></li>
-							<li class=""><a href="#" id="user_account_details">회원정보수정</a></li>
-							<li class=""><a href="" id="user_view_addresses">내 동네설정</a></li>
-							<li class=""><a href="#" id="">흙당근 포인트 내역</a></li>
-							<li class=""><a href="#" id="user_received_reviewList">받은 거래 후기</a></li>
-							<li class=""><a href="user_logout_action">로그아웃</a></li>
-							<li class=""><a href="#" id="user_remove_form" style="color:#6c757d">회원탈퇴</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-12 col-lg-9">
-		<!-- START!! ************************************************ -->
-					<div id="my-account-content" class="my-account-content mb-50" style="margin-bottom: 20px">
-						<div class="shortcodes_content mb-100" style="margin-bottom:0px">
-	                        <div class="col-12 col-lg-9" style="text-align:center;max-width:100%">
-		                        <!-- 더나은 방법을 찾고싶다! -->
-		                        <div class="circle" style="display:inline-block;height:120px">
-		                        	<div class="" style="position:relative">
-			                        <c:set var="string" value="${sUser.user_profile}"/>
-									<c:choose>
-										<c:when test="${fn:startsWith(string,'http://')}">
-				                            <img class="img-circle" src="${sUser.user_profile}" onerror="this.src='img/user_profile/newCarrot.jpg'">
-										</c:when>
-										<c:otherwise>
-				                            <img class="img-circle" src="img/user_profile/${sUser.user_profile}" onerror="this.src='img/user_profile/newCarrot.jpg'" >
-										</c:otherwise>
-									</c:choose>
-										<div class="img-edit" style="position:absolute;padding-top:77px;padding-left:77px">
-										<i class="icofont-edit" style="font-size:20px;color:#747794"></i>
-										<!-- <span style="background-color: #f8f8ff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><i class="icofont-ui-edit" ></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> -->
-										</div>
-									</div>
-									<!-- 프로필 이미지 -->
-								</div>
-								<br>
-								<div>
-									<p class="my-user">
-										<span style="color:#212529"><strong >${sUser.user_id}</strong> 님, 안녕하세요?</span><br>
-										<i class="icofont-ui-rating" style="font-size:10pt;color:orange"></i><span>${sUser.user_freshness}</span>&nbsp;&nbsp;
-										<i class="icofont-money-bag" style="font-size:10pt;color:orange"></i><span><fmt:formatNumber value="${sUser.user_point}" type="number"/></span>
-									</p>
-									<p>
-									</p>
-								</div>
-	                        </div>
-						</div>
-	                    <div class="shortcodes_content mb-100" style="margin-bottom: 20px;border:1px solid #d6e6fb">
-	                        <form class="invi_form">
-	                            <div class="form-group">
-	                                <label for="invi_email">흙당근마켓에 친구를 초대해보세요!</label>
-	                                <input type="email" class="form-control" id="invi_email" name="invi_email" aria-describedby="emailHelp" placeholder="Enter email">
-	                                <small id="emailHelp" class="form-text text-muted">초대받은 친구가 회원가입시, 500point를 드립니다!.</small>
-	                            </div>
-	                        </form>
-	                        <div style="text-align:right">
-	                        	<button type="submit" class="btn btn-primary" id="btn_invi">Submit</button>
-	                        </div>
-						</div>
-                    </div>
-		<!-- END!! ************************************************** -->
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- My Account Area -->
-
-	<!-- Footer Area -->
-		<!-- include_common_bottom.jsp start-->
-		<jsp:include page="common/include_common_footer.jsp"/>
-		<!-- include_common_bottom.jsp end-->
-	<!-- Footer Area -->
-
-	<!-- jQuery (Necessary for All JavaScript Plugins) -->
-	<!-- <script src="js/jquery.min.js"></script> -->
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.easing.min.js"></script>
-	<script src="js/default/classy-nav.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/default/scrollup.js"></script>
-	<script src="js/waypoints.min.js"></script>
-	<script src="js/jquery.countdown.min.js"></script>
-	<script src="js/jquery.counterup.min.js"></script>
-	<script src="js/jquery-ui.min.js"></script>
-	<script src="js/jarallax.min.js"></script>
-	<script src="js/jarallax-video.min.js"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/jquery.nice-select.min.js"></script>
-	<script src="js/wow.min.js"></script>
-	<script src="js/default/active.js"></script>
-
-	<script type="text/javascript" src="js/user/user_my_account.js"></script>
 
 
 

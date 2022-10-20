@@ -111,11 +111,11 @@ update userinfo set user_point =user_point-(select p_price from product where p_
 update userinfo set user_point =user_point+(select p_price from product where p_no = 1)
     where user_id= (select user_id from product where p_no = 1);
 --[review] 구매자
-insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
-    values(REVIEW_REVIEW_NO_SEQ.nextval,'친절하고 약속시간을 잘지켜요','',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot5');
+insert into review(review_no,review_desc,your_id,review_point,orders_no,user_id)
+    values(REVIEW_REVIEW_NO_SEQ.nextval,'친절하고 약속시간을 잘지켜요','carrot1',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot5');
 --[review] 판매자    
-insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
-    values(REVIEW_REVIEW_NO_SEQ.nextval,'쿨거래했어요','',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot1');
+insert into review(review_no,review_desc,your_id,review_point,orders_no,user_id)
+    values(REVIEW_REVIEW_NO_SEQ.nextval,'쿨거래했어요','carrot5',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot1');
     
     
 --************
@@ -150,11 +150,11 @@ update userinfo set user_point =user_point-(select p_price from product where p_
 update userinfo set user_point =user_point+(select p_price from product where p_no = 2)
     where user_id= (select user_id from product where p_no = 2);
 --[review] 구매자
-insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
-    values(REVIEW_REVIEW_NO_SEQ.nextval,'친절하고 약속시간을 잘지켜요','',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot1');
+insert into review(review_no,review_desc,your_id,review_point,orders_no,user_id)
+    values(REVIEW_REVIEW_NO_SEQ.nextval,'친절하고 약속시간을 잘지켜요','carrot3',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot1');
 --[review] 판매자    
-insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
-    values(REVIEW_REVIEW_NO_SEQ.nextval,'쿨거래했어요','',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot3');
+insert into review(review_no,review_desc,your_id,review_point,orders_no,user_id)
+    values(REVIEW_REVIEW_NO_SEQ.nextval,'쿨거래했어요','carrot1',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot3');
     
 --************
 --[orders] p_no=3, 판매자 carrot3, 구매자 carrot4
@@ -188,11 +188,11 @@ update userinfo set user_point =user_point-(select p_price from product where p_
 update userinfo set user_point =user_point+(select p_price from product where p_no = 3)
     where user_id= (select user_id from product where p_no = 3);
 --[review] 구매자
-insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
-    values(REVIEW_REVIEW_NO_SEQ.nextval,'마음에 들어요','',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot4');
+insert into review(review_no,review_desc,your_id,review_point,orders_no,user_id)
+    values(REVIEW_REVIEW_NO_SEQ.nextval,'마음에 들어요','carrot3',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot4');
 --[review] 판매자    
-insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
-    values(REVIEW_REVIEW_NO_SEQ.nextval,'친절해요','',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot3');
+insert into review(review_no,review_desc,your_id,review_point,orders_no,user_id)
+    values(REVIEW_REVIEW_NO_SEQ.nextval,'친절해요','carrot4',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot3');
     
 --************
 --[orders] p_no=4, 판매자 carrot4, 구매자 carrot2
@@ -226,11 +226,11 @@ update userinfo set user_point =user_point-(select p_price from product where p_
 update userinfo set user_point =user_point+(select p_price from product where p_no = 4)
     where user_id= (select user_id from product where p_no = 4);
 --[review] 구매자
-insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
-    values(REVIEW_REVIEW_NO_SEQ.nextval,'굳굳','',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot2');
+insert into review(review_no,review_desc,your_id,review_point,orders_no,user_id)
+    values(REVIEW_REVIEW_NO_SEQ.nextval,'굳굳','carrot4',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot2');
 --[review] 판매자    
-insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
-    values(REVIEW_REVIEW_NO_SEQ.nextval,'좋아요','',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot4');
+insert into review(review_no,review_desc,your_id,review_point,orders_no,user_id)
+    values(REVIEW_REVIEW_NO_SEQ.nextval,'좋아요','carrot2',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot4');
     
 --************
 --[orders] p_no=7, 판매자 carrot5, 구매자 carrot2
@@ -264,8 +264,8 @@ update userinfo set user_point =user_point-(select p_price from product where p_
 update userinfo set user_point =user_point+(select p_price from product where p_no = 7)
     where user_id= (select user_id from product where p_no = 7);
 --[review] 구매자
-insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
-    values(REVIEW_REVIEW_NO_SEQ.nextval,'깔끔해요','',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot2');
+insert into review(review_no,review_desc,your_id,review_point,orders_no,user_id)
+    values(REVIEW_REVIEW_NO_SEQ.nextval,'깔끔해요','carrot5',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot2');
 --[review] 판매자    
-insert into review(review_no,review_desc,review_image,review_point,orders_no,user_id)
-    values(REVIEW_REVIEW_NO_SEQ.nextval,'만족합니다','',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot5');
+insert into review(review_no,review_desc,your_id,review_point,orders_no,user_id)
+    values(REVIEW_REVIEW_NO_SEQ.nextval,'만족합니다','carrot2',0.1, ORDERS_ORDERS_NO_SEQ.currval,'carrot5');

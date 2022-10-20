@@ -11,7 +11,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Bigshop | Responsive E-commerce Template</title>
+    <title>내 물건 팔기</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -49,7 +49,7 @@
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
-                    <h5>Contact</h5>
+                    <h5>내 물건 팔기</h5>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="main">흙당근마켓</a></li>
                         <li class="breadcrumb-item"><a href="product_list">동네물건</a></li>
