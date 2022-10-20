@@ -16,7 +16,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Bigshop | Responsive E-commerce Template</title>
+    <title>동네생활</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -73,7 +73,7 @@
                     
                         <div class="widget-area catagory_section mb-30">
                         <div id = "category_list">
-                            <h6>Catagory</h6>
+                            <h6>카테고리</h6>
                             <ul>
                               <li>
                               
@@ -165,9 +165,9 @@
                     
                     <!-- Search Post -->
                         <div class="widget-area search_post mb-30">
-                            <h6>Search Post</h6>
+                            <h6>게시글 검색</h6>
                             <form action="#" method="get">
-                                <input type="search" class="form-control" id="townBoardSearch" placeholder="Enter Keyword...">
+                                <input type="search" class="form-control" id="townBoardSearch" placeholder="검색">
                                 <button type="submit" class="btn d-none">Submit</button>
                             </form>
                         </div>
