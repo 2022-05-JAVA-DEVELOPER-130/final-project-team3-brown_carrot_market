@@ -38,7 +38,7 @@ public class ProductController {
 		System.out.println("### ProductController() 기본생성자");
 	}
 	
-	@CrossOrigin(origins = "http://192.168.15.12")
+	//@CrossOrigin(origins = "http://192.168.15.12")
 	@RequestMapping(value={"/product_list",
 							"/product_login_list"})
 	public String product_list(@RequestParam(required = false, defaultValue = "1") Integer pageno,Model model,HttpServletRequest req, HttpSession session) throws Exception {
