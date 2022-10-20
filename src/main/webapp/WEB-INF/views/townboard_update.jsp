@@ -13,23 +13,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <!-- include_common_top -->
-    <!-- include_common_top -->
+     <!-- Title  -->
+    <title>우리동네 게시글 수정폼</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+    
+    
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/townBoard.css">
+    <link rel="stylesheet" href="css/user.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
-	
-	<!-- javaScript -->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
-	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
-	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 	
 	<!-- toast -->
  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
+   
+	
+	
+	
 	
 	
 	
@@ -291,10 +294,18 @@
     <script src="js/townBoard/townBoard.js"></script>
     
     <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
 	<script type="text/javascript" src="js/townBoard/townBoard.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	
+	<!-- javaScript -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
+	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
+	<script type="text/javascript" src="js/common/user_session_check.js"></script>
+	
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
+
 <style type="text/css">
 #toast-container > .toast {
     background-image: none !important;
@@ -313,7 +324,13 @@
     #toast-container > .toast-warning:before {
      content: "\f27a"; 
  
-}
+} 
+
+ #toast-container > .toast-success:before {
+     content: "\f2b5"; 
+ 
+} 
+
 	
 	
 </body>

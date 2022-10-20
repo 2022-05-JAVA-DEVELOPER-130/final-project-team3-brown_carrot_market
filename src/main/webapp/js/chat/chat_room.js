@@ -169,6 +169,7 @@ $(document).ready(function(){
 	 console.log(path);
 	 console.log(myId);
 	 if(path==2){
+			
 			$('#chatHead').hide();
 			$('#plist').hide();
 			$('#chat_history').hide();			
@@ -259,10 +260,18 @@ $.ajax({
 				}
 			};
 
-			console.log("여기?");
+			$(function(){
+				$("#chat").css({
+				"margin-left": "0px",
+ 			   	"border-left": "none"
+					
+					
+				});
+				
+			});
 			$('#chatHead').show();
 			$('#chat_history').show();
-			$('#plist').show();
+			
 		}
 	});
 	

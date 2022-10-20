@@ -7,7 +7,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>동네생활 검색</title>
+ 	<!-- Title  -->
+	<title>동네생활 검색</title>
+
+	<!-- Favicon  -->
+    <link rel="icon" href="img/core-img/favicon.ico">
 
 <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/townBoard.css">
@@ -265,6 +269,11 @@ content: "\f27a";
      content: "\f2b5"; 
  
 } 
+
+.shop_pagination_area .page-item.active .page-link { /* 페이징 버튼 색 변경 */
+    background-color: orange;
+    color: #ffffff;
+}
 	
 </body>
 </html>

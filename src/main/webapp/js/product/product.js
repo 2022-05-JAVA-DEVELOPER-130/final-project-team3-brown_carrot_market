@@ -138,7 +138,7 @@ function changeProductList(pageno,p_ctgr_no){
 		},
 		dataType:"json",
 		success:function(resultObj){
-			console.log(resultObj);
+			console.log(resultObj.data);
 				let data = resultObj.data;
 				let htmlBuffer = ``;
 				data.itemList.forEach(function(product, i){
@@ -219,6 +219,7 @@ function changeProductList(pageno,p_ctgr_no){
                                        <p class="brand_name">Top</p>
                                        <a href="product_detail?p_no=${product.p_no}" p_no="${product.p_no}">${product.p_title}</a>
 										<h6 class="product-price">가격: ${product.p_price}</h6>
+										<p class="product-short-desc">${product.p_address_name}</p>
                                         <p class="product-short-desc">${product.p_desc}</p>
                                     </div>
                                 </div>

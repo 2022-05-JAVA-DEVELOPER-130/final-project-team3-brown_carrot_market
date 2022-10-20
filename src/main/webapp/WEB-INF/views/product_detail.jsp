@@ -224,7 +224,7 @@
                         <!-- Add to Cart Form -->
                         <form class="cart clearfix my-5 d-flex flex-wrap align-items-center" method="post" name="chatStart">
                            
-                            
+                             
                             <input type="hidden" name="loginId" id="loginId" value="${sUser.user_id}" />
                             <input type="hidden" name="p_userId" id="p_userId" value="${product.userInfo.user_id}" />
                             <input type="hidden" name="p_no" id="p_no" value="${product.p_no}" />
@@ -270,7 +270,102 @@
                
     </section>
     <!-- Single Product Details Area End -->
+ 
+<section class="you_may_like_area section_padding_0_100 clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section_heading new_arrivals" style="background-color: #FFA500">
+                        <h5>이웃의 상품</h5>
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                
+                <div class="col-12">
+                <div class="you_make_like_slider owl-carousel">
+                
+                <c:forEach items="${userProductList}" var="product">
+                <!-- Single Product -->
+                        <div class="single-product-area">
+                            <div class="product_image">
+                                <!-- Product Image -->
+                                
+								<c:choose>
+                                        <c:when test="${!empty product.productImagesList[0].pi_name}">
+                                        <c:set var = "image_name" value = "${product.productImagesList[0].pi_name}"/>
+                                        <c:choose>
+											<c:when test="${fn:startsWith(image_name, 'http')}">
+		                                        <img class="normal_img" style="width:300px; height:300px;" src="${product.productImagesList[0].pi_name}"  alt="">
+		                                        <img class="hover_img" style="width:300px; height:300px;" src="${product.productImagesList[0].pi_name}" alt="">
+	                                        </c:when>
+											<c:otherwise>
+		                                        <img class="normal_img_test" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}"  alt="">
+		                                        <img class="hover_img" style="width:300px; height:300px;" src="img/product_img/${product.productImagesList[0].pi_name}" alt="">
+											</c:otherwise>
+										</c:choose>
+										</c:when>
+										
+										<c:otherwise>
+										<img class="normal_img" style="width:300px; height:300px;" src="img/chat-img/logo_carrot.png" alt="">
+                                        <img class="hover_img" style="width:300px; height:300px;" src="img/chat-img/logo_carrot.png" alt="">
+										
+										</c:otherwise>
+										</c:choose>
+                                <!-- Product Badge -->
+                                <div class="product_badge">
+                                    <span>
+                                     <c:if test="${product.p_sell eq 1}">
+		                                        		<c:out value="판매중"></c:out>
+		                                        	</c:if>
+		                                        	<c:if test="${product.p_sell eq 2}">
+		                                        		<c:out value="예약중"></c:out>
+		                                        	</c:if>
+		                                        	<c:if test="${product.p_sell eq 3}">
+		                                        		<c:out value="판매완료"></c:out>
+		                                        	</c:if>
+                                    </span>
+                                </div>
 
+                                <!-- Wishlist -->
+                               
+
+                                <!-- Compare -->
+                                
+                            </div>
+
+                            <!-- Product Description -->
+                            <div class="product_description">
+                                <!-- Add to cart -->
+                                
+
+                                <!-- Quick View -->
+                                
+
+                                <p class="brand_name">
+                                <c:if test="${product.p_sell eq 1}">
+		                                        		<c:out value="판매중"></c:out>
+		                                        	</c:if>
+		                                        	<c:if test="${product.p_sell eq 2}">
+		                                        		<c:out value="예약중"></c:out>
+		                                        	</c:if>
+		                                        	<c:if test="${product.p_sell eq 3}">
+		                                        		<c:out value="판매완료"></c:out>
+		                                        	</c:if>
+                                </p>
+                                <a href="product_detail?p_no=${product.p_no}" p_no="${product.p_no}">${product.p_title}</a>
+                                <h6 class="product-price">${product.p_price} 원</h6>
+                            </div>
+                        </div>
+               
+                </c:forEach>
+                         
+                   </div>
+                </div>
+            </div>
+        </div>
+    </section>
+  
     <!-- Related Products Area -->
     
     <!-- Related Products Area -->
