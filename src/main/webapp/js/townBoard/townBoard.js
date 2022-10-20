@@ -387,7 +387,9 @@ $("#townMainReplyBtn").on("click", function(e){
 $(".btn.btn-primary.rereply").on("click", function(e){
 	e.preventDefault();
 	e.stopPropagation();
+	/***************수정해야한ㅁ */
 	index=$(e.target).attr("index");
+	console.log(index);
 	var form=$(".townReReply_write_form_"+index);
 	let pageno = form.find($('input[name="page_no"]')).val();
 	let t_no = form.find($('input[name="t_no"]')).val();
