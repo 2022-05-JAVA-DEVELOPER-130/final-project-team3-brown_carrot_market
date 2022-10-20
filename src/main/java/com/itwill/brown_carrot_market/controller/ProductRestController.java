@@ -95,7 +95,7 @@ public class ProductRestController {
 		
 		code = productService.insertProduct(map);
 		if(code==1) message="product_write 성공";
-		
+		url="product_detail?p_no="+(Integer.parseInt(map.get("p_no").toString()));
 		System.out.println("restController>>>"+map);
 		
 		resultMap.put("code", code);
