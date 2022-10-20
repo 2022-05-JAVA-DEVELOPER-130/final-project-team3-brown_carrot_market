@@ -14,14 +14,14 @@ public class Orders {
 	private Product product;
 	private UserInfo userinfo;
 	private Transfer transfer;
-	private Date orders_date;
+	private String orders_date;
 	private ProductImage productImage;
 	
 	public Orders() {
 
 	}
 
-	public Orders(int orders_no, Product product, UserInfo userinfo, Transfer transfer, Date orders_date,
+	public Orders(int orders_no, Product product, UserInfo userinfo, Transfer transfer, String orders_date,
 			ProductImage productImage) {
 		super();
 		this.orders_no = orders_no;
@@ -64,11 +64,11 @@ public class Orders {
 		this.transfer = transfer;
 	}
 
-	public Date getOrders_date() {
+	public String getOrders_date() {
 		return orders_date;
 	}
 
-	public void setOrders_date(Date orders_date) {
+	public void setOrders_date(String orders_date) {
 		this.orders_date = orders_date;
 	}
 

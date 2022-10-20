@@ -7,7 +7,12 @@
     height: 100px;
     max-width: none;
     cursor:pointer;
+    float:left;
 }
+.img-edit{
+	cursor:pointer;
+}
+
 .review-img-circle {
     border-radius: 50%;
     background-color: #fff;
@@ -15,6 +20,22 @@
     height: 50px;
     max-width: none;
 }
+/*
+.my-circle{
+	text-align:center;
+	line-height : 100px;
+	float:left;
+}
+
+.my-circle::after{
+   content:'';
+   display:block;
+   clear:both;
+}
+.my-user{
+	clear:both;
+}
+*/
 /*
 .badge-carrot {
 	all: unset;
@@ -30,7 +51,7 @@
 	background-color: orange;
 }
 */
-.btn-carrot {
+.btn-carrot{
 	color: white;
 	background-color: orange;
 }

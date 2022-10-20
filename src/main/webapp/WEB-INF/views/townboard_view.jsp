@@ -19,6 +19,10 @@
     
     <!-- 슬라이드쇼 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+  <!-- toast -->
+ <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
   <script>
@@ -215,7 +219,7 @@
                         
                         <!-- Bar Area -->
                         <div class="status-bar mb-15">
-                            <a href="#"><i class="icofont-user-male"></i> ${townBoard.userInfo.user_id }</a>
+                            <a href="#" id="viewWriterId"><i class="icofont-user-male"></i>${townBoard.userInfo.user_id }</a>
                             <a href="#"><i class="icofont-ui-clock"></i> ${townBoard.t_date }</a>
                            
                            
@@ -423,6 +427,11 @@
      content: "\f27a"; 
  
 }
+
+#toast-container > .toast-success:before {
+     content: "\f2b5"; 
+ 
+} 
 
 
 </body>

@@ -23,11 +23,11 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/user.css">
 
-	<!-- chat toast -->
-	<link href="[//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css)" rel="stylesheet" />
-	<link rel="stylesheet" type="text/css" href="[https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css](https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css)"/>
-	<script type="text/javascript" src="[https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js](https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js)"></script>
-
+	<!-- toast -->
+ <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+   
+	  
     <!-- javaScript -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
@@ -35,6 +35,10 @@
 	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
 	<script type="text/javascript" src="js/review/review.js"></script>
 	<script type="text/javascript" src="js/review/ReviewHtmlContents.js"></script>
+	
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
+	
+
 
 </head>
 
@@ -154,6 +158,8 @@
     <script src="js/jquery.nice-select.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/default/active.js"></script>
+    
+  
 
 	<!-- chat toast -->
 	<style type="text/css">
@@ -174,6 +180,11 @@
 		content: "\f27a";
 		
 		}
+		
+		 #toast-container > .toast-success:before {
+     content: "\f2b5"; 
+ 
+} 
 	</style>
 
 </body>
