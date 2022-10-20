@@ -144,7 +144,7 @@
 
                             <!-- Chat -->
                             <div id="chat-area" class="cart-area chat-area" >
-                                <a href="chat_room" class="cart--btn" style="display:block;"><i class="icofont-chat"></i> <span class="cart_quantity">1</span></a>
+                                <a href="chat_room" class="cart--btn" style="display:block;"><i class="icofont-chat"></i> <span style="background-color:orange;" class="cart_quantity">1</span></a>
 
                                 <!-- Cart Dropdown Content -->
                                 <!--  
