@@ -467,7 +467,33 @@ $(document).ready(function() {
   var loginId=sessionStorage.getItem('sUserId');
   var writeId=$('#viewWriterId').text();
   index=$(this).attr("index");
-  console.log(index);
+  
+  $('view')
+  console.log("댓글 인덱스:"+index);
+  
+  
+  var replyNumber=$('#ReplyNumber').val();
+  console.log("댓글수:"+replyNumber);
+  
+   for(var i=0;i<replyNumber;i++){
+	var replyId=$('#viewReplyWriterId_'+i).text();
+	var rereplyId=$('#viewReReplyWriterId_'+i).text();
+	console.log("댓글 아이디:"+replyId);
+	if(replyId==loginId){
+		console.log("같은 작성자:"+i);
+		$('#townReplyDeletebtn_'+i).show();
+	}else{
+		console.log("다른 작성자:"+i);
+		$('#townReplyDeletebtn_'+i).hide();
+	}
+	if(rereplyId==loginId){
+		$('#reReplyDeleteBtn_'+i).show();
+	}else{
+		$('#reReplyDeleteBtn_'+i).hide();
+	}
+	
+	
+   }
   var replyWriteId=$('#viewReplyWriterId_'+index).text();
  
   var rereplyWriteId=$('#viewReReplyWriterId_'+index).text();
@@ -486,6 +512,7 @@ $(document).ready(function() {
 
 
 /* 댓글의 삭제버튼 */
+/*
   if(loginId==replyWriteId){
   console.log("댓글 같은 작성자")
 	$('.townReply.delete.reply').show();
@@ -494,8 +521,10 @@ $(document).ready(function() {
 	console.log("댓글 다른 작성자")
 	$('.townReply.delete.reply').hide();
 }
+*/
 
 /* 대댓글의 삭제버튼 */
+/*
   if(loginId==rereplyWriteId){
   console.log("대댓글 같은 작성자")
 	$('.townReply.delete.rereply').show();
@@ -504,7 +533,7 @@ $(document).ready(function() {
 	console.log("대댓글 다른 작성자")
 	$('.townReply.delete.rereply').hide();
 }
-
+*/
 
 
   $(".heading").click(function()
