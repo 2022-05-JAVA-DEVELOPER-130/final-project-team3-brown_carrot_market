@@ -224,7 +224,7 @@
                         <!-- Add to Cart Form -->
                         <form class="cart clearfix my-5 d-flex flex-wrap align-items-center" method="post" name="chatStart">
                            
-                            
+                             
                             <input type="hidden" name="loginId" id="loginId" value="${sUser.user_id}" />
                             <input type="hidden" name="p_userId" id="p_userId" value="${product.userInfo.user_id}" />
                             <input type="hidden" name="p_no" id="p_no" value="${product.p_no}" />
@@ -270,6 +270,7 @@
                
     </section>
     <!-- Single Product Details Area End -->
+ 
 <section class="you_may_like_area section_padding_0_100 clearfix">
         <div class="container">
             <div class="row">
@@ -289,10 +290,7 @@
                         <div class="single-product-area">
                             <div class="product_image">
                                 <!-- Product Image -->
-                                <!-- 
-                                <img class="normal_img" src="img/product-img/new-1-back.png" alt="">
-                                <img class="hover_img" src="img/product-img/new-1.png" alt="">
-								-->
+                                
 								<c:choose>
                                         <c:when test="${!empty product.productImagesList[0].pi_name}">
                                         <c:set var = "image_name" value = "${product.productImagesList[0].pi_name}"/>
@@ -367,6 +365,7 @@
             </div>
         </div>
     </section>
+  
     <!-- Related Products Area -->
     
     <!-- Related Products Area -->
