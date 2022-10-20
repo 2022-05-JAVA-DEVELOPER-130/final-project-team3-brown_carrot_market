@@ -12,10 +12,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-    <!-- include_common_top -->
-    <!-- include_common_top -->
+	
+	 <!-- Title  -->
+    <title>Brown Carrot Market</title>
+    
+    <!-- Favicon  -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+	
+  
+    
+    <!-- Style CSS -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/user.css">
     <link rel="stylesheet" href="css/townBoard.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
@@ -42,10 +50,8 @@
         </div>
     </div>
 
-    <!-- Header Area -->
-     <!-- include_common_bottom.jsp start-->
-	<jsp:include page="common/include_common_header.jsp"/>
-	<!-- include_common_bottom.jsp end-->
+   <!-- Header Area -->
+			<jsp:include page="common/include_common_header.jsp"/>
     <!-- Header Area End -->
     
     
@@ -288,7 +294,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	
 		<!-- javaScript -->
-	<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
