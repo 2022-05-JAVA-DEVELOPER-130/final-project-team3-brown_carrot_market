@@ -388,7 +388,11 @@ $(".btn.btn-primary.rereply").on("click", function(e){
 	e.preventDefault();
 	e.stopPropagation();
 	/***************수정해야한ㅁ */
-	index=$('.content>form').attr("index");
+	console.log($(e.target).attr("index"));
+	console.log($(".townReReply_write_form_"+$(e.target).attr("index")));
+	
+	//index=$('.content>form').attr("index");
+	index=$(e.target).attr("index");
 	console.log(index);
 	var form=$(".townReReply_write_form_"+index);
 	

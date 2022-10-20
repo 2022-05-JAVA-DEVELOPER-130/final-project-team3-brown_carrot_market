@@ -293,7 +293,7 @@
                                  				     -->
 				                                    <input type="hidden" class="form-control" name="depth" value="2"/>
 				                                    <div class="col-12 ">
-				                                        <button  class="btn btn-primary rereply" type="submit" >등록</button>
+				                                        <button  class="btn btn-primary rereply" index="${status.index }" type="submit" >등록</button>
 				                                    </div>
 				                                </div>
 				                            </form>
