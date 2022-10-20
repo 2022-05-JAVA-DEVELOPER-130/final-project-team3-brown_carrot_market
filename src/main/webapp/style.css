@@ -279,7 +279,7 @@ textarea:focus,
     .section_heading.new_arrivals h5 {
       margin-bottom: 0; }
     .section_heading.new_arrivals::before {
-      background-color: #0f99f3;
+      background-color: #FFA500;
       content: "";
       height: 40px;
       position: absolute;
@@ -1802,7 +1802,7 @@ textarea:focus,
       color: #000;
       text-transform: capitalize; }
     .footer_area .single_footer_area .footer_content li {
-      color: #000;);
+      color: #000;
       font-size: 14px;
       margin-bottom: 1rem; }
       .footer_area .single_footer_area .footer_content li:last-child {
