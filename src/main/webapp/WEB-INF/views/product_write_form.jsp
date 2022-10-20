@@ -152,14 +152,14 @@
                                     <!-- 사진 넣기 임시--> 
                                     <div class="form-group" style="margin-left: 50px">
                                     
-                                   	<img id ="preview" style="width:50px; height:50px;"/>
-                                    <span><input type="file" onchange="readURL(this);" name="files" style="width: 200px"></span> 
-                                   	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img id ="preview1" style="width:50px; height:50px;"/>
-                                    <span><input type="file" name="files" onchange="readURL1(this);" style="width: 200px"></span> 
-                                   	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img id ="preview2" style="width:50px; height:50px;"/>
-                                    <span><input type="file" name="files" onchange="readURL2(this);" style="width: 200px"></span> 
-                                   	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img id ="preview3" style="width:50px; height:50px;"/>
-                                    <span><input type="file" name="files" onchange="readURL3(this);" style="width: 200px"></span> 
+                                   	<img id ="preview" src="img/chat-img/logo_carrot.png" style="width:50px; height:50px;"/>
+                                    <span><input type="file" onchange="readURL(this);" name="files" style="width: 80px"></span> 
+                                   	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img id ="preview1" src="img/chat-img/logo_carrot.png" style="width:50px; height:50px;"/>
+                                    <span><input type="file" name="files" onchange="readURL1(this);" style="width: 80px"></span> 
+                                   	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img id ="preview2" src="img/chat-img/logo_carrot.png" style="width:50px; height:50px;"/>
+                                    <span><input type="file" name="files" onchange="readURL2(this);" style="width: 80px"></span> 
+                                   	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img id ="preview3" src="img/chat-img/logo_carrot.png" style="width:50px; height:50px;"/>
+                                    <span><input type="file" name="files" onchange="readURL3(this);" style="width: 80px"></span> 
 
 									</div>
 									<!-- 사진 넣기 임시 끝 -->

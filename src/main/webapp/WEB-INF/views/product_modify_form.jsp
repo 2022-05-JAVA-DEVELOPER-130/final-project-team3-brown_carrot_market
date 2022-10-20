@@ -177,7 +177,7 @@
 									</c:otherwise>
                                     </c:choose>
 									
-									<span><input type="file" onchange="readURL(this);" name="files" style="width: 200px"></span> 
+									<span><input type="file" onchange="readURL(this);" name="files" style="width: 80px"></span> 
                                    	
                                    	<c:choose>
                                    	<c:when test="${!empty product.productImagesList[1].pi_name}">
@@ -196,7 +196,7 @@
 									</c:otherwise>
                                     </c:choose>
                                     
-                                    <span><input type="file" name="files" onchange="readURL1(this);" style="width: 200px"></span> 
+                                    <span><input type="file" name="files" onchange="readURL1(this);" style="width: 80px"></span> 
                                    	
                                    	<c:choose>
                                    	<c:when test="${!empty product.productImagesList[2].pi_name}">
@@ -215,7 +215,7 @@
 									</c:otherwise>
                                     </c:choose>
                                     
-                                    <span><input type="file" name="files" onchange="readURL2(this);" style="width: 200px"></span> 
+                                    <span><input type="file" name="files" onchange="readURL2(this);" style="width: 80px"></span> 
                                    	
                                    	<c:choose>
                                    	<c:when test="${!empty product.productImagesList[3].pi_name}">
@@ -234,7 +234,7 @@
 									</c:otherwise>
                                     </c:choose>
 									
-                                    <span><input type="file" name="files" onchange="readURL3(this);" style="width: 200px"></span> 
+                                    <span><input type="file" name="files" onchange="readURL3(this);" style="width: 80px"></span> 
 									
 									</div>
 									<!-- 사진 넣기 임시 끝-->
