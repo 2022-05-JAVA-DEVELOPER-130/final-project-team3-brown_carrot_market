@@ -198,7 +198,7 @@
                             </div>
                             <a href="townboard_view?t_no=${townBoard.t_no}&pageno=${townBoardList.pageMaker.curPage}" t_no="${townBoard.t_no}" pageno="${pageno}" class="blog_title">${townBoard.t_title}</a>
                             <p>${townBoard.t_content}</p>
-                            <a href="single-blog.html">Continue Reading <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-location-arrow" aria-hidden="true"></i> ${townBoard.t_address_name }</a>
                         </div>
                    </c:forEach>
                     </div>

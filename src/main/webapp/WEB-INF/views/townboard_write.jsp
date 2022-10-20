@@ -14,7 +14,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	
 	 <!-- Title  -->
-    <title>Brown Carrot Market</title>
+    <title>우리동네 게시글 쓰기 폼</title>
     
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
