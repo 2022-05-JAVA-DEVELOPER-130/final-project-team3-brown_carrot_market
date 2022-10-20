@@ -284,7 +284,7 @@
 				                                            <textarea class="form-control rereply" name="t_reply_content" class="t_reply_content" cols="30" rows="7" placeholder="내용" tabindex="2"></textarea>
 				                                        </div>
 				                                    </div>
-				                                    <input type="hidden" class="form-control" name="t_no" value="${townBoard.t_no}"/>
+				                                    <input type="hidden" class="form-control" name="t_no" value="${townReply.townBoard.t_no}"/>
                                  				    <input type="hidden" class="form-control" name="page_no" value="${pageno}" />
                                  				    <input type="hidden" class="form-control" name="t_reply_no" value="${townReply.t_reply_no}" />
                                  				    <input type="hidden" class="form-control" name="groupno" value="${townReply.groupno}" />
