@@ -48,6 +48,8 @@ public interface UserInfoService {
 	//비밀번호 update
 	int updatePwById(UserInfo userInfo) throws Exception;
 	
+	List<Address> findAddressesById(UserInfo userInfo) throws Exception;
+	
 	/*
 	 * 회원수정
 	 */

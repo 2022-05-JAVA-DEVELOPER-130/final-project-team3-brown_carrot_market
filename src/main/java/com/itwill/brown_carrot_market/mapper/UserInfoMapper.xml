@@ -35,7 +35,7 @@
 	<select id="findUserList" resultMap="userInfoResultMap">
 		select * from address a join userinfo u on a.user_id=u.user_id
 	</select>
-
+	
 	<!-- user_id를 통해, userinfo와 addressList (Select) -->
 	<select id="findUser" parameterType="String" resultMap="userInfoResultMap">
 		select * from userinfo u left join address a on u.user_id=a.user_id where u.user_id= #{user_id} order by a.address_no asc
@@ -58,6 +58,15 @@
 			 from userinfo
 			 where user_email=#{user_email} and user_id=#{user_id}
 	</select>
+	
+	<!-- [update Address Range] -->
+	<select id="findAddressesById" parameterType="com.itwill.brown_carrot_market.dto.UserInfo" resultType="com.itwill.brown_carrot_market.dto.Address">
+		 select *
+			 from address
+			 where user_id=#{user_id}
+	</select>
+	
+	
 	
 	<update id="updatePwById" parameterType="com.itwill.brown_carrot_market.dto.UserInfo" >
 	 	update userinfo set user_pw=#{user_pw}

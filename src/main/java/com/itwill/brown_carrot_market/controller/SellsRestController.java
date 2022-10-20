@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,6 +19,7 @@ public class SellsRestController {
 	@Autowired
 	private ProductService productService;
 	
+	@RequestMapping("/sell_list_rest")
 	public Map<String, Object> sell_list_rest(@RequestParam(required = false, defaultValue = "0") int p_sell,
 											 HttpSession session)throws Exception{
 		Map<String, Object> resultMap = new HashMap<>();

@@ -28,6 +28,7 @@
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/review/review.js"></script>
+	<script type="text/javascript" src="js/sells/sell_list.js"></script>
 
 
 	<!-- 탭 기능 자바스크립트 -->
@@ -70,7 +71,7 @@
     <!-- tabs -->
     <ul class="nav nav-tabs" role="tablist" id="product-details-tab">
          <li class="nav-item">
-             <a href="#all" class="nav-link active" data-toggle="tab" role="tab">전체 내역</a>
+             <a href="#" class="nav-link active" onclick="sellStatus(0)" data-toggle="tab" role="tab">전체 내역</a>
           </li>
           <li class="nav-item">
              <a href="#" class="nav-link" onclick="sellStatus(1)" data-toggle="tab" role="tab">판매중</a>
@@ -93,6 +94,9 @@
 	                <div class="col-12">
 	                    <div class="cart-table">
 	                        <div class="table-responsive">
+	                           
+	                           
+	                           
 	                            <table class="table table-bordered mb-30">
 	                                <thead>
 	                                    <tr>
@@ -105,7 +109,8 @@
 	                                        <th scope="col">후   기</th>
 	                                    </tr>
 	                                </thead>
-	                                <tbody>
+	                <!-- 시작? --> 
+	                                <tbody id="sell_list_start">
 	                                
 									    <c:forEach items="${productList}" var="product" varStatus="status">
 		                                    <tr>
@@ -116,7 +121,6 @@
 		                                        	${fn:substring(product_date,0,10)}
 		                                        </td>
 		                                        <td>
-		                                        	
 		                                        	<c:set var = "image_name" value = "${product.productImagesList[0].pi_name}"/>
 			                                        <c:choose>
 														<c:when test="${fn:startsWith(image_name, 'http')}">
@@ -126,9 +130,6 @@
 				                                            <img src="img/product_img/${product.productImagesList[0].pi_name}" onerror="this.src='img/user_profile/newCarrot.jpg'">
 														</c:otherwise>
 													</c:choose>
-		                                        
-		                                        
-		                                        
 		                                        </td>
 		                                        <td>
 		                                            <a href="product_detail?p_no=${product.p_no}">${product.p_title}</a>
@@ -151,15 +152,19 @@
 		                                        <td>
 		                                          	<div id="sell_list">
 		                                            <script>check_isExisted_orders($('input[name=p_no_${status.index}]').val())</script>
-		                                            <a href="#" class="badge ${product.p_no}" id="${Orders.orders_no}" seller_id="${Orders.product.userInfo.user_id}" p_title="${product.p_title}" style="height:20px;font-size:1rem"></a>
+		                                            <a href="#" class="badge ${product.p_no}" id="" seller_id="" p_title="${product.p_title}" style="height:20px;font-size:1rem"></a>
 		                                            </div>
 		                                        </td>
 		                                    </tr>
-										</c:forEach>  
-										
+										</c:forEach> 
+										 
 	                                </tbody>
 	                            </table>
+									</div>	
 	                        </div>
+	                        <!-- 끝? -->
+	                        
+	                        
 	                    </div>
 	                </div>
 	            </div>
@@ -171,7 +176,7 @@
 	    </div>
 	    </div>
 	    </div>
-	    </div>
+	 
 	    
     <!-- Cart Area End -->
 

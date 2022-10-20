@@ -31,7 +31,6 @@ public class TransferRestController {
 		String url = "";
 		String msg = "";
 		String sUserId = (String) request.getSession().getAttribute("sUserId");
-		System.out.println(sUserId);
 		List<Transfer> resultList = transferService.selectById(sUserId);
 
 		resultMap.put("code", code);

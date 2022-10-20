@@ -9,16 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.itwill.brown_carrot_market.dto.Orders;
 import com.itwill.brown_carrot_market.dto.Product;
-import com.itwill.brown_carrot_market.dto.ProductImage;
 import com.itwill.brown_carrot_market.dto.Transfer;
 import com.itwill.brown_carrot_market.dto.UserInfo;
 import com.itwill.brown_carrot_market.service.OrdersService;
 import com.itwill.brown_carrot_market.service.ProductService;
 import com.itwill.brown_carrot_market.service.TransferService;
 import com.itwill.brown_carrot_market.service.UserInfoService;
-import com.itwill.brown_carrot_market.test.dao.ProductImageDaoSpringBootTestApplication;
 
 @Controller
 public class TransferController {
@@ -58,25 +55,12 @@ public class TransferController {
 
 	}
 	
-	@RequestMapping(value = "/transfer_action")
-	public String transfer_action(int p_no, HttpServletRequest request) throws Exception {
-		String forwardPath="";
-		boolean result = transferService.transfer_transaction(p_no);
-		if(result == true){
-			forwardPath="redirect:transfer_fail?p_no="+p_no;
-		}else if(result == false){
-			forwardPath="redirect:transfer_complete?p_no="+p_no;
-		}
-		return forwardPath;
-	}
-	
 	@LoginCheck
 	@RequestMapping(value = "/transfer_complete")
 	public String transfer_complete(int p_no,Model model, HttpServletRequest request) throws Exception {
 		String sUserId = (String) request.getSession().getAttribute("sUserId");
 		Product product = productService.selectByOne(p_no);
 		//productService.updateProductSell(3, p_no);
-		
 		model.addAttribute("product", product);
 		return "/transfer_complete";
 	}
