@@ -162,7 +162,7 @@ public class ProductRestController {
 			code = productService.updateProduct(map);
 			if(code==1) message="product_write 성공";
 			System.out.println(">>>modify product"+map);
-			url = "redirect:product_detail?p_no=" + p_no;
+			url = "product_detail?p_no=" + p_no;
 			
 			resultMap.put("code", code);
 			resultMap.put("url", url);
@@ -236,4 +236,18 @@ public class ProductRestController {
 		
 		return resultMap;
 	}
+	
+	@RequestMapping("/deleteProduct")
+	public Map<String,Object> deleteProduct(@RequestParam int p_no,HttpSession session)throws Exception{
+		Map<String, Object> resultMap = new HashMap<>();
+		int result =0;
+		
+		result=productService.deleteByPNo(p_no);
+		
+		resultMap.put("data", result);
+		
+		return resultMap;
+	}
+	
+	
 }

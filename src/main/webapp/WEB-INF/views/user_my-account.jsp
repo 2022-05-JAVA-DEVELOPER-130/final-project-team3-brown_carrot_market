@@ -25,6 +25,7 @@
 <link rel="stylesheet" href="css/user.css">
 
 <!-- javaScript -->
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=a7c7231db91ae56cfc5e3c6ea06f73c6&libraries=services"></script>
 <!-- <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
 
@@ -121,12 +122,12 @@
 	                        <form class="invi_form">
 	                            <div class="form-group">
 	                                <label for="invi_email">흙당근마켓에 친구를 초대해보세요!</label>
-	                                <input type="email" class="form-control" id="invi_email" name="invi_email" aria-describedby="emailHelp" placeholder="Enter email">
+	                                <input type="email" class="form-control" id="invi_email" name="invi_email" aria-describedby="emailHelp" placeholder="이메일 주소">
 	                                <small id="emailHelp" class="form-text text-muted">초대받은 친구가 회원가입시, 500point를 드립니다!.</small>
 	                            </div>
 	                        </form>
 	                        <div style="text-align:right">
-	                        	<button type="submit" class="btn btn-primary" id="btn_invi">Submit</button>
+	                        	<button type="submit" class="btn btn-primary" id="btn_invi">메일전송</button>
 	                        </div>
 						</div>
                     </div>
@@ -145,8 +146,12 @@
 
 	<!-- jQuery (Necessary for All JavaScript Plugins) -->
 	<script src="js/jquery.min.js"></script>
+<<<<<<< HEAD
 	<!-- <script src="js/popper.min.js"></script> -->
-	<!-- <script src="js/bootstrap.min.js"></script> -->
+=======
+	<script src="js/popper.min.js"></script>
+>>>>>>> branch 'master' of https://github.com/2022-05-JAVA-DEVELOPER/final-project-team3-brown_carrot_market.git
+	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.easing.min.js"></script>
 	<script src="js/default/classy-nav.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
@@ -155,8 +160,8 @@
 	<script src="js/jquery.countdown.min.js"></script>
 	<script src="js/jquery.counterup.min.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
-	<!-- <script src="js/jarallax.min.js"></script>
-	<script src="js/jarallax-video.min.js"></script> -->
+	<script src="js/jarallax.min.js"></script>
+	<script src="js/jarallax-video.min.js"></script>
 	<script src="js/jquery.magnific-popup.min.js"></script>
 	<script src="js/jquery.nice-select.min.js"></script>
 	<script src="js/wow.min.js"></script>
@@ -166,7 +171,7 @@
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
 
-<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=a7c7231db91ae56cfc5e3c6ea06f73c6&libraries=services"></script>
+
 <script type="text/javascript" src="js/common/user_session_check.js"></script>
 <script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 <script type="text/javascript" src="js/user/UserHtmlContents.js"></script>

@@ -15,6 +15,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -245,7 +246,7 @@ public class UserInfoRestController {
 		return resultMap;
 	}
 	
-	@LoginCheck
+	@CrossOrigin(origins = "http://172.20.10.10")
 	@PostMapping("/user_remove_address_json")
 	public Map user_remove_address_json(HttpServletRequest request, @ModelAttribute Address address) throws Exception{
 		System.out.println(address);

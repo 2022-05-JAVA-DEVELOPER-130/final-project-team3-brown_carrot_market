@@ -104,16 +104,13 @@
                                     <!-- 사진 넣기 임시 -->
                                     <div class="form-group">
                                    
-                                    
-                        
-                                    <span>사진1: <input type="file" name="files"></span>
-									<span>사진2: <input type="file" name="files"></span>
-									<span>사진3: <input type="file" name="files"></span>
-									<span>사진4: <input type="file" name="files"></span>
-									
-									
+                                    <span>사진1: <input type="file" name="files"></span> 
+                                    <span>사진2: <input type="file" name="files"></span> 
+                                    <span>사진3: <input type="file" name="files"></span> 
+                                    <span>사진4: <input type="file" name="files"></span> 
+
 									</div>
-									<!-- 사진 넣기 임시 끝-->
+									<!-- 사진 넣기 임시 끝 -->
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <textarea name="p_desc" class="form-control" id="p_desc" cols="30" rows="10" placeholder="물건 설명" required></textarea>
