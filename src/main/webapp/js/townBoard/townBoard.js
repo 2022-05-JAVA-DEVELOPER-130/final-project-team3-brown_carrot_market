@@ -486,21 +486,21 @@ $(document).ready(function() {
 /* 댓글의 삭제버튼 */
   if(loginId==replyWriteId){
   console.log("같은 작성자")
-	$('.townReply.delete.reply').show();
+	$('.townReply delete reply').show();
 	
 }else if(loginId!=replyWriteId){
 	console.log("다른 작성자")
-	$('.townReply.delete.reply').hide();
+	$('.townReply delete reply').hide();
 }
 
 /* 대댓글의 삭제버튼 */
   if(loginId==rereplyWriteId){
   console.log("같은 작성자")
-	$('.townReply.delete.rereply').show();
+	$('.townReply delete rereply').show();
 	
 }else if(loginId!=rereplyWriteId){
 	console.log("다른 작성자")
-	$('.townReply.delete.rereply').hide();
+	$('.townReply delete rereply').hide();
 }
 
 
