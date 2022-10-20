@@ -795,18 +795,25 @@
 
 <style type="text/css">
 
+@font-face {
+
+  font-family: 'Noto'; 
 
 
-/*
-.shop_by_catagory_slides.owl-carousel.single_catagory_slide a img{
- object-fit: contain;
-width: 30px;
+  src: url("./css/font/NotoSansKR-Medium.otf"); /* 가는글씨체 웹폰트주소 지정*/
 }
-*/
-.single_catagory_slide a img{
- object-fit: contain;
-width: 30px;
+@font-face {
+
+  font-family: 'Noto';
+
+  src: url("./css/font/NotoSansKR-Bold.otf"); /* 굵은글씨체 웹폰트주소 지정*/
+  font-weight: bold;
+
 }
+body{
+ font-family: 'Noto',serif;
+}
+
 
 
 
