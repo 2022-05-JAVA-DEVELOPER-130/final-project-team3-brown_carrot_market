@@ -45,6 +45,27 @@
   margin: 0;
   padding: 0; }
 
+@font-face {
+
+  font-family: 'Noto'; 
+
+
+  src: url("./css/font/NotoSansKR-Medium.otf"); /* 가는글씨체 웹폰트주소 지정*/
+}
+@font-face {
+
+  font-family: 'Noto';
+
+  src: url("./css/font/NotoSansKR-Bold.otf"); /* 굵은글씨체 웹폰트주소 지정*/
+  font-weight: bold;
+
+}
+
+header{
+	font-family: "Noto", sans-serif;
+	
+}
+
 body {
   font-family: "Noto", sans-serif;
   font-size: 1rem; }
@@ -511,7 +532,7 @@ textarea:focus,
       .header_area .classynav ul li a {
         padding: 20px 10px; } }
     .header_area .classynav ul li a:focus, .header_area .classynav ul li a:hover {
-      color: #0f99f3; }
+      color: #ff8b3b; }
   .header_area .classynav ul li li a {
     padding: 15px 25px; }
   .header_area .classynav ul li .dropdown {
@@ -1338,16 +1359,20 @@ textarea:focus,
 .single_catagory_slide {
   position: relative;
   z-index: 1;
-  text-align: center; }
+  text-align: center;
+   }
   .single_catagory_slide a {
     display: block;
-    margin: 0 auto 15px; }
+    margin: 0 auto 15px; 
+    }
     .single_catagory_slide a img {
       -webkit-transition-duration: 500ms;
       -o-transition-duration: 500ms;
       transition-duration: 500ms;
+      
       border-radius: 50%;
-      border: 2px solid #d6e6fb; }
+      border: 2px solid #d6e6fb;}
+
   .single_catagory_slide p {
     -webkit-transition-duration: 500ms;
     -o-transition-duration: 500ms;

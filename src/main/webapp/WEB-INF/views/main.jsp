@@ -814,6 +814,9 @@ body{
  font-family: 'Noto',serif;
 }
 
+
+
+
 #toast-container > .toast {
     background-image: none !important;
 }

@@ -51,6 +51,10 @@
 	background-color: orange;
 }
 */
+#user_login_form>.btn-primary:hover {
+	background-color: #343a40;
+}
+
 .btn-carrot{
 	color: white;
 	background-color: orange;
