@@ -466,6 +466,9 @@ $(document).ready(function() {
   $(".content").hide();
   var loginId=sessionStorage.getItem('sUserId');
   var writeId=$('#viewWriterId').text();
+  index=$(this).attr("index");
+  var replyWriteId=$('#viewReplyWriterId_'+index).text();
+  var rereplyWriteId=$('#viewReReplyWriterId_'+index).text();
   
 /* 게시글 삭제 수정버튼 */
   if(loginId==writeId){
@@ -483,21 +486,21 @@ $(document).ready(function() {
 /* 댓글의 삭제버튼 */
   if(loginId==replyWriteId){
   console.log("같은 작성자")
-	$('.townReply.delete').show();
+	$('.townReply.delete.reply').show();
 	
-}else{
+}else if(loginId!=replyWriteId){
 	console.log("다른 작성자")
-	$('.townReply.delete').hide();
+	$('.townReply.delete.reply').hide();
 }
 
 /* 대댓글의 삭제버튼 */
   if(loginId==rereplyWriteId){
   console.log("같은 작성자")
-	$('.townReply.delete').show();
+	$('.townReply.delete.rereply').show();
 	
-}else{
+}else if(loginId!=rereplyWriteId){
 	console.log("다른 작성자")
-	$('.children>.townReply.delete').hide();
+	$('.townReply.delete.rereply').hide();
 }
 
 
