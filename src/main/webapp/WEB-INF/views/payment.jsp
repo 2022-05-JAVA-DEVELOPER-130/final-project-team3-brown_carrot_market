@@ -44,7 +44,8 @@
 color = orange;
 </style>
 </head>
-
+<script>
+</script>
 <body>
 	<!-- Preloader -->
 	<div id="preloader">
@@ -72,66 +73,109 @@ color = orange;
 		</div>
 	</div>
 	<!-- Breadcumb Area -->
-
-	<div class="checkout_steps_area">
-		<a class="active" href="/brown_carrot_market/payment"><i class="icofont-check-circled"></i> 페이 충전</a> 
-		<a href="/brown_carrot_market/point_list"><i class="icofont-check-circled"></i> 페이 내역</a> 
-		<a href="/brown_carrot_market/payment_withdraw"><i class="icofont-check-circled"></i> 페이 출금</a>
+	<div class="col-12">
+		<div class="checkout_steps_area">
+			<a class="active" href="/brown_carrot_market/payment"><i class="icofont-check-circled"></i> 페이 충전</a> 
+			<a href="/brown_carrot_market/point_list"><i class="icofont-check-circled"></i> 페이 내역</a> 
+			<a href="/brown_carrot_market/payment_withdraw"><i class="icofont-check-circled"></i> 페이 출금</a>
+		</div>
 	</div>
+	<div>
+		<select id="point_select" name="point_select">
+			<option value="1">10000</option>
+			<option value="2">50000</option>
+			<option value="3">100000</option>
+			<option value="4">직접입력</option>
+		</select>
 
+		<input type="text" id="point_select_input" name="point_select_input"/>
+	</div>
+	<script>
+
+	</script>
 	<div class="col-12">
 		<div class="checkout_pagination mt-50">
 			<button class="btn btn-primary" onclick="requestPay()">충전하기</button>
 		</div>
 	</div>
+
 	<script>
+		$(function point_select(){
+		      //직접입력 인풋박스 기존에는 숨어있다가
+		$("#point_select_input").hide();
+		$("#point_select").change(function() {
+		                //직접입력을 누를 때 나타남
+				if($("#point_select").val() == "4") {
+					$("#point_select_input").show();
+				}else {
+					$("#point_select_input").hide();
+				}
+			}) 
+		});
+		$("#point_select_input").change(function() {
+			$("#point_select option:selected").text($("#point_select_input").val());			
+		});
+		
 		var IMP = window.IMP; // 생략 가능
 		IMP.init("imp41236885"); // 예: imp00000000
+		var selectValue = document.getElementById('#point_select option:selected').text();
 		function requestPay() {
 			// IMP.request_pay(param, callback) 결제창 호출
 			IMP.request_pay({ // param(결제에대한 정보)
-  		          pg: "inicis_html5",
+  		          pg: "kakaopay",
   		          pay_method: "card",
   		          merchant_uid: "carrot_"+new Date().getTime(),
-  		          name: "노르웨이 회전 식탁",
-  		          amount: 8000,
-  		          buyer_email: "gildong@gmail.com",
-  		          buyer_name: "홍길동",
-  		          buyer_tel: "010-4242-4242",
-  		          buyer_addr: "서울특별시 강남구 신사동",
-  		          buyer_postcode: "01181",
+  		          name: "흙당근마켓 페이 포인트 충전",
+  		          amount: $("#point_select option:selected").text(),
+  		          buyer_email: "${sUser.user_email}",
+  		          buyer_name: "${sUser.user_name}",
+  		          buyer_tel: "${sUser.user_phone}",
   		          msg:""
 			}, function(rsp) { // callback함수 
 				if (rsp.success) {
 					// 결제 성공 시 로직,
+					let imp_uid =  rsp.imp_uid;
 					let merchant_uid = rsp.merchant_uid;
-					let paid_amount = rsp.paid_amount;
+					let payment_amount = rsp.paid_amount;
 
 					let data = {
+							/*
+						imp_uid : imp_uid,
 						merchant_uid : merchant_uid,
-						paid_amount : paid_amount,
+						*/
+						"payment_amount" : payment_amount
 					};
+					/*
 					$.ajax({
-						url : "",
+						url : "payment_complete_json",
 						method : "POST",
 						dataType : 'json',
 						data : data,
 						success : function(jsonResult) {
-							let msg = "결제가 완료되었습니다.\n";
+							let msg = "충전이 완료되었습니다.\n";
 							msg += "고유ID: " + imp_uid;
 							msg += "\n상점거래ID : " + merchant_uid;
 							msg += "\n결제금액 : " + paid_amount;
+							alert(msg);
 						}
-					})// end ajax	
-					//location.href=`"https://api.iamport.kr/payments/find/${merchant_uid}/?sorting=-started&_token=ccbf1726c92ab47f51b5527bbd29ea779a24bb91"`
+					});// end ajax	
+					*/
+					var url = "/brown_carrot_market/payment_complete?payment_amount="+payment_amount;
+					var name = "당근 페이 포인트 충전";
+					var option = "width = 470, height = 650, top = 100, left = 200, location = yes,  resizable=no";
+					window.open(url, name, option);
+					
 				} else {
 					// 결제 실패 시 로직,
-					let msg = "결제에 실패하였습니다.";
-					alert(msg);
+					var url = "/brown_carrot_market/payment_fail";
+					var name = "당근 페이 포인트 충전";
+					var option = "width = 470, height = 650, left = 500, location = yes,  resizable=no";
+					window.open(url, name, option);
 				}
-			});
-		};
+			});		};
+
 	</script>
+	
 	<!-- Checkout Area End -->
 
 	<!-- Footer Area -->

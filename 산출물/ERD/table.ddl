@@ -1,12 +1,12 @@
-DROP TABLE review CASCADE CONSTRAINTS;
 DROP TABLE review_img CASCADE CONSTRAINTS;
+DROP TABLE promise CASCADE CONSTRAINTS;
+DROP TABLE review CASCADE CONSTRAINTS;
 DROP TABLE town_reaction CASCADE CONSTRAINTS;
 DROP TABLE town_reply CASCADE CONSTRAINTS;
 DROP TABLE town_img CASCADE CONSTRAINTS;
 DROP TABLE town_wishlist CASCADE CONSTRAINTS;
 DROP TABLE town_board CASCADE CONSTRAINTS;
 DROP TABLE town_category CASCADE CONSTRAINTS;
-DROP TABLE promise CASCADE CONSTRAINTS;
 DROP TABLE chat_contents CASCADE CONSTRAINTS;
 DROP TABLE chat_room CASCADE CONSTRAINTS;
 DROP TABLE notice CASCADE CONSTRAINTS;
@@ -27,9 +27,9 @@ CREATE TABLE userinfo(
 		user_name                     		VARCHAR2(50)		 NULL ,
 		user_email                    		VARCHAR2(100)		 NULL ,
 		user_phone                    		VARCHAR2(15)		 NULL ,
-		user_freshness                		NUMBER(10,2)		 DEFAULT 0		 NULL ,
+		user_freshness                		NUMBER(10,1)		 DEFAULT 36.5		 NULL ,
 		user_point                    		NUMBER(10)		 NULL ,
-		user_profile                  		VARCHAR2(1000)		 NULL 
+		user_profile                  		VARCHAR2(200)		 NULL 
 );
 
 
@@ -42,11 +42,20 @@ DROP SEQUENCE p_category_p_ctgr_no_SEQ;
 
 CREATE SEQUENCE p_category_p_ctgr_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+CREATE TRIGGER p_category_p_ctgr_no_TRG
+BEFORE INSERT ON p_category
+FOR EACH ROW
+BEGIN
+IF :NEW.p_ctgr_no IS NOT NULL THEN
+  SELECT p_category_p_ctgr_no_SEQ.NEXTVAL INTO :NEW.p_ctgr_no FROM DUAL;
+END IF;
+END;
+
 
 CREATE TABLE product(
 		p_no                          		NUMBER(20)		 NULL ,
 		p_title                       		VARCHAR2(500)		 NULL ,
-		p_desc                        		VARCHAR2(1000)		 NULL ,
+		p_desc                        		VARCHAR2(500)		 NULL ,
 		p_price                       		NUMBER(20)		 NULL ,
 		p_date                        		DATE		 NULL ,
 		p_sell                        		NUMBER(10)		 NULL ,
@@ -63,10 +72,18 @@ DROP SEQUENCE product_p_no_SEQ;
 
 CREATE SEQUENCE product_p_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+CREATE TRIGGER product_p_no_TRG
+BEFORE INSERT ON product
+FOR EACH ROW
+BEGIN
+IF :NEW.p_no IS NOT NULL THEN
+  SELECT product_p_no_SEQ.NEXTVAL INTO :NEW.p_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE payment(
-		merchant_uid                    	VARCHAR2(30)		 NULL ,
+		payment_no                    		VARCHAR2(30)		 NULL ,
 		payment_method                		VARCHAR2(30)		 NULL ,
 		payment_amount                		NUMBER(10)		 NULL ,
 		payment_date                  		DATE		 NULL ,
@@ -77,13 +94,22 @@ CREATE TABLE payment(
 CREATE TABLE orders(
 		orders_no                     		NUMBER(10)		 NULL ,
 		p_no                          		NUMBER(20)		 NULL ,
-		user_id                       		VARCHAR2(10)		 NULL, 
+		user_id                       		VARCHAR2(10)		 NULL ,
 		orders_date                   		DATE		 NULL 
 );
 
 DROP SEQUENCE orders_orders_no_SEQ;
 
 CREATE SEQUENCE orders_orders_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+
+CREATE TRIGGER orders_orders_no_TRG
+BEFORE INSERT ON orders
+FOR EACH ROW
+BEGIN
+IF :NEW.orders_no IS NOT NULL THEN
+  SELECT orders_orders_no_SEQ.NEXTVAL INTO :NEW.orders_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE transfer(
@@ -93,24 +119,41 @@ CREATE TABLE transfer(
 		transfer_date                 		DATE		 NULL ,
 		user_id                       		VARCHAR2(30)		 NULL ,
 		orders_no                     		NUMBER(10)		 NULL ,
-		p_no                          		NUMBER(20)		 NULL ,
-		t_balance							NUMBER(20)		NULL
+		p_no                          		NUMBER(20)		 NULL 
 );
 
 DROP SEQUENCE transfer_transfer_no_SEQ;
 
 CREATE SEQUENCE transfer_transfer_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+CREATE TRIGGER transfer_transfer_no_TRG
+BEFORE INSERT ON transfer
+FOR EACH ROW
+BEGIN
+IF :NEW.transfer_no IS NOT NULL THEN
+  SELECT transfer_transfer_no_SEQ.NEXTVAL INTO :NEW.transfer_no FROM DUAL;
+END IF;
+END;
+
 
 CREATE TABLE product_img(
 		pi_no                         		NUMBER(10)		 NULL ,
-		pi_name                       		VARCHAR2(1000)		 NULL ,
+		pi_name                       		VARCHAR2(50)		 NULL ,
 		p_no                          		NUMBER(20)		 NULL 
 );
 
 DROP SEQUENCE product_img_pi_no_SEQ;
 
 CREATE SEQUENCE product_img_pi_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+
+CREATE TRIGGER product_img_pi_no_TRG
+BEFORE INSERT ON product_img
+FOR EACH ROW
+BEGIN
+IF :NEW.pi_no IS NOT NULL THEN
+  SELECT product_img_pi_no_SEQ.NEXTVAL INTO :NEW.pi_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE wishlist(
@@ -122,6 +165,16 @@ CREATE TABLE wishlist(
 DROP SEQUENCE wishlist_wishlist_no_SEQ;
 
 CREATE SEQUENCE wishlist_wishlist_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+
+CREATE TRIGGER wishlist_wishlist_no_TRG
+BEFORE INSERT ON wishlist
+FOR EACH ROW
+BEGIN
+IF :NEW.wishlist_no IS NOT NULL THEN
+  SELECT wishlist_wishlist_no_SEQ.NEXTVAL INTO :NEW.wishlist_no FROM DUAL;
+END IF;
+END;
+
 
 CREATE TABLE address(
 		address_no                    		NUMBER(30)		 NULL ,
@@ -136,6 +189,14 @@ DROP SEQUENCE address_address_no_SEQ;
 
 CREATE SEQUENCE address_address_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+CREATE TRIGGER address_address_no_TRG
+BEFORE INSERT ON address
+FOR EACH ROW
+BEGIN
+IF :NEW.address_no IS NOT NULL THEN
+  SELECT address_address_no_SEQ.NEXTVAL INTO :NEW.address_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE invitation(
@@ -147,6 +208,15 @@ CREATE TABLE invitation(
 DROP SEQUENCE invitation_invi_no_SEQ;
 
 CREATE SEQUENCE invitation_invi_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+
+CREATE TRIGGER invitation_invi_no_TRG
+BEFORE INSERT ON invitation
+FOR EACH ROW
+BEGIN
+IF :NEW.invi_no IS NOT NULL THEN
+  SELECT invitation_invi_no_SEQ.NEXTVAL INTO :NEW.invi_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE notice(
@@ -162,19 +232,36 @@ DROP SEQUENCE notice_notice_no_SEQ;
 
 CREATE SEQUENCE notice_notice_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+CREATE TRIGGER notice_notice_no_TRG
+BEFORE INSERT ON notice
+FOR EACH ROW
+BEGIN
+IF :NEW.notice_no IS NOT NULL THEN
+  SELECT notice_notice_no_SEQ.NEXTVAL INTO :NEW.notice_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE chat_room(
 		c_room_no                     		NUMBER(10)		 NULL ,
 		from_id                       		VARCHAR2(10)		 NULL ,
 		to_id                         		VARCHAR2(20)		 NULL ,
-        from_id_in                     		NUMBER(10)		 NULL ,
-		to_id_in                            NUMBER(20)		 NULL ,
 		p_no                          		NUMBER(20)		 NULL 
 );
 
 DROP SEQUENCE chat_room_c_room_no_SEQ;
+
 CREATE SEQUENCE chat_room_c_room_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+
+CREATE TRIGGER chat_room_c_room_no_TRG
+BEFORE INSERT ON chat_room
+FOR EACH ROW
+BEGIN
+IF :NEW.c_room_no IS NOT NULL THEN
+  SELECT chat_room_c_room_no_SEQ.NEXTVAL INTO :NEW.c_room_no FROM DUAL;
+END IF;
+END;
+
 
 CREATE TABLE chat_contents(
 		c_content_no                  		NUMBER(10)		 NULL ,
@@ -189,14 +276,14 @@ DROP SEQUENCE chat_contents_c_content_no_SEQ;
 
 CREATE SEQUENCE chat_contents_c_content_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-CREATE TABLE promise(
-		c_room_no                     		NUMBER(10)		 NULL ,
-		c_app_lat                     		NUMBER(20,10)		 NULL ,
-		c_app_lng                     		NUMBER(20,10)		 NULL ,
-		c_app_spot                    		VARCHAR2(80)		 NULL ,
-		c_app_date                    		DATE		 NULL 
-);
-
+CREATE TRIGGER chat_contents_c_content_no_TRG
+BEFORE INSERT ON chat_contents
+FOR EACH ROW
+BEGIN
+IF :NEW.c_content_no IS NOT NULL THEN
+  SELECT chat_contents_c_content_no_SEQ.NEXTVAL INTO :NEW.c_content_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE town_category(
@@ -208,7 +295,14 @@ DROP SEQUENCE town_category_t_ctgr_no_SEQ;
 
 CREATE SEQUENCE town_category_t_ctgr_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-
+CREATE TRIGGER town_category_t_ctgr_no_TRG
+BEFORE INSERT ON town_category
+FOR EACH ROW
+BEGIN
+IF :NEW.t_ctgr_no IS NOT NULL THEN
+  SELECT town_category_t_ctgr_no_SEQ.NEXTVAL INTO :NEW.t_ctgr_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE town_board(
@@ -228,6 +322,15 @@ DROP SEQUENCE town_board_t_no_SEQ;
 
 CREATE SEQUENCE town_board_t_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+CREATE TRIGGER town_board_t_no_TRG
+BEFORE INSERT ON town_board
+FOR EACH ROW
+BEGIN
+IF :NEW.t_no IS NOT NULL THEN
+  SELECT town_board_t_no_SEQ.NEXTVAL INTO :NEW.t_no FROM DUAL;
+END IF;
+END;
+
 
 CREATE TABLE town_wishlist(
 		t_wl_no                       		NUMBER(10)		 NULL ,
@@ -239,10 +342,19 @@ DROP SEQUENCE town_wishlist_t_wl_no_SEQ;
 
 CREATE SEQUENCE town_wishlist_t_wl_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+CREATE TRIGGER town_wishlist_t_wl_no_TRG
+BEFORE INSERT ON town_wishlist
+FOR EACH ROW
+BEGIN
+IF :NEW.t_wl_no IS NOT NULL THEN
+  SELECT town_wishlist_t_wl_no_SEQ.NEXTVAL INTO :NEW.t_wl_no FROM DUAL;
+END IF;
+END;
+
 
 CREATE TABLE town_img(
 		t_img_no                      		NUMBER(10)		 NULL ,
-		t_img_name                    		VARCHAR2(1000)		 NULL ,
+		t_img_name                    		VARCHAR2(100)		 NULL ,
 		t_no                          		NUMBER(10)		 NULL 
 );
 
@@ -250,6 +362,14 @@ DROP SEQUENCE town_img_t_img_no_SEQ;
 
 CREATE SEQUENCE town_img_t_img_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+CREATE TRIGGER town_img_t_img_no_TRG
+BEFORE INSERT ON town_img
+FOR EACH ROW
+BEGIN
+IF :NEW.t_img_no IS NOT NULL THEN
+  SELECT town_img_t_img_no_SEQ.NEXTVAL INTO :NEW.t_img_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE town_reply(
@@ -268,6 +388,14 @@ DROP SEQUENCE town_reply_t_reply_no_SEQ;
 
 CREATE SEQUENCE town_reply_t_reply_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+CREATE TRIGGER town_reply_t_reply_no_TRG
+BEFORE INSERT ON town_reply
+FOR EACH ROW
+BEGIN
+IF :NEW.t_reply_no IS NOT NULL THEN
+  SELECT town_reply_t_reply_no_SEQ.NEXTVAL INTO :NEW.t_reply_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE town_reaction(
@@ -281,12 +409,20 @@ DROP SEQUENCE town_reaction_t_reac_no_SEQ;
 
 CREATE SEQUENCE town_reaction_t_reac_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
+CREATE TRIGGER town_reaction_t_reac_no_TRG
+BEFORE INSERT ON town_reaction
+FOR EACH ROW
+BEGIN
+IF :NEW.t_reac_no IS NOT NULL THEN
+  SELECT town_reaction_t_reac_no_SEQ.NEXTVAL INTO :NEW.t_reac_no FROM DUAL;
+END IF;
+END;
 
 
 CREATE TABLE review(
 		review_no                     		NUMBER(10)		 NULL ,
-		review_desc                   		VARCHAR2(2000)		 NULL ,
-		your_id                 		    VARCHAR2(100)		 NULL ,
+		review_desc                   		VARCHAR2(100)		 NULL ,
+		review_image                  		VARCHAR2(100)		 NULL ,
 		review_point                  		NUMBER(10,1)		 NULL ,
 		orders_no                     		NUMBER(10)		 NULL ,
 		user_id                       		VARCHAR2(30)		 NULL 
@@ -296,16 +432,43 @@ DROP SEQUENCE review_review_no_SEQ;
 
 CREATE SEQUENCE review_review_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
-DROP TABLE review_img CASCADE CONSTRAINTS;
+CREATE TRIGGER review_review_no_TRG
+BEFORE INSERT ON review
+FOR EACH ROW
+BEGIN
+IF :NEW.review_no IS NOT NULL THEN
+  SELECT review_review_no_SEQ.NEXTVAL INTO :NEW.review_no FROM DUAL;
+END IF;
+END;
+
+
+CREATE TABLE promise(
+		c_room_no                     		NUMBER(10)		 NULL ,
+		c_app_lat                     		NUMBER(20,10)		 NULL ,
+		c_app_lng                     		NUMBER(20,10)		 NULL ,
+		c_app_spot                    		VARCHAR2(80)		 NULL ,
+		c_app_date                    		DATE		 NULL 
+);
+
 
 CREATE TABLE review_img(
 		review_img_no                 		NUMBER(10)		 NULL ,
-		review_img_name               		VARCHAR2(1000)		 NOT NULL,
+		review_img_name               		VARCHAR2(200)		 NOT NULL,
 		review_no                     		NUMBER(10)		 NULL 
 );
 
 DROP SEQUENCE review_img_review_img_no_SEQ;
 
+CREATE SEQUENCE review_img_review_img_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+
+CREATE TRIGGER review_img_review_img_no_TRG
+BEFORE INSERT ON review_img
+FOR EACH ROW
+BEGIN
+IF :NEW.review_img_no IS NOT NULL THEN
+  SELECT review_img_review_img_no_SEQ.NEXTVAL INTO :NEW.review_img_no FROM DUAL;
+END IF;
+END;
 
 
 
@@ -315,75 +478,72 @@ ALTER TABLE p_category ADD CONSTRAINT IDX_p_category_PK PRIMARY KEY (p_ctgr_no);
 
 ALTER TABLE product ADD CONSTRAINT IDX_product_PK PRIMARY KEY (p_no);
 ALTER TABLE product ADD CONSTRAINT IDX_product_FK0 FOREIGN KEY (p_ctgr_no) REFERENCES p_category (p_ctgr_no);
-ALTER TABLE product ADD CONSTRAINT IDX_product_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
+ALTER TABLE product ADD CONSTRAINT IDX_product_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
 
 ALTER TABLE payment ADD CONSTRAINT IDX_payment_PK PRIMARY KEY (payment_no);
-ALTER TABLE payment ADD CONSTRAINT IDX_payment_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
+ALTER TABLE payment ADD CONSTRAINT IDX_payment_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
 
 ALTER TABLE orders ADD CONSTRAINT IDX_orders_PK PRIMARY KEY (orders_no);
 ALTER TABLE orders ADD CONSTRAINT IDX_orders_FK0 FOREIGN KEY (p_no) REFERENCES product (p_no);
-ALTER TABLE orders ADD CONSTRAINT IDX_orders_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
+ALTER TABLE orders ADD CONSTRAINT IDX_orders_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
 
 ALTER TABLE transfer ADD CONSTRAINT IDX_transfer_PK PRIMARY KEY (transfer_no);
-ALTER TABLE transfer ADD CONSTRAINT IDX_transfer_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
-ALTER TABLE transfer ADD CONSTRAINT IDX_transfer_FK1 FOREIGN KEY (orders_no) REFERENCES orders (orders_no) on delete cascade;
+ALTER TABLE transfer ADD CONSTRAINT IDX_transfer_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
+ALTER TABLE transfer ADD CONSTRAINT IDX_transfer_FK1 FOREIGN KEY (orders_no) REFERENCES orders (orders_no);
 ALTER TABLE transfer ADD CONSTRAINT IDX_transfer_FK2 FOREIGN KEY (p_no) REFERENCES product (p_no);
 
 ALTER TABLE product_img ADD CONSTRAINT IDX_product_img_PK PRIMARY KEY (pi_no);
-ALTER TABLE product_img ADD CONSTRAINT IDX_product_img_FK0 FOREIGN KEY (p_no) REFERENCES product (p_no) on delete cascade;
+ALTER TABLE product_img ADD CONSTRAINT IDX_product_img_FK0 FOREIGN KEY (p_no) REFERENCES product (p_no);
 
 ALTER TABLE wishlist ADD CONSTRAINT IDX_wishlist_PK PRIMARY KEY (wishlist_no);
 ALTER TABLE wishlist ADD CONSTRAINT IDX_wishlist_FK0 FOREIGN KEY (p_no) REFERENCES product (p_no);
-ALTER TABLE wishlist ADD CONSTRAINT IDX_wishlist_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
+ALTER TABLE wishlist ADD CONSTRAINT IDX_wishlist_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
 
 ALTER TABLE address ADD CONSTRAINT IDX_address_PK PRIMARY KEY (address_no);
-ALTER TABLE address ADD CONSTRAINT IDX_address_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
+ALTER TABLE address ADD CONSTRAINT IDX_address_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
 
 ALTER TABLE invitation ADD CONSTRAINT IDX_invitation_PK PRIMARY KEY (invi_no);
-ALTER TABLE invitation ADD CONSTRAINT IDX_invitation_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
+ALTER TABLE invitation ADD CONSTRAINT IDX_invitation_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
 
 ALTER TABLE notice ADD CONSTRAINT IDX_notice_PK PRIMARY KEY (notice_no);
 
 ALTER TABLE chat_room ADD CONSTRAINT IDX_chat_room_PK PRIMARY KEY (c_room_no);
-ALTER TABLE chat_room ADD CONSTRAINT IDX_chat_room_FK0 FOREIGN KEY (from_id) REFERENCES userinfo (user_id) on delete cascade;
-ALTER TABLE chat_room ADD CONSTRAINT IDX_chat_room_FK1 FOREIGN KEY (p_no) REFERENCES product (p_no) on delete cascade;
-ALTER TABLE chat_room ADD CONSTRAINT IDX_chat_room_FK2 FOREIGN KEY (to_id) REFERENCES userinfo (user_id) on delete cascade;
+ALTER TABLE chat_room ADD CONSTRAINT IDX_chat_room_FK0 FOREIGN KEY (from_id) REFERENCES userinfo (user_id);
+ALTER TABLE chat_room ADD CONSTRAINT IDX_chat_room_FK1 FOREIGN KEY (p_no) REFERENCES product (p_no);
+ALTER TABLE chat_room ADD CONSTRAINT IDX_chat_room_FK2 FOREIGN KEY (to_id) REFERENCES userinfo (user_id);
 
 ALTER TABLE chat_contents ADD CONSTRAINT IDX_chat_contents_PK PRIMARY KEY (c_content_no);
-ALTER TABLE chat_contents ADD CONSTRAINT IDX_chat_contents_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
-ALTER TABLE chat_contents ADD CONSTRAINT IDX_chat_contents_FK1 FOREIGN KEY (c_room_no) REFERENCES chat_room (c_room_no) on delete cascade;
-
-ALTER TABLE promise ADD CONSTRAINT IDX_promise_PK PRIMARY KEY (c_room_no);
-ALTER TABLE promise ADD CONSTRAINT IDX_promise_FK0 FOREIGN KEY (c_room_no) REFERENCES chat_room (c_room_no) on delete cascade;
+ALTER TABLE chat_contents ADD CONSTRAINT IDX_chat_contents_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
+ALTER TABLE chat_contents ADD CONSTRAINT IDX_chat_contents_FK1 FOREIGN KEY (c_room_no) REFERENCES chat_room (c_room_no);
 
 ALTER TABLE town_category ADD CONSTRAINT IDX_town_category_PK PRIMARY KEY (t_ctgr_no);
 
 ALTER TABLE town_board ADD CONSTRAINT IDX_town_board_PK PRIMARY KEY (t_no);
 ALTER TABLE town_board ADD CONSTRAINT IDX_town_board_FK0 FOREIGN KEY (t_ctgr_no) REFERENCES town_category (t_ctgr_no);
-ALTER TABLE town_board ADD CONSTRAINT IDX_town_board_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
+ALTER TABLE town_board ADD CONSTRAINT IDX_town_board_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
 
 ALTER TABLE town_wishlist ADD CONSTRAINT IDX_town_wishlist_PK PRIMARY KEY (t_wl_no);
-ALTER TABLE town_wishlist ADD CONSTRAINT IDX_town_wishlist_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
+ALTER TABLE town_wishlist ADD CONSTRAINT IDX_town_wishlist_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
 ALTER TABLE town_wishlist ADD CONSTRAINT IDX_town_wishlist_FK1 FOREIGN KEY (t_no) REFERENCES town_board (t_no);
---ALTER TABLE town_wishlist DROP FOREIGN KEY IDX_town_wishlist_FK1;
-ALTER TABLE town_wishlist ADD CONSTRAINT IDX_town_wishlist_FK1 FOREIGN KEY (t_no) REFERENCES town_board (t_no) on delete cascade;
-
 
 ALTER TABLE town_img ADD CONSTRAINT IDX_town_img_PK PRIMARY KEY (t_img_no);
-ALTER TABLE town_img ADD CONSTRAINT IDX_town_img_FK0 FOREIGN KEY (t_no) REFERENCES town_board (t_no) on delete cascade;
+ALTER TABLE town_img ADD CONSTRAINT IDX_town_img_FK0 FOREIGN KEY (t_no) REFERENCES town_board (t_no);
 
 ALTER TABLE town_reply ADD CONSTRAINT IDX_town_reply_PK PRIMARY KEY (t_reply_no);
-ALTER TABLE town_reply ADD CONSTRAINT IDX_town_reply_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
+ALTER TABLE town_reply ADD CONSTRAINT IDX_town_reply_FK0 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
 ALTER TABLE town_reply ADD CONSTRAINT IDX_town_reply_FK1 FOREIGN KEY (t_no) REFERENCES town_board (t_no);
 
 ALTER TABLE town_reaction ADD CONSTRAINT IDX_town_reaction_PK PRIMARY KEY (t_reac_no);
 ALTER TABLE town_reaction ADD CONSTRAINT IDX_town_reaction_FK0 FOREIGN KEY (t_no) REFERENCES town_board (t_no);
-ALTER TABLE town_reaction ADD CONSTRAINT IDX_town_reaction_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
+ALTER TABLE town_reaction ADD CONSTRAINT IDX_town_reaction_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
 
 ALTER TABLE review ADD CONSTRAINT IDX_review_PK PRIMARY KEY (review_no);
-ALTER TABLE review ADD CONSTRAINT IDX_review_FK0 FOREIGN KEY (orders_no) REFERENCES orders (orders_no) on delete cascade;
-ALTER TABLE review ADD CONSTRAINT IDX_review_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id) on delete cascade;
---ALTER TABLE review RENAME COLUMN review_image TO your_id;
+ALTER TABLE review ADD CONSTRAINT IDX_review_FK0 FOREIGN KEY (orders_no) REFERENCES orders (orders_no);
+ALTER TABLE review ADD CONSTRAINT IDX_review_FK1 FOREIGN KEY (user_id) REFERENCES userinfo (user_id);
+
+ALTER TABLE promise ADD CONSTRAINT IDX_promise_PK PRIMARY KEY (c_room_no);
+ALTER TABLE promise ADD CONSTRAINT IDX_promise_FK0 FOREIGN KEY (c_room_no) REFERENCES chat_room (c_room_no);
 
 ALTER TABLE review_img ADD CONSTRAINT IDX_review_img_PK PRIMARY KEY (review_img_no);
-ALTER TABLE review_img ADD CONSTRAINT IDX_review_img_FK0 FOREIGN KEY (review_no) REFERENCES review (review_no) on delete cascade;
+ALTER TABLE review_img ADD CONSTRAINT IDX_review_img_FK0 FOREIGN KEY (review_no) REFERENCES review (review_no);
+
