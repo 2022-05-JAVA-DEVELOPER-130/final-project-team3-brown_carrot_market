@@ -141,11 +141,18 @@ UserHtmlContents.user_view_addresses_zero=function(addressList){
 }
 
 UserHtmlContents.user_profile_edit=function(sUser){
+	
+  		if(sUser.user_profile.startsWith('http')){
+         sUser.user_profile= sUser.user_profile;
+      }else{
+         sUser.user_profile= 'img/user_profile/'+sUser.user_profile;
+      }
+	
 	return `<h5 class="mb-3">프로필 수정</h5>
                    <profile>
       	               <div class="mb-100" style="margin-bottom: 0px;height:200px;text-align:center">
 	                        <div class="" style="display:inline-block">
-	                            <img id="user_profile" class="img-circle" src='img/user_profile/${sUser.user_profile}' alt="" user_profile='${sUser.user_profile}' style="width:200px; height:200px" >
+	                            <img id="user_profile" class="img-circle" src='${sUser.user_profile}' alt="" user_profile='${sUser.user_profile}' style="width:200px; height:200px" >
 	                        </div>
                         	<form id="image_form"  name="image_form" enctype="multipart/form-data" style="margin:0 auto 0 200px">
 	                        	<input type="hidden" name="user_id" id="user_id" value="${sUser.user_id}"><br>
