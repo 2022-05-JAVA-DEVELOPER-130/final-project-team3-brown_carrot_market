@@ -396,10 +396,15 @@
 			});
 			 /****************user_insert_addresses******************/
 			//(Step_1) Getting a address
-			$(window).on('click',	'#btn_address_new1,#btn_address_new2',function(e) {
+			$(document).on('click',	'#btn_address_new1,#btn_address_new2',function(e) {
 				var selectedAddress = $(e.target).parent($("address"));
 				selectedAddress.addClass("selected_address");
 				$(e.target).addClass("selected");
+				
+				$(".selected_address > input[name=address_name] ").val('서울시 서초구 역삼동');
+				$(".selected_address > input[name=address_lat] ").val(37.50082663);
+				$(".selected_address > input[name=address_lng] ").val(127.0366527);
+				
 		    /**********************************************************/
 		    	// 주소-좌표 변환 객체를 생성합니다
 		    	var geocoder = new kakao.maps.services.Geocoder();

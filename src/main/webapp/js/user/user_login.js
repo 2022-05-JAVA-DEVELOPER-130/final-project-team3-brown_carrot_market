@@ -5,9 +5,14 @@ $(document).ready(function(){
 		$("#address_name").on("click", function(e) {
 					console.log('click!! - #address_name');
 					
+					$("#address_name").val('서울시 서초구 역삼동');
+					$("#address_lat").val(37.50082663);
+					$("#address_lng").val(127.0366527);
 					
-					
-					// 주소-좌표 변환 객체를 생성합니다
+			});
+			
+			
+			// 주소-좌표 변환 객체를 생성합니다
 					var geocoder = new kakao.maps.services.Geocoder();
 
 					// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
@@ -46,9 +51,7 @@ $(document).ready(function(){
 															.substring(
 																	0,
 																	subStr);
-													$("#address_name")
-															.val(
-																	detailAddr);
+													//$("#address_name").val(detailAddr);
 												}
 											});
 								});
@@ -70,5 +73,5 @@ $(document).ready(function(){
 					}
 
 				});
-			});
+			
 	});
