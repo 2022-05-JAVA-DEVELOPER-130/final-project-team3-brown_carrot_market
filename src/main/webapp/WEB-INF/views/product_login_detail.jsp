@@ -168,7 +168,7 @@
                             <span class="text-muted">(8 Reviews)</span>
                         </div>
                         -->
-                        <h4 align="right"  ><i class="fa fa-money"></i>가격 : ${product.p_price} 원 </h4>
+                        <h4 align="right"  ><i class="fa fa-money"></i>${product.p_price} 원 </h4>
                         
                         <!-- Overview -->
        
