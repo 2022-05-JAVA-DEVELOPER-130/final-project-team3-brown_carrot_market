@@ -86,10 +86,8 @@
 	
 	
 	#btn-close{
-	position: fixed;
-    right: 0;
-    bottom: 0;
-    margin: left 50, right 50;
+	position: absolute;
+	left: 25%;
     width: 45%;
     height: 44px;
     display:inline-block;

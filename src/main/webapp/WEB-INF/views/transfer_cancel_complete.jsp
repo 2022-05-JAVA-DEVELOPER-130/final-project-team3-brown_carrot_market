@@ -36,7 +36,7 @@ var jsonData={
 		console.log("송금아이디:"+ window.opener.loginId);
 		jsonData.your_id=window.opener.yourId;
 		jsonData.msg="송금 완료";
-		jsonData.code="1";
+		jsonData.code="3";
 		jsonData.data=[{
 					c_content_no:"",
 					c_content:`${loginId} 님이 송금 취소 금액 ${product.p_price}원을 송금했습니다.`,

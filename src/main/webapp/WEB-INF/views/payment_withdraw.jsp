@@ -97,14 +97,15 @@ color = orange;
                         <blockquote class="bigshop-blockquote mb-0 bl-10">
                             <h3>흙당근페이 포인트 출금</h3>
                             <br>
-                            	<div> 출금 할 포인트 : </div>
+                            	<div> 출금 할 포인트 </div>
 								<select id="point_select2" name="point_select2">
 									<option value="1">10000</option>
 									<option value="2">50000</option>
 									<option value="3">100000</option>
-									<option value="4">직접입력</option>
-								</select>
-								<input type="text" id="point_select_input2" name="point_select_input2"/>
+<!-- 									<option value="4">직접입력</option>
+ -->								</select>
+								<!-- <input type="text" id="point_select_input2" name="point_select_input2"/> -->
+								&nbsp;&nbsp;&nbsp;
                             	<button class="btn btn-primary" onclick="withdrawPay()"> 출금하기 </button>
                         </blockquote>
                     </div>
@@ -135,8 +136,9 @@ color = orange;
 		});
 		
 		function withdrawPay(){
-					if ((${sUser.user_point}-${amount})>=0) {
-					let amount = $("#point_select2 option:selected").text();
+					/* let amount = $("#point_select2 option:selected").val(); */
+					let amount = 50000;
+					if ((${sUser.user_point-50000})>=0) {
 					// 성공 시 로직,
 					let data = {
 						"amount" : amount
@@ -147,7 +149,7 @@ color = orange;
 					var option = "width = 470, height = 650, top = 100, left = 200, location = yes,  resizable=no";
 					window.open(url, name, option);
 					
-				} else if((${sUser.user_point}-${amount}<0){
+				} else if((${sUser.user_point-50000})){
 					// 결제 실패 시 로직,
 					var url = "/brown_carrot_market/payment_withdraw_fail";
 					var name = "당근 페이 포인트 출금";
@@ -185,30 +187,15 @@ color = orange;
 	 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
 
 <style type="text/css">
-#toast-container > .toast {
-    background-image: none !important;
-}
-
- #toast-container > .toast:before {
-    position: relative;
-    font-family: FontAwesome;
-    font-size: 24px;
-    line-height: 18px;
-    float: left;
-    color: #FFF;
-    padding-right: 0.5em;
-    margin: auto 0.5em auto -1.5em;
-}       
-    #toast-container > .toast-warning:before {
-     content: "\f27a"; 
- 
-} 
-
- #toast-container > .toast-success:before {
-     content: "\f2b5"; 
- 
-} 
-.bl-10 {
+#point_select_input {
+  width: 15%;
+  height: 40px;
+  border: 2px solid #orange;
+  font-size: 13px;
+  padding: 0 20px;
+  margin-bottom: 15px; }
+  
+  .bl-10 {
   border-left: 10px solid orange; }	
 
 </body>
