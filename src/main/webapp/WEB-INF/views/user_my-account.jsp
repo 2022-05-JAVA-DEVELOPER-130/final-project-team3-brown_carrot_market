@@ -419,8 +419,8 @@
 				            console.log("locPosition: "+locPosition.getLat(),locPosition.getLng());
 				            console.log(message);
 							/*좌표->주소 변환*********************************************************/
-							 searchDetailAddrFromCoords(locPosition, function(result, status) {
-							 if (status === kakao.maps.services.Status.OK) {
+							 //searchDetailAddrFromCoords(locPosition, function(result, status) {
+							 //if (status === kakao.maps.services.Status.OK) {
 							    	//console.log('도로명주소 : ' + result[0].road_address.address_name);
 							    	//console.log('지번 주소 : ' + result[0].address.address_name);
 							            //var detailAddr = !!result[0].road_address ? result[0].road_address.address_name  : '';
@@ -428,9 +428,15 @@
 							           		//주소를 동까지만 자릅니다.
 							           		subStr = detailAddr.lastIndexOf(" ");
 							           		detailAddr=detailAddr.substring(0,subStr);
-											$(".selected_address > input[name=address_name] ").val(detailAddr);
+											/*
+							           		$(".selected_address > input[name=address_name] ").val(detailAddr);
 											$(".selected_address > input[name=address_lat] ").val(lat);
 											$(".selected_address > input[name=address_lng] ").val(lon);
+											*/
+							           		$(".selected_address > input[name=address_name] ").val('서울시 서초구 역삼동');
+											$(".selected_address > input[name=address_lat] ").val(37.50082663);
+											$(".selected_address > input[name=address_lng] ").val(127.0366527);
+											
 											confirm("[ "+detailAddr+"] "+message);
 											$.ajax({
 												url : 'user_insert_address_json',
@@ -443,8 +449,8 @@
 													    $( "#user_view_addresses" ).trigger( "click" );
 												    }
 											});
-							        }
-							 });
+							       // }
+							 //});
 							/**********************************************************/
 				      });
 				} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
