@@ -105,7 +105,7 @@ color = orange;
 									<option value="3">100000</option>
 									<option value="4">직접입력</option>
 								</select>
-								&nbsp;<input type="text" id="point_select_input" name="point_select_input"/>
+								<input type="text" id="point_select_input" name="point_select_input"/>
 								&nbsp;&nbsp;&nbsp;
                             	<button class="btn btn-primary" onclick="requestPay()">충전하기</button>
                         </blockquote>
@@ -188,7 +188,7 @@ color = orange;
 					// 결제 실패 시 로직,
 					var url = "/brown_carrot_market/payment_deposit_fail";
 					var name = "당근 페이 포인트 충전";
-					var option = "width = 470, height = 500, left= 500, top=150, location = yes,  resizable=no";
+					var option = "width = 470, height = 500, top = 100, left = 200, location = yes,  resizable=no";
 					window.open(url, name, option);
 				}
 			});		};
