@@ -185,30 +185,15 @@ color = orange;
 	 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
 
 <style type="text/css">
-#toast-container > .toast {
-    background-image: none !important;
-}
-
- #toast-container > .toast:before {
-    position: relative;
-    font-family: FontAwesome;
-    font-size: 24px;
-    line-height: 18px;
-    float: left;
-    color: #FFF;
-    padding-right: 0.5em;
-    margin: auto 0.5em auto -1.5em;
-}       
-    #toast-container > .toast-warning:before {
-     content: "\f27a"; 
- 
-} 
-
- #toast-container > .toast-success:before {
-     content: "\f2b5"; 
- 
-} 
-.bl-10 {
+#point_select_input {
+  width: 15%;
+  height: 40px;
+  border: 2px solid #orange;
+  font-size: 13px;
+  padding: 0 20px;
+  margin-bottom: 15px; }
+  
+  .bl-10 {
   border-left: 10px solid orange; }	
 
 </body>
