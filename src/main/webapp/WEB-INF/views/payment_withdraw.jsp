@@ -146,7 +146,7 @@ color = orange;
 					
 					var url = "/brown_carrot_market/payment_withdraw_complete?amount="+amount;
 					var name = "당근 페이 포인트 출금";
-					var option = "width = 470, height = 650, top = 100, left = 200, location = yes,  resizable=no";
+					var option = "width = 470, height = 500, top = 100, left = 200, location = yes,  resizable=no";
 					window.open(url, name, option);
 					
 				} else if((${sUser.user_point-50000})){

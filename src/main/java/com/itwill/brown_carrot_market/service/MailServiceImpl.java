@@ -61,7 +61,7 @@ public class MailServiceImpl implements MailService {
 				mimeMessage.setContent( "<div class=\"\" style=\"text-align:center\">\r\n"
 						+ "		             <h3 id=\"title\">흙당근 마켓으로" + invitation.getUser_id() + "님이 초대합니다.</h3>\r\n"
 						+ "		             <p class=\"mb-0\" id=\"body1\" >초대코드: "+invi_code+"</p>"
-						+ "		             <p class=\"mb-0\" id=\"body2\" style=\"color:dimgray\">초대코드로 회원가입하시면, 500point를 드립니다!</p>\r\n http://localhost/brown_carrot_market/main"
+						+ "		             <p class=\"mb-0\" id=\"body2\" style=\"color:dimgray\">초대코드로 회원가입하시면, 500point를 드립니다!</p>\r\n http://119.207.178.242/brown_carrot_market/main"
 						+ "		         </div>\r\n"
 						, "text/html; charset=utf-8");
 			}
@@ -112,11 +112,11 @@ public class MailServiceImpl implements MailService {
 				mimeMessage.setContent( "<div class=\"\" style=\"text-align:center\">\r\n"
 						+ "		             <h3 id=\"title\">"+userInfo.getUser_id()+" 회원님, 흙당근마켓 임시비밀번호를 안내해드립니다.</h3>\r\n"
 						+ "		             <p class=\"mb-0\" id=\"body1\" >임시비밀번호 : "+newPw+"</p>"
-						+ "		             <p class=\"mb-0\" id=\"body2\" style=\"color:dimgray\">임시로 발급 받으신 비밀번호로 로그인한 후, 새로운 비밀번호로 변경하시기 바랍니다.</p>\r\n http://localhost/brown_carrot_market/user_login"
+						+ "		             <p class=\"mb-0\" id=\"body2\" style=\"color:dimgray\">임시로 발급 받으신 비밀번호로 로그인한 후, 새로운 비밀번호로 변경하시기 바랍니다.</p>\r\n http://119.207.178.242/brown_carrot_market/user_login"
 						+ "		         </div>\r\n"
 						, "text/html; charset=utf-8");
 			}
-		};
+		}; 
 		try {
 			sender.send(preparator);
 			//메일이 성공적으로 보내지면, UPDATE user_pw
