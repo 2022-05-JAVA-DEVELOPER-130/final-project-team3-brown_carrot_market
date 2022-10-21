@@ -4,7 +4,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8">
@@ -152,7 +152,7 @@
     <!-- Footer Area -->
    	<jsp:include page="common/include_common_footer.jsp"/>
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    <%-- <script src="js/jquery.min.js"></script> --%>
+    <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.easing.min.js"></script>
@@ -171,7 +171,7 @@
     <script src="js/default/active.js"></script>
     
         <!-- javaScript -->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<%-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script> --%>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>

@@ -48,7 +48,7 @@
 	<h1></h1>
 	<div>
 	<h1>송금 취소</h1>
-		<h3 class="orderid mb-0"> 구매자 ${"?"}님이 송금하신 ${product.p_price} 포인트를 송금 취소처리 합니다.</h3>
+		<h3 class="orderid mb-0"> 구매자에게 송금받은 ${product.p_price} 포인트를 송금 취소처리 합니다.</h3>
 		<br>
 		<hr>
 		<br>

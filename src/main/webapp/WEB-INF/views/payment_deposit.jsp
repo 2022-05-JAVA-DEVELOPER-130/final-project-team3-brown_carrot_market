@@ -98,7 +98,7 @@ color = orange;
                         <blockquote class="bigshop-blockquote mb-0 bl-10">
                             <h3>흙당근페이 포인트 충전</h3>
                             <br>
-                            	<div>충전 할 포인트 : </div>
+                            	<div> 충전 할 포인트 </div>
 								<select id="point_select" name="point_select">
 									<option value="1">10000</option>
 									<option value="2">50000</option>
@@ -106,6 +106,7 @@ color = orange;
 									<option value="4">직접입력</option>
 								</select>
 								<input type="text" id="point_select_input" name="point_select_input"/>
+								&nbsp;&nbsp;&nbsp;
                             	<button class="btn btn-primary" onclick="requestPay()">충전하기</button>
                         </blockquote>
                     </div>
@@ -187,7 +188,7 @@ color = orange;
 					// 결제 실패 시 로직,
 					var url = "/brown_carrot_market/payment_deposit_fail";
 					var name = "당근 페이 포인트 충전";
-					var option = "width = 470, height = 650, left = 500, location = yes,  resizable=no";
+					var option = "width = 470, height = 500, top = 100, left = 200, location = yes,  resizable=no";
 					window.open(url, name, option);
 				}
 			});		};
@@ -222,29 +223,14 @@ color = orange;
 	 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
 
 <style type="text/css">
-#toast-container > .toast {
-    background-image: none !important;
-}
-
- #toast-container > .toast:before {
-    position: relative;
-    font-family: FontAwesome;
-    font-size: 24px;
-    line-height: 18px;
-    float: left;
-    color: #FFF;
-    padding-right: 0.5em;
-    margin: auto 0.5em auto -1.5em;
-}       
-    #toast-container > .toast-warning:before {
-     content: "\f27a"; 
- 
-} 
-
- #toast-container > .toast-success:before {
-     content: "\f2b5"; 
- 
-} 
+#point_select_input {
+  width: 15%;
+  height: 40px;
+  border: 2px solid #orange;
+  font-size: 13px;
+  padding: 0 20px;
+  margin-bottom: 15px; }
+  
 .bl-10 {
   border-left: 10px solid orange; }
 

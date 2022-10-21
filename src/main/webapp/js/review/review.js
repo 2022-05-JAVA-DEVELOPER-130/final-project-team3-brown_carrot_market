@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	toastr.options.positionClass = "toast-top-right";
 /*
 	$(document).on('click','.btn_review_write',function(e){
 		console.log("click "+e.target.id);
@@ -184,7 +185,7 @@ $(document).ready(function(){
 			console.log('click - #btn_review_remove');
 			console.log("reivew_no"+$("#review_no").val());
 			
-			var result = confirm("작성하신 리뷰를 삭제하시겠습니까?");
+			var result =  toastr.info("작성하신 리뷰가 삭제됩니다");
        		if(!result){return false;}
 			$.ajax({
 					url : 'review_remove_action',
