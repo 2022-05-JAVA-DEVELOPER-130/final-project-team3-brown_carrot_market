@@ -107,7 +107,15 @@
 	 	                                        		</c:choose>
  	                                        		</c:when>
 	 	                                        	<c:otherwise>
-	 														포인트 충전                                        				
+	 	                                        	<c:choose>
+	 	                                        			<c:when test="${transfer.transfer_withdraw != 0}">
+	 	                                        				포인트 출금
+	 	                                        			</c:when>
+	 	                                        			<c:otherwise>
+	 															포인트 충전                                       				
+	 	                                        			</c:otherwise>
+	 	                                        		</c:choose>
+	 														                                        				
 	 	                                        	</c:otherwise>
  	                                        	</c:choose>
 	                                        </td>
