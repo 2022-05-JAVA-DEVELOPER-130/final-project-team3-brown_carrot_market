@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>Brown Carrot Market</title>
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
@@ -89,7 +89,7 @@
 	position: fixed;
     right: 0;
     bottom: 0;
-    margin: 1 auto;
+    margin: left 50, right 50;
     width: 45%;
     height: 44px;
     display:inline-block;

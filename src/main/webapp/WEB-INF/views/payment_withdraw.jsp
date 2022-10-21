@@ -84,58 +84,70 @@ color = orange;
 			<a class="active" href="/brown_carrot_market/payment_withdraw"><i class="icofont-check-circled"></i> 페이 출금</a>
 		</div>
 	</div>
-	<div>
-		<select id="point_select2" name="point_select2">
-			<option value="1">10000</option>
-			<option value="2">50000</option>
-			<option value="3">100000</option>
-			<option value="4">직접입력</option>
-		</select>
-		<input type="text" id="point_select2_input" name="point_select2_input"/>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<input type="text" id="account_input" name="account_input"/>
-	</div>
+	  <!-- Shortcodes Area -->
+    <div class="shortcodes_area section_padding_100">
+        <div class="container">
+	<!-- Shortcodes Content -->
+            <div class="row">
+                <div class="col-12">
+                    <!-- +++++++++
+                    Blockquote One
+                    ++++++++++ -->
+                    <div class="shortcodes_content mb-100">
+                        <blockquote class="bigshop-blockquote mb-0 bl-10">
+                            <h3>흙당근페이 포인트 출금</h3>
+                            <br>
+                            	<div> 출금 할 포인트 : </div>
+								<select id="point_select2" name="point_select2">
+									<option value="1">10000</option>
+									<option value="2">50000</option>
+									<option value="3">100000</option>
+									<option value="4">직접입력</option>
+								</select>
+								<input type="text" id="point_select_input2" name="point_select_input2"/>
+                            	<button class="btn btn-primary" onclick="withdrawPay()"> 출금하기 </button>
+                        </blockquote>
+                    </div>
+                    <!-- +++++++++
+                    Blockquote One
+                    ++++++++++ -->
 
-		<div class="col-12">
-		<div class="checkout_pagination mt-50">
-			<button class="btn btn-primary" onclick="withdrawPay()">출금하기</button>
-		</div>
-	</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Shortcodes Area End -->
 	<script>
-		$(function point_select2(){
-		$("#point_select2_input").hide();
+	$(function point_select2(){
+	      //직접입력 인풋박스 기존에는 숨어있다가
+		$("#point_select_input2").hide();
 		$("#point_select2").change(function() {
+		                //직접입력을 누를 때 나타남
 				if($("#point_select2").val() == "4") {
-					$("#point_select2_input").show();
+					$("#point_select_input2").show();
 				}else {
-					$("#point_select2_input").hide();
+					$("#point_select_input2").hide();
 				}
 			}) 
 		});
-		$("#point_select2_input").change(function() {
-			$("#point_select2 option:selected").text($("#point_select2_input").val());			
+		$("#point_select_input2").change(function() {
+			$("#point_select2 option:selected").text($("#point_select_input2").val());			
 		});
 		
 		function withdrawPay(){
+					if ((${sUser.user_point}-${amount})>=0) {
 					let amount = $("#point_select2 option:selected").text();
-					//let account = $("#point_select2_input").text();
-				if ((${sUser.user_point}-#{amount})>=0) {
 					// 성공 시 로직,
 					let data = {
-						"amount" : amount,
-						"account" : account
+						"amount" : amount
 					};
 					
-					var url = "/brown_carrot_market/payment_withdraw_complete?amount="+amount+"&account="+account;
+					var url = "/brown_carrot_market/payment_withdraw_complete?amount="+amount;
 					var name = "당근 페이 포인트 출금";
 					var option = "width = 470, height = 650, top = 100, left = 200, location = yes,  resizable=no";
 					window.open(url, name, option);
 					
-				} else if((${sUser.user_point}-$(amount)<0){
+				} else if((${sUser.user_point}-${amount}<0){
 					// 결제 실패 시 로직,
 					var url = "/brown_carrot_market/payment_withdraw_fail";
 					var name = "당근 페이 포인트 출금";
@@ -196,7 +208,8 @@ color = orange;
      content: "\f2b5"; 
  
 } 
-	
+.bl-10 {
+  border-left: 10px solid orange; }	
 
 </body>
 

@@ -33,7 +33,7 @@ function changeQnaList(pageno,t_ctgr_no){
                             </div>
                             <a href="townboard_view?t_no=${townBoard.t_no}&pageno=${pageno}" t_no="${townBoard.t_no}" pageno="${pageno}" class="blog_title">${townBoard.t_title}</a>
                             <p>${townBoard.t_content}</p>
-                            <a href="single-blog.html">Continue Reading <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-location-arrow" aria-hidden="true"></i> ${townBoard.t_address_name }</a>
                         </div>
                         `;
                      
@@ -387,11 +387,28 @@ $("#townMainReplyBtn").on("click", function(e){
 $(".btn.btn-primary.rereply").on("click", function(e){
 	e.preventDefault();
 	e.stopPropagation();
+	/***************수정해야한ㅁ */
+	console.log($(e.target).attr("index"));
+	console.log($(".townReReply_write_form_"+$(e.target).attr("index")));
+	
+	//index=$('.content>form').attr("index");
 	index=$(e.target).attr("index");
+	console.log(index);
 	var form=$(".townReReply_write_form_"+index);
+	
+	/*
+	index=$('this').attr("index");
+    console.log(index);
+     var replyNumber=$('#ReplyNumber').val();
+    for(var i=0;i<replyNumber;i++){
+	var form=$(".townReReply_write_form_"+i);
+	}
+	*/
 	let pageno = form.find($('input[name="page_no"]')).val();
-	let t_no = form.find($('input[name="t_no"]')).val();
+	let t_no =form.find($('input[name="t_no"]')).val();
 	let groupno = form.find($('input[name="groupno"]')).val();
+	console.log('t_no'+t_no)
+	
 	if($(".form-group.t_reply_title").val() == "" || $(".t_reply_content").val() == ""){
 		Toast.fire({ icon: 'warning', title: "필수 입력값을 입력하지 않았습니다.\n 제목과 내용을 모두 입력해주세요" });
 		return;
@@ -400,14 +417,14 @@ $(".btn.btn-primary.rereply").on("click", function(e){
 		ToastConfirm.fire({ icon: 'question', 
 							title: "댓글을 작성하시겠습니까?"}).then((result) => {
 								if(result.isConfirmed){
-									console.log('t_no'+t_no)
+									console.log()
 							$.ajax({
 								url: "townReReply_wirte_rest",
 								method: "post",
 								data: form.serialize(),
 								dataType: "json",
 								success:function(resultObj){
-									console.log();
+									console.log('두번쨰까지 성공')
 									if(resultObj.errorCode > 0){
 										Toast.fire({ icon: 'success', title: resultObj.errorMsg }).then((result) => {
 											console.log('페이지이동');

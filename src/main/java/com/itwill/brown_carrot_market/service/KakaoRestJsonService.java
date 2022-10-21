@@ -15,7 +15,7 @@ public class KakaoRestJsonService  {
 
 	private final String GRANT_TYPE= "authorization_code";
     private final String CLIENT_ID = "28023bfb18a5c5340b26afd6befa9050";
-    private final String REDIRECT_URI= "http://localhost/brown_carrot_market/user_kakaologin";
+    private final String REDIRECT_URI= "http://119.207.178.242/brown_carrot_market/user_kakaologin";
     //private final String CLIENT_SECRET= "지정안한 상태";
     private final String TOKEN_URL = "https://kauth.kakao.com/oauth/token";
 	

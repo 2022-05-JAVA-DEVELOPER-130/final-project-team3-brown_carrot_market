@@ -246,7 +246,7 @@ public class UserInfoRestController {
 		return resultMap;
 	}
 	
-	@CrossOrigin(origins = "http://192.168.15.12")
+	@CrossOrigin(origins = "http://119.207.178.242/")
 	@PostMapping("/user_remove_address_json")
 	public Map user_remove_address_json(HttpServletRequest request, @ModelAttribute Address address) throws Exception{
 		System.out.println(address);

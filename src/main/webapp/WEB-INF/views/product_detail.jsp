@@ -189,8 +189,12 @@
                     <div class="single_product_desc"><div style="display:inline;">
                     
                         <img style="max-width: 8%;
-    border-radius: 400px;"alt="" src="img/user_profile/${product.userInfo.user_profile}"> ${product.userInfo.user_id}</div><div style="display: inline-block;
-    width: 70%;"> <p style="margin-left: 85%;"> ${product.userInfo.user_freshness} &nbsp;<i style="color:orange;"class="fa fa-thermometer"></i></p></div>
+   						 border-radius: 400px;"alt="" src="img/user_profile/${product.userInfo.user_profile}"> ${product.userInfo.user_id}
+   						 </div>
+    					<div style="display: inline-block;
+    					width: 70%;"> <p style="margin-left: 85%;"> ${product.userInfo.user_freshness} &nbsp;<i style="color:orange;"class="fa fa-thermometer"></i></p>
+    					
+    					</div>
                        <!-- 신선도 해결
                         <div class="form-group">
                                     <span>신선도</span>
@@ -202,7 +206,7 @@
                                 </div>
                              -->     
                         <hr>
-                        <h3 class="title mb-2"  >${product.p_title}</h3>
+                        <h3 class="title mb-2" style="text-align:left; display: inline-block;" >${product.p_title}</h3>
                         <p style="font-size:10px;">${product.productCategory.p_ctgr_name}</p>
                         <a class="add_to_wishlist" id="addWishListBtn" style="position: relative; left: 440px; display: inline-block;"><i class="fa fa-heart" aria-hidden="true"></i> 찜하기</a>
                         <hr>
@@ -264,7 +268,9 @@
 
                         <!-- Size Guide -->
                       </div>
-                      <div class="single_product_desc"><br><p>${product.p_desc}</p><br></div>
+                      <div class="single_product_desc">
+                      <p style="text-align:left; display: inline-block;">${product.p_address_name}</p>
+                      <br><p>${product.p_desc}</p><br></div>
 </div>
 </div>
 </div>
@@ -459,3 +465,4 @@ content: "\f004";
 </body>
 
 </html>
+
