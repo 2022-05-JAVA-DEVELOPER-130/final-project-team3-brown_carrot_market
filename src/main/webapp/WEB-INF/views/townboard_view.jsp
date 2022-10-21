@@ -158,7 +158,7 @@
 	                                </div>
 	                                <div class="post-content">
 	                                    <a href="#">${townBoardTop.t_title }</a>
-	                                    <p>${townBoardTop.t_count }</p>
+	                                    <p>조회수 : ${townBoardTop.t_count }</p>
 	                                </div>
 	                            </div>
                             </c:forEach>
@@ -269,7 +269,7 @@
                                             <p>${townReply.t_reply_content }</p>
                                             
                                             <input class="townReply delete reply" id="townReplyDeletebtn_${status.index}" type="button" pageno="${pageno}" t_no="${townBoard.t_no }" t_reply_no="${townReply.t_reply_no}" value="삭제하기" />
-                                            <button class="heading">댓글달기</button>
+                                            <button class="heading">대댓글달기</button>
                                             
                                             <div  class="content">
                                             <form class="townReReply_write_form_${status.index }"  method="post">
@@ -293,7 +293,7 @@
                                  				     -->
 				                                    <input type="hidden" class="form-control" name="depth" value="2"/>
 				                                    <div class="col-12 ">
-				                                        <button  class="btn btn-primary rereply" type="submit" >등록</button>
+				                                        <button  class="btn btn-primary rereply" index="${status.index }" type="submit" >등록</button>
 				                                    </div>
 				                                </div>
 				                            </form>

@@ -1,8 +1,8 @@
 $(document).ready(function(){
 	
 	
-
-$("#address_name")
+	$(window).on("load",function(){
+		$("#address_name")
 				.on(
 						"click",
 						function(e) {
@@ -74,4 +74,5 @@ $("#address_name")
 							}
 
 						});
+			});
 	});

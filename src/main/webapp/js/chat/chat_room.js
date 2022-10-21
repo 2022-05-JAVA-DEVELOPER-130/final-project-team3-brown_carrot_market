@@ -101,7 +101,7 @@ function session_check(){
 
 function connectServer(loginId){
 	console.log("connectWS 실행 : "+loginId)
-	var url="ws://192.168.15.12:80/brown_carrot_market/replyEcho?"+loginId;
+	var url="ws://119.207.178.242:80/brown_carrot_market/replyEcho?"+loginId;
 	var ws=new WebSocket(url);
 	socket=ws;
 	
@@ -992,7 +992,7 @@ function message_sendDB(jsonData){
 
 function connectWS(){
 	console.log("connectWS 실행 : "+loginId)
-	var url="ws://192.168.15.12:80/brown_carrot_market/replyEcho?"+loginId+"&"+c_room_no;
+	var url="ws://119.207.178.242:80/brown_carrot_market/replyEcho?"+loginId+"&"+c_room_no;
 	var ws=new WebSocket(url);
 	socket=ws;
 	
@@ -1295,8 +1295,16 @@ function chatRoomListNew(list){
 	if(list.c_content.startsWith("@@image!#")){
 		list_content="사진 전송";
 	}
+	
+		if(list.p_img.startsWith('http')){
+			list.p_img= list.p_img;
+		}else{
+			list.p_img= 'img/product_img/'+list.p_img;
+		}
+	
+	
 	return `        <li class="clearfix">
-                        <img src='img/user_profile/${list.you_image}' alt="avatar"><img src="img/product_img/${list.p_img}" style="float:right; width:45px; height:45px; border-radius: 0%">
+                        <img src='img/user_profile/${list.you_image}' alt="avatar"><img src="${list.p_img}" style="float:right; width:45px; height:45px; border-radius: 0%">
                        
                         <div class="about">
 							<input name="chatRoomNo" type="hidden" value=${list.c_room_no}/>
