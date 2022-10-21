@@ -396,7 +396,7 @@
 			});
 			 /****************user_insert_addresses******************/
 			//(Step_1) Getting a address
-			$(document).on('click',	'#btn_address_new1,#btn_address_new2',function(e) {
+			$(window).on('click',	'#btn_address_new1,#btn_address_new2',function(e) {
 				var selectedAddress = $(e.target).parent($("address"));
 				selectedAddress.addClass("selected_address");
 				$(e.target).addClass("selected");
