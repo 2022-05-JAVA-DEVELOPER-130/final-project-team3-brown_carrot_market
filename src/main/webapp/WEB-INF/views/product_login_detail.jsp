@@ -241,7 +241,9 @@
 
                         <!-- Size Guide -->
                       </div>
-                      <div class="single_product_desc"><br><p>${product.p_desc}</p><br></div>
+                      <div class="single_product_desc">
+                      <p style="text-align:left; display: inline-block;">${product.p_address_name}</p>
+                      <br><p>${product.p_desc}</p><br></div>
 					</div>
 					</div>
 					</div>

@@ -20,6 +20,54 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/product.css">
     
+    <!-- java script -->
+    <script type="text/javascript">
+    function readURL(input) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+	      document.getElementById('preview').src = e.target.result;
+	    };
+	    reader.readAsDataURL(input.files[0]);
+	  } else {
+	    document.getElementById('preview').src = "";
+	  }
+	}
+    function readURL1(input) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+	      document.getElementById('preview1').src = e.target.result;
+	    };
+	    reader.readAsDataURL(input.files[0]);
+	  } else {
+	    document.getElementById('preview1').src = "";
+	  }
+	}
+    function readURL2(input) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+	      document.getElementById('preview2').src = e.target.result;
+	    };
+	    reader.readAsDataURL(input.files[0]);
+	  } else {
+	    document.getElementById('preview2').src = "";
+	  }
+	}
+    function readURL3(input) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+	      document.getElementById('preview3').src = e.target.result;
+	    };
+	    reader.readAsDataURL(input.files[0]);
+	  } else {
+	    document.getElementById('preview3').src = "";
+	  }
+	}
+    </script>   
+    
     <!-- toast -->
  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
@@ -101,13 +149,17 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <!-- 사진 넣기 임시 -->
-                                    <div class="form-group">
-                                   
-                                    <span>사진1: <input type="file" name="files"></span> 
-                                    <span>사진2: <input type="file" name="files"></span> 
-                                    <span>사진3: <input type="file" name="files"></span> 
-                                    <span>사진4: <input type="file" name="files"></span> 
+                                    <!-- 사진 넣기 임시--> 
+                                    <div class="form-group" style="margin-left: 50px">
+                                    
+                                   	<img id ="preview" src="img/chat-img/logo_carrot.png" style="width:50px; height:50px;"/>
+                                    <span><input type="file" onchange="readURL(this);" name="files" style="width: 80px"></span> 
+                                   	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img id ="preview1" src="img/chat-img/logo_carrot.png" style="width:50px; height:50px;"/>
+                                    <span><input type="file" name="files" onchange="readURL1(this);" style="width: 80px"></span> 
+                                   	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img id ="preview2" src="img/chat-img/logo_carrot.png" style="width:50px; height:50px;"/>
+                                    <span><input type="file" name="files" onchange="readURL2(this);" style="width: 80px"></span> 
+                                   	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img id ="preview3" src="img/chat-img/logo_carrot.png" style="width:50px; height:50px;"/>
+                                    <span><input type="file" name="files" onchange="readURL3(this);" style="width: 80px"></span> 
 
 									</div>
 									<!-- 사진 넣기 임시 끝 -->
@@ -206,10 +258,10 @@
                                     </li>
                                     </ul>
                                     </div>
-                                      이미지 업로드 부분 끝-->
+                                     이미지 업로드 부분 끝-->
                                     <div class="col-12 text-center">
-                                        <input type="button" id="btn_product_write_action" class="btn btn-primary w-40" value="물건 올리기" onclick="productCreate()">&nbsp; 
-                                        <input type="button" class="btn btn-primary w-40" value="동네물건목록" onclick="productList()">
+                                        <input type="button" id="btn_product_write_action" class="btn btn-primary w-40" style="margin-bottom: 30px" value="물건 올리기" onclick="productCreate()">&nbsp; 
+                                        <input type="button" class="btn btn-primary w-40" style="margin-bottom: 30px" value="동네물건목록" onclick="productList()">
                                 </div>
                             </div>
                         </form>
@@ -280,3 +332,4 @@ content: "\f2b5";
 </body>
 
 </html>
+

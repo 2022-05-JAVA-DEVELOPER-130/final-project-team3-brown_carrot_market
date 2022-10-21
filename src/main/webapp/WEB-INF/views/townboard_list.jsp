@@ -141,7 +141,7 @@
 	                                </div>
 	                                <div class="post-content">
 	                                    <a href="#">${townBoardTop.t_title }</a>
-	                                    <p>${townBoardTop.t_count }</p>
+	                                    <p>조회수 : ${townBoardTop.t_count }</p>
 	                                </div>
 	                            </div>
                             </c:forEach>
