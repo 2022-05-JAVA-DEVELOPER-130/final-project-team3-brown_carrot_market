@@ -7,7 +7,7 @@ $(document).ready(function(){
 		$('.my-account-navigation > ul li').removeClass('active');
 		$(e.target).closest('li').addClass('active');
 		    $.ajax({
-				url:'user_view_json',
+				url:'user_view_json', 
 				method:'POST',
 				dataType:'json',
 				success:function(jsonResult){
