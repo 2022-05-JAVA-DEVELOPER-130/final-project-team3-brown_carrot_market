@@ -116,7 +116,7 @@ public class MailServiceImpl implements MailService {
 						+ "		         </div>\r\n"
 						, "text/html; charset=utf-8");
 			}
-		};
+		}; 
 		try {
 			sender.send(preparator);
 			//메일이 성공적으로 보내지면, UPDATE user_pw

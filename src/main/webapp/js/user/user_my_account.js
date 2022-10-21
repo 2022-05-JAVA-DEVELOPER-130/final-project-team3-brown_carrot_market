@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	
+	toastr.options.positionClass = "toast-top-right";
 	/* [마이페이지]user_view *********************************/
 	$(document).on('click', '#user_account_details, #a_account_details',function(e){
 		//console.log("click!! >> "+e.target);
@@ -7,7 +7,7 @@ $(document).ready(function(){
 		$('.my-account-navigation > ul li').removeClass('active');
 		$(e.target).closest('li').addClass('active');
 		    $.ajax({
-				url:'user_view_json',
+				url:'user_view_json', 
 				method:'POST',
 				dataType:'json',
 				success:function(jsonResult){
@@ -43,7 +43,8 @@ $(document).ready(function(){
 			success : function(e) {
 				console.log("success");
 				$('.progress').remove();
-				alert($("#invi_email").val()+" 님에게 초대장이 전송되었습니다.");
+				toastr['success']($("#invi_email").val()+" 님에게 초대장이 전송되었습니다.");
+				//alert($("#invi_email").val()+" 님에게 초대장이 전송되었습니다.");
 				$("#invi_email").val("");
 			}
 		});
