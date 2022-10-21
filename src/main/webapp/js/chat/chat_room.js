@@ -101,7 +101,7 @@ function session_check(){
 
 function connectServer(loginId){
 	console.log("connectWS 실행 : "+loginId)
-	var url="ws://192.168.15.12:80/brown_carrot_market/replyEcho?"+loginId;
+	var url="ws://119.207.178.242:80/brown_carrot_market/replyEcho?"+loginId;
 	var ws=new WebSocket(url);
 	socket=ws;
 	
@@ -992,7 +992,7 @@ function message_sendDB(jsonData){
 
 function connectWS(){
 	console.log("connectWS 실행 : "+loginId)
-	var url="ws://192.168.15.12:80/brown_carrot_market/replyEcho?"+loginId+"&"+c_room_no;
+	var url="ws://119.207.178.242:80/brown_carrot_market/replyEcho?"+loginId+"&"+c_room_no;
 	var ws=new WebSocket(url);
 	socket=ws;
 	

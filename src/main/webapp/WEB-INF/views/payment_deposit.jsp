@@ -84,25 +84,40 @@ color = orange;
 			<a href="/brown_carrot_market/payment_withdraw"><i class="icofont-check-circled"></i> 페이 출금</a>
 		</div>
 	</div>
-	<div>
-		<select id="point_select" name="point_select">
-			<option value="1">10000</option>
-			<option value="2">50000</option>
-			<option value="3">100000</option>
-			<option value="4">직접입력</option>
-		</select>
+	
+	    <!-- Shortcodes Area -->
+    <div class="shortcodes_area section_padding_100">
+        <div class="container">
+            <!-- Shortcodes Content -->
+            <div class="row">
+                <div class="col-12">
+                    <!-- +++++++++
+                    Blockquote One
+                    ++++++++++ -->
+                    <div class="shortcodes_content mb-100">
+                        <blockquote class="bigshop-blockquote mb-0 bl-10">
+                            <h3>흙당근페이 포인트 충전</h3>
+                            <br>
+                            	<div>충전 할 포인트 : </div>
+								<select id="point_select" name="point_select">
+									<option value="1">10000</option>
+									<option value="2">50000</option>
+									<option value="3">100000</option>
+									<option value="4">직접입력</option>
+								</select>
+								<input type="text" id="point_select_input" name="point_select_input"/>
+                            	<button class="btn btn-primary" onclick="requestPay()">충전하기</button>
+                        </blockquote>
+                    </div>
+                    <!-- +++++++++
+                    Blockquote One
+                    ++++++++++ -->
 
-		<input type="text" id="point_select_input" name="point_select_input"/>
-	</div>
-	<script>
-
-	</script>
-	<div class="col-12">
-		<div class="checkout_pagination mt-50">
-			<button class="btn btn-primary" onclick="requestPay()">충전하기</button>
-		</div>
-	</div>
-
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Shortcodes Area End -->
 	<script>
 		$(function point_select(){
 		      //직접입력 인풋박스 기존에는 숨어있다가
@@ -122,7 +137,6 @@ color = orange;
 		
 		var IMP = window.IMP; // 생략 가능
 		IMP.init("imp41236885"); // 예: imp00000000
-		var selectValue = document.getElementById('#point_select option:selected').text();
 		function requestPay() {
 			// IMP.request_pay(param, callback) 결제창 호출
 			IMP.request_pay({ // param(결제에대한 정보)
@@ -231,7 +245,8 @@ color = orange;
      content: "\f2b5"; 
  
 } 
-	
+.bl-10 {
+  border-left: 10px solid orange; }
 
 </body>
 
