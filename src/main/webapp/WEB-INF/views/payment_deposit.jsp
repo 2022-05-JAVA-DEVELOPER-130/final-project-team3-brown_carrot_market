@@ -187,7 +187,7 @@ color = orange;
 					// 결제 실패 시 로직,
 					var url = "/brown_carrot_market/payment_deposit_fail";
 					var name = "당근 페이 포인트 충전";
-					var option = "width = 470, height = 650, left = 500, location = yes,  resizable=no";
+					var option = "width = 470, height = 500, left= 500, top=150, location = yes,  resizable=no";
 					window.open(url, name, option);
 				}
 			});		};
@@ -245,6 +245,15 @@ color = orange;
      content: "\f2b5"; 
  
 } 
+
+#point_select_input {
+  width: 15%;
+  height: 40px;
+  border: 2px solid #orange;
+  font-size: 13px;
+  padding: 0 20px;
+  margin-bottom: 15px; }
+  
 .bl-10 {
   border-left: 10px solid orange; }
 

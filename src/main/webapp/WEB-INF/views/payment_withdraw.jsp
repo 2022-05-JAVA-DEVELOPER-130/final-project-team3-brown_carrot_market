@@ -134,9 +134,9 @@ color = orange;
 			$("#point_select2 option:selected").text($("#point_select_input2").val());			
 		});
 		
-		function withdrawPay({
-					let amount = $("#point_select option:selected").text();
+		function withdrawPay(){
 					if ((${sUser.user_point}-${amount})>=0) {
+					let amount = $("#point_select2 option:selected").text();
 					// 성공 시 로직,
 					let data = {
 						"amount" : amount
@@ -154,7 +154,7 @@ color = orange;
 					var option = "width = 470, height = 650, left = 500, location = yes,  resizable=no";
 					window.open(url, name, option);
 				}
-			});		
+			};		
 	</script>
 
 	<!-- Checkout Area End -->
