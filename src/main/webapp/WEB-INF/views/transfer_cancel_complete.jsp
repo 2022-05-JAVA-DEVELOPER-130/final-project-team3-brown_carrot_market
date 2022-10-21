@@ -36,7 +36,7 @@ var jsonData={
 		console.log("송금아이디:"+ window.opener.loginId);
 		jsonData.your_id=window.opener.yourId;
 		jsonData.msg="송금 완료";
-		jsonData.code="1";
+		jsonData.code="3";
 		jsonData.data=[{
 					c_content_no:"",
 					c_content:`${loginId} 님이 송금 취소 금액 ${product.p_price}원을 송금했습니다.`,
@@ -74,7 +74,7 @@ var jsonData={
 	<div>
 		<h1>송금 취소 완료</h1>
 		<h3>송금 취소가 완료되었습니다.</h3>
-		<h3 class="orderid mb-0"> ${orders.userInfo.user_id}님께 ${product.p_price}포인트가 송금 되었습니다.</h3>
+		<h3 class="orderid mb-0"> 구매자님께 ${product.p_price}포인트가 송금 되었습니다.</h3>
 		<br>
 		<hr>
 		<br>
