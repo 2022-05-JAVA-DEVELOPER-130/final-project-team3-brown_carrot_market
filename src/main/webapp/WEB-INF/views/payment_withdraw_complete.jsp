@@ -51,8 +51,6 @@
 		<br>
 		<hr>
 		<br><br>
-		<h4>포인트 입금 계좌 : ${account} </h4>
-		<br><br>
 		<h4>출금 포인트 : ${amount} 포인트</h4>
 	</div>
 	<div>
