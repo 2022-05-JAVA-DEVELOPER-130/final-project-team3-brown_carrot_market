@@ -297,7 +297,7 @@
 			errorClass : 'error',
 			validClass : 'valid'
 		});
-/*
+		
 		$(document)
 				.on(
 						"click",
@@ -371,7 +371,6 @@
 							}
 
 						});
-*/
 		/************ save_login_data -> Cookie에 id저장(노골적 저장중..) ***********************/
 		var cookie_user_id = getLogin(); //Cookie값 가져오기
 		/* Cookie값 존재시, id에 Cookie에서 가져온 id할당 -> 체크박스 상태 체크로 변경*/
@@ -535,7 +534,7 @@
 		function loginWithKakao() {
 			Kakao.Auth
 					.authorize({
-						redirectUri : 'http://119.207.178.242/brown_carrot_market/user_kakaologin',
+						redirectUri : 'http://localhost/brown_carrot_market/user_kakaologin',
 						prompts : 'login'
 					});
 		}
