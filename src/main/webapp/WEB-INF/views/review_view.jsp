@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="css/user.css">
     
     <!-- toast -->
- <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+ 	<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
    
 
@@ -135,7 +135,7 @@
     <!-- Footer Area -->
    	<jsp:include page="common/include_common_footer.jsp"/>
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    <%-- <script src="js/jquery.min.js"></script> --%>
+    <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.easing.min.js"></script>
@@ -154,7 +154,7 @@
     <script src="js/default/active.js"></script>
     
      <!-- javaScript -->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<%-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script> --%>
 	<script type="text/javascript" src="js/common/user_session_check.js"></script>
 	<script type="text/javascript" src="js/common/CommonHtmlContents.js"></script>
 	<script type="text/javascript" src="js/user/UserHtmlContents.js"></script>
